@@ -1,0 +1,59 @@
+_metadata:
+  major_version: 1
+  minor_version: 1
+display_information:
+  name: CP4WAIOPSTEST
+  description: The friendly CP4WAIOPS Bot
+  background_color: "#001cab"
+features:
+  app_home:
+    home_tab_enabled: false
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: true
+  bot_user:
+    display_name: CP4WAIOPS
+    always_online: false
+  slash_commands:
+    - command: /welcome
+      url: https://cap-sg-prd-2.securegateway.appdomain.cloud:18947/aiops/aimanager/instances/xxxxxx/api/slack/events
+      description: Welcome to CloudPak for Watson AIOps
+      should_escape: false
+oauth_config:
+  scopes:
+    user:
+      - channels:history
+      - channels:read
+      - chat:write
+      - files:read
+      - files:write
+      - groups:history
+      - groups:read
+      - im:history
+      - im:read
+      - mpim:history
+      - mpim:read
+      - users:read
+      - users:read.email
+    bot:
+      - app_mentions:read
+      - channels:manage
+      - channels:read
+      - chat:write
+      - commands
+      - files:write
+      - groups:read
+      - groups:write
+      - users:read
+      - users:read.email
+settings:
+  event_subscriptions:
+    request_url: https://cap-sg-prd-2.securegateway.appdomain.cloud:18947/aiops/aimanager/instances/xxxxxx/api/slack/events
+    bot_events:
+      - app_mention
+      - member_joined_channel
+  interactivity:
+    is_enabled: true
+    request_url: https://cap-sg-prd-2.securegateway.appdomain.cloud:18947/aiops/aimanager/instances/xxxxxx/api/slack/events
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  is_hosted: false

@@ -1,0 +1,57 @@
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: load-log-indexes
+  namespace: default
+spec:
+  serviceAccountName: demo-admin
+  template:
+    spec:
+      containers:
+        - name: load
+          image: niklaushirt/cp4waiops-tools:1.3
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "150m"
+            limits:
+              memory: "1256Mi"
+              cpu: "1200m"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              #!/bin/bash
+              #set -x
+
+              echo "*****************************************************************************************************************************"
+              echo " ✅ STARTING: Load log anomaly training files"
+              echo "*****************************************************************************************************************************"
+
+              echo "   ------------------------------------------------------------------------------------------------------------------------------"
+              echo "    📥 Downloading log anomaly training files"
+              echo "   ------------------------------------------------------------------------------------------------------------------------------"
+              export AWX_REPO=https://github.com/niklaushirt/cp4waiops-trainingdata.git
+              git clone $AWX_REPO
+
+              echo "   ------------------------------------------------------------------------------------------------------------------------------"
+              echo "    🚀 Starting Data Load"
+              echo "   ------------------------------------------------------------------------------------------------------------------------------"
+              cd cp4waiops-trainingdata
+              ./training/robotshop-load-logs-for-training.sh
+
+              echo "*****************************************************************************************************************************"
+              echo " ✅ DONE"
+              echo "*****************************************************************************************************************************"
+              sleep 60000
+
+          env:
+            - name: INDEX_OVERWRITE
+              value : "true"
+            - name: VERSION
+              value : "3.3"
+      restartPolicy: Never
+
+  backoffLimit: 4

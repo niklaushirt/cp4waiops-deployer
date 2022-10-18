@@ -1,0 +1,68 @@
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="icon" type="image/png" href="images/duck.png">
+
+    <title>Kubetoy Networking</title>
+    <style>
+        <% if( typeof background !== 'undefined' ) { %>
+            body {
+                background-image: url('images/<%= background %>.png');
+            }
+            .transparent {
+                background:#7f7f7f;
+                background:rgba(255,255,255,0.5);
+            }
+        <% } %>
+    </style> 
+</head>
+
+<body>
+<div class="container transparent">
+
+<h1>Networking</h1>
+<h6>Pod: <%= pod %></h6>
+
+<p>
+    <a href="home">home</a> | 
+        <% if( filesystem ) { %><a href="files">filesystem</a> | <% } %> 
+        <a href="config">config maps and secrets</a> | 
+        <a href="network">networking</a> | 
+        <a href="about.html">about</a>
+</p>
+
+<hr/>
+
+	<form method="POST" action="network">
+	  <div class="form-group">
+	    <label for="url">URL</label>
+	    <input type="text" class="form-control" name="url" id="url" aria-describedby="urlHelp" value="<%= url %>">
+	    <small id="filenameHelp" class="form-text text-muted">Enter in a URL (internal kubernentes or external) for this pod to obtain and render as HTML below.</small>
+	  </div>
+	  <button type="submit" class="btn btn-primary">Load</button>
+	
+	</form>
+    
+    <% if( content.length > 0 ) { %>
+        <h2>What I got:</h2>
+        <div id=content style="border: 20px solid #969696; background: #d9dbda; margin: 10px;">
+            <%- content %>
+        </div>
+    <% } %>
+
+
+	</div>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

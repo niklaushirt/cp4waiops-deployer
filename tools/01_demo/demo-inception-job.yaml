@@ -1,0 +1,36 @@
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: demo-inception-job
+  namespace: default
+spec:
+  serviceAccountName: demo-admin
+  template:
+    spec:
+      containers:
+        - name: load
+          image: niklaushirt/cp4waiops-tools:1.3
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "150m"
+            limits:
+              memory: "1256Mi"
+              cpu: "1200m"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              #!/bin/bash
+              set -x
+
+              export GIT_REPO=https://github.com/niklaushirt/cp4waiops-trainingdata.git
+              git clone $GIT_REPO
+              cd cp4waiops-trainingdata
+              ./tools/01_demo/incident_robotshop.sh
+              sleep 6000000
+      restartPolicy: Never
+
+  backoffLimit: 4

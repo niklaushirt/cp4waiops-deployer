@@ -1,0 +1,8 @@
+/node_modules/
+.DS_Store
+cos-configuration/cos-credentials.json
+packaging/kubetoy-1.9.0.tgz
+packaging/kubetoy-ppa-1.9.0.tgz
+packaging/values-test.yaml
+.vscode
+test.js

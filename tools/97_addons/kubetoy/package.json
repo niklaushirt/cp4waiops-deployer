@@ -1,0 +1,21 @@
+{
+	"name": "kubetoy",
+	"version": "2.6.1",
+	"private": true,
+	"scripts": {
+		"start": "node app.js"
+	},
+	"dependencies": {
+		"body-parser": "^1.20.0",
+		"ejs": "^3.1.6",
+		"express": "^4.17.3",
+		"node-uname": "3.0.4",
+		"requests": "^0.3.0",
+		"sprintf-js": "^1.1.2",
+		"valid-filename": "^3.1.0",
+        "valid-url": "^1.0.9",
+        "follow-redirects":"^1.13.0",
+		"@instana/collector": "^1.132.2"
+	},
+	"repository": {}
+}

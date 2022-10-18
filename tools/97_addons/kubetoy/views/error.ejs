@@ -1,0 +1,55 @@
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="icon" type="image/png" href="images/duck.png">
+
+    <title>Kubetoy Error</title>
+    <style>
+        <% if( typeof background !== 'undefined' ) { %>
+            body {
+                background-image: url('images/<%= background %>.png');
+            }
+            .transparent {
+                background:#7f7f7f;
+                background:rgba(255,255,255,0.5);
+            }
+        <% } %>
+    </style> 
+</head>
+<body>
+<div class="container">
+
+
+<p>pod: <%=pod%> </p>
+<p>
+    <a href="home">home</a> | 
+        <% if( filesystem ) { %><a href="files">filesystem</a> | <% } %> 
+        <a href="config">config maps and secrets</a> | 
+        <a href="networking">networking</a> | 
+        <a href="about.html">about</a>
+</p>
+<hr/>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Error</h5>
+	<pre><%=msg%></pre>
+  </div>
+</div>
+
+
+
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

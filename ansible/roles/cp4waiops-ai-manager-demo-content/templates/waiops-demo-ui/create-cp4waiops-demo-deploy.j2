@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: waiops-demo-ui-python
+  namespace: {{current_cp4waiops_cluster.project}}
+  labels:
+      app: waiops-demo-ui-python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: waiops-demo-ui-python
+  template:
+    metadata:
+      labels:
+        app: waiops-demo-ui-python
+    spec:
+      containers:
+      - image: niklaushirt/cp4waiops-demo-ui-python:0.57
+        imagePullPolicy: Always
+        name: waiops-demo-ui-python
+        command:
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+          limits:
+            cpu: "550m"
+            memory: "550Mi"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 60
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        envFrom:
+        - configMapRef:
+            name:  demo-ui-python-config
+        - configMapRef:
+            name:  demo-ui-python-config-events
+        - configMapRef:
+            name:  demo-ui-python-config-logs
+        - configMapRef:
+            name:  demo-ui-python-config-metrics
+      serviceAccountName: demo-ui-python-admin
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: waiops-demo-ui-python-service
+  namespace: {{current_cp4waiops_cluster.project}}
+spec:
+  selector:
+    app: waiops-demo-ui-python
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name:  waiops-demo-ui-python
+  namespace: {{current_cp4waiops_cluster.project}}
+spec:
+  to:
+    kind: Service
+    name: waiops-demo-ui-python-service
+    weight: 100
+  port:
+    targetPort: 8000
+  wildcardPolicy: None
+

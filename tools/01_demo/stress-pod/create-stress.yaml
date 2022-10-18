@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stress-pod
+  namespace: default
+  labels:
+      app: stress-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stress-pod
+  template:
+    metadata:
+      labels:
+        app: stress-pod
+    spec:
+      containers:
+      - image: niklaushirt/stress-pod:1.0.1
+        imagePullPolicy: IfNotPresent
+        name: bastion
+        command:
+        ports:
+        - containerPort: 22
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+          limits:
+            cpu: "250m"
+            memory: "250Mi"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/stress.job
+          subPath: stress.job
+      volumes:
+        - name: config-volume
+          configMap:
+            name: stress-pod-job
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stress-pod-job
+  namespace: default
+data:
+  stress.job: |-
+    # CONFIG MAP FILE
+    run parallel     # run stressors sequentially
+    verbose          # verbose output
+    metrics-brief    # show metrics at end of run
+    timeout 6m       # stop each stressor after 6 months (so basically you'll have to stop it manually)
+    #
+    # vm stressor options:
+    #
+    vm 20            # 20 vm stressors
+    vm-bytes 128M    # 128MB available memory
+    vm-keep          # keep vm mapping
+    vm-populate      # populate memory
+    #
+    # memcpy stressor options:
+    #
+    memcpy 5         # 5 memcpy stressors
+

@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Bootstrap-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"><!-- Optional theme-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <style>
+        .navbar-brand img {
+            height: 42px;
+            margin-top: -12px;
+        }
+
+        .navbar-brand-right img {
+            height: 42px;
+            margin-top: 2px;
+        }
+
+        .logo-text {
+            padding-left: 5px;
+        }
+
+        .tools-style {
+            font-size: medium;
+        }
+
+        html {
+            background: url({% static 'images/waiops.svg' %}) no-repeat center center fixed;
+            background-color: black;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        body {
+            background-color: transparent;
+        }
+
+        .jumbotron {
+            opacity: 0.92;
+        }
+    </style>
+    <title>IBM Automation</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header"><a href="/" class="navbar-brand"><img alt="Brand"
+                src="{% static 'images/ibm_watson.png' %}"></a><a class="navbar-brand logo-text"> IBM Automation</a></div>
+                <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a target="_blank" href="https://www.ibm.com/cloud/cloud-pak-for-watson-aiops">IBM CloudPak for
+                            Watson AIOps</a></li><a target="_blank"
+                        href="https://www.ibm.com/cloud/cloud-pak-for-watson-aiops" class="navbar-brand-right"></a>
+                </ul>
+            </div>
+        </div>
+    </nav>

@@ -1,0 +1,32 @@
+current_cp4waiops_cluster:
+  project: cp4waiops-addons
+
+
+current_cp4waiops_feature:
+  kind: ELK
+
+# *************************************************************************************************************************************************
+# --------------------------------------------------------------------------------------------------------------------------------------
+# CP4WAIOPS GLOBAL CONFIGURATION
+# --------------------------------------------------------------------------------------------------------------------------------------
+# *************************************************************************************************************************************************
+config_file:
+
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  # CP4WAIOPS Storage Classes
+  # --------------------------------------------------------------------------------------------------------------------------------------
+
+  # Override the Storage Class auto detection (not_configured, ibmc-file-gold-gid, rook-cephfs, nfs-client, ...)
+  storage_class_file: automatic
+  #storage_class_file: ibmc-file-gold-gid               # ROKS
+  #storage_class_file: ocs-storagecluster-cephfs        # ODF
+  #storage_class_file: ibmc-vpc-block-10iops-tier       # IBM VPC
+  #storage_class_file: rook-cephfs                      # FYRE
+  #storage_class_file: nfs-client                       # TEC
+  storage_class_block: automatic
+  #storage_class_block: ibmc-block-gold                 # ROKS
+  #storage_class_block: ocs-storagecluster-ceph-rbd     # ODF
+  #storage_class_block: ibmc-vpc-block-10iops-tier      # IBM VPC
+  #storage_class_block: rook-cephfs                     # FYRE
+  #storage_class_block: nfs-client                      # TEC
+

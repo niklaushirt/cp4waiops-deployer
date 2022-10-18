@@ -1,0 +1,261 @@
+apiVersion: v1                     
+kind: Namespace
+metadata:
+  name: kubetoy-channel-namespace
+---
+apiVersion: v1                     
+kind: Namespace
+metadata:
+  name: kubetoy-project
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Channel
+metadata:
+  name: kubetoy-channel
+  namespace: kubetoy-channel-namespace
+  labels:
+    app: kubetoy-app
+spec:
+  type: Namespace
+  pathname: kubetoy-channel-namespace
+---
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: kubetoy-application
+  namespace: kubetoy-project
+  generation: 2
+  labels:
+    app: kubetoy-app
+spec:
+  componentKinds:
+    - group: app.ibm.com
+      kind: Subscription
+  descriptor: {}
+  selector:
+    matchLabels:
+      app: kubetoy-app
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Subscription
+metadata:
+  name: kubetoy-application
+  namespace: kubetoy-project
+  labels:
+    app: kubetoy-app
+spec:
+  channel: kubetoy-channel-namespace/kubetoy-channel
+  overrides:
+    - clusterName: /
+      clusterOverrides:
+        - path: metadata.namespace
+          value: default
+  packageFilter:
+    labelSelector:
+      matchLabels:
+        app: kubetoy-app
+  placement:
+    placementRef:
+      name: kubetoy-placement-rule
+      kind: PlacementRule
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: PlacementRule
+metadata:
+  name: kubetoy-placement-rule
+  namespace: kubetoy-project
+  labels:
+    app: kubetoy-app
+spec:
+  clusterReplicas: 1
+  clusterLabels:
+    matchLabels:  
+      environment: Dev
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: kubetoy-channel-deployment
+  namespace: kubetoy-channel-namespace
+  labels:
+    app: kubetoy-app
+spec:
+  template:
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: kubetoy-channel-deployment
+      labels:
+        app: kubetoy-app
+    spec:
+        selector:
+          matchLabels:
+            app: kubetoy
+        replicas: 3
+        template:
+          metadata:
+            labels:
+              app: kubetoy
+          spec:
+            containers:
+            - name: kubetoy
+              image: docker.io/ibmicpcoc/kubetoy:2.0.0
+              imagePullPolicy: Always
+              ports:
+              - containerPort: 3000
+              volumeMounts:
+              - name: configvol
+                mountPath: /var/config
+              - name: secretvol
+                mountPath: /var/secret
+              livenessProbe:
+                httpGet:
+                  path: /health
+                  port: 3000
+                initialDelaySeconds: 10
+                periodSeconds: 5
+              resources:
+              requests:
+                memory: "20Mi"
+                cpu: "1m"
+              limits:
+                memory: "64Mi"
+                cpu: "500m"
+              env:
+              - name: ENV_TOY_CONFIGMAP
+                valueFrom: 
+                  configMapKeyRef:
+                    name: kubetoy-configmap-env
+                    key: ENV_TOY_CONFIGMAP
+              - name: ENV_TOY_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: kubetoy-secret-env
+                    key: ENV_TOY_SECRET
+            volumes:
+            - name: configvol
+              configMap:
+                name: kubetoy-configmap-files
+            - name: secretvol
+              secret:
+                secretName: kubetoy-secret-files
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: kubetoy-channel-service
+  namespace:  kubetoy-channel-namespace
+  labels:
+    app: kubetoy-app
+spec:
+  template:
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: kubetoy-service
+      labels:
+        app: kubetoy-app
+    spec:
+      type: ClusterIP
+      ports:
+        - targetPort: 3000
+          port: 3000
+          protocol: TCP
+          name: "http"
+      selector:
+        app: kubetoy
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: kubetoy-channel-route
+  namespace: kubetoy-channel-namespace
+  labels:
+    app: kubetoy-app
+spec:
+  template:
+    kind: Route
+    apiVersion: route.openshift.io/v1
+    metadata:
+      name: kubetoy
+      labels:
+        app: kubetoy-app
+    spec:
+      subdomain: ''
+      to:
+        kind: Service
+        name: kubetoy-service
+        weight: 100
+      port:
+        targetPort: http
+      wildcardPolicy: None
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: kubetoy-channel-cm-env
+  namespace: kubetoy-channel-namespace
+  labels:
+    app: kubetoy-app
+spec:
+  template:
+    spec: {}
+    kind: ConfigMap
+    apiVersion: v1
+    metadata:
+      name: kubetoy-configmap-env
+    data:
+      ENV_TOY_CONFIGMAP: 'This is a configuration value.'
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: kubetoy-channel-sec-env
+  namespace: kubetoy-channel-namespace
+  labels:
+    app: kubetoy-app
+spec:
+  template:
+    spec: {}
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: kubetoy-secret-env
+    type: Opaque
+    data:
+      ENV_TOY_SECRET: VGhpcyBpcyBhIHRlc3Q=
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: kubetoy-channel-cm-file
+  namespace: kubetoy-channel-namespace
+  labels:
+    app: kubetoy-app
+spec:
+  template:
+    spec: {}
+    kind: ConfigMap
+    apiVersion: v1
+    metadata:
+      name: kubetoy-configmap-files
+    data:
+      config.json: '{ "default": "123" }'
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: kubetoy-channel-sec-file
+  namespace: kubetoy-channel-namespace
+  labels:
+    app: kubetoy-app
+spec:
+  template:
+    spec: {}
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: kubetoy-secret-files
+    type: Opaque
+    data:
+      toy-secret.txt: U2hoLi4uIFRoaXMgaXMgYSBzZWNyZXQu

@@ -1,0 +1,53 @@
+
+# *************************************************************************************************************************************************
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Install CP4WAIOPS
+# --------------------------------------------------------------------------------------------------------------------------------------
+# *************************************************************************************************************************************************
+
+- name: 🛰️  START - AI MANAGER INSIGHTS
+  debug: 
+    msg="{{ lookup('pipe','date +%d.%m.%Y---%H:%M:%S') }}"
+
+
+- name: Log
+  shell: |
+    export MESSAGE="Enabling AI MAnager Insights"
+    export currentDate=$(date +%Y-%m-%d_%H:%M)
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo $currentDate" - "$USER" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+  ignore_errors: yes
+
+
+- name: 🚀 AIMANAGER INSIGHTS - Get Datarouter Image
+  shell: |
+    oc get -n {{ current_cp4waiops_cluster.project }} $(oc get -n {{ current_cp4waiops_cluster.project }} deploy -o name | grep ir-core-operator) -o jsonpath={.spec.template.metadata.annotations."olm\.relatedImage\.datarouting-service"}
+    oc patch -n openshift-marketplace serviceaccount default -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
+  register: DATAROUTER_IMAGE
+  ignore_errors: yes
+
+- name: 🚀 AIMANAGER INSIGHTS - DATAROUTER_IMAGE {{ DATAROUTER_IMAGE.stdout }}
+  set_fact: DATAROUTER_IMAGE={{ DATAROUTER_IMAGE.stdout }} 
+
+
+
+- name: 🚀 AIMANAGER INSIGHTS - Enable AI Manager Insights
+  kubernetes.core.k8s:
+    state: present
+    template: './templates/waiops/5_waiops-enable-insights.j2'
+  ignore_errors: yes
+
+- name: 🕦 AIMANAGER INSIGHTS - Wait 120 seconds
+  shell: |
+   sleep 120
+  ignore_errors: yes
+
+
+
+- name: 🕦 AIMANAGER INSIGHTS - Wait for AI MAnager Insights to become ready
+  shell: oc get pods -l app.kubernetes.io/name=aiops-aiops-insights-ui -n {{ current_cp4waiops_cluster.project }}| grep "1/1" | grep -c ""
+  register: kubectl_get_pods
+  until: kubectl_get_pods.stdout == "1"
+  retries: 50
+  delay: 15
+

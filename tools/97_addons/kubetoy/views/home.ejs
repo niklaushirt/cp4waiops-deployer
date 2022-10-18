@@ -1,0 +1,149 @@
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script defer src="js/fontawesome-all.js"></script>
+	<link rel="icon" type="image/png" href="images/duck.png">
+
+    <title>Kubetoy</title>
+    
+    <style>
+        <% if( typeof background !== 'undefined' ) { %>
+            body {
+                background-image: url('images/<%= background %>.png');
+            }
+            .transparent {
+                background:#7f7f7f;
+                background:rgba(255,255,255,0.5);
+            }
+        <% } %>
+    </style> 
+    
+</head>
+<body>
+
+<div class="container">
+
+	<div class="jumbotron">
+		<div class="container">
+		  <div class="row">
+		    <div class="col-1">
+	  			<img src="images/<%=duckImage %>"/>
+		    </div>
+		    <div class="col-11">
+	  			<h1 class="display-4">Kubetoy</h1>
+		    </div>
+		  </div>
+		</div>
+	  <p class="lead">A kubernetes toy application to explore kuberenetes deployments.</p>
+	  <p><%=version %></p>
+	  <hr class="my-4">
+	  <p>Currently being served up by pod: <%=pod%> <br/>
+	  <%=sysInfoStr%> </p>
+	</div>
+    
+    <div class="container transparent" >
+        <p>
+            <a href="home">home</a> | 
+                <% if( filesystem ) { %><a href="files">filesystem</a> | <% } %> 
+                <a href="config">config maps and secrets</a> | 
+                <a href="network">networking</a> | 
+                <a href="about.html">about</a>
+        </p>
+        <hr/>
+        
+        <div class="row">
+            <div class="col-md-4">
+                    <form class="form-inline" method="GET" action="logit">
+                        <input type="text" class="form-control mb-2 mr-sm-2" name="msg" placeholder="Message for stdout">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-primary mb-2">Log It!</button>			  
+                            </div>
+                    </form>
+                    <form class="form-inline" method="GET" action="errit">
+                        <input type="text" class="form-control mb-2 mr-sm-2" name="msg" placeholder="Message for stderr">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-danger mb-2">Err It!</button>
+                            </div>
+                    </form>
+                    <form class="form-inline" method="POST" action="crash">
+                        <input type="text" class="form-control mb-2 mr-sm-2" name="msg" placeholder="Crash message">
+                                <div class="input-group-prepend">
+                                    <button type="submit" class="btn btn-primary mb-2">Crash Me!</button>
+                                </div>
+                    </form>
+                </div>
+            <div class="col-md-3">
+                <form class="form-inline" method="POST" action="health">
+                    <p>
+                        <button type="submit" id="health" class="btn btn-primary mb-2">Toggle Health</button> 
+                        (<%= healthStatus %>)
+                    </p>
+                </form>
+                <form class="form-inline" method="GET" action="mutate">
+                    <button type="submit" class="btn btn-success mb-2">Mutate</button>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <form method="POST" action="stress">
+                    <div class="form-row">
+                        <p>Linux <a href="https://linux.die.net/man/1/stress" target="_blank">stress</a></p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="cpu">CPU workers</label>
+                            <input type="text" class="form-control" name="cpu" id="cpu" value="<%= stress_vm %>">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="io">IO workers</label>
+                            <input type="text" class="form-control" name="io" id="io" value="<%= stress_io %>">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="vm">VM workers</label>
+                            <input type="text" class="form-control" name="vm" id="vm" value="<%= stress_vm %>">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="vmb">VM Bytes</label>
+                            <input type="text" class="form-control" name="vmb" id="vmb" value="<%= stress_vm_bytes %>">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="timeout">Timeout</label>
+                            <input type="text" class="form-control" name="timeout" id="timeout" value="<%= stress_timeout %>">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Stress Test</button>
+                </form>
+        
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                pod background: &nbsp;
+                <a href="home?background=none">none</a> | 
+                <a href="home?background=bridge">bridge</a> | 
+                <a href="home?background=ernie">ernie</a> | 
+                <a href="home?background=pond">pond</a> | 
+                <a href="home?background=tardis">tardis</a> 
+
+            </div>
+        </div>
+
+
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+</body>
+</html>

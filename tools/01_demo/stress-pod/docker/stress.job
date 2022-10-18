@@ -1,0 +1,15 @@
+run parallel   # run stressors sequentially
+verbose          # verbose output
+metrics-brief    # show metrics at end of run
+timeout 6000s      # stop each stressor after 60 seconds
+#
+# vm stressor options:
+#
+vm 20            # 2 vm stressors
+vm-bytes 512M    # 128MB available memory
+vm-keep          # keep vm mapping
+vm-populate      # populate memory
+#
+# memcpy stressor options:
+#
+memcpy 5         # 5 memcpy stressors

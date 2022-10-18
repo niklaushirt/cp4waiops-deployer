@@ -1,0 +1,16 @@
+
+{
+  "query": { 
+    "bool": { 
+      "must": [
+        { "match": { "kubernetes.namespace_name":   "robot-shop"        }}
+      ],
+      "filter": [ 
+        { "range": { "@timestamp": {
+          "gte": "2022-03-04T17:17:30.165Z",
+          "lt": "2022-03-04T17:32:05.754Z"
+        }}}
+      ]
+    }
+  }
+}

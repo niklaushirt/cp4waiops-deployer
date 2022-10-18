@@ -1,0 +1,27 @@
+# 1. pull down helm chart
+# cloudctl catalog create-archive --archive kubetoy-ppa-1.9.1.tgz --spec create-ppa-manifest.yaml 
+#
+charts:
+  - archive: file:kubetoy-1.9.1.tgz
+    repository-keys:
+    - image.repository
+
+images:
+- image: ibmicpcoc/kubetoy:1.9.1
+  references:
+  - repository: ibmicpcoc/kubetoy-amd64:1.9.1
+    pull-repository: ibmicpcoc/kubetoy-amd64:1.9.1
+    platform:
+      os: linux
+      architecture: amd64
+  - repository: ibmicpcoc/kubetoy-ppc64le:1.9.1
+    pull-repository: ibmicpcoc/kubetoy-ppc64le:1.9.1
+    platform:
+      os: linux
+      architecture: ppc64le
+  - repository: ibmicpcoc/kubetoy-s390x:1.9.1
+    pull-repository: ibmicpcoc/kubetoy-s390x:1.9.1
+    platform:
+      os: linux
+      architecture: s390x
+
