@@ -86,7 +86,7 @@ I installed the demo in a ROKS environment.
 You'll need:
 
 - ROKS 4.10
-- 5x worker nodes Flavor `b3c.16x64` (so 16 CPU / 64 GB) 
+- 5x worker nodes Flavor `b3c.16x64` (so **16 CPU / 64 GB**)  ❗
 
 
 
@@ -113,10 +113,10 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 	
 1. Fill-in the remaining fields
 
-	1. Geograpy: whatever is closest to you
-	2. Worker node count: 5
-	3. Flavour: b3c.16x64
-	4. OpenShift Version: 4.10
+	1. Geograpy: prefer Dallas or London (others might be slow)
+	2. Worker node count: **5**
+	3. Flavour: **b3c.16x64** ❗
+	4. OpenShift Version: **4.10**
 
 	![K8s CNI](./doc/pics/roks02.png)
 
@@ -135,68 +135,37 @@ This allows the CP4WAIOPS images to be pulled from the IBM Container Registry.
 
 
 
+## 🐥 1.2 Some remarks before you start
+
+Those are remarks to feedback and problem reports I got from the field.
+
+Those scripts have been tested thoroughly on different environments and have proven to be VERY reliable.
+
+
+* Make sure that you have provisioned a cluster with **5 worker nodes with 16 CPU and 64 GB** each (`b3c.16x64` - it's easy to select the wrong size). If you have Pods in `0/0` state verify the `Events`. If you get `Not enough CPU` then delete the cluster and provision the correct size.
+* When deploying ROKS I usually use Dallas or London, they are the fastest. On other regions we have seen much worse performance - deployment can take 4-5 times longer.
+* The complete installation takes about 2.5 to 8 hours depending on your region where you deployed ROKS to (see above).
+* If you see Pods in `CrashLoop` or other error states, try to wait it out (this can be due to dependencies on other componenets that are not ready yet). Chances are that the deployment will eventually go through. If after 8h you are still stuck, ping me.
+* **Select and use ONLY ONE of the scripts** below, depending on which components you want to install.
 
 
 
 
-## 🐥 1.2 Install AI Manager with demo content
+### ❗ So simply put be patient and make sure you have the correct size of cluster provisioned!
+
+<div style="page-break-after: always;"></div>
+
+## 🐥 1.3 Install AI Manager, Event Manager and Turbonomic with demo content
+
+This is probably the one that you want. 
+You get all the CP4WAIOPS components installed and pre-trained in one simple script.
+Ready to go.
+On top of that you get a Turbonomic instance to play around a bit (you'll need a license key for this).
+
+
 
 ![K8s CNI](./doc/pics/install01.png)
 
-1. In the the OCP Web UI click on the `+` sign in the right upper corner
-2. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/02_INSTALL_AIMGR_ALL.yaml)
-3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
-4. Click `Save`
-	
-
-
-Installs the following components:
-
-
-> - **AI Manager**
-> 	- IBM Operator
-> 	- AI Manager Instance
-> - **AI Manager Demo Content**
->    - **OpenLDAP** & Register with AI Manager
-> 
->    
->    - **AWX** (Open Source Ansible Tower) with preloaded Playbooks
->    - **AI Models** - Load and Train 
->      - Create Training Definitions (TG, LAD, CR, SI. Turn off RSA) 
->      - Create Training Data (LAD, SNOW) 
->      - Train Models (TG, LAD, CR, SI) 
->    - **Topology**
->      - RobotShop Demo App
->      - Create K8s Observer
->      - Create ASM merge rules
->      - Load Overlay Topology
->      - Create AI Manager Application
->    - **Misc**
-> 	   - Creates valid certificate for Ingress (Slack) 
-> 	   - External Routes (Flink, Topology, ...)
-> 	   - Disables ASM Service match rule 
-> 	   - Create Policy Creation for Stories and Runbooks 
-> 	   - Demo Service Account 
-
-<div style="page-break-after: always;"></div>
-		
-## 🐥 1.3 Install Event Manager with demo content
-1. In the the OCP Web UI click on the `+` sign in the right upper corner
-1. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/03_INSTALL_EVTMGR_ALL.yaml)
-3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
-3. Click `Save`
-
-> - **Event Manager**
-> 	- Event Manager
-> - **Event Manager Demo Content**
->   - **Topology**
->     - Create ASM merge rules
->     - Load ASM merge Topology
->     - Create AI Manager Application
-
-<div style="page-break-after: always;"></div>
-
-## 🐥 1.4 Install AI Manager, Event Manager and Turbonomic with demo content
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/01_INSTALL_ALL.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
@@ -238,7 +207,65 @@ Installs the following components:
 
 <div style="page-break-after: always;"></div>
 
-## 1.5 Install other components
+
+
+## 🐥 1.4 Install AI Manager with demo content
+
+
+1. In the the OCP Web UI click on the `+` sign in the right upper corner
+2. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/02_INSTALL_AIMGR_ALL.yaml)
+3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
+4. Click `Save`
+	
+
+
+Installs the following components:
+
+
+> - **AI Manager**
+> 	- IBM Operator
+> 	- AI Manager Instance
+> - **AI Manager Demo Content**
+>    - **OpenLDAP** & Register with AI Manager
+> 
+>    
+>    - **AWX** (Open Source Ansible Tower) with preloaded Playbooks
+>    - **AI Models** - Load and Train 
+>      - Create Training Definitions (TG, LAD, CR, SI. Turn off RSA) 
+>      - Create Training Data (LAD, SNOW) 
+>      - Train Models (TG, LAD, CR, SI) 
+>    - **Topology**
+>      - RobotShop Demo App
+>      - Create K8s Observer
+>      - Create ASM merge rules
+>      - Load Overlay Topology
+>      - Create AI Manager Application
+>    - **Misc**
+> 	   - Creates valid certificate for Ingress (Slack) 
+> 	   - External Routes (Flink, Topology, ...)
+> 	   - Disables ASM Service match rule 
+> 	   - Create Policy Creation for Stories and Runbooks 
+> 	   - Demo Service Account 
+
+<div style="page-break-after: always;"></div>
+		
+## 🐥 1.5 Install Event Manager with demo content
+1. In the the OCP Web UI click on the `+` sign in the right upper corner
+1. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/03_INSTALL_EVTMGR_ALL.yaml)
+3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
+3. Click `Save`
+
+> - **Event Manager**
+> 	- Event Manager
+> - **Event Manager Demo Content**
+>   - **Topology**
+>     - Create ASM merge rules
+>     - Load ASM merge Topology
+>     - Create AI Manager Application
+
+<div style="page-break-after: always;"></div>
+
+## 1.6 Install other components
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Select the content file from  [this directory](./tools/08_Quick_Install_Jobs/)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
@@ -247,7 +274,7 @@ Installs the following components:
 > ℹ️ If you get a ClusterRoleBinding already exists, just delete it at the beginning of the YAML
 
 
-## 1.6 Configure Slack
+## 1.7 Configure Slack
 
 Continue [here](#4-slack-integration) for [Slack integration](#4-slack-integration)
 
