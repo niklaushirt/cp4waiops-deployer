@@ -81,8 +81,8 @@
                                     <tr>
                                         <td colspan="2">
                                             <p></p>All other CP4WAIOPS Applications can be found <a href="apps">here</a>
-
                                         </td>
+                                    </tr>
                     </td>
 
                     <td style="width: 259px; vertical-align:top">
@@ -93,7 +93,7 @@
         </table>
 
         <hr>
-
+        {% if SIMULATION_MODE == 'true' %}
         <p> </p>
         <p> </p>
         <p> </p>
@@ -153,23 +153,46 @@
                 <tr>
                     <td style="width: 30%; vertical-align:top">
                         <p style="font-size:16px;">Clear Stories and Events to reset environment if needed . </p>
-                        <p style="font-size:16px;">If you want all Stories and Alerts to disappear you'll hae to wait up
-                            to 10 minutes.</p>
+                        <p style="font-size:16px;">If you want all Stories and Alerts to disappear you'll have to wait
+                            up
+                            to 10 minutes after clearing.</p>
                     </td>
                     <td width="40px">
                         &nbsp;
                     </td>
                     <td style="width: 30%; vertical-align:top">
-                        <p style="font-size:16px;">Create Incident simulating a Memory Leak in the Robotshop
+                        <p style="font-size:16px;">Create Incident simulating a Git Commit for the Robotshop
                             Application.</p>
-                        <p style="font-size:16px;">Creates Events and Log and Metric Anomalies. Linked to ServiceNow
-                            Incidents and Ansible Runbooks.</p>
+                        <p style="font-size:16px;">Creates Events and Log and Metric Anomalies, linked to ServiceNow
+                            Incidents and Ansible Runbooks for the mysql component of the application.</p>
                     </td>
 
 
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <p></p>Other Demo scenarios can be found <a href="apps_demo">here</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
+        {% else %}
+        <p> </p>
+        <p> </p>
+        <p> </p>
+
+        <table width="300" cellspacing="0" cellpadding="0" style="width: 1100px; table-layout: fixed">
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <p>You cannot simulate incidents on this system.</p>
+                        <p>Please use the existing incidents for demo purposes.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% endif %}
         <hr>
         <p></p>
         <p></p>

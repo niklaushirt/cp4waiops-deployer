@@ -1,7 +1,5 @@
 export TOKEN=test
 export LOG_ITERATIONS=5
-
-
 export LOG_TIME_FORMAT="%Y-%m-%dT%H:%M:%S.000000"
 export LOG_TIME_STEPS=1000
 export LOG_TIME_SKEW=60
@@ -15,7 +13,8 @@ export SLACK_URL="https://aiops-fry2953.slack.com/x-p1624757694871-3716524482480
 export SLACK_USER="ibmaiopsdemo@gmail.com"
 export SLACK_PWD="P4ssw0rd!"
 
-export ADMIN_MODE='true'
+export ADMIN_MODE='false'
+export SIMULATION_MODE='true'
 
 export DEMO_USER='demo1'
 export DEMO_PWD='P4ssw0rd!1'
@@ -161,7 +160,7 @@ export DEMO_LOGS='
 
 
 cd demoui
-python manage.py runserver # --http_timeout 240
+python manage.py runserver
 
 
 

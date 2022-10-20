@@ -168,6 +168,8 @@ spec:
                   demoui_slack_user: ibmaiopsdemo@gmail.com
                   demoui_slack_pwd: P4ssw0rd!
                   demoui_admin_mode: "true"
+                  demoui_simulation_mode: "true"
+
                   demoui_aimanager_demo_user: demo
                   demoui_aimanager_demo_pwd: P4ssw0rd!
 

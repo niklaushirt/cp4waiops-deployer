@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: waiops-demo-ui-python
-  namespace: {{current_cp4waiops_cluster.project}}
+  name: cp4waiops-demo-ui
+  namespace: {{current_cp4waiops_cluster.project}}-demo-ui
   labels:
-      app: waiops-demo-ui-python
+      app: cp4waiops-demo-ui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: waiops-demo-ui-python
+      app: cp4waiops-demo-ui
   template:
     metadata:
       labels:
-        app: waiops-demo-ui-python
+        app: cp4waiops-demo-ui
     spec:
       containers:
-      - image: niklaushirt/cp4waiops-demo-ui-python:0.57
+      - image: niklaushirt/cp4waiops-demo-ui:0.62
         imagePullPolicy: Always
-        name: waiops-demo-ui-python
+        name: cp4waiops-demo-ui
         command:
         ports:
         - containerPort: 8000
@@ -42,24 +42,24 @@ spec:
           failureThreshold: 3
         envFrom:
         - configMapRef:
-            name:  demo-ui-python-config
+            name:  cp4waiops-demo-ui-config
         - configMapRef:
-            name:  demo-ui-python-config-events
+            name:  cp4waiops-demo-ui-config-events
         - configMapRef:
-            name:  demo-ui-python-config-logs
+            name:  cp4waiops-demo-ui-config-logs
         - configMapRef:
-            name:  demo-ui-python-config-metrics
-      serviceAccountName: demo-ui-python-admin
+            name:  cp4waiops-demo-ui-config-metrics
+      serviceAccountName: cp4waiops-demo-ui-admin
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: waiops-demo-ui-python-service
-  namespace: {{current_cp4waiops_cluster.project}}
+  name: cp4waiops-demo-ui-service
+  namespace: {{current_cp4waiops_cluster.project}}-demo-ui
 spec:
   selector:
-    app: waiops-demo-ui-python
+    app: cp4waiops-demo-ui
   ports:
     - protocol: TCP
       port: 8000
@@ -68,12 +68,12 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name:  waiops-demo-ui-python
-  namespace: {{current_cp4waiops_cluster.project}}
+  name:  cp4waiops-demo-ui
+  namespace: {{current_cp4waiops_cluster.project}}-demo-ui
 spec:
   to:
     kind: Service
-    name: waiops-demo-ui-python-service
+    name: cp4waiops-demo-ui-service
     weight: 100
   port:
     targetPort: 8000

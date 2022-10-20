@@ -249,14 +249,20 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
     
     print ('           METRIC_TIME_SKEW:               '+str(METRIC_TIME_SKEW))
     print ('           METRIC_TIME_STEP:               '+str(METRIC_TIME_STEP))
+    print('     ❓ Getting AIManager Namespace')
+    stream = os.popen("oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}'")
+    aimanagerns = stream.read().strip()
+    print('        ✅ AIManager Namespace:       '+aimanagerns)
+
     print('     ❓ Getting Details Metric Endpoint')
-    stream = os.popen("oc get route | grep ibm-nginx-svc | awk '{print $2}'")
+    stream = os.popen("oc get route -n "+aimanagerns+" | grep ibm-nginx-svc | awk '{print $2}'")
     METRIC_ROUTE = stream.read().strip()
-    stream = os.popen("oc get secret admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d")
+    stream = os.popen("oc get secret  -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d")
     tmppass = stream.read().strip()
     stream = os.popen('curl -k -s -X POST https://'+METRIC_ROUTE+'/icp4d-api/v1/authorize -H "Content-Type: application/json" -d "{\\\"username\\\": \\\"admin\\\",\\\"password\\\": \\\"'+tmppass+'\\\"}" | jq .token | sed "s/\\\"//g"')
     METRIC_TOKEN = stream.read().strip()
 
+    requests.packages.urllib3.disable_warnings()
 
     timestamp = datetime.datetime.now()
     timestamp = timestamp + datetime.timedelta(seconds=METRIC_TIME_SKEW)

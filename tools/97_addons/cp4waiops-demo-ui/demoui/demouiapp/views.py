@@ -182,6 +182,7 @@ robotshop_url = stream.read().strip()
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 TOKEN=os.environ.get('TOKEN')
 ADMIN_MODE=os.environ.get('ADMIN_MODE')
+SIMULATION_MODE=os.environ.get('SIMULATION_MODE')
 DEMO_USER=os.environ.get('DEMO_USER')
 DEMO_PWD=os.environ.get('DEMO_PWD')
 
@@ -194,26 +195,27 @@ print ('')
 print ('    **************************************************************************************************')
 print ('     🔎 Demo Parameters')
 print ('    **************************************************************************************************')
-print ('           KafkaBroker:        '+KAFKA_BROKER)
-print ('           KafkaUser:          '+KAFKA_USER)
-print ('           KafkaPWD:           '+KAFKA_PWD)
-print ('           KafkaTopic Logs:    '+KAFKA_TOPIC_LOGS)
-print ('           Kafka Cert:         '+KAFKA_CERT[:25]+'...')
-print ('')
-print ('')
-print ('           Datalayer Route:    '+DATALAYER_ROUTE)
-print ('           Datalayer User:     '+DATALAYER_USER)
-print ('           Datalayer Pwd:      '+DATALAYER_PWD)
-print ('')
-print ('           Metric Route:       '+METRIC_ROUTE)
-print ('           Metric Token:       '+METRIC_TOKEN[:25]+'...')
-print ('')
-print ('           Token:              '+TOKEN)
-print ('')
-print ('           Admin:              '+ADMIN_MODE)
-print ('')
-print ('           Demo User:          '+DEMO_USER)
-print ('           Demo Password:      '+DEMO_PWD)
+print ('           KafkaBroker:           '+KAFKA_BROKER)
+print ('           KafkaUser:             '+KAFKA_USER)
+print ('           KafkaPWD:              '+KAFKA_PWD)
+print ('           KafkaTopic Logs:       '+KAFKA_TOPIC_LOGS)
+print ('           Kafka Cert:            '+KAFKA_CERT[:25]+'...')
+print ('')   
+print ('')   
+print ('           Datalayer Route:       '+DATALAYER_ROUTE)
+print ('           Datalayer User:        '+DATALAYER_USER)
+print ('           Datalayer Pwd:         '+DATALAYER_PWD)
+print ('')   
+print ('           Metric Route:          '+METRIC_ROUTE)
+print ('           Metric Token:          '+METRIC_TOKEN[:25]+'...')
+print ('')   
+print ('           Token:                 '+TOKEN)
+print ('')   
+print ('           Admin:                 '+ADMIN_MODE)
+print ('           Can create incident:   '+SIMULATION_MODE)
+print ('')   
+print ('           Demo User:             '+DEMO_USER)
+print ('           Demo Password:         '+DEMO_PWD)
 print ('')
 print ('    **************************************************************************************************')
 
@@ -273,7 +275,9 @@ def injectAllREST(request):
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -322,7 +326,9 @@ def injectAllFanREST(request):
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -365,7 +371,9 @@ def injectLogsREST(request):
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -406,7 +414,9 @@ def injectEventsREST(request):
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -445,7 +455,9 @@ def injectMetricsREST(request):
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -457,6 +469,11 @@ def clearAllREST(request):
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
+
+        print('🌏 Reset RobotShop MySQL outage')
+        os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql\\"}}}"')
+        
+
         closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
         closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
     else:
@@ -487,7 +504,9 @@ def clearAllREST(request):
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -526,7 +545,9 @@ def clearEventsREST(request):
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -565,7 +586,9 @@ def clearStoriesREST(request):
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -600,7 +623,10 @@ def login(request):
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'ADMIN_MODE': ADMIN_MODE,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'SIMULATION_MODE': SIMULATION_MODE,  
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
 
     return HttpResponse(template.render(context, request))
@@ -668,9 +694,12 @@ def index(request):
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
         'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
         
     }
     return HttpResponse(template.render(context, request))
@@ -709,7 +738,10 @@ def doc(request):
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd
+        'eventmanager_pwd': eventmanager_pwd,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -752,8 +784,10 @@ def apps(request):
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
         'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
-        'DEMO_PWD': DEMO_PWD
+        'DEMO_PWD': DEMO_PWD,
+        'INSTANCE_NAME': INSTANCE_NAME
         
     }
     return HttpResponse(template.render(context, request))
@@ -797,8 +831,58 @@ def apps_system(request):
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
         'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
-        'DEMO_PWD': DEMO_PWD
+        'DEMO_PWD': DEMO_PWD,
+        'INSTANCE_NAME': INSTANCE_NAME
+        
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def apps_demo(request):
+    print('🌏 apps_demo')
+    global loggedin
+
+    verifyLogin(request)
+
+    if loggedin=='true':
+        template = loader.get_template('demouiapp/apps_demo.html')
+    else:
+        template = loader.get_template('demouiapp/loginui.html')
+    context = {
+        'loggedin': loggedin,
+        'aimanager_url': aimanager_url,
+        'aimanager_user': aimanager_user,
+        'aimanager_pwd': aimanager_pwd,
+        'awx_url': awx_url,
+        'awx_user': awx_user,
+        'awx_pwd': awx_pwd,
+        'elk_url': elk_url,
+        'turonomic_url': turonomic_url,
+        'openshift_url': openshift_url,
+        'openshift_token': openshift_token,
+        'openshift_server': openshift_server,
+        'vault_url': vault_url,
+        'vault_token': vault_token,
+        'ladp_url': ladp_url,
+        'ladp_user': ladp_user,
+        'ladp_pwd': ladp_pwd,
+        'flink_url': flink_url,
+        'flink_url_policy': flink_url_policy,
+        'robotshop_url': robotshop_url,
+        'spark_url': spark_url,
+        'eventmanager_url': eventmanager_url,
+        'eventmanager_user': eventmanager_user,
+        'eventmanager_pwd': eventmanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE,  
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
+        'INSTANCE_NAME': INSTANCE_NAME
         
     }
     return HttpResponse(template.render(context, request))
@@ -844,8 +928,10 @@ def apps_additional(request):
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
         'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
-        'DEMO_PWD': DEMO_PWD
+        'DEMO_PWD': DEMO_PWD,
+        'INSTANCE_NAME': INSTANCE_NAME
         
     }
     return HttpResponse(template.render(context, request))
@@ -865,6 +951,9 @@ def about(request):
         template = loader.get_template('demouiapp/loginui.html')
     context = {
         'loggedin': loggedin,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -902,7 +991,10 @@ def config(request):
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd
+        'eventmanager_pwd': eventmanager_pwd,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE
     }
     return HttpResponse(template.render(context, request))
 
@@ -912,6 +1004,7 @@ def index1(request):
     template = loader.get_template('demouiapp/index.html')
     context = {
         'loggedin': loggedin,
+        'INSTANCE_NAME': INSTANCE_NAME
     }
     return HttpResponse(template.render(context, request))
 

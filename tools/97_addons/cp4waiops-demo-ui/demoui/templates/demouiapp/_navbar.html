@@ -12,8 +12,13 @@
     <p></p>
     <p>Details</p>
     <p></p><a href="apps">CP4waiops Apps</a>
-    <p></p><a href="apps_additional">Additonal Apps</a>
+    <p></p><a href="apps_additional">Third-Party Apps</a>
+    {% if SIMULATION_MODE == 'true' %}
+    <p></p><a href="apps_demo">Demo Content</a>
+    {% endif %}
+    {% if ADMIN_MODE == 'true' %}
     <p></p><a href="apps_system">System</a>
+    {% endif %}
     <p></p>
     <p> </p>
     <hr>

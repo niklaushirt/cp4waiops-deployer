@@ -1,10 +1,10 @@
 #!/bin/bash
 
-export CONT_VERSION=0.56
+export CONT_VERSION=0.60
 
 # Create the Image
-docker buildx build --platform linux/amd64 -t niklaushirt/cp4waiops-demo-ui-python:$CONT_VERSION --load .
-docker push niklaushirt/cp4waiops-demo-ui-python:$CONT_VERSION
+docker buildx build --platform linux/amd64 -t niklaushirt/cp4waiops-demo-ui:$CONT_VERSION --load .
+docker push niklaushirt/cp4waiops-demo-ui:$CONT_VERSION
 
 # Run the Image
 

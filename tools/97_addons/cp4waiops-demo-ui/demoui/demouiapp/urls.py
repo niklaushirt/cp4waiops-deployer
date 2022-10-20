@@ -10,6 +10,7 @@ urlpatterns = [
     path('config', views.config, name='config'),
     path('apps', views.apps, name='apps'),
     path('apps_system', views.apps_system, name='apps_system'),
+    path('apps_demo', views.apps_demo, name='apps_demo'),
     path('apps_additional', views.apps_additional, name='apps_additional'),
     path('about', views.about, name='about'),
     path('', views.index, name='index'),

@@ -268,7 +268,7 @@ Continue [here](#4-slack-integration) for [Slack integration](#4-slack-integrati
 	export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 		
 	echo "🌏 AI Manager:           https://$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})"
-	echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE waiops-demo-ui-python -o jsonpath={.spec.host})"
+	echo "🌏 Demo UI:              http://$(oc get route -n $WAIOPS_NAMESPACE-demo-ui cp4waiops-demo-ui -o jsonpath={.spec.host})"
 	
 	```
 	

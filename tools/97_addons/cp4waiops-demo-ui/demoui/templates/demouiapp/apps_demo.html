@@ -1,0 +1,97 @@
+{% load static %}
+{% include "demouiapp/_header.html" %}
+<div role="main" class="container theme-showcase">
+    <div class="jumbotron container">
+        <table>
+            <tbody>
+                <tr>
+                    {% include "demouiapp/_navbar.html" %}
+                    <td style="width:90%; padding-left:50px;">
+                        <p style="font-size:2.5em;">IBM CloudPak for Watson AIOps</p>
+ 
+                        <p></p>
+                        <p style="font-size:50px;">🚀 CP4WAIOPS Additional Demo Content<p> </p>
+                            <p></p>
+                        <hr>
+             
+
+
+                        {% if SIMULATION_MODE == 'true' %}
+                            <table   cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed">
+                                <tbody>
+
+                   
+                                    <tr>
+                                    <td style="width: 30%; vertical-align:top">
+                                        <p style="font-size:20px;">Create Incident</p>
+                                        </td>
+                                        <td  width="40px">
+                                            &nbsp;
+                                        </td>
+                                        <td  style="width: 259px; vertical-align:top">
+                                            <p style="font-size:20px;">Create Events</a>
+                                        </td>
+                                        <td  width="10px">
+                                            &nbsp;
+                                        </td>
+                                        <td  style="width: 259px; vertical-align:top">
+                                            <p style="font-size:20px;">Clear Stories and Events</p>
+                    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 259px; vertical-align:top">
+                                            <p></p><button type="button" onclick="toggle(this)" data-arg1='injectAllREST' class="btn btn-danger btn-lg">Create Incident Memory Leak</button>
+                                            <p></p><button type="button" onclick="toggle(this)" data-arg1='injectAllFanREST' class="btn btn-danger btn-lg">Create Incident Fan Failure</button>
+                                        </td>
+                                        <td  width="40px">
+                                            &nbsp;
+                                        </td>
+                                       
+                                        <td  style="width: 259px; vertical-align:top">
+                                            <p></p><button type="button" onclick="toggle(this)" data-arg1='injectEventsREST' class="btn btn-warning">Create Events</button>
+                                            <p></p><button type="button" onclick="toggle(this)" data-arg1='injectLogsREST' class="btn btn-warning">Create Log Anomalies</button>
+                                            <p></p><button type="button" onclick="toggle(this)" data-arg1='injectMetricsREST' class="btn btn-warning">Create Metric Anomalies</button>
+                                        </td>
+                                        <td  width="10px">
+                                            &nbsp;
+                                        </td>
+                                        <td  style="width: 259px; vertical-align:top">
+                                            <p></p><button type="button" onclick="toggle(this)" data-arg1='clearAllREST' class="btn btn-success">Clear Stories and Events</button>
+                                            <p></p><button type="button" onclick="toggle(this)" data-arg1='clearEventsREST' class="btn btn-success">Clear Events</button>
+                                            <p></p><button type="button" onclick="toggle(this)" data-arg1='clearStoriesREST' class="btn btn-success">Clear Stories</button>
+                                        </td>
+                                    </tr>
+                   
+                                </tbody>
+                            </table>
+
+                            {% else %}
+                            <p> </p>
+                            <p> </p>
+                            <p> </p>
+                    
+                            <table width="300" cellspacing="0" cellpadding="0" style="width: 1100px; table-layout: fixed">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <p>You cannot simulate incidents on this system.</p>
+                                            <p>Please use the existing incidents for demo purposes.</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    
+                            {% endif %}
+                         
+    
+                        </p>
+                        <p></p>
+                        <p></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% include "demouiapp/_footer.html" %}
