@@ -61,7 +61,7 @@ Here is a quick video that walks you through the installation process
 # 🐥 1 Quick Install
 ---------------------------------------------------------------
 
-### ✅ **This method doesn't require you to install anything on your local machine.**
+### ⚠️ **This method doesn't require you to install anything on your local machine.**
 
 * You get a OpenShift Cluster
 * You get your entitlement key/pull token
@@ -77,9 +77,9 @@ Here is a quick video that walks you through the installation process
 
 <div style="page-break-after: always;"></div>
 
-## 1.1 Prerequisites 
+## ✅ 1.1 Prerequisites 
 
-### 1.1.1 OpenShift requirements 
+### ✅ 1.1.1 OpenShift requirements 
 
 I installed the demo in a ROKS environment.
 
@@ -97,7 +97,7 @@ You **might** get away with less if you don't install some components (Event Man
 
 
 
-### 1.1.2 Get a ROKS Cluster (IBMers and IBM Partners only)
+### ✅ 1.1.2 Get a ROKS Cluster (IBMers and IBM Partners only)
 
 IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collection/custom-roks-vmware-requests) (ususally valid for up to 8 days)
 
@@ -125,7 +125,7 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 1. Once the cluster is provisioned, don't forget to extend it to 8 days if needed.
 
 
-### 1.1.3 Get the CP4WAIOPS installation token (registry pull token) 
+### ✅ 1.1.3 Get the CP4WAIOPS installation token (registry pull token) 
 
 You can get the installation (registry pull token) token from [https://myibm.ibm.com/products-services/containerlibrary](https://myibm.ibm.com/products-services/containerlibrary).
 
