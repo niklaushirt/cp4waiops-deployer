@@ -113,7 +113,7 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 	
 1. Fill-in the remaining fields
 
-	1. Geograpy: prefer **Dallas or London** (others might be slow)
+	1. Geograpy: prefer **Dallas or London** (others might be slower)
 	2. Worker node count: **5**
 	3. Flavour: **b3c.16x64** ❗
 	4. OpenShift Version: **4.10**
