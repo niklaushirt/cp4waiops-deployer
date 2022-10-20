@@ -135,7 +135,7 @@ This allows the CP4WAIOPS images to be pulled from the IBM Container Registry.
 
 
 
-## ⚠️ 1.2 Some remarks before you start
+## ⚠️ 1.2 Some remarks before you start ⚠️
 
 Those are remarks to feedback and problem reports I got from the field.
 
