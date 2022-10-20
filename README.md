@@ -66,7 +66,7 @@ Here is a quick video that walks you through the installation process
 * You get a OpenShift Cluster
 * You get your entitlement key/pull token
 * You paste the install file into the OpenShift web UI
-* Grab a coffe and come back after 1-2 hours depending on the modules you're installing
+* Grab a coffe and come back after 2-3 hours depending on the modules you're installing
 
 
 🚀 Already have a cluster? [Dive right in](#-12-install-ai-manager-with-demo-content)
@@ -99,7 +99,7 @@ You **might** get away with less if you don't install some components (Event Man
 
 ### 1.1.2 Get a ROKS Cluster (IBMers and IBM Partners only)
 
-IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collection/custom-roks-vmware-requests) (ususally valid for 2 weeks)
+IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collection/custom-roks-vmware-requests) (ususally valid for up to 8 days)
 
 1. Create a cluster for `Practice/Self Education` if you don't have an Opportunity Number
 
@@ -113,7 +113,7 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 	
 1. Fill-in the remaining fields
 
-	1. Geograpy: prefer Dallas or London (others might be slow)
+	1. Geograpy: prefer **Dallas or London** (others might be slow)
 	2. Worker node count: **5**
 	3. Flavour: **b3c.16x64** ❗
 	4. OpenShift Version: **4.10**
@@ -122,7 +122,7 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 
 1. Click `Submit`
 	
-
+1. Once the cluster is provisioned, don't forget to extend it to 8 days if needed.
 
 
 ### 1.1.3 Get the CP4WAIOPS installation token (registry pull token) 
@@ -135,12 +135,13 @@ This allows the CP4WAIOPS images to be pulled from the IBM Container Registry.
 
 
 
-## ⚠️ 1.2 Some remarks before you start ⚠️
+## ⚠️⚠️ 1.2 Important remarks before you start ⚠️⚠️
 
 Those are remarks to feedback and problem reports I got from the field.
 
 Those scripts have been tested thoroughly on different environments and have proven to be VERY reliable.
 
+If you think that you hit a problem:
 
 * Make sure that you have provisioned a cluster with **5 worker nodes with 16 CPU and 64 GB** each (`b3c.16x64` - it's easy to select the wrong size). If you have Pods in `0/0` state verify the `Events`. If you get `Not enough CPU` then delete the cluster and provision the correct size.
 * When deploying ROKS I usually use Dallas or London, they are the fastest. On other regions we have seen much worse performance - deployment can take 4-5 times longer.
