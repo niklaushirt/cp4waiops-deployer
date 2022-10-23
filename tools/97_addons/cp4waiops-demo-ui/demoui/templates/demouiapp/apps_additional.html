@@ -5,50 +5,66 @@
         <table>
             <tbody>
                 <tr>
-                    {% include "demouiapp/_navbar.html" %}
                     <td style="width:90%; padding-left:50px;">
-                        <p style="font-size:2.5em;">IBM CloudPak for Watson AIOps</p>
- 
-                        <p></p>
-                        <p style="font-size:50px;">🚀 Additional Applications<p> </p>
-                            <p></p>
-                        <hr>
-                            <table   cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed">
-                                <tbody>
-
-
-                                    <tr>
-
-                                    </tr>
+                        <div style="max-height: 120px;   background-color:#f2f7ff; padding: 20px; margin: 5px;">
+                            <table cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed; ">
+                                <tbody>                          
                                     <tr>
                                         <td width="10%">
                                             &nbsp;
                                         </td>
-                                        <td  width="100px">
+                                        <td width="100px">
                                             &nbsp;
                                         </td>
-                                        <td  width="10px">
+                                        <td width="10px">
                                             &nbsp;
                                         </td>
-                                        <td  width="10px">
+                                        <td width="10px">
                                             &nbsp;
                                         </td>
                                     </tr>
-                             
 
                                     <tr>
-                                        <td><a href="http://{{ robotshop_url }}" target="_blank"
-                                                role="button" class="btn btn-success btn-lg">RobotShop</a></td>
+                                        <td>
+                                            <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                                                <a target="_blank" tabindex="0"
+                                                    class="bx--btn bx--btn--pink bx--btn--expressive"
+                                                    href="http://{{ robotshop_url }}" style="font-size: 18px;"
+                                                    onclick="toggle(this)" data-arg1='clearAllREST'>RobotShop
+                                                    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" class="bx--btn__icon"><path d="M30.94,15.66A16.69,16.69,0,0,0,16,5,16.69,16.69,0,0,0,1.06,15.66a1,1,0,0,0,0,.68A16.69,16.69,0,0,0,16,27,16.69,16.69,0,0,0,30.94,16.34,1,1,0,0,0,30.94,15.66ZM16,25c-5.3,0-10.9-3.93-12.93-9C5.1,10.93,10.7,7,16,7s10.9,3.93,12.93,9C26.9,21.07,21.3,25,16,25Z"></path><path d="M16,10a6,6,0,1,0,6,6A6,6,0,0,0,16,10Zm0,10a4,4,0,1,1,4-4A4,4,0,0,1,16,20Z"></path></svg>
+
+                                                </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
                                             &nbsp;
                                         </td>
                                     </tr>
-
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90%; padding-left:50px;">
+                        <div style="max-height: 100px;   background-color:#f2f7ff; padding: 20px; margin: 5px;">
+                            <table cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed; ">
+                                <tbody>
                                     <tr>
-                                        <td><a href="https://{{ awx_url }}" target="_blank"
-                                                role="button" class="btn btn-success btn-lg">AWX</a></td>
+                                        <td>
+                                            <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                                                <a target="_blank" tabindex="0"
+                                                    class="bx--btn bx--btn--pink bx--btn--expressive"
+                                                    href="https://{{ awx_url }}" style="font-size: 18px;"
+                                                    onclick="toggle(this)" data-arg1='clearAllREST'>AWX
+                                                    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Grid" aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" role="img" class="bx--btn__icon"><path d="M12 4H6A2 2 0 004 6v6a2 2 0 002 2h6a2 2 0 002-2V6A2 2 0 0012 4zm0 8H6V6h6zM26 4H20a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2V6A2 2 0 0026 4zm0 8H20V6h6zM12 18H6a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2V20A2 2 0 0012 18zm0 8H6V20h6zM26 18H20a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2V20A2 2 0 0026 18zm0 8H20V20h6z"></path></svg>
+
+                                                </a>
+                                            </div>
+
+                                        </td>
                                         <td>👩‍💻&nbsp;&nbsp;USER: {{awx_user}}</td>
                                         <td>🔐&nbsp;&nbsp;PASSWORD: {{awx_pwd}}</td>
                                     </tr>
@@ -57,10 +73,30 @@
                                             &nbsp;
                                         </td>
                                     </tr>
-                                    {% if ADMIN_MODE == 'true' %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                {% if ADMIN_MODE == 'true' %}
+
+                <tr>
+                    <td style="width:90%; padding-left:50px;">
+                        <div style="max-height: 100px;   background-color:#f2f7ff; padding: 20px; margin: 5px;">
+                            <table cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed; ">
+                                <tbody>
                                     <tr>
-                                        <td><a href="http://{{ ladp_url }}" target="_blank"
-                                                role="button" class="btn btn-success btn-lg">OpenLdap</a></td>
+                                        <td>
+                                            <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                                                <a target="_blank" tabindex="0"
+                                                    class="bx--btn bx--btn--pink bx--btn--expressive"
+                                                    href="http://{{ ladp_url }}" style="font-size: 18px;"
+                                                    onclick="toggle(this)" data-arg1='clearAllREST'>OpenLdap
+                                                    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" class="bx--btn__icon"><path d="M16,8a5,5,0,1,0,5,5A5,5,0,0,0,16,8Zm0,8a3,3,0,1,1,3-3A3.0034,3.0034,0,0,1,16,16Z"></path><path d="M16,2A14,14,0,1,0,30,16,14.0158,14.0158,0,0,0,16,2ZM10,26.3765V25a3.0033,3.0033,0,0,1,3-3h6a3.0033,3.0033,0,0,1,3,3v1.3765a11.8989,11.8989,0,0,1-12,0Zm13.9925-1.4507A5.0016,5.0016,0,0,0,19,20H13a5.0016,5.0016,0,0,0-4.9925,4.9258,12,12,0,1,1,15.985,0Z"></path></svg>
+
+                                                </a>
+                                            </div>
+                                        </td>
                                         <td>👩‍💻&nbsp;&nbsp;USER: {{ladp_user}}</td>
                                         <td>🔐&nbsp;&nbsp;PASSWORD: {{ladp_pwd}}</td>
                                     </tr>
@@ -69,48 +105,73 @@
                                             &nbsp;
                                         </td>
                                     </tr>
-                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}
 
-                    
-                                    {% if elk_url != '' %}
+                {% if elk_url != '' %}
+                <tr>
+                    <td style="width:90%; padding-left:50px;">
+                        <div style="max-height: 100px;   background-color:#f2f7ff; padding: 20px; margin: 5px;">
+                            <table cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed; ">
+                                <tbody>
                                     <tr>
-                                        <td><a href="https://{{ elk_url }}" target="_blank"
-                                                role="button" class="btn btn-success btn-lg">ELK</a></td>
+                                        <td>
+                                            <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                                                <a target="_blank" tabindex="0"
+                                                    class="bx--btn bx--btn--pink bx--btn--expressive"
+                                                    href="https://{{ elk_url }}" style="font-size: 18px;"
+                                                    onclick="toggle(this)" data-arg1='clearAllREST'>ELK
+                                                    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" class="bx--btn__icon"><path d="M9.3 3.7L13.1 7.5 1 7.5 1 8.5 13.1 8.5 9.3 12.3 10 13 15 8 10 3z"></path></svg>
+
+                                                </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
                                             &nbsp;
                                         </td>
                                     </tr>
-                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                {% endif %}
 
-                                    {% if turonomic_url != '' %}
+                {% if turonomic_url != '' %}
+                <tr>
+                    <td style="width:90%; padding-left:50px;">
+                        <div style="max-height: 100px;   background-color:#f2f7ff; padding: 20px; margin: 5px;">
+                            <table cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed; ">
+                                <tbody>
                                     <tr>
-                                        <td><a href="https://{{ turonomic_url }}" target="_blank"
-                                                role="button" class="btn btn-success btn-lg">Turbonomic</a></td>
+                                        <td>
+                                            <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                                                <a target="_blank" tabindex="0"
+                                                    class="bx--btn bx--btn--pink bx--btn--expressive"
+                                                    href="https://{{ turonomic_url }}" style="font-size: 18px;"
+                                                    onclick="toggle(this)" data-arg1='clearAllREST'>Turbonomic
+                                                    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" class="bx--btn__icon"><path d="M9.3 3.7L13.1 7.5 1 7.5 1 8.5 13.1 8.5 9.3 12.3 10 13 15 8 10 3z"></path></svg>
+
+                                                </a>
+                                            </div>
+                                        </td>
                                         <td>👩‍💻&nbsp;&nbsp;USER: admin</td>
                                         <td>🔐&nbsp;&nbsp;PASSWORD: as set on install</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                          
                                         </td>
                                     </tr>
                                     {% endif %}
-                            
-                                    <p> </p>
-                                    <p> </p>
-                                    <p> </p>
-
-                    
                                 </tbody>
                             </table>
-
-                            <hr>
-    
-                        </p>
-                        <p></p>
-                        <p></p>
+                        </div>
                     </td>
                 </tr>
             </tbody>

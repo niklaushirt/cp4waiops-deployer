@@ -5,17 +5,10 @@
         <table>
             <tbody>
                 <tr>
-                    {% include "demouiapp/_navbar.html" %}
                     <td style="width:90%; padding-left:50px;">
-                        <p style="font-size:2.5em;">IBM CloudPak for Watson AIOps</p>
-
-                        <p></p>
-                        <p style="font-size:50px;">🚀 CP4WAIOPS Applications<p> </p>
-                            <p></p>
-                            <hr>
-                            <table cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed">
+                        <div style="max-height: 200px; background-color:#f2f7ff; padding: 20px; margin: 5px;">
+                            <table cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed; ">
                                 <tbody>
-
 
                                     <tr>
 
@@ -34,91 +27,136 @@
                                             &nbsp;
                                         </td>
                                     </tr>
-                                 
+
                                     <tr>
-                                        <td width="10%"><a href="https://{{ aimanager_url }}" target="_blank"
-                                                role="button" class="btn btn-info btn-lg">AI Manager</a></td>
+
+                                        <td width="10%">
+                                            <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                                                <a target="_blank" tabindex="0"
+                                                    class="bx--btn bx--btn--primary bx--btn--expressive"
+                                                    href="https://{{ aimanager_url }}" style="font-size: 18px;"
+                                                    onclick="toggle(this)" data-arg1='clearAllREST'>AI Manager
+                                                    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" class="bx--btn__icon"><path d="M9.3 3.7L13.1 7.5 1 7.5 1 8.5 13.1 8.5 9.3 12.3 10 13 15 8 10 3z"></path></svg>
+
+                                                </a>
+                                            </div>
+
+
+                                        </td>
                                         {% if ADMIN_MODE == 'true' %}
                                         <td>👩‍💻&nbsp;&nbsp;USER: {{aimanager_user}}</td>
-                    </td>
-                    <td  colspan="2">🔐&nbsp;&nbsp;PASSWORD: {{aimanager_pwd}}</td>
-                    {% endif %}
-                <tr>
-                    <td colspan="1">
-                        &nbsp;
-                    </td>
-                    <td>👩‍💻&nbsp;&nbsp;USER: {{ DEMO_USER }} </td>
-                    </td>
-                    <td>🔐&nbsp;&nbsp;PASSWORD: {{ DEMO_PWD }} </td>
-                </tr>
 
+                                        <td colspan="2">🔐&nbsp;&nbsp;PASSWORD: {{aimanager_pwd}}</td>
+                                    </tr>
 
+                                    {% endif %}
+                                    <tr>
+                                        <td colspan="1">
+                                            &nbsp;
+                                        </td>
+                                        <td>👩‍💻&nbsp;&nbsp;USER: {{ DEMO_USER }} </td>
 
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        &nbsp;
-                    </td>
-                </tr>
-
-                {% if eventmanager_url != '' %}
-                <tr>
-                    <td width="10%"><a href="https://{{ eventmanager_url }}" target="_blank" role="button"
-                            class="btn btn-info btn-lg">Event Manager</a></td>
-
-                    <td>👩‍💻&nbsp;&nbsp;USER: {{eventmanager_user}}</td>
-                    <td>🔐&nbsp;&nbsp;PASSWORD: {{eventmanager_pwd}}</td>
-                </tr>
-
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        &nbsp;
-                    </td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td colspan="3">
-                        &nbsp;
+                                        <td>🔐&nbsp;&nbsp;PASSWORD: {{ DEMO_PWD }} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </td>
                 </tr>
                 <tr>
-                    <td width="10%"><a href="{{ SLACK_URL }}" target="_blank" role="button"
-                            class="btn btn-warning btn-lg">Slack</a></td>
-                    <td>👩‍💻&nbsp;&nbsp;USER: {{ SLACK_USER }}</td>
-                    </td>
-                    <td>🔐&nbsp;&nbsp;PASSWORD: {{ SLACK_PWD }}</p>
+                    <td style="width:90%; padding-left:50px;">
+                        <div style="max-height: 120px;  background-color:#f2f7ff; padding: 20px; margin: 5px;">
+                            <table cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed; ">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="3">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+
+                                    {% if eventmanager_url != '' %}
+                                    <tr>
+                                        <td width="10%">
+                                            <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                                                <a target="_blank" tabindex="0"
+                                                    class="bx--btn bx--btn--primary bx--btn--expressive"
+                                                    href="https://{{ eventmanager_url }}" style="font-size: 18px;"
+                                                    onclick="toggle(this)" data-arg1='clearAllREST'>Event Manager
+                                                    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" class="bx--btn__icon"><path d="M9.3 3.7L13.1 7.5 1 7.5 1 8.5 13.1 8.5 9.3 12.3 10 13 15 8 10 3z"></path></svg>
+
+                                                </a>
+                                            </div>
+
+                                        </td>
+
+                                        <td>👩‍💻&nbsp;&nbsp;USER: {{eventmanager_user}}</td>
+                                        <td>🔐&nbsp;&nbsp;PASSWORD: {{eventmanager_pwd}}</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
-                        &nbsp;
+                    <td style="width:90%; padding-left:50px;">
+                        <div style="max-height: 120px;  background-color:#f2f7ff; padding: 20px; margin: 5px;">
+                            <table cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed; ">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="3">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%">
+                                            <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                                                <a target="_blank" tabindex="0"
+                                                    class="bx--btn bx--btn--pink bx--btn--expressive"
+                                                    href="{{ SLACK_URL }}" style="font-size: 18px;"
+                                                    onclick="toggle(this)" data-arg1='clearAllREST'>Slack
+                                                    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 32 32" aria-hidden="true" class="bx--btn__icon"><path d="M28.7071,19.293,26,16.5859V13a10.0136,10.0136,0,0,0-9-9.9492V1H15V3.0508A10.0136,10.0136,0,0,0,6,13v3.5859L3.2929,19.293A1,1,0,0,0,3,20v3a1,1,0,0,0,1,1h7v.7768a5.152,5.152,0,0,0,4.5,5.1987A5.0057,5.0057,0,0,0,21,25V24h7a1,1,0,0,0,1-1V20A1,1,0,0,0,28.7071,19.293ZM19,25a3,3,0,0,1-6,0V24h6Zm8-3H5V20.4141L7.707,17.707A1,1,0,0,0,8,17V13a8,8,0,0,1,16,0v4a1,1,0,0,0,.293.707L27,20.4141Z"></path></svg>
+
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>👩‍💻&nbsp;&nbsp;USER: {{ SLACK_USER }}</td>
+
+                                        <td>🔐&nbsp;&nbsp;PASSWORD: {{ SLACK_PWD }}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3">
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
                     </td>
                 </tr>
-
-
-                <tr>
-                    <td colspan="3">
-                       
-                    </td>
-                </tr>
-               
-
-               
-
-
             </tbody>
-        </table>
-        <hr>
-
-
-        </p>
-        <p></p>
-        <p></p>
-        </td>
-        </tr>
-        </tbody>
         </table>
     </div>
 </div>
+
 {% include "demouiapp/_footer.html" %}

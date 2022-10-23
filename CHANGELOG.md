@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
+## [35.0.5] - 2022-10-23
+
+### Major changes
+
+- Update to DemoUI - new Interface design to match Techzone
+
+
+
 ## [35.0.5] - 2022-10-21
 
 ### Major changes

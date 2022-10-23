@@ -255,6 +255,11 @@ def injectAllREST(request):
         'aimanager_url': aimanager_url,
         'aimanager_user': aimanager_user,
         'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
         'awx_url': awx_url,
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
@@ -277,7 +282,9 @@ def injectAllREST(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
 
@@ -306,6 +313,11 @@ def injectAllFanREST(request):
         'aimanager_url': aimanager_url,
         'aimanager_user': aimanager_user,
         'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
         'awx_url': awx_url,
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
@@ -328,7 +340,9 @@ def injectAllFanREST(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
 
@@ -351,6 +365,11 @@ def injectLogsREST(request):
         'aimanager_url': aimanager_url,
         'aimanager_user': aimanager_user,
         'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
         'awx_url': awx_url,
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
@@ -373,7 +392,9 @@ def injectLogsREST(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
 
@@ -394,6 +415,11 @@ def injectEventsREST(request):
         'aimanager_url': aimanager_url,
         'aimanager_user': aimanager_user,
         'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
         'awx_url': awx_url,
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
@@ -416,7 +442,9 @@ def injectEventsREST(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
 
@@ -435,6 +463,11 @@ def injectMetricsREST(request):
         'aimanager_url': aimanager_url,
         'aimanager_user': aimanager_user,
         'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
         'awx_url': awx_url,
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
@@ -457,7 +490,9 @@ def injectMetricsREST(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
 
@@ -484,6 +519,11 @@ def clearAllREST(request):
         'aimanager_url': aimanager_url,
         'aimanager_user': aimanager_user,
         'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
         'awx_url': awx_url,
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
@@ -506,7 +546,15 @@ def clearAllREST(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_NAME': 'index'
+
+
+        
+
+
+
     }
     return HttpResponse(template.render(context, request))
 
@@ -525,6 +573,11 @@ def clearEventsREST(request):
         'aimanager_url': aimanager_url,
         'aimanager_user': aimanager_user,
         'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
         'awx_url': awx_url,
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
@@ -547,7 +600,9 @@ def clearEventsREST(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
 
@@ -566,6 +621,11 @@ def clearStoriesREST(request):
         'aimanager_url': aimanager_url,
         'aimanager_user': aimanager_user,
         'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
         'awx_url': awx_url,
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
@@ -588,7 +648,9 @@ def clearStoriesREST(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
 
@@ -607,27 +669,46 @@ def login(request):
         loggedin='true'
         template = loader.get_template('demouiapp/home.html')
         print ('  ✅ Login SUCCESSFUL')
-
+        context = {
+            'loggedin': loggedin,
+            'aimanager_url': aimanager_url,
+            'aimanager_user': aimanager_user,
+            'aimanager_pwd': aimanager_pwd,
+            'SLACK_URL': SLACK_URL,
+            'SLACK_USER': SLACK_USER,
+            'SLACK_PWD': SLACK_PWD,
+            'DEMO_USER': DEMO_USER,
+            'DEMO_PWD': DEMO_PWD,
+            'ADMIN_MODE': ADMIN_MODE,
+            'SIMULATION_MODE': SIMULATION_MODE,  
+            'INSTANCE_NAME': INSTANCE_NAME,
+            'ADMIN_MODE': ADMIN_MODE,
+            'SIMULATION_MODE': SIMULATION_MODE,
+            'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+            'PAGE_NAME': 'index'
+        }
     else:
         loggedin='false'
         template = loader.get_template('demouiapp/loginui.html')
         print ('  ❗ Login NOT SUCCESSFUL')
-    context = {
-        'loggedin': loggedin,
-        'aimanager_url': aimanager_url,
-        'aimanager_user': aimanager_user,
-        'aimanager_pwd': aimanager_pwd,
-        'SLACK_URL': SLACK_URL,
-        'SLACK_USER': SLACK_USER,
-        'SLACK_PWD': SLACK_PWD,
-        'DEMO_USER': DEMO_USER,
-        'DEMO_PWD': DEMO_PWD,
-        'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE,  
-        'INSTANCE_NAME': INSTANCE_NAME,
-        'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
-    }
+        context = {
+            'loggedin': loggedin,
+            'aimanager_url': aimanager_url,
+            'aimanager_user': aimanager_user,
+            'aimanager_pwd': aimanager_pwd,
+            'SLACK_URL': SLACK_URL,
+            'SLACK_USER': SLACK_USER,
+            'SLACK_PWD': SLACK_PWD,
+            'DEMO_USER': DEMO_USER,
+            'DEMO_PWD': DEMO_PWD,
+            'ADMIN_MODE': ADMIN_MODE,
+            'SIMULATION_MODE': SIMULATION_MODE,  
+            'INSTANCE_NAME': INSTANCE_NAME,
+            'ADMIN_MODE': ADMIN_MODE,
+            'SIMULATION_MODE': SIMULATION_MODE,
+            'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+            'PAGE_NAME': 'login'
+        }
 
     return HttpResponse(template.render(context, request))
     #return HttpResponse("Hello, world. You're at the polls index.")
@@ -699,7 +780,9 @@ def index(request):
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_NAME': 'index'
         
     }
     return HttpResponse(template.render(context, request))
@@ -741,7 +824,9 @@ def doc(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': 'CloudPak for Watson AIOps Demo UI',
+        'PAGE_NAME': 'doc'
     }
     return HttpResponse(template.render(context, request))
 
@@ -787,7 +872,9 @@ def apps(request):
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'PAGE_TITLE': '🚀 CP4WAIOPS Applications',
+        'PAGE_NAME': 'apps'
         
     }
     return HttpResponse(template.render(context, request))
@@ -834,7 +921,9 @@ def apps_system(request):
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'PAGE_TITLE': '🛠️ System Links',
+        'PAGE_NAME': 'system'
         
     }
     return HttpResponse(template.render(context, request))
@@ -882,7 +971,9 @@ def apps_demo(request):
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'PAGE_TITLE': '🌏 Demo Content',
+        'PAGE_NAME': 'demo'
         
     }
     return HttpResponse(template.render(context, request))
@@ -931,7 +1022,9 @@ def apps_additional(request):
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
-        'INSTANCE_NAME': INSTANCE_NAME
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'PAGE_TITLE': '📥 Third-party Applications',
+        'PAGE_NAME': 'TEST'
         
     }
     return HttpResponse(template.render(context, request))
@@ -953,7 +1046,11 @@ def about(request):
         'loggedin': loggedin,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'PAGE_TITLE': '👽 About',
+        'PAGE_NAME': 'about'
+
     }
     return HttpResponse(template.render(context, request))
 
@@ -994,7 +1091,10 @@ def config(request):
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
-        'SIMULATION_MODE': SIMULATION_MODE
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': 'Third-party Applications',
+        'PAGE_NAME': 'TEST'
+
     }
     return HttpResponse(template.render(context, request))
 
