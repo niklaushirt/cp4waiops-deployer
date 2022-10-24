@@ -17,9 +17,10 @@
 - name: 🚀 ANOMALY DETECTION - RESET ANOMALY DETECTION
   shell: |
     set -x
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
     
 
-    oc delete pod $(oc get po -n {{current_cp4waiops_cluster.project}}|grep anomaly|awk '{print$1}') -n {{current_cp4waiops_cluster.project}}
+    oc delete pod $(oc get po -n $WAIOPS_NAMESPACE|grep anomaly|awk '{print$1}') -n $WAIOPS_NAMESPACE
 
   register: output_string
   ignore_errors: yes

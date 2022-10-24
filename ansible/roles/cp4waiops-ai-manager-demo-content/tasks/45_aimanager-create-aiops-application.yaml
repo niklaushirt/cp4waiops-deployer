@@ -31,12 +31,12 @@
     set -x
         
     echo "Create Custom Topology - Create Template"
-    
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
-    export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n {{current_cp4waiops_cluster.project}} -o jsonpath='{.data.username}' | base64 --decode)
-    export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n {{current_cp4waiops_cluster.project}} -o jsonpath='{.data.password}' | base64 --decode)
-    oc create route passthrough topology-manage -n {{current_cp4waiops_cluster.project}} --service=aiops-topology-topology --port=https-topology-api
-    export TOPO_MGT_ROUTE="https://"$(oc get route -n {{current_cp4waiops_cluster.project}} topology-manage -o jsonpath={.spec.host})
+    export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
+    export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
+    oc create route passthrough topology-manage -n $WAIOPS_NAMESPACE --service=aiops-topology-topology --port=https-topology-api
+    export TOPO_MGT_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-manage -o jsonpath={.spec.host})
 
  
     export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
@@ -148,10 +148,12 @@
 
     echo "Create Custom Topology - Add Members to App"
 
-    export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n {{current_cp4waiops_cluster.project}} -o jsonpath='{.data.username}' | base64 --decode)
-    export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n {{current_cp4waiops_cluster.project}} -o jsonpath='{.data.password}' | base64 --decode)
 
-    export TOPO_MGT_ROUTE="https://"$(oc get route -n {{current_cp4waiops_cluster.project}} topology-manage -o jsonpath={.spec.host})
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+    export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
+    export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
+
+    export TOPO_MGT_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-manage -o jsonpath={.spec.host})
 
     export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
 
@@ -198,18 +200,18 @@
     # # RE-RUN K8s Observer
     # # -------------------------------------------------------------------------------------------------------------------------------------------------
 
-    export AIO_PLATFORM_ROUTE=$(oc get route -n {{current_cp4waiops_cluster.project}} aimanager-aio-controller -o jsonpath={.spec.host})
+    export AIO_PLATFORM_ROUTE=$(oc get route -n $WAIOPS_NAMESPACE aimanager-aio-controller -o jsonpath={.spec.host})
 
-    echo "        Namespace:          {{current_cp4waiops_cluster.project}}"
+    echo "        Namespace:          $WAIOPS_NAMESPACE"
     echo "        AIO_PLATFORM_ROUTE: $AIO_PLATFORM_ROUTE"
     echo ""
 
     echo "       🛠️   Getting ZEN Token"
 
-    ZEN_API_HOST=$(oc get route -n {{current_cp4waiops_cluster.project}} cpd -o jsonpath='{.spec.host}')
+    ZEN_API_HOST=$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath='{.spec.host}')
     ZEN_LOGIN_URL="https://${ZEN_API_HOST}/v1/preauth/signin"
     LOGIN_USER=admin
-    LOGIN_PASSWORD="$(oc get secret admin-user-details -n {{current_cp4waiops_cluster.project}} -o jsonpath='{ .data.initial_admin_password }' | base64 --decode)"
+    LOGIN_PASSWORD="$(oc get secret admin-user-details -n $WAIOPS_NAMESPACE -o jsonpath='{ .data.initial_admin_password }' | base64 --decode)"
 
     ZEN_LOGIN_RESPONSE=$(
     curl -k \

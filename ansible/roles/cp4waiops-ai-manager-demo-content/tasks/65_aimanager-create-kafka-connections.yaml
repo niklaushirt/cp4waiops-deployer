@@ -21,15 +21,17 @@
 
 - name: 🌏 CONNECTIONS - Create KAFKA Connections for Inception
   shell: |
-    oc create route passthrough -n {{current_cp4waiops_cluster.project}} --service aimanager-aio-controller
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+
+    oc create route passthrough -n $WAIOPS_NAMESPACE --service aimanager-aio-controller
 
 
-    export AI_PLATFORM_ROUTE=$(oc get route -n {{current_cp4waiops_cluster.project}} ai-platform-api  -o jsonpath={.spec.host})
-    export AIO_PLATFORM_ROUTE=$(oc get route -n {{current_cp4waiops_cluster.project}} aimanager-aio-controller -o jsonpath={.spec.host})
+    export AI_PLATFORM_ROUTE=$(oc get route -n $WAIOPS_NAMESPACE ai-platform-api  -o jsonpath={.spec.host})
+    export AIO_PLATFORM_ROUTE=$(oc get route -n $WAIOPS_NAMESPACE aimanager-aio-controller -o jsonpath={.spec.host})
 
 
 
-    echo "        Namespace:          {{current_cp4waiops_cluster.project}}"
+    echo "        Namespace:          $WAIOPS_NAMESPACE"
     echo "        AI_PLATFORM_ROUTE:  $AI_PLATFORM_ROUTE"
     echo "        AIO_PLATFORM_ROUTE: $AIO_PLATFORM_ROUTE"
     echo ""
@@ -37,10 +39,10 @@
     echo "       🛠️   Getting ZEN Token"
 
 
-    ZEN_API_HOST=$(oc get route -n {{current_cp4waiops_cluster.project}} cpd -o jsonpath='{.spec.host}')
+    ZEN_API_HOST=$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath='{.spec.host}')
     ZEN_LOGIN_URL="https://${ZEN_API_HOST}/v1/preauth/signin"
     LOGIN_USER=admin
-    LOGIN_PASSWORD="$(oc get secret admin-user-details -n {{current_cp4waiops_cluster.project}} -o jsonpath='{ .data.initial_admin_password }' | base64 --decode)"
+    LOGIN_PASSWORD="$(oc get secret admin-user-details -n $WAIOPS_NAMESPACE -o jsonpath='{ .data.initial_admin_password }' | base64 --decode)"
 
     ZEN_LOGIN_RESPONSE=$(
     curl -k \

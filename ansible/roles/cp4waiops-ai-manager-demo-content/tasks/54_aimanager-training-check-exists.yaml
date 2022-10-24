@@ -20,12 +20,13 @@
   shell: |
     set -x
     export ROUTE=""
-    
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+
 
     if [[ ! $ROUTE =~ "ai-platform-api" ]]; then
           #echo "       🛠️   Create Route"
-          oc create route passthrough ai-platform-api -n {{current_cp4waiops_cluster.project}}  --service=aimanager-aio-ai-platform-api-server --port=4000 --insecure-policy=Redirect --wildcard-policy=None
-          export ROUTE=$(oc get route -n {{current_cp4waiops_cluster.project}} ai-platform-api  -o jsonpath={.spec.host})
+          oc create route passthrough ai-platform-api -n $WAIOPS_NAMESPACE  --service=aimanager-aio-ai-platform-api-server --port=4000 --insecure-policy=Redirect --wildcard-policy=None
+          export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE ai-platform-api  -o jsonpath={.spec.host})
           #echo "        Route: $ROUTE"
           #echo ""
     fi
@@ -33,10 +34,10 @@
     if [[ $ZEN_TOKEN == "" ]]; then
           #echo "       🛠️   Getting ZEN Token"
         
-          ZEN_API_HOST=$(oc get route -n {{current_cp4waiops_cluster.project}} cpd -o jsonpath='{.spec.host}')
+          ZEN_API_HOST=$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath='{.spec.host}')
           ZEN_LOGIN_URL="https://${ZEN_API_HOST}/v1/preauth/signin"
           LOGIN_USER=admin
-          LOGIN_PASSWORD="$(oc get secret admin-user-details -n {{current_cp4waiops_cluster.project}} -o jsonpath='{ .data.initial_admin_password }' | base64 --decode)"
+          LOGIN_PASSWORD="$(oc get secret admin-user-details -n $WAIOPS_NAMESPACE -o jsonpath='{ .data.initial_admin_password }' | base64 --decode)"
 
           ZEN_LOGIN_RESPONSE=$(
           curl -k \
