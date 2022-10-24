@@ -1,0 +1,79 @@
+{% load static %}
+{% include "demouiapp/_header.html" %} 
+    <div role="main" class="container theme-showcase">
+        <div class="jumbotron container">
+            <table>
+                <tbody>
+                    <tr>
+                        {% include "demouiapp/_navbar.html" %}   
+                        <td style="width:90%; padding-left:50px;">
+                            <p style="font-size:2.5em;">IBM CloudPak for Watson AIOps</p>
+                            <h1>AIManager</h1>
+                            <p style="font-size:30px;">Demo UI </p>
+                            <hr>
+                            <p></p>
+                            <p style="font-size:50px;">🛠️  Usage</p>
+                            <h3 id="accessing-the-web-ui">Accessing the Web UI</h3>
+                            <p>You can access the Web UI via the external Route that you can determine like this:</p>
+                            <pre>oc get route -n cp4waiops cp4waiops-demo-ui  -o jsonpath={.spec.host}
+    </pre>
+                            <p>You have to use the Token to access the UI.</p>
+                            <h3 id="using-the-api">Using the API</h3>
+                            <p>The Demo APIs are available at </p>
+                            <ul>
+                                <li><code>http://<YOUR-CLUSTER>/demo</code> - create Events and Log Anomalies</li>
+                                <li><code>http://<YOUR-CLUSTER>/demo_event</code> - create onyl Events</li>
+                                <li><code>http://<YOUR-CLUSTER>/demo_log</code>- create only Log Anomalies</li>
+                            </ul>
+                            <p>They have to be called with the <code>POST</code> Method and the security
+                                <code>token</code> (defined in the ConfigMap) has to be provided in the Header.</p>
+                            <p>The following example we will create Events and Log Anomalies :</p>
+                            <pre>curl -X "POST" "http://localhost:8080/demo" -H 'token: my-token' 
+    </pre>
+                            <h3 id="content-format">Content format</h3>
+                            <p>You can have a look at the ConfigFile for examples of content (Events and Logs) to be
+                                injected.</p>
+                            <h4 id="events">Events</h4>
+                            <p>For Events you have to use the following JSON Structure:</p>
+                            <pre>{
+        "events": [{
+            "Node": "mysql-github",
+            "NodeAlias": "github",
+            "Manager": "Github",
+            "AlertGroup": "robot-shop",
+            "Severity": 2,
+            "Summary": "[Git] Commit in repository robot-shop by Niklaus Hirt on file robot-shop.yaml - New Memory Limits",
+            "URL": "https://pirsoscom.github.io/git-commit-robot.html"
+            }, {
+            "Node": "mysql-instana",
+            "NodeAlias": "mysql",
+            "Manager": "Instana",
+            "AlertGroup": "robot-shop",
+            "Severity": 3,
+            "Summary": "[Instana] MySQL - change detected - The value **resources/limits** has changed",
+            "URL": "https://pirsoscom.github.io/INSTANA_CHANGE_ROB.html"
+            }
+        }]
+    }
+    </pre>
+                            <p>Then merge it to a one line string:</p>
+                            <pre>DEMO_EVENTS:  |-
+      {"events": [{"Node" : "mysql-github","NodeAlias" : "github","Manager" : "Github","AlertGroup" : "robot-shop",....}
+    </pre>
+                            <p> </p>
+                            <h4 id="logs">Logs</h4>
+                            <p>For Logs, just define the lines you wish to inject and put them one per line (without the
+                                comma at the end! This is one valid JSON but separate lines of valid JSON entries)</p>
+                            <pre>DEMO_LOGS:  |-
+      {"kubernetes.namespace_name":"robot-shop",.....,"@rawstring":"2021-05-17T06:20:10.922365132-05:00\",....}
+      {"kubernetes.namespace_name":"robot-shop",.....,"@rawstring":"2021-05-17T06:20:10.922061234-05:00\",....}
+      {"kubernetes.namespace_name":"robot-shop",.....,"@rawstring":"2021-05-17T06:20:10.920550071-05:00\",....}</pre>
+                            <p></p>
+                            <p></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% include "demouiapp/_footer.html" %} 

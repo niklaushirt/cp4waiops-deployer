@@ -1,0 +1,120 @@
+{% load static %}
+{% include "demouiapp/_header.html" %}
+<div role="main" class="container theme-showcase">
+    <div class="jumbotron container">
+        <table>
+            <tbody>
+                <tr>
+                    {% include "demouiapp/_navbar.html" %}
+                    <td style="width:90%; padding-left:50px;">
+                        <p style="font-size:2.5em;">IBM CloudPak for Watson AIOps</p>
+ 
+                        <p></p>
+                        <p style="font-size:50px;">🚀 Additional Applications<p> </p>
+                            <p></p>
+                        <hr>
+                            <table   cellspacing="0" cellpadding="0" style="width: 1200px; table-layout: fixed">
+                                <tbody>
+
+
+                                    <tr>
+
+                                    </tr>
+                                    <tr>
+                                        <td width="10%">
+                                            &nbsp;
+                                        </td>
+                                        <td  width="100px">
+                                            &nbsp;
+                                        </td>
+                                        <td  width="10px">
+                                            &nbsp;
+                                        </td>
+                                        <td  width="10px">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                             
+
+                                    <tr>
+                                        <td><a href="http://{{ robotshop_url }}" target="_blank"
+                                                role="button" class="btn btn-success btn-lg">RobotShop</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a href="https://{{ awx_url }}" target="_blank"
+                                                role="button" class="btn btn-success btn-lg">AWX</a></td>
+                                        <td>👩‍💻&nbsp;&nbsp;USER: {{awx_user}}</td>
+                                        <td>🔐&nbsp;&nbsp;PASSWORD: {{awx_pwd}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                    {% if ADMIN_MODE == 'true' %}
+                                    <tr>
+                                        <td><a href="http://{{ ladp_url }}" target="_blank"
+                                                role="button" class="btn btn-success btn-lg">OpenLdap</a></td>
+                                        <td>👩‍💻&nbsp;&nbsp;USER: {{ladp_user}}</td>
+                                        <td>🔐&nbsp;&nbsp;PASSWORD: {{ladp_pwd}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+
+                    
+                                    {% if elk_url != '' %}
+                                    <tr>
+                                        <td><a href="https://{{ elk_url }}" target="_blank"
+                                                role="button" class="btn btn-success btn-lg">ELK</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+
+                                    {% if turonomic_url != '' %}
+                                    <tr>
+                                        <td><a href="https://{{ turonomic_url }}" target="_blank"
+                                                role="button" class="btn btn-success btn-lg">Turbonomic</a></td>
+                                        <td>👩‍💻&nbsp;&nbsp;USER: admin</td>
+                                        <td>🔐&nbsp;&nbsp;PASSWORD: as set on install</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                          
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                            
+                                    <p> </p>
+                                    <p> </p>
+                                    <p> </p>
+
+                    
+                                </tbody>
+                            </table>
+
+                            <hr>
+    
+                        </p>
+                        <p></p>
+                        <p></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% include "demouiapp/_footer.html" %}
