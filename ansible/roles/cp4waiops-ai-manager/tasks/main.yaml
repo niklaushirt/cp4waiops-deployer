@@ -130,10 +130,10 @@
   include_tasks: 99_aimanager-wait-cp4waiops.yaml
 
 
-# Enable CP4WAIOPS Insights
-- name: 📥 Enable CP4WAIOPS Insights
-  include_tasks: 13_aimanager-insights.yaml
-  when: current_cp4waiops_feature.enable_aiops_insights == true
+# Enable CP4WAIOPS Insights - Installed by default now
+# - name: 📥 Enable CP4WAIOPS Insights
+#   include_tasks: 13_aimanager-insights.yaml
+#   when: current_cp4waiops_feature.enable_aiops_insights == true
 
 
 
