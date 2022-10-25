@@ -118,8 +118,6 @@ spec:
                   # Version of the catalog subscription
                   subscription_channel: v3.5
 
-                  # Install AIOps Insights
-                  enable_aiops_insights: true
 
                   
                 # --------------------------------------------------------------------------------------------------------------------------------------

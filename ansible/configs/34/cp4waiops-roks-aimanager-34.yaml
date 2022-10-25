@@ -21,8 +21,7 @@ cp4waiops:
     # Version of the catalog subscription
     subscription_channel: v3.4
 
-    # Install AIOps Insights
-    enable_aiops_insights: false
+
 
 
 # *************************************************************************************************************************************************

@@ -1,4 +1,4 @@
-FROM ubuntu:21.10
+FROM ubuntu:22.10
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 
 # Install Openshift Client
-RUN wget https://github.com/openshift/okd/releases/download/4.9.0-0.okd-2022-01-14-230113/openshift-client-linux-4.9.0-0.okd-2022-01-14-230113.tar.gz && tar xfvz openshift-client-linux-4.9.0-0.okd-2022-01-14-230113.tar.gz && mv oc /usr/local/bin && mv kubectl /usr/local/bin/ && rm openshift-client-linux-4.9.0-0.okd-2022-01-14-230113.tar.gz
+RUN wget https://github.com/okd-project/okd/releases/download/4.11.0-0.okd-2022-10-15-073651/openshift-client-linux-4.11.0-0.okd-2022-10-15-073651.tar.gz && tar xfvz openshift-client-linux-4.11.0-0.okd-2022-10-15-073651.tar.gz && mv oc /usr/local/bin && mv kubectl /usr/local/bin/ && rm openshift-client-linux-4.11.0-0.okd-2022-10-15-073651.tar.gz
+
 
 # Init SSH
 RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh/ && echo $SSH_KEY > /root/.ssh/authorized_keys && touch /root/.ssh/authorized_keys && chmod 600 /root/.ssh/authorized_keys
@@ -25,13 +26,14 @@ RUN curl -L https://github.com/IBM/cloud-pak-cli/releases/latest/download/cloudc
 
 
 # Install stuff
-RUN ansible-galaxy collection install community.kubernetes:1.2.1
+# RUN ansible-galaxy collection install community.kubernetes:2.0.1
+#ansible-galaxy collection install community.kubernetes
 RUN npm install elasticdump -g
 RUN pip install slack-cleaner2
 
 
 # Install k9s
-RUN wget https://github.com/derailed/k9s/releases/download/v0.24.15/k9s_Linux_x86_64.tar.gz && tar xfzv k9s_Linux_x86_64.tar.gz && mv k9s /usr/local/bin && rm LICENSE && rm README.md && rm k9s_Linux_x86_64.tar.gz
+RUN wget https://github.com/derailed/k9s/releases/download/v0.26.7/k9s_Linux_x86_64.tar.gz && tar xfzv k9s_Linux_x86_64.tar.gz && mv k9s /usr/local/bin && rm LICENSE && rm README.md && rm k9s_Linux_x86_64.tar.gz
 
 
 

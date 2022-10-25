@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export CONT_VERSION=1.3
+export CONT_VERSION=1.4
 
 # Build Production AMD64
 docker buildx build --platform linux/amd64 -t niklaushirt/cp4waiops-tools:$CONT_VERSION --load .
