@@ -86,14 +86,14 @@ I installed the demo in a ROKS environment.
 You'll need:
 
 - ROKS 4.10
-- 5x worker nodes Flavor `b3c.16x64` (so **16 CPU / 64 GB**)  ❗
+- 5x worker nodes Flavour `b3c.16x64` (so **16 CPU / 64 GB**)  ❗
 
 
 
 
 You **might** get away with less if you don't install some components (Event Manager, ELK, Turbonomic,...) but no guarantee:
 
-- Typically 4x worker nodes Flavor `b3c.16x64` _**for only AI Manager**_
+- Typically 4x worker nodes Flavour `b3c.16x64` _**for only AI Manager**_
 
 
 
@@ -474,14 +474,14 @@ I installed the demo in a ROKS environment.
 You'll need:
 
 - ROKS 4.10
-- 5x worker nodes Flavor `b3c.16x64` (so 16 CPU / 64 GB) 
+- 5x worker nodes Flavour `b3c.16x64` (so 16 CPU / 64 GB) 
 
 
 
 
 You **might** get away with less if you don't install some components (Event Manager, ELK, Turbonomic,...) but no guarantee:
 
-- Typically 4x worker nodes Flavor `b3c.16x64` _**for only AI Manager**_
+- Typically 4x worker nodes Flavour `b3c.16x64` _**for only AI Manager**_
 
 <div style="page-break-after: always;"></div>
 
