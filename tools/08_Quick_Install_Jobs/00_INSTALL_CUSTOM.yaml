@@ -111,6 +111,9 @@ spec:
               
               cat <<EOF > ./ansible/configs/cp4waiops-roks-custom.yaml
               cp4waiops:
+
+
+
               - project: cp4waiops
                 instances:
                 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -119,6 +122,8 @@ spec:
                 - name: cp4waiops-aimanager
                   kind: AIManager
                   install: true
+
+                  # ---------------------------------------------------------------------
                   # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
                   waiops_size: small
                   # Name of the CP4WAIOPS instance
@@ -128,6 +133,9 @@ spec:
 
 
                   
+
+
+
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 # CP4WAIOPS AI Manager Demo Content
                 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -181,14 +189,6 @@ spec:
 
 
                   # ---------------------------------------------------------------------
-                  # OUTPUT
-                  # Print all logins
-                  print_logins: true
-                  # Open the relevant Web UIs
-                  open_web_ui: true
-
-
-                  # ---------------------------------------------------------------------
                   # LDAP
                   install_ldap: true
                   # ldap domain
@@ -217,6 +217,15 @@ spec:
 
                   # Create Service Account
                   create_account: true
+
+
+
+                  # ---------------------------------------------------------------------
+                  # OUTPUT
+                  # Print all logins
+                  print_logins: true
+                  # Open the relevant Web UIs
+                  open_web_ui: true
 
 
 
@@ -253,8 +262,10 @@ spec:
                   kind: InfrastructureManagement
                   install: false
                   # Version of the catalog subscription
-                  subscription_channel: v3.3
-                  #subscription_channel: 3.4-dev
+                  subscription_channel: v3.5
+
+
+
 
 
 
@@ -275,6 +286,13 @@ spec:
                 - name: cp4waiops-turbonomic
                   kind: Turbonomic
                   install: true
+
+
+
+
+
+
+
 
 
 
