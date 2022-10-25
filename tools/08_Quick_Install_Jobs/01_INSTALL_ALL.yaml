@@ -29,9 +29,9 @@
 #     - AWX (Open Source Ansible Tower) with preloaded Playbooks
 #     - Disables ASM Service match rule 
 #     - Train Models
-#       - Create Training Definitions (TG, LAD, CR, SI. Turn off RSA) 
-#       - Create Training Data (LAD, SNOW) 
-#       - Train Models (TG, LAD, CR, SI) 
+#       - Create Training Definitions (TG, LAD, CR, SI. MET, Turn off RSA) 
+#       - Create Training Data (LAD, SNOW, MET) 
+#       - Train Models (TG, LAD, CR, SI, MET) 
 #     - Topology
 #       - Create K8s Observer
 #       - Create ASM merge rules
