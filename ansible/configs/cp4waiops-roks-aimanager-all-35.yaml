@@ -16,6 +16,8 @@ cp4waiops:
     install: true
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
     waiops_size: small
+    # Custom Sizing File (waiops_size must be set to "custom")
+    custom_size_file: none    # Name of the CP4WAIOPS instance
     # Name of the CP4WAIOPS instance
     waiops_name: ibm-cp-watson-aiops
     # Version of the catalog subscription
