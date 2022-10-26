@@ -89,7 +89,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Create Openshift WebConsole Menu Item
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name: 📥  Create Demo UI Openshift WebConsole Menu Item
+- name: 📥  Create Event Manager Openshift WebConsole Menu Item
   include_tasks: 91_aimanager-create-ocp-menu.yaml
 
 
