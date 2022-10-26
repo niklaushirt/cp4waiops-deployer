@@ -35,7 +35,7 @@
       spec:
         applicationMenu:
           imageURL: >-
-            https://raw.githubusercontent.com/carbon-design-system/carbon/main/packages/icons/src/svg/32/cloud.svg
+            https://raw.githubusercontent.com/carbon-design-system/carbon/main/packages/icons/src/svg/32/watson-health/page-scroll.svg
           section: CP4WAIOps Demo
         href: >-
           https://$appURL

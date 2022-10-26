@@ -281,6 +281,22 @@ Continue [here](#4-slack-integration) for [Slack integration](#4-slack-integrati
 
 <div style="page-break-after: always;"></div>
 
+## 1.8 Access the Environment
+
+Once the installation has finisehd, you can access the demo environment:
+
+
+
+* Click on the Application Menu <svg fill="currentColor" height="1em" width="1em" viewBox="0 0 512 512" aria-hidden="true" role="img" style="vertical-align: -0.125em;"><path d="M149.333 56v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zm181.334 240v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm32-240v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24zm-32 80V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm-205.334 56H24c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm386.667-56H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm0 160H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zM181.333 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24z"></path></svg> in your Openshift Web Console.
+* Select `CP4WAIOps Demo UI`
+* Login with the password `P4ssw0rd!`
+
+	![demo](./doc/pics/demo-menu.png)
+
+
+
+<div style="page-break-after: always;"></div>
+
 ---------------------------------------------------------------
 # 2 Demo the Solution
 ---------------------------------------------------------------
@@ -288,48 +304,48 @@ Continue [here](#4-slack-integration) for [Slack integration](#4-slack-integrati
 ## 2.1 Simulate incident - Web Demo UI
 
 
-## 2.1.1 Get the URL
+## 2.1.1 Access the Environment
 
-* Run:
+To access the demo environment:
 
-	```bash
-	export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-		
-	echo "🌏 AI Manager:           https://$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})"
-	echo "🌏 Demo UI:              http://$(oc get route -n $WAIOPS_NAMESPACE-demo-ui cp4waiops-demo-ui -o jsonpath={.spec.host})"
-	
-	```
-	
-	![demo](./doc/pics/demo03.png)
-	
-
-## 2.1.2 Open the Web Demo UI
-
-* Open the Demo UI URL from the above
+* Click on the Application Menu <svg fill="currentColor" height="1em" width="1em" viewBox="0 0 512 512" aria-hidden="true" role="img" style="vertical-align: -0.125em;"><path d="M149.333 56v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zm181.334 240v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm32-240v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24zm-32 80V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm-205.334 56H24c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm386.667-56H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm0 160H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zM181.333 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24z"></path></svg> in your Openshift Web Console.
+* Select `CP4WAIOps Demo UI`
 * Login with the password `P4ssw0rd!`
 
-<div style="page-break-after: always;"></div>
+	![demo](./doc/pics/demo-menu.png)
 
-## 2.1.3 Simulate the incident
 
-Click on the red `Create Incident Memory Leak` button
 
-This will create alerts and a story in AI Manager.
-
-![demo](./doc/pics/demo01.png)
 
 <div style="page-break-after: always;"></div>
 
 ## 2.1.2 Login to AI Manager as demo User
 
-* Open the AI Manager URL from the above
-* Click on `Enterprise LDAP`
-* Login as `demo` with the password `P4ssw0rd!`
+* Click on the blue `AI Manager` button
+* Login as User `demo` with the Password `P4ssw0rd!`
+
+
+![demo](./doc/pics/demo01.png)
+
+
+
+
+
+## 2.1.3 Simulate the incident
+
+Back on the Demo UI, click on the red `Create Incident Memory Leak` button
+
+This will create alerts and a story in AI Manager.
+
+![demo](./doc/pics/demo01.png)
 
 ℹ️  Give it a minute or two for all events and anomalies to arrive in AI Manager and Slack.
 
-
 ![demo](./doc/pics/demo02.png)
+
+<div style="page-break-after: always;"></div>
+
+
 
 
 

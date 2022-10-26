@@ -121,7 +121,10 @@ spec:
 
 
 
-              sleep 60000
+              while true
+              do
+                sleep 1000
+              done
 
           env:
           - name: INSTALL_REPO
