@@ -145,3 +145,8 @@
 - name:   🚀 INITIALIZATION - Set OCP_MAJOR_VERSION={{ MAJOR_VERSION.stdout_lines[0] }} 
   set_fact: OCP_MAJOR_VERSION={{ MAJOR_VERSION.stdout_lines[0] }} 
 
+
+
+
+
+
