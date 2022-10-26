@@ -300,7 +300,6 @@
 # Create Training definitions
 - name: 📥  Check if Models exist
   include_tasks: 54_aimanager-training-check-exists.yaml
-  when: current_cp4waiops_feature.train_models_logs == true or current_cp4waiops_feature.train_models_snow == true or current_cp4waiops_feature.train_models_metrics == true 
 
 - name: 📥  Create Training Temporal Grouping
   include_tasks: 55_aimanager-training-create-tg-configuration.yaml
