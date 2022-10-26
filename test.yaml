@@ -1,0 +1,13 @@
+﻿apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: test
+spec:
+  applicationMenu:
+    imageURL: >-
+      https://raw.githubusercontent.com/carbon-design-system/carbon/main/packages/icons/src/svg/32/cloud.svg
+    section: IBM Cloud Paks
+  href: >-
+    https://cp-console.itzroks-270003bu3k-5rdgdj-4b4a324f027aea19c5cbc0c3275c4656-0000.eu-de.containers.appdomain.cloud/common-nav/dashboard
+  location: ApplicationMenu
+  text: test

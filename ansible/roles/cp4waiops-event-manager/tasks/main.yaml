@@ -86,6 +86,13 @@
   include_tasks: 21_eventmanager-restart-demoui.yaml
 
 
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Create Openshift WebConsole Menu Item
+# --------------------------------------------------------------------------------------------------------------------------------------
+- name: 📥  Create Demo UI Openshift WebConsole Menu Item
+  include_tasks: 91_aimanager-create-ocp-menu.yaml
+
+
 # Access and documentaiton
 # - name: Get all logins
 #   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90_core-get-all-logins.yaml"

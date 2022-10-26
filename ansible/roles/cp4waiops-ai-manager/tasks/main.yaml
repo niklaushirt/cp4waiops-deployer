@@ -129,6 +129,12 @@
 - name: 📥 Wait for AI Manager
   include_tasks: 99_aimanager-wait-cp4waiops.yaml
 
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Create Openshift WebConsole Menu Item
+# --------------------------------------------------------------------------------------------------------------------------------------
+- name: 📥  Create AI Manager Openshift WebConsole Menu Item
+  include_tasks: 91_aimanager-create-ocp-menu.yaml
+
 
   
 # Access and documentaiton

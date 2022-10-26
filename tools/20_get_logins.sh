@@ -114,8 +114,8 @@ then
     echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
     echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
     echo "    "
-    appURL=$(oc get routes -n $WAIOPS_NAMESPACE waiops-demo-ui-python  -o jsonpath="{['spec']['host']}")|| true
-    appToken=$(oc get cm -n $WAIOPS_NAMESPACE demo-ui-python-config -o jsonpath='{.data.TOKEN}')
+    appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+    appToken=$(oc get cm -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui-config -o jsonpath='{.data.TOKEN}')
     echo "            📥 Demo UI:"   
     echo "    " 
     echo "                🌏 URL:           http://$appURL/"
