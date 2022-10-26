@@ -6,7 +6,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager
     kind: AIManager
-    install: true
+    install: false
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
     waiops_size: custom
     # Custom Sizing File (waiops_size must be set to "custom")
@@ -118,7 +118,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-eventmanager
     kind: EventManager
-    install: true
+    install: false
     # Version of the catalog subscription
     subscription_channel: v1.10
     starting_csv: noi.v1.6.0
@@ -129,7 +129,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-eventmanager
     kind: EventManagerDemoContent
-    install: true
+    install: false
 
 
 
@@ -164,7 +164,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-turbonomic
     kind: Turbonomic
-    install: true
+    install: false
 
 
 
