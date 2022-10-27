@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [35.1.2] - 2022-10-27
+
+### Major changes
+
+- Corrected a bug with links in the Demo UI 
+- Secured routes for RobotShop, LDAP, Spark
+
+
+
 ## [35.1.1] - 2022-10-26
 
 ### Major changes
