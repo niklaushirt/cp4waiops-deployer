@@ -85,14 +85,14 @@
         href: >-
           https://$appURL
         location: ApplicationMenu
-        text: CP4WAIOps Demo UI
+        text: AWX Runbooks
     EOF
   ignore_errors: yes
 
 
 - name: 🌏 OCP MENU - Create Openshift WebConsole Menu Item - LDAP
   shell: |
-    appURL=$(oc get route -n openldap openldap-admin -o jsonpath={.spec.host})|| true
+    appURL=$(oc get route -n openldap admin -o jsonpath={.spec.host})|| true
 
     cat <<EOF | oc apply -f -
       apiVersion: console.openshift.io/v1
@@ -107,7 +107,7 @@
         href: >-
           https://$appURL
         location: ApplicationMenu
-        text: CP4WAIOps Demo UI
+        text: Open LDAP
     EOF
   ignore_errors: yes
 

@@ -9,6 +9,23 @@ spec:
     kind: Service
     name: web
 ---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: robotshop
+  namespace: robot-shop
+spec:
+  to:
+    kind: Service
+    name: web
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
+---
 # Source: robot-shop/templates/podsecuritypolicy.yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy

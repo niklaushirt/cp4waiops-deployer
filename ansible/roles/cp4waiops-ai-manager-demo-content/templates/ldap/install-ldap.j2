@@ -382,3 +382,20 @@ spec:
     name: openldap-admin
     weight: 100
   wildcardPolicy: None
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: admin
+  namespace: openldap
+spec:
+  to:
+    kind: Service
+    name: openldap-admin
+    weight: 100
+  port:
+    targetPort: 80
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
