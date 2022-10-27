@@ -142,6 +142,7 @@
   - name: 🚀 ROUTES - Create Spark Master UI Route (you can ignore errors in this step)
     shell: |
      export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+     oc create route edge sparkadmin -n $WAIOPS_NAMESPACE  --service=aiops-ir-analytics-spark-master
      oc expose svc aiops-ir-analytics-spark-master -n $WAIOPS_NAMESPACE --name spark
     ignore_errors: yes
     when: create_external_routes == true

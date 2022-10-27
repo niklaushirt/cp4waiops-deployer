@@ -118,7 +118,7 @@ then
     appToken=$(oc get cm -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui-config -o jsonpath='{.data.TOKEN}')
     echo "            📥 Demo UI:"   
     echo "    " 
-    echo "                🌏 URL:           http://$appURL/"
+    echo "                🌏 URL:           https://$appURL/"
     echo "                🔐 Token:         $appToken"
     echo ""
     echo ""
@@ -136,10 +136,10 @@ then
     echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
     echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
     echo "    "
-    appURL=$(oc get routes -n robot-shop web  -o jsonpath="{['spec']['host']}")|| true
+    appURL=$(oc get routes -n robot-shop robotshop  -o jsonpath="{['spec']['host']}")|| true
     echo "            📥 RobotShop:"   
     echo "    " 
-    echo "                🌏 APP URL:       http://$appURL/"
+    echo "                🌏 APP URL:       https://$appURL/"
     echo "  "
     echo "    "
     echo "    "
@@ -447,7 +447,7 @@ echo "    ----------------------------------------------------------------------
 echo "    " 
 echo "            📥 OPENLDAP:"
 echo "    " 
-echo "                🌏 URL:           http://$(oc get route -n default openldap-admin -o jsonpath={.spec.host})"
+echo "                🌏 URL:           https://$(oc get route -n openldap admin -o jsonpath={.spec.host})"
 echo "                🧑 User:          cn=admin,dc=ibm,dc=com"
 echo "                🔐 Password:      P4ssw0rd!"
 echo "    "
@@ -505,11 +505,11 @@ then
     echo "    🚀 Spark Master"
     echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
     echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
-    appURL=$(oc get routes -n $WAIOPS_NAMESPACE spark  -o jsonpath="{['spec']['host']}")
+    appURL=$(oc get routes -n $WAIOPS_NAMESPACE sparkadmin  -o jsonpath="{['spec']['host']}")
     echo "    " 
     echo "            📥 Spark Master:"
     echo "    " 
-    echo "                🌏 APP URL:       http://$appURL/"
+    echo "                🌏 APP URL:       https://$appURL/"
     echo "    "
     echo "    "
     echo "    "
