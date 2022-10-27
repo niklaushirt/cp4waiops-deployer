@@ -35,7 +35,7 @@
       spec:
         applicationMenu:
           imageURL: >-
-            https://raw.githubusercontent.com/carbon-design-system/carbon/main/packages/icons/src/svg/32/watson-health/thumbnail-preview.svg
+            https://raw.githubusercontent.com/niklaushirt/cp4waiops-deployer/main/doc/pics/icons/thumbnail-preview.svg
           section: CP4WAIOps Demo
         href: >-
           https://$appURL
