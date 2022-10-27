@@ -69,8 +69,8 @@ spec:
       port: 8000
       targetPort: 8000
 ---
-apiVersion: route.openshift.io/v1
 kind: Route
+apiVersion: route.openshift.io/v1
 metadata:
   name:  cp4waiops-demo-ui
   namespace: cp4waiops-demo-ui
@@ -81,5 +81,7 @@ spec:
     weight: 100
   port:
     targetPort: 8000
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
   wildcardPolicy: None
-
