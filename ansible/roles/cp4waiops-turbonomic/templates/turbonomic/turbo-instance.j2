@@ -41,7 +41,7 @@ spec:
     repository: registry.connect.redhat.com/turbonomic
     storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
     storageSelector: false
-    tag: 8.6.4
+    tag: {{ current_cp4waiops_feature.turbo_version }}
   tomcat:
     enabled: true
   netapp:

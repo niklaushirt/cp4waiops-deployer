@@ -156,7 +156,7 @@ stream = os.popen('oc get secret -n '+aimanagerns+' ibm-vault-deploy-vault-crede
 vault_token = stream.read().strip()
 
 print('     ❓ Getting Details LDAP ')
-stream = os.popen('oc get route -n openldap openldap-admin -o jsonpath={.spec.host}')
+stream = os.popen('oc get route -n openldap admin -o jsonpath={.spec.host}')
 ladp_url = stream.read().strip()
 ladp_user = 'cn=admin,dc=ibm,dc=com'
 ladp_pwd = 'P4ssw0rd!'
