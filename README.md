@@ -303,7 +303,7 @@ Once the installation has finisehd, you can access the demo environment:
 
 ## 2.1 Simulate incident - Web Demo UI
 
-📹 I have added a short [Demo Walkthrough video](https://ibm.box.com/s/8kxbb50dt4vkari2gsiw0hrin9gi6ivp) that you can watch to get an idea on how to do the demo. This is based on 3.1 and the Click Through PPT, but should work more or less with your own instance.
+📹 I have added a short [Demo Walkthrough video](https://ibm.box.com/s/a4zbl8rjevxqfe48yxgatgmhomsiu8wl) that you can watch to get an idea on how to do the demo. This is based on 3.2 and the [Click Through PPT](https://ibm.box.com/s/icgkxzlt2ja6dth16dpdin055uyysej1), but should work more or less with your own instance.
 
 ## 2.1.1 Access the Environment
 
