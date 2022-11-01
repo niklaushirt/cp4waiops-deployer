@@ -1,0 +1,9 @@
+echo "TEST"
+echo "VMT_ACTION_INTERNAL:      "$VMT_ACTION_INTERNAL
+echo "VMT_ACTION_NAME:          "$VMT_ACTION_NAME
+echo "VMT_CURRENT_INTERNAL:     "$VMT_CURRENT_INTERNAL
+echo "VMT_CURRENT_NAME:         "$VMT_CURRENT_NAME
+echo "VMT_ACTION_INTERNAL:      "$VMT_ACTION_INTERNAL
+
+ myActionData=$(cat -)
+echo "JSON"$myActionData > test.json

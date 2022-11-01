@@ -1,0 +1,14 @@
+{
+  "name": "@lostinbrittany/k8s_autoscale_prime_numbers",
+  "version": "1.0.0",
+  "description": "A naive prime number calculator to be used in Kubernetes autoscaling demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Horacio Gonzalez <horacio.gonzalez@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

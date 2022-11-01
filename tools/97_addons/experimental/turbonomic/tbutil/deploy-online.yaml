@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tbutil-full
+  labels:
+    app: tbutil-full
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: tbutil-full
+
+  template:
+
+    metadata:
+      labels:
+        app: tbutil-full
+
+    spec:
+      serviceAccountName: turbo-user
+
+      securityContext:
+        fsGroup: 2000
+
+      containers:
+      - name: tbutil-full
+        image: turbointegrations/tbutil-full:2.0b
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: TURBO_MACHINE_ID_FILE
+            value: /home/tbutil/.tbutilmachine-id
+
+          - name: TURBO_K8S_SERVICE_NAME
+            value: tbutil-full
+
+          - name: TZ
+            value: GMT
+
+          - name: TURBO_AUTOCONFIGURE_K8S
+            value: "false"
+
+        ports:
+          - containerPort: 22
+          - containerPort: 80
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: tbutil-full
+spec:
+  type: NodePort
+  ports:
+    - name: ssh
+      port: 22
+      targetPort: 22
+      nodePort: 31222
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 31280
+
+  selector:
+    app: tbutil-full

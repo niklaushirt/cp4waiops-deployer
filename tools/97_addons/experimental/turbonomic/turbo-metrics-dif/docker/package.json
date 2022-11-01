@@ -1,0 +1,13 @@
+{
+    "name": "dif-metrics",
+    "version": "1.0.0",
+    "description": "dif-metrics for Turbonomic",
+    "author": "Niklaus Hirt <nikh@ch.ibm.com>",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1"
+    }
+  }

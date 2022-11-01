@@ -1,0 +1,131 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tbutil-full
+  labels:
+    app: tbutil-full
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: tbutil-full
+
+  template:
+
+    metadata:
+      labels:
+        app: tbutil-full
+
+    spec:
+      serviceAccountName: turbo-user
+
+      securityContext:
+        fsGroup: 2000
+
+      volumes:
+        - name: tbutil-full-volume
+          persistentVolumeClaim:
+            claimName: tbutil-full-volume
+        - name: topology-processor
+          persistentVolumeClaim:
+            claimName: topology-processor
+
+        - name: api
+          persistentVolumeClaim:
+            claimName: api
+
+        - name: auth
+          persistentVolumeClaim:
+            claimName: auth
+
+        - name: turbo-volume
+          configMap:
+            defaultMode: 420
+            name: global-properties-xl-example
+            optional: true
+
+      containers:
+      - name: tbutil-full
+        image: turbointegrations/tbutil-full:2.0b
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: TURBO_MACHINE_ID_FILE
+            value: /home/tbutil/.tbutilmachine-id
+
+          - name: TURBO_K8S_SERVICE_NAME
+            value: tbutil-full
+
+          - name: TZ
+            value: GMT
+
+        ports:
+          - containerPort: 22
+          - containerPort: 80
+
+        volumeMounts:
+          - name: tbutil-full-volume
+            subPath: tbutil
+            mountPath: /home/tbutil
+
+          - name: tbutil-full-volume
+            subPath: tbexport
+            mountPath: /home/tbexport
+
+          - name: tbutil-full-volume
+            subPath: etc-ssh
+            mountPath: /etc/ssh
+
+          - name: tbutil-full-volume
+            subPath: etc-crontabs
+            mountPath: /etc/crontabs
+
+          - name: turbo-volume
+            mountPath: /etc/turbonomic
+          - name: topology-processor
+            subPath: helper_dir
+            mountPath: /home/turbonomic/data/helper_dir/topology-processor
+            readOnly: true
+
+          - name: api
+            subPath: helper_dir
+            mountPath: /home/turbonomic/data/helper_dir/api
+            readOnly: true
+
+          - name: auth
+            subPath: helper_dir
+            mountPath: /home/turbonomic/data/helper_dir/auth
+            readOnly: true
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: tbutil-full
+spec:
+  type: NodePort
+  ports:
+    - name: ssh
+      port: 22
+      targetPort: 22
+      nodePort: 31222
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 31280
+
+  selector:
+    app: tbutil-full
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tbutil-full-volume
+  namespace: turbonomic
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem

@@ -1,0 +1,105 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: turbo-gateway-config
+  namespace: default
+data:
+  POLLING_INTERVAL: '300'
+  NOI_SUMMARY_PREFIX: '[Turbonomic] '
+  NOI_WEBHOOK_PATH: >-
+    /norml/webhook/webhookincomming/cfd95b7e-3bc7-4006-a4a8-a73xxxxxxxxxxxxxx2Gg8wdAXeErarvCrfkF6EEu8u2YkA
+  TURBO_API_URL: api-turbonomic.cp4waiops-953327-a376efc1170b9b8ace6422196c51e491-0000.eu-de.containers.appdomain.cloud
+  TURBO_BA_NAME: 'RobotShop:robot-shop'
+  #TURBO_BA_NAME: 'Quote of the Day Hybrid:qotd-hybrid'
+  ACTION_STATES: 'SUCCEEDED,FAILED,READY,IN_PROGRESS'
+  NOI_WEBHOOK_URL: netcool-evtmanager.cp4waiops-953327-a37xxxxxxxxace6422196c51e491-0000.eu-de.containers.appdomain.cloud
+  ACTION_TYPES: 'MOVE,RESIZE_FOR_PERFORMANCE,RESIZE_FOR_EFFICIENCY,RESIZE'
+  DEBUG_ENABLED: 'false'
+  ENTITY_TYPES: 'VirtualMachine,Application,PhysicalMachine,ContainerSpec,WorkloadController,Container'
+  ACTION_START_TIME: '-30m'
+---
+#oc -n default create secret generic turbo-creds --from-literal=TURBO_USER=apiuser --from-literal=TURBO_PWD=turboadmin -o yaml --dry-run=client
+apiVersion: v1
+data:
+  TURBO_PWD: dHVyYm9hZG1pbg==
+  TURBO_USER: YXBpdXNlcg==
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: turbo-creds
+  namespace: default
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: turbo-gateway-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1G
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: turbo-gateway
+  namespace: default
+  labels:
+      app: turbo-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: turbo-gateway
+  template:
+    metadata:
+      labels:
+        app: turbo-gateway
+    spec:
+      containers:
+      - image: niklaushirt/turbo-gateway:1.0.9
+        imagePullPolicy: IfNotPresent
+        name: gateway
+        command:
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+          limits:
+            cpu: "250m"
+            memory: "250Mi"
+        envFrom:
+        - configMapRef:
+            name: turbo-gateway-config
+        - secretRef:
+            name: turbo-creds
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: turbo-gateway-service
+  namespace: default
+spec:
+  selector:
+    app: turbo-gateway
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
+# Source: robot-shop/templates/web-service.yaml
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: turbo-gateway
+  namespace: default
+spec:
+  to:
+    kind: Service
+    name: turbo-gateway-service
+

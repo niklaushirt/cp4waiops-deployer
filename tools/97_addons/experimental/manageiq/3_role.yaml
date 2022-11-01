@@ -1,0 +1,76 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: manageiq-operator
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - persistentvolumeclaims
+  - pods
+  - pods/finalizers
+  - secrets
+  - serviceaccounts
+  - services
+  - services/finalizers
+  verbs:
+  - '*'
+- apiGroups:
+  - extensions
+  resources:
+  - deployments
+  - deployments/scale
+  - ingresses
+  - networkpolicies
+  verbs:
+  - '*'
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - networkpolicies
+  verbs:
+  - '*'
+- apiGroups:
+  - "rbac.authorization.k8s.io"
+  resources:
+  - rolebindings
+  - roles
+  verbs:
+  - '*'
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - deployments/scale
+  - replicasets
+  verbs:
+  - '*'
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - servicemonitors
+  verbs:
+  - create
+  - get
+- apiGroups:
+  - apps
+  resourceNames:
+  - manageiq-operator
+  resources:
+  - deployments/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - manageiq.org
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - route.openshift.io
+  resources:
+  - routes/custom-host
+  verbs:
+  - '*'

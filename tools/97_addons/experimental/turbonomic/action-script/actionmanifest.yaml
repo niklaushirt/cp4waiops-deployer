@@ -1,0 +1,86 @@
+scripts:
+- name: MyContainerResourceWH
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: WORKLOAD_CONTROLLER
+  actionType: RESIZE_CAPACITY
+  actionPhase: PRE
+- name: MyContainerResourceWH1
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: WORKLOAD_CONTROLLER
+  actionType: RESIZE
+  actionPhase: PRE
+- name: MyContainerResourceWH2
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: CONTAINER_SPEC
+  actionType: RESIZE_CAPACITY
+  actionPhase: PRE
+- name: MyContainerResourceWH3
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: CONTAINER_SPEC
+  actionType: RESIZE
+  actionPhase: PRE
+- name: MyContainerResourceWH4DPOD
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: DPOD
+  actionType: RESIZE
+  actionPhase: PRE
+- name: MyContainerResourceWH5VPOD
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: DPOD
+  actionType: RESIZE_CAPACITY
+  actionPhase: PRE  
+- name: MyContainerResourceWH4VPOD
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: VPOD
+  actionType: RESIZE
+  actionPhase: PRE
+- name: MyContainerResourceWH5DPOD
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: VPOD
+  actionType: RESIZE_CAPACITY
+  actionPhase: PRE  
+- name: MyContainerResourceWH4CONTAINER_POD
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: CONTAINER_POD
+  actionType: RESIZE
+  actionPhase: PRE
+- name: MyContainerResourceWH5CONTAINER_POD
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: CONTAINER_POD
+  actionType: RESIZE_CAPACITY
+  actionPhase: PRE  
+- name: MyContainerResourceWH4CONTAINER
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: CONTAINER
+  actionType: RESIZE
+  actionPhase: PRE
+- name: MyContainerResourceWH5CONTAINER
+  description: Execute this script to send Action to WAIOPS
+  scriptPath: scripts/containerSpecWH.sh
+  entityType: CONTAINER
+  actionType: RESIZE_CAPACITY
+  actionPhase: PRE  
+- name: MyVmMovePrep
+  description: Execute this script in preperation to a VM Move
+  scriptPath: vmScripts/movePrep.sh
+  entityType: VIRTUAL_MACHINE
+  actionType: MOVE
+  actionPhase: PRE
+- name: MyVmSuspendReplace
+  description: Execute this instead of a VM Suspend action
+  scriptPath: vmScripts/suspendReplace.sh
+  entityType: VIRTUAL_MACHINE
+  actionType: SUSPEND
+  actionPhase: REPLACE
+

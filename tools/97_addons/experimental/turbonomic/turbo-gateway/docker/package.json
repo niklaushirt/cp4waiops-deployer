@@ -1,0 +1,14 @@
+{
+    "name": "turbo-gateway",
+    "version": "1.0.0",
+    "description": "turbo-gateway for Turbonomic to WAIOPS",
+    "author": "Niklaus Hirt <nikh@ch.ibm.com>",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1",
+      "axios": "^0.21.1"
+    }
+  }
