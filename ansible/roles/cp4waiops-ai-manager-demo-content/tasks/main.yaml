@@ -320,7 +320,7 @@
 
 - name: 📥  Create Training Temporal Grouping
   include_tasks: 55_aimanager-training-create-tg-configuration.yaml
-  when: current_cp4waiops_feature.training_create_training_temporal AND TRAINING_EXISTS==false
+  when: current_cp4waiops_feature.training_create_training_temporal and TRAINING_EXISTS==false
 
 - name: 📥  Create Training Metrics
   include_tasks: 56_aimanager-training-create-metric-configuration.yaml
