@@ -33,7 +33,7 @@ It takes some time for the metrics to start showing up. Polling is every 10 minu
 
 You can use the following URL to test if everything is working:
 
-`http://turbo-dif-service.default:3000/helloworld`
+`http://turbo-metrics-dif-service.turbonomic:3000/helloworld`
 
 This will create a standalone `Business Application` called `Hello World` without any other `Entities` attached to it. 
 But with metrics being ingested.
@@ -43,7 +43,7 @@ But with metrics being ingested.
 The URL has the format of:
 
 ```yaml
-http://turbo-dif-service.default:3000/<TYPE>/<NAME>/<UUID>
+http://turbo-metrics-dif-service.default:3000/<TYPE>/<NAME>/<UUID>
 ```
 
 where:
@@ -53,7 +53,7 @@ where:
 - UUID: The UUID that you can find under `Entity Information / Show All / Vendor ID`
 
 So an example might be:
-`http://turbo-dif-service.default:3000/service/Service-robot-shop%2Fcatalogue/b2d6fd52-c895-469e-bb98-2a791faefce7`
-`http://turbo-dif-service.default:3000/businessApplication/RobotShop/285215220007744`
+`http://turbo-metrics-dif-service.default:3000/service/Service-robot-shop%2Fcatalogue/b2d6fd52-c895-469e-bb98-2a791faefce7`
+`http://turbo-metrics-dif-service.default:3000/businessApplication/RobotShop/285215220007744`
 
 

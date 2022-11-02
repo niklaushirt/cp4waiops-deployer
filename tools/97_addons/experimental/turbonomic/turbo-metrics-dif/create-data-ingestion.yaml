@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: turbo-dif
-  namespace: default
+  name: turbo-metrics-dif
+  namespace: turbonomic
   labels:
-      app: turbo-dif
+      app: turbo-metrics-dif
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: turbo-dif
+      app: turbo-metrics-dif
   template:
     metadata:
       labels:
-        app: turbo-dif
+        app: turbo-metrics-dif
     spec:
       containers:
       - image: niklaushirt/turbo-dif:1.0.1
@@ -58,11 +58,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: turbo-dif-service
-  namespace: default
+  name: turbo-metrics-dif-service
+  namespace: turbonomic
 spec:
   selector:
-    app: turbo-dif
+    app: turbo-metrics-dif
   ports:
     - protocol: TCP
       port: 3000
@@ -72,9 +72,9 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: turbo-dif
-  namespace: default
+  name: turbo-metrics-dif
+  namespace: turbonomic
 spec:
   to:
     kind: Service
-    name: turbo-dif-service
+    name: turbo-metrics-dif-service

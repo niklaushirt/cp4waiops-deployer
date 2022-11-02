@@ -1,8 +1,13 @@
+apiVersion: v1                     
+kind: Namespace
+metadata:
+  name: cp4waiops-tools
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: primecalc-deployment
-  namespace: default
+  namespace: cp4waiops-tools
   labels:
     app: primecalc
 spec:
@@ -19,7 +24,7 @@ spec:
     spec:
       containers:
       - name: primecalc
-        image: niklaushirt/prime_numbers:0.1
+        image: niklaushirt/prime_numbers:0.2
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
