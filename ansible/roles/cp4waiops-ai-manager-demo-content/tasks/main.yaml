@@ -86,7 +86,7 @@
     - "     ✅ Create Training for Temp Grouping:       {{current_cp4waiops_feature.training_create_training_temporal}}"
     - "     🔽 Load Data for Log Anomaly:               {{current_cp4waiops_feature.training_load_data_logs}}"
     - "     ✅ Create Training for Log Anomaly:         {{current_cp4waiops_feature.training_create_training_logs}}"
-    - "     🚀 Run Training for Log Anomaly:            {{current_cp4waiops_feature.training_training_run_training_logs}}"
+    - "     🚀 Run Training for Log Anomaly:            {{current_cp4waiops_feature.training_run_training_logs}}"
     - "     🔽 Load Data for Metric Anomaly:            {{current_cp4waiops_feature.training_load_data_logs}}"
     - "     ✅ Create Training for Metric Anomaly:      {{current_cp4waiops_feature.training_create_training_metrics}}"
     - "     🚀 Run Training for Metric Anomaly:         {{current_cp4waiops_feature.training_run_training_metrics}}"
