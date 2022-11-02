@@ -250,7 +250,7 @@
 # CREATE TOPOLOGY (part 2)
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 - name: 📥  Create Topology Templates
-  include_tasks: 45_aimanager-create-aiops-application-templates
+  include_tasks: 45_aimanager-create-aiops-application-templates.yaml
   when: current_cp4waiops_feature.create_topology_templates == true
 
 - name: 📥  Create Topology Application
