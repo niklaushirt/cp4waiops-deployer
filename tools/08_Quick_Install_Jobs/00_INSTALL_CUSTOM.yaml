@@ -147,9 +147,20 @@ spec:
                   # ---------------------------------------------------------------------
                   # TRAINING
                   # Train the Models based on pre-canned content
-                  train_models_logs: true
-                  train_models_snow: true
-                  train_models_metrics: true
+
+                  training_create_training_temporal: true
+
+                  training_load_data_logs: true
+                  training_create_training_logs: true
+                  training_run_training_logs: true
+
+                  training_load_data_snow: true
+                  training_create_training_snow: true
+                  training_run_training_snow: true
+
+                  training_load_data_metrics: true
+                  training_create_training_metrics: true
+                  training_run_training_metrics: true
 
                   training_data_url: https://github.com/niklaushirt/
                   training_data_repo: cp4waiops-trainingdata
@@ -160,7 +171,8 @@ spec:
                   # Install RobotShop Application
                   install_robotshop: true
                   # Create Topology
-                  create_topology: true
+                  create_topology_templates: true
+                  create_topology_apps: true
                   # Create RobotShop overlay topology
                   install_robotshop_topology: true
 
@@ -199,7 +211,8 @@ spec:
                   ldap_admin_password: P4ssw0rd!
                   # ldap namespace
                   ldap_namespace: openldap
-
+                  # ldap namespace
+                  ldap_register: true
 
                   # ---------------------------------------------------------------------
                   # MISC PARAMETERS (you should not modify those)

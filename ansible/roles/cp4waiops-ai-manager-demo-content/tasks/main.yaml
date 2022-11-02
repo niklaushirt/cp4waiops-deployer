@@ -83,9 +83,16 @@
     - "     💾 Storage Class InfraManagement:     {{config_file.storage_class_file}}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 TRAINING"
-    - "     ✅ Train Log Anomaly Models:          {{current_cp4waiops_feature.train_models_logs}}"
-    - "     ✅ Train Metric Anomaly Models:       {{current_cp4waiops_feature.train_models_metrics}}"
-    - "     ✅ Train Similar Incidents Models:    {{current_cp4waiops_feature.train_models_snow}}"
+    - "     ✅ Create Training for Temp Grouping:       {{current_cp4waiops_feature.training_create_training_temporal}}"
+    - "     🔽 Load Data for Log Anomaly:               {{current_cp4waiops_feature.training_load_data_logs}}"
+    - "     ✅ Create Training for Log Anomaly:         {{current_cp4waiops_feature.training_create_training_logs}}"
+    - "     🚀 Run Training for Log Anomaly:            {{current_cp4waiops_feature.training_load_data_logs}}"
+    - "     🔽 Load Data for Metric Anomaly:            {{current_cp4waiops_feature.training_load_data_logs}}"
+    - "     ✅ Create Training for Metric Anomaly:      {{current_cp4waiops_feature.training_create_training_metrics}}"
+    - "     🚀 Run Training for Metric Anomaly:         {{current_cp4waiops_feature.training_run_training_metrics}}"
+    - "     🔽 Load Data for Similar Incidents:         {{current_cp4waiops_feature.training_load_data_logs}}"
+    - "     ✅ Create Training for Similar Incidents:   {{current_cp4waiops_feature.training_create_training_snow}}"
+    - "     🚀 Run Training for Similar Incidents:      {{current_cp4waiops_feature.training_run_training_snow}}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 TOPOLOGY"
     - "     🈸 Install RobotShop Application:     {{current_cp4waiops_feature.install_robotshop}}"
@@ -115,6 +122,7 @@
     - "     🌏 LDAP Domain:                       {{current_cp4waiops_feature.ldap_domain}}"
     - "     🌏 LDAP Base:                         {{current_cp4waiops_feature.ldap_base}}"
     - "     🔐 LDAP Admin Password:               {{current_cp4waiops_feature.ldap_admin_password}}"
+    - "     🚀 LDAP Register:                     {{current_cp4waiops_feature.ldap_register}}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 MISC PARAMETERS"
     - "     🌏 Create external routes:            {{current_cp4waiops_feature.create_external_routes}}"
@@ -188,15 +196,15 @@
 # Load data
 - name: 📥  Load Data SNOW
   include_tasks: 51_aimanager-training-load-snow.yaml
-  when: current_cp4waiops_feature.train_models_snow == true
+  when: current_cp4waiops_feature.training_load_data_snow == true
 
 - name: 📥  Load Data LOGS
   include_tasks: 52_aimanager-training-load-logs.yaml
-  when: current_cp4waiops_feature.train_models_logs == true
+  when: current_cp4waiops_feature.training_load_data_logs == true
 
 - name: 📥  Load Data METRICS
   include_tasks: 53_aimanager-training-load-metric.yaml
-  when: current_cp4waiops_feature.train_models_metrics == true
+  when: current_cp4waiops_feature.training_load_data_metrics == true
 
 
 
@@ -237,9 +245,13 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # CREATE TOPOLOGY (part 2)
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
+- name: 📥  Create Topology Templates
+  include_tasks: 45_aimanager-create-aiops-application-templates
+  when: current_cp4waiops_feature.create_topology_templates == true
+
 - name: 📥  Create Topology Application
   include_tasks: 45_aimanager-create-aiops-application.yaml
-  when: current_cp4waiops_feature.create_topology == true
+  when: current_cp4waiops_feature.create_topology_apps == true
 
 
 
@@ -250,7 +262,7 @@
 # Register LDAP Users
 - name: 📥  Register LDAP Server
   include_tasks: 25-post-ldap-register.yaml
-  when: current_cp4waiops_feature.install_ldap == true
+  when: current_cp4waiops_feature.install_ldap == true AND current_cp4waiops_feature.ldap_register == true
 
 # Create valid certificate for Ingress (for Slack)
 - name: 📥  Create valid certificate for Ingress
@@ -305,19 +317,19 @@
 
 - name: 📥  Create Training Temporal Grouping
   include_tasks: 55_aimanager-training-create-tg-configuration.yaml
-  when: TRAINING_EXISTS==false
+  when: current_cp4waiops_feature.training_create_training_temporal AND TRAINING_EXISTS==false
 
 - name: 📥  Create Training Metrics
   include_tasks: 56_aimanager-training-create-metric-configuration.yaml
-  when: current_cp4waiops_feature.train_models_metrics == true and TRAINING_EXISTS==false
+  when: current_cp4waiops_feature.training_create_training_metrics == true and TRAINING_EXISTS==false
 
 - name: 📥  Create Training SNOW 
   include_tasks: 57_aimanager-training-create-snow-configuration.yaml
-  when: current_cp4waiops_feature.train_models_snow == true and TRAINING_EXISTS==false
+  when: current_cp4waiops_feature.training_create_training_snow == true and TRAINING_EXISTS==false
 
 - name: 📥  Create Training Logs
   include_tasks: 58_aimanager-training-create-logs-configuration.yaml
-  when: current_cp4waiops_feature.train_models_logs == true and TRAINING_EXISTS==false
+  when: current_cp4waiops_feature.training_create_training_logs == true and TRAINING_EXISTS==false
 
 
 
@@ -341,19 +353,19 @@
 # Train models
 - name: 📥  Wait for Trainingdata to finish loading
   include_tasks: 60_aimanager-training-load-wait.yaml
-  when: (current_cp4waiops_feature.train_models_logs == true or current_cp4waiops_feature.train_models_snow == true or current_cp4waiops_feature.train_models_metrics == true) and TRAINING_EXISTS==false
+  when: (current_cp4waiops_feature.training_load_data_logs == true or current_cp4waiops_feature.training_load_data_snow == true or current_cp4waiops_feature.training_load_data_metrics == true) and TRAINING_EXISTS==false
 
 - name: 📥  Run SNOW Training
   include_tasks: 61_aimanager-training-run-snow.yaml
-  when: current_cp4waiops_feature.train_models_snow == true and TRAINING_EXISTS==false
+  when: current_cp4waiops_feature.training_run_training_snow == true and TRAINING_EXISTS==false
 
 - name: 📥  Run LAD Training
   include_tasks: 62_aimanager-training-run-logs.yaml
-  when: current_cp4waiops_feature.train_models_logs == true and TRAINING_EXISTS==false
+  when: current_cp4waiops_feature.training_run_training_logs == true and TRAINING_EXISTS==false
 
 - name: 📥  Run METRICS Training
   include_tasks: 63_aimanager-training-run-metric.yaml
-  when: current_cp4waiops_feature.train_models_metrics == true and TRAINING_EXISTS==false
+  when: current_cp4waiops_feature.training_run_training_metrics == true and TRAINING_EXISTS==false
       
 
 
