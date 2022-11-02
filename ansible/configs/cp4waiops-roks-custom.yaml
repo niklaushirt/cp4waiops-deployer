@@ -70,6 +70,7 @@ cp4waiops:
     load_awx_playbooks: true
     integrate_awx_aimanager: true
     load_aimanager_runbooks: true
+    create_runbook_policy: true
 
 
     # ---------------------------------------------------------------------

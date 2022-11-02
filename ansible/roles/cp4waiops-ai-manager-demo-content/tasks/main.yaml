@@ -343,7 +343,7 @@
 
 - name: 📥  Create Runbook Trigger Policy
   include_tasks: 50_aimanager-create-policies-runbooks.yaml
-  when: current_cp4waiops_feature.integrate_awx_aimanager == true and current_cp4waiops_feature.install_awx == true and current_cp4waiops_feature.load_awx_playbooks == true
+  when: current_cp4waiops_feature.create_runbook_policy == true
 
 
 
