@@ -217,7 +217,7 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 - name: 📥  Create Topology Observers
   include_tasks: 41_aimanager-create-observers.yaml
-  when: current_cp4waiops_feature.install_robotshop_topology == true
+  when: current_cp4waiops_feature.install_robotshop_observer == true
 
 - name: 📥  Load Topology Merge Rules
   include_tasks: 42_aimanager-load-topology-merge.yaml

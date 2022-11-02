@@ -170,6 +170,8 @@ spec:
                   # TOPOLOGY
                   # Install RobotShop Application
                   install_robotshop: true
+                  # Install RobotShop K8s Observer
+                  install_robotshop_observer: true
                   # Create Topology
                   create_topology_templates: true
                   create_topology_apps: true
