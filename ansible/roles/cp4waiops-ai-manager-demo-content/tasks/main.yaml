@@ -266,8 +266,7 @@
 # Register LDAP Users
 - name: 📥  Register LDAP Server
   include_tasks: 25-post-ldap-register.yaml
-  when: current_cp4waiops_feature.install_ldap == true AND current_cp4waiops_feature.ldap_register == true
-
+  when: current_cp4waiops_feature.install_ldap == true and current_cp4waiops_feature.ldap_register == true
 # Create valid certificate for Ingress (for Slack)
 - name: 📥  Create valid certificate for Ingress
   include_tasks: 31_aimanager-patch-ingress.yaml
