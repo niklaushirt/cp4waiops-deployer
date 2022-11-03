@@ -1,7 +1,10 @@
-<center> <h1>CP4WatsonAIOps CP4WAIOPS v3.5.0</h1> </center>
-<center> <h2>Demo Environment Installation 🚀</h2> </center>
+<center> <h2>CP4WatsonAIOps CP4WAIOPS</h2> </center>
+<center> <h1>From Zero To Hero</h1> </center>
 
-![K8s CNI](./doc/pics/front.png)
+![K8s CNI](./pics/front.png)
+
+
+<center> <h3>Installation Training</h3> </center>
 
 
 <center> ©2022 Niklaus Hirt / IBM </center>
@@ -35,8 +38,553 @@ So please if you have any feedback contact me
 - by Mail: nikh@ch.ibm.com
 
 
+
+
 <div style="page-break-after: always;"></div>
 
+---------------------------------------------------------------
+# 1 Introduction
+---------------------------------------------------------------
+
+## 1.1 Training
+
+In this Training you will learn how to install IBM CloudPak for AIOps and how to configure some basic functionnalities.
+
+The idea is to provide an optimised way for you to learn CP4WAIOPS.
+
+In the end you will have a demo environment containing the following components:
+
+ - **AI Manager**
+ - **AI Manager Demo Content**
+    - **OpenLDAP** registered with AI Manager
+    - **AWX** (Open Source Ansible Tower) with Playbooks and CP4WAIOPS Runbooks
+    - **AI Models** for
+      - Log Anomaly Detectiom
+      - Metric Anomaly Detection
+      - Event Grouping
+      - Similar Incidents
+      - Change Risk 
+    - **Topology**
+      - RobotShop Demo Installation
+      - K8s Observer
+      - RobotShop Application
+
+
+
+
+
+## 1.2 Demo Setup - Explained
+
+### 2.2.1 Basic Architecture
+
+The environement (Kubernetes, Applications, ...) create logs that are being fed into a Log Management Tool (ELK in this case).
+
+![demo](./pics/waiops_arch_overview.jpg)
+
+1. External Systems generate Alerts and send them into the AI Manager for Event Grouping.
+1. At the same time AI Manager ingests the raw logs coming from the Log Management Tool (ELK) and looks for anomalies in the stream based on the trained model.
+2. It also ingests Metric Data and looks for anomalies
+1. If it finds an anomaly (logs and/or metrics) it forwards it to the Event Grouping as well.
+1. Out of this, AI Manager creates a Story that is being enriched with Topology (Localization and Blast Radius) and with Similar Incidents that might help correct the problem.
+1. The Story is then sent to Slack.
+1. A Runbook is available to correct the problem but not launched automatically.
+
+<div style="page-break-after: always;"></div>
+
+### 2.2.2 Optimized Demo Architecture
+
+
+![demo](./pics/waiops_arch_dataflow.jpg)
+
+
+For the this specific Demo environment:
+
+* ELK is installed for you to kearn how to integrate it
+* For Log Anomaly simulation we'll beusing pre-canned logs for the anomaly detection (inception)
+* For Metrics, we'll be using pre-canned metric data for training and for the anomaly detection (inception)
+* The Events will be created from pre-canned content that is injected into AI Manager
+* There are also pre-canned ServiceNow Incidents as we don’t do the live integration with SNOW for this training
+* The Webpages that are reachable from the Events are static and hosted on my GitHub
+* The same goes for ServiceNow Incident pages if you don’t integrate with live SNOW
+
+
+<div style="page-break-after: always;"></div>
+
+
+
+
+---------------------------------------------------------------
+# 2 Prerequisites
+---------------------------------------------------------------
+
+
+## 2.1 OpenShift requirements 
+
+I installed the demo in a ROKS environment.
+
+You'll need:
+
+- ROKS 4.10
+- 5x worker nodes Flavour `b3c.16x64` (so **16 CPU / 64 GB**)  ❗
+
+
+
+You **might** get away with less if you don't install some components (Event Manager, ELK, Turbonomic,...) but no guarantee:
+
+- Typically 4x worker nodes Flavour `b3c.16x64` _**for only AI Manager**_
+
+
+
+## 2.2 Get a ROKS Cluster (IBMers and IBM Partners only)
+
+IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collection/custom-roks-vmware-requests) (ususally valid for up to 8 days)
+
+1. Create a cluster for `Practice/Self Education` if you don't have an Opportunity Number
+
+	![K8s CNI](./pics/roks01.png)
+
+<div style="page-break-after: always;"></div>
+
+1. Select the maximum end date that fits your needs (you can extend the duration once after creation)
+
+	![K8s CNI](./pics/roks03.png)
+	
+1. Fill-in the remaining fields
+
+	1. Geograpy: prefer **Dallas or London** (others might be slower)
+	2. Worker node count: **5**
+	3. Flavour: **b3c.16x64** ❗
+	4. OpenShift Version: **4.10**
+
+	![K8s CNI](./pics/roks02.png)
+
+1. Click `Submit`
+	
+1. Once the cluster is provisioned, don't forget to extend it to 8 days if needed.
+
+
+
+
+
+## 2.3 Important remarks before you start ⚠️⚠️
+
+Those are remarks to feedback and problem reports I got from the field.
+
+Those scripts have been tested thoroughly on different environments and have proven to be VERY reliable.
+
+If you think that you hit a problem:
+
+* Make sure that you have provisioned a cluster with **5 worker nodes with 16 CPU and 64 GB** each (`b3c.16x64` - it's easy to select the wrong size). If you have Pods in `0/0` state verify the `Events`. If you get `Not enough CPU` then delete the cluster and provision the correct size.
+* When deploying ROKS I usually use Dallas or London, they are the fastest. On other regions we have seen much worse performance - deployment can take 4-5 times longer.
+* The complete installation takes about 2.5 to 8 hours depending on your region where you deployed ROKS to (see above).
+* If you see Pods in `CrashLoop` or other error states, try to wait it out (this can be due to dependencies on other componenets that are not ready yet). Chances are that the deployment will eventually go through. If after 8h you are still stuck, ping me.
+* **Select and use ONLY ONE of the scripts** below, depending on which components you want to install.
+
+
+
+
+### ❗ So simply put be patient and make sure you have the correct size of cluster provisioned!
+
+<div style="page-break-after: always;"></div>
+
+
+
+---------------------------------------------------------------
+# 3 Installing AI Manager
+---------------------------------------------------------------
+
+The official documentation can be found [here](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=manager-starter-installation-cli).
+
+
+## 3.1 Preparing to run commands
+
+Befor continuing, you have to connect to your OpenShift Cluster.
+
+
+1. Open your Openshift Web Console
+1. Select `Copy Login Command`
+
+	![K8s CNI](./pics/fzth/01_fzth_ocp_connect.png)
+
+1. Copy the `oc login ..` string
+
+	![K8s CNI](./pics/fzth/02_fzth_ocp_connect.png)
+
+1. Open your terminal
+1. Paste the `oc login ..` command from above
+1. Clone the GitHub Repository into your directory of choice
+
+	```
+	git clone https://github.com/niklaushirt/cp4waiops-deployer.git
+	```
+	
+1. Go to the deployer directory
+
+	```
+	cd cp4waiops-deployer
+	```
+	
+Now you're good to start with the installation.
+
+
+## 3.2 Installing the Catalog and Operator
+
+### 3.2.1 Create the namespace (project)
+
+
+1. Create a namespace called `cp4waiops`, by running the following command:
+
+	```
+	oc create namespace cp4waiops
+	```
+
+
+### 3.2.2 Create the OperatorGroup
+
+1. Create the Operator group by running the following command:
+
+	```yaml
+	cat << EOF | oc apply -f -
+	apiVersion: operators.coreos.com/v1
+	kind: OperatorGroup
+	metadata:
+	  name: cp4waiops-operator-group
+	  namespace: cp4waiops
+	spec:
+	  targetNamespaces:
+	    - cp4waiops
+	EOF
+```
+
+### 3.2.3 Create the entitlement key pull secret
+
+
+1. Log in to [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary) with the IBMid.
+
+2. In the *Entitlement keys* section, select **Copy key** to copy your entitlement key to the clipboard.
+
+3. Run the following command:
+
+   ```
+   oc create secret docker-registry ibm-entitlement-key \
+       --docker-username=cp\
+       --docker-password=<entitlement-key> \
+       --docker-server=cp.icr.io \
+       --namespace=cp4waiops
+   ```
+
+    Where `<entitlement-key>` is the entitlement key that you copied in the previous step.
+
+
+
+### 3.2.4 Create the catalog source
+
+1. Run the following command to create the CatalogSource.
+
+   ```yaml
+   cat << EOF | oc apply -f -
+   apiVersion: operators.coreos.com/v1alpha1
+   kind: CatalogSource
+   metadata:
+     name: ibm-operator-catalog
+     namespace: openshift-marketplace
+   spec:
+     displayName: ibm-operator-catalog
+     publisher: IBM Content
+     sourceType: grpc
+     image: icr.io/cpopen/ibm-operator-catalog:latest
+   EOF
+   ```
+   
+1. Update the CatalogSource to always use the current image digest by running the following commands:
+
+   ```
+   IMGDIGEST=`oc get pods -n openshift-marketplace -l=olm.catalogSource=ibm-operator-catalog --no-headers -o=jsonpath="{.items[0].status.containerStatuses[0].imageID}" -n openshift-marketplace` && \
+   oc patch catalogsource ibm-operator-catalog -n openshift-marketplace --type=json -p "[{ "op": "test", "path": "/spec/image", "value": "\"icr.io/cpopen/ibm-operator-catalog:latest\"" }, { "op": "replace", "path": "/spec/image", "value": "\"$IMGDIGEST\"" }]"
+   ```
+
+
+### 3.2.4 Install the CP4WAIOPS operator
+
+1. Run the following command:
+ 
+	```yaml
+	cat << EOF | oc apply -f -
+	apiVersion: operators.coreos.com/v1alpha1
+	kind: Subscription
+	metadata:
+	  name: ibm-aiops-orchestrator
+	  namespace: cp4waiops
+	spec:
+	  channel: v3.5
+	  installPlanApproval: Automatic
+	  name: ibm-aiops-orchestrator
+	  source: ibm-operator-catalog
+	  sourceNamespace: openshift-marketplace
+	EOF
+	```
+
+### 3.2.5 Check Operator is ready
+
+Verify that the Operator is running.
+
+* Either run the following:
+	
+	```bash
+	oc get csv -n cp4waiops                                                           
+	```
+	
+	And you should see TODO entries with `Succeeded` state
+	
+	```bash
+	NAME                                     DISPLAY                                            VERSION   REPLACES                                 PHASE
+	aimanager-operator.v3.5.1                IBM Watson AIOps AI Manager                        3.5.1                                              Succeeded
+	aiopsedge-operator.v3.5.1                IBM Watson AIOps Edge                              3.5.1                                              Succeeded
+	asm-operator.v3.5.1                      IBM Netcool Agile Service Manager                  3.5.1                                              Succeeded
+	elasticsearch-operator.5.5.3             OpenShift Elasticsearch Operator                   5.5.3                                              Succeeded
+	ibm-aiops-ir-ai.v3.5.1                   IBM Watson AIOps Issue Resolution AI & Analytics   3.5.1                                              Succeeded
+	ibm-aiops-ir-core.v3.5.1                 IBM Watson AIOps Issue Resolution Core             3.5.1                                              Succeeded
+	ibm-aiops-ir-lifecycle.v3.5.1            IBM Cloud Pak for Watson AIOps Lifecycle           3.5.1                                              Succeeded
+	ibm-aiops-orchestrator.v3.5.1            IBM Cloud Pak for Watson AIOps AI Manager          3.5.1                                              Succeeded
+	ibm-automation-core.v1.3.11              IBM Automation Foundation Core                     1.3.11    ibm-automation-core.v1.3.10              Succeeded
+	ibm-automation-elastic.v1.3.10           IBM Elastic                                        1.3.10    ibm-automation-elastic.v1.3.9            Succeeded
+	ibm-automation-eventprocessing.v1.3.11   IBM Automation Foundation Event Processing         1.3.11    ibm-automation-eventprocessing.v1.3.10   Succeeded
+	ibm-automation-flink.v1.3.10             IBM Automation Foundation Flink                    1.3.10    ibm-automation-flink.v1.3.9              Succeeded
+	ibm-automation.v1.3.11                   IBM Automation Foundation                          1.3.11    ibm-automation.v1.3.10                   Succeeded
+	ibm-cloud-databases-redis.v1.4.3         IBM Operator for Redis                             1.4.3     ibm-cloud-databases-redis.v1.4.2         Succeeded
+	ibm-common-service-operator.v3.21.0      IBM Cloud Pak foundational services                3.21.0                                             Succeeded
+	ibm-management-kong.v3.5.1               IBM Internal - IBM Watson AIOps Kong               3.5.1                                              Succeeded
+	ibm-postgreservice-operator.v3.5.1       IBM Postgreservice                                 3.5.1                                              Succeeded
+	ibm-secure-tunnel-operator.v3.5.1        IBM Secure Tunnel                                  3.5.1                                              Succeeded
+	ibm-vault-operator.v3.5.1                IBM Vault Operator                                 3.5.1                                              Succeeded
+	ibm-watson-aiops-ui-operator.v3.5.1      IBM Watson AIOps UI                                3.5.1                                              Succeeded
+	```
+
+* Or check your OpenShift Web Console
+
+	![K8s CNI](./pics/fzth/01_fzth_ocp_connect.png)
+
+
+## 3.3 Installing AI Manager
+
+
+### 3.3.1 Creating the AI Manager Instance
+
+
+1. Run the following command to create an instance of AI Manager.
+
+   ```yaml
+   cat << EOF | oc apply -f -
+   apiVersion: orchestrator.aiops.ibm.com/v1alpha1
+   kind: Installation
+   metadata:
+     name: ibm-cp-watson-aiops
+     namespace: cp4waiops
+   spec:
+     imagePullSecret: ibm-entitlement-key
+     license:
+       accept: <license_acceptance>
+     pakModules:
+     - name: aiopsFoundation
+       enabled: true
+     - name: applicationManager
+       enabled: true
+     - name: aiManager
+       enabled: true
+     - name: connection
+       enabled: false
+     size: small
+     storageClass: ibmc-file-gold-gid
+     storageClassLargeBlock: ibmc-block-gold
+   EOF  
+   ```
+
+This takes some time depending on what region of ROKS you have chosen.
+Wait **up to 45 minutes** for the installation to complete.
+
+
+> This works only on IBM ROKS. 
+> If you want to install on another platform you will have to adapt storageClass and storageClassLargeBlock to your available storage classes.
+
+### 3.2.5 Check AI Manager is ready
+
+❗ This takes some time depending on what region of ROKS you have chosen.
+Wait **up to 45 minutes** for the installation to complete.
+
+You can follow along the process.
+
+#### 3.2.5.1 Check with the Command Line
+
+Run the following:
+	
+```bash
+oc get po -n cp4waiops | grep -v Completed | grep -v Error |grep "0/"
+	
+oc get po -n cp4waiops | grep -v Completed | grep -v Error |grep -v "0/" |wc -l| tr -d ' '
+
+oc get po -n cp4waiops | grep -v Completed | grep -v Error |grep "0/" |wc -l| tr -d ' '                                                  
+```
+
+This will list the Pods that are not Ready yet.
+
+🚀 And **when done** you should get only the numbers `129` and `0`.
+	
+	
+#### 3.2.5.2 Check with your OpenShift Web Console
+
+1. Select `Pods` and your `cp4waiops` Project
+	
+	![K8s CNI](./pics/fzth/03_fzth_aimanager_check.png)
+
+1. Filter for the relevant statuses
+	
+	![K8s CNI](./pics/fzth/04_fzth_aimanager_check.png)
+	
+	The drop-down also shows you the number of Pods for the different statuses.
+	
+
+1. Sort by `Ready` column
+	
+	![K8s CNI](./pics/fzth/05_fzth_aimanager_check.png)
+
+This allows you to follow along the progress of the installation.
+
+🚀 **When done** you should have 129 Pods in Running status and all Pods should be `1/1, 2/2, 3/3, ...`
+
+
+<div style="page-break-after: always;"></div>
+
+
+---------------------------------------------------------------
+# 4 Installing Training resources
+---------------------------------------------------------------
+
+This will install resources that you will need for the configuration of AI Manager in the next chapter.
+
+Those are assets that typically already exist at a customer.
+
+* OpenLDAP
+* AWX (Open Source Ansible Tower) with preloaded Playbooks
+* RobotShop Demo App
+* Demo Service Account
+
+This will also load training data for:
+
+* Log Anomalies
+
+	You will integrate with your live ELK instance but you probably don't have 2-3 days to wait for ELK to collect enough logs.
+	So we'll train on this pre-canned Log Data.
+	
+* Metric Anomalies
+
+	For this training we won't have a Metric provider (Instana, ...) so we'll train on pre-canned Metric Data.
+	If you want you can always integrate an existing Metric Source on top of the provided training data.
+	
+* Service Now - Similar Incidents
+
+	For this training we won't have a Service Now Instance so we'll train on pre-canned SNOW Data.
+	If you want you can always integrate an existing SNOW instance on top of the provided training data.
+	You can find documentation [here](./INTEGRATION_SNOW.md)
+	
+
+## 4.1 Installing Training Resources
+
+1. Open [this file ](../tools/11_fzth/FROM_ZERO_TO_HERO_INSTALL.sh)
+1. Run the command to start the creation of the Training Resources. You should get:
+	
+	```bash
+	clusterrolebinding.rbac.authorization.k8s.io/installer-default-default created       or unchanged if you have already lauched it once
+	job.batch/waiops-easy-install-aimanager-practicum created
+	```
+
+### 4.2 Check - follow the progress
+
+❗ This takes some time depending on what region of ROKS you have chosen.
+Wait **up to 45 minutes** for the installation to complete.
+
+You can follow along the process by running:
+	
+```bash
+./tools/11_fzth/stream_remote_logs.sh                                                 
+```
+
+Or through the OpensHift Web Console:
+
+* Select `default` Namespace
+* Select `Pods`
+* Click on the `waiops-easy-install-aimanager-practicum-...` Pod
+* Select `Logs`
+
+	![K8s CNI](./pics/fzth/06_fzth_aimanager_load.png)
+
+🚀 And **when done** you should get the following with `failed=0`.
+
+```bash
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=XXX    changed=XXX    unreachable=0    failed=0    skipped=XXX    rescued=0    ignored=0
+
+
+
+*****************************************************************************************************************************
+ ✅ DONE
+*****************************************************************************************************************************
+                                                
+```
+
+
+
+---------------------------------------------------------------
+# 5 Configuring AI Manager
+---------------------------------------------------------------
+
+## 5.1 Login to AI Manager
+
+1. In your OpenShift Console click on the Applications Menu
+
+	![K8s CNI](./pics/fzth/07_fzth_ocp_menu.png)
+
+
+1. Select **CP4WAIOps Demo UI**
+
+1. Login with token `P4ssw0rd!`
+
+	![K8s CNI](./pics/fzth/08_demo_ui_login.png)
+
+
+1. Copy the Admin Password
+
+	![K8s CNI](./pics/fzth/09_demo_ui_aimanager_pwd.png)
+
+1. Open `AI Manager`
+
+	![K8s CNI](./pics/fzth/10_demo_ui_aimanager_open.png)
+
+1. Select `IBM provided credentials`
+
+	![K8s CNI](./pics/fzth/11_demo_ui_aimanager_type.png)
+
+1. Login with `admin` user and the password you copied in the step above
+
+	![K8s CNI](./pics/fzth/12_demo_ui_aimanager_login.png)
+
+1. Welcome to  `AI Manager`
+
+	![K8s CNI](./pics/fzth/13_demo_ui_aimanager_welcome.png)
+
+
+
+
+
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
 
 ## 🚀 Demo Installation
 
@@ -58,7 +606,7 @@ So please if you have any feedback contact me
 
 
 Here is a quick video that walks you through the installation process
-![K8s CNI](./doc/pics/JOB_INSTALL.gif)
+![K8s CNI](./pics/JOB_INSTALL.gif)
 
 <div style="page-break-after: always;"></div>
 
@@ -108,13 +656,13 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 
 1. Create a cluster for `Practice/Self Education` if you don't have an Opportunity Number
 
-	![K8s CNI](./doc/pics/roks01.png)
+	![K8s CNI](./pics/roks01.png)
 
 <div style="page-break-after: always;"></div>
 
 1. Select the maximum end date that fits your needs (you can extend the duration once after creation)
 
-	![K8s CNI](./doc/pics/roks03.png)
+	![K8s CNI](./pics/roks03.png)
 	
 1. Fill-in the remaining fields
 
@@ -123,7 +671,7 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 	3. Flavour: **b3c.16x64** ❗
 	4. OpenShift Version: **4.10**
 
-	![K8s CNI](./doc/pics/roks02.png)
+	![K8s CNI](./pics/roks02.png)
 
 1. Click `Submit`
 	
@@ -170,7 +718,7 @@ On top of that you get a Turbonomic instance to play around a bit (you'll need a
 
 
 
-![K8s CNI](./doc/pics/install01.png)
+![K8s CNI](./pics/install01.png)
 
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/01_INSTALL_ALL.yaml)
@@ -296,7 +844,7 @@ Once the installation has finisehd, you can access the demo environment:
 * Select `CP4WAIOps Demo UI`
 * Login with the password `P4ssw0rd!`
 
-	![demo](./doc/pics/demo-menu.png)
+	![demo](./pics/demo-menu.png)
 
 
 
@@ -318,7 +866,7 @@ To access the demo environment:
 * Select `CP4WAIOps Demo UI`
 * Login with the password `P4ssw0rd!`
 
-	![demo](./doc/pics/demo-menu.png)
+	![demo](./pics/demo-menu.png)
 
 
 
@@ -331,7 +879,7 @@ To access the demo environment:
 * Login as User `demo` with the Password `P4ssw0rd!`
 
 
-![demo](./doc/pics/demo01.png)
+![demo](./pics/demo01.png)
 
 
 
@@ -343,95 +891,17 @@ Back on the Demo UI, click on the red `Create Incident Memory Leak` button
 
 This will create alerts and a story in AI Manager.
 
-![demo](./doc/pics/demo01.png)
+![demo](./pics/demo01.png)
 
 ℹ️  Give it a minute or two for all events and anomalies to arrive in AI Manager and Slack.
 
-![demo](./doc/pics/demo02.png)
+![demo](./pics/demo02.png)
 
 <div style="page-break-after: always;"></div>
 
 
 
 
-
-<div style="page-break-after: always;"></div>
-
-
-## 2.2 Demo Setup - Explained
-
-### 2.2.1 Basic Architecture
-
-The environement (Kubernetes, Applications, ...) create logs that are being fed into a Log Management Tool (ELK in this case).
-
-![demo](./doc/pics/waiops_arch_overview.jpg)
-
-1. External Systems generate Alerts and send them into the AI Manager for Event Grouping.
-1. At the same time AI Manager ingests the raw logs coming from the Log Management Tool (ELK) and looks for anomalies in the stream based on the trained model.
-2. It also ingests Metric Data and looks for anomalies
-1. If it finds an anomaly (logs and/or metrics) it forwards it to the Event Grouping as well.
-1. Out of this, AI Manager creates a Story that is being enriched with Topology (Localization and Blast Radius) and with Similar Incidents that might help correct the problem.
-1. The Story is then sent to Slack.
-1. A Runbook is available to correct the problem but not launched automatically.
-
-<div style="page-break-after: always;"></div>
-
-### 2.2.2 Optimized Demo Architecture
-
-The idea of this repo is to provide a optimised, complete, pre-trained demo environment that is self-contained (e.g. can be deployed in only one cluster)
-
-It contains the following components (which can be installed independently):
-
- - **AI Manager**
- 	- IBM Operator
- 	- AI Manager Instance
- - **AI Manager Demo Content**  (optional)
-    - **OpenLDAP** & Register with AI Manager
-    - **AWX** (Open Source Ansible Tower) with preloaded Playbooks
-    - **AI Models** - Load and Train 
-      - Create Training Definitions (TG, LAD, CR, SI. Turn off RSA) 
-      - Create Training Data (LAD, SNOW) 
-      - Train Models (TG, LAD, CR, SI) 
-    - **Topology**
-      - RobotShop Demo App
-      - Create K8s Observer
-      - Create ASM merge rules
-      - Load Overlay Topology
-      - Create AI Manager Application
-    - **Misc**
- 	   - Creates valid certificate for Ingress (Slack) 
- 	   - External Routes (Flink, Topology, ...)
- 	   - Disables ASM Service match rule 
- 	   - Create Policy Creation for Stories and Runbooks 
- 	   - Demo Service Account 
- - **Event Manager**  (optional)
- 	- Event Manager
- - **Event Manager Demo Content**  (optional)
-   - **Topology**
-     - Create ASM merge rules
-     - Load ASM merge Topology
-     - Create AI Manager Application
- - **Turbonomic**  (optional)
-
-
-![demo](./doc/pics/waiops_arch_dataflow.jpg)
-
-
-For the this specific Demo environment:
-
-* ELK is not needed as I am using pre-canned logs for training and for the anomaly detection (inception)
-* Same goes for Metrics, I am using pre-canned metric data for training and for the anomaly detection (inception)
-* The Events are also created from pre-canned content that is injected into AI Manager
-* There are also pre-canned ServiceNow Incidents if you don’t want to do the live integration with SNOW
-* The Webpages that are reachable from the Events are static and hosted on my GitHub
-* The same goes for ServiceNow Incident pages if you don’t integrate with live SNOW
-
-This allows us to:
-
-* Install the whole Demo Environment in a self-contained OCP Cluster
-* Trigger the Anomalies reliably
-* Get Events from sources that would normally not be available (Instana, Turbonomic, Log Aggregator, Metric Provider, ...)
-* Show some examples of SNOW integration without a live system
 
 
 <div style="page-break-after: always;"></div>
@@ -440,7 +910,7 @@ This allows us to:
 
 #### 2.2.3.1 Loading training data
 
-![demo](./doc/pics/waiops_arch_training.jpg)
+![demo](./pics/waiops_arch_training.jpg)
 
 Loading Training data is done at the lowest possible level (for efficiency and speed):
 
@@ -459,7 +929,7 @@ The models can be trained directly on the data that has been loaded as described
 
 ### 2.2.4 Incident creation (inception)
 
-![demo](./doc/pics/waiops_arch_inception.jpg)
+![demo](./pics/waiops_arch_inception.jpg)
 
 Incidents are being created by using the high level APIs in order to simulate a real-world scenario.
 
@@ -513,11 +983,11 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 
 1. Create a cluster for `Practice/Self Education` if you don't have an Opportunity Number
 
-	![K8s CNI](./doc/pics/roks01.png)
+	![K8s CNI](./pics/roks01.png)
 
 1. Select the maximum end date that fits your needs (you can extend the duration once after creation)
 
-	![K8s CNI](./doc/pics/roks03.png)
+	![K8s CNI](./pics/roks03.png)
 	
 1. Fill-in the remaining fields
 
@@ -526,7 +996,7 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 	3. Flavour: b3c.16x64
 	4. OpenShift Version: 4.10
 
-	![K8s CNI](./doc/pics/roks02.png)
+	![K8s CNI](./pics/roks02.png)
 
 1. Click `Submit`
 
@@ -670,13 +1140,13 @@ echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE wai
 * Open the URL from the above
 * Click on `IBM provided credentials (admin only)`
 
-	![K8s CNI](./doc/pics/doc53.png)
+	![K8s CNI](./pics/doc53.png)
 
 
 
 * Login as `admin` with the password from the `LOGINS.txt` file
 
-	![K8s CNI](./doc/pics/doc55.png)
+	![K8s CNI](./pics/doc55.png)
 
 
 
@@ -700,7 +1170,7 @@ echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE wai
 	
 	```
 	
-	![demo](./doc/pics/demo03.png)
+	![demo](./pics/demo03.png)
 	
 
 #### 3.4.1.2 Open the Web Demo UI
@@ -716,7 +1186,7 @@ Click on the red `Create Incident Memory Leak` button
 
 This will create alerts and a story in AI Manager.
 
-![demo](./doc/pics/demo01.png)
+![demo](./pics/demo01.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -729,7 +1199,7 @@ This will create alerts and a story in AI Manager.
 ℹ️  Give it a minute or two for all events and anomalies to arrive in AI Manager and Slack.
 
 
-![demo](./doc/pics/demo02.png)
+![demo](./pics/demo02.png)
 
 
 ### 3.4.2 Simulate incident - Command Line
@@ -820,7 +1290,7 @@ After successful installation, the Playbook creates a file `./LOGINS.txt` in you
 * Click `Connect`
 * Name it `Netcool`
 * Fill-in the information from the script above
-![](./doc/pics/netcool01.png)
+![](./pics/netcool01.png)
 * Click `Test Connection`
 * Click `Next`
 * Toggle `Enable Data Collection` to the `ON` position
@@ -909,7 +1379,7 @@ Optionnally you can also add `Expiry Time` from `Optional event attributes` and 
 	* AlertGroup = 'CEACorrelationKeyParent'
 	* AlertGroup = 'robot-shop'
 
-![](./doc/pics/noi10.png)
+![](./pics/noi10.png)
 
 
 ##### 3.5.4.2.2 View 
@@ -994,36 +1464,36 @@ For the system to work you need to follow those steps:
 
 1. Create a Slack workspace by going to https://slack.com/get-started#/createnew and logging in with an email <i>**which is not your IBM email**</i>. Your IBM email is part of the IBM Slack enterprise account and you will not be able to create an independent Slack workspace outside if the IBM slack service. 
 
-  ![slack1](./doc/pics/slackws1.png)
+  ![slack1](./pics/slackws1.png)
 
 2. After authentication, you will see the following screen:
 
-  ![slack2](./doc/pics/slackws2.png)
+  ![slack2](./pics/slackws2.png)
 
 3. Click **Create a Workspace** ->
 
 4. Name your Slack workspace
 
-  ![slack3](./doc/pics/slackws3.png)
+  ![slack3](./pics/slackws3.png)
 
   Give your workspace a unique name such as aiops-\<yourname\>.
 
 5. Describe the workspace current purpose
 
-  ![slack4](./doc/pics/slackws4.png)
+  ![slack4](./pics/slackws4.png)
 
   This is free text, you may simply write “demo for Watson AIOps” or whatever you like.
 
 6. 
 
-  ![slack5](./doc/pics/slackws5.png)
+  ![slack5](./pics/slackws5.png)
 
   You may add team members to your new Slack workspace or skip this step.
 
 
 At this point you have created your own Slack workspace where you are the administrator and can perform all the necessary steps to integrate with CP4WAOps.
 
-![slack6](./doc/pics/slackws6.png)
+![slack6](./pics/slackws6.png)
 
 **Note** : This Slack workspace is outside the control of IBM and must be treated as a completely public environment. Do not place any confidential material in this Slack workspace.
 
@@ -1033,13 +1503,13 @@ At this point you have created your own Slack workspace where you are the admini
 
 1. Create a Slack app, by going to https://api.slack.com/apps and clicking `Create New App`. 
 
-   ![slack7](./doc/pics/slack01.png)
+   ![slack7](./pics/slack01.png)
 
 
 2. Select `From an app manifest`
 
 
-  ![slack7](./doc/pics/slack02.png)
+  ![slack7](./pics/slack02.png)
 
 3. Select the appropriate workspace that you have created before and click `Next`
 
@@ -1068,7 +1538,7 @@ At this point you have created your own Slack workspace where you are the admini
 	* aiops-demo-reactive
 	* aiops-demo-proactive
 
-	![slack7](./doc/pics/slack03.png)
+	![slack7](./pics/slack03.png)
 
 
 2. Right click on each channel and select `Copy Link`
@@ -1079,7 +1549,7 @@ At this point you have created your own Slack workspace where you are the admini
 	
 3. Under Apps click Browse Apps
 
-	![slack7](./doc/pics/slack13.png)
+	![slack7](./pics/slack13.png)
 
 4. Select the App you just have created
 
@@ -1102,33 +1572,33 @@ In the Slack App:
 
 1. In the `Basic Information` menu get the `Signing Secret` (not the Client Secret!) and jot it down
 
-	![K8s CNI](./doc/pics/doc47.png)
+	![K8s CNI](./pics/doc47.png)
 	
 3. In the `OAuth & Permissions` get the `Bot User OAuth Token` (not the User OAuth Token!) and jot it down
 
-	![K8s CNI](./doc/pics/doc48.png)
+	![K8s CNI](./pics/doc48.png)
 
 In the AI Manager (CP4WAIOPS) 
 
 1. In the `AI Manager` "Hamburger" Menu select `Define`/`Data and tool integrations`
 1. Click `Add connection`
  
-	![K8s CNI](./doc/pics/doc14.png)
+	![K8s CNI](./pics/doc14.png)
 	
 1. Under `Slack`, click on `Add Connection`
-	![K8s CNI](./doc/pics/doc45.png)
+	![K8s CNI](./pics/doc45.png)
 
 6. Name it "Slack"
 7. Paste the `Signing Secret` from above
 8. Paste the `Bot User OAuth Token` from above
 
-	![K8s CNI](./doc/pics/doc50.png)
+	![K8s CNI](./pics/doc50.png)
 	
 9. Paste the channel IDs from the channel creation step in the respective fields
 
-	![K8s CNI](./doc/pics/doc49.png)
+	![K8s CNI](./pics/doc49.png)
 	
-	![K8s CNI](./doc/pics/doc52.png)
+	![K8s CNI](./pics/doc52.png)
 		
 		
 
@@ -1147,7 +1617,7 @@ In the AI Manager (CP4WAIOPS)
 2. Under `Slack` click on `1 integration`
 3. Copy out the URL
 
-	![secure_gw_search](./doc/pics/slack04.png)
+	![secure_gw_search](./pics/slack04.png)
 
 This is the URL you will be using for step 6.
 
@@ -1170,7 +1640,7 @@ Return to the browser tab for the Slack app.
 
 4. After pasting the value in the field, a *Verified* message should display.
 
-	![slacki3](./doc/pics/slacki3.png)
+	![slacki3](./pics/slacki3.png)
 
 	If you get an error please check 5.7
 
@@ -1179,7 +1649,7 @@ Return to the browser tab for the Slack app.
 	*  `app_mention` and 
 	*  `member_joined_channel` events.
 
-	![slacki4](./doc/pics/slacki4.png)
+	![slacki4](./pics/slacki4.png)
 
 6. Click `Save Changes` button.
 
@@ -1192,7 +1662,7 @@ Return to the browser tab for the Slack app.
 
  **There is no automatic verification for this form**
 
-![slacki5](./doc/pics/slacki5.png)
+![slacki5](./pics/slacki5.png)
 
 9. Click `Save Changes` button.
 
