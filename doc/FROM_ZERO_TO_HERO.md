@@ -27,7 +27,7 @@ This is provided `as-is`:
 * It clearly can be improved
 
 
-**❗This has been tested for the new CP4WAIOPS v3.5.0 release on OpenShift 4.10 on ROKS**
+**❗This has been tested for CP4WAIOPS v3.5.0 release on OpenShift 4.10 on ROKS**
 
 
 
@@ -55,19 +55,18 @@ The idea is to provide an optimised way for you to learn CP4WAIOPS.
 In the end you will have a demo environment containing the following components:
 
  - **AI Manager**
- - **AI Manager Demo Content**
-    - **OpenLDAP** registered with AI Manager
-    - **AWX** (Open Source Ansible Tower) with Playbooks and CP4WAIOPS Runbooks
-    - **AI Models** for
-      - Log Anomaly Detectiom
-      - Metric Anomaly Detection
-      - Event Grouping
-      - Similar Incidents
-      - Change Risk 
-    - **Topology**
-      - RobotShop Demo Installation
-      - K8s Observer
-      - RobotShop Application
+- **OpenLDAP** registered with AI Manager
+- **AWX** (Open Source Ansible Tower) with Playbooks and CP4WAIOPS Runbooks
+- **AI Models** for
+  - Log Anomaly Detectiom
+  - Metric Anomaly Detection
+  - Event Grouping
+  - Similar Incidents
+  - Change Risk 
+- **Topology**
+  - RobotShop Demo Installation
+  - K8s Observer
+  - RobotShop Application
 
 
 
@@ -118,24 +117,8 @@ For the this specific Demo environment:
 ---------------------------------------------------------------
 
 
-## 2.1 OpenShift requirements 
 
-I installed the demo in a ROKS environment.
-
-You'll need:
-
-- ROKS 4.10
-- 5x worker nodes Flavour `b3c.16x64` (so **16 CPU / 64 GB**)  ❗
-
-
-
-You **might** get away with less if you don't install some components (Event Manager, ELK, Turbonomic,...) but no guarantee:
-
-- Typically 4x worker nodes Flavour `b3c.16x64` _**for only AI Manager**_
-
-
-
-## 2.2 Get a ROKS Cluster (IBMers and IBM Partners only)
+## 2.1 Get your ROKS Cluster (IBMers and IBM Partners only)
 
 IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collection/custom-roks-vmware-requests) (ususally valid for up to 8 days)
 
@@ -166,7 +149,7 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 
 
 
-## 2.3 Important remarks before you start ⚠️⚠️
+## 2.2 Important remarks before you start ⚠️⚠️
 
 Those are remarks to feedback and problem reports I got from the field.
 
@@ -176,11 +159,7 @@ If you think that you hit a problem:
 
 * Make sure that you have provisioned a cluster with **5 worker nodes with 16 CPU and 64 GB** each (`b3c.16x64` - it's easy to select the wrong size). If you have Pods in `0/0` state verify the `Events`. If you get `Not enough CPU` then delete the cluster and provision the correct size.
 * When deploying ROKS I usually use Dallas or London, they are the fastest. On other regions we have seen much worse performance - deployment can take 4-5 times longer.
-* The complete installation takes about 2.5 to 8 hours depending on your region where you deployed ROKS to (see above).
 * If you see Pods in `CrashLoop` or other error states, try to wait it out (this can be due to dependencies on other componenets that are not ready yet). Chances are that the deployment will eventually go through. If after 8h you are still stuck, ping me.
-* **Select and use ONLY ONE of the scripts** below, depending on which components you want to install.
-
-
 
 
 ### ❗ So simply put be patient and make sure you have the correct size of cluster provisioned!
@@ -254,7 +233,7 @@ Now you're good to start with the installation.
 	  targetNamespaces:
 	    - cp4waiops
 	EOF
-```
+	```
 
 ### 3.2.3 Create the entitlement key pull secret
 
