@@ -45,8 +45,8 @@ spec:
               echo ""
               echo ""
               echo "------------------------------------------------------------------------------------------------------------------------------"
-              echo " 📥 Clone Repo $INSTALL_REPO"
-              git clone $INSTALL_REPO
+              echo " 📥 Clone Repo https://github.com/niklaushirt/cp4waiops-deployer.git"
+              git clone https://github.com/niklaushirt/cp4waiops-deployer.git
               cd cp4waiops-deployer
               echo ""
               echo ""
@@ -62,7 +62,7 @@ spec:
 
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 🚀 Starting Installation"
-              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=$CONFIG" -e CP_ENTITLEMENT_KEY=$ENTITLED_REGISTRY_KEY
+              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=./configs/cp4waiops-roks-aimanager-practicum.yaml"
               echo ""
               echo ""
               echo "*****************************************************************************************************************************"
@@ -74,11 +74,6 @@ spec:
                 sleep 1000
               done
 
-          env:
-          - name: INSTALL_REPO
-            value : "https://github.com/niklaushirt/cp4waiops-deployer.git"
-          - name: CONFIG
-            value : "./configs/cp4waiops-roks-aimanager-practicum.yaml"
       restartPolicy: Never
   backoffLimit: 4
 EOF

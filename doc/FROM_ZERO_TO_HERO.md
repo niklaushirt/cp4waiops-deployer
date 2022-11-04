@@ -362,7 +362,7 @@ Verify that the Operator is running.
    spec:
      imagePullSecret: ibm-entitlement-key
      license:
-       accept: <license_acceptance>
+       accept: true
      pakModules:
      - name: aiopsFoundation
        enabled: true
@@ -390,7 +390,6 @@ Wait **up to 45 minutes** for the installation to complete.
 ❗ This takes some time depending on what region of ROKS you have chosen.
 Wait **up to 45 minutes** for the installation to complete.
 
-You can follow along the process.
 
 #### 3.2.5.1 Check with the Command Line
 

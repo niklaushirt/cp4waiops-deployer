@@ -1,0 +1,516 @@
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+
+   __________  __ ___       _____    ________            
+  / ____/ __ \/ // / |     / /   |  /  _/ __ \____  _____
+ / /   / /_/ / // /| | /| / / /| |  / // / / / __ \/ ___/
+/ /___/ ____/__  __/ |/ |/ / ___ |_/ // /_/ / /_/ (__  ) 
+\____/_/      /_/  |__/|__/_/  |_/___/\____/ .___/____/  
+                                   /_/            
+
+  
+  🚀 CloudPak for Watson AIOps - Logins and URLs for Prakticum
+  
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+  
+  
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+🚀 1. CloudPak for Watson AIOps
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🐣 1.1 Demo UI
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+            🐣 Demo UI:
+    
+                🌏 URL:           https://cp4waiops-demo-ui-cp4waiops-demo-ui.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+                🔐 Token:         P4ssw0rd!
+
+
+    
+    
+    
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 1.2 AI Manager
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+      📥 AI Manager
+
+                🌏 URL:           https://cpd-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+                🧑 User:          demo
+                🔐 Password:      P4ssw0rd!
+
+                🧑 User:          admin
+                🔐 Password:      HrlORW90Pp8caJVCPsSZvvs5hfz2yUZz
+     
+     
+     
+      📥 Administration hub / Common Services
+
+                🌏 URL:           https://cp-console.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+                🧑 User:          demo
+                🔐 Password:      P4ssw0rd!
+
+                🧑 User:          admin
+                🔐 Password:      HrlORW90Pp8caJVCPsSZvvs5hfz2yUZz
+    
+    
+    
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 1.3 Demo Apps - Details
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+            📥 RobotShop:
+    
+                🌏 APP URL:       https://robotshop-robot-shop.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+  
+    
+    
+    
+    
+    
+    
+    
+    
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+🚀 2. AI Manager Configuration Information
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+    
+    
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 2.1 Configure LDAP - Access Control 
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+            📥 Identity providers:
+
+                🌏 Connection name:      LDAP
+                🛠️  Server type:          Custom
+                
+                🧒 Base DN:              dc=ibm,dc=com
+                🧒 Bind DN:              cn=admin,dc=ibm,dc=com
+                🔐 Bind DN password:     P4ssw0rd! 
+                 
+                🌏 LDAP server URL:      ldap://openldap.openldap:389
+                 
+                🛠️  Group filter:         (&(cn=%v)(objectclass=groupOfUniqueNames))
+                🛠️  User filter:          (&(uid=%v)(objectclass=Person))
+                🛠️  Group ID map:         *:cn
+                🛠️  User ID map:          *:uid
+                🛠️  Group member ID map:  groupOfUniqueNames:uniqueMember
+    
+    
+            📥 OPENLDAP ADMIN LOGIN:
+    
+                🌏 URL:           https://admin-openldap.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+                🧑 User:          cn=admin,dc=ibm,dc=com
+                🔐 Password:      P4ssw0rd!
+
+
+
+
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 2.2 Configure ELK 
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+      
+            📥 ELK:
+      
+               🌏 ELK service URL             : https://elasticsearch-openshift-logging.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/app*
+               🔐 Authentication type         : Token
+               🔐 Token                       : eyJhbGciOiJSUzI1NiIsImtpZCI6IndRc3BCRUM2dzhrVFFWaGlKSEwzQlNEa1c1bGNtV2pfTjdhUDRyS2RpTVUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJvcGVuc2hpZnQtbG9nZ2luZyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJjbHVzdGVyLWxvZ2dpbmctb3BlcmF0b3ItdG9rZW4tOWc4cjciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiY2x1c3Rlci1sb2dnaW5nLW9wZXJhdG9yIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiYWZjOWYwODgtMTUwNi00MGM0LWI0ZGYtZGQ2Y2U3MGJlNTY2Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Om9wZW5zaGlmdC1sb2dnaW5nOmNsdXN0ZXItbG9nZ2luZy1vcGVyYXRvciJ9.NqynGmD50xU4gFBt54bplms9pclrTgaCnx3wuRcfWjIAQeoi4InzEgaRtJ0N8-AtIOW58wnmVpvKoNGocMXzEUDhlLDLNcZDM1jskA6tpRWjZIteWv5XH76IzZRzxy419L6ZMQjDtWyaonHvJUrRLOu0E7EKHjh1gd9cBGs6VYba_hdmfUeIlKBuZuX_uwvH3vU5dS-ttrNgQ_n_cyl1Bi9ygsuwDll67Vozo7LII9fOVLA26PL23JW2wi087ghLaJYk5hrGcuXrxze_MrFT0cv-ntPPlEKu_FHWwMRxfonzw1eiD6fRI8cYKyhjH40c9XMTA40iqVlTQ6itjrnxjg
+      
+               🌏 Kibana URL                  : https://kibana-openshift-logging.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+               🚪 Kibana port                 : 443
+               🗺️  Mapping                     : 
+{ 
+  "codec": "elk",
+  "message_field": "message",
+  "log_entity_types": "kubernetes.container_image_id, kubernetes.host, kubernetes.pod_name, kubernetes.namespace_name",
+  "instance_id_field": "kubernetes.container_name",
+  "rolling_time": 10,
+  "timestamp_field": "@timestamp"
+}
+  
+
+
+
+               🗺️  Filter                     : 
+
+      {
+        "query": {
+          "bool": {
+               "must": {
+                  "term" : { "kubernetes.namespace_name" : "robot-shop" }
+               }
+              }
+          }
+      }
+  
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 2.3 Configure Runbooks - Ansible Automation Controller 
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+            📥 Add connection :
+
+                🌏 URL for REST API:      https://awx-awx.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+                🔐 Authentication type:   User ID/Password
+                🧑 User:                  admin
+                🔐 Password:              4ym9fLo89qyIuwBXR313lywtCXfSp9Af
+
+
+
+
+
+
+
+
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 2.4 Configure Runbooks - Runbook Parameters 
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+            📥 Add connection :
+
+                🌏 Action:      CP4WAIOPS Mitigate Robotshop Ratings Outage
+                🔐 Mapping:   Fixed Value
+                     Value:                  
+                        {
+                         "my_k8s_apiurl": "https://c108-e.eu-gb.containers.cloud.ibm.com:30346",
+                           "my_k8s_apikey": "eyJhbGciOiJSUzI1NiIsImtpZCI6IndRc3BCRUM2dzhrVFFWaGlKSEwzQlNEa1c1bGNtV2pfTjdhUDRyS2RpTVUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlbW8tYWRtaW4tdG9rZW4tMmZ0engiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVtby1hZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjUyMDFmMzMzLWE3MjYtNDY4OC1iOWY1LTgzM2I1MzRkMzFlYSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlbW8tYWRtaW4ifQ.Jy61xWeM5pI2j7kWEua0b0FAiELJfwtyhVGSOG_FbQkCKlIdYaQ55VuJlixRVp81tUGLp78KAllh4AMD6kimSFZpKTDH-hAlc3MGmKN8aqtvDw3EJkEBb5VKkFNGfjIsN76gsaI4jKM_2DkZ00srug4MBO8IyAfJp3OmkJzKT8DUAGLHVw4OiOKhCugwwikiF5adssNQWFNNxl7AAev79KgWgV-6zn9MuTx2vKtixj-YmJISBSk49oNbwcL-R7jrKMM3-CcDIZWXLh7tXo_DGuZtY3OqVXm46BTGQxdFvOWQyipurXdxVxz_Mh4oHlvAijMpgWsb-r5V1MuYJaQJRg"
+                        }
+
+
+
+
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 2.5 Configure Applications - RobotShop Kubernetes Observer 
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+
+                🛠️ Name:                          RobotShop
+                🛠️ Data center:                   robot-shop
+                🛠️ Kubernetes master IP address:  172.21.0.1
+                🛠️ Kubernetes API port:           443
+                🛠️ Token:                         eyJhbGciOiJSUzI1NiIsImtpZCI6IndRc3BCRUM2dzhrVFFWaGlKSEwzQlNEa1c1bGNtV2pfTjdhUDRyS2RpTVUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlbW8tYWRtaW4tdG9rZW4tMmZ0engiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVtby1hZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjUyMDFmMzMzLWE3MjYtNDY4OC1iOWY1LTgzM2I1MzRkMzFlYSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlbW8tYWRtaW4ifQ.Jy61xWeM5pI2j7kWEua0b0FAiELJfwtyhVGSOG_FbQkCKlIdYaQ55VuJlixRVp81tUGLp78KAllh4AMD6kimSFZpKTDH-hAlc3MGmKN8aqtvDw3EJkEBb5VKkFNGfjIsN76gsaI4jKM_2DkZ00srug4MBO8IyAfJp3OmkJzKT8DUAGLHVw4OiOKhCugwwikiF5adssNQWFNNxl7AAev79KgWgV-6zn9MuTx2vKtixj-YmJISBSk49oNbwcL-R7jrKMM3-CcDIZWXLh7tXo_DGuZtY3OqVXm46BTGQxdFvOWQyipurXdxVxz_Mh4oHlvAijMpgWsb-r5V1MuYJaQJRg
+                🛠️ Trust all HTTPS certificates:  true
+                🛠️ Correlate analytics events:    true
+                🛠️ Namespaces to observe:         robot-shop
+
+
+
+
+    
+    
+    
+    
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+🚀 Openshift Connection Details
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+
+  📥 Openshift Console
+
+            🌏 URL:               https://console-openshift-console.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+ 
+ 
+ 
+  📥 Openshift Command Line
+
+            🌏 URL:               https://c108-e.eu-gb.containers.cloud.ibm.com:30346
+            🔐 Token:             eyJhbGciOiJSUzI1NiIsImtpZCI6IndRc3BCRUM2dzhrVFFWaGlKSEwzQlNEa1c1bGNtV2pfTjdhUDRyS2RpTVUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlbW8tYWRtaW4tdG9rZW4tMmZ0engiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVtby1hZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjUyMDFmMzMzLWE3MjYtNDY4OC1iOWY1LTgzM2I1MzRkMzFlYSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlbW8tYWRtaW4ifQ.Jy61xWeM5pI2j7kWEua0b0FAiELJfwtyhVGSOG_FbQkCKlIdYaQ55VuJlixRVp81tUGLp78KAllh4AMD6kimSFZpKTDH-hAlc3MGmKN8aqtvDw3EJkEBb5VKkFNGfjIsN76gsaI4jKM_2DkZ00srug4MBO8IyAfJp3OmkJzKT8DUAGLHVw4OiOKhCugwwikiF5adssNQWFNNxl7AAev79KgWgV-6zn9MuTx2vKtixj-YmJISBSk49oNbwcL-R7jrKMM3-CcDIZWXLh7tXo_DGuZtY3OqVXm46BTGQxdFvOWQyipurXdxVxz_Mh4oHlvAijMpgWsb-r5V1MuYJaQJRg
+
+
+            🧑 Login:   oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IndRc3BCRUM2dzhrVFFWaGlKSEwzQlNEa1c1bGNtV2pfTjdhUDRyS2RpTVUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlbW8tYWRtaW4tdG9rZW4tMmZ0engiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVtby1hZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjUyMDFmMzMzLWE3MjYtNDY4OC1iOWY1LTgzM2I1MzRkMzFlYSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlbW8tYWRtaW4ifQ.Jy61xWeM5pI2j7kWEua0b0FAiELJfwtyhVGSOG_FbQkCKlIdYaQ55VuJlixRVp81tUGLp78KAllh4AMD6kimSFZpKTDH-hAlc3MGmKN8aqtvDw3EJkEBb5VKkFNGfjIsN76gsaI4jKM_2DkZ00srug4MBO8IyAfJp3OmkJzKT8DUAGLHVw4OiOKhCugwwikiF5adssNQWFNNxl7AAev79KgWgV-6zn9MuTx2vKtixj-YmJISBSk49oNbwcL-R7jrKMM3-CcDIZWXLh7tXo_DGuZtY3OqVXm46BTGQxdFvOWQyipurXdxVxz_Mh4oHlvAijMpgWsb-r5V1MuYJaQJRg --server=https://c108-e.eu-gb.containers.cloud.ibm.com:30346
+
+
+
+
+
+
+
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+🚀 Additional Components
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+    
+    
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 AWX 
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+            📥 AWX :
+
+                🌏 URL:           https://awx-awx.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+                🧑 User:          admin
+                🔐 Password:      4ym9fLo89qyIuwBXR313lywtCXfSp9Af
+    
+    
+    
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 ELK 
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+      
+            📥 ELK:
+      
+               🌏 ELK service URL             : https://elasticsearch-openshift-logging.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/app*
+               🌏 Kibana URL                  : https://kibana-openshift-logging.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+               🔐 Authentication type         : Token
+               🔐 Token                       : eyJhbGciOiJSUzI1NiIsImtpZCI6IndRc3BCRUM2dzhrVFFWaGlKSEwzQlNEa1c1bGNtV2pfTjdhUDRyS2RpTVUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJvcGVuc2hpZnQtbG9nZ2luZyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJjbHVzdGVyLWxvZ2dpbmctb3BlcmF0b3ItdG9rZW4tOWc4cjciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiY2x1c3Rlci1sb2dnaW5nLW9wZXJhdG9yIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiYWZjOWYwODgtMTUwNi00MGM0LWI0ZGYtZGQ2Y2U3MGJlNTY2Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Om9wZW5zaGlmdC1sb2dnaW5nOmNsdXN0ZXItbG9nZ2luZy1vcGVyYXRvciJ9.NqynGmD50xU4gFBt54bplms9pclrTgaCnx3wuRcfWjIAQeoi4InzEgaRtJ0N8-AtIOW58wnmVpvKoNGocMXzEUDhlLDLNcZDM1jskA6tpRWjZIteWv5XH76IzZRzxy419L6ZMQjDtWyaonHvJUrRLOu0E7EKHjh1gd9cBGs6VYba_hdmfUeIlKBuZuX_uwvH3vU5dS-ttrNgQ_n_cyl1Bi9ygsuwDll67Vozo7LII9fOVLA26PL23JW2wi087ghLaJYk5hrGcuXrxze_MrFT0cv-ntPPlEKu_FHWwMRxfonzw1eiD6fRI8cYKyhjH40c9XMTA40iqVlTQ6itjrnxjg
+      
+               🗺️  Filter                     : 
+
+      {
+        "query": {
+          "bool": {
+               "must": {
+                  "term" : { "kubernetes.namespace_name" : "robot-shop" }
+               }
+              }
+          }
+      }
+
+               🚪 Kibana port                 : 443
+
+               🗺️  Mapping                     : 
+{ 
+  "codec": "elk",
+  "message_field": "message",
+  "log_entity_types": "kubernetes.container_image_id, kubernetes.host, kubernetes.pod_name, kubernetes.namespace_name",
+  "instance_id_field": "kubernetes.container_name",
+  "rolling_time": 10,
+  "timestamp_field": "@timestamp"
+}
+  
+
+
+
+  
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+🚀 CloudPak for Watson AIOps - Technical Links
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 CP4WAIOPS Vault
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+            📥 Vault:
+    
+                🌏 URL:           https://ibm-vault-deploy-vault-route-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+                🔐 Token:         hvs.S1DJRct7q0hxqC3AUKEpEEYz
+    
+    
+    
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 Flink Task Manager - Ingestion
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+                🌏 APP URL:       https://job-manager-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+    
+                In Chrome: if you get blocked just type thisisunsafe and it will continue (you don't get any visual feedback when typing!)
+    
+    
+    
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 Flink Task Manager - Policy Framework
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+                🌏 APP URL:       https://job-manager-policy-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+    
+                In Chrome: if you get blocked just type thisisunsafe and it will continue (you don't get any visual feedback when typing!)
+    
+    
+    
+    
+
+
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+🚀 CloudPak for Watson AIOps - DEMO Connections
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 Service Now 
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+            📥 Login SNOW Dev Portal (if you have to wake the dev instance):
+    
+                🌏 URL:                   https://developer.servicenow.com/dev.do
+                🧑 User:                  demo@mydemo.center
+                🔐 Password:              P4ssw0rd!IBM
+
+
+            📥  Login SNOW Instance::
+
+                🌏 URL:                   https://dev56805.service-now.com
+                🧑 User ID:               abraham.lincoln             (if you followed the demo install instructions)
+                🔐 Password:              P4ssw0rd!                   (if you followed the demo install instructions)
+                🔐 Encrypted Password:    g4W3L7/eFsUjV0eMncBkbg==    (if you followed the demo install instructions)
+
+
+            📥 INTEGRATION SNOW-->CP4WAIOPS:
+    
+                🌏 URL:                   https://cpd-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud    (URL for IBM Watson AIOps connection)
+                📛 Instance Name:         aimanager
+                🧑 User:                  admin
+                🔐 Password:              HrlORW90Pp8caJVCPsSZvvs5hfz2yUZz
+
+
+
+
+
+
+
+
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+🚀 CloudPak for Watson AIOps - APIs
+***************************************************************************************************************************************************
+***************************************************************************************************************************************************
+
+        -----------------------------------------------------------------------------------------------------------------------------------------------
+        -----------------------------------------------------------------------------------------------------------------------------------------------
+        🚀 AI MANAGER APIs 
+        -----------------------------------------------------------------------------------------------------------------------------------------------
+        -----------------------------------------------------------------------------------------------------------------------------------------------
+                🌏 Topology Merge:           https://topology-merge-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+    
+                🌏 Topology REST:            https://topology-rest-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+    
+                🌏 Topology File:            https://topology-file-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+    
+                🌏 Topology Manage:          https://topology-manage-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+                🌏 Topology SWAGGER:         https://topology-manage-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/1.0/topology/swagger
+    
+                🌏 Datalayer API:            https://datalayer-api-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+                🌏 Datalayer SWAGGER:        https://datalayer-api-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/irdatalayer.aiops.io/docs/active/v1
+    
+                🌏 AIO Controller API:       https://aimanager-aio-controller-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/
+                🌏 AIO Controller SWAGGER:   https://aimanager-aio-controller-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/openapi/ui/#/
+
+
+
+                🌏 METRICS:                  https://cpd-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/alerts/anomaly/details?metric=MemoryUsagePercent&group=MemoryUsage&resource=mysql-predictive&policyId=1ffe8c50-e103-11ec-984f-17ba5df49c3f&isAiopsPolicy=true&viewname=Example_IBM_RelatedEvents&viewtype=3
+
+
+
+
+
+        -----------------------------------------------------------------------------------------------------------------------------------------------
+        -----------------------------------------------------------------------------------------------------------------------------------------------
+        🚀 AI Platform API - GRAPHQL Playground 
+        -----------------------------------------------------------------------------------------------------------------------------------------------
+        -----------------------------------------------------------------------------------------------------------------------------------------------
+        
+                📥 Playground:
+        
+                    🌏 URL:                   https://ai-platform-api-cp4waiops.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud/graphql
+    
+    
+        
+                    🔐 HTTP HEADERS
+                            {
+                            "authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlRHWjg0NGRSQTRKcFBOQmgtOUlCTE9ZTzNIaE1GNGtNV01BMkFzNUNqYkkifQ.eyJ1c2VybmFtZSI6ImFkbWluIiwic3ViIjoiYWRtaW4iLCJpc3MiOiJLTk9YU1NPIiwiYXVkIjoiRFNYIiwicm9sZSI6IkFkbWluIiwicGVybWlzc2lvbnMiOlsiYWRtaW5pc3RyYXRvciIsImNhbl9wcm92aXNpb24iLCJzZWN1cmVfdHVubmVsX25ldHdvcmsiLCJzZWN1cmVfdHVubmVsX3BvcnRfZm9yd2FyZGluZyIsInNlY3VyZV90dW5uZWxfY29ubmVjdG9yX2luc3RhbGwiLCJzZWN1cmVfdHVubmVsX2NyZWF0ZV90ZW1wbGF0ZSIsInNlY3VyZV90dW5uZWxfcmVuZXdfY2VydCIsInNlY3VyZV90dW5uZWxfdmlld19hdWRpdF9sb2ciLCJ3YWlvcHNfbWFuYWdlX2ludGVncmF0aW9ucyIsIndhaW9wc192aWV3X2ludGVncmF0aW9ucyIsIndhaW9wc192aWV3X3RvcG9sb2dpZXMiLCJ3YWlvcHNfbWFuYWdlX3RvcG9sb2d5X3RlbXBsYXRlcyIsIndhaW9wc19tYW5hZ2VfdG9wb2xvZ3lfY29tbWVudHMiLCJ3YWlvcHNfbWFuYWdlX2FwcGxpY2F0aW9ucyIsIndhaW9wc19tYW5hZ2VfYnVzaW5lc3NfY29udGV4dCIsIndhaW9wc19tYW5hZ2VfdG9wb2xvZ3lfdG9vbHMiLCJ3YWlvcHNfbWFuYWdlX3RvcG9sb2d5X3ByZXNlbnRhdGlvbiIsIndhaW9wc19tYW5hZ2VfdG9wb2xvZ3lfcnVsZXMiLCJ3YWlvcHNfbWFuYWdlX2FkdmFuY2VkX3RvcG9sb2d5X3NldHRpbmdzIiwid2Fpb3BzX3ZpZXdfYWltb2RlbHNfc3RhdHVzIiwid2Fpb3BzX21hbmFnZV9haW1vZGVscyIsIndhaW9wc192aWV3X29wZXJhdGlvbmFsX3BvbGljaWVzIiwid2Fpb3BzX21hbmFnZV9ydW5ib29rcyIsIndhaW9wc191c2VfcnVuYm9va3MiLCJ3YWlvcHNfYXV0aG9yX3J1bmJvb2tzIiwid2Fpb3BzX2FkbWluaXN0ZXJfcnVuYm9va3MiLCJ3YWlvcHNfdmlld19vcGVyYXRpb25hbF9kYXRhIiwid2Fpb3BzX2VkaXRfb3BlcmF0aW9uYWxfcG9saWNpZXMiLCJ3YWlvcHNfZGVsZXRlX29wZXJhdGlvbmFsX3BvbGljaWVzIiwid2Fpb3BzX3VzZV9pbnNpZ2h0c19kYXNoYm9hcmQiXSwiZ3JvdXBzIjpbMTAwMDBdLCJ1aWQiOiIxMDAwMzMwOTk5IiwiYXV0aGVudGljYXRvciI6ImRlZmF1bHQiLCJkaXNwbGF5X25hbWUiOiJhZG1pbiIsImNhbl9yZWZyZXNoX3VudGlsIjoxNjY3NTQwMzY1NTU0LCJjc3JmX3Rva2VuIjoiZmNmZDhmYjE2NTJjYjFhZjQ1OTM0NDhjY2JjMTUwMjAiLCJzZXNzaW9uX2lkIjoiODI2Njg5YTItZGY0Ny00NzU2LTllMDEtYzQ4NDQzZDc2YjVmIiwiaWF0IjoxNjY3NDk3MjAxLCJleHAiOjE2Njc1NDA0MDF9.V6wTuzLzmAxiocxyHrjiWAiGJdqGS8YNiFM6_LryRcRk-l1li6Vamxr11r-lLxoZrrkCmGEX78MA2qEn60uOp-qukUeI_L74wT4h9MvmfC6zXy5-Nky79-DbObLIN64F2BfnNrDN_-KkS_oAp8Xp3TTIRMxQMjtEQx1o0_AgNBzhAc6n23XdfSQ3DQgXJlH4zpLAZlnMDFHDh8pbGffAsonaBMPEqNIecU9VYI4Ok1bge5qstlveNjWhF5F_gMjK2lx_uFpM2r-lwIiHAUbP3nAwN7VB4CH8uaAKj6VYv6M2pn6KodoTvPqxBA3R_mt8b5WWsLEX3IklfKrEQtPaOw"
+                            }
+        
+        
+        
+                    📥 Example Payload
+                            query {
+                                getTrainingDefinitions {
+                                  definitionName
+                                  algorithmName
+                                  version
+                                  deployedVersion
+                                  description
+                                  createdBy
+                                  modelDeploymentDate
+                                  promoteOption
+                                  trainingSchedule {
+                                    frequency
+                                    repeat
+                                    timeRangeValidStart
+                                    timeRangeValidEnd
+                                    noEndDate
+                                  }
+                                }
+                              }
+        
+        
+        
+                    🔐 ZEN Token:             eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlRHWjg0NGRSQTRKcFBOQmgtOUlCTE9ZTzNIaE1GNGtNV01BMkFzNUNqYkkifQ.eyJ1c2VybmFtZSI6ImFkbWluIiwic3ViIjoiYWRtaW4iLCJpc3MiOiJLTk9YU1NPIiwiYXVkIjoiRFNYIiwicm9sZSI6IkFkbWluIiwicGVybWlzc2lvbnMiOlsiYWRtaW5pc3RyYXRvciIsImNhbl9wcm92aXNpb24iLCJzZWN1cmVfdHVubmVsX25ldHdvcmsiLCJzZWN1cmVfdHVubmVsX3BvcnRfZm9yd2FyZGluZyIsInNlY3VyZV90dW5uZWxfY29ubmVjdG9yX2luc3RhbGwiLCJzZWN1cmVfdHVubmVsX2NyZWF0ZV90ZW1wbGF0ZSIsInNlY3VyZV90dW5uZWxfcmVuZXdfY2VydCIsInNlY3VyZV90dW5uZWxfdmlld19hdWRpdF9sb2ciLCJ3YWlvcHNfbWFuYWdlX2ludGVncmF0aW9ucyIsIndhaW9wc192aWV3X2ludGVncmF0aW9ucyIsIndhaW9wc192aWV3X3RvcG9sb2dpZXMiLCJ3YWlvcHNfbWFuYWdlX3RvcG9sb2d5X3RlbXBsYXRlcyIsIndhaW9wc19tYW5hZ2VfdG9wb2xvZ3lfY29tbWVudHMiLCJ3YWlvcHNfbWFuYWdlX2FwcGxpY2F0aW9ucyIsIndhaW9wc19tYW5hZ2VfYnVzaW5lc3NfY29udGV4dCIsIndhaW9wc19tYW5hZ2VfdG9wb2xvZ3lfdG9vbHMiLCJ3YWlvcHNfbWFuYWdlX3RvcG9sb2d5X3ByZXNlbnRhdGlvbiIsIndhaW9wc19tYW5hZ2VfdG9wb2xvZ3lfcnVsZXMiLCJ3YWlvcHNfbWFuYWdlX2FkdmFuY2VkX3RvcG9sb2d5X3NldHRpbmdzIiwid2Fpb3BzX3ZpZXdfYWltb2RlbHNfc3RhdHVzIiwid2Fpb3BzX21hbmFnZV9haW1vZGVscyIsIndhaW9wc192aWV3X29wZXJhdGlvbmFsX3BvbGljaWVzIiwid2Fpb3BzX21hbmFnZV9ydW5ib29rcyIsIndhaW9wc191c2VfcnVuYm9va3MiLCJ3YWlvcHNfYXV0aG9yX3J1bmJvb2tzIiwid2Fpb3BzX2FkbWluaXN0ZXJfcnVuYm9va3MiLCJ3YWlvcHNfdmlld19vcGVyYXRpb25hbF9kYXRhIiwid2Fpb3BzX2VkaXRfb3BlcmF0aW9uYWxfcG9saWNpZXMiLCJ3YWlvcHNfZGVsZXRlX29wZXJhdGlvbmFsX3BvbGljaWVzIiwid2Fpb3BzX3VzZV9pbnNpZ2h0c19kYXNoYm9hcmQiXSwiZ3JvdXBzIjpbMTAwMDBdLCJ1aWQiOiIxMDAwMzMwOTk5IiwiYXV0aGVudGljYXRvciI6ImRlZmF1bHQiLCJkaXNwbGF5X25hbWUiOiJhZG1pbiIsImNhbl9yZWZyZXNoX3VudGlsIjoxNjY3NTQwMzY1NTU0LCJjc3JmX3Rva2VuIjoiZmNmZDhmYjE2NTJjYjFhZjQ1OTM0NDhjY2JjMTUwMjAiLCJzZXNzaW9uX2lkIjoiODI2Njg5YTItZGY0Ny00NzU2LTllMDEtYzQ4NDQzZDc2YjVmIiwiaWF0IjoxNjY3NDk3MjAxLCJleHAiOjE2Njc1NDA0MDF9.V6wTuzLzmAxiocxyHrjiWAiGJdqGS8YNiFM6_LryRcRk-l1li6Vamxr11r-lLxoZrrkCmGEX78MA2qEn60uOp-qukUeI_L74wT4h9MvmfC6zXy5-Nky79-DbObLIN64F2BfnNrDN_-KkS_oAp8Xp3TTIRMxQMjtEQx1o0_AgNBzhAc6n23XdfSQ3DQgXJlH4zpLAZlnMDFHDh8pbGffAsonaBMPEqNIecU9VYI4Ok1bge5qstlveNjWhF5F_gMjK2lx_uFpM2r-lwIiHAUbP3nAwN7VB4CH8uaAKj6VYv6M2pn6KodoTvPqxBA3R_mt8b5WWsLEX3IklfKrEQtPaOw
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    🚀 WAIOPS Licensing 
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+            📥 Login License Portal:
+    
+                🌏 URL:                   https://ibm-licensing-service-instance-ibm-common-services.itzroks-270003bu3k-zfcikb-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-gb.containers.appdomain.cloud
+                🔐 Password:              9Zt9m95EljJ8PRG3jRYraqwE
+
