@@ -1,0 +1,6 @@
+registry,image_name,tag,digest,mtype,os,arch,variant,insecure,digest_source,image_type,groups
+icr.io,cpopen/ibm-aiops-orchestrator-bundle,v3.5.1-20221017.2202-be1f0da08,sha256:be1f0da08622173b632ff378744c13e0227f11b502a261cd7789214aa827baa3,IMAGE,linux,amd64,"",0,CASE,olm-bundle,""
+icr.io,cpopen/ibm-cp-waiops-case-bundle-catalog,v3.5.1-20221017.2202-558b92e35,sha256:558b92e35d51573ae738c278cbca96e4e3932b4e2663015a619f56bcc6db37cd,LIST,"","","",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-cp-waiops-case-bundle-catalog,v3.5.1-20221017.2202-558b92e35-linux.amd64,sha256:0eeb4f10c66ce78c2170c2428de83f9c1ff7ca7ac6d3383e56103ce5fbaa3dca,IMAGE,linux,amd64,"",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-aiops-orchestrator,v3.5.1-20221017.2202-37e1bf1a6,sha256:37e1bf1a6f03f9242d6176fa1388c19ed0cd1d4cc15a1e57e0a37c48e28a9bd8,LIST,"","","",0,CASE,"",""
+icr.io,cpopen/ibm-aiops-orchestrator,v3.5.1-20221017.2202-37e1bf1a6-linux.amd64,sha256:6bdde594c649659f1e594cfb3789883d0e8796dd2aac717fae7c57a31d1eea35,IMAGE,linux,amd64,"",0,CASE,"",""

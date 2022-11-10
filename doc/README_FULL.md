@@ -255,7 +255,7 @@ For a vanilla install you will see this:
 or run:
 
 ```bash
-ansible-playbook ./ansible/10_install-cp4waiops_ai_manager_only_with_demo_runbooks.yaml -e CP_ENTITLEMENT_KEY=<REGISTRY_TOKEN> 
+ansible-playbook ./ansible/10_install-cp4waiops_ai_manager_only_with_demo_runbooks.yaml -e cp_entitlement_key=<REGISTRY_TOKEN> 
 ```
 
 

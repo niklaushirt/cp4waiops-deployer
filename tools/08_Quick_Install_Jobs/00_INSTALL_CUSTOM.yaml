@@ -27,9 +27,8 @@
 #     - RobotShop Demo App
 #     - Demo Service Account 
 #     - AWX (Open Source Ansible Tower) with preloaded Playbooks
-#     - Disables ASM Service match rule 
 #     - Train Models
-#       - Create Training Definitions (TG, LAD, CR, SI. MET, Turn off RSA) 
+#       - Create Training Definitions (TG, LAD, CR, SI, MET. Turn off RSA) 
 #       - Create Training Data (LAD, SNOW, MET) 
 #       - Train Models (TG, LAD, CR, SI, MET) 
 #     - Topology
@@ -41,13 +40,6 @@
 #     - External Routes (Flink, Topology, ...)
 #     - Disables ASM Service match rule 
 #     - Create Policy Creation for Stories and Runbooks 
-#  - Event Manager
-#  - Demo Content
-#    - Topology
-#      - Create ASM merge rules
-#      - Load ASM merge Topology
-#      - Create AI Manager Application
-#  - Turbonomic
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -68,7 +60,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: cp4waiops-install-custom
+  name: waiops-easy-install-custom
   namespace: default
 spec:
   serviceAccountName: installer-default-default
@@ -96,6 +88,7 @@ spec:
               echo " ✅ STARTING: INSTALL AI Manager with Demo Content"
               echo "*****************************************************************************************************************************"
               echo ""
+              echo "  ⏳ INSTALLATION START TIMESTAMP: $(date)"
               echo ""
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 📥 Clone Repo $INSTALL_REPO"
@@ -111,9 +104,6 @@ spec:
               
               cat <<EOF > ./ansible/configs/cp4waiops-roks-custom.yaml
               cp4waiops:
-
-
-
               - project: cp4waiops
                 instances:
                 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -122,20 +112,38 @@ spec:
                 - name: cp4waiops-aimanager
                   kind: AIManager
                   install: true
-
-                  # ---------------------------------------------------------------------
                   # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
                   waiops_size: small
+                  # Custom Sizing File (waiops_size must be set to "custom")
+                  custom_size_file: none
                   # Name of the CP4WAIOPS instance
                   waiops_name: ibm-cp-watson-aiops
                   # Version of the catalog subscription
                   subscription_channel: v3.5
 
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # Storage Classes (see comment below)
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  storage_class_file: automatic
+                  storage_class_block: automatic
+
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # Install with CASE Files
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  case_install: false
+                  case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
+                  case_name: ibm-cp-waiops
+                  case_version: 1.4.1
+                  case_inventory_setup: cpwaiopsSetup
+                  
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # CP4WAIOPS Pull Registires
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  entitled_registry: cp.icr.io
+                  entitled_registry_user: cp
+                  catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
 
                   
-
-
-
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 # CP4WAIOPS AI Manager Demo Content
                 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -186,8 +194,7 @@ spec:
                   load_awx_playbooks: true
                   integrate_awx_aimanager: true
                   load_aimanager_runbooks: true
-    create_runbook_policy: true
-
+                  create_runbook_policy: true
 
                   # ---------------------------------------------------------------------
                   # Demo UI
@@ -259,6 +266,19 @@ spec:
                   starting_csv: noi.v1.6.0
                   noi_version: 1.6.6
 
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # Storage Classes (see comment below)
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  storage_class_file: automatic
+                  storage_class_block: automatic
+                  
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # CP4WAIOPS Pull Registires
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  entitled_registry: cp.icr.io
+                  entitled_registry_user: cp
+                  catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 # CP4WAIOPS Event Manager Demo Content
                 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -278,12 +298,21 @@ spec:
                   kind: InfrastructureManagement
                   install: false
                   # Version of the catalog subscription
-                  subscription_channel: v3.5
+                  subscription_channel: v3.3
+                  #subscription_channel: 3.4-dev
 
-
-
-
-
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # Storage Classes (see comment below)
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  storage_class_file: automatic
+                  storage_class_block: automatic
+                  
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # CP4WAIOPS Pull Registires
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  entitled_registry: cp.icr.io
+                  entitled_registry_user: cp
+                  catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
 
 
               - project: cp4waiops-addons
@@ -303,13 +332,6 @@ spec:
                   kind: Turbonomic
                   install: true
                   turbo_version: 8.6.6
-
-
-
-
-
-
-
 
 
 
@@ -369,19 +391,21 @@ spec:
 
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 🚀 Starting Installation"
-              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=$CONFIG" -e CP_ENTITLEMENT_KEY=$ENTITLED_REGISTRY_KEY
+              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=$CONFIG" -e cp_entitlement_key=$ENTITLED_REGISTRY_KEY
               echo ""
+              echo ""
+              echo "  ⏳ INSTALLATION END TIMESTAMP: $(date)"
               echo ""
               echo "*****************************************************************************************************************************"
               echo " ✅ DONE"
               echo "*****************************************************************************************************************************"
 
 
-
               while true
               do
                 sleep 1000
               done
+
 
           env:
           - name: INSTALL_REPO

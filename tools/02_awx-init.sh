@@ -55,7 +55,7 @@ echo ""
 echo ""
 echo ""
 
-echo "        🔐 CP_ENTITLEMENT_KEY:     $CP_ENTITLEMENT_KEY"
+echo "        🔐 cp_entitlement_key:     $cp_entitlement_key"
 
 
 echo ""
@@ -130,7 +130,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/inventories/" -u "$
     "project": '$PROJECT_ID',
     "kind": "",
     "host_filter": null,
-    "variables": "---\nOCP_LOGIN: false\nOCP_URL: '$OCP_URL'\nOCP_TOKEN: '$OCP_TOKEN'\n#CP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "variables": "---\nOCP_LOGIN: false\nOCP_URL: '$OCP_URL'\nOCP_TOKEN: '$OCP_TOKEN'\n#cp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 
@@ -176,7 +176,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "scm_branch": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-all-33.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-all-33.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 if [[ $result =~ " already exists" ]];
@@ -203,7 +203,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "extra_vars": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-33.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-33.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 if [[ $result =~ " already exists" ]];
@@ -232,7 +232,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "extra_vars": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-demo-content-33.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-demo-content-33.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 if [[ $result =~ " already exists" ]];
@@ -260,7 +260,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "extra_vars": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-eventmanager-33.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-eventmanager-33.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 if [[ $result =~ " already exists" ]];
@@ -288,7 +288,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "extra_vars": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-inframgt-33.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-inframgt-33.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 
@@ -317,7 +317,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "scm_branch": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-all-34.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-all-34.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 if [[ $result =~ " already exists" ]];
@@ -344,7 +344,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "extra_vars": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-34.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-34.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 if [[ $result =~ " already exists" ]];
@@ -373,7 +373,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "extra_vars": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-demo-content-34.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-aimanager-demo-content-34.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 if [[ $result =~ " already exists" ]];
@@ -401,7 +401,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "extra_vars": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-eventmanager-34.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-eventmanager-34.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 if [[ $result =~ " already exists" ]];
@@ -429,7 +429,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "extra_vars": "",
     "execution_environment": '$EXENV_ID',
     "ask_variables_on_launch": true,
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-inframgt-34.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'"
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-inframgt-34.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'"
 }
 ')
 
@@ -482,7 +482,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "project": '$PROJECT_ID',
     "playbook": "ansible/00_cp4waiops-install.yaml",
     "scm_branch": "",
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-turbonomic.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'",
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-turbonomic.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'",
     "execution_environment": '$EXENV_ID'
 }
 ')
@@ -509,7 +509,7 @@ export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u 
     "project": '$PROJECT_ID',
     "playbook": "ansible/00_cp4waiops-install.yaml",
     "scm_branch": "",
-    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-elk.yaml\"\nCP_ENTITLEMENT_KEY: '$CP_ENTITLEMENT_KEY'",
+    "extra_vars": "---\nconfig_file_path: \"./configs/cp4waiops-roks-elk.yaml\"\ncp_entitlement_key: '$cp_entitlement_key'",
     "execution_environment": '$EXENV_ID'
 }
 ')

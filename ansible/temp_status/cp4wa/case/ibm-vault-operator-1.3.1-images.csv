@@ -1,0 +1,12 @@
+registry,image_name,tag,digest,mtype,os,arch,variant,insecure,digest_source,image_type,groups
+cp.icr.io,cp/cp4waiops/ibm-consul,v3.5.1-20221017.2202-9cdef7cdb,sha256:9cdef7cdb448b2ab4185ee5cfdd2c0eae1ab0e712b719e02a1bf07e076c0bf9e,LIST,"","","",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/ibm-consul,v3.5.1-20221017.2202-9cdef7cdb-linux.amd64,sha256:c9ec556fbf8deb73d604175a1719c0e5cd35e0a12de1dc2438966e4722a19e72,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/ibm-vault,v3.5.1-20221017.2202-c7b1e5ee8,sha256:c7b1e5ee8f5172cd51cf51356f4a521222e96bebd26822d7539080c814ac54d3,LIST,"","","",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/ibm-vault,v3.5.1-20221017.2202-c7b1e5ee8-linux.amd64,sha256:13aefcfd3243f8b9bdd6d4bfa41f4386ab6c01c26bc92d94492499e3c921541e,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/ibm-vault-k8s,v3.5.1-20221017.2202-a845a388b,sha256:a845a388bc6d943e47e0bfcb2f7669cea870e413b343b93bb89d82f0ac9303db,LIST,"","","",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/ibm-vault-k8s,v3.5.1-20221017.2202-a845a388b-linux.amd64,sha256:a32c797fd7c211747c1c56a2be0cf449cb376b40e46b925b2158609a639a3e04,IMAGE,linux,amd64,"",0,CASE,"",""
+icr.io,cpopen/ibm-vault-operator-bundle,v3.5.1-20221017.2202-2dcdc52d2,sha256:2dcdc52d21205a95954016f4b9e73aba38e6e2cb2221921d4581f7227239bf27,IMAGE,linux,amd64,"",0,CASE,olm-bundle,""
+icr.io,cpopen/ibm-vault-operator-catalog,v3.5.1-20221017.2202-bf666e1b7,sha256:bf666e1b74648a17e2f5615635208b187a9271bfdbbe9773729faa6a1503d0b0,LIST,"","","",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-vault-operator-catalog,v3.5.1-20221017.2202-bf666e1b7-linux.amd64,sha256:fc46717935db6a3654f1474a78a30dfafdd66ce7898700be95e06394ff64c2f2,IMAGE,linux,amd64,"",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-vault-operator,v3.5.1-20221017.2202-80044e6b5,sha256:80044e6b5b568fc362bea05a8c7379e9b625b564415a2b9ef3a4724462295bcf,LIST,"","","",0,CASE,"",""
+icr.io,cpopen/ibm-vault-operator,v3.5.1-20221017.2202-80044e6b5-linux.amd64,sha256:f7aaea5b69d2fc42b2d4216fa6aae6466b2b1c43282845cffe8900e9bf8f661c,IMAGE,linux,amd64,"",0,CASE,"",""

@@ -1,0 +1,12 @@
+registry,image_name,tag,digest,mtype,os,arch,variant,insecure,digest_source,image_type,groups
+cp.icr.io,cp/cp4waiops/secure-tunnel,v3.5.1-20221017.2202-0812bc579,sha256:0812bc579361dfcd510477f7c1f27fb1d55856a27e0a3f4734e46aa0463c829c,LIST,"","","",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/secure-tunnel,v3.5.1-20221017.2202-0812bc579-linux.amd64,sha256:ae22ba058119e765f02a4f4aebdd8f4505d0fe947a510864cee9ea43cb2f5a58,IMAGE,linux,amd64,"",0,CASE,"",""
+icr.io,cpopen/cp4waiops/secure-tunnel-connector,v3.5.1-20221017.2202-8d9073dc2,sha256:8d9073dc2a9592f20aceea85d1384c09cf26f93b4b9f1e56833965378feac2a6,LIST,"","","",0,CASE,"",""
+icr.io,cpopen/cp4waiops/secure-tunnel-connector,v3.5.1-20221017.2202-8d9073dc2-linux.amd64,sha256:93b6bf4026be4f07070c88f3803cbc93db1cf202d8283cdbf5d573f3accef884,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/secure-tunnel-ui,v3.5.1-20221017.2202-c9093d076,sha256:c9093d076c2ceee076d38ad690d19ad9853a7e22351804720f081a4686718b58,LIST,"","","",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/secure-tunnel-ui,v3.5.1-20221017.2202-c9093d076-linux.amd64,sha256:6edbc1b590cbbc7c7c43117d9ebd78567dc85bfeb691c1add45bcd3eb8dabfd9,IMAGE,linux,amd64,"",0,CASE,"",""
+icr.io,cpopen/ibm-secure-tunnel-operator-bundle,v3.5.1-20221017.2202-ee50eac32,sha256:ee50eac3220f76b7a26fe6e811c99720ebd81ca9f43e68174c82227d67643341,IMAGE,linux,amd64,"",0,CASE,olm-bundle,""
+icr.io,cpopen/ibm-secure-tunnel-operator-catalog,v3.5.1-20221017.2202-affb267f9,sha256:affb267f905f9a4fddf2a8d3ab2f7534050a0de13f8086707a298da8146694ea,LIST,"","","",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-secure-tunnel-operator-catalog,v3.5.1-20221017.2202-affb267f9-linux.amd64,sha256:374dbba5b8940c94cb7dfc4147ba5351cd928dbb6b855ac1bf6e5422ea82c566,IMAGE,linux,amd64,"",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-secure-tunnel-operator,v3.5.1-20221017.2202-76c3e570f,sha256:76c3e570f5c99e1b8001f21f06351bc679810ce2f4c2d030804b053eaef0b046,LIST,"","","",0,CASE,"",""
+icr.io,cpopen/ibm-secure-tunnel-operator,v3.5.1-20221017.2202-76c3e570f-linux.amd64,sha256:139209a61d241c43304a5bc06120fb13d3dc24c3526ce0e79307ca84cecde56e,IMAGE,linux,amd64,"",0,CASE,"",""

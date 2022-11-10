@@ -108,7 +108,7 @@ then
     exit 1
 else
     echo " 🔐  Token                               ${Green}Provided${Purple}"
-    export CP_ENTITLEMENT_KEY=$INPUT_TOKEN
+    export cp_entitlement_key=$INPUT_TOKEN
 fi
 
 
@@ -325,14 +325,14 @@ openTheUrl () {
 
 checkToken () {
       #Get Pull Token
-      if [[ $CP_ENTITLEMENT_KEY == "" ]];
+      if [[ $cp_entitlement_key == "" ]];
       then
             echo ""
             echo ""
             echo "  Enter CP4WAIOPS Pull token: "
             read TOKEN
       else
-            TOKEN=$CP_ENTITLEMENT_KEY
+            TOKEN=$cp_entitlement_key
       fi
 
       echo ""
@@ -482,7 +482,7 @@ spec:
 
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 🚀 Starting Installation"
-              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=$CONFIG" -e CP_ENTITLEMENT_KEY=$CP_ENTITLEMENT_KEY
+              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=$CONFIG" -e cp_entitlement_key=$cp_entitlement_key
               echo ""
               echo ""
               echo "*****************************************************************************************************************************"
@@ -1301,7 +1301,7 @@ echo ""
 echo "*****************************************************************************************************************************"
 echo ""
 echo "${Purple}"
-if [[ $CP_ENTITLEMENT_KEY == "" ]];
+if [[ $cp_entitlement_key == "" ]];
 then
 echo "      🔐 Image Pull Token:           ${Red}Not Provided (will be asked during installation)${Purple}"
 else

@@ -73,9 +73,9 @@ runPlaybook () {
                   echo ""
                   echo "  Enter CP4WAIOPS Pull token: "
                   read TOKEN
-                  ansible-playbook $FILE -e CP_ENTITLEMENT_KEY=$TOKEN
+                  ansible-playbook $FILE -e cp_entitlement_key=$TOKEN
             else
-                  ansible-playbook ./ansible/00_cp4waiops-install.yaml -e config_file_path=$FILE  -e CP_ENTITLEMENT_KEY=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1Nzg0NzQzMjgsImp0aSI6IjRjYTM3ODkwMzExNjQxZDdiMDJhMjRmMGMxMWMwYmZhIn0.Z-rqfSLJA-R-ow__tI3RmLx4m9EH-abvdc53DYEkbYY
+                  ansible-playbook ./ansible/00_cp4waiops-install.yaml -e config_file_path=$FILE  -e cp_entitlement_key=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1Nzg0NzQzMjgsImp0aSI6IjRjYTM3ODkwMzExNjQxZDdiMDJhMjRmMGMxMWMwYmZhIn0.Z-rqfSLJA-R-ow__tI3RmLx4m9EH-abvdc53DYEkbYY
             fi
 
       else

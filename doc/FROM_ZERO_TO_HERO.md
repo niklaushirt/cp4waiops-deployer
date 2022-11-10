@@ -1034,7 +1034,7 @@ You have different options:
 	
 1. **Install from your PC** *with the token from 1.3.1*
 	```bash
-	ansible-playbook ./ansible/01_cp4waiops-aimanager-all.yaml -e CP_ENTITLEMENT_KEY=<REGISTRY_TOKEN> 
+	ansible-playbook ./ansible/01_cp4waiops-aimanager-all.yaml -e cp_entitlement_key=<REGISTRY_TOKEN> 
 	```
 	
 1. **Install with the Easy Installer** *with the token from 1.3.1*
@@ -1213,7 +1213,7 @@ You have different options:
 	
 1. **Install from your PC** *with the token from 1.3.1*
 	```bash
-	ansible-playbook ./ansible/04_cp4waiops-eventmanager-all.yaml -e CP_ENTITLEMENT_KEY=<REGISTRY_TOKEN> 
+	ansible-playbook ./ansible/04_cp4waiops-eventmanager-all.yaml -e cp_entitlement_key=<REGISTRY_TOKEN> 
 	```
 	
 1. **Install with the Easy Installer** *with the token from 1.3.1*

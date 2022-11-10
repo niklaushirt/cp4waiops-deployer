@@ -53,7 +53,7 @@ spec:
             value : "false"
           - name: SHOW_DEBUG
             value : "false"
-          - name: CP_ENTITLEMENT_KEY
+          - name: cp_entitlement_key
             value : "CHANGEME1234"
 
 

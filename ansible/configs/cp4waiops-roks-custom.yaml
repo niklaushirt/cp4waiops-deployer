@@ -16,7 +16,27 @@ cp4waiops:
     # Version of the catalog subscription
     subscription_channel: v3.5
 
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Storage Classes (see comment below)
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    storage_class_file: automatic
+    storage_class_block: automatic
 
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Install with CASE Files
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    case_install: false
+    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
+    case_name: ibm-cp-waiops
+    case_version: 1.4.1
+    case_inventory_setup: cpwaiopsSetup
+    
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # CP4WAIOPS Pull Registires
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    entitled_registry: cp.icr.io
+    entitled_registry_user: cp
+    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
 
     
 
@@ -128,23 +148,6 @@ cp4waiops:
     open_web_ui: true
 
 
-    # ---------------------------------------------------------------------
-    # MISC PARAMETERS (you should not modify those)
-    # Create external routes (needed to create demo content)
-    create_external_routes: true
-
-    # Create a valid ingress certificate (needed for Slack integration)
-    create_valid_ingress_certificate: true
-
-    # Create Policy for Story Creation
-    create_story_policy: true
-
-    # Create Kafka connection for Log inception (needed to create log anomalies in the demo environment)
-    create_log_connection: true
-
-    # Create Service Account
-    create_account: true
-
 
 
 
@@ -160,6 +163,28 @@ cp4waiops:
     subscription_channel: v1.10
     starting_csv: noi.v1.6.0
     noi_version: 1.6.6
+
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Storage Classes (see comment below)
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    storage_class_file: automatic
+    storage_class_block: automatic
+
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Install with CASE Files
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    case_install: false
+    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
+    case_name: ibm-cp-waiops
+    case_version: 1.4.1
+    case_inventory_setup: cpwaiopsSetup
+    
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # CP4WAIOPS Pull Registires
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    entitled_registry: cp.icr.io
+    entitled_registry_user: cp
+    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
 
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS Event Manager Demo Content
@@ -183,6 +208,27 @@ cp4waiops:
     subscription_channel: v3.3
     #subscription_channel: 3.4-dev
 
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Storage Classes (see comment below)
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    storage_class_file: automatic
+    storage_class_block: automatic
+
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Install with CASE Files
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    case_install: false
+    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
+    case_name: ibm-cp-waiops
+    case_version: 1.4.1
+    case_inventory_setup: cpwaiopsSetup
+    
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # CP4WAIOPS Pull Registires
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    entitled_registry: cp.icr.io
+    entitled_registry_user: cp
+    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
 
 
 
@@ -205,9 +251,10 @@ cp4waiops:
 
 
 
+
 # *************************************************************************************************************************************************
 # --------------------------------------------------------------------------------------------------------------------------------------
-# CP4WAIOPS GLOBAL CONFIGURATION
+# CP4WAIOPS USAGE
 # --------------------------------------------------------------------------------------------------------------------------------------
 # *************************************************************************************************************************************************
 
@@ -217,28 +264,18 @@ cp4waiops:
 # --------------------------------------------------------------------------------------------------------------------------------------
 
 # Override the Storage Class auto detection (not_configured, ibmc-file-gold-gid, rook-cephfs, nfs-client, ...)
-storage_class_file: automatic
+#storage_class_file: automatic
 #storage_class_file: ibmc-file-gold-gid               # ROKS
 #storage_class_file: ocs-storagecluster-cephfs        # ODF
 #storage_class_file: ibmc-vpc-block-10iops-tier       # IBM VPC
 #storage_class_file: rook-cephfs                      # FYRE
 #storage_class_file: nfs-client                       # TEC
-storage_class_block: automatic
+
+#storage_class_block: automatic
 #storage_class_block: ibmc-block-gold                 # ROKS
 #storage_class_block: ocs-storagecluster-ceph-rbd     # ODF
 #storage_class_block: ibmc-vpc-block-10iops-tier      # IBM VPC
 #storage_class_block: rook-cephfs                     # FYRE
 #storage_class_block: nfs-client                      # TEC
-
-
-
-# --------------------------------------------------------------------------------------------------------------------------------------
-# CP4WAIOPS Pull Registires
-# --------------------------------------------------------------------------------------------------------------------------------------
-entitled_registry: cp.icr.io
-entitled_registry_user: cp
-catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-
-
-#Version of your OCP Cluster (override by setting manually - 4.6, 4.7,...)
+by setting manually - 4.6, 4.7,...)
 ocp_major_version: automatic

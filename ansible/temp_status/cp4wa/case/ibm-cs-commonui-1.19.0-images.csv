@@ -1,0 +1,9 @@
+registry,image_name,tag,digest,mtype,os,arch,variant,insecure,digest_source,image_type,groups
+icr.io,cpopen/ibm-commonui-operator,1.19.0,sha256:6abab9fb9c7c6e3541f4346570cd293af6503e913d74ed7f116c0750edd1e2e2,LIST,"","","",0,CASE,"",""
+icr.io,cpopen/ibm-commonui-operator,1.19.0-amd64,sha256:bcd5dadf2df6cd070e1804c8a3d32488551389c57bdbcf27fe1ad9f23a215e3f,IMAGE,linux,amd64,"",0,CASE,"",""
+icr.io,cpopen/ibm-commonui-operator,1.19.0-ppc64le,sha256:1225cbd442f4ee73c53097a946d94edf3073b8eb2f993d91a337a079660efc6a,IMAGE,linux,ppc64le,"",0,CASE,"",""
+icr.io,cpopen/ibm-commonui-operator,1.19.0-s390x,sha256:87aa6d3dd91dbfbe3aadf3dc10377350373fbb9706804d7d7a05c03d2d94c0e6,IMAGE,linux,s390x,"",0,CASE,"",""
+icr.io,cpopen/cpfs/common-web-ui,1.19.0,sha256:5344589ee18717dde5c7436019d0a9a4d2e87c7137dfc622cc65d066157bf9ee,LIST,"","","",0,CASE,"",""
+icr.io,cpopen/cpfs/common-web-ui,1.19.0-amd64,sha256:1cd1b79bd87e6d1d1fd84e08b21bf01afce57d70b5c85c0a25a280a40573b016,IMAGE,linux,amd64,"",0,CASE,"",""
+icr.io,cpopen/cpfs/common-web-ui,1.19.0-ppc64le,sha256:c60cd253994f24ab4751e0a03802839fe0480c77ebd27a435c08ae8984799939,IMAGE,linux,ppc64le,"",0,CASE,"",""
+icr.io,cpopen/cpfs/common-web-ui,1.19.0-s390x,sha256:f0444480c015c74b2f16f3194593538fa2b2b639b3b3e1d45727fadd76fa4ea9,IMAGE,linux,s390x,"",0,CASE,"",""

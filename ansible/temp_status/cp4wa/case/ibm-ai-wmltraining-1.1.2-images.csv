@@ -1,0 +1,10 @@
+registry,image_name,tag,digest,mtype,os,arch,variant,insecure,digest_source,image_type,groups
+icr.io,cpopen/ibm-ai-wmltraining-operator-bundle,1.1.1-op_114,sha256:83784b79f9b948b022c0ac4a6732b787d40b650af37208ad4ae610c4175ea436,IMAGE,linux,amd64,"",0,CASE,olm-bundle,""
+icr.io,cpopen/ibm-ai-wmltraining-operator-catalog,1.1.1-20220629.125309,sha256:6bc72737c10c985de0f1325c50382fc2dd1ceb811fd0948bd1eef58f544d9188,IMAGE,linux,amd64,"",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-ai-wmltraining-operator,1.1.1-op_114,sha256:9b357f215d5216f21174ec3fb33ad672d4d75e7cb39f1686e61e773d1932806d,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/ai/ibm-ai-wmltraining-init-sidecar,0.3.0-dev_870,sha256:8512c9a09f40af38843bc5297fd9d83194d9b877e97716f6e9b104e15e0e75a4,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/ai/ibm-ai-wmltraining-sidecar,0.3.0-dev_870,sha256:c021278e6e7e1e75986b22d62f0b4cd49b5cf0f5e82a311d368d4d1d6b638a8b,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/ai/ibm-ai-wmltraining-proxy-controller,0.3.0-dev_870,sha256:9f7b725a93c45304e5241d875a77b0eda3ff51c45a93d5be8ee92efbd7d9f084,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/ai/ibm-ai-wmltraining-controller,0.3.0-dev_870,sha256:5c12d3cdbedca7f5636a50c6a95f9c32cff72aa806c77f509d15b5f49886a25f,IMAGE,linux,amd64,"",0,CASE,"",""
+icr.io,cpopen/ibm-ai-wmltraining-operator-bundle,1.0.0-op_49,sha256:17748928f47f06767590f1c5913e3dc5161c5dd62bea8cdfe9837878d541bc9b,IMAGE,linux,amd64,"",0,CASE,olm-bundle,""
+icr.io,cpopen/ibm-ai-wmltraining-operator-bundle,1.1.0-op_84,sha256:e31ee093e09c5e9e683fefd20df4fb37b507e4b2aaaa8239d2145cddd8144158,IMAGE,linux,amd64,"",0,CASE,olm-bundle,""

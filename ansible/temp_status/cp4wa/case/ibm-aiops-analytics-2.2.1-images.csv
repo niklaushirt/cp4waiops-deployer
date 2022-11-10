@@ -1,0 +1,12 @@
+registry,image_name,tag,digest,mtype,os,arch,variant,insecure,digest_source,image_type,groups
+cp.icr.io,cp/cp4waiops/ea-mime-classification-service,v3.5.1-20221017.2202-be481f68f,sha256:be481f68f155f3324f2f236db39b4ec4c1457d302c288a656df3fb412356714a,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/noi-metric-action-service,v3.5.1-20221017.2202-ef90b02fd,sha256:ef90b02fdc89bb603d19415bc31ad3ae7cd7a9e90623d893722985bd5da9d8ba,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/metric-api,v3.5.1-20221017.2202-910ff7d2d,sha256:910ff7d2d1ef0b963d5ea14ee1b245e0ec48dd046e37a5a18b9a5e9a7e086ed2,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/metric-spark,v3.5.1-20221017.2202-2e5125476,sha256:2e5125476777acfb317a0628ae49be1298fc0f2ea9d4c7ea904fa4bbf9c628f2,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/probable-cause,v3.5.1-20221017.2202-15a291871,sha256:15a2918719f5fc9d88d5beecb86a68c267b86df843477077d691d4e7a8319a8c,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/spark,v3.5.1-20221017.2202-569288286,sha256:56928828660e7e496fc232fe0aacfb491f2ae68ba2cdf536c7db219fffa58120,IMAGE,linux,amd64,"",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/training-service,v3.5.1-20221017.2202-61c08b42b,sha256:61c08b42bb852915441a0bac45f5e74d18f996d9d52dec5ba93b804fe98151a1,IMAGE,linux,amd64,"",0,CASE,"",""
+icr.io,cpopen/ibm-aiops-analytics-operator-bundle,v3.5.1-20221017.2202-de4d83afc,sha256:de4d83afc2506befdef67b1140b13160c1e63f09bdef5c6d6b4b743db84cd810,IMAGE,linux,amd64,"",0,CASE,olm-bundle,""
+icr.io,cpopen/ibm-aiops-analytics-operator-catalog,v3.5.1-20221017.2202-96dc0151f,sha256:96dc0151f563f95c6cd638bdfe240f0bd1fb6a843a72228bc9382b24953195c7,LIST,"","","",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-aiops-analytics-operator-catalog,v3.5.1-20221017.2202-96dc0151f-linux.amd64,sha256:35c699a458ec2a7ed999e7f594b1b4b82dd8451f593c2f24d38aa7dfaa9927bc,IMAGE,linux,amd64,"",0,CASE,olm-catalog,""
+icr.io,cpopen/ir-ai-operator,v3.5.1-20221017.2202-8f328f5b5,sha256:8f328f5b5d4a5e4dd17a153094bb663cdd7356968830d8913463e86ceeaa2f38,IMAGE,linux,amd64,"",0,CASE,"",""

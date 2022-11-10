@@ -1,0 +1,8 @@
+registry,image_name,tag,digest,mtype,os,arch,variant,insecure,digest_source,image_type,groups
+cp.icr.io,cp/cp4waiops/ibm-stolon,v3.5.1-20221017.2202-594707273,sha256:5947072735df7841aec9ba97c1acd170753f0b50e0ecd1d6c5b530198f1c2799,LIST,"","","",0,CASE,"",""
+cp.icr.io,cp/cp4waiops/ibm-stolon,v3.5.1-20221017.2202-594707273-linux.amd64,sha256:fac1a38e246cd00f234ebc25ae1c8f2060db36763c04bd6e82764a3e65bd806d,IMAGE,linux,amd64,"",0,CASE,"",""
+icr.io,cpopen/ibm-postgreservice-operator-bundle,v3.5.1-20221017.2202-283b277ad,sha256:283b277adcfd505dd982b7ce9fc5cda37719106fb778470cf9730d8bc3e37092,IMAGE,linux,amd64,"",0,CASE,olm-bundle,""
+icr.io,cpopen/ibm-postgreservice-operator-catalog,v3.5.1-20221017.2202-8990ffdcf,sha256:8990ffdcf8518723655f4d7fe3392b926297c525e49bd21168f82a695393b5e9,LIST,"","","",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-postgreservice-operator-catalog,v3.5.1-20221017.2202-8990ffdcf-linux.amd64,sha256:d07caf8761afcce864a0f85207a945e4ffc92e6585ed893245aeb274611723e3,IMAGE,linux,amd64,"",0,CASE,olm-catalog,""
+icr.io,cpopen/ibm-postgreservice-operator,v3.5.1-20221017.2202-9965ba559,sha256:9965ba559d3e68639bcce484d3f425adde33b368a662c8773005fb871d3c29ea,LIST,"","","",0,CASE,"",""
+icr.io,cpopen/ibm-postgreservice-operator,v3.5.1-20221017.2202-9965ba559-linux.amd64,sha256:dc09442e4f0aa39a0bdbf1784c6dd0b88bd6837cc388e6239e30eb4bff9beb3b,IMAGE,linux,amd64,"",0,CASE,"",""

@@ -160,11 +160,11 @@ eyJhbGciOiJIUzI1NiJ9.eyJpc3adsgJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1Nzg0NzQzMjgsImp
 Just run:
 
 ```bash
-ansible-playbook ./ansible/01_aimanager-base-install.yaml -e CP_ENTITLEMENT_KEY=<REGISTRY_TOKEN> 
+ansible-playbook ./ansible/01_aimanager-base-install.yaml -e cp_entitlement_key=<REGISTRY_TOKEN> 
 
 
 Example:
-ansible-playbook ./ansible/01_aimanager-base-install.yaml -e CP_ENTITLEMENT_KEY=eyJhbGciOiJIUzI1NiJ9.eyJpc3adsgJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1Nzg0NzQzMjgsImp0aSI6IjRjYTM3gsdgdMzExNjQxZDdiMDJhMjRmMGMxMWgdsmZhIn0.Z-rqfSLJA-R-ow__tI3RmLx4mssdggdabvdcgdgYEkbYY
+ansible-playbook ./ansible/01_aimanager-base-install.yaml -e cp_entitlement_key=eyJhbGciOiJIUzI1NiJ9.eyJpc3adsgJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1Nzg0NzQzMjgsImp0aSI6IjRjYTM3gsdgdMzExNjQxZDdiMDJhMjRmMGMxMWgdsmZhIn0.Z-rqfSLJA-R-ow__tI3RmLx4mssdggdabvdcgdgYEkbYY
 ```
 
 This will install:

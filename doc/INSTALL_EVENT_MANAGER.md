@@ -9,7 +9,7 @@ Use Option 🐥`02` in Easy Install to install a base `Event Manager` instance
 or run:
 
 ```bash
-ansible-playbook ./ansible/04_cp4waiops-eventmanager-install.yaml -e CP_ENTITLEMENT_KEY=<REGISTRY_TOKEN> 
+ansible-playbook ./ansible/04_cp4waiops-eventmanager-install.yaml -e cp_entitlement_key=<REGISTRY_TOKEN> 
 ```
 
 ### 2.6.2 Configure Event Manager 
