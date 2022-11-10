@@ -172,7 +172,7 @@ stream = os.popen('oc get routes -n '+aimanagerns+' spark  -o jsonpath={.spec.ho
 spark_url = stream.read().strip()
 
 print('     ❓ Getting Details RobotShop')
-stream = os.popen('oc get routes -n robot-shop web  -o jsonpath={.spec.host}')
+stream = os.popen('oc get routes -n robot-shop robotshop  -o jsonpath={.spec.host}')
 robotshop_url = stream.read().strip()
 
 
