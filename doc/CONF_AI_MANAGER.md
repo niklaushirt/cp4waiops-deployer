@@ -135,7 +135,7 @@ This will create Merge Topologies for RobotShop.
 1. Run this command in a separate terminal window to gain access to the Elasticsearch cluster:
 
 	```bash
-	while true; do oc port-forward statefulset/$(oc get statefulset | grep es-server-all | awk '{print $1}') 9200; done
+	while true; do oc port-forward statefulset/$(oc get statefulset | grep iaf-system-elasticsearch-es-aiops | awk '{print $1}') 9200; done
 	```
 
 
@@ -282,7 +282,7 @@ The "Needs improvement" is no concern for the time being.
 1. Run this command in a separate terminal window to gain access to the Elasticsearch cluster:
 
 	```bash
-	while true; do oc port-forward statefulset/$(oc get statefulset | grep es-server-all | awk '{print $1}') 9200; done
+	while true; do oc port-forward statefulset/$(oc get statefulset | grep iaf-system-elasticsearch-es-aiops | awk '{print $1}') 9200; done
 	```
 
 

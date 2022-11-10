@@ -152,7 +152,7 @@ IAF_PVCS=("persistentvolumeclaim/data-iaf-system-elasticsearch-es-aiops-0"
           "persistentvolumeclaim/datadir-zen-metastoredb-0"
           "persistentvolumeclaim/datadir-zen-metastoredb-1"
           "persistentvolumeclaim/datadir-zen-metastoredb-2"
-          "persistentvolumeclaim/elasticsearch-ibm-elasticsearch-ibm-elasticsearch-data-elasticsea-cd98-ib-6fb9-es-server-all-0")
+          "persistentvolumeclaim/elasticsearch-ibm-elasticsearch-ibm-elasticsearch-data-elasticsea-cd98-ib-6fb9-iaf-system-elasticsearch-es-aiops-0")
 #### IBM Automation Foundation ####
 IAF_MISC=("client.oidc.security.ibm.com/zenclient-cp4waiops"
           "operatorgroup.operators.coreos.com/operand-deployment-lifecycle-manager-operatorgroup"
