@@ -1,8 +1,0 @@
-registry,image_name,tag,digest,mtype,os,arch,variant,insecure,digest_source,image_type,groups
-icr.io,cpopen/ibm-management-kong-operator-bundle,v3.5.1-20221017.2202-ecf473d2f,sha256:ecf473d2f9408a19e5d912e88e9eabc222e445400408493a0f279fbc88e95015,IMAGE,linux,amd64,"",0,CASE,olm-bundle,""
-icr.io,cpopen/ibm-management-kong-catalog,v3.5.1-20221017.2202-1f5fd24cb,sha256:1f5fd24cbcfbafea05ca805135c23cad7a52df5238317b4eddd9023d3596bb77,LIST,"","","",0,CASE,olm-catalog,""
-icr.io,cpopen/ibm-management-kong-catalog,v3.5.1-20221017.2202-1f5fd24cb-linux.amd64,sha256:03734d7ae5132b3ed1743325d92a54016f2e510e5a9cf5264aefa0b6d5cd59ff,IMAGE,linux,amd64,"",0,CASE,olm-catalog,""
-icr.io,cpopen/ibm-kong-operator,v3.5.1-20221017.2202-c830aa445,sha256:c830aa4458fcbf744d300cf3b980405db01b457444838abe85927a7494f41243,IMAGE,linux,amd64,"",0,CASE,"",""
-cp.icr.io,cp/cp4waiops/kong,v3.5.1-20221017.2202-0bcb49a8b,sha256:0bcb49a8b3e4b94c0f356b96fe750b61337bed907eae08add72f0863ef0b948c,IMAGE,linux,amd64,"",0,CASE,"",""
-cp.icr.io,cp/cp4waiops/kong-ingress-controller,v3.5.1-20221017.2202-e4dc6c83f,sha256:e4dc6c83f34ff6d54e80191b5d5be274f0aff403a49287b37a14ed7ece89039a,IMAGE,linux,amd64,"",0,CASE,"",""
-cp.icr.io,cp/cp4waiops/kubectl,v3.5.1-20221017.2202-03fd550b4,sha256:03fd550b451d10cba89061b39f34790f4d2864e2da583c7ea946ff316b084389,IMAGE,linux,amd64,"",0,CASE,"",""
