@@ -34,12 +34,13 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for serviceaccount being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER OPERATOR - 🕦 Wait for serviceaccount to become ready
+- name:   🚀 AIMANAGER OPERATOR - 🕦 Wait for serviceaccount ibm-operator-catalog to become ready
   shell: oc get -n openshift-marketplace serviceaccount ibm-operator-catalog --no-headers| grep -c ""
   register: kubectl_get_sa
   until: kubectl_get_sa.stdout == "1"
   retries: 500
   delay: 15
+  when: current_cp4waiops_feature.case_install==false
 
 
 
@@ -113,15 +114,26 @@
   until: kubectl_get_pods.stdout == "1"
   retries: 500
   delay: 15
+  when: current_cp4waiops_feature.case_install==false
 
 
 
 
 # Create IBM AIOps Subscription
-- name:   🚀 AIMANAGER OPERATOR - Install Subscription
+- name:   🚀 AIMANAGER OPERATOR - Install Subscription - ONLINE
   community.kubernetes.k8s:
     state: present
     template: ./templates/waiops/3_sub-ibm-aiops-subscription.j2
+  when: current_cp4waiops_feature.case_install==false
+
+# Create IBM AIOps Subscription
+- name:   🚀 AIMANAGER OPERATOR - Install Subscription - CASE
+  community.kubernetes.k8s:
+    state: present
+    template: ./templates/waiops/3_sub-ibm-aiops-subscription-case.j2
+  when: current_cp4waiops_feature.case_install==true
+
+
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -172,6 +184,7 @@
   until: kubectl_get_pods.stdout == "1"
   retries: 500
   delay: 15
+  when: current_cp4waiops_feature.case_install==false
 
 
 
