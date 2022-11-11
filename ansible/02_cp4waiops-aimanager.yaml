@@ -70,21 +70,31 @@
       file: "{{config_file_path}}"
       name: config_file
 
-  - name: 🛠️  Show Global Config
+  - name: 🟢  Show Config File
     debug:
-      var: config_file
+      var: all_config
 
 
+  - name: 🛠️  Set Global Config
+    set_fact: global_config={{ all_config.global_config | default([]) }}
+  - name: 🟢  Show Global Config
+    debug:
+      var: global_config
 
+
+  - name: 🛠️  Set Openshift Config
+    set_fact: openshift_cluster={{ all_config.openshift | default([]) }}
+  - name: 🟢  Show Openshift Config
+    debug:
+      var: openshift_cluster
 
 
   # Loop over all Clusters
   - name: ♻️  Deploy Cloud Pak for Watson AIOps Assets - Loop over Clusters
     include_role:
       name: cp4waiops-install
-    loop: "{{ config_file.cp4waiops | default([]) }}"
+    loop: "{{ all_config.cp4waiops | default([]) }}"
     loop_control:
       loop_var: current_cp4waiops_cluster
-
 
 
