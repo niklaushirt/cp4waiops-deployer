@@ -1,3 +1,9 @@
+---
+# *************************************************************************************************************************************************
+# --------------------------------------------------------------------------------------------------------------------------------------
+# CP4WAIOPS INSTANCES
+# --------------------------------------------------------------------------------------------------------------------------------------
+# *************************************************************************************************************************************************
 
 
 global_config:
@@ -35,10 +41,12 @@ cp4waiops:
   - name: cp4waiops-aimanager
     kind: AIManager
     install: false
+
+    # current_cp4waiops_feature
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
-    waiops_size: custom
+    waiops_size: small
     # Custom Sizing File (waiops_size must be set to "custom")
-    custom_size_file: ./custom-sizes/aiops-custom-size-profile-tiny.yaml
+    custom_size_file: none    # Name of the CP4WAIOPS instance
     # Name of the CP4WAIOPS instance
     waiops_name: ibm-cp-watson-aiops
     # Version of the catalog subscription
@@ -58,22 +66,18 @@ cp4waiops:
     case_name: ibm-cp-waiops
     case_version: 1.4.1
     case_inventory_setup: cpwaiopsSetup
-    
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # CP4WAIOPS Pull Registires
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    entitled_registry: cp.icr.io
-    entitled_registry_user: cp
-    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
 
-    
+
+
+
+
 
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS AI Manager Demo Content
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager-demo-content
     kind: AIManagerDemoContent
-    install: true
+    install: false
 
 
     # ---------------------------------------------------------------------
@@ -186,7 +190,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-eventmanager
     kind: EventManager
-    install: false
+    install: true
     # Version of the catalog subscription
     subscription_channel: v1.10
     starting_csv: noi.v1.6.0
@@ -197,29 +201,14 @@ cp4waiops:
     # --------------------------------------------------------------------------------------------------------------------------------------
     #storage_class_file: automatic
     #storage_class_block: automatic
-
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # Install with CASE Files
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    case_install: false
-    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
-    case_name: ibm-cp-waiops
-    case_version: 1.4.1
-    case_inventory_setup: cpwaiopsSetup
     
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # CP4WAIOPS Pull Registires
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    entitled_registry: cp.icr.io
-    entitled_registry_user: cp
-    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
 
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS Event Manager Demo Content
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-eventmanager
     kind: EventManagerDemoContent
-    install: false
+    install: true
 
 
 
@@ -233,30 +222,15 @@ cp4waiops:
     kind: InfrastructureManagement
     install: false
     # Version of the catalog subscription
-    subscription_channel: v3.3
+    subscription_channel: v3.5
     #subscription_channel: 3.4-dev
-
+    
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
     # --------------------------------------------------------------------------------------------------------------------------------------
     #storage_class_file: automatic
     #storage_class_block: automatic
-
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # Install with CASE Files
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    case_install: false
-    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
-    case_name: ibm-cp-waiops
-    case_version: 1.4.1
-    case_inventory_setup: cpwaiopsSetup
     
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # CP4WAIOPS Pull Registires
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    entitled_registry: cp.icr.io
-    entitled_registry_user: cp
-    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
 
 
 
@@ -275,7 +249,8 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-turbonomic
     kind: Turbonomic
-    install: false
+    install: true
+    turbo_version: 8.6.6
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
@@ -309,5 +284,7 @@ cp4waiops:
 #storage_class_block: ibmc-vpc-block-10iops-tier      # IBM VPC
 #storage_class_block: rook-cephfs                     # FYRE
 #storage_class_block: nfs-client                      # TEC
-by setting manually - 4.6, 4.7,...)
-ocp_major_version: automatic
+
+
+
+

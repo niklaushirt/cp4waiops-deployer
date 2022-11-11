@@ -7,7 +7,7 @@
 
 
 global_config:
-  environment_name: sample
+  environment_name: cp4waiops
   cloud_platform: existing-ocp
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS Pull Registires

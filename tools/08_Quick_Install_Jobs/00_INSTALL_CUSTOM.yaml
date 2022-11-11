@@ -112,7 +112,7 @@ spec:
 
 
               global_config:
-                environment_name: sample
+                environment_name: cp4waiops
                 cloud_platform: existing-ocp
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 # CP4WAIOPS Pull Registires
@@ -158,7 +158,7 @@ spec:
                   subscription_channel: v3.5
 
                   # --------------------------------------------------------------------------------------------------------------------------------------
-                  # Storage Classes (see comment below)
+                  # Storage Classes Override for this Instance (see comment below)
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   #storage_class_file: automatic
                   #storage_class_block: automatic
@@ -302,7 +302,7 @@ spec:
                   noi_version: 1.6.6
 
                   # --------------------------------------------------------------------------------------------------------------------------------------
-                  # Storage Classes (see comment below)
+                  # Storage Classes Override for this Instance (see comment below)
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   #storage_class_file: automatic
                   #storage_class_block: automatic
@@ -331,7 +331,7 @@ spec:
                   #subscription_channel: 3.4-dev
                   
                   # --------------------------------------------------------------------------------------------------------------------------------------
-                  # Storage Classes (see comment below)
+                  # Storage Classes Override for this Instance (see comment below)
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   #storage_class_file: automatic
                   #storage_class_block: automatic
@@ -358,7 +358,7 @@ spec:
                   turbo_version: 8.6.6
 
                   # --------------------------------------------------------------------------------------------------------------------------------------
-                  # Storage Classes (see comment below)
+                  # Storage Classes Override for this Instance (see comment below)
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   #storage_class_file: automatic
                   #storage_class_block: automatic
