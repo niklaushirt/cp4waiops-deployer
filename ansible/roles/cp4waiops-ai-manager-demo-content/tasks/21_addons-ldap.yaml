@@ -65,5 +65,5 @@
 - name: 🕦 TIMESTAMP - END INSTALLATION - INSTALL OPENLDAP
   debug: 
     msg="{{ lookup('pipe','date +%d.%m.%Y---%H:%M:%S') }}"
-    verbosity: 1
+
 
