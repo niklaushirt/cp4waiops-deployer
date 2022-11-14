@@ -237,7 +237,7 @@
     executable: /bin/bash
 
 
-- name: 🟢 STORAGECLASS - Storage Class 
+- name: 🟣 STORAGECLASS - Storage Class 
   debug: 
     msg: 
     - "** Global Storage Classes for CP4WAIOPS installation *************************************************************************"

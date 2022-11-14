@@ -60,17 +60,17 @@
   shell:   
     cloudctl login -a {{ CS_SERVER.stdout_lines[0] }} --skip-ssl-validation -u admin -p {{ CS_PWD.stdout_lines[0] }} -n kube-system
   register: LOGIN
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: LOGIN.stdout_lines
-    #verbosity: 2
+    verbosity: 1
 
 
 - name: 🚀 LDAPREGISTER - Check already registered
   shell:   
     echo $(cloudctl iam resources|grep "Directory:LDAP")
   register: LDAPS
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: LDAPS.stdout_lines
     #verbosity: 2
@@ -91,10 +91,10 @@
       cloudctl iam ldap-create "LDAP" --basedn {{ current_cp4waiops_feature.ldap_base }} --server ldap://openldap.{{ current_cp4waiops_feature.ldap_namespace }}:389 --binddn cn=admin,{{ current_cp4waiops_feature.ldap_base }} --binddn-password {{ current_cp4waiops_feature.ldap_admin_password }} -t "Custom" --group-filter "(&(cn=%v)(objectclass=groupOfUniqueNames))" --group-id-map "*:cn" --group-member-id-map "groupOfUniqueNames:uniqueMember" --user-filter "(&(uid=%v)(objectclass=Person))" --user-id-map "*:uid"
     ignore_errors: true
     register: LOGIN
-  - name: 🟢  OUTPUT
+  - name: 🟣  OUTPUT
     debug: 
       var: LOGIN.stdout_lines
-      #verbosity: 2
+      verbosity: 1
 
   # - name: LDAPREGISTER -           📥 Get Team ID
   #   shell:         
@@ -499,11 +499,11 @@
   args:
     executable: /bin/bash
     
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: output_string.stdout_lines
-  #when: PRINT_LOGINS == true
-    #verbosity: 2
+    verbosity: 1
+
 
 
 

@@ -28,7 +28,7 @@
  
 
 
-- name: 🚀 INSTALLATION MODULE START - {{current_cp4waiops_feature.kind}}
+- name: ✴️ ✴️ ✴️ INSTALLATION MODULE START - {{current_cp4waiops_feature.kind}}
   debug: 
     msg: 
     - "***************************************************************************************************************************************************"
@@ -36,7 +36,7 @@
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
     - "                                                                                                                                                   "
-    - "       CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}} "
+    - "      🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}} "
     - "                                                                                                                                                   "
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
@@ -45,12 +45,12 @@
 
 
 
-- name: 🟢 Installing {{current_cp4waiops_feature.kind}} with the following configuration
+- name: 🟣 Installing {{current_cp4waiops_feature.kind}} with the following configuration
   debug:
     var: current_cp4waiops_feature
 
 
-# - name:  🟢 Installation Parameters"
+# - name:  🟣 Installation Parameters"
 #   debug:
 #     msg:
 #     - "** Installation Options ***********************************************************************"

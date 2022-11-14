@@ -8,6 +8,16 @@
 
 
 
+
+
+- name: 🟡🟡🟡  Show Current Feature
+  debug:
+    var: current_cp4waiops_feature
+    verbosity: 1
+
+
+
+
 - name: cp4waiops-install-modules 🌡   CHECK for - AI Manager
   include_role:
     name: cp4waiops-ai-manager

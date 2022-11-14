@@ -41,7 +41,7 @@
   register: LOGINS
 
 
-- name: 🟢 EVENT MANAGER - EVENT MANAGER LOGINS
+- name: 🟣 EVENT MANAGER - EVENT MANAGER LOGINS
   debug: 
     var: LOGINS.stdout_lines
 

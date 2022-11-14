@@ -69,7 +69,7 @@
   register: access
 
 
-- name: 🟢 OUTPUT
+- name: 🟣 OUTPUT
   debug: 
     var: access.stdout_lines
     #verbosity: 1

@@ -41,7 +41,7 @@
   register: LOGINS
 
 
-- name: 🟢 AI MANAGER - AI MANAGER LOGINS
+- name: 🌏 AI MANAGER - AI MANAGER LOGINS
   debug: 
     var: LOGINS.stdout_lines
 

@@ -90,9 +90,9 @@
   args:
     executable: /bin/bash
 
-- name: 🟢 OUTPUT
+- name: 🟣 OUTPUT
   debug: 
     var: POLICY_RESULT.stdout_lines
-    #verbosity: 2
+    verbosity: 1
 
 

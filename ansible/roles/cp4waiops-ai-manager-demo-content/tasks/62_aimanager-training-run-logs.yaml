@@ -29,9 +29,8 @@
     executable: /bin/bash
 
 
-- name: 🟢 TRAINING RUN - RESULT
+- name: 🟣 TRAINING RUN - RESULT
   debug: 
     var: output_string.stdout_lines
-  #when: PRINT_LOGINS == true
-    #verbosity: 2
+    verbosity: 1
 

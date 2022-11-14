@@ -97,7 +97,7 @@
 #     rm builder-secret.tmp
 #     oc patch serviceaccount builder  -p '{"secrets": [{"name": "merged-secret"}]}' -n {{ current_cp4waiops_cluster.project }} || true
 #   register: ready
-# - name: DEBUG -              🟢 Output
+# - name: DEBUG -              🟣 Output
 #   debug: 
 #     var: ready.stdout_lines
 #     #verbosity: 1

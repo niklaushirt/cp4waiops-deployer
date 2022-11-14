@@ -12,7 +12,7 @@
 
 
   
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: output_string.stdout_lines
   #when: PRINT_LOGINS == true
@@ -53,7 +53,7 @@
   args:
     executable: /bin/bash
 
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: output_string.stdout_lines
   #when: PRINT_LOGINS == true
@@ -121,7 +121,7 @@
   args:
     executable: /bin/bash
   
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: output_string.stdout_lines
   #when: PRINT_LOGINS == true

@@ -11,14 +11,6 @@
 
 
 
-  
-- name: 🟢  OUTPUT
-  debug: 
-    var: output_string.stdout_lines
-  #when: PRINT_LOGINS == true
-    #verbosity: 2
-
-
 - name: Log
   shell: |
     export MESSAGE="Load Robotshop overlay Topology"
@@ -57,18 +49,16 @@
     TARGET_FILE_PATH="/opt/ibm/netcool/asm/data/file-observer/${LOAD_FILE_NAME}"
     echo "  Copying capture file [${FILE_OBSERVER_CAP}] to file observer pod"
     oc cp -n $WAIOPS_NAMESPACE ${FILE_OBSERVER_CAP} ${FILE_OBSERVER_POD}:${TARGET_FILE_PATH}
-
-
   register: output_string
   ignore_errors: true
   args:
     executable: /bin/bash
 
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: output_string.stdout_lines
+    verbosity: 1
   #when: PRINT_LOGINS == true
-    #verbosity: 2
 
 
 
@@ -124,9 +114,9 @@
   args:
     executable: /bin/bash
   
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: output_string.stdout_lines
-  #when: PRINT_LOGINS == true
-    #verbosity: 2
+    verbosity: 1
+
 

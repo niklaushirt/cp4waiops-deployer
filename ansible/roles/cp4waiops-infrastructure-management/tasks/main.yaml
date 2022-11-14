@@ -29,7 +29,7 @@
  
  
  
-- name:  🚀 INSTALLATION MODULE START - {{current_cp4waiops_feature.kind}}
+- name:  ✴️ ✴️ ✴️ INSTALLATION MODULE START - {{current_cp4waiops_feature.kind}}
   debug: 
     msg: 
     - "***************************************************************************************************************************************************"
@@ -37,7 +37,7 @@
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
     - "                                                                                                                                                   "
-    - "       CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}}                                                                                          "
+    - "      🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}}                                                                                          "
     - "                                                                                                                                                   "
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
@@ -45,12 +45,12 @@
 
 
 
-- name: 🟢 Installing {{current_cp4waiops_feature.kind}} with the following configuration
+- name: 🟣 Installing {{current_cp4waiops_feature.kind}} with the following configuration
   debug:
     var: current_cp4waiops_feature
 
 
-- name:  🟢 Storage Class Parameters - SPECIFIC INSTANCE"
+- name:  🟣 Storage Class Parameters - SPECIFIC INSTANCE"
   debug:
     msg:
     - "** Installation Options for SPECIFIC INSTANCE ***********************************************************************"
@@ -61,7 +61,7 @@
   when: current_cp4waiops_feature.storage_class_file is defined
 
 
-- name:  🟢 Storage Class Parameters - GLOBAL"
+- name:  🟣 Storage Class Parameters - GLOBAL"
   debug:
     msg:
     - "** Installation Options from GLOBAL ***********************************************************************"

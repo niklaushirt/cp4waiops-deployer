@@ -15,14 +15,13 @@
   ignore_errors: true
 
 
-
 - name: 🌏 DEMO-UI - Get DEMO UI LOGINS
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-    export DEMOUI_ROUTE=$(oc get route -n {{ current_cp4waiops_cluster.project }} waiops-demo-ui-python -o jsonpath={.spec.host})
+    export DEMOUI_ROUTE=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")
     echo "                🌏 URL:      http://$DEMOUI_ROUTE"
     echo ""
-    echo "                🔐 Token:    $(oc get cm -n {{ current_cp4waiops_cluster.project }} demo-ui-python-config -o jsonpath='{.data.TOKEN}' && echo)"
+    echo "                🔐 Token:    $(oc get cm -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui-config -o jsonpath='{.data.TOKEN}')"
 
     export URL=http://$DEMOUI_ROUTE
     if [ -x "$(command -v open)" ]; then
@@ -40,7 +39,7 @@
   register: LOGINS
 
 
-- name: 🟢 DEMO-UI - DEMO UI LOGINS
+- name: 🌏 DEMO-UI - DEMO UI LOGINS
   debug: 
     var: LOGINS.stdout_lines
 

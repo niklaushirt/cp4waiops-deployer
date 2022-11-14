@@ -124,10 +124,10 @@
   args:
     executable: /bin/bash
 
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: output_string.stdout_lines
-    #verbosity: 2
+    verbosity: 1
 
 
 
@@ -182,10 +182,10 @@
   args:
     executable: /bin/bash
 
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: output_string.stdout_lines
-    #verbosity: 2
+    verbosity: 1
 
 - name:   🚀 TOPOLOGY - CREATE APPLICATION MEMBERS
   shell: |
@@ -250,7 +250,7 @@
   args:
     executable: /bin/bash
 
-- name: 🟢  OUTPUT
+- name: 🟣  OUTPUT
   debug: 
     var: output_string.stdout_lines
-    #verbosity: 2
+    verbosity: 1

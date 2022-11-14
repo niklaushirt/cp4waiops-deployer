@@ -33,7 +33,7 @@
   register: logins
 
 
-- name: 🟢 OUTPUT
+- name: 🌏 LOGINS
   debug: 
     var: logins.stdout_lines
 

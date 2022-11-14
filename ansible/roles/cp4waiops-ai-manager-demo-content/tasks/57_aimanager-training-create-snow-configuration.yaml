@@ -44,8 +44,7 @@
 
 
 
-- name: 🟢 TRAINING CREATE SNOW - RESULT
+- name: 🟣 TRAINING CREATE SNOW - RESULT
   debug: 
     var: output_string.stdout_lines
-  #when: PRINT_LOGINS == true
-    #verbosity: 2
+    verbosity: 1

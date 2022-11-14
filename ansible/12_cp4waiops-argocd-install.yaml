@@ -68,21 +68,21 @@
       file: "{{config_file_path}}"
       name: config_file
 
-  - name: 🟢  Show Config File
+  - name: 🟣  Show Config File
     debug:
       var: all_config
 
 
   - name: 🛠️  Set Global Config
     set_fact: global_config={{ all_config.global_config | default([]) }}
-  - name: 🟢  Show Global Config
+  - name: 🟣  Show Global Config
     debug:
       var: global_config
 
 
   - name: 🛠️  Set Openshift Config
     set_fact: openshift_cluster={{ all_config.openshift | default([]) }}
-  - name: 🟢  Show Openshift Config
+  - name: 🟣  Show Openshift Config
     debug:
       var: openshift_cluster
 

@@ -21,29 +21,28 @@
 
 
 
-
 # - name: Show Config
 #   debug:
 #     var: cp4waiops_cluster
-- name: 🛠️  SHOW all_config
+- name: 🟡🟡🟡  Show Config File
   debug:
     var: all_config
-    #verbosity: 2
+    verbosity: 2
 
-- name: 🛠️  GET global_config
+- name: 🛠️  Get Global Config
   set_fact: global_config={{ all_config.global_config | default([]) }}
-- name: 🛠️  SHOW global_config
+- name: 🟡🟡🟡  Show Global Config
   debug:
     var: global_config
-    #verbosity: 2
+    verbosity: 1
 
 
-- name: 🛠️  GET _current_openshift_cluster
+- name: 🛠️  Get Openshift Config
   set_fact: _current_openshift_cluster={{ all_config.openshift | default([]) }}
-- name: 🛠️  SHOW _current_openshift_cluster
+- name: 🟡🟡🟡  Show Openshift Config
   debug:
     var: _current_openshift_cluster
-    #verbosity: 2
+    verbosity: 1
 
 
 
