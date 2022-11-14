@@ -51,6 +51,8 @@ rm pull-secret-backup.yaml>/dev/null 2>/dev/null
 rm temp-ibm-entitlement-key.yaml>/dev/null 2>/dev/null
 rm temp-pull-secret.yaml>/dev/null 2>/dev/null
 
+rm -r ./tools/97_addons/cp4waiops-demo-ui/demoui/demoui/__pycache__
+rm -r ./tools/97_addons/cp4waiops-demo-ui/demoui/demouiapp/__pycache__
 
 echo "--------------------------------------------------------------------------------------------------------------------------------"
 echo "    🚀  Remove Keys"
