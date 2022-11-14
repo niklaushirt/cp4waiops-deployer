@@ -47,7 +47,7 @@
 
 
 # Loop over all clusters
-- name: 🚀 Deploy Cloud Pak for Watson AIOps Assets - Loop over Instances for {{current_cp4waiops_cluster.project}}
+- name: MAIN LOOP   🚀 Deploy Cloud Pak for Watson AIOps Assets - Loop over Instances for {{current_cp4waiops_cluster.project}}
   include_role:
     name: cp4waiops-install-modules
   loop: "{{ current_cp4waiops_cluster.instances}}"
