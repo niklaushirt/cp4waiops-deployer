@@ -154,5 +154,5 @@
 - name: 🟢  OUTPUT
   debug: 
     var: output_string.stdout_lines
-    verbosity: 2
+    #verbosity: 2
 
