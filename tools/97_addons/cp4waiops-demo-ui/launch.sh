@@ -1,3 +1,7 @@
+
+# sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
+# sudo ln -s $(which python3) /usr/local/bin/python
+
 export TOKEN=test
 export LOG_ITERATIONS=5
 

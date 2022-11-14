@@ -4,6 +4,7 @@ from django.template import loader
 import os
 import sys 
 import time 
+import hashlib
 sys.path.append(os.path.abspath("demouiapp"))
 from functions import *
 SLACK_URL=str(os.environ.get('SLACK_URL'))
@@ -660,15 +661,22 @@ def login(request):
     global loggedin
     global loginip
 
-    verifyLogin(request)
+    response = HttpResponse()
 
-    currenttoken=request.GET.get("token", "0")
+    verifyLogin(request)
+    currenttoken=request.GET.get("token", "none")
     token=os.environ.get('TOKEN')
-    print ('  🔐 Login attempt with Token: '+currenttoken)
+    print ('  🔐 Login attempt with Password/Token: '+currenttoken)
     if token==currenttoken:
         loggedin='true'
         template = loader.get_template('demouiapp/home.html')
         print ('  ✅ Login SUCCESSFUL')
+
+        response.set_cookie('last_visit', time.localtime())
+        actloginip=request.META.get('REMOTE_ADDR')
+        response.set_cookie('IP', actloginip)
+        response.set_cookie('token', hashlib.md5((token+actloginip).encode()).hexdigest())
+
         context = {
             'loggedin': loggedin,
             'aimanager_url': aimanager_url,
@@ -691,6 +699,12 @@ def login(request):
         loggedin='false'
         template = loader.get_template('demouiapp/loginui.html')
         print ('  ❗ Login NOT SUCCESSFUL')
+
+        response.set_cookie('last_visit', 'none')
+        response.set_cookie('IP', 'none')
+        response.set_cookie('token', 'none')
+
+
         context = {
             'loggedin': loggedin,
             'aimanager_url': aimanager_url,
@@ -710,23 +724,26 @@ def login(request):
             'PAGE_NAME': 'login'
         }
 
-    return HttpResponse(template.render(context, request))
+
+
+    response.write(template.render(context, request))
+    return response
     #return HttpResponse("Hello, world. You're at the polls index.")
 
-
 def verifyLogin(request):
-    actloginip=request.META.get('REMOTE_ADDR')
+    actToken=request.COOKIES.get('token', 'none')
+    print('   🔎 SESSION TOKEN:'+str(actToken))
 
     global loggedin
-    global loginip
+    
+    actloginip=request.META.get('REMOTE_ADDR')
+    token=os.environ.get('TOKEN')
 
-
-    if str(loginip)!=str(actloginip):
+    if str(actToken)!=hashlib.md5((token+actloginip).encode()).hexdigest():
         loggedin='false'
-        loginip=request.META.get('REMOTE_ADDR')
 
         #print('        ❌ LOGIN NOK: NEW IP')
-        print('   🔎 Check IP : ❌ LOGIN NOK: ACT IP:'+str(actloginip)+'  - SAVED IP:'+str(loginip))
+        print('   🔎 Check IP : ❌ LOGIN NOK: ACT SESSION TOKEN:'+str(actToken)+' - LOGGED IN: '+str(loggedin))
     else:
         print('   🔎 Check IP : ✅ LOGIN OK: '+str(loggedin))
         #print('        ✅ LOGIN OK')
@@ -734,6 +751,25 @@ def verifyLogin(request):
         loginip=request.META.get('REMOTE_ADDR')
 
 
+
+# def verifyLogin(request):
+#     actloginip=request.META.get('REMOTE_ADDR')
+
+#     global loggedin
+#     global loginip
+
+
+#     if str(loginip)!=str(actloginip):
+#         loggedin='false'
+#         loginip=request.META.get('REMOTE_ADDR')
+
+#         #print('        ❌ LOGIN NOK: NEW IP')
+#         print('   🔎 Check IP : ❌ LOGIN NOK: ACT IP:'+str(actloginip)+'  - SAVED IP:'+str(loginip))
+#     else:
+#         print('   🔎 Check IP : ✅ LOGIN OK: '+str(loggedin))
+#         #print('        ✅ LOGIN OK')
+#         #loggedin='true'
+#         loginip=request.META.get('REMOTE_ADDR')
 
 
 
