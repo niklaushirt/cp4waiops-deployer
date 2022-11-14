@@ -11,7 +11,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -46,7 +46,7 @@
   shell: |
     oc delete pod  -n default --ignore-not-found $(oc get po -n default|grep load-metric-cassandra|awk '{print$1}')
   register: ES_READY
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🕦 TRAINING WAIT - WAIT FOR COMPLETION SNOW LOAD
@@ -79,7 +79,7 @@
   shell: |
     oc delete pod  -n default --ignore-not-found $(oc get po -n default|grep load-snow-indexes|awk '{print$1}')
   register: ES_READY
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -115,5 +115,5 @@
   shell: |
     oc delete pod  -n default --ignore-not-found $(oc get po -n default|grep load-log-indexes|awk '{print$1}')
   register: ES_READY
-  ignore_errors: yes
+  ignore_errors: true
 

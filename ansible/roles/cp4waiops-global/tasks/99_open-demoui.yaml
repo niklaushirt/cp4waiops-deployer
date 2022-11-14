@@ -12,7 +12,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -36,7 +36,7 @@
         fi
       fi
     fi
-  ignore_errors: yes
+  ignore_errors: true
   register: LOGINS
 
 
@@ -58,4 +58,4 @@
     echo "                🔐 Token:         $appToken"  >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true

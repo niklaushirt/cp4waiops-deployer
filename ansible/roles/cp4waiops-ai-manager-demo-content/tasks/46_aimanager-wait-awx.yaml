@@ -11,7 +11,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@
     export MESSAGE=" ✅ AWX is ready"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: Log
@@ -61,13 +61,13 @@
     echo "                🧑 User:     admin"  >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "                🔐 Password: $(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)"  >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
 - name: 🚀 AWX - Adapt service account (you can ignore errors in this step)
   shell: |
-    oc create clusterrolebinding awx-default --clusterrole=cluster-admin --serviceaccount=awx:default
-  ignore_errors: yes
+    oc create clusterrolebinding awx-default --clusterrole=cluster-admin --serviceaccount=awx:default>/dev/null 2>/dev/null
+  ignore_errors: true
 
 

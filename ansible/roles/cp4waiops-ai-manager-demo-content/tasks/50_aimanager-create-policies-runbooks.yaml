@@ -11,7 +11,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🛠️  POLICIES - Create Runbooks Trigger Policy
@@ -85,7 +85,7 @@
     fi 
     echo $result
 
-  ignore_errors: yes
+  ignore_errors: true
   register: POLICY_RESULT
   args:
     executable: /bin/bash

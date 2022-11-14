@@ -71,9 +71,9 @@
 
 - name: 🚀 EVENTMANAGER - Create Pull Secret for {{current_cp4waiops_cluster.project}} Namespace (you can ignore errors if it already exists)
   shell: |
-    oc create secret docker-registry 'ibm-entitlement-key' --docker-server={{ global_config.entitled_registry }} --docker-username={{ global_config.entitled_registry_user }} --docker-password={{ cp_entitlement_key }} --namespace={{ current_cp4waiops_cluster.project }}
-    oc create secret docker-registry 'ibm-entitlement-key' --docker-server={{ global_config.entitled_registry }} --docker-username={{ global_config.entitled_registry_user }} --docker-password={{ cp_entitlement_key }} --namespace={{ current_cp4waiops_cluster.project }}
-  ignore_errors: yes
+    oc create secret docker-registry 'ibm-entitlement-key' --docker-server={{ global_config.entitled_registry }} --docker-username={{ global_config.entitled_registry_user }} --docker-password={{ cp_entitlement_key }} --namespace={{ current_cp4waiops_cluster.project }}>/dev/null 2>/dev/null
+    oc create secret docker-registry 'ibm-entitlement-key' --docker-server={{ global_config.entitled_registry }} --docker-username={{ global_config.entitled_registry_user }} --docker-password={{ cp_entitlement_key }} --namespace={{ current_cp4waiops_cluster.project }}>/dev/null 2>/dev/null
+  ignore_errors: true
 
 
 

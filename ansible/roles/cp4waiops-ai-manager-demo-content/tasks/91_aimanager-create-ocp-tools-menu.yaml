@@ -18,7 +18,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
    
 
 
@@ -43,7 +43,7 @@
         location: ApplicationMenu
         text: RobotShop Demo App
     EOF
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🌏 OCP MENU - Create Openshift WebConsole Menu Item - AWX
@@ -65,7 +65,7 @@
         location: ApplicationMenu
         text: AWX Runbooks
     EOF
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🌏 OCP MENU - Create Openshift WebConsole Menu Item - LDAP
@@ -87,7 +87,7 @@
         location: ApplicationMenu
         text: Open LDAP
     EOF
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🌏 OCP MENU - Create Openshift WebConsole Menu Item
@@ -110,7 +110,7 @@
         location: ApplicationMenu
         text: CP4WAIOps Flink Connectors
     EOF
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🌏 OCP MENU - Create Openshift WebConsole Menu Item
@@ -133,7 +133,7 @@
         location: ApplicationMenu
         text: CP4WAIOps Flink Policies
     EOF
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: 🌏 OCP MENU - Create Openshift WebConsole Menu Item
   shell: |
@@ -155,4 +155,4 @@
         location: ApplicationMenu
         text: CP4WAIOps Spark
     EOF
-  ignore_errors: yes
+  ignore_errors: true

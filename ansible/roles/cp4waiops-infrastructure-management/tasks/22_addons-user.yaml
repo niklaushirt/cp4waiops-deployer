@@ -20,14 +20,14 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
 - name: 👩‍💻 DEMO USER - Check OCP Demouser Account
   shell: |
     oc get serviceaccount --ignore-not-found -n default demo-admin
-  ignore_errors: yes
+  ignore_errors: true
   register: USER_EXISTS
 
 
@@ -37,7 +37,7 @@
         oc create serviceaccount -n default demo-admin
         oc create clusterrolebinding test-admin --clusterrole=cluster-admin --serviceaccount=default:demo-admin
         oc create clusterrolebinding ibm-zen-operator-serviceaccount --clusterrole=cluster-admin --serviceaccount=ibm-common-services:ibm-zen-operator-serviceaccount
-  ignore_errors: yes
+  ignore_errors: true
   register: demo_account
   when: USER_EXISTS.stdout|length == 0
 

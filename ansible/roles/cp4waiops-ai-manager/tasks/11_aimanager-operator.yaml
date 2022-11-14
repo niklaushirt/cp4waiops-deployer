@@ -16,7 +16,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -48,7 +48,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for CSV being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER OPERATOR - Patch service account for pull secret (you can ignore errors)
+- name:   🚀 AIMANAGER OPERATOR - Patch service account for pull secret
   shell: |
     oc patch -n openshift-marketplace serviceaccount ibm-operator-catalog -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
     oc patch -n openshift-marketplace serviceaccount default -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
@@ -58,7 +58,7 @@
       oc delete pod $(oc get po -n openshift-marketplace|grep ImagePull|awk '{print$1}') -n openshift-marketplace --ignore-not-found
     fi
   register: kubectl_get_pods
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -68,7 +68,7 @@
 # - name: AIMANAGER OPERATOR -     🕦 Wait 120 seconds
 #   shell: |
 #     sleep 120
-#   ignore_errors: yes
+#   ignore_errors: true
 
 
 
@@ -77,9 +77,9 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name:   🚀 AIMANAGER OPERATOR - Delete lingering Pods before check for reinstall
   shell: |
-    oc delete pod $(oc get po -n {{ current_cp4waiops_cluster.project }}|grep ContainerStatusUnknown|awk '{print$1}') -n {{ current_cp4waiops_cluster.project }}
+    oc delete pod $(oc get po -n {{ current_cp4waiops_cluster.project }}|grep ContainerStatusUnknown|awk '{print$1}'):-notfound -n {{ current_cp4waiops_cluster.project }} --ignore-not-found
   register: kubectl_get_pods
-  ignore_errors: yes
+  ignore_errors: true
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@
     # Wait for Operator to settle
     sleep 20
   register: kubectl_get_pods
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -101,7 +101,7 @@
   shell: |
     oc delete pod $(oc get po -n openshift-marketplace|grep ImagePullBackOff|awk '{print$1}') -n openshift-marketplace
   register: kubectl_get_pods
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -169,7 +169,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -203,5 +203,5 @@
     export MESSAGE=" ✅ CSVs are ready"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 

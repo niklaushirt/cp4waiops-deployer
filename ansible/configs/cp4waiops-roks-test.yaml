@@ -40,7 +40,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager
     kind: AIManager
-    install: true
+    install: false
 
     # current_cp4waiops_feature
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)

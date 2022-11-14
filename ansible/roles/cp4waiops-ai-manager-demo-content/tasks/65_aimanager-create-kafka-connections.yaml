@@ -16,7 +16,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🌏 CONNECTIONS - Create KAFKA Connections for Inception
@@ -116,7 +116,7 @@
     echo $result
 
 
-  ignore_errors: yes
+  ignore_errors: true
   when: create_external_routes == true
   register: output_string
   args:

@@ -16,7 +16,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -29,7 +29,7 @@
     kind: Namespace
     name: "{{ current_cp4waiops_cluster.project }}"
     state: present
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🚀 INFRA MGT - Create Pull Secret
@@ -41,7 +41,7 @@
     oc create secret docker-registry 'ibm-entitlement-key' --docker-server={{ global_config.entitled_registry }} --docker-username={{ global_config.entitled_registry_user }} --docker-password={{ cp_entitlement_key }} --namespace=openshift-marketplace
     oc create secret docker-registry 'ibm-entitlement-key' --docker-server={{ global_config.entitled_registry }} --docker-username={{ global_config.entitled_registry_user }} --docker-password={{ cp_entitlement_key }} --namespace=openshift-operators
     oc create secret docker-registry 'ibm-management-pull-secret' --docker-server={{ global_config.entitled_registry }} --docker-username={{ global_config.entitled_registry_user }} --docker-password={{ cp_entitlement_key }} --namespace={{ current_cp4waiops_cluster.project }}
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -113,7 +113,7 @@
 - name: 🚀 INFRA MGT - Patch Service Account
   shell: |
     oc patch -n {{ current_cp4waiops_cluster.project }} serviceaccount ibm-infra-management-install-operator -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -185,7 +185,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🕦 CHECK -  Wait for Infrastructure Management to be ready (this might take some time)
@@ -212,5 +212,5 @@
     export MESSAGE=" ✅  IA CONFIG is ready"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 

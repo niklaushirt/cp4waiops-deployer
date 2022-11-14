@@ -15,6 +15,6 @@
     echo "**********************************************************************************************************************************************************" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "**********************************************************************************************************************************************************" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 

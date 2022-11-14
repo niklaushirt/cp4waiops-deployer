@@ -21,7 +21,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 # *************************************************************************************************************************************************
@@ -82,7 +82,7 @@
     shell:         
       #echo 'cloudctl iam ldap-create "LDAP" --basedn "{{ LDAP_BASE }}" --server "ldap://openldap.default:389" --binddn "cn=admin,{{ LDAP_BASE }}" --binddn-password "{{ LDAP_ADMIN_PASSWORD }}" -t "Custom" --group-filter "(&(cn=%v)(objectclass=groupOfUniqueNames))" --group-id-map "*:cn" --group-member-id-map "groupOfUniqueNames:uniqueMember" --user-filter "(&(uid=%v)(objectclass=Person))" --user-id-map "*:uid"'
       cloudctl iam ldap-create "LDAP" --basedn {{ current_cp4waiops_feature.ldap_base }} --server ldap://openldap.default:389 --binddn cn=admin,{{ current_cp4waiops_feature.ldap_base }} --binddn-password {{ current_cp4waiops_feature.ldap_admin_password }} -t "Custom" --group-filter "(&(cn=%v)(objectclass=groupOfUniqueNames))" --group-id-map "*:cn" --group-member-id-map "groupOfUniqueNames:uniqueMember" --user-filter "(&(uid=%v)(objectclass=Person))" --user-id-map "*:uid"
-    ignore_errors: yes
+    ignore_errors: true
     register: LOGIN
   - name: 🟢  OUTPUT
     debug: 
@@ -117,7 +117,7 @@
 
   #     cloudctl iam resource-add {{ TEAM_ID.stdout_lines[0] }} -r crn:v1:icp:private:iam::::Directory:LDAP
   #   register: TEAMS
-  #   ignore_errors: yes
+  #   ignore_errors: true
   when: LDAPS.stdout_lines|length == 0
 
 
@@ -211,7 +211,7 @@
     echo "     "	
     echo "     "	
   register: output_string
-  ignore_errors: yes
+  ignore_errors: true
   args:
     executable: /bin/bash
     

@@ -37,5 +37,5 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     mv ../install_{{current_cp4waiops_feature.kind}}.log ../install_{{current_cp4waiops_feature.kind}}.log$currentDate
     echo "" > ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 

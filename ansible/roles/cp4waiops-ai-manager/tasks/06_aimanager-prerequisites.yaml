@@ -31,7 +31,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -48,7 +48,7 @@
     kind: Namespace
     name: "{{ current_cp4waiops_cluster.project }}"
     state: present
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -64,7 +64,7 @@
     oc patch -n openshift-marketplace serviceaccount ibm-aiops-catalog -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
     oc patch -n openshift-marketplace serviceaccount default -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
     oc patch -n {{ current_cp4waiops_cluster.project }} serviceaccount default -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
@@ -83,7 +83,7 @@
     imagePullSecrets:
       - name: ibm-entitlement-key
     EOF
-  ignore_errors: yes
+  ignore_errors: true
 
 
 # Patch builder service account

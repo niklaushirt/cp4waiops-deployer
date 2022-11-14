@@ -18,7 +18,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
    
 
 - name: 🌏 NETWORK - CHECK Ingress already patched
@@ -33,7 +33,7 @@
       echo "false"
     fi
   register: output_string
-  ignore_errors: yes
+  ignore_errors: true
   args:
     executable: /bin/bash
     
@@ -55,7 +55,7 @@
   shell:  |
           export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
           oc wait --namespace="$WAIOPS_NAMESPACE" --for=condition=Ready pods $(oc get po -n "$WAIOPS_NAMESPACE"|grep "aimanager-aio-chatops-slack-integrator"|awk '{print$1}') --timeout=600s
-  ignore_errors: yes  
+  ignore_errors: true  
   register: slack_ready
 
 
@@ -83,7 +83,7 @@
     EOF
   when: INGRESS_PATCHED==false
   register: network_patch
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🌏 CERTIFICATES - Patch AutomationUIConfig Certificates
@@ -134,7 +134,7 @@
     fi
   when: INGRESS_PATCHED==false
   register: certificate_patch
-  ignore_errors: yes
+  ignore_errors: true
   args:
     executable: /bin/bash
 
@@ -164,7 +164,7 @@
     oc scale Deployment/ibm-nginx --replicas=${REPLICAS}
   when: INGRESS_PATCHED==false
   register: certificate_patch
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: 🌏 CERTIFICATES - Patch Ingress Certificates
   debug: 
@@ -209,6 +209,6 @@
 
     oc set env -n $WAIOPS_NAMESPACE deployment/$(oc get deploy -n $WAIOPS_NAMESPACE -l app.kubernetes.io/component=chatops-slack-integrator -o jsonpath='{.items[*].metadata.name }') SLACK_WELCOME_COMMAND_NAME=/welcome
     oc delete pod $(oc get po -n $WAIOPS_NAMESPACE|grep slack|awk '{print$1}') -n $WAIOPS_NAMESPACE --grace-period 0 --force
-  ignore_errors: yes
+  ignore_errors: true
 
 

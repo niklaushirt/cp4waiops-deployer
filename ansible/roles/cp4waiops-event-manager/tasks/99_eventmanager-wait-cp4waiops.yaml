@@ -13,7 +13,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@
     echo "    EventManager (NOI):"
     echo "        URL:     https://netcool-evtmanager.{{CLUSTER_NAME.stdout_lines[0]}}/"
   register: output_string
-  ignore_errors: yes
+  ignore_errors: true
 - name: 🔐 LOGIN - WAIOPS Event Manager (NOI)
   debug: 
     var: output_string.stdout_lines

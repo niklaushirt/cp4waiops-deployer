@@ -19,7 +19,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🕦 TOPOLOGY -  Wait for Topology Route to become ready
@@ -120,7 +120,7 @@
     fi
 
   register: output_string
-  ignore_errors: yes
+  ignore_errors: true
   args:
     executable: /bin/bash
 
@@ -178,7 +178,7 @@
       echo "  Application already exists"
     fi
   register: output_string
-  ignore_errors: yes
+  ignore_errors: true
   args:
     executable: /bin/bash
 
@@ -246,7 +246,7 @@
 
 
   register: output_string
-  ignore_errors: yes
+  ignore_errors: true
   args:
     executable: /bin/bash
 

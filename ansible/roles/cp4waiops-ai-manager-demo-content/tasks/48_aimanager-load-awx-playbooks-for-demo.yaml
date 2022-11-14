@@ -18,7 +18,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🚀 AWX - Get AWX URL
@@ -26,7 +26,7 @@
     export AWX_ROUTE=$(oc get route -n awx awx -o jsonpath={.spec.host})
     export AWX_URL=$(echo "https://$AWX_ROUTE")
     echo $AWX_URL
-  ignore_errors: yes
+  ignore_errors: true
   register: ACT_AWX_URL
 
 
@@ -38,7 +38,7 @@
   shell: |
     export ADMIN_PASSWORD=$(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)
     echo $ADMIN_PASSWORD
-  ignore_errors: yes
+  ignore_errors: true
   register: ACT_AWX_PWD
 
 
@@ -69,7 +69,7 @@
         sleep 60
     fi 
     echo "$EXENV_ID"
-  ignore_errors: yes
+  ignore_errors: true
   register: EXENV_ID
   args:
     executable: /bin/bash
@@ -117,7 +117,7 @@
     fi
     #sleep 60
     echo "$PROJECT_ID"
-  ignore_errors: yes
+  ignore_errors: true
   register: AWX_RESULT
   args:
     executable: /bin/bash
@@ -162,7 +162,7 @@
     fi
     #sleep 60
     echo "$PROJECT_ID"
-  ignore_errors: yes
+  ignore_errors: true
   register: AWX_RESULT
   args:
     executable: /bin/bash
@@ -173,7 +173,7 @@
     #sleep 60
     export STATUS=$(curl -X "GET" -s "{{ AWX_URL }}/api/v2/projects/" -u "admin:{{ AWX_PWD }}" --insecure|jq -c -r '.results[]| select( .name == "CP4WAIOPS Runbooks")|.status')
     echo "$STATUS"
-  ignore_errors: yes
+  ignore_errors: true
   register: STATUS
   until: STATUS.stdout == "successful"
   retries: 10
@@ -209,7 +209,7 @@
         sleep 15
     fi
     echo "$INVENTORY_ID"
-  ignore_errors: yes
+  ignore_errors: true
   register: AWX_RESULT
   args:
     executable: /bin/bash
@@ -240,7 +240,7 @@
     }')
 
     echo $result
-  ignore_errors: yes
+  ignore_errors: true
   register: AWX_RESULT
   args:
     executable: /bin/bash
@@ -266,7 +266,7 @@
     }')
 
     echo $result
-  ignore_errors: yes
+  ignore_errors: true
   register: AWX_RESULT
   args:
     executable: /bin/bash
@@ -291,7 +291,7 @@
     }')
 
     echo $result
-  ignore_errors: yes
+  ignore_errors: true
   register: AWX_RESULT
   args:
     executable: /bin/bash
@@ -317,7 +317,7 @@
     }')
 
     echo $result
-  ignore_errors: yes
+  ignore_errors: true
   register: AWX_RESULT
   args:
     executable: /bin/bash

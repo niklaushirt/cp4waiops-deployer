@@ -20,7 +20,7 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🚀 ELK - Create Elasticsearch
@@ -83,7 +83,7 @@
 #     oc delete cm fluentd -n openshift-logging
 #     oc apply -f ./templates/elk/5_fluentd-configmap.yaml
 #     oc delete pods -n openshift-logging -l component=collector  
-#   ignore_errors: yes
+#   ignore_errors: true
 
     
 - name: 🚀 ELK - Create Elasticsearch Route

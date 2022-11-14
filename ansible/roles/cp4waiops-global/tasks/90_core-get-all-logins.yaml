@@ -16,20 +16,20 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
-  ignore_errors: yes
+  ignore_errors: true
 
 
 
 - name: 🚀 LOGIN - WAIOPS - Get Logins (please ignore any errors)
   shell: |
     ../tools/20_get_logins.sh > ../LOGINS.txt
-  ignore_errors: yes
+  ignore_errors: true
 
 
 - name: 🚀 LOGIN - WAIOPS - Print Logins
   shell: |
     cat ../LOGINS.txt
-  ignore_errors: yes
+  ignore_errors: true
   register: logins
 
 
@@ -53,5 +53,5 @@
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
 
-  ignore_errors: yes
+  ignore_errors: true
 
