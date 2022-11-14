@@ -9,10 +9,10 @@
 
 - name: Log
   shell: |
-    export MESSAGE=" 🌏 Open doc at https://github.ibm.com/NIKH/aiops-install-ansible-33#3-ai-manager-configuration"
+    export MESSAGE=" 🌏 Open doc at https://github.com/niklaushirt/cp4waiops-deployer#-demo-installation"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
-    echo $currentDate" - "$USER" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: yes
 
 

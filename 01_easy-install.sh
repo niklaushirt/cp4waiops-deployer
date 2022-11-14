@@ -21,7 +21,7 @@ export WAIOPS_VERSION=35
 
 export SHOW_MORE="false"
 export WAIOPS_PODS_MIN=115
-export DOC_URL="https://github.com/niklaushirt/cp4waiops-deployer#-1-quick-install"
+export DOC_URL="https://github.com/niklaushirt/cp4waiops-deployer#-demo-installation"
 
 export INSTALL_REPO="https://github.com/niklaushirt/cp4waiops-deployer.git"
 

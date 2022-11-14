@@ -11,7 +11,7 @@
     export MESSAGE="Check if Training Exists"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
-    echo $currentDate" - "$USER" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: yes
 
 
@@ -116,7 +116,7 @@
   shell: |
     export MESSAGE="Check if Training Exists"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
-    echo $currentDate" - "$USER" - Training exists: {{TRAINING_EXISTS}}"  >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo $currentDate" - Training exists: {{TRAINING_EXISTS}}"  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: yes
 
 

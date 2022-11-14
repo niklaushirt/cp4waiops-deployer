@@ -12,7 +12,7 @@
     export MESSAGE=" 🕦 Wait for Common Services to become ready"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
-    echo $currentDate" - "$USER" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: yes
 
 
@@ -45,5 +45,5 @@
   shell: |
     export MESSAGE=" ✅ Common Services is ready"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
-    echo $currentDate" - "$USER" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: yes
