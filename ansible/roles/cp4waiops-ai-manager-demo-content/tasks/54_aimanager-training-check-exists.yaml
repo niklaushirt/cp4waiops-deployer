@@ -101,6 +101,7 @@
 - name: 🔎 CHECK LAD TRAINING
   debug: 
     var: output_string.stdout_lines
+    verbosity: 2
 
 - name: 🔎 CHECK LAD TRAINING - Check if Training Definitions already exist
   set_fact: TRAINING_EXISTS={{output_string.stdout_lines[0]}}
@@ -110,6 +111,7 @@
   debug: 
     var: TRAINING_EXISTS
   #when: PRINT_LOGINS == true
+    verbosity: 2
 
 
 - name: Log

@@ -15,7 +15,7 @@
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: yes
 
-
+ 
 
 - name:  🌏 DOCUMENTATION - Open Documentation
   shell: |

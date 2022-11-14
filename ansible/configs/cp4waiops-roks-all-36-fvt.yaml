@@ -14,7 +14,7 @@ global_config:
   # --------------------------------------------------------------------------------------------------------------------------------------
   entitled_registry: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com
   entitled_registry_user: nikh@ch.ibm.com
-  catalog_image: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com/ia/relatedimages/ibm-watson-aiops-catalog:v3.6.0-20221111.1001-dac9e5aa5
+  catalog_image: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com/ia/relatedimages/ibm-watson-aiops-catalog:v3.6.0-20221114.1001-e30628169
 
 
 openshift:

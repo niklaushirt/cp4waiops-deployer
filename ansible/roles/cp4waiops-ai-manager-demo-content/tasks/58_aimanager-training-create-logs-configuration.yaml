@@ -134,4 +134,5 @@
   debug: 
     var: output_string.stdout_lines
   #when: PRINT_LOGINS == true
+    verbosity: 2
 

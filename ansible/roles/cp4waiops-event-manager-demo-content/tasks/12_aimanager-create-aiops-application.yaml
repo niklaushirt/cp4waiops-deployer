@@ -127,6 +127,7 @@
 - name: 🟢  OUTPUT
   debug: 
     var: output_string.stdout_lines
+    verbosity: 2
 
 
 
@@ -184,6 +185,7 @@
 - name: 🟢  OUTPUT
   debug: 
     var: output_string.stdout_lines
+    verbosity: 2
 
 - name:   🚀 TOPOLOGY - CREATE APPLICATION MEMBERS
   shell: |
@@ -251,3 +253,4 @@
 - name: 🟢  OUTPUT
   debug: 
     var: output_string.stdout_lines
+    verbosity: 2

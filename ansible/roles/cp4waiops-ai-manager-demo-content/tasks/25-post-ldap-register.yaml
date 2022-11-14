@@ -63,6 +63,7 @@
 - name: 🟢  OUTPUT
   debug: 
     var: LOGIN.stdout_lines
+    verbosity: 2
 
 
 - name: 🚀 LDAPREGISTER - Check already registered
@@ -72,6 +73,7 @@
 - name: 🟢  OUTPUT
   debug: 
     var: LDAPS.stdout_lines
+    verbosity: 2
 
 
 - name: 🚀 LDAPREGISTER - Create LDAP Integration
@@ -85,6 +87,7 @@
   - name: 🟢  OUTPUT
     debug: 
       var: LOGIN.stdout_lines
+      verbosity: 2
 
   # - name: LDAPREGISTER -           📥 Get Team ID
   #   shell:         
@@ -486,6 +489,7 @@
   debug: 
     var: output_string.stdout_lines
   #when: PRINT_LOGINS == true
+    verbosity: 2
 
 
 

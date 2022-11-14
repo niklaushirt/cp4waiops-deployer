@@ -28,13 +28,14 @@
 - name: 🛠️  SHOW all_config
   debug:
     var: all_config
-
+    verbosity: 2
 
 - name: 🛠️  GET global_config
   set_fact: global_config={{ all_config.global_config | default([]) }}
 - name: 🛠️  SHOW global_config
   debug:
     var: global_config
+    verbosity: 2
 
 
 - name: 🛠️  GET _current_openshift_cluster
@@ -42,6 +43,7 @@
 - name: 🛠️  SHOW _current_openshift_cluster
   debug:
     var: _current_openshift_cluster
+    verbosity: 2
 
 
 

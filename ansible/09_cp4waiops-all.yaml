@@ -41,7 +41,7 @@
       - "***************************************************************************************************************************************************"
       - "***************************************************************************************************************************************************"
       - "                                                                                                                                                   "
-      - "       🚀 CloudPak for Watson AIOps - INSTALLATION - Install all components                                                                 "
+      - "       CloudPak for Watson AIOps - INSTALLATION - Install all components                                                                 "
       - "                                                                                                                                                   "
       - "***************************************************************************************************************************************************"
       - "***************************************************************************************************************************************************"
@@ -62,6 +62,7 @@
     register: p
   - debug:
       msg: "  ✅ Config File exists..."
+      verbosity: 2
     when: p.stat.exists
   - fail: msg="The specified config file {{config_file_path}} does not exist"
     when: p.stat.exists == False
@@ -74,6 +75,7 @@
   - name: 🟢  Show Config File
     debug:
       var: all_config
+      verbosity: 2
 
 
   - name: 🛠️  Set Global Config
@@ -81,6 +83,7 @@
   - name: 🟢  Show Global Config
     debug:
       var: global_config
+      verbosity: 2
 
 
   - name: 🛠️  Set Openshift Config
@@ -88,6 +91,7 @@
   - name: 🟢  Show Openshift Config
     debug:
       var: openshift_cluster
+      verbosity: 2
 
 
   # Loop over all Clusters
