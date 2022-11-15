@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Major changes
 
-- Added Instana to the mix
+- Added Instana to the mix (mostly stolen from Luca Floris - thanks!!!)
 
 
 
