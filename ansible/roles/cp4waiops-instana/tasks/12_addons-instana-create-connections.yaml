@@ -110,7 +110,7 @@
           ".*"
         ]
       },
-      "api_token": "VtMvIvUKRguljY9WFSbobg",
+      "api_token": "changeme",
       "display_name": "Instana",
       "event": {
         "enable_event_flow": true,
