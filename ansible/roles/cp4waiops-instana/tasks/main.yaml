@@ -55,7 +55,6 @@
     - "** Installation Options for SPECIFIC INSTANCE ***********************************************************************"
     - " Storage Class File Override:      {{ current_cp4waiops_feature.storage_class_file}}"
     - " Storage Class Block Override:     {{ current_cp4waiops_feature.storage_class_block}}"
-    - " Storage Class InfraManagement:    {{ current_cp4waiops_feature.storage_class_file}}"
     - ""
   when: current_cp4waiops_feature.storage_class_file is defined
 
@@ -66,7 +65,6 @@
     - "** Installation Options from GLOBAL ***********************************************************************"
     - " Storage Class File Override:      {{ all_config.openshift[0].openshift_storage[0].ocp_storage_class_file}}"
     - " Storage Class Block Override:     {{ all_config.openshift[0].openshift_storage[0].ocp_storage_class_block}}"
-    - " Storage Class InfraManagement:    {{ all_config.openshift[0].openshift_storage[0].ocp_storage_class_file}}"
     - ""
   when: current_cp4waiops_feature.storage_class_file is not defined and all_config.openshift[0].openshift_storage[0].ocp_storage_class_file is defined
 
@@ -105,6 +103,13 @@
 - name: 📥 Install Instana Agent
   include_tasks: 11_addons-instana-agent.yaml
   when: current_cp4waiops_feature.install_agent == true
+
+
+# Install INSTANA AIManager Connection
+- name: 📥 Install AIManager to Instana Connection
+  include_tasks: 12_addons-instana-create-connections.yaml
+  when: current_cp4waiops_feature.integrate_aimanager == true
+
 
 - name: 📥 Install OCP Menu Item
   include_tasks: 91_addons-instana-create-ocp-tools-menu.yaml

@@ -26,6 +26,16 @@
     oc create route passthrough -n $WAIOPS_NAMESPACE --service aimanager-aio-controller
 
 
+    CLUSTER_ROUTE=$(oc get routes console -n openshift-console | tail -n 1 2>&1 ) 
+    CLUSTER_FQDN=$( echo $CLUSTER_ROUTE | awk '{print $2}')
+    CLUSTER_NAME=${CLUSTER_FQDN##*console.}
+
+    BASE_DOMAIN="$CLUSTER_NAME"
+    echo $BASE_DOMAIN
+    
+
+
+
     export AI_PLATFORM_ROUTE=$(oc get route -n $WAIOPS_NAMESPACE ai-platform-api  -o jsonpath={.spec.host})
     export AIO_PLATFORM_ROUTE=$(oc get route -n $WAIOPS_NAMESPACE aimanager-aio-controller -o jsonpath={.spec.host})
 
@@ -76,36 +86,51 @@
     -H 'Content-Type: application/json' \
       -H "authorization: Bearer $ZEN_TOKEN"  \
     -d '
-    {
-      "application_group_id": "1000",
-      "application_id": "1000",
-      "connection_config": {
-        "data_flow": true,
-        "collection_mode": "inference",
-        "json_option": "none",
-        "connection_type": "kafka",
-        "creator_user_name": "",
-        "description": "Automatically created by Nicks scripts",
-        "topic": "cp4waiops-cartridge-logs-elk-iuacrepx",
-        "base_parallelism": 5,
-        "num_partitions": 1,
-        "display_name": "ELKInception3",
-        "json_option": "none",
-        "logs_per_second": 2000
+     {
+    "aiopsedge_id": "null",
+    "application_group_id": "1000",
+    "application_id": "1000",
+    "connection_config": {
+      "deploymentType": "local",
+      "endpoint": "https://dev-aiops.'$BASE_DOMAIN'/",
+      "connection_type": "instana",
+      "creator_user_name": "",
+      "metric": {
+        "collect_live_data_flow": true,
+        "plugin_selection_option": "[{\"kubernetesCluster\":[\"nodes.MemoryPressure.True\"]},{\"kubernetesDeployment\":[\"duration\"]},{\"kubernetesNode\":[\"required_cpu\",\"required_mem_percentage\",\"required_mem\",\"required_cpu_percentage\",\"allocatedPods\"]},{\"kubernetesPod\":[\"cpuRequests\",\"container_count\",\"memoryRequests\",\"restartCount\"]}]",
+        "enable_metric_flow": true,
+        "aggregation_interval": 5
       },
-      "connection_type": "kafka",
-      "connection_updated_at": "2021-07-26T15:18:25.43602Z",
-      "datasource_type": "logs",
-        "data_flow": true,
-        "mapping": {
-          "codec": "elk",
-          "message_field": "message",
-          "log_entity_types": "clusterName, kubernetes.container_image_id, kubernetes.host, kubernetes.container_name, kubernetes.pod_name",
-          "instance_id_field": "kubernetes.container_name",
-          "rolling_time": 10,
-          "timestamp_field": "@timestamp"
-        },
-      "request_action": "create"
+      "topology": {
+        "time_window": 86400,
+        "connection_interval": 60,
+        "enable_topology_flow": true,
+        "import_app_perspectives_as_aiops_apps": true,
+        "white_list_pattern": [
+          ".*"
+        ]
+      },
+      "api_token": "VtMvIvUKRguljY9WFSbobg",
+      "display_name": "Instana",
+      "event": {
+        "enable_event_flow": true,
+        "types": [
+          "incident",
+          "issue",
+          "change"
+        ]
+      }
+    },
+    "connection_id": "3e9648cf-79a0-4f4a-9e84-79f6e94e37ea",
+    "connection_type": "instana",
+    "connection_updated_at": "2022-11-15T18:47:07.853425Z",
+    "created_at": "Instana",
+    "created_by": "null",
+    "data_flow": false,
+    "datasource_type": "events",
+    "global_id": "814178722954674177",
+    "mapping": {},
+    "name": "Instana"
     }')
 
     echo $result | jq -r '.connection_id'

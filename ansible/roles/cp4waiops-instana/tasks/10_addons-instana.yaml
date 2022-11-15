@@ -121,6 +121,8 @@
     #switch project
     oc project instana-operator
 
+    sleep 15
+
     oc create clusterrolebinding instana-operator-admin --clusterrole=cluster-admin --serviceaccount=instana-operator:instana-operator
 
 
