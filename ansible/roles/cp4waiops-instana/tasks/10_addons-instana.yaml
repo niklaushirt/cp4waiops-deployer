@@ -42,9 +42,6 @@
             apt-get install instana-kubectl
         fi
     fi
-
-
-
   ignore_errors: true
   register: output
 - name: 🟣  DEBUG
@@ -104,15 +101,12 @@
 
 - name: 🚀 INSTANA - Create Operator Secret
   shell: |
-    exists=$(oc get secret instana-registry -n instana-operator|awk '{print$1}')
-    if [ $exists == "" ]; then
-      oc -n instana-operator create secret docker-registry instana-registry \
-          --docker-username=_ \
-          --docker-password={{current_cp4waiops_feature.agent_key}} \
-          --docker-server=containers.instana.io    
-    else  
-      echo "Already exists."
-    fi
+    oc -n instana-operator delete secret instana-registry --ignore-not-found
+    oc -n instana-operator create secret docker-registry instana-registry \
+        --docker-username=_ \
+        --docker-password={{current_cp4waiops_feature.agent_key}} \
+        --docker-server=containers.instana.io    
+
   ignore_errors: true
   register: output
 - name: 🟣  DEBUG
