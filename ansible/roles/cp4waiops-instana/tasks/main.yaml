@@ -74,12 +74,12 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 - name: 🛠️  Fail if Sales Key not Provided
   fail: msg="Please provide your Sales Key in the configuration file"
-  when: current_cp4waiops_feature.sales_key == "none"
+  when: current_cp4waiops_feature.sales_key == "NONE"
 
 
 - name: 🛠️  Fail if Agent Key not Provided
   fail: msg="Please provide your Agent Key in the configuration file"
-  when: current_cp4waiops_feature.agent_key == "none"
+  when: current_cp4waiops_feature.agent_key == "NONE"
 
 
 
