@@ -65,3 +65,9 @@
   when: current_cp4waiops_feature.kind=="GitOps" and current_cp4waiops_feature.install==true
 
 
+- name: cp4waiops-install-modules 🌡   CHECK for - Instana
+  include_role:
+    name: cp4waiops-instana
+  when: current_cp4waiops_feature.kind=="Instana" and current_cp4waiops_feature.install==true
+
+
