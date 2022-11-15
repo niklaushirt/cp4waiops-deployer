@@ -1,4 +1,21 @@
 #!/bin/bash
+if [ -x "$(command -v kubectl-instana)" ]; then
+    echo "Kubectl Instana Plugin already installed"
+else
+    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    echo "Installing Kubectl Instana Plugin for $OS"
+    if [ "${OS}" == "darwin" ]; then
+          wget https://self-hosted.instana.io/kubectl/kubectl-instana-darwin_amd64-release-235-3.tar.gz
+          tar xfvz kubectl-instana-darwin_amd64-release-235-3.tar.gz
+          sudo mv kubectl-instana /usr/local/bin/kubectl-instana
+          rm kubectl-instana-darwin_amd64-release-235-3.tar.gz
+    else
+        echo "deb [arch=amd64] https://self-hosted.instana.io/apt generic main" > /etc/apt/sources.list.d/instana-product.list
+        wget -qO - "https://self-hosted.instana.io/signing_key.gpg" | apt-key add -
+        apt-get update
+        apt-get install instana-kubectl
+    fi
+fi
 
 oc delete agents.instana.io -n instana-agent instana-agent
 oc delete subscription -n openshift-operators instana-agent
