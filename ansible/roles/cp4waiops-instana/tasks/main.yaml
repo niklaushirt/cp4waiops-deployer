@@ -106,6 +106,42 @@
   include_tasks: 11_addons-instana-agent.yaml
   when: current_cp4waiops_feature.install_agent == true
 
+- name: 📥 Install OCP Menu Item
+  include_tasks: 91_addons-instana-create-ocp-tools-menu.yaml
+
+
+
+- name: 🌏 INSTANA - LOGINS
+  shell: |
+    export DEMOUI_ROUTE=$(oc get routes -n instana-core dev-aiops  -o jsonpath="{['spec']['host']}")
+    echo "                🌏 URL:       http://$DEMOUI_ROUTE"
+    echo ""
+    echo "                🧑‍🦳 USER:      {{initial_admin_user}}"
+    echo "                🔐 LOGIN:     {{initial_admin_pass}}"
+  ignore_errors: true
+  register: LOGINS
+
+
+- name: 🌏 INSTANA - LOGINS
+  debug: 
+    var: LOGINS.stdout_lines
+
+- name: Log
+  shell: |
+    export MESSAGE=" 🌏 INSTANA - LOGINS"
+    export currentDate=$(date +%Y-%m-%d_%H:%M)
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
+    appURL=$(oc get routes -n instana-core dev-aiops  -o jsonpath="{['spec']['host']}")|| true
+    echo "            📥 Demo UI:"     >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo "    "   >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo "                🌏 URL:           http://$appURL/"  >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo "                🧑‍🦳 USER:          {{initial_admin_user}}"  >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo "                🔐 USER:          {{initial_admin_pass}}"  >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
+  ignore_errors: true
+
 
 
 - name: 📥 End Logging

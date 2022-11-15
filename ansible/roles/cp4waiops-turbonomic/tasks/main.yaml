@@ -104,7 +104,7 @@
 - name: 📥 Restart Demo UI
   include_tasks: 21_addons-turbonomic-restart-demoui.yaml
 
-- name: 📥 Restart Demo UI
+- name: 📥 Install OCP Menu Item
   include_tasks: 91_addons-turbonomic-create-ocp-tools-menu.yaml
 
 
