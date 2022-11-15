@@ -38,8 +38,8 @@ spec:
             cpu: '8'
             memory: 16Gi
           requests:
-            cpu: '512m'
-            memory: 1Gi
+            cpu: '2'
+            memory: 4Gi
         volumeMounts:
           - mountPath: /mnt/data
             name: es-data

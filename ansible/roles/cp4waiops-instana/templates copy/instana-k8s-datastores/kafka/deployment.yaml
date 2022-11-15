@@ -37,8 +37,8 @@ spec:
             cpu: '8'
             memory: 16Gi
           requests:
-            cpu: '512m'
-            memory: 1Gi
+            cpu: '2'
+            memory: 4Gi
         env:
           - name: ZOOKEEPER_HOST
             value: zookeeper-service
