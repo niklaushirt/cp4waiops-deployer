@@ -469,16 +469,6 @@
 
 
 
-# --------------------------------------------------------------------------------------------------------------------------------------
-# Wait for Operator being ready
-# --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🕦 INSTANA - Wait for Operator to become ready
-  shell: oc -n instana-operator get pods -l app.kubernetes.io/component=webhook| grep '1/1' | grep -c ""
-  register: kubectl_get_pods
-  until: kubectl_get_pods.stdout == "1"
-  retries: 500
-  delay: 15
-
 
 - name: 🚀 INSTANA - Hack for Affinity
   shell: |
@@ -497,6 +487,36 @@
   shell: oc -n instana-datastores get pods| grep '1/1' | grep -c ""
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout > "5"
+  retries: 5
+  delay: 15
+
+
+- name: 🚀 INSTANA - Hack for Affinity
+  shell: |
+    oc annotate namespace instana-datastores openshift.io/node-selector-
+    oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}') -n instana-datastores --ignore-not-found
+  ignore_errors: true
+  register: output
+
+
+
+
+- name:   🕦 INSTANA - Wait for DataStores to become ready
+  shell: oc -n instana-datastores get pods| grep '1/1' | grep -c ""
+  register: kubectl_get_pods
+  until: kubectl_get_pods.stdout > "5"
+  retries: 500
+  delay: 15
+
+
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Wait for Operator being ready
+# --------------------------------------------------------------------------------------------------------------------------------------
+- name:   🕦 INSTANA - Wait for Operator to become ready
+  shell: oc -n instana-operator get pods -l app.kubernetes.io/component=webhook| grep '1/1' | grep -c ""
+  register: kubectl_get_pods
+  until: kubectl_get_pods.stdout == "1"
   retries: 500
   delay: 15
 
