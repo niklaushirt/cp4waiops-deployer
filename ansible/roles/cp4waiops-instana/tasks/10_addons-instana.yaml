@@ -95,7 +95,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
 
 
 
@@ -112,7 +112,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
 
 
 
@@ -174,7 +174,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
 
 
 - name: 🚀 INSTANA - Create TLS Ingress Secrets
@@ -188,7 +188,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
 
 
 
@@ -210,7 +210,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
 
 
 - name: 🚀 INSTANA - Create License
@@ -236,7 +236,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    ##verbosity: 1
+    verbosity: 1
 
 
 
@@ -463,7 +463,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
 
 
 
