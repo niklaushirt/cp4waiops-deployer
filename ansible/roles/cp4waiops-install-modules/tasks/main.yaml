@@ -71,3 +71,8 @@
   when: current_cp4waiops_feature.kind=="Instana" and current_cp4waiops_feature.install==true
 
 
+- name: cp4waiops-install-modules 🌡   CHECK for - Turbonomic Demo Contnet
+  include_role:
+    name: cp4waiops-turbonomic-demo-content
+  when: current_cp4waiops_feature.kind=="TurbonomicDemoContent" and current_cp4waiops_feature.install==true
+
