@@ -166,7 +166,7 @@
   # CHECKS
   # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 
-  when: current_cp4waiops_feature.sales_key == "NONE" or current_cp4waiops_feature.agent_key == "NONE"
+  when: current_cp4waiops_feature.sales_key != "NONE" and current_cp4waiops_feature.agent_key != "NONE"
   ignore_errors: true
 
 
