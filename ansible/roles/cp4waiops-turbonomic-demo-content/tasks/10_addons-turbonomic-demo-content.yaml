@@ -177,7 +177,7 @@
 
     appID=$(echo $result|jq -r ".uuid")
 
-    echo $result|jq -r ".message"
+    echo $result
     echo ""
     echo ""
   ignore_errors: true
@@ -230,7 +230,7 @@
         "groupClassName": "GroupApiDTO"
       }')
 
-    echo $result|jq -r ".message"
+    echo $result
     echo ""
     echo ""
   ignore_errors: true
@@ -282,7 +282,7 @@
         "groupClassName": "GroupApiDTO"
       }')
 
-    echo $result|jq -r ".message"
+    echo $result
     echo ""
     echo ""
   ignore_errors: true
@@ -339,7 +339,7 @@
       
       ')
 
-    echo $result|jq -r ".message"
+    echo $result
     echo ""
     echo ""
 
@@ -380,7 +380,7 @@
       }
       ')
 
-    echo $result|jq -r ".message"
+    echo $result
     echo ""
     echo ""
   ignore_errors: true
@@ -468,7 +468,7 @@
         "readonly": false
       }')
 
-    echo $result|jq -r ".message"
+    echo $result
     echo ""
     echo ""
   ignore_errors: true
@@ -504,7 +504,7 @@
         "readonly": false
       }')
 
-    echo $result|jq -r ".message"
+    echo $result
     echo ""
     echo ""
   ignore_errors: true
@@ -544,7 +544,7 @@
         }
       }')
 
-    echo $result|jq -r ".message"
+    echo $result
     echo ""
     echo ""
   ignore_errors: true
