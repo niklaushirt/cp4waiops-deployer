@@ -55,9 +55,9 @@ TOKEN='test'
 print('     ❓ Getting Details Datalayer')
 stream = os.popen("oc get route  -n "+aimanagerns+" datalayer-api  -o jsonpath='{.status.ingress[0].host}'")
 DATALAYER_ROUTE = stream.read().strip()
-stream = os.popen("oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode")
+stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode")
 DATALAYER_USER = stream.read().strip()
-stream = os.popen("oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode")
+stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode")
 DATALAYER_PWD = stream.read().strip()
 
 
@@ -72,7 +72,7 @@ print ('************************************************************************
 print ('')
 print ('    **************************************************************************************************')
 print ('     🔎 Mapping Parameters')
-print ('    **************************************************************************************************')
+print ('    ******************************************************************  ********************************')
 
 EVENT_MAPPING=os.environ.get('EVENT_MAPPING')
 mappingelements=EVENT_MAPPING.split(';')

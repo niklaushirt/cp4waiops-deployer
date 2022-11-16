@@ -123,9 +123,12 @@
   when: current_cp4waiops_feature.integrate_aimanager == true
 
 
+- name: 📥 Restart Demo UI
+  include_tasks:21_addons-instana-restart-demoui.yaml
+
+
 - name: 📥 Install OCP Menu Item
   include_tasks: 91_addons-instana-create-ocp-tools-menu.yaml
-
 
 
 - name: 🌏 INSTANA - LOGINS
