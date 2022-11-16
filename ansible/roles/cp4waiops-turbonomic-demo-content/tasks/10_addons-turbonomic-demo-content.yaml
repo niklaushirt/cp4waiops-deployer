@@ -175,7 +175,6 @@
         }
       }')
 
-    appID=$(echo $result|jq -r ".uuid")
 
     echo $result
     echo ""
