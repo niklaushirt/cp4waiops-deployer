@@ -139,7 +139,12 @@ elk_url = stream.read().strip()
 
 print('     ❓ Getting Details Turbonomic Dashboard')
 stream = os.popen('oc get route -n turbonomic api -o jsonpath={.spec.host}')
-turonomic_url = stream.read().strip()
+turbonomic_url = stream.read().strip()
+
+print('     ❓ Getting Details Instana Dashboard')
+stream = os.popen('oc get route -n instana-core dev-aiops -o jsonpath={.spec.host}')
+instana_url = stream.read().strip()
+
 
 print('     ❓ Getting Details Openshift Console')
 stream = os.popen('oc get route -n openshift-console console -o jsonpath={.spec.host}')
@@ -265,7 +270,9 @@ def injectAllREST(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -284,7 +291,7 @@ def injectAllREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -323,7 +330,8 @@ def injectAllFanREST(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -342,7 +350,7 @@ def injectAllFanREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -375,7 +383,8 @@ def injectLogsREST(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -394,7 +403,7 @@ def injectLogsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -425,7 +434,8 @@ def injectEventsREST(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -444,7 +454,7 @@ def injectEventsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -473,7 +483,8 @@ def injectMetricsREST(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -492,7 +503,7 @@ def injectMetricsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -529,7 +540,8 @@ def clearAllREST(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -548,7 +560,7 @@ def clearAllREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
 
 
@@ -583,7 +595,8 @@ def clearEventsREST(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -602,7 +615,7 @@ def clearEventsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -631,7 +644,8 @@ def clearStoriesREST(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -650,7 +664,7 @@ def clearStoriesREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -675,7 +689,7 @@ def login(request):
         response.set_cookie('last_visit', time.localtime())
         actloginip=request.META.get('REMOTE_ADDR')
         response.set_cookie('IP', actloginip)
-        response.set_cookie('token', hashlib.md5((token+actloginip).encode()).hexdigest())
+        response.set_cookie('token', hashlib.md5((token).encode()).hexdigest())
 
         context = {
             'loggedin': loggedin,
@@ -692,7 +706,7 @@ def login(request):
             'INSTANCE_NAME': INSTANCE_NAME,
             'ADMIN_MODE': ADMIN_MODE,
             'SIMULATION_MODE': SIMULATION_MODE,
-            'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+            'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
             'PAGE_NAME': 'index'
         }
     else:
@@ -720,7 +734,7 @@ def login(request):
             'INSTANCE_NAME': INSTANCE_NAME,
             'ADMIN_MODE': ADMIN_MODE,
             'SIMULATION_MODE': SIMULATION_MODE,
-            'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+            'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
             'PAGE_NAME': 'login'
         }
 
@@ -739,7 +753,7 @@ def verifyLogin(request):
     actloginip=request.META.get('REMOTE_ADDR')
     token=os.environ.get('TOKEN')
 
-    if str(actToken)!=hashlib.md5((token+actloginip).encode()).hexdigest():
+    if str(actToken)!=hashlib.md5((token).encode()).hexdigest():
         loggedin='false'
 
         #print('        ❌ LOGIN NOK: NEW IP')
@@ -817,7 +831,7 @@ def index(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME + ' Environment',
+        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
         
     }
@@ -842,7 +856,8 @@ def doc(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -885,7 +900,8 @@ def apps(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -909,7 +925,7 @@ def apps(request):
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
-        'PAGE_TITLE': '🚀 CP4WAIOPS Applications',
+        'PAGE_TITLE': '🚀 IBM AIOps Applications',
         'PAGE_NAME': 'apps'
         
     }
@@ -934,7 +950,8 @@ def apps_system(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -984,7 +1001,8 @@ def apps_demo(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -1008,7 +1026,7 @@ def apps_demo(request):
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
-        'PAGE_TITLE': '🌏 Demo Content',
+        'PAGE_TITLE': '🌏 Demo Scenarios',
         'PAGE_NAME': 'demo'
         
     }
@@ -1035,7 +1053,8 @@ def apps_additional(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,
@@ -1109,7 +1128,8 @@ def config(request):
         'awx_user': awx_user,
         'awx_pwd': awx_pwd,
         'elk_url': elk_url,
-        'turonomic_url': turonomic_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
         'openshift_url': openshift_url,
         'openshift_token': openshift_token,
         'openshift_server': openshift_server,

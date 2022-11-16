@@ -1,0 +1,1455 @@
+[
+  {
+    "uuid": "74729818198128",
+    "displayName": "RobotShop",
+    "category": "Custom",
+    "inputFields": [
+      {
+        "displayName": "Name",
+        "name": "Name",
+        "value": "RobotShop",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Name for the metric server endpoint",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "URL",
+        "name": "targetIdentifier",
+        "value": "http://turbo-metrics-dif-service.turbonomic:3000/businessApplication/RobotShop/285836049966016",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "HTTP URL for the JSON DIF data",
+        "verificationRegex": ".*"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:35:11Z",
+    "status": "Validated",
+    "type": "DataIngestionFramework-Turbonomic",
+    "readonly": false,
+    "lastEditTime": "2022-11-16T08:35:11Z",
+    "lastEditUser": "administrator",
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  },
+  {
+    "uuid": "74729818101040",
+    "displayName": "159.122.143.166",
+    "category": "Applications and Databases",
+    "inputFields": [
+      {
+        "displayName": "API Token",
+        "name": "apiToken",
+        "isMandatory": true,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "API Token to use to connect to a target",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Hostname or IP Address",
+        "name": "address",
+        "value": "159.122.143.166",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "The hostname or IP address to use when connecting to the Instana instance",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Collect Virtual Machine Metrics",
+        "name": "collectVmMetrics",
+        "value": "false",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Overwrite Hypervisor or Cloud Provider Virtual Machine metrics with data from the target",
+        "verificationRegex": "(true|false)"
+      },
+      {
+        "displayName": "Proxy Host",
+        "name": "proxyHost",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Proxy host name or IP address (optional)",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Port",
+        "name": "proxyPort",
+        "defaultValue": "8080",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "NUMERIC",
+        "description": "Proxy host port (optional)",
+        "verificationRegex": "^$|(^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$)"
+      },
+      {
+        "displayName": "Proxy Username",
+        "name": "proxyUsername",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "User name to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Password",
+        "name": "proxyPassword",
+        "isMandatory": false,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Password to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Secure Proxy Connection",
+        "name": "secureProxy",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Use SSL to connect to the proxy host",
+        "verificationRegex": "(true|false)"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:35:20Z",
+    "status": "Probe version ('Unknown') is custom; please confirm image being used supports server version '8.6.6'.",
+    "type": "Instana",
+    "readonly": false,
+    "lastEditTime": "2022-11-16T08:35:05Z",
+    "lastEditUser": "administrator",
+    "healthSummary": {
+      "healthState": "MINOR"
+    }
+  },
+  {
+    "uuid": "74729818146512",
+    "displayName": "Hello",
+    "category": "Custom",
+    "inputFields": [
+      {
+        "displayName": "Name",
+        "name": "Name",
+        "value": "Hello",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Name for the metric server endpoint",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "URL",
+        "name": "targetIdentifier",
+        "value": "http://turbo-metrics-dif-service.turbonomic:3000/helloworld",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "HTTP URL for the JSON DIF data",
+        "verificationRegex": ".*"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:35:08Z",
+    "status": "Validated",
+    "type": "DataIngestionFramework-Turbonomic",
+    "readonly": false,
+    "lastEditTime": "2022-11-16T08:35:08Z",
+    "lastEditUser": "administrator",
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  },
+  {
+    "uuid": "74729817926736",
+    "displayName": "GCP",
+    "category": "Public Cloud",
+    "inputFields": [
+      {
+        "displayName": "Display Name",
+        "name": "name",
+        "value": "GCP",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter a unique display name for this target.",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Service Account Key (JSON)",
+        "name": "serviceAccountKey",
+        "isMandatory": true,
+        "isSecret": true,
+        "isMultiline": true,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter the complete Service Account Key JSON.",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Host",
+        "name": "proxyHost",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Proxy host name or IP address (optional)",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Port",
+        "name": "proxyPort",
+        "defaultValue": "8080",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "NUMERIC",
+        "description": "Proxy host port (optional)",
+        "verificationRegex": "^$|(^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$)"
+      },
+      {
+        "displayName": "Proxy Username",
+        "name": "proxyUsername",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "User name to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Password",
+        "name": "proxyPassword",
+        "isMandatory": false,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Password to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Secure Proxy Connection",
+        "name": "secureProxy",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Use SSL to connect to the proxy host",
+        "verificationRegex": "(true|false)"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:35:06Z",
+    "status": "Validated",
+    "derivedTargets": [
+      {
+        "uuid": "74729818111232",
+        "displayName": "niklaushirt",
+        "category": "Public Cloud",
+        "inputFields": [
+          {
+            "displayName": "GCP Project Id",
+            "name": "projectId",
+            "value": "niklaushirt",
+            "isMandatory": true,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Enter GCP project ID.",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "GCP Project Name",
+            "name": "displayName",
+            "value": "niklaushirt",
+            "isMandatory": true,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Enter GCP project Name.",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Service Account Key",
+            "name": "serviceAccountKey",
+            "isMandatory": true,
+            "isSecret": true,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Enter the Service Account key.",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Proxy Host",
+            "name": "proxyHost",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Proxy host name or IP address (optional)",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Proxy Port",
+            "name": "proxyPort",
+            "value": "8080",
+            "defaultValue": "8080",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "NUMERIC",
+            "description": "Proxy host port (optional)",
+            "verificationRegex": "^$|(^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$)"
+          },
+          {
+            "displayName": "Proxy Username",
+            "name": "proxyUsername",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "User name to use to connect to a proxy",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Proxy Password",
+            "name": "proxyPassword",
+            "isMandatory": false,
+            "isSecret": true,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Password to use to connect to a proxy",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Secure Proxy Connection",
+            "name": "secureProxy",
+            "value": "false",
+            "defaultValue": "false",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "BOOLEAN",
+            "description": "Use SSL to connect to the proxy host",
+            "verificationRegex": "(true|false)"
+          }
+        ],
+        "lastValidated": "2022-11-16T08:35:38Z",
+        "status": "Validated",
+        "type": "GCP Project",
+        "readonly": true,
+        "healthSummary": {
+          "healthState": "NORMAL"
+        }
+      }
+    ],
+    "type": "GCP Service Account",
+    "readonly": false,
+    "lastEditTime": "2022-11-16T08:34:54Z",
+    "lastEditUser": "administrator",
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  },
+  {
+    "uuid": "74729817848928",
+    "displayName": "Azure",
+    "category": "Public Cloud",
+    "inputFields": [
+      {
+        "displayName": "Directory (tenant) ID",
+        "name": "tenant",
+        "value": "5f6406eb-5254-4c5e-97e1-d3bdd1ec80cd",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter the directory (tenant) ID associated with Azure Account",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Application (client) ID",
+        "name": "client",
+        "value": "8b056368-3a11-4ec7-bcf3-60dff81dea95",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter the Client/App ID to allow Turbonomic access to resources in the Azure Subscription",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Client Secret Key",
+        "name": "key",
+        "isMandatory": true,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter the Client Secret Key associated with Client App ID",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Discover Azure MCA",
+        "name": "discoverMCA",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Discover Microsoft Customer Agreement information. Disable any Azure EA probe covering the same subscriptions before enabling this.",
+        "verificationRegex": "(true|false)"
+      },
+      {
+        "displayName": "Display Name",
+        "name": "name",
+        "value": "Azure",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter display name for Service Principal target",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Azure Cloud Type",
+        "name": "cloudType",
+        "value": "Global",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Select Azure Cloud type",
+        "verificationRegex": ".*",
+        "allowedValues": [
+          "Global",
+          "US Government",
+          "Germany"
+        ]
+      },
+      {
+        "displayName": "Proxy Host",
+        "name": "proxyHost",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Proxy host name or IP address (optional)",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Port",
+        "name": "proxyPort",
+        "defaultValue": "8080",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "NUMERIC",
+        "description": "Proxy host port (optional)",
+        "verificationRegex": "^$|(^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$)"
+      },
+      {
+        "displayName": "Proxy Username",
+        "name": "proxyUsername",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "User name to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Password",
+        "name": "proxyPassword",
+        "isMandatory": false,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Password to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Secure Proxy Connection",
+        "name": "secureProxy",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Use SSL to connect to the proxy host",
+        "verificationRegex": "(true|false)"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:34:52Z",
+    "status": "Validated",
+    "derivedTargets": [
+      {
+        "uuid": "74729817893760",
+        "displayName": "Pay-As-You-Go",
+        "category": "Public Cloud",
+        "inputFields": [
+          {
+            "displayName": "Username",
+            "name": "username",
+            "value": "449e8069-7cd0-4d08-868e-770fd24e9461",
+            "isMandatory": true,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Enter the Azure Subscription ID",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Scope",
+            "name": "targetCostRelatedFields",
+            "value": "449e8069-7cd0-4d08-868e-770fd24e9461",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "GROUP_SCOPE",
+            "description": "Subscription ID for Business Account defining the entity scope.",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Directory (tenant) ID",
+            "name": "tenant",
+            "value": "5f6406eb-5254-4c5e-97e1-d3bdd1ec80cd",
+            "isMandatory": true,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Enter the directory (tenant) ID associated with Azure Account",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Application (client) ID",
+            "name": "client",
+            "value": "8b056368-3a11-4ec7-bcf3-60dff81dea95",
+            "isMandatory": true,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Enter the Client/App ID to allow Turbonomic access to resources in the Azure Subscription",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Client Secret Key",
+            "name": "key",
+            "isMandatory": true,
+            "isSecret": true,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Enter the Client Secret Key associated with Client App ID",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Display Name",
+            "name": "name",
+            "value": "Pay-As-You-Go",
+            "isMandatory": true,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Enter display name for Service Principal target",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Azure Cloud Type",
+            "name": "cloudType",
+            "value": "Global",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Select Azure Cloud type",
+            "verificationRegex": ".*",
+            "allowedValues": [
+              "Global",
+              "US Government",
+              "Germany"
+            ]
+          },
+          {
+            "displayName": "Proxy Host",
+            "name": "proxyHost",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Proxy host name or IP address (optional)",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Proxy Port",
+            "name": "proxyPort",
+            "value": "8080",
+            "defaultValue": "8080",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "NUMERIC",
+            "description": "Proxy host port (optional)",
+            "verificationRegex": "^$|(^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$)"
+          },
+          {
+            "displayName": "Proxy Username",
+            "name": "proxyUsername",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "User name to use to connect to a proxy",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Proxy Password",
+            "name": "proxyPassword",
+            "isMandatory": false,
+            "isSecret": true,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "STRING",
+            "description": "Password to use to connect to a proxy",
+            "verificationRegex": ".*"
+          },
+          {
+            "displayName": "Secure Proxy Connection",
+            "name": "secureProxy",
+            "value": "false",
+            "defaultValue": "false",
+            "isMandatory": false,
+            "isSecret": false,
+            "isMultiline": false,
+            "isTargetDisplayName": false,
+            "valueType": "BOOLEAN",
+            "description": "Use SSL to connect to the proxy host",
+            "verificationRegex": "(true|false)"
+          }
+        ],
+        "lastValidated": "2022-11-16T08:35:57Z",
+        "status": "Validated",
+        "type": "Azure Subscription",
+        "readonly": true,
+        "healthSummary": {
+          "healthState": "NORMAL"
+        }
+      }
+    ],
+    "type": "Azure Service Principal",
+    "readonly": false,
+    "lastEditTime": "2022-11-16T08:34:49Z",
+    "lastEditUser": "administrator",
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  },
+  {
+    "uuid": "74729817893760",
+    "displayName": "Pay-As-You-Go",
+    "category": "Public Cloud",
+    "inputFields": [
+      {
+        "displayName": "Username",
+        "name": "username",
+        "value": "449e8069-7cd0-4d08-868e-770fd24e9461",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter the Azure Subscription ID",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Scope",
+        "name": "targetCostRelatedFields",
+        "value": "449e8069-7cd0-4d08-868e-770fd24e9461",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "GROUP_SCOPE",
+        "description": "Subscription ID for Business Account defining the entity scope.",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Directory (tenant) ID",
+        "name": "tenant",
+        "value": "5f6406eb-5254-4c5e-97e1-d3bdd1ec80cd",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter the directory (tenant) ID associated with Azure Account",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Application (client) ID",
+        "name": "client",
+        "value": "8b056368-3a11-4ec7-bcf3-60dff81dea95",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter the Client/App ID to allow Turbonomic access to resources in the Azure Subscription",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Client Secret Key",
+        "name": "key",
+        "isMandatory": true,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter the Client Secret Key associated with Client App ID",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Display Name",
+        "name": "name",
+        "value": "Pay-As-You-Go",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter display name for Service Principal target",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Azure Cloud Type",
+        "name": "cloudType",
+        "value": "Global",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Select Azure Cloud type",
+        "verificationRegex": ".*",
+        "allowedValues": [
+          "Global",
+          "US Government",
+          "Germany"
+        ]
+      },
+      {
+        "displayName": "Proxy Host",
+        "name": "proxyHost",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Proxy host name or IP address (optional)",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Port",
+        "name": "proxyPort",
+        "value": "8080",
+        "defaultValue": "8080",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "NUMERIC",
+        "description": "Proxy host port (optional)",
+        "verificationRegex": "^$|(^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$)"
+      },
+      {
+        "displayName": "Proxy Username",
+        "name": "proxyUsername",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "User name to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Password",
+        "name": "proxyPassword",
+        "isMandatory": false,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Password to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Secure Proxy Connection",
+        "name": "secureProxy",
+        "value": "false",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Use SSL to connect to the proxy host",
+        "verificationRegex": "(true|false)"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:35:57Z",
+    "status": "Validated",
+    "type": "Azure Subscription",
+    "readonly": true,
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  },
+  {
+    "uuid": "74729817739392",
+    "displayName": "AWS",
+    "category": "Public Cloud",
+    "inputFields": [
+      {
+        "displayName": "Custom Target Name",
+        "name": "address",
+        "value": "AWS",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter a unique target name.",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Account Type",
+        "name": "accountType",
+        "value": "Standard",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "AWS Account type, Standard or GovCloud (US).",
+        "verificationRegex": ".*",
+        "allowedValues": [
+          "Standard",
+          "Government_US"
+        ]
+      },
+      {
+        "displayName": "IAM Role",
+        "name": "iamRole",
+        "value": "false",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Authenticate using either IAM Role ARN or Access Key and Secret Access Key.",
+        "verificationRegex": "(true|false)"
+      },
+      {
+        "displayName": "Access Key",
+        "name": "username",
+        "value": "AKIAYPCVQIEKUG6DBIGL",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter AWS account Access Key ID.",
+        "verificationRegex": ".*",
+        "dependencyKey": "iamRole",
+        "dependencyValue": "false"
+      },
+      {
+        "displayName": "Secret Access Key",
+        "name": "password",
+        "isMandatory": true,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter AWS account Secret Access Key ID.",
+        "verificationRegex": ".*",
+        "dependencyKey": "iamRole",
+        "dependencyValue": "false"
+      },
+      {
+        "displayName": "IAM Role ARN",
+        "name": "iamRoleArn",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter ARN for IAM Role.",
+        "verificationRegex": ".*",
+        "dependencyKey": "iamRole",
+        "dependencyValue": "true"
+      },
+      {
+        "displayName": "Proxy Host",
+        "name": "proxyHost",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Proxy host name or IP address (optional)",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Port",
+        "name": "proxyPort",
+        "defaultValue": "8080",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "NUMERIC",
+        "description": "Proxy host port (optional)",
+        "verificationRegex": "^$|(^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$)"
+      },
+      {
+        "displayName": "Proxy Username",
+        "name": "proxyUsername",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "User name to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Password",
+        "name": "proxyPassword",
+        "isMandatory": false,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Password to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Secure Proxy Connection",
+        "name": "secureProxy",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Use SSL to connect to the proxy host",
+        "verificationRegex": "(true|false)"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:34:47Z",
+    "status": "Validated",
+    "type": "AWS",
+    "readonly": false,
+    "lastEditTime": "2022-11-16T08:34:42Z",
+    "lastEditUser": "administrator",
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  },
+  {
+    "uuid": "74729817626944",
+    "displayName": "https://hirt.us",
+    "category": "Hypervisor",
+    "inputFields": [
+      {
+        "displayName": "Address",
+        "name": "address",
+        "value": "https://hirt.us",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "IP or FQDN of vCenter Server",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Enable Datastore Browsing",
+        "name": "isStorageBrowsingEnabled",
+        "value": "true",
+        "defaultValue": "true",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Enable datastore browsing for this target.",
+        "verificationRegex": "(true|false)"
+      },
+      {
+        "displayName": "Enable guest metrics (vSphere 6.5U3+)",
+        "name": "guestMetricsEnabled",
+        "value": "true",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Enable retrieval of advanced memory metrics. Only supported on vCenter Server version 6.5U3 or later. Guest VMs must run VMWare Tools 10.3.2 Build 10338 or later.",
+        "verificationRegex": "(true|false)"
+      },
+      {
+        "displayName": "Username",
+        "name": "username",
+        "value": "administrator@hirt.us",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "User name to use to connect to a target",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Password",
+        "name": "password",
+        "isMandatory": true,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Password to use to connect to a target",
+        "verificationRegex": ".*"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:34:40Z",
+    "status": "Validated",
+    "type": "vCenter",
+    "readonly": false,
+    "lastEditTime": "2022-11-16T08:34:35Z",
+    "lastEditUser": "administrator",
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  },
+  {
+    "uuid": "74729214471536",
+    "displayName": "dev-aiops.itzroks-270003bu3k-arskds-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/",
+    "category": "Applications and Databases",
+    "inputFields": [
+      {
+        "displayName": "API Token",
+        "name": "apiToken",
+        "isMandatory": true,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "API Token to use to connect to a target",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Hostname or IP Address",
+        "name": "address",
+        "value": "dev-aiops.itzroks-270003bu3k-arskds-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "The hostname or IP address to use when connecting to the Instana instance",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Collect Virtual Machine Metrics",
+        "name": "collectVmMetrics",
+        "value": "false",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Overwrite Hypervisor or Cloud Provider Virtual Machine metrics with data from the target",
+        "verificationRegex": "(true|false)"
+      },
+      {
+        "displayName": "Proxy Host",
+        "name": "proxyHost",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Proxy host name or IP address (optional)",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Port",
+        "name": "proxyPort",
+        "value": "8080",
+        "defaultValue": "8080",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "NUMERIC",
+        "description": "Proxy host port (optional)",
+        "verificationRegex": "^$|(^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$)"
+      },
+      {
+        "displayName": "Proxy Username",
+        "name": "proxyUsername",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "User name to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Password",
+        "name": "proxyPassword",
+        "isMandatory": false,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Password to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Secure Proxy Connection",
+        "name": "secureProxy",
+        "value": "false",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Use SSL to connect to the proxy host",
+        "verificationRegex": "(true|false)"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:27:50Z",
+    "status": "Probe version ('Unknown') is custom; please confirm image being used supports server version '8.6.6'.",
+    "type": "Instana",
+    "readonly": false,
+    "lastEditTime": "2022-11-15T22:07:21Z",
+    "lastEditUser": "administrator",
+    "healthSummary": {
+      "healthState": "MINOR"
+    }
+  },
+  {
+    "uuid": "74729201617120",
+    "displayName": "Kubernetes-Turbonomic",
+    "category": "Cloud Native",
+    "inputFields": [
+      {
+        "displayName": "Name",
+        "name": "targetIdentifier",
+        "value": "Kubernetes-Turbonomic",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Name of the Kubernetes cluster",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Master Host",
+        "name": "masterHost",
+        "value": "https://172.21.0.1:443",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Address of the Kubernetes master",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Kubernetes Server Version",
+        "name": "serverVersion",
+        "value": "v1.23.5+8471591, OCP 4.10.36",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Version of the Kubernetes server",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Kubeturbo Image",
+        "name": "image",
+        "value": "registry.connect.redhat.com/turbonomic/kubeturbo:8.6.6",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Container Image of Kubeturbo Probe",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Kubeturbo Image ID",
+        "name": "imageID",
+        "value": "sha256:3a432582424901098ba1a17e785bc9d3f4533d5507988679ffec1366f2f6c5c8",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Container Image ID of Kubeturbo Probe",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Kubeturbo Version",
+        "name": "probeVersion",
+        "value": "8.6.6",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Release Version of Kubeturbo Probe",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "communicationBindingChannel",
+        "name": "communicationBindingChannel",
+        "value": "1c39676b-344a-497b-a654-71aa245fd4b7",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false
+      }
+    ],
+    "lastValidated": "2022-11-16T08:33:06Z",
+    "status": "Validated",
+    "type": "Kubernetes",
+    "readonly": false,
+    "lastEditTime": "2022-11-15T21:52:55Z",
+    "lastEditUser": "Kubernetes",
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  },
+  {
+    "uuid": "74729818111232",
+    "displayName": "niklaushirt",
+    "category": "Public Cloud",
+    "inputFields": [
+      {
+        "displayName": "GCP Project Id",
+        "name": "projectId",
+        "value": "niklaushirt",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter GCP project ID.",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "GCP Project Name",
+        "name": "displayName",
+        "value": "niklaushirt",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter GCP project Name.",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Service Account Key",
+        "name": "serviceAccountKey",
+        "isMandatory": true,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Enter the Service Account key.",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Host",
+        "name": "proxyHost",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Proxy host name or IP address (optional)",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Port",
+        "name": "proxyPort",
+        "value": "8080",
+        "defaultValue": "8080",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "NUMERIC",
+        "description": "Proxy host port (optional)",
+        "verificationRegex": "^$|(^([0-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$)"
+      },
+      {
+        "displayName": "Proxy Username",
+        "name": "proxyUsername",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "User name to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Proxy Password",
+        "name": "proxyPassword",
+        "isMandatory": false,
+        "isSecret": true,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Password to use to connect to a proxy",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "Secure Proxy Connection",
+        "name": "secureProxy",
+        "value": "false",
+        "defaultValue": "false",
+        "isMandatory": false,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "BOOLEAN",
+        "description": "Use SSL to connect to the proxy host",
+        "verificationRegex": "(true|false)"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:35:38Z",
+    "status": "Validated",
+    "type": "GCP Project",
+    "readonly": true,
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  },
+  {
+    "uuid": "74729201288464",
+    "displayName": "Prometheus-Turbonomic",
+    "category": "Custom",
+    "inputFields": [
+      {
+        "displayName": "Name",
+        "name": "Name",
+        "value": "Prometheus-Turbonomic",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "Name for the metric server endpoint",
+        "verificationRegex": ".*"
+      },
+      {
+        "displayName": "URL",
+        "name": "targetIdentifier",
+        "value": "http://localhost:8081/metrics",
+        "isMandatory": true,
+        "isSecret": false,
+        "isMultiline": false,
+        "isTargetDisplayName": false,
+        "valueType": "STRING",
+        "description": "HTTP URL for the JSON DIF data",
+        "verificationRegex": ".*"
+      }
+    ],
+    "lastValidated": "2022-11-16T08:33:00Z",
+    "status": "Validated",
+    "type": "DataIngestionFramework-Turbonomic",
+    "readonly": false,
+    "lastEditTime": "2022-11-15T21:52:34Z",
+    "healthSummary": {
+      "healthState": "NORMAL"
+    }
+  }
+]
