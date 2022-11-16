@@ -14,7 +14,7 @@
 Please drop me a note on Slack or by mail nikh@ch.ibm.com if you find glitches or problems.
 
 
-
+## 🚨 Can now install Instana into your Cluster
 
 
 This is provided `as-is`:
@@ -120,8 +120,10 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 
 	1. Geograpy: prefer **Dallas or London** (others might be slower)
 	2. Worker node count: **5**
-	3. Flavour: **b3c.16x64** ❗
+	3. Flavour: **b3c.16x64** ❗ 
 	4. OpenShift Version: **4.10**
+
+	> ❗ If you want to install AIManager, Event Manager, Trubonomic and Instana please select **b3c.32x128** 
 
 	![K8s CNI](./doc/pics/roks02.png)
 
@@ -149,6 +151,7 @@ Those scripts have been tested thoroughly on different environments and have pro
 If you think that you hit a problem:
 
 * Make sure that you have provisioned a cluster with **5 worker nodes with 16 CPU and 64 GB** each (`b3c.16x64` - it's easy to select the wrong size). If you have Pods in `0/0` state verify the `Events`. If you get `Not enough CPU` then delete the cluster and provision the correct size.
+* If you want to install AIManager, Event Manager, Trubonomic and Instana please select **5 worker nodes with 32 CPU and 128 GB** (`b3c.32x128`)
 * When deploying ROKS I usually use Dallas or London, they are the fastest. On other regions we have seen much worse performance - deployment can take 4-5 times longer.
 * The complete installation takes about 2.5 to 8 hours depending on your region where you deployed ROKS to (see above).
 * If you see Pods in `CrashLoop` or other error states, try to wait it out (this can be due to dependencies on other componenets that are not ready yet). Chances are that the deployment will eventually go through. If after 8h you are still stuck, ping me.
@@ -161,19 +164,34 @@ If you think that you hit a problem:
 
 <div style="page-break-after: always;"></div>
 
-## 🐥 1.3 Install AI Manager, Event Manager and Turbonomic with demo content
+## 🐥 1.3 Quick Install 
 
-This is probably the one that you want. 
-You get all the CP4WAIOPS components installed and pre-trained in one simple script.
+You can use the scritps in the `Quick_Install` folder to rapidly spin up a demo environment.
+The names should be self explaining and the headers of the files explain the modules to be installed.
+
+> Basically you would to the following:
+> 
+> 1. In the the OCP Web UI click on the `+` sign in the right upper corner
+> 1. Select the `Quick Install File` from  [this directory](./Quick_Install/)
+> 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
+> 3. Click `Save`	
+
+Some examples in the following chapters.
+
+### 🐥 1.3.1 Install AI Manager with demo content, Turbonomic and Instana 
+
+This is probably the one that you want.
+
+You get AIManager installed and pre-trained in one simple script.
 Ready to go.
-On top of that you get a Turbonomic instance to play around a bit (you'll need a license key for this).
+On top of that you get Turbonomic and Instana instances to play around a bit (you'll need a license key for each).
 
 
 
 ![K8s CNI](./doc/pics/install01.png)
 
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
-1. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/01_INSTALL_ALL.yaml)
+1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_TURBO_INSTANA.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
 3. Click `Save`
 
@@ -201,32 +219,25 @@ On top of that you get a Turbonomic instance to play around a bit (you'll need a
 > 	   - Disables ASM Service match rule 
 > 	   - Create Policy Creation for Stories and Runbooks 
 > 	   - Demo Service Account 
-> - **Event Manager**
-> 	- Event Manager
-> - **Event Manager Demo Content**
->   - **Topology**
->     - Create ASM merge rules
->     - Load ASM merge Topology
->     - Create AI Manager Application
 > - **Turbonomic**
+> - **Instana**
 > 
 
 <div style="page-break-after: always;"></div>
 
+### 🐥 1.3.2 Install AI Manager, Event Manager with demo content
+
+You get all the CP4WAIOPS components installed and pre-trained in one simple script.
+Ready to go.
 
 
-## 🐥 1.4 Install AI Manager with demo content
 
+![K8s CNI](./doc/pics/install01.png)
 
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
-2. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/02_INSTALL_AIMGR_ALL.yaml)
+1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_EVTMGR.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
-4. Click `Save`
-	
-
-
-Installs the following components:
-
+3. Click `Save`
 
 > - **AI Manager**
 > 	- IBM Operator
@@ -252,15 +263,6 @@ Installs the following components:
 > 	   - Disables ASM Service match rule 
 > 	   - Create Policy Creation for Stories and Runbooks 
 > 	   - Demo Service Account 
-
-<div style="page-break-after: always;"></div>
-		
-## 🐥 1.5 Install Event Manager with demo content
-1. In the the OCP Web UI click on the `+` sign in the right upper corner
-1. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/03_INSTALL_EVTMGR_ALL.yaml)
-3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
-3. Click `Save`
-
 > - **Event Manager**
 > 	- Event Manager
 > - **Event Manager Demo Content**
@@ -268,25 +270,48 @@ Installs the following components:
 >     - Create ASM merge rules
 >     - Load ASM merge Topology
 >     - Create AI Manager Application
+> 
 
 <div style="page-break-after: always;"></div>
 
-## 1.6 Install other components
+
+
+### 🐥 1.3.2 Custom Install
+
+1. Open the [00\_INSTALL_CUSTOM.yaml](./Quick_Install/00_INSTALL_CUSTOM.yaml) file
+1. Adap the installation configuration to your needs. Select the modules to install and their configuration.
+
+	```yaml
+	- name: cp4waiops-aimanager
+	  kind: AIManager						<-- The feature to be configured
+	  install: true							<-- Install yes/no
+	
+	  # current_cp4waiops_feature			<-- Configuration of the feature
+	  # CP4WAIOPS Size of the install
+	  waiops_size: small
+	  ...
+	  # Version of the catalog subscription
+	  subscription_channel: v3.5
+	
+	```
+	
+1. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
+1. Copy the content
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
-1. Select the content file from  [this directory](./tools/08_Quick_Install_Jobs/)
-3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
-3. Click `Save`		
+1. Paste the content
+1. Click `Save`
+
 
 > ℹ️ If you get a ClusterRoleBinding already exists, just delete it at the beginning of the YAML
 
 
-## 1.7 Configure Slack
+## 1.4 Configure Slack
 
 Continue [here](#4-slack-integration) for [Slack integration](#4-slack-integration)
 
 <div style="page-break-after: always;"></div>
 
-## 1.8 Access the Environment
+## 1.5 Access the Environment
 
 Once the installation has finisehd, you can access the demo environment:
 
@@ -759,7 +784,7 @@ You have different options:
 
 1. **Install directly from the OCP Web UI** *(no need to install anything on your PC)*
 	1. In the the OCP Web UI click on the + sign in the right upper corner
-	1. Copy and paste the content from [this file](./tools/08_Quick_Install_Jobs/03_INSTALL_EVTMGR_ALL.yaml)
+	1. Copy and paste the content from [this file](./Quick_Install/03_INSTALL_EVTMGR_ALL.yaml)
 	2. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.3.1
 	3. Click `Save`
 	
