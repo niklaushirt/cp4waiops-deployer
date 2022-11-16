@@ -59,3 +59,37 @@
         
 
 
+
+
+
+- name: 🚀 TURBONOMIC - Create demo User
+  shell: |
+    echo "------------------------------------------------------------------------------------------------------------------------------"
+    echo " 📥 Create demo User"
+    result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/users" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '  {
+      "displayName": "Demo User",
+        "username": "{{current_cp4waiops_feature.demo_user}}",
+        "password": "{{current_cp4waiops_feature.demo_password}}",
+        "roles": [
+          {
+            "name": "ADMINISTRATOR"
+          }
+        ],
+        "loginProvider": "Local",
+        "type": "DedicatedCustomer",
+        "showSharedUserSC": false
+      }
+      ')
+    echo $result
+    echo ""
+    echo ""
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+
+
