@@ -40,7 +40,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-turbonomic
+  name: waiops-easy-install-instana
   namespace: default
 spec:
   serviceAccountName: installer-default-default
@@ -67,7 +67,7 @@ spec:
        
 
               echo "*****************************************************************************************************************************"
-              echo " ✅ STARTING: INSTALL Turbonomic"
+              echo " ✅ STARTING: INSTALL Instana"
               echo "*****************************************************************************************************************************"
               echo ""
               echo ""

@@ -78,7 +78,7 @@
     - " Agent Key:      {{ current_cp4waiops_feature.agent_key}}"
     - "❌ Skipping installation...."
     - ""
-  when: current_cp4waiops_feature.sales_key != "NONE" or current_cp4waiops_feature.agent_key != "NONE"
+  when: current_cp4waiops_feature.sales_key == "NONE" or current_cp4waiops_feature.agent_key == "NONE"
 
 
 - name: Install Instana if sales and agent key provided
@@ -166,7 +166,7 @@
   # CHECKS
   # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 
-  when: current_cp4waiops_feature.sales_key != "NONE" or current_cp4waiops_feature.agent_key != "NONE"
+  when: current_cp4waiops_feature.sales_key == "NONE" or current_cp4waiops_feature.agent_key == "NONE"
   ignore_errors: true
 
 
