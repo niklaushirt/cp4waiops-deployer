@@ -27,8 +27,9 @@
 #     - RobotShop Demo App
 #     - Demo Service Account 
 #     - AWX (Open Source Ansible Tower) with preloaded Playbooks
+#     - Disables ASM Service match rule 
 #     - Train Models
-#       - Create Training Definitions (TG, LAD, CR, SI, MET. Turn off RSA) 
+#       - Create Training Definitions (TG, LAD, CR, SI. MET, Turn off RSA) 
 #       - Create Training Data (LAD, SNOW, MET) 
 #       - Train Models (TG, LAD, CR, SI, MET) 
 #     - Topology
@@ -40,7 +41,14 @@
 #     - External Routes (Flink, Topology, ...)
 #     - Disables ASM Service match rule 
 #     - Create Policy Creation for Stories and Runbooks 
-
+#  - Event Manager
+#  - Demo Content
+#    - Topology
+#      - Create ASM merge rules
+#      - Load ASM merge Topology
+#      - Create AI Manager Application
+#  - Turbonomic
+#  - Instana
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 
@@ -368,7 +376,7 @@ spec:
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 - name: cp4waiops-instana
                   kind: Instana
-                  install: false
+                  install: true
 
                   # ---------------------------------------------------------------------
                   # INSTANA LICENSE
@@ -394,6 +402,8 @@ spec:
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   #storage_class_file: automatic
                   #storage_class_block: automatic
+
+
               # *************************************************************************************************************************************************
               # --------------------------------------------------------------------------------------------------------------------------------------
               # CP4WAIOPS USAGE
