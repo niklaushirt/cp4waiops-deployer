@@ -124,7 +124,7 @@
 
 
 - name: 📥 Restart Demo UI
-  include_tasks:21_addons-instana-restart-demoui.yaml
+  include_tasks: 21_addons-instana-restart-demoui.yaml
 
 
 - name: 📥 Install OCP Menu Item
