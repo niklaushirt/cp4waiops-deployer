@@ -335,7 +335,6 @@
 #   retries: 500
 #   delay: 15
 
-  when: current_cp4waiops_feature.create_external_routes == true
 
 
 

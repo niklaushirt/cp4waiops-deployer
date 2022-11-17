@@ -94,6 +94,24 @@
   include_tasks: 03_init-initialization.yaml
   
 
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# TEST
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+- name: 📥  Create Routes
+  include_tasks: 30_aimanager-create-routes.yaml
+  when: current_cp4waiops_feature.create_external_routes == true
+
+# Update AI Manager Cards
+- name: 📥 Update AI Manager Cards
+  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# TEST
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+
+
 - name: 📥 Get Storage Class
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
 
@@ -106,17 +124,6 @@
 - name: 📥 AI Manager Custom Hook
   include_tasks: 08_aimanager-custom-hook.yaml
 
-
-# ---------------------------------------------------------------------------------------------------------------------------------------------------"
-# TEST
-# ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 📥  Create Routes
-  include_tasks: 30_aimanager-create-routes.yaml
-  when: current_cp4waiops_feature.create_external_routes == true
-
-# Update AI Manager Cards
-- name: 📥 Update AI Manager Cards
-  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
