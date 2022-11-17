@@ -56,7 +56,7 @@
   - name: 🟣  DEBUG
     debug:
       var: ZEN_TOKEN
-      verbosity: 1
+      #verbosity: 1
           
 
 
@@ -78,7 +78,7 @@
   - name: 🟣  DEBUG
     debug:
       var: output.stdout_lines
-      verbosity: 1
+      #verbosity: 1
           
 
 
@@ -119,7 +119,7 @@
   - name: 🟣  DEBUG
     debug:
       var: output.stdout_lines
-      verbosity: 1
+      #verbosity: 1
           
 
 
@@ -167,7 +167,7 @@
   - name: 🟣  DEBUG
     debug:
       var: output.stdout_lines
-      verbosity: 1
+      #verbosity: 1
           
 
 
@@ -225,7 +225,7 @@
   - name: 🟣  DEBUG
     debug:
       var: output.stdout_lines
-      verbosity: 1
+      #verbosity: 1
           
 
 
@@ -280,7 +280,7 @@
   - name: 🟣  DEBUG
     debug:
       var: output.stdout_lines
-      verbosity: 1
+      #verbosity: 1
 
   when: global_config.create_cards | default(true) == true  
 
