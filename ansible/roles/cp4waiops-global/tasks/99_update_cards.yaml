@@ -65,7 +65,7 @@
 
   - name:  🧻 ZEN CARDS - Delete All Custom Cards
     shell: |
-      echo "       🛠️   Get Route"
+      export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
       export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd  -o jsonpath={.spec.host})          
       curl -X "DELETE" -k "https://$ROUTE/zen-data/v1/custom_cards/welcomecard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json"
       curl -X "DELETE" -k "https://$ROUTE/zen-data/v1/custom_cards/aiopscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json"
