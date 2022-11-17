@@ -77,7 +77,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager-demo-content
     kind: AIManagerDemoContent
-    install: true
+    install: false
 
 
     # ---------------------------------------------------------------------
@@ -190,7 +190,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-eventmanager
     kind: EventManager
-    install: true
+    install: false
     # Version of the catalog subscription
     subscription_channel: v1.10
     starting_csv: noi.v1.6.0
@@ -208,7 +208,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-eventmanager
     kind: EventManagerDemoContent
-    install: true
+    install: false
 
 
 
@@ -249,7 +249,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-turbonomic
     kind: Turbonomic
-    install: true
+    install: false
     turbo_version: 8.6.6
 
     # --------------------------------------------------------------------------------------------------------------------------------------
@@ -258,7 +258,38 @@ cp4waiops:
     #storage_class_file: automatic
     #storage_class_block: automatic
 
+  - name: cp4waiops-turbonomic-demo-content
+    kind: TurbonomicDemoContent
+    install: true
+    turbo_password: P4ssw0rd!
 
+    # ---------------------------------------------------------------------
+    # Create Demo User
+    create_user: false
+    demo_user: demo
+    demo_password: P4ssw0rd!
+
+    # ---------------------------------------------------------------------
+    # Create Groups
+    group_vcenter_vms: true
+    group_robotshop: true
+    group_licensing: true
+    group_xyz: true
+
+    # ---------------------------------------------------------------------
+    # Create Targets
+    target_instana: true
+
+
+    # ---------------------------------------------------------------------
+    # Create Memory and CPU hogs
+    resource_hogs: true
+
+    # ---------------------------------------------------------------------
+    # Create Metrics server, DIF integration and RobotShop BuisnessApp
+    metrics_dif: true
+
+    
 # *************************************************************************************************************************************************
 # --------------------------------------------------------------------------------------------------------------------------------------
 # CP4WAIOPS USAGE

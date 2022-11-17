@@ -43,19 +43,39 @@ cp4waiops:
     install: true
     turbo_version: 8.6.6
     
-  - name: cp4waiops-turbonomic-demo-content
-    kind: TurbonomicDemoContent
-    install: true
-    turbo_password: P4ssw0rd!
-    demo_user: demo
-    demo_password: P4ssw0rd!
-
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
     # --------------------------------------------------------------------------------------------------------------------------------------
     #storage_class_file: automatic
     #storage_class_block: automatic
 
+    
+  - name: cp4waiops-turbonomic-demo-content
+    kind: TurbonomicDemoContent
+    install: true
+    turbo_password: P4ssw0rd!
+    # ---------------------------------------------------------------------
+    # Create Demo User
+    create_user: false
+    demo_user: demo
+    demo_password: P4ssw0rd!
+    # ---------------------------------------------------------------------
+    # Create Groups
+    group_vcenter_vms: true
+    group_robotshop: true
+    group_licensing: true
+    group_xyz: true
+    # ---------------------------------------------------------------------
+    # Create Targets
+    target_instana: true
+    # ---------------------------------------------------------------------
+    # Create Memory and CPU hogs
+    resource_hogs: true
+    # ---------------------------------------------------------------------
+    # Create Metrics server, DIF integration and RobotShop BuisnessApp
+    metrics_dif: true
+
+    
 
 # *************************************************************************************************************************************************
 # --------------------------------------------------------------------------------------------------------------------------------------
