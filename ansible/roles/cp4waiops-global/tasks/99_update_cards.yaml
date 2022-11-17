@@ -138,7 +138,7 @@
 
       if [[ $instanaURL =~ "dev-aiops" ]]; then
       echo "Instana Present"
-      ROWS=$ROWS'{"drilldown_url":  "https://'$instanaURL'", "label": "→  Open Instana", "sub_text": " "},'
+      ROWS=$ROWS'{"drilldown_url":  "https://'$instanaURL'/#/applications", "label": "→  Open Instana", "sub_text": " "},'
       ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: admin@instana.local - Password: P4ssw0rd! "},'
       fi
       if [[ $turboURL =~ "api-turbonomic" ]]; then
