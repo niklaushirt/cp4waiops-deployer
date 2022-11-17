@@ -99,7 +99,6 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 - name: 📥  Create Routes
   include_tasks: 30_aimanager-create-routes.yaml
-  when: current_cp4waiops_feature.create_external_routes == true
 
 # Update AI Manager Cards
 - name: 📥 Update AI Manager Cards
