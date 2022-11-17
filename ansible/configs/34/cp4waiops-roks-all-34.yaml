@@ -161,7 +161,7 @@ cp4waiops:
     group_vcenter_vms: true
     group_robotshop: true
     group_licensing: true
-    group_xyz: true
+
     # ---------------------------------------------------------------------
     # Create Targets
     target_instana: true

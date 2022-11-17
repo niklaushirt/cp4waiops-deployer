@@ -23,7 +23,12 @@
 #  - AI Manager & Demo Content
 #  - Event Manager & Demo Content
 #  - ELK
-#  - Turbonomic
+#     - Demo User
+#     - RobotShop Demo App with synthetic metric
+#     - Instana target (if Instana is installed - you have to enter the API Token Manually)
+#     - Groups for vCenter and RobotShop
+#     - Groups for licensing
+#     - Resource Hogs
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
  

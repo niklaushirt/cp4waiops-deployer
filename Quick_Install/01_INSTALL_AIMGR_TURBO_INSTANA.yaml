@@ -22,7 +22,7 @@
 #
 #  - IBM Operator
 #  - AI Manager
-#  - Demo Content
+#  - AI Manager Demo Content
 #     - OpenLDAP & Register with AI Manager
 #     - RobotShop Demo App
 #     - Demo Service Account 
@@ -42,6 +42,13 @@
 #     - Disables ASM Service match rule 
 #     - Create Policy Creation for Stories and Runbooks 
 #  - Turbonomic
+#  - Turbonomic Demo Content
+#     - Demo User
+#     - RobotShop Demo App with synthetic metric
+#     - Instana target (if Instana is installed - you have to enter the API Token Manually)
+#     - Groups for vCenter and RobotShop
+#     - Groups for licensing
+#     - Resource Hogs
 #  - Instana
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
