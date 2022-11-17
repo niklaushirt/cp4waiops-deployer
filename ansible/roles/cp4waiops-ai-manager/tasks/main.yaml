@@ -169,6 +169,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name: 📥  Create AI Manager Openshift WebConsole Menu Item
   include_tasks: 91_aimanager-create-ocp-menu.yaml
+  when: global_config.create_ocp_items | default(true) == true  
 
 # Update AI Manager Cards
 - name: 📥 Update AI Manager Cards

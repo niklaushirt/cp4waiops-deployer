@@ -60,7 +60,7 @@ spec:
               export METRIC_TIME_SKEW=240
               export METRIC_TIME_STEP=100
 
-              export INSTANCE_NAME="Tyrion"
+              export INSTANCE_NAME=" {{global_config.environment_name | default("Demo")}}"
 
 
               export SLACK_URL="{{current_cp4waiops_feature.demoui_slack_url}}"

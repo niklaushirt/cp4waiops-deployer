@@ -113,6 +113,7 @@
 
 - name: 📥 Install OCP Menu Item
   include_tasks: 91_addons-turbonomic-create-ocp-tools-menu.yaml
+  when: global_config.create_ocp_items | default(true) == true  
 
 # Update AI Manager Cards
 - name: 📥 Update AI Manager Cards

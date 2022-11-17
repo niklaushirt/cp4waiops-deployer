@@ -9,6 +9,8 @@ global_config:
   entitled_registry: cp.icr.io
   entitled_registry_user: cp
   catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+  create_cards: true
+  create_ocp_items: true
 
 
 openshift:
@@ -65,6 +67,8 @@ cp4waiops:
     entitled_registry: cp.icr.io
     entitled_registry_user: cp
     catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+  create_cards: true
+  create_ocp_items: true
 
     
 
@@ -213,6 +217,8 @@ cp4waiops:
     entitled_registry: cp.icr.io
     entitled_registry_user: cp
     catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+  create_cards: true
+  create_ocp_items: true
 
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS Event Manager Demo Content
@@ -257,6 +263,8 @@ cp4waiops:
     entitled_registry: cp.icr.io
     entitled_registry_user: cp
     catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+  create_cards: true
+  create_ocp_items: true
 
 
 
