@@ -407,6 +407,10 @@
 - name: 📥  Create Demo UI Openshift WebConsole Additional Menu Item
   include_tasks: 91_aimanager-create-ocp-tools-menu.yaml
 
+# Update AI Manager Cards
+- name: 📥 Update AI Manager Cards
+  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
+
 
 
 # Access and documentaiton

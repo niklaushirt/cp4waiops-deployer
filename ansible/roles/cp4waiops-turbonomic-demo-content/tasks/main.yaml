@@ -89,8 +89,13 @@
 # INSTALL TURBONOMIC DEMO CONTENT
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install TURBONOMIC
-- name: 📥 Install Turbonomic
-  include_tasks: 10_addons-turbonomic-demo-content.yaml
+# - name: 📥 Install Turbonomic
+#   include_tasks: 10_addons-turbonomic-demo-content.yaml
+
+
+# Update AI Manager Cards
+- name: 📥 Update AI Manager Cards
+  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
 
 - name: 📥 End Logging
