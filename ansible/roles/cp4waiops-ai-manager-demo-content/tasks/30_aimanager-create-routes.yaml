@@ -57,7 +57,7 @@
         oc create route passthrough topology-merge -n $WAIOPS_NAMESPACE --insecure-policy="Redirect" --service=aiops-topology-merge --port=https-merge-api
       fi
     ignore_errors: true
-    when: create_topo_route == true
+    when: current_cp4waiops_feature.create_topo_route == true
 
   - name: 🚀 ROUTES - Create Topology Route - topology-rest
     shell: |
@@ -68,7 +68,7 @@
         oc create route passthrough topology-rest -n $WAIOPS_NAMESPACE --insecure-policy="Redirect" --service=aiops-topology-rest-observer --port=https-rest-observer-admin
       fi
     ignore_errors: true
-    when: create_topo_route == true
+    when: current_cp4waiops_feature.create_topo_route == true
 
   - name: 🚀 ROUTES - Create Topology Route - topology-file
     shell: |
@@ -79,7 +79,7 @@
         oc create route passthrough topology-file -n $WAIOPS_NAMESPACE --insecure-policy="Redirect" --service=aiops-topology-file-observer --port=https-file-observer-admin
       fi
     ignore_errors: true
-    when: create_topo_route == true
+    when: current_cp4waiops_feature.create_topo_route == true
 
   - name: 🚀 ROUTES - Create Topology Route - topology-manage
     shell: |
@@ -90,7 +90,7 @@
         oc create route passthrough topology-manage -n $WAIOPS_NAMESPACE --service=aiops-topology-topology --port=https-topology-api
       fi
     ignore_errors: true
-    when: create_topo_route == true
+    when: current_cp4waiops_feature.create_topo_route == true
 
   - name: 🚀 ROUTES - Create Topology Route - topology-file-api
     shell: |
@@ -101,9 +101,9 @@
         oc create route reencrypt topology-file-api -n $WAIOPS_NAMESPACE --service=aiops-topology-file-observer --port=https-file-observer-api
       fi
     ignore_errors: true
-    when: create_topo_route == true
+    when: current_cp4waiops_feature.create_topo_route == true
 
-  when: OBJECT_EXISTS.stdout|length == 0
+  #when: OBJECT_EXISTS.stdout|length == 0
 
 
 
@@ -119,7 +119,7 @@
         oc create route edge job-manager -n $WAIOPS_NAMESPACE --service=cp4waiops-eventprocessor-eve-29ee-ep-jobmanager --port=ui>/dev/null 2>/dev/null
       fi
     ignore_errors: true
-    when: create_external_routes == true
+    when: current_cp4waiops_feature.create_external_routes == true
   
   - name: 🚀 ROUTES - Create external Flink Policy Job Manager Route 
     shell: |
@@ -145,7 +145,7 @@
         oc create route passthrough ai-platform-api -n $WAIOPS_NAMESPACE  --service=aimanager-aio-ai-platform-api-server --port=4000 --insecure-policy=Redirect --wildcard-policy=None>/dev/null 2>/dev/null
       fi
     ignore_errors: true
-    when: create_external_routes == true
+    when: current_cp4waiops_feature.create_external_routes == true
 
 
   - name: 🚀 ROUTES - Create external Datalayer API Route 
@@ -157,7 +157,7 @@
         oc create route reencrypt datalayer-api -n $WAIOPS_NAMESPACE  --service=aiops-ir-core-ncodl-api --port=secure-port --insecure-policy=Redirect --wildcard-policy=None>/dev/null 2>/dev/null
       fi
     ignore_errors: true
-    when: create_external_routes == true
+    when: current_cp4waiops_feature.create_external_routes == true
 
 
   - name: 🚀 ROUTES - Create external AIO Controller Route 
@@ -169,7 +169,7 @@
         oc create route passthrough aimanager-aio-controller -n $WAIOPS_NAMESPACE  --service=aimanager-aio-controller>/dev/null 2>/dev/null
       fi
     ignore_errors: true
-    when: create_external_routes == true
+    when: current_cp4waiops_feature.create_external_routes == true
 
 
   - name: 🚀 ROUTES - Enable Swagger on external Datalayer API Route 
@@ -181,7 +181,7 @@
         oc set env deploy -n $WAIOPS_NAMESPACE aiops-ir-core-ncodl-api ENABLE_SWAGGER_UI="true" >/dev/null 2>/dev/null
       fi
     ignore_errors: true
-    when: create_external_routes == true
+    when: current_cp4waiops_feature.create_external_routes == true
 
   - name: 🚀 ROUTES - Create Spark Master UI Route 
     shell: |
@@ -193,7 +193,7 @@
         oc expose svc aiops-ir-analytics-spark-master -n $WAIOPS_NAMESPACE --name spark>/dev/null 2>/dev/null
       fi
     ignore_errors: true
-    when: create_external_routes == true
+    when: current_cp4waiops_feature.create_external_routes == true
 
 
 # # --------------------------------------------------------------------------------------------------------------------------------------
