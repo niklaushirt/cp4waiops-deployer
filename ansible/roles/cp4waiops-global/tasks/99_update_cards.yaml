@@ -96,6 +96,7 @@
       echo "DemoUI Present"
       ROWS=$ROWS'{"drilldown_url":  "https://'$demoURL'", "label": "🐥 Get started with the DemoUI 🐥", "sub_text": "Token/Password: '$demoToken'"},'
       fi
+      ROWS=$ROWS'{"drilldown_url":  " ", "label": " ", "sub_text": " "},'
 
       ROWS=$ROWS'{"drilldown_url":  "https://github.com/niklaushirt/cp4waiops-deployer#-demo-installation", "label": "Created with CP4WAIOps Deployer", "sub_text": "Built with 🤍 by Niklaus Hirt"},'
 
@@ -202,7 +203,7 @@
       if [[ $awxUrl =~ "awx" ]]; then
       echo "AWX Present"
       ROWS=$ROWS'{"drilldown_url":  "https://'$awxUrl'", "label": "→ Open Ansible Tower", "sub_text": " "},'
-      ROWS=$ROWS'{"drilldown_url":  "", "label": " ", "sub_text": "User: admin - <p>Password: '$awxPwd' "},'
+      ROWS=$ROWS'{"drilldown_url":  "", "label": " ", "sub_text": "User: admin - Password: '$awxPwd' "},'
       fi
 
 
