@@ -126,7 +126,7 @@
 
       instanaURL=$(oc get routes -n instana-core dev-aiops -o jsonpath={.spec.host})
       turboURL=$(oc get route -n turbonomic api -o jsonpath={.spec.host})
-      evtMgrURL=$(oc get pod -n $EVTMGR_NAMESPACE --ignore-not-found| grep webgui-0)
+      evtMgrURL=$(oc get route -n $EVTMGR_NAMESPACE  evtmanager-ibm-hdm-common-ui -o jsonpath={.spec.host})
       evtMgrPwd=$(oc get secret -n $EVTMGR_NAMESPACE  evtmanager-was-secret -o jsonpath='{.data.WAS_PASSWORD}'| base64 --decode && echo)
 
       export ROWS=""
@@ -151,6 +151,8 @@
 
       PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 2, "title": "🚀 IBM AIOps", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
       echo "PAYLOAD:"$PAYLOAD
+
+      curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/aiopscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD"
 
       export result=$(curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/aiopscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD")
       echo "      🔎 Result: "
@@ -209,6 +211,8 @@
       PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 3, "title": "🚀 Demo Apps", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
       echo "PAYLOAD:"$PAYLOAD
 
+      curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/appscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD"
+
       export result=$(curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/appscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD")
       echo "      🔎 Result: "
       echo "       "$result
@@ -262,6 +266,8 @@
 
       PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 4, "title": "🛠️ System Links", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
       echo "PAYLOAD:"$PAYLOAD
+
+      curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/systemcard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD"
 
       export result=$(curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/systemcard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD")
       echo "      🔎 Result: "
