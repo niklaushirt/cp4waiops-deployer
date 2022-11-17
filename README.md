@@ -220,6 +220,13 @@ On top of that you get Turbonomic and Instana instances to play around a bit (yo
 > 	   - Create Policy Creation for Stories and Runbooks 
 > 	   - Demo Service Account 
 > - **Turbonomic**
+> - **Turbonomic Demo Content**
+> 		- Demo User
+> 		- RobotShop Demo App with synthetic metric
+> 		- Instana target (if Instana is installed - you have to enter the API Token Manually)
+> 		- Groups for vCenter and RobotShop
+> 		- Groups for licensing
+> 		- Resource Hogs
 > - **Instana**
 > 
 
@@ -437,7 +444,14 @@ It contains the following components (which can be installed independently):
      - Load ASM merge Topology
      - Create AI Manager Application
  - **Turbonomic**  (optional)
-
+ - **Turbonomic Demo Content** (optional)
+	- Demo User
+	- RobotShop Demo App with synthetic metric
+	- Instana target (if Instana is installed - you have to enter the API Token Manually)
+	- Groups for vCenter and RobotShop
+	- Groups for licensing
+	- Resource Hogs
+ - **Instana**  (optional)
 
 ![demo](./doc/pics/waiops_arch_dataflow.jpg)
 
