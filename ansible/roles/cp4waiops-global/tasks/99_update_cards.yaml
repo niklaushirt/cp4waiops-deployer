@@ -152,7 +152,7 @@
       PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 2, "title": "🚀 IBM AIOps", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
       echo "PAYLOAD:"$PAYLOAD
 
-      curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/aiopscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD"
+      echo "curl -X \"PUT\" -k \"https://$ROUTE/zen-data/v1/custom_cards/aiopscard\" -H \"Authorization: Bearer {{ZEN_TOKEN}}\" -H \"Content-Type: application/json\" -d \"$PAYLOAD\""
 
       export result=$(curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/aiopscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD")
       echo "      🔎 Result: "
@@ -165,7 +165,11 @@
     debug:
       var: output.stderr_lines
       #verbosity: 1
-          
+  - name: 🟣  DEBUG
+    debug:
+      var: output.stdout_lines
+      #verbosity: 1
+             
 
 
 
