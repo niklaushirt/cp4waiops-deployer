@@ -1,17 +1,21 @@
+
 mutation createTrainingDefinition {
   createTrainingDefinition(
     definitionName: "ChangeRisk"
     algorithmName: "Change_Risk"
-    description: "Automatically created by Nick's scripts"
     createdBy: "demo"
-    promoteOption: whenTrainingComplete
     trainingSchedule: {
       frequency: manual
       repeat: daily
-      timeRangeValidStart: null
+      atTimeHour: 14
+      atTimeMinute: 53
+      timeRangeValidStart: "2022-11-18T14:53:00.000+01:00"
       timeRangeValidEnd: null
-      noEndDate: false
+      noEndDate: true
     }
+    promoteOption: whenTrainingComplete
+    dataSetIds: []
+    description: "Automatically created by Nick's scripts"
   ) {
     status
     message
