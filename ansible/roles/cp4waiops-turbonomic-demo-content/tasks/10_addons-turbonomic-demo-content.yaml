@@ -35,6 +35,30 @@
   set_fact: TURBO_URL={{ output.stdout_lines[0] }} 
 
 
+- name: 🚀 TURBONOMIC - Init Admin
+  shell: |
+    echo "------------------------------------------------------------------------------------------------------------------------------"
+    echo " 📥 Initialization"
+    export TURBO_PASSWORD={{current_cp4waiops_feature.turbo_password}}
+    export TURBO_URL={{TURBO_URL}}
+
+    result=$(curl -XPOST -s -k -c /tmp/cookies -H 'accept: application/json' "https://{{TURBO_URL}}/api/v3/initAdmin" -d "username=administrator&password=$TURBO_PASSWORD")
+    echo $result
+    result=$(curl -XPOST -s -k -c /tmp/cookies -H 'accept: application/json' "https://{{TURBO_URL}}/api/v3/login?disable_hateoas=true" -d "username=administrator&password=$TURBO_PASSWORD")
+    echo $result
+
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    #verbosity: 1
+        
+
+
+
 
 - name: 🚀 TURBONOMIC - Login
   shell: |
@@ -57,6 +81,35 @@
     var: output.stdout_lines
     verbosity: 1
         
+
+
+
+
+# --------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
+# LOAD LICENSE IF PROVIDED
+# --------------------------------------------------------------------------------------------------------
+- name: 🚀 TURBONOMIC - Add License if provided
+  shell: |
+    export TURBO_URL={{TURBO_URL}}
+
+    echo "{{current_cp4waiops_feature.turbo_license | default("NONE") }}" > /tmp/license.lic
+    #cat /tmp/license.lic
+    
+    result=$(curl -XPOST -k -s -b /tmp/cookies -H 'Content-Type: multipart/form-data;'  -H 'accept: application/json' "https://$TURBO_URL/api/v3/licenses" -F 'file=@/tmp/license.lic')
+    echo $result
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+  when: current_cp4waiops_feature.turbo_license | default("NONE") != "NONE"
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+  when: current_cp4waiops_feature.turbo_license | default("NONE") != "NONE"
+
+
 
 
 
@@ -588,4 +641,50 @@
     var: output.stdout_lines
     verbosity: 1
   when: current_cp4waiops_feature.resource_hogs == true
+
+
+
+
+# --------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------
+# WEBHOOKS
+# --------------------------------------------------------------------------------------------------------
+
+- name: 🚀 TURBONOMIC - Sample Webhook
+  shell: |
+    echo "------------------------------------------------------------------------------------------------------------------------------"
+    echo " 🚀 Deploy Sample Webhook"
+
+    result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/workflows" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d ' {
+        "displayName": "My_WebHook",
+        "className": "Workflow",
+        "description": "My First Webhook",
+        "discoveredBy":
+        {
+            "readonly": false
+        },
+       "type": "WEBHOOK",
+       "typeSpecificDetails": {
+       "url": "http://ibm.com",
+          "method": "POST",
+          "template": "My Webhook Template -- DATA: Action Details: $action.details",
+          "type": "WebhookApiDTO"
+       }
+    }')
+
+    echo $result
+    echo ""
+    echo ""
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+  when: current_cp4waiops_feature.metrics_dif == true
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+  when: current_cp4waiops_feature.metrics_dif == true
+
+
 

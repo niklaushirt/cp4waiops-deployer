@@ -57,6 +57,13 @@
 
 
 
+- name:  🟣 ❗❗❗❗ This script will wait until you have initialised Turbonomic with password P4ssw0rd!"
+  debug:
+    msg:
+    - " - Open Turbonomic"
+    - " - Set initial Password to P4ssw0rd!"
+
+
 
 
 

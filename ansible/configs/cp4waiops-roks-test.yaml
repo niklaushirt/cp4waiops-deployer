@@ -252,7 +252,7 @@ cp4waiops:
   - name: cp4waiops-turbonomic
     kind: Turbonomic
     install: true
-    turbo_version: 8.6.6
+    turbo_version: 8.7.0
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
@@ -264,7 +264,10 @@ cp4waiops:
     kind: TurbonomicDemoContent
     install: true
     turbo_password: P4ssw0rd!
-
+    # ---------------------------------------------------------------------
+    # Turbo License (optional)
+    turbo_license: NONE
+    
     # ---------------------------------------------------------------------
     # Create Demo User
     create_user: false

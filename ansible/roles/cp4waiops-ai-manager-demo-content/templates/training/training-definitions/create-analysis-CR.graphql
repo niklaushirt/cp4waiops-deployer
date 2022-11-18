@@ -2,7 +2,6 @@ mutation createTrainingDefinition {
   createTrainingDefinition(
     definitionName: "ChangeRisk"
     algorithmName: "Change_Risk"
-    version: "v0"
     description: "Automatically created by Nick's scripts"
     createdBy: "demo"
     promoteOption: whenTrainingComplete
