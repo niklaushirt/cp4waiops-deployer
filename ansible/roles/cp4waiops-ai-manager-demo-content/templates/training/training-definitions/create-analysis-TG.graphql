@@ -3,6 +3,7 @@ mutation createTrainingDefinition {
   createTrainingDefinition(
     definitionName: "TemporalGrouping"
     algorithmName: "Temporal_Grouping"
+    version: "v0"
     description: "Automatically created by Nick's scripts"
     createdBy: "demo"
     promoteOption: manual
