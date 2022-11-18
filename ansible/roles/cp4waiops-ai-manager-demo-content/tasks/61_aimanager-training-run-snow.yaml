@@ -41,5 +41,5 @@
 - name: 🟣 TRAINING RUN - RESULT
   debug: 
     var: output_string.stdout_lines
-    verbosity: 1
+    #verbosity: 1
 

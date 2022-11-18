@@ -299,7 +299,7 @@ cp4waiops:
     turbo_password: P4ssw0rd!
     # ---------------------------------------------------------------------
     # Create Demo User
-    create_user: false
+    create_user: true
     demo_user: demo
     demo_password: P4ssw0rd!
     # ---------------------------------------------------------------------
