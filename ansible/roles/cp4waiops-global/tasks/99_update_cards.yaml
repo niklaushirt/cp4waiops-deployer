@@ -56,7 +56,7 @@
   - name: 🟣  DEBUG
     debug:
       var: ZEN_TOKEN
-      #verbosity: 1
+      verbosity: 1
           
 
 
@@ -78,7 +78,7 @@
   - name: 🟣  DEBUG
     debug:
       var: output.stdout_lines
-      #verbosity: 1
+      verbosity: 1
           
 
 
@@ -114,15 +114,15 @@
   - name: 🟣  DEBUG
     debug:
       var: output.stdout_lines
-      #verbosity: 1
+      verbosity: 1
           
 
 
   - name:  🌏 ZEN CARDS - Create Card AIOPS APPS
     shell: |
-      export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd  -o jsonpath={.spec.host})          
       export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
       export EVTMGR_NAMESPACE=$(oc get po -A|grep noi-operator |awk '{print$1}')
+      export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd  -o jsonpath={.spec.host})          
 
       instanaURL=$(oc get routes -n instana-core dev-aiops -o jsonpath={.spec.host})
       turboURL=$(oc get route -n turbonomic api -o jsonpath={.spec.host})
@@ -163,12 +163,8 @@
       executable: /bin/bash
   - name: 🟣  DEBUG
     debug:
-      var: output.stderr_lines
-      #verbosity: 1
-  - name: 🟣  DEBUG
-    debug:
       var: output.stdout_lines
-      #verbosity: 1
+      verbosity: 1
              
 
 
@@ -179,8 +175,8 @@
   - name:  🌏 ZEN CARDS - Create Card DEMO
     shell: |
       echo "       🛠️   Get Route"
-      export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd  -o jsonpath={.spec.host})          
       export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+      export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd  -o jsonpath={.spec.host})          
 
 
       appURL=$(oc get routes -n robot-shop robotshop  -o jsonpath="{['spec']['host']}")
@@ -227,8 +223,8 @@
       executable: /bin/bash
   - name: 🟣  DEBUG
     debug:
-      var: output.stderr_lines
-      #verbosity: 1
+      var: output.stdout_lines
+      verbosity: 1
           
 
 
@@ -237,8 +233,8 @@
   - name:  🌏 ZEN CARDS - Create Card SYSTEM
     shell: |
       echo "       🛠️   Get Route"
-      export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd  -o jsonpath={.spec.host})          
       export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+      export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd  -o jsonpath={.spec.host})          
 
       jobURL=$(oc get routes -n $WAIOPS_NAMESPACE job-manager  -o jsonpath="{['spec']['host']}")
       jobPolicyURL=$(oc get routes -n $WAIOPS_NAMESPACE job-manager-policy  -o jsonpath="{['spec']['host']}")
@@ -284,8 +280,8 @@
       executable: /bin/bash
   - name: 🟣  DEBUG
     debug:
-      var: output.stderr_lines
-      #verbosity: 1
+      var: output.stdout_lines
+      verbosity: 1
 
   when: global_config.create_cards | default(true) == true  
 
