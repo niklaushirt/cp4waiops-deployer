@@ -61,17 +61,6 @@ cp4waiops:
     case_version: 1.4.1
     case_inventory_setup: cpwaiopsSetup
     
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # CP4WAIOPS Pull Registires
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    entitled_registry: cp.icr.io
-    entitled_registry_user: cp
-    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-  create_cards: true
-  create_ocp_items: true
-
-    
-
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS AI Manager Demo Content
   # --------------------------------------------------------------------------------------------------------------------------------------
@@ -202,24 +191,6 @@ cp4waiops:
     #storage_class_file: automatic
     #storage_class_block: automatic
 
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # Install with CASE Files
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    case_install: false
-    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
-    case_name: ibm-cp-waiops
-    case_version: 1.4.1
-    case_inventory_setup: cpwaiopsSetup
-    
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # CP4WAIOPS Pull Registires
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    entitled_registry: cp.icr.io
-    entitled_registry_user: cp
-    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-  create_cards: true
-  create_ocp_items: true
-
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS Event Manager Demo Content
   # --------------------------------------------------------------------------------------------------------------------------------------
@@ -248,24 +219,6 @@ cp4waiops:
     #storage_class_file: automatic
     #storage_class_block: automatic
 
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # Install with CASE Files
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    case_install: false
-    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
-    case_name: ibm-cp-waiops
-    case_version: 1.4.1
-    case_inventory_setup: cpwaiopsSetup
-    
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # CP4WAIOPS Pull Registires
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    entitled_registry: cp.icr.io
-    entitled_registry_user: cp
-    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-  create_cards: true
-  create_ocp_items: true
-
 
 
 - project: cp4waiops-addons
@@ -276,6 +229,41 @@ cp4waiops:
   - name: cp4waiops-elk
     kind: ELK
     install: false
+
+
+
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  # CP4WAIOPS INSTANA
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  - name: cp4waiops-instana
+    kind: Instana
+    install: false
+
+    # ---------------------------------------------------------------------
+    # INSTANA LICENSE
+    sales_key: 'NONE'
+    agent_key: 'NONE'
+
+    # ---------------------------------------------------------------------
+    # INSTANA ADMIN LOGIN
+    initial_admin_user: "admin@instana.local"
+    initial_admin_pass: 'P4ssw0rd!'
+    
+    # ---------------------------------------------------------------------
+    # INSTALL INSTANA AGENT
+    install_agent: true
+
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # INTEGRATIONS
+    integrate_aimanager: true
+    #integrate_turbonomic: true
+    
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Storage Classes Override for this Instance (see comment below)
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    #storage_class_file: automatic
+    #storage_class_block: automatic
+
 
 
   # --------------------------------------------------------------------------------------------------------------------------------------
@@ -340,5 +328,3 @@ cp4waiops:
 #storage_class_block: ibmc-vpc-block-10iops-tier      # IBM VPC
 #storage_class_block: rook-cephfs                     # FYRE
 #storage_class_block: nfs-client                      # TEC
-by setting manually - 4.6, 4.7,...)
-ocp_major_version: automatic
