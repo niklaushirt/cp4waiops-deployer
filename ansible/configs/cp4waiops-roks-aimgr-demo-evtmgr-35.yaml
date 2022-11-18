@@ -73,8 +73,8 @@ cp4waiops:
     entitled_registry: cp.icr.io
     entitled_registry_user: cp
     catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-  create_cards: true
-  create_ocp_items: true
+    create_cards: true
+    create_ocp_items: true
 
 
 
@@ -173,14 +173,15 @@ cp4waiops:
     #storage_class_file: automatic
     #storage_class_block: automatic
     
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # CP4WAIOPS Pull Registires
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    entitled_registry: cp.icr.io
-    entitled_registry_user: cp
-    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-  create_cards: true
-  create_ocp_items: true
+
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  # CP4WAIOPS Event Manager Demo Content
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  - name: cp4waiops-eventmanager
+    kind: EventManagerDemoContent
+    install: true
+
+
 
 
 
