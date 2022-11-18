@@ -56,12 +56,6 @@
     var: current_cp4waiops_feature
 
 
-- name:  🟣 ❗❗❗❗ This script will wait until you have initialised Turbonomic with password P4ssw0rd!"
-  debug:
-    msg:
-    - " - Open Turbonomic"
-    - " - Set initial Password to P4ssw0rd!"
-
 
 
 
@@ -89,8 +83,8 @@
 # INSTALL TURBONOMIC DEMO CONTENT
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install TURBONOMIC
-- name: 📥 Install Turbonomic
-  include_tasks: 10_addons-turbonomic-demo-content.yaml
+# - name: 📥 Install Turbonomic
+#   include_tasks: 10_addons-turbonomic-demo-content.yaml
 
 
 # Update AI Manager Cards
