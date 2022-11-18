@@ -94,13 +94,13 @@
 
       if [[ $demoURL =~ "demo-ui" ]]; then
       echo "DemoUI Present"
-      ROWS=$ROWS'{"drilldown_url":  "https://'$demoURL'", "label": "🐥 Get started with the DemoUI 🐥", "sub_text": "Token/Password: '$demoToken'"},'
+      ROWS=$ROWS'{"drilldown_url":  "https://'$demoURL'", "label": "🚀  Get started with the DemoUI ", "sub_text": "Token/Password: '$demoToken'"},'
       fi
       ROWS=$ROWS'{"drilldown_url":  " ", "label": " ", "sub_text": " "},'
 
-      ROWS=$ROWS'{"drilldown_url":  "https://github.com/niklaushirt/cp4waiops-deployer#-demo-installation", "label": "Created with CP4WAIOps Deployer", "sub_text": "Built with 🤍 by Niklaus Hirt"},'
+      ROWS=$ROWS'{"drilldown_url":  "https://github.com/niklaushirt/cp4waiops-deployer#-demo-installation", "label": "Created with CP4WAIOps-Deployer", "sub_text": "Built with 🤍 by Niklaus Hirt"},'
 
-      PAYLOAD='{ "permissions": ["administrator"],  "window_open_target": "_blank",  "order": 1, "title": "🌏 Welcome to {{global_config.environment_name | default("Demo")}}", "template_type": "text_list", "data": { "text_list_data": { "rows": [ { "drilldown_url": "", "label": "Welcome to your WAIOPS Demo Environment", "sub_text": "" }, '$ROWS' { "drilldown_url": "", "label": " ", "sub_text": " " } ] } } } '
+      PAYLOAD='{ "permissions": ["administrator"],  "window_open_target": "_blank",  "order": 1, "title": "🚀   Getting Started", "template_type": "text_list", "data": { "text_list_data": { "rows": [ { "drilldown_url": "", "label": "🐥 Welcome to the {{global_config.environment_name | default("Demo")}} Environment", "sub_text": "" }, '$ROWS' { "drilldown_url": "", "label": " ", "sub_text": " " } ] } } } '
       echo "PAYLOAD:"$PAYLOAD
       echo "ENV:{{global_config.environment_name | default("Demo")}}"
 
@@ -133,23 +133,23 @@
 
       if [[ $instanaURL =~ "dev-aiops" ]]; then
       echo "Instana Present"
-      ROWS=$ROWS'{"drilldown_url":  "https://'$instanaURL'/#/applications", "label": "→  Open Instana", "sub_text": " "},'
+      ROWS=$ROWS'{"drilldown_url":  "https://'$instanaURL'/#/applications", "label": "→   Instana", "sub_text": " "},'
       ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: admin@instana.local - Password: P4ssw0rd! "},'
       fi
       if [[ $turboURL =~ "api-turbonomic" ]]; then
       echo "Turbonomic Present"
-      ROWS=$ROWS'{"drilldown_url":  "https://'$turboURL'", "label": "→  Open Turbonomic", "sub_text": " "},'
+      ROWS=$ROWS'{"drilldown_url":  "https://'$turboURL'", "label": "→   Turbonomic", "sub_text": " "},'
       ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: administrator - Password: P4ssw0rd! "},'
       fi
       if [[ $evtMgrURL =~ "evt" ]]; then
       echo "EventManager Present "
-      ROWS=$ROWS'{"drilldown_url":  "https://'$evtMgrURL'", "label": "→ Open EventManager", "sub_text": " "},'
+      ROWS=$ROWS'{"drilldown_url":  "https://'$evtMgrURL'", "label": "→  EventManager", "sub_text": " "},'
       ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: smadmin - Password: '$evtMgrPwd' "},'
       fi
 
       ROWS=$ROWS'{"drilldown_url":  "", "label": "Select your IBM AIOps Application above.", "sub_text": ""}'
 
-      PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 2, "title": "🚀 IBM AIOps", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
+      PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 2, "title": "🟣   IBM Automation - AIOps", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
       echo "PAYLOAD:"$PAYLOAD
 
       echo "curl -X \"PUT\" -k \"https://$ROUTE/zen-data/v1/custom_cards/aiopscard\" -H \"Authorization: Bearer {{ZEN_TOKEN}}\" -H \"Content-Type: application/json\" -d \"$PAYLOAD\""
@@ -190,16 +190,16 @@
 
       if [[ $appURL =~ "robot-shop" ]]; then
       echo "RobotShop Present"
-      ROWS=$ROWS'{"drilldown_url":  "https://'$appURL'", "label": "→ Open RobotShop", "sub_text": " "},'
+      ROWS=$ROWS'{"drilldown_url":  "https://'$appURL'", "label": "→  RobotShop", "sub_text": " "},'
       fi
       if [[ $ldapURL =~ "openldap" ]]; then
       echo "LDAP Present"
-      ROWS=$ROWS'{"drilldown_url":  "https://'$ldapURL'", "label": "→ Open LDAP", "sub_text": " "},'
+      ROWS=$ROWS'{"drilldown_url":  "https://'$ldapURL'", "label": "→  LDAP", "sub_text": " "},'
       ROWS=$ROWS'{"drilldown_url":  "", "label": " ", "sub_text": "User: cn=admin,dc=ibm,dc=com - Password: P4ssw0rd! "},'
       fi
       if [[ $awxUrl =~ "awx" ]]; then
       echo "AWX Present"
-      ROWS=$ROWS'{"drilldown_url":  "https://'$awxUrl'", "label": "→ Open Ansible Tower", "sub_text": " "},'
+      ROWS=$ROWS'{"drilldown_url":  "https://'$awxUrl'", "label": "→  Ansible Tower", "sub_text": " "},'
       ROWS=$ROWS'{"drilldown_url":  "", "label": " ", "sub_text": "User: admin - Password: '$awxPwd' "},'
       fi
 
@@ -208,7 +208,7 @@
       ROWS=$ROWS'{"drilldown_url":  "", "label": "Select your app above.", "sub_text": ""}'
 
 
-      PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 3, "title": "🚀 Demo Apps", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
+      PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 3, "title": "🔵   Demo Apps", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
       echo "PAYLOAD:"$PAYLOAD
 
       curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/appscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD"
@@ -264,7 +264,7 @@
       ROWS=$ROWS'{"drilldown_url":  "", "label": "Internal System Links", "sub_text": ""}'
 
 
-      PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 4, "title": "🛠️ System Links", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
+      PAYLOAD='{ "permissions": ["administrator"], "window_open_target": "_blank", "order": 4, "title": "🧰   System Links", "template_type": "text_list", "data": { "text_list_data": { "rows": [ '$ROWS' ] } }}'
       echo "PAYLOAD:"$PAYLOAD
 
       curl -X "PUT" -k "https://$ROUTE/zen-data/v1/custom_cards/systemcard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json" -d "$PAYLOAD"
