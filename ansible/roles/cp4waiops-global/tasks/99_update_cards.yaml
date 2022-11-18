@@ -163,7 +163,7 @@
       executable: /bin/bash
   - name: 🟣  DEBUG
     debug:
-      var: output.stdout_lines
+      var: output.stderr_lines
       #verbosity: 1
           
 
@@ -223,7 +223,7 @@
       executable: /bin/bash
   - name: 🟣  DEBUG
     debug:
-      var: output.stdout_lines
+      var: output.stderr_lines
       #verbosity: 1
           
 
@@ -280,7 +280,7 @@
       executable: /bin/bash
   - name: 🟣  DEBUG
     debug:
-      var: output.stdout_lines
+      var: output.stderr_lines
       #verbosity: 1
 
   when: global_config.create_cards | default(true) == true  
