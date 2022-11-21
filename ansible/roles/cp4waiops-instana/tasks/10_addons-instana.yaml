@@ -31,12 +31,12 @@
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         echo "Installing Kubectl Instana Plugin for $OS"
         if [ "${OS}" == "darwin" ]; then
-              wget https://self-hosted.instana.io/kubectl/kubectl-instana-darwin_amd64-release-235-3.tar.gz
+              wget https://self-hosted.instana.io/kubectl/kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("235-5") }}.tar.gz
               tar xfvz kubectl-instana-darwin_amd64-release-235-3.tar.gz
               sudo mv kubectl-instana /usr/local/bin/kubectl-instana
               rm kubectl-instana-darwin_amd64-release-235-3.tar.gz
         else
-            wget https://self-hosted.instana.io/kubectl/kubectl-instana-linux_amd64-release-237-0.tar.gz
+            wget https://self-hosted.instana.io/kubectl/kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("235-5") }}.tar.gz
             tar xfvz kubectl-instana-linux_amd64-release-237-0.tar.gz
             mv kubectl-instana /usr/local/bin/kubectl-instana
             rm kubectl-instana-linux_amd64-release-237-0.tar.gz
@@ -496,6 +496,7 @@
   shell: |
     oc annotate namespace instana-datastores scheduler.alpha.kubernetes.io/defaultTolerations-
     oc annotate namespace instana-datastores openshift.io/node-selector-
+    oc delete pod $(oc -n instana-datastores get pods| grep -v '1/1'|grep -v "ContainerCreating"|awk '{print$1}') -n instana-datastores --ignore-not-found  --force --grace-period 0
   ignore_errors: true
   register: output
   args:
@@ -585,7 +586,7 @@
 - name:   🕦 INSTANA - Wait for DataStores to become ready (this will take up to 5 minutes)
   shell: |
     sleep 20
-    while [ `oc -n instana-datastores get pods| grep '1/1' | grep -c ""` -lt 6 ]
+    while [ `oc -n instana-datastores get pods| grep '0/1' | grep -c ""` -gt 0 ]
     do
       oc annotate namespace instana-datastores scheduler.alpha.kubernetes.io/defaultTolerations-
       oc annotate namespace instana-datastores openshift.io/node-selector-
