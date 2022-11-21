@@ -47,6 +47,11 @@
             # apt-get install instana-kubectl
         fi
     fi
+    if [ -x "$(command -v kubectl-instana)" ]; then
+        echo "✅ Kubectl Instana Plugin installed"
+    else
+        echo "❗❗❗ Kubectl Instana Plugin NOT installed. ERROR!!!!!"
+    fi
   ignore_errors: true
   register: output
 - name: 🟣  DEBUG
@@ -143,7 +148,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    verbosity: 1
+    #verbosity: 1
 
 
 
