@@ -41,7 +41,7 @@
             echo "ls ---------------------------------------------------------"
             ls
             echo "ls---------------------------------------------------------"
-            sudo mv kubectl-instana /usr/local/bin/kubectl-instana
+            mv kubectl-instana /usr/local/bin/kubectl-instana
             echo bin ---------------------------------------------------------"
             ls /usr/local/bin/
             echo "bin" ---------------------------------------------------------"
