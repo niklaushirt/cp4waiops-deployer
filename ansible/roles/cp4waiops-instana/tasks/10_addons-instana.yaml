@@ -38,7 +38,9 @@
         else
             wget https://self-hosted.instana.io/kubectl/kubectl-instana-linux_amd64-release-237-0.tar.gz
             tar xfvz kubectl-instana-linux_amd64-release-237-0.tar.gz
+            ls
             sudo mv kubectl-instana /usr/local/bin/kubectl-instana
+            ls /usr/local/bin/
             rm kubectl-instana-linux_amd64-release-237-0.tar.gz
 
             # echo "deb [arch=amd64] https://self-hosted.instana.io/apt generic main" > /etc/apt/sources.list.d/instana-product.list
