@@ -24,7 +24,7 @@
 
     echo "***************************************************************************************************************************************************"
     echo "   🛠️   Create Analysis Definiton: Temporal Grouping"
-    export FILE_NAME=create-analysis-TG.graphql
+    export FILE_NAME=create-analysis-TG{{current_cp4waiops_feature.training_suffix | default("") }}.graphql
     export FILE_PATH="{{role_path}}/templates/training/training-definitions/"
     {{role_path}}/templates/training/scripts/execute-graphql.sh
 
@@ -33,8 +33,6 @@
     #echo "   🛠️   Run Analysis: Temporal Grouping"
     #export FILE_NAME=run-analysis-TG.graphql
     #{{role_path}}/templates/training/scripts/execute-graphql.sh
-
-
   register: output_string
   ignore_errors: true
   args:

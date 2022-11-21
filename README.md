@@ -14,7 +14,7 @@
 Please drop me a note on Slack or by mail nikh@ch.ibm.com if you find glitches or problems.
 
 
-## 🚨 Can now install Instana into your Cluster
+## 🚨 You can now also install Instana into your Cluster
 
 
 This is provided `as-is`:
@@ -34,6 +34,10 @@ So please if you have any feedback contact me
 - on Slack: @niklaushirt or
 - by Mail: nikh@ch.ibm.com
 
+
+❗Those are **non-production** installations and are suited only for demo and PoC environments. ❗
+
+Please refer to the official IBM Documentation for production ready installations.
 
 <div style="page-break-after: always;"></div>
 

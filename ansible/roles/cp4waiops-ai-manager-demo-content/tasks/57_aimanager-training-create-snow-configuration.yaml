@@ -25,13 +25,13 @@
 
     echo "***************************************************************************************************************************************************"
     echo "   🛠️   Create Analysis Definiton: Change Risk"
-    export FILE_NAME=create-analysis-CR.graphql
+    export FILE_NAME=create-analysis-CR{{current_cp4waiops_feature.training_suffix | default("") }}.graphql
     export FILE_PATH="{{role_path}}/templates/training/training-definitions/"
     {{role_path}}/templates/training/scripts/execute-graphql.sh
 
     echo "***************************************************************************************************************************************************"
     echo "   🛠️   Create Analysis Definiton: Similar Incidents"
-    export FILE_NAME=create-analysis-SI.graphql
+    export FILE_NAME=create-analysis-SI{{current_cp4waiops_feature.training_suffix | default("") }}.graphql
     export FILE_PATH="{{role_path}}/templates/training/training-definitions/"
     {{role_path}}/templates/training/scripts/execute-graphql.sh
 

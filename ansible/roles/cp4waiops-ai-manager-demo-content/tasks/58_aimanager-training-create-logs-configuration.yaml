@@ -104,7 +104,7 @@
     echo "***************************************************************************************************************************************************"
     echo "   🛠️   Create Analysis Definiton: Log Anomaly Detection"
     echo "     "	
-    echo "      📥 Launch Query for file: create-analysis-LAD.graphql"	
+    echo "      📥 Launch Query for file: create-analysis-LAD{{current_cp4waiops_feature.training_suffix | default("") }}.graphql"	
     echo "     "
     QUERY_TMPL="$(cat {{role_path}}/templates/training/training-definitions/create-analysis-LAD.graphql)"
     QUERY=$(echo $QUERY_TMPL | sed "s/<DATA_SET_ID>/$DATA_SET_ID/g")

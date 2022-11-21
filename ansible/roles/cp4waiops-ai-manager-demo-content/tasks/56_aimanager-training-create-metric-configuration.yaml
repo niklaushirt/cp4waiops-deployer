@@ -22,7 +22,7 @@
 
     echo "***************************************************************************************************************************************************"
     echo "   🛠️   Create Analysis Definiton: Metric Anomaly"
-    export FILE_NAME=create-analysis-METRIC.graphql
+    export FILE_NAME=create-analysis-METRIC{{current_cp4waiops_feature.training_suffix | default("") }}.graphql
     export FILE_PATH="{{role_path}}/templates/training/training-definitions/"
     {{role_path}}/templates/training/scripts/execute-graphql.sh
 
