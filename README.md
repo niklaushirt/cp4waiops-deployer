@@ -1327,6 +1327,8 @@ or
 
 ## ℹ️ Old documentation for reference
 
+## ⚠️❗Many of those will not work anymore and are here just to give you some pointers
+
 * Info
 	* [Changelog](./CHANGELOG.md)
 	* [Demo Architecture](./doc/ARCHITECTURE.md)
