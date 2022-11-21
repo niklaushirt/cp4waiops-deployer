@@ -26,14 +26,15 @@
 
 - name: 🚀 INSTANA - Check cert-manager
   shell: |
-    CERT_MANAGER_CRD=$(oc get customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io1|grep "certificates.cert-manager.io"|wc -l|tr -d ' ') 
+    CERT_MANAGER_CRD=$(oc get customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io|grep "certificates.cert-manager.io"|wc -l|tr -d ' ') 
     echo $CERT_MANAGER_CRD
   ignore_errors: true
   register: cert_check
+
 - name: 🚀 INSTANA - Fail cert-manager
   fail: msg="You need a cert-manager running. You can install it with kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml"
-  when: cert_check.stdout == 0
-
+  when: cert_check.stdout == "0"
+  ignore_errors: false
 
 
 - name: 🚀 INSTANA - Install Kubectl Instana Plugin
