@@ -46,9 +46,10 @@
             # apt-get update
             # apt-get install instana-kubectl
         fi
-        /usr/local/bin/kubectl-instana -v
+        
     fi
     if [ -x "$(command -v kubectl-instana)" ]; then
+        /usr/local/bin/kubectl-instana -v
         echo "✅ Kubectl Instana Plugin installed"
     else
         echo "❗❗❗ Kubectl Instana Plugin NOT installed. ERROR!!!!!"
