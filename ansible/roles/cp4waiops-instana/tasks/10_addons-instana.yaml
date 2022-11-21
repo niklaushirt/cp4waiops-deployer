@@ -405,6 +405,25 @@
     template: ./templates/instana-k8s-datastores/elasticsearch/service.yaml
 
 
+- name: 🚀 INSTANA - Patch Pull Secrets Backend Datastores
+  shell: |
+    #prep for datastores
+    #instana-docker-port directory should be here
+    oc delete secret instana-pullsecret
+    oc create secret docker-registry instana-pullsecret --docker-server=containers.instana.io --docker-username="_" --docker-password={{current_cp4waiops_feature.agent_key}}
+    oc -n instana-datastores secrets link default instana-pullsecret --for=pull
+    oc -n instana-datastores secrets link instana-datastore-sa instana-pullsecret --for=pull
+    oc adm policy add-scc-to-user privileged instana-datastore-sa -n instana-datastores
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    #verbosity: 1
+
+
 
 
 - name: 🚀 INSTANA - Patch Images Backend Datastores
@@ -456,13 +475,6 @@
     echo "COCKROACH_IMAGE:      $COCKROACH_IMAGE"
 
 
-    #prep for datastores
-    #instana-docker-port directory should be here
-    oc delete secret instana-pullsecret
-    oc create secret docker-registry instana-pullsecret --docker-server=containers.instana.io --docker-username="_" --docker-password={{current_cp4waiops_feature.agent_key}}
-    oc -n instana-datastores secrets link default instana-pullsecret --for=pull
-    oc -n instana-datastores secrets link instana-datastore-sa instana-pullsecret --for=pull
-    oc adm policy add-scc-to-user privileged instana-datastore-sa -n instana-datastores
 
     #deploy datastores from the YAMLs, replacing with the images
     oc -n instana-datastores set image deployment/zookeeper zookeeper=$ZOOKEEPER_IMAGE
@@ -471,15 +483,23 @@
     oc -n instana-datastores set image deployment/cockroachdb cockroachdb=$COCKROACH_IMAGE
     oc -n instana-datastores set image deployment/elasticsearch elasticsearch=$ELASTICSEARCH_IMAGE
     oc -n instana-datastores set image deployment/cassandra cassandra=$CASSANDRA_IMAGE
-
-
-    oc annotate namespace instana-datastores scheduler.alpha.kubernetes.io/defaultTolerations-
-    oc annotate namespace instana-datastores openshift.io/node-selector-
-    oc delete rs -n instana-datastores --all
-    oc delete pod -n instana-datastores --all
-
   ignore_errors: true
   register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    #verbosity: 1
+
+- name: 🚀 INSTANA - Annotate and clean Backend Datastores
+  shell: |
+    oc annotate namespace instana-datastores scheduler.alpha.kubernetes.io/defaultTolerations-
+    oc annotate namespace instana-datastores openshift.io/node-selector-
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
@@ -564,12 +584,13 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name:   🕦 INSTANA - Wait for DataStores to become ready (this will take up to 5 minutes)
   shell: |
-    sleep 10
+    sleep 20
     while [ `oc -n instana-datastores get pods| grep '1/1' | grep -c ""` -lt 6 ]
     do
+      oc annotate namespace instana-datastores scheduler.alpha.kubernetes.io/defaultTolerations-
       oc annotate namespace instana-datastores openshift.io/node-selector-
       
-      oc delete rs $(oc get -n instana-datastores rs | grep -v "1         1         1"|awk '{print$1}') -n instana-datastores --ignore-not-found
+      #oc delete rs $(oc get -n instana-datastores rs | grep -v "1         1         1"|awk '{print$1}') -n instana-datastores --ignore-not-found
       oc delete pod $(oc -n instana-datastores get pods| grep -v '1/1'|grep -v "ContainerCreating"|awk '{print$1}') -n instana-datastores --ignore-not-found  --force --grace-period 0
       sleep 120
     done
