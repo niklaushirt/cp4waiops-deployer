@@ -181,7 +181,7 @@
 
 
 
-- name: 🚀 INSTANA - Create Get and Save License
+- name: 🚀 INSTANA - Get and Save License
   shell: |
     #get license
     kubectl instana license download --sales-key {{current_cp4waiops_feature.sales_key}}
@@ -410,8 +410,9 @@
   shell: |
     #prep for datastores
     #instana-docker-port directory should be here
+    oc project instana-datastores
     oc delete secret instana-pullsecret
-    oc create secret docker-registry instana-pullsecret --docker-server=containers.instana.io --docker-username="_" --docker-password={{current_cp4waiops_feature.agent_key}}
+    oc create secret -n instana-datastores docker-registry instana-pullsecret --docker-server=containers.instana.io --docker-username="_" --docker-password={{current_cp4waiops_feature.agent_key}}
     oc -n instana-datastores secrets link default instana-pullsecret --for=pull
     oc -n instana-datastores secrets link instana-datastore-sa instana-pullsecret --for=pull
     oc adm policy add-scc-to-user privileged instana-datastore-sa -n instana-datastores
