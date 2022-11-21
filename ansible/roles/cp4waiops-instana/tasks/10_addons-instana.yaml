@@ -36,10 +36,15 @@
               sudo mv kubectl-instana /usr/local/bin/kubectl-instana
               rm kubectl-instana-darwin_amd64-release-235-3.tar.gz
         else
-            echo "deb [arch=amd64] https://self-hosted.instana.io/apt generic main" > /etc/apt/sources.list.d/instana-product.list
-            wget -qO - "https://self-hosted.instana.io/signing_key.gpg" | apt-key add -
-            apt-get update
-            apt-get install instana-kubectl
+            wget https://self-hosted.instana.io/kubectl/kubectl-instana-linux_amd64-release-237-0.tar.gz
+            tar xfvz kubectl-instana-linux_amd64-release-237-0.tar.gz
+            sudo mv kubectl-instana /usr/local/bin/kubectl-instana
+            rm kubectl-instana-linux_amd64-release-237-0.tar.gz
+
+            # echo "deb [arch=amd64] https://self-hosted.instana.io/apt generic main" > /etc/apt/sources.list.d/instana-product.list
+            # wget -qO - "https://self-hosted.instana.io/signing_key.gpg" | apt-key add -
+            # apt-get update
+            # apt-get install instana-kubectl
         fi
     fi
   ignore_errors: true
@@ -133,22 +138,17 @@
 
     kubectl instana operator apply --namespace=instana-operator
 
+  ignore_errors: true
+  register: output
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
 
-    # if [ ! $SKIP_TLS == 'true' ]; then
-    #   # Create the key (requires input)
-    #   openssl genrsa -aes128 -out key.pem 2048
 
-    #   # Create the certificate
-    #   openssl req -new -x509 -key key.pem -out cert.pem -days 365
 
-    #   # Combine the two into a single file
-    #   cat key.pem cert.pem > sp.pem
-      
-    # fi
-
-    # create secret
-    #oc -n instana-core create secret generic instana-service-provider --from-file=sp.pem --from-literal=sp.key.pass=instana
-
+- name: 🚀 INSTANA - Create Core and Units Registry Secrets
+  shell: |
     # create core secrets
 
     oc -n instana-core create secret docker-registry instana-registry\
@@ -166,7 +166,17 @@
         --docker-server=containers.instana.io
 
     oc -n instana-units label secret instana-registry app.kubernetes.io/name=instana
+  ignore_errors: true
+  register: output
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
 
+
+
+- name: 🚀 INSTANA - Create Get and Save License
+  shell: |
     #get license
     kubectl instana license download --sales-key {{current_cp4waiops_feature.sales_key}}
     oc annotate namespace instana-datastores scheduler.alpha.kubernetes.io/defaultTolerations-
@@ -510,8 +520,8 @@
     while [ `oc -n instana-datastores get pods| grep '1/1' | grep -c ""` -lt 6 ]
     do
       oc annotate namespace instana-datastores openshift.io/node-selector-
-      oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}') -n instana-datastores --ignore-not-found
-      sleep 15
+      oc delete pod $(oc -n instana-datastores get pods| grep -v '1/1'|awk '{print$1}') -n instana-datastores --ignore-not-found
+      sleep 120
     done
   ignore_errors: true
   register: output

@@ -12,7 +12,7 @@ echo "--------------------------------------------------------------------------
 mkdir -p ../ARCHIVE/cp4waiops-deployer-$gitCommitMessage
 
 cp -r * ../ARCHIVE/cp4waiops-deployer-$gitCommitMessage
-cp .gitignore ../ARCHIVE/aiops-ansible-next-$gitCommitMessage
+cp .gitignore ../ARCHIVE/cp4waiops-deployer-$gitCommitMessage
  
 
 echo "--------------------------------------------------------------------------------------------------------------------------------"
