@@ -252,7 +252,9 @@ cp4waiops:
   - name: cp4waiops-instana
     kind: Instana
     install: true
+    version: 235-5
 
+    
     # ---------------------------------------------------------------------
     # INSTANA LICENSE
     sales_key: 'NONE'
