@@ -25,7 +25,7 @@
 
     
 - set_fact:
-    _case_dir: "{{ status_dir | default('temp_status') }}/cp4wa/case"
+    _case_dir: "{{ status_dir | default('temp_status') }}/cp4waiops/case"
 
 - name: 📥 Create directory {{ _case_dir }} for case files
   file:

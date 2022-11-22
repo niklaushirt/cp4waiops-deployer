@@ -1,6 +1,6 @@
 ---
 - set_fact:
-    _case_dir: "{{ status_dir  | default('temp_status') }}/cp4wa/case"
+    _case_dir: "{{ status_dir  | default('temp_status') }}/cp4waiops/case"
 
 # Install catalog
 - name: 📥 Compose cloudctl install-catalog command for case file
