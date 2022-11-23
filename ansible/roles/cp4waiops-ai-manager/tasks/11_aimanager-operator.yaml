@@ -24,7 +24,7 @@
 
 
 # Create IBM AIOps Operator Group
-- name:   🚀 AIMANAGER OPERATOR - Install Operator Group
+- name:   🚀 AIMANAGER CATALOG - Install Operator Group
   community.kubernetes.k8s:
     state: present
     template: ./templates/waiops/2_opgroup-ibm-aiops.j2
@@ -34,7 +34,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for serviceaccount being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER OPERATOR - 🕦 Wait for serviceaccount ibm-operator-catalog to become ready
+- name:   🚀 AIMANAGER CATALOG - 🕦 Wait for serviceaccount ibm-operator-catalog to become ready
   shell: oc get -n openshift-marketplace serviceaccount ibm-operator-catalog --no-headers| grep -c ""
   register: kubectl_get_sa
   until: kubectl_get_sa.stdout == "1"
@@ -48,7 +48,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for CSV being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER OPERATOR - Patch service account for pull secret
+- name:   🚀 AIMANAGER CATALOG - Patch service account for pull secret
   shell: |
     oc patch -n openshift-marketplace serviceaccount ibm-operator-catalog -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
     oc patch -n openshift-marketplace serviceaccount default -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
@@ -75,7 +75,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Delete lingering Pods before check for reinstall
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER OPERATOR - Delete lingering Pods before check for reinstall
+- name:   🚀 AIMANAGER CATALOG - Delete lingering Pods before check for reinstall
   shell: |
     oc delete pod $(oc get po -n {{ current_cp4waiops_cluster.project }}|grep ContainerStatusUnknown|awk '{print$1}'):-notfound -n {{ current_cp4waiops_cluster.project }} --ignore-not-found
   register: kubectl_get_pods
@@ -85,7 +85,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for Operator to settle
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER OPERATOR - Wait for Operator Catalog to settle
+- name:   🚀 AIMANAGER CATALOG - Wait for Operator Catalog to settle
   shell: |
     # Wait for Operator to settle
     sleep 20
@@ -97,7 +97,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Delete lingering Pods before check for reinstall
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER OPERATOR - Delete operator for pull secret (hack 3.5)
+- name:   🚀 AIMANAGER CATALOG - Delete operator for pull secret (hack 3.5)
   shell: |
     oc delete pod $(oc get po -n openshift-marketplace|grep ImagePullBackOff|awk '{print$1}') -n openshift-marketplace
   register: kubectl_get_pods
@@ -108,7 +108,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for Marketplace being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🕦 AIMANAGER OPERATOR - Wait for ibm-operator-catalog to become ready
+- name:   🕦 AIMANAGER CATALOG - Wait for ibm-operator-catalog to become ready
   shell: oc get po -n openshift-marketplace |grep ibm-operator-catalog| grep '1/1' | grep -c ""
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "1"

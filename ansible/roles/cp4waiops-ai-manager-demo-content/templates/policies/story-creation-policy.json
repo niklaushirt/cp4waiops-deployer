@@ -205,8 +205,8 @@
               "details": {}
             }],
             "assignment": {
-              "owner": null,
-              "team": null
+              "owner": "demo",
+              "team": "All users"
             },
             "addRelatedAlerts": {
               "update": false
