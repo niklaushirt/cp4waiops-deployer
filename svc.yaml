@@ -1,0 +1,336 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"mysql","namespace":"zabbix"},"spec":{"clusterIP":"None","ports":[{"port":3306}],"selector":{"app":"mysql"}}}
+    creationTimestamp: "2022-11-25T11:08:35Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          f:clusterIP: {}
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":3306,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: "2022-11-25T11:08:35Z"
+    name: mysql
+    namespace: zabbix
+    resourceVersion: "5440843"
+    uid: 2bd7ca34-2388-4de1-816b-d75c3d6699bf
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 3306
+      protocol: TCP
+      targetPort: 3306
+    selector:
+      app: mysql
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2022-11-25T10:58:02Z"
+    labels:
+      name: zabbix-operator-certified
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:name: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"147c99aa-101c-43c5-8a5f-d188dd67c44a"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":8383,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":8686,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: ansible-operator
+      operation: Update
+      time: "2022-11-25T10:58:02Z"
+    name: zabbix-operator-certified-metrics
+    namespace: zabbix
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: zabbix-operator-certified
+      uid: 147c99aa-101c-43c5-8a5f-d188dd67c44a
+    resourceVersion: "5421381"
+    uid: 13893222-99f1-4d3b-8e85-aea1d990be7c
+  spec:
+    clusterIP: 172.21.129.169
+    clusterIPs:
+    - 172.21.129.169
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http-metrics
+      port: 8383
+      protocol: TCP
+      targetPort: 8383
+    - name: cr-metrics
+      port: 8686
+      protocol: TCP
+      targetPort: 8686
+    selector:
+      name: zabbix-operator-certified
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2022-11-25T11:12:29Z"
+    labels:
+      app: zabbix-server-java-gw
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"8b46fcc6-a140-4b05-b680-4d8fb2db8543"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":10052,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: "2022-11-25T11:12:29Z"
+    name: zabbix-server-java-gw-zabbix
+    namespace: zabbix
+    ownerReferences:
+    - apiVersion: kubernetes.zabbix.com/v1alpha1
+      kind: ZabbixServer
+      name: zabbix-server
+      uid: 8b46fcc6-a140-4b05-b680-4d8fb2db8543
+    resourceVersion: "5448011"
+    uid: 2edebd3b-a467-4c39-98fd-1d011379755f
+  spec:
+    clusterIP: 172.21.149.9
+    clusterIPs:
+    - 172.21.149.9
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: 10052-tcp
+      port: 10052
+      protocol: TCP
+      targetPort: 10052
+    selector:
+      app: zabbix-server-java-gw
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2022-11-25T11:12:24Z"
+    labels:
+      app: zabbix-server-server
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"8b46fcc6-a140-4b05-b680-4d8fb2db8543"}: {}
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":10051,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: "2022-11-25T11:12:23Z"
+    name: zabbix-server-server
+    namespace: zabbix
+    ownerReferences:
+    - apiVersion: kubernetes.zabbix.com/v1alpha1
+      kind: ZabbixServer
+      name: zabbix-server
+      uid: 8b46fcc6-a140-4b05-b680-4d8fb2db8543
+    resourceVersion: "5447791"
+    uid: 39aac1ca-c836-437d-a0f0-3bc3b92d0ffb
+  spec:
+    clusterIP: 172.21.171.135
+    clusterIPs:
+    - 172.21.171.135
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: 10051-tcp
+      port: 10051
+      protocol: TCP
+      targetPort: 10051
+    selector:
+      app: zabbix-server-server
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2022-11-25T11:12:35Z"
+    finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+    labels:
+      app: zabbix-server-web
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:labels:
+            .: {}
+            f:app: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"8b46fcc6-a140-4b05-b680-4d8fb2db8543"}: {}
+        f:spec:
+          f:externalTrafficPolicy: {}
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":80,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: "2022-11-25T11:12:35Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:finalizers:
+            .: {}
+            v:"service.kubernetes.io/load-balancer-cleanup": {}
+        f:status:
+          f:loadBalancer:
+            f:ingress: {}
+      manager: ibm-cloud-controller-manager
+      operation: Update
+      subresource: status
+      time: "2022-11-25T11:12:36Z"
+    name: zabbix-server-web
+    namespace: zabbix
+    ownerReferences:
+    - apiVersion: kubernetes.zabbix.com/v1alpha1
+      kind: ZabbixServer
+      name: zabbix-server
+      uid: 8b46fcc6-a140-4b05-b680-4d8fb2db8543
+    resourceVersion: "5448284"
+    uid: 8e109d99-c9eb-4bf1-b855-b3f0693d42df
+  spec:
+    clusterIP: 172.21.173.36
+    clusterIPs:
+    - 172.21.173.36
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: 80-http
+      nodePort: 32255
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: zabbix-server-web
+    sessionAffinity: None
+    type: LoadBalancer
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 159.8.182.114
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

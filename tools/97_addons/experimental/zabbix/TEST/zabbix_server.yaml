@@ -1,0 +1,103 @@
+# https://www.zabbix.com/documentation/5.0/en/manual/installation/containers/openshift
+
+
+apiVersion: kubernetes.zabbix.com/v1alpha1
+kind: ZabbixServer
+metadata:
+  name: zabbix-server
+  labels:
+    app: server
+    vendor: zabbix
+  namespace: zabbix
+spec:
+  server:
+    cache_size: 8M
+    cache_update_frequency: 60
+    db_tls_cipher: ''
+    db_tls_cipher13: ''
+    db_tls_cipher_13: ''
+    db_tls_connect: ''
+    debug_level: 3
+    export_file_size: ''
+    history_cache_size: 16M
+    history_index_cache_size: 4M
+    history_storage_date_index: true
+    history_storage_types: ''
+    housekeeping_frequency: 1
+    load_module: ''
+    log_slow_queries: 0
+    max_housekeeper_delete: 5000
+    proxy_config_frequency: 3600
+    proxy_data_frequency: 1
+    start_alerters: 3
+    start_db_syncers: 4
+    start_discoverers: 1
+    start_escalators: 1
+    start_http_pollers: 1
+    start_ipmi_pollers: 0
+    start_java_pollers: 5
+    start_lld_processors: 2
+    start_pingers: 1
+    start_pollers: 5
+    start_pollers_unreachable: 1
+    start_preprocessors: 3
+    start_proxy_pollers: 0
+    start_timers: 1
+    start_trappers: 5
+    start_vmware_collectors: 0
+    stats_allowed_ip: ''
+    timeout: 30
+    tls_ca_file_name: ''
+    tls_cert_file_name: ''
+    tls_crl_file_name: ''
+    tls_key_file_name: ''
+    tlscipherall: ''
+    tlscipherall13: ''
+    tlsciphercert: ''
+    tlsciphercert13: ''
+    tlscipherpsk: ''
+    tlscipherpsk13: ''
+    trapper_timeout: 300
+    trend_cache_size: 4M
+    unavailable_delay: 60
+    unreachable_delay: 15
+    unreachable_period: 45
+    value_cache_size: 8M
+    vmware_cache_size: 8M
+    vmware_frequency: 60
+    vmware_perf_frequency: 60
+    vmware_timeout: 10
+  java_gateway:
+    debug_level: info
+    start_pollers: 5
+    timeout: 3
+  web:
+    db_cipher_list: ''
+    db_double_ieee754: true
+    db_encryption: false
+    db_verify_host: false
+    deny_gui_access: false
+    enable_web_access_log: true
+    gui_access_ip_range: ''
+    gui_warning_msg: Zabbix is under maintenance.
+    history_storage_types: ''
+    max_execution_time: 300
+    max_input_time: 300
+    memory_limit: 128M
+    post_max_size: 16M
+    server_name: Kubernetes installation
+    session_name: zbx_sessionid
+    sso_settings: ''
+    timezone: Europe/Riga
+    upload_max_filesize: 2M
+  db_server_host: mysql
+  db_server_port: 3306
+  history_storage_url: ''
+  java_gateway_size: 1
+  mysql_database: zabbix
+  web_enable_route: true
+  web_size: 1
+  zabbix_mysqlsecret: zabbix-server-secrets
+
+
+

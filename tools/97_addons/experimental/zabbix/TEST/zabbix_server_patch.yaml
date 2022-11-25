@@ -1,0 +1,165 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: zabbix-server-server
+  namespace: zabbix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zabbix-server-server
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: zabbix-server-server
+    spec:
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: zabbix-server
+          livenessProbe:
+            tcpSocket:
+              port: 10051
+            timeoutSeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 300
+          env:
+            - name: DB_SERVER_HOST
+              value: mysql
+            - name: DB_SERVER_PORT
+              value: '3306'
+            - name: MYSQL_DATABASE
+              value: zabbix
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zabbix-server-secrets
+                  key: mysql_root_password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: zabbix-server-secrets
+                  key: mysql_zabbix_username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: zabbix-server-secrets
+                  key: mysql_zabbix_password
+            - name: ZBX_DBTLSCONNECT
+            - name: ZBX_HISTORYSTORAGEURL
+            - name: ZBX_HISTORYSTORAGETYPES
+            - name: ZBX_HISTORYSTORAGEDATEINDEX
+              value: '1'
+            - name: ZBX_DEBUGLEVEL
+              value: '3'
+            - name: ZBX_STARTPOLLERS
+              value: '5'
+            - name: ZBX_STARTPREPROCESSORS
+              value: '3'
+            - name: ZBX_STARTPOLLERSUNREACHABLE
+              value: '1'
+            - name: ZBX_STARTTRAPPERS
+              value: '5'
+            - name: ZBX_STARTPINGERS
+              value: '1'
+            - name: ZBX_STARTDISCOVERERS
+              value: '1'
+            - name: ZBX_STARTHTTPPOLLERS
+              value: '1'
+            - name: ZBX_IPMIPOLLERS
+              value: '0'
+            - name: ZBX_STARTTIMERS
+              value: '1'
+            - name: ZBX_STARTESCALATORS
+              value: '1'
+            - name: ZBX_STARTALERTERS
+              value: '3'
+            - name: ZBX_JAVAGATEWAY_ENABLE
+              value: 'true'
+            - name: ZBX_JAVAGATEWAY
+              value: zabbix-server-java-gw-zabbix
+            - name: ZBX_JAVAGATEWAYPORT
+              value: '10052'
+            - name: ZBX_STARTJAVAPOLLERS
+              value: '5'
+            - name: ZBX_STARTLLDPROCESSORS
+              value: '2'
+            - name: ZBX_STATSALLOWEDIP
+            - name: ZBX_STARTVMWARECOLLECTORS
+              value: '0'
+            - name: ZBX_VMWAREFREQUENCY
+              value: '60'
+            - name: ZBX_VMWAREPERFFREQUENCY
+              value: '60'
+            - name: ZBX_VMWARECACHESIZE
+              value: 8M
+            - name: ZBX_VMWARETIMEOUT
+              value: '10'
+            - name: ZBX_HOUSEKEEPINGFREQUENCY
+              value: '1'
+            - name: ZBX_MAXHOUSEKEEPERDELETE
+              value: '5000'
+            - name: ZBX_CACHESIZE
+              value: 8M
+            - name: ZBX_CACHEUPDATEFREQUENCY
+              value: '60'
+            - name: ZBX_STARTDBSYNCERS
+              value: '4'
+            - name: ZBX_HISTORYCACHESIZE
+              value: 16M
+            - name: ZBX_HISTORYINDEXCACHESIZE
+              value: 4M
+            - name: ZBX_TRENDCACHESIZE
+              value: 4M
+            - name: ZBX_VALUECACHESIZE
+              value: 8M
+            - name: ZBX_TIMEOUT
+              value: '30'
+            - name: ZBX_TRAPPERIMEOUT
+              value: '300'
+            - name: ZBX_UNREACHABLEPERIOD
+              value: '45'
+            - name: ZBX_UNAVAILABLEDELAY
+              value: '60'
+            - name: ZBX_UNREACHABLEDELAY
+              value: '15'
+            - name: ZBX_LOGSLOWQUERIES
+              value: '0'
+            - name: ZBX_STARTPROXYPOLLERS
+              value: '0'
+            - name: ZBX_PROXYCONFIGFREQUENCY
+              value: '3600'
+            - name: ZBX_PROXYDATAFREQUENCY
+              value: '1'
+            - name: DEBUG_MODE
+              value: 'false'
+          securityContext:
+            capabilities: {}
+            privileged: false
+          ports:
+            - name: zabbix-trapper
+              containerPort: 10051
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          startupProbe:
+            tcpSocket:
+              port: 10051
+            initialDelaySeconds: 180
+            timeoutSeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 400
+          terminationMessagePolicy: File
+          image: >-
+            registry.connect.redhat.com/zabbix/zabbix-server-mysql-50@sha256:2f76e7cbece9d9366b613bcb1079b030ddbcc5e97b2f133b73bd0131f0869725
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

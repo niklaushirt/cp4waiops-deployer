@@ -1,0 +1,184 @@
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: zabbix-server-secrets
+  namespace: zabbix
+data:
+  mysql_root_password: UDRzc3cwcmQh
+  mysql_zabbix_password: emFiYml4X3N1cGVyIQ==
+  mysql_zabbix_username: emFiYml4
+type: Opaque
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  namespace: zabbix
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zabbix-database
+  namespace: zabbix
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: zabbix
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:8.0
+        name: mysql
+        args:
+          - mysqld
+          - '--character-set-server=utf8'
+          - '--collation-server=utf8_bin'
+          - '--default-authentication-plugin=mysql_native_password'
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: P4ssw0rd!
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: zabbix
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: mysql
+  clusterIP: None
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: zabbix-full-secrets
+  namespace: zabbix
+data:
+  mysql_root_password: UDRzc3cwcmQh
+  mysql_zabbix_password: emFiYml4X3N1cGVyIQ==
+  mysql_zabbix_username: emFiYml4
+type: Opaque
+
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: zabbix-operator-certified-metrics
+    namespace: zabbix
+  spec:
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http-metrics
+      port: 8383
+      protocol: TCP
+      targetPort: 8383
+    - name: cr-metrics
+      port: 8686
+      protocol: TCP
+      targetPort: 8686
+    selector:
+      name: zabbix-operator-certified
+    sessionAffinity: None
+    type: ClusterIP
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: zabbix-server-java-gw-zabbix
+    namespace: zabbix
+  spec:
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: 10052-tcp
+      port: 10052
+      protocol: TCP
+      targetPort: 10052
+    selector:
+      app: zabbix-server-java-gw
+    sessionAffinity: None
+    type: ClusterIP
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: zabbix-server-server
+    namespace: zabbix
+  spec:
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: 10051-tcp
+      port: 10051
+      protocol: TCP
+      targetPort: 10051
+    selector:
+      app: zabbix-server-server
+    sessionAffinity: None
+    type: ClusterIP
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: zabbix-server-web
+    namespace: zabbix
+  spec:
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: 80-http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: zabbix-server-web
+    sessionAffinity: None
+    type: LoadBalancer

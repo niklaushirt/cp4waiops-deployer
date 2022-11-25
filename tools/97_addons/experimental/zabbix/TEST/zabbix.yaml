@@ -1,0 +1,122 @@
+# https://www.zabbix.com/documentation/5.0/en/manual/installation/containers/openshift
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  namespace: zabbix
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: zabbix
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:8.0
+        name: mysql
+        args:
+          - mysqld
+          - '--character-set-server=utf8'
+          - '--collation-server=utf8_bin'
+          - '--default-authentication-plugin=mysql_native_password'
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: P4ssw0rd!
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: zabbix
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: mysql
+  clusterIP: None
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: zabbix-server-secrets
+  namespace: zabbix
+data:
+  mysql_root_password: UDRzc3cwcmQh
+  mysql_zabbix_password: emFiYml4X3N1cGVyIQ==
+  mysql_zabbix_username: emFiYml4
+type: Opaque
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zabbix-database
+  namespace: zabbix
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 50Gi
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: zabbix-full-secrets
+  namespace: zabbix
+data:
+  mysql_root_password: UDRzc3cwcmQh
+  mysql_zabbix_password: emFiYml4X3N1cGVyIQ==
+  mysql_zabbix_username: emFiYml4
+type: Opaque
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: zabbix-operator-certified
+  namespace: zabbix
+spec:
+  channel: lts
+  installPlanApproval: Automatic
+  name: zabbix-operator-certified
+  source: certified-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: zabbix-operator-certified.v0.0.3
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: zabbix-44wdt
+  namespace: zabbix
+spec:
+  targetNamespaces:
+    - zabbix
+---

@@ -1,0 +1,334 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zabbix-server-java-gw
+  namespace: zabbix
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: zabbix-server-gateway
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: zabbix-server-gateway
+    spec:
+      containers:
+      - env:
+        - name: ZBX_START_POLLERS
+          value: "5"
+        - name: ZBX_TIMEOUT
+          value: "3"
+        - name: ZBX_DEBUGLEVEL
+          value: info
+        - name: JAVA_OPTIONS
+        - name: DEBUG_MODE
+          value: "false"
+        image: registry.connect.redhat.com/zabbix/zabbix-java-gateway-50@sha256:a216de448dc10b2797a70f4fc6664c2bd611840b7b6c26f066635d48c606bf06
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 2
+          successThreshold: 1
+          tcpSocket:
+            port: 10052
+          timeoutSeconds: 1
+        name: zabbix-java-gateway
+        ports:
+        - containerPort: 10052
+          name: zabbix-java
+          protocol: TCP
+        resources: {}
+        securityContext:
+          capabilities: {}
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zabbix-server-server
+  namespace: zabbix
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: zabbix-server-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: zabbix-server-server
+    spec:
+      containers:
+      - env:
+        - name: DB_SERVER_HOST
+          value: mysql
+        - name: DB_SERVER_PORT
+          value: "3306"
+        - name: MYSQL_DATABASE
+          value: zabbix
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mysql_root_password
+              name: zabbix-server-secrets
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: mysql_zabbix_username
+              name: zabbix-server-secrets
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mysql_zabbix_password
+              name: zabbix-server-secrets
+        - name: ZBX_DBTLSCONNECT
+        - name: ZBX_HISTORYSTORAGEURL
+        - name: ZBX_HISTORYSTORAGETYPES
+        - name: ZBX_HISTORYSTORAGEDATEINDEX
+          value: "1"
+        - name: ZBX_DEBUGLEVEL
+          value: "3"
+        - name: ZBX_STARTPOLLERS
+          value: "5"
+        - name: ZBX_STARTPREPROCESSORS
+          value: "3"
+        - name: ZBX_STARTPOLLERSUNREACHABLE
+          value: "1"
+        - name: ZBX_STARTTRAPPERS
+          value: "5"
+        - name: ZBX_STARTPINGERS
+          value: "1"
+        - name: ZBX_STARTDISCOVERERS
+          value: "1"
+        - name: ZBX_STARTHTTPPOLLERS
+          value: "1"
+        - name: ZBX_IPMIPOLLERS
+          value: "0"
+        - name: ZBX_STARTTIMERS
+          value: "1"
+        - name: ZBX_STARTESCALATORS
+          value: "1"
+        - name: ZBX_STARTALERTERS
+          value: "3"
+        - name: ZBX_JAVAGATEWAY_ENABLE
+          value: "true"
+        - name: ZBX_JAVAGATEWAY
+          value: zabbix-server-java-gw-zabbix
+        - name: ZBX_JAVAGATEWAYPORT
+          value: "10052"
+        - name: ZBX_STARTJAVAPOLLERS
+          value: "5"
+        - name: ZBX_STARTLLDPROCESSORS
+          value: "2"
+        - name: ZBX_STATSALLOWEDIP
+        - name: ZBX_STARTVMWARECOLLECTORS
+          value: "0"
+        - name: ZBX_VMWAREFREQUENCY
+          value: "60"
+        - name: ZBX_VMWAREPERFFREQUENCY
+          value: "60"
+        - name: ZBX_VMWARECACHESIZE
+          value: 8M
+        - name: ZBX_VMWARETIMEOUT
+          value: "10"
+        - name: ZBX_HOUSEKEEPINGFREQUENCY
+          value: "1"
+        - name: ZBX_MAXHOUSEKEEPERDELETE
+          value: "5000"
+        - name: ZBX_CACHESIZE
+          value: 8M
+        - name: ZBX_CACHEUPDATEFREQUENCY
+          value: "60"
+        - name: ZBX_STARTDBSYNCERS
+          value: "4"
+        - name: ZBX_HISTORYCACHESIZE
+          value: 16M
+        - name: ZBX_HISTORYINDEXCACHESIZE
+          value: 4M
+        - name: ZBX_TRENDCACHESIZE
+          value: 4M
+        - name: ZBX_VALUECACHESIZE
+          value: 8M
+        - name: ZBX_TIMEOUT
+          value: "30"
+        - name: ZBX_TRAPPERIMEOUT
+          value: "300"
+        - name: ZBX_UNREACHABLEPERIOD
+          value: "45"
+        - name: ZBX_UNAVAILABLEDELAY
+          value: "60"
+        - name: ZBX_UNREACHABLEDELAY
+          value: "15"
+        - name: ZBX_LOGSLOWQUERIES
+          value: "0"
+        - name: ZBX_STARTPROXYPOLLERS
+          value: "0"
+        - name: ZBX_PROXYCONFIGFREQUENCY
+          value: "3600"
+        - name: ZBX_PROXYDATAFREQUENCY
+          value: "1"
+        - name: DEBUG_MODE
+          value: "false"
+        image: registry.connect.redhat.com/zabbix/zabbix-server-mysql-50@sha256:2f76e7cbece9d9366b613bcb1079b030ddbcc5e97b2f133b73bd0131f0869725
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 10051
+          timeoutSeconds: 3
+        name: zabbix-server
+        ports:
+        - containerPort: 10051
+          name: zabbix-trapper
+          protocol: TCP
+        resources: {}
+        securityContext:
+          capabilities: {}
+          privileged: false
+        startupProbe:
+          failureThreshold: 400
+          initialDelaySeconds: 180
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: 10051
+          timeoutSeconds: 3
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zabbix-server-web
+  namespace: zabbix
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: zabbix-server-web
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: zabbix-server-web
+    spec:
+      containers:
+      - env:
+        - name: ZBX_DENY_GUI_ACCESS
+          value: "false"
+        - name: ZBX_GUI_ACCESS_IP_RANGE
+        - name: ZBX_GUI_WARNING_MSG
+          value: Zabbix is under maintenance.
+        - name: DB_SERVER_HOST
+          value: mysql
+        - name: DB_SERVER_PORT
+          value: "3306"
+        - name: MYSQL_DATABASE
+          value: zabbix
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: mysql_zabbix_username
+              name: zabbix-server-secrets
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: mysql_zabbix_password
+              name: zabbix-server-secrets
+        - name: ZBX_DB_ENCRYPTION
+          value: "false"
+        - name: ZBX_SERVER_HOST
+          value: zabbix-server-server
+        - name: ZBX_SERVER_PORT
+          value: "10051"
+        - name: ZBX_SERVER_NAME
+          value: Kubernetes installation
+        - name: ZBX_HISTORYSTORAGEURL
+        - name: ZBX_HISTORYSTORAGETYPES
+        - name: ZBX_MAXEXECUTIONTIME
+          value: "300"
+        - name: ZBX_MEMORYLIMIT
+          value: 128M
+        - name: ZBX_POSTMAXSIZE
+          value: 16M
+        - name: ZBX_UPLOADMAXFILESIZE
+          value: 2M
+        - name: ZBX_MAXINPUTTIME
+          value: "300"
+        - name: ZBX_SESSION_NAME
+          value: zbx_sessionid
+        - name: PHP_TZ
+          value: Europe/Riga
+        - name: DB_DOUBLE_IEEE754
+          value: "true"
+        - name: ZBX_SSO_SETTINGS
+        - name: ENABLE_WEB_ACCESS_LOG
+          value: "true"
+        - name: DEBUG_MODE
+          value: "false"
+        image: registry.connect.redhat.com/zabbix/zabbix-web-mysql-50@sha256:9f3ba82445ea3d9754f016e21b2ea1c99c1958da928f49aee1b18377af78d365
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /index.php
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 2
+        name: zabbix-web
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        resources: {}
+        securityContext:
+          capabilities: {}
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

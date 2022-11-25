@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2022-11-25T12:43:16Z</date>
+    <groups>
+        <group>
+            <name>Linux servers</name>
+        </group>
+        <group>
+            <name>Templates</name>
+        </group>
+        <group>
+            <name>Virtual machines</name>
+        </group>
+        <group>
+            <name>Zabbix servers</name>
+        </group>
+    </groups>
+    <hosts>
+        <host>
+            <host>robot</host>
+            <name>robot</name>
+            <templates>
+                <template>
+                    <name>Template App Nginx by HTTP</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <useip>NO</useip>
+                    <ip/>
+                    <dns>robotshop-robot-shop.itzroks-270003bu3k-apddzw-4b4a324f027aea19c5cbc0c3275c4656-0000.eu-gb.containers.appdomain.cloud</dns>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <applications>
+                <application>
+                    <name>RobotShop</name>
+                </application>
+            </applications>
+            <httptests>
+                <httptest>
+                    <name>Home</name>
+                    <application>
+                        <name>RobotShop</name>
+                    </application>
+                    <steps>
+                        <step>
+                            <name>home</name>
+                            <url>https://robotshop-robot-shop.itzroks-270003bu3k-apddzw-4b4a324f027aea19c5cbc0c3275c4656-0000.eu-gb.containers.appdomain.cloud/</url>
+                            <follow_redirects>NO</follow_redirects>
+                            <status_codes>200</status_codes>
+                        </step>
+                    </steps>
+                </httptest>
+            </httptests>
+            <inventory_mode>DISABLED</inventory_mode>
+        </host>
+        <host>
+            <host>test</host>
+            <name>test</name>
+            <groups>
+                <group>
+                    <name>Linux servers</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <ip>91.121.172.228</ip>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <inventory_mode>DISABLED</inventory_mode>
+        </host>
+        <host>
+            <host>vSphere Hirt</host>
+            <name>vSphere Hirt</name>
+            <templates>
+                <template>
+                    <name>Template VM VMware</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Virtual machines</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <useip>NO</useip>
+                    <ip/>
+                    <dns>hirt.us</dns>
+                    <port>443</port>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <macros>
+                <macro>
+                    <macro>{$VMWARE.PASSWORD}</macro>
+                    <type>SECRET_TEXT</type>
+                </macro>
+                <macro>
+                    <macro>{$VMWARE.URL}</macro>
+                    <value>https://hirt.us</value>
+                </macro>
+                <macro>
+                    <macro>{$VMWARE.USERNAME}</macro>
+                    <value>administrator@hirt.us</value>
+                </macro>
+            </macros>
+            <inventory_mode>DISABLED</inventory_mode>
+        </host>
+        <host>
+            <host>Zabbix server</host>
+            <name>Zabbix server</name>
+            <templates>
+                <template>
+                    <name>Template App Zabbix Server</name>
+                </template>
+                <template>
+                    <name>Template OS Linux by Zabbix agent</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Zabbix servers</name>
+                </group>
+            </groups>
+            <interfaces>
+                <interface>
+                    <interface_ref>if1</interface_ref>
+                </interface>
+            </interfaces>
+            <inventory_mode>DISABLED</inventory_mode>
+        </host>
+    </hosts>
+</zabbix_export>
