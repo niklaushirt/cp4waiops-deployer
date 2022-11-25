@@ -6,7 +6,7 @@
       "ibm.com/aiops/uitemplate": "alert:suppression",
       "ibm.com/is-default": "false"
     },
-    "name": "Turbo Size Down",
+    "name": "Supress Alerts - Turbo Size Down actions",
     "description": "",
     "lastUpdatedBy": {
       "id": "demo",

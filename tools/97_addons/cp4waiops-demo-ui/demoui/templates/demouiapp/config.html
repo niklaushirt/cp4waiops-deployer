@@ -5,63 +5,63 @@
         <table>
             <tbody>
                 <tr>
-                    {% include "demouiapp/_navbar.html" %}
                     <td style="width:90%; padding-left:50px;">
-                        <p style="font-size:2.5em;">IBM CloudPak for Watson AIOps</p>
-                        <h1>AIManager</h1>
-                        <p style="font-size:30px;">Demo UI </p>
-                        <hr>
-                        <p></p>
 
+                        <div style="  background-color:#f2f7ff; padding: 40px; margin: 20px;">
 
-                        <p style="font-size:50px;">🔎 Configuration<p> </p>
+                            <div role="main" class="container theme-showcase">
+                                <div class="jumbotron container">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:90%; padding-left:50px;">
+
+                                                    <p></p>
+                                                    <p style="font-size:20px;">This is the configuration information that you will need for the IBM AIOps Training</p>
+                                                    </p>
+                                                    <blockquote>
+                                                        <p>The Training can be found here <a target="_blank"
+                                                                href="https://niklaushirt.github.io/cp4waiops-training/">here</a></p>
+                                                    </blockquote>
+                                                   
+                                                    <p></p>
+                                                    <p></p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            </p>
                             <p></p>
-
                             <p></p>
-                            <h4>KAFKA Parameters</h4>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td> KafkaBroker: </td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>iaf-system-kafka-0-cp4waiops.cp4waiops33-a376efc1170b9b8ace6422196c51e491-0000.eu-de.containers.appdomain.cloud:443
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> KafkaUser: </td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>cp4waiops-cartridge-kafka-auth-0</td>
-                                    </tr>
-                                    <tr>
-                                        <td> KafkaPWD: </td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>**PROVIDED**</td>
-                                    </tr>
-                                    <tr>
-                                        <td> KafkaTopic Events:</td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>cp4waiops-cartridge-alerts-noi-szk3lkuu</td>
-                                    </tr>
-                                    <tr>
-                                        <td> KafkaTopic Logs:</td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>cp4waiops-cartridge-logs-elk-qikzazfi</td>
-                                    </tr>
-                                    <tr>
-                                        <td> Log Iterations:</td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <td> Token:</td>
-                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>{{my_string}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </p>
-                        <p></p>
-                        <p></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:90%; padding-left:50px;line-height: normal;">
+
+                        <div style="  background-color:#f2f7ff; padding: 40px; margin: 20px;">
+
+                            <div role="main" class="container theme-showcase">
+                                <div class="jumbotron container">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:90%; padding-left:50px;">
+
+                                                    <p></p>
+                                                    <p>{{ ALL_LOGINS|safe }}</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            </p>
+                            <p></p>
+                            <p></p>
                     </td>
                 </tr>
             </tbody>

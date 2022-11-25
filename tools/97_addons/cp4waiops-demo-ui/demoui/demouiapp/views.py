@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from subprocess import check_output
 import os
 import sys 
 import time 
@@ -48,6 +49,253 @@ stream = os.popen("oc get po -A|grep noi-operator |awk '{print$1}'")
 eventmanagerns = stream.read().strip()
 print('        ✅ EventManager Namespace:    '+eventmanagerns)
 
+
+
+cmd = '''
+echo "  <BR>"
+echo "  <h1>🚀 CloudPak for Watson AIOps - Logins and URLs </h1><BR>"
+echo "  <BR>"
+echo "  <BR>"
+echo "  <BR>"
+export TEMP_PATH=~/aiops-install
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+# Do Not Edit Below
+# ---------------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+
+
+
+export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+export EVTMGR_NAMESPACE=$(oc get po -A|grep noi-operator |awk '{print$1}')
+
+: "${WAIOPS_NAMESPACE:=cp4waiops}<BR>"
+: "${EVTMGR_NAMESPACE:=noi}<BR>"
+
+CLUSTER_ROUTE=$(oc get routes console -n openshift-console | tail -n 1 2>&1 ) 
+CLUSTER_FQDN=$( echo $CLUSTER_ROUTE | awk '{print $2}')
+CLUSTER_NAME=${CLUSTER_FQDN##*console.}
+
+echo "<HR><BR>"
+echo "<h2>🚀 1. CloudPak for Watson AIOps</h2><BR>"
+echo "<BR>"
+
+    echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+    echo "<h3>    🐣 1.1 Demo UI</h3><BR>"
+    appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+    appToken=$(oc get cm -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui-config -o jsonpath='{.data.TOKEN}')
+    echo "<table>"
+    echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🔐 Token:</td><td>$appToken<BR>"
+    echo "</table>"
+
+    echo "<BR>"
+    echo "<BR>"
+
+echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+echo " <h3>   🚀 1.2 AI Manager</h3><BR>"
+
+appURL=$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
+
+echo "<table>"
+echo "<tr><td style=\"min-width:300px\"><h4>📥 AI Manager</h4></td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>demo</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>P4ssw0rd!</td></tr>"
+echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>$(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode && echo)</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>$(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode)</td></tr>"
+echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+
+appURL=$(oc get route -n ibm-common-services cp-console -o jsonpath={.spec.host})
+
+echo "<tr><td colspan="2" style=\"min-width:300px\"><h4>📥 Administration hub / Common Services</h4></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>demo</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>P4ssw0rd!</td></tr>"
+echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>$(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode && echo)</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>$(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode)</td></tr>"
+echo "</table>"
+echo "    <BR>"
+echo "    <BR>"
+
+
+
+    echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+    echo "    <h3>🚀 1.3 Demo Apps - Details</h3><BR>"
+    appURL=$(oc get routes -n robot-shop robotshop  -o jsonpath="{['spec']['host']}")|| true
+
+    echo "<table>"
+    echo "<tr><td style=\"min-width:300px\"><h4>📥 RobotShop:</h4></td><td></td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
+    echo "</table>"
+
+    echo "<BR>"
+    echo "<BR>"
+
+  
+
+
+    appURL=$(oc get route -n $EVTMGR_NAMESPACE  evtmanager-ibm-hdm-common-ui -o jsonpath={.spec.host})
+
+    echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+    echo "    <h3>🚀 1.4 Event Manager (Netcool Operations Insight)</h3><BR>"
+    echo "<table>"
+    echo "<tr><td style=\"min-width:300px\"><h4>📥 Event Manager</h4></td><td></td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a>https://</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>demo</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>P4ssw0rd!</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>smadmin</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>$(oc get secret -n $EVTMGR_NAMESPACE  evtmanager-was-secret -o jsonpath='{.data.WAS_PASSWORD}'| base64 --decode && echo)</td></tr>"
+    echo "</table>"
+
+
+
+echo "    <BR>"
+echo "    <BR>"
+echo "    <BR>"
+echo "    <BR>"
+
+echo "<HR><BR>"
+echo "<h2>🚀 2. AI Manager Configuration Information</h2><BR>"
+echo "    <BR>"
+echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+echo "    <h3>🚀 2.1 Configure LDAP - Access Control </h3><BR>"
+
+appURL=$(oc get route -n openldap admin -o jsonpath={.spec.host})
+
+echo "<table>"
+
+echo "<tr><td style=\"min-width:300px\"><h4>📥 Identity providers</h4></td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🌏 Connection name:</td><td>LDAP</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🛠️  Server type:</td><td>Custom</td></tr>"
+echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🧒 Base DN:</td><td>dc=ibm,dc=com</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🧒 Bind DN:</td><td>cn=admin,dc=ibm,dc=com</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Bind DN password:</td><td>P4ssw0rd! </td></tr>"
+echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🌏 LDAP server URL:</td><td>ldap://openldap.openldap:389</td></tr>"
+echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🛠️  Group filter:</td><td>(&(cn=%v)(objectclass=groupOfUniqueNames))</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🛠️  User filter:</td><td>(&(uid=%v)(objectclass=Person))</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🛠️  Group ID map:</td><td>*:cn</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🛠️  User ID map:</td><td>*:uid</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🛠️  Group member ID map:</td><td>groupOfUniqueNames:uniqueMember</td></tr>"
+echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\"><h4>📥 OpenLDAP Admin Login</h4></td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>cn=admin,dc=ibm,dc=com</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>P4ssw0rd!</td></tr>"
+
+echo "</table>"
+echo "    <BR>"
+echo "    <BR>"
+
+
+
+
+    echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+    echo "    <h3>🚀 2.2 Configure ELK </h3><BR>"
+    token=$(oc sa get-token cluster-logging-operator -n openshift-logging)
+    routeES=`oc get route elasticsearch -o jsonpath={.spec.host} -n openshift-logging`
+    routeKIBANA=`oc get route kibana -o jsonpath={.spec.host} -n openshift-logging`
+
+    echo "<table>"
+    echo "<tr><td style=\"min-width:300px\"><h4>📥 ELK</h4></td><td></td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🌏 ELK service URL:</td><td>https://$routeES/app*</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🌏 Kibana URL:</td><td><a target="_blank" href=\"https://$routeKIBANA/\">https://$routeKIBANA/</a></td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🔐 Authentication type:</td><td>Token</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🔐 Token:</td><td>$token</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🕦 TimeZone:</td><td>set to your Timezone</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🚪 Kibana port:</td><td>443</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🗺️  Mapping:</td><td>"
+    echo "&nbsp;{ <BR>"
+    echo "&nbsp;&nbsp;&nbsp;  \"codec\": \"elk\",<BR>"
+    echo "&nbsp;&nbsp;&nbsp;  \"message_field\": \"message\",<BR>"
+    echo "&nbsp;&nbsp;&nbsp;  \"log_entity_types\": \"kubernetes.container_image_id, kubernetes.host, kubernetes.pod_name, kubernetes.namespace_name\",<BR>"
+    echo "&nbsp;&nbsp;&nbsp;  \"instance_id_field\": \"kubernetes.container_name\",<BR>"
+    echo "&nbsp;&nbsp;&nbsp;  \"rolling_time\": 10,<BR>"
+    echo "&nbsp;&nbsp;&nbsp;  \"timestamp_field\": \"@timestamp\"<BR>"
+    echo "&nbsp;}</td></tr>"
+    echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
+    echo "<tr><td style=\"min-width:300px\">🗺️  Filter: </td><td>"
+    echo "&nbsp;      {<BR>"
+    echo "&nbsp;&nbsp;&nbsp;          \"query\": {<BR>"
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          \"bool\": {<BR>"
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \"must\": {<BR>"
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      \"term\" : { \"kubernetes.namespace_name\" : \"robot-shop\" }<BR>"
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   }<BR>"
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  }<BR>"
+    echo "&nbsp;&nbsp;&nbsp;        }<BR>"
+    echo "&nbsp;      }</td></tr>"
+    echo "</table>"
+    echo "<BR>"
+    echo "<BR>"     
+echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+echo "    <h3>🚀 2.3 Configure Runbooks - Ansible Automation Controller </h3><BR>"
+appURL=$(oc get route -n awx awx -o jsonpath={.spec.host})
+
+echo "<table>"
+echo "<tr><td style=\"min-width:300px\">🌏 URL for REST API:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Authentication type:</td><td>User ID/Password</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>admin</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>$(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)</td></tr>"
+echo "</table>"
+echo "<BR>"
+echo "<BR>"
+
+
+echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+echo "    <h3>🚀 2.4 Configure Runbooks - Runbook Parameters </h3><BR>"
+DEMO_TOKEN=$(oc -n default get secret $(oc get secret -n default |grep -m1 demo-admin-token|awk '{print$1}') -o jsonpath='{.data.token}'|base64 --decode)
+DEMO_URL=$(oc status|grep -m1 "In project"|awk '{print$6}')
+
+echo "<table>"
+echo "<tr><td style=\"min-width:300px\">🌏 Action:</td><td>CP4WAIOPS Mitigate Robotshop Ratings Outage<BR>"
+echo "<tr><td style=\"min-width:300px\">🔐 Mapping:</td><td>Fixed Value<BR>"
+echo "<tr><td style=\"min-width:300px\">🗺️ Value:</td><td>"
+echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>"
+echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \"my_k8s_apiurl\": \"$DEMO_URL\",<BR>"
+echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   \"my_k8s_apikey\": \"$DEMO_TOKEN\"<BR>"
+echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR></tr>"
+echo "</table>"
+echo "<BR>"
+echo "<BR>"
+
+
+
+
+echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
+echo "    <h3>🚀 2.5 Configure Applications - RobotShop Kubernetes Observer </h3><BR>"
+API_TOKEN=$(oc -n default get secret $(oc get secret -n default |grep -m1 demo-admin-token|awk '{print$1}') -o jsonpath='{.data.token}'|base64 --decode)
+echo "<table>"
+echo "<tr><td style=\"min-width:300px\">🛠️  Name:</td><td>RobotShop</td></tr>"
+echo "<tr><td>🛠️  Data center:</td><td>robot-shop</td></tr>"
+echo "<tr><td>🛠️  Kubernetes master IP address:</td><td>172.21.0.1</td></tr>"
+echo "<tr><td>🛠️  Kubernetes API port:</td><td>443</td></tr>"
+echo "<tr><td>🛠️  Token:</td><td>$API_TOKEN<</td></tr>"
+echo "<tr><td>🛠️  Trust all HTTPS certificates:</td><td>true</td></tr>"
+echo "<tr><td>🛠️  Correlate analytics events:</td><td>true</td></tr>"
+echo "<tr><td>🛠️  Namespaces to observe:</td><td>robot-shop</td></tr>"
+echo "</table>"
+echo "<BR>"
+echo "<BR>"
+
+
+'''
+
+print('     ❓ Getting ALL LOGINS - this may take a minute or two')
+#ALL_LOGINS = check_output(cmd, shell=True, executable='/bin/bash')
+
+
+stream = os.popen(cmd)
+ALL_LOGINS = stream.read().strip()
+#print ('           ALL_LOGINS:              '+ALL_LOGINS)
 
 
 
@@ -1104,7 +1352,9 @@ def about(request):
         'SIMULATION_MODE': SIMULATION_MODE,
         'INSTANCE_NAME': INSTANCE_NAME,
         'PAGE_TITLE': '👽 About',
-        'PAGE_NAME': 'about'
+        'PAGE_NAME': 'about',
+        'ALL_LOGINS': ALL_LOGINS
+        
 
     }
     return HttpResponse(template.render(context, request))
@@ -1121,35 +1371,13 @@ def config(request):
         template = loader.get_template('demouiapp/loginui.html')
     context = {
         'loggedin': loggedin,
-        'aimanager_url': aimanager_url,
-        'aimanager_user': aimanager_user,
-        'aimanager_pwd': aimanager_pwd,
-        'awx_url': awx_url,
-        'awx_user': awx_user,
-        'awx_pwd': awx_pwd,
-        'elk_url': elk_url,
-        'turbonomic_url': turbonomic_url,
-        'instana_url': instana_url,
-        'openshift_url': openshift_url,
-        'openshift_token': openshift_token,
-        'openshift_server': openshift_server,
-        'vault_url': vault_url,
-        'vault_token': vault_token,
-        'ladp_url': ladp_url,
-        'ladp_user': ladp_user,
-        'ladp_pwd': ladp_pwd,
-        'flink_url': flink_url,
-        'flink_url_policy': flink_url_policy,
-        'robotshop_url': robotshop_url,
-        'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': 'Third-party Applications',
-        'PAGE_NAME': 'TEST'
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'PAGE_TITLE': '📥 Configuration for the IBM AIOps Training',
+        'PAGE_NAME': 'config',
+        'ALL_LOGINS': ALL_LOGINS
 
     }
     return HttpResponse(template.render(context, request))

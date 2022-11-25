@@ -57,9 +57,9 @@ rm -r ./tools/97_addons/cp4waiops-demo-ui/demoui/demouiapp/__pycache__
 echo "--------------------------------------------------------------------------------------------------------------------------------"
 echo "    🚀  Remove Keys"
 echo "--------------------------------------------------------------------------------------------------------------------------------"
-cp ./tools/98_reset/templates/13_reset-slack.sh ./tools/98_reset/13_reset-slack.sh
-cp ./tools/98_reset/templates/14_reset-slack-changerisk.sh ./tools/98_reset/14_reset-slack-changerisk.sh
-cp ./tools/98_reset/templates/incident_robotshop-noi.sh ./tools/01_demo/incident_robotshop-noi.sh
+cp ./tools/98_maintenance/scripts/templates/13_reset-slack.sh ./tools/98_maintenance/scripts/13_reset-slack.sh
+cp ./tools/98_maintenance/scripts/templates/14_reset-slack-changerisk.sh ./tools/98_maintenance/scripts/14_reset-slack-changerisk.sh
+cp ./tools/98_maintenance/scripts/templates/incident_robotshop-noi.sh ./tools/01_demo/incident_robotshop-noi.sh
 mkdir -p ./DO_NOT_DELIVER/LOGINS
 mkdir -p ./DO_NOT_DELIVER/LOGS/LOGS-$gitCommitMessage
 mv -f ./LOGINS.txt ./DO_NOT_DELIVER/LOGINS/LOGINS-$gitCommitMessage.txt

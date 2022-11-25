@@ -45,3 +45,21 @@ spec:
   to:
     kind: Service
     name: gateway
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: eum
+  namespace: instana-core
+spec:
+  host: eum.{{BASE_DOMAIN}}
+  to:
+    kind: Service
+    name: eum-acceptor
+    weight: 100
+  port:
+    targetPort: http-service
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None

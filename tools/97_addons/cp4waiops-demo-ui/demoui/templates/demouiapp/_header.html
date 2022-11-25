@@ -130,6 +130,14 @@
                                     tabindex="-1">System</a>
                             </li>
                             {% endif %}
+                            {% if ADMIN_MODE == 'true' %}
+                        
+                            <li class="bx--tabs--scrollable__nav-item" role="presentation">
+                                <a type="button" role="tab" aria-selected="false" aria-controls="favorites__panel"
+                                    id="favorites" class="bx--tabs--scrollable__nav-link" href="/config"
+                                    tabindex="-1">Configuration</a>
+                            </li>
+                            {% endif %}
                             <li class="bx--tabs--scrollable__nav-item" role="presentation">
                                 <a type="button" role="tab" aria-selected="false" aria-controls="favorites__panel"
                                     id="favorites" class="bx--tabs--scrollable__nav-link" href="/about"

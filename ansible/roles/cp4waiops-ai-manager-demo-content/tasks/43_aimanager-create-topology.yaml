@@ -36,18 +36,22 @@
 
     # Get FILE_OBSERVER_POD
     FILE_OBSERVER_POD=$(oc get po -n $WAIOPS_NAMESPACE -l app.kubernetes.io/instance=aiops-topology,app.kubernetes.io/name=file-observer -o jsonpath='{.items[0].metadata.name}')
-
+    echo $FILE_OBSERVER_POD
     LOAD_FILE_NAME="robot-shop-file.txt"
     
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     if [ "${OS}" == "darwin" ]; then
           echo "MAC"
-          FILE_OBSERVER_CAP="./roles/cp4waiops-ai-manager-demo-content/templates/topology/$LOAD_FILE_NAME"
+          FILE_OBSERVER_CAP=$(pwd)"/roles/cp4waiops-ai-manager-demo-content/templates/topology/$LOAD_FILE_NAME"
     else
           FILE_OBSERVER_CAP="{{role_path}}/templates/topology/$LOAD_FILE_NAME"
     fi    
+    echo $FILE_OBSERVER_POD
+    echo $FILE_OBSERVER_CAP
+    echo $TARGET_FILE_PATH
     TARGET_FILE_PATH="/opt/ibm/netcool/asm/data/file-observer/${LOAD_FILE_NAME}"
     echo "  Copying capture file [${FILE_OBSERVER_CAP}] to file observer pod"
+    echo "oc cp -n $WAIOPS_NAMESPACE ${FILE_OBSERVER_CAP} ${FILE_OBSERVER_POD}:${TARGET_FILE_PATH}"
     oc cp -n $WAIOPS_NAMESPACE ${FILE_OBSERVER_CAP} ${FILE_OBSERVER_POD}:${TARGET_FILE_PATH}
   register: output_string
   ignore_errors: true

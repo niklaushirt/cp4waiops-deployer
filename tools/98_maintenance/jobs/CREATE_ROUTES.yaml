@@ -1,0 +1,186 @@
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#       __________  __ ___       _____    ________            
+#      / ____/ __ \/ // / |     / /   |  /  _/ __ \____  _____
+#     / /   / /_/ / // /| | /| / / /| |  / // / / / __ \/ ___/
+#    / /___/ ____/__  __/ |/ |/ / ___ |_/ // /_/ / /_/ (__  ) 
+#    \____/_/      /_/  |__/|__/_/  |_/___/\____/ .___/____/  
+#                                              /_/            
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------------------------"
+#  DELETE CP4WAIOPS v3.5.0
+#
+#  CloudPak for Watson AIOps
+#
+#  ©2022 nikh@ch.ibm.com
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: installer-default-default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: waiops-create-routes
+  namespace: default
+spec:
+  serviceAccountName: installer-default-default
+  template:
+    spec:
+      containers:
+        - name: install
+          image: niklaushirt/cp4waiops-tools:1.3
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "150m"
+            limits:
+              memory: "1256Mi"
+              cpu: "1200m"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              #!/bin/bash
+              #set -x
+
+
+
+
+
+
+              echo "*****************************************************************************************************************************"
+              echo " ✅ STARTING: Create Routes"
+              echo "*****************************************************************************************************************************"
+              echo ""
+              echo "  ⏳ INSTALLATION START TIMESTAMP: $(date)"
+              echo ""
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+    
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo " 🚀 Create Routes"
+              
+              export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+
+              oc patch namespace default --type=json -p '[{"op":"add","path":"/metadata/labels","value":{"network.openshift.io/policy-group":"ingress"}}]'
+
+
+
+              existing=$(oc get route topology-merge -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route passthrough topology-merge -n $WAIOPS_NAMESPACE --insecure-policy="Redirect" --service=aiops-topology-merge --port=https-merge-api
+              fi
+
+
+              existing=$(oc get route topology-rest -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route passthrough topology-rest -n $WAIOPS_NAMESPACE --insecure-policy="Redirect" --service=aiops-topology-rest-observer --port=https-rest-observer-admin
+              fi
+
+
+              existing=$(oc get route topology-file -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route passthrough topology-file -n $WAIOPS_NAMESPACE --insecure-policy="Redirect" --service=aiops-topology-file-observer --port=https-file-observer-admin
+              fi
+
+
+              existing=$(oc get route topology-manage -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route passthrough topology-manage -n $WAIOPS_NAMESPACE --service=aiops-topology-topology --port=https-topology-api
+              fi
+
+
+              existing=$(oc get route topology-file-api -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route reencrypt topology-file-api -n $WAIOPS_NAMESPACE --service=aiops-topology-file-observer --port=https-file-observer-api
+              fi
+
+
+              existing=$(oc get route job-manager -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route edge job-manager -n $WAIOPS_NAMESPACE --service=cp4waiops-eventprocessor-eve-29ee-ep-jobmanager --port=ui
+              fi
+
+
+              existing=$(oc get route job-manager-policy -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route edge job-manager-policy -n $WAIOPS_NAMESPACE --service=aiops-ir-lifecycle-eventprocessor-ep-jobmanager --port=ui
+              fi
+
+
+              existing=$(oc get route ai-platform-api -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route passthrough ai-platform-api -n $WAIOPS_NAMESPACE  --service=aimanager-aio-ai-platform-api-server --port=4000 --insecure-policy=Redirect --wildcard-policy=None
+              fi
+
+
+              existing=$(oc get route datalayer-api -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route reencrypt datalayer-api -n $WAIOPS_NAMESPACE  --service=aiops-ir-core-ncodl-api --port=secure-port --insecure-policy=Redirect --wildcard-policy=None
+              fi
+
+
+              existing=$(oc get route aimanager-aio-controller -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route passthrough aimanager-aio-controller -n $WAIOPS_NAMESPACE  --service=aimanager-aio-controller
+              fi
+
+
+              existing=$(oc get route aiops-ir-core-ncodl-api -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc set env deploy -n $WAIOPS_NAMESPACE aiops-ir-core-ncodl-api ENABLE_SWAGGER_UI="true" 
+              fi
+
+
+              existing=$(oc get route sparkadmin -n $WAIOPS_NAMESPACE --no-headers|awk '{print$1}')
+              if [[ $existing == "" ]]; then
+                echo "Create Route"
+                oc create route edge sparkadmin -n $WAIOPS_NAMESPACE  --service=aiops-ir-analytics-spark-master
+                oc expose svc aiops-ir-analytics-spark-master -n $WAIOPS_NAMESPACE --name spark
+              fi
+
+
+
+              echo ""
+              echo ""
+              echo "  ⏳ INSTALLATION END TIMESTAMP: $(date)"
+              echo ""
+              echo "*****************************************************************************************************************************"
+              echo " ✅ DONE"
+              echo "*****************************************************************************************************************************"
+
+
+              while true
+              do
+                sleep 1000
+              done
+
+      restartPolicy: Never
+  backoffLimit: 4
