@@ -267,16 +267,12 @@
 
 - name: 🚀 TURBONOMIC - Create Licensing Groups
   shell: |
-    echo "------------------------------------------------------------------------------------------------------------------------------"
-    echo " 📥 Create Licensing Groups"
-
     result=$(curl -s -k -X 'POST' \
-      "https://{{TURBO_URL}}/api/v3/groups" -b /tmp/cookies\
+      "https://$TURBO_URL/api/v3/groups" -b /tmp/cookies\
       -H 'accept: application/json' \
       -H 'Content-Type: application/json' \
-      -d ' 
-      {
-        "displayName": "_DB_LICENSED_HOSTs",
+      -d ' {
+        "displayName": "_DB_LICENSED_HOST",
         "className": "Group",
         "groupType": "PhysicalMachine",
         "severity": "CRITICAL",
@@ -304,20 +300,21 @@
         "groupOrigin": "USER",
         "groupClassName": "GroupApiDTO"
       }
+      
       ')
 
-    echo $result
-    echo ""
+    echo $result|jq -r ".displayName"| sed 's/^/     /'
+    export sellerUuid=$(echo $result|jq -r ".uuid")
+    echo "sellerUuid: $sellerUuid"
     echo ""
 
 
 
     result=$(curl -s -k -X 'POST' \
-      "https://{{TURBO_URL}}/api/v3/groups" -b /tmp/cookies\
+      "https://$TURBO_URL/api/v3/groups" -b /tmp/cookies\
       -H 'accept: application/json' \
       -H 'Content-Type: application/json' \
-      -d '   
-      {
+      -d '   {
         "displayName": "_DB_VMs",
         "className": "Group",
         "groupType": "VirtualMachine",
@@ -348,9 +345,61 @@
       }
       ')
 
-    echo $result
+    echo $result|jq -r ".displayName"| sed 's/^/     /'
+    export buyerUuid=$(echo $result|jq -r ".uuid")
+    echo "buyerUuid: $buyerUuid"
     echo ""
+
+
+    echo "------------------------------------------------------------------------------------------------------------------------------"
+    echo " 🚀 Creating License Policy"
+    echo "      sellerUuid: $sellerUuid"
+    echo "      buyerUuid: $buyerUuid"
+
+
+
+    result=$(curl -XPOST -s -k "https://$TURBO_URL/api/v3/markets/777777/policies" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '
+    {
+      "policyName": "_DB_LICENSE",
+      "type": "BIND_TO_GROUP_AND_LICENSE",
+      "sellerUuid": "'$sellerUuid'",
+      "buyerUuid": "'$buyerUuid'",
+      "mergeUuids": [
+      
+      ],
+      "mergeType": "Cluster",
+      "capacity": 0,
+      "enabled": true,
+      "providerEntityType": "Application"
+    }')
+
+    echo $result|jq -r ".displayName"| sed 's/^/     /'
     echo ""
+
+
+
+
+    result=$(curl -XPOST -s -k "https://$TURBO_URL/api/v3/markets/777777/policies" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '
+    {
+      "policyName": "_DB_PLACE",
+      "type": "AT_MOST_N_BOUND",
+      "capacity": 4,
+      "sellerUuid": "'$sellerUuid'",
+      "buyerUuid": "'$buyerUuid'",
+      "mergeUuids": [
+      
+      ],
+      "mergeType": "Cluster",
+      "capacity": 0,
+      "enabled": true,
+      "providerEntityType": "Application"
+    }')
+
+    echo $result|jq -r ".displayName"| sed 's/^/     /'
+    echo ""
+
+
+
   ignore_errors: true
   register: output
   args:
@@ -361,9 +410,6 @@
     var: output.stdout_lines
     #verbosity: 1
   when: current_cp4waiops_feature.group_licensing == true
-
-
-
 
 
 
