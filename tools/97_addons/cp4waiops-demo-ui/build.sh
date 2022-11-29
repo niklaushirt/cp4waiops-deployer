@@ -21,6 +21,18 @@ oc apply -n default -f create-cp4mcm-event-gateway.yaml
 
 exit 1
 
+
+export CONT_VERSION=0.97
+
+# Create the Image
+docker build -t niklaushirt/cp4waiops-demo-ui:$CONT_VERSION .
+
+podman login docker.io -u niklaushirt   
+podman build -t niklaushirt/cp4waiops-demo-ui:$CONT_VERSION .
+podman push ^niklaushirt/cp4waiops-demo-ui:$CONT_VERSION
+
+
+
 podman machine start
 
 export CONT_VERSION=0.45

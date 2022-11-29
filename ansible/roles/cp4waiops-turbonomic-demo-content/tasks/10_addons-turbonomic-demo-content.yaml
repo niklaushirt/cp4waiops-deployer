@@ -281,7 +281,7 @@
         "logicalOperator": "AND",
         "criteriaList": [
           {
-            "expVal": "192.168.10.88",
+            "expVal": "192.168.10.87",
             "expType": "RXEQ",
             "filterType": "pmsByName",
             "caseSensitive": false,
