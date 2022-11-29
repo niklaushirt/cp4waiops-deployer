@@ -36,6 +36,8 @@ echo "      ❎  Deleting TLS Secrets"
 find . -name 'openshift-tls-secret*' -type f -delete
 echo "      ❎  Deleting JSON Log Files Kafka"
 find . -name '*.json' -type f -size +1000000k -delete
+echo "      ❎  Deleting Monokle"
+find . -name '.monokle' -type f -delete
 echo "      ❎  Deleting JSON Log Files Elastic"
 find . -name '*-logtrain.json' -type f -size +10000k -delete
 echo "      ❎  Deleting Conflict Files"
