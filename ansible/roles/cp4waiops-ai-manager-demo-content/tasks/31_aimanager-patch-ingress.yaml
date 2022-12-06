@@ -86,52 +86,35 @@
   ignore_errors: true
 
 
-- name: 🌏 CERTIFICATES - Patch AutomationUIConfig Certificates
+- name: 🌏 CERTIFICATES - Patch AutomationUIConfig and Nginx Certificates
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
     oc project $WAIOPS_NAMESPACE
-    NAMESPACE=$WAIOPS_NAMESPACE
-    AUTO_UI_INSTANCE=$(oc get AutomationUIConfig -n $NAMESPACE --no-headers -o custom-columns=":metadata.name")
-    IAF_STORAGE=$(oc get AutomationUIConfig -n $NAMESPACE -o jsonpath='{ .items[*].spec.zenService.storageClass }')
-    ZEN_STORAGE=$(oc get AutomationUIConfig -n $NAMESPACE -o jsonpath='{ .items[*].spec.zenService.zenCoreMetaDbStorageClass }')
+    PROJECT_CP4WAIOPS=$WAIOPS_NAMESPACE
 
-    echo "AUTO_UI_INSTANCE:   "$AUTO_UI_INSTANCE
-    echo "IAF_STORAGE:        "$IAF_STORAGE
-    echo "ZEN_STORAGE:        "$ZEN_STORAGE
+    AUTO_UI_INSTANCE=$(oc get AutomationUIConfig -n ${PROJECT_CP4WAIOPS} --no-headers -o custom-columns=":metadata.name")
 
-    oc get -n $NAMESPACE AutomationUIConfig $AUTO_UI_INSTANCE --ignore-not-found -o yaml > /tmp/AutomationUIConfig-backup-$(date +%Y%m%d-%H%M).yaml
-    
-    if [[ ! $IAF_STORAGE == "" ]];
-    then
-    oc delete -n $NAMESPACE AutomationUIConfig $AUTO_UI_INSTANCE
+    ingress_pod=$(oc get secrets -n openshift-ingress | grep tls | grep -v router-metrics-certs-default | awk '{print $1}')
 
-    cat <<EOF | oc apply -f -
-    apiVersion: core.automation.ibm.com/v1beta1
-    kind: AutomationUIConfig
-    metadata:
-      name: $AUTO_UI_INSTANCE
-      namespace: $NAMESPACE
-    spec:
-      description: AutomationUIConfig for cp4waiops
-      license:
-        accept: true
-      version: v1.3
-      zen: true
-      zenService:
-        iamIntegration: true
-        storageClass: $IAF_STORAGE
-        zenCoreMetaDbStorageClass: $ZEN_STORAGE
-      tls:
-        caSecret:
-          key: ca.crt
-          secretName: external-tls-secret
-        certificateSecret:
-          secretName: external-tls-secret
-    EOF
-    else
-      echo "Couldn't get IAF_STORAGE"
-    fi
+    oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.crt"}}' ${ingress_pod} | base64 -d > cert.crt
+    oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.key"}}' ${ingress_pod} | base64 -d > cert.key
+    oc get secret -n ${PROJECT_CP4WAIOPS} external-tls-secret -o yaml > external-tls-secret.yaml
+
+    oc patch AutomationUIConfig ${AUTO_UI_INSTANCE} \
+    -n ${PROJECT_CP4WAIOPS} \
+    --type merge \
+    --patch '{"spec": {"tls": {"caSecret": {"key":"ca.crt", "secretName": "external-tls-secret"}, "certificateSecret": { "secretName": "external-tls-secret"}}}}'
+
+    oc create secret generic -n ${PROJECT_CP4WAIOPS} external-tls-secret --from-file=cert.crt=cert.crt --from-file=cert.key=cert.key -o yaml --dry-run=client | oc apply -f -
+
+    REPLICAS=$(oc get Deployment/ibm-nginx -n ${PROJECT_CP4WAIOPS} -o jsonpath='{.spec.replicas}')
+    echo "Scale to 0"
+    oc scale Deployment/ibm-nginx --replicas=0 -n ${PROJECT_CP4WAIOPS}
+    sleep 3
+    echo "Scale to $REPLICAS"
+    oc scale Deployment/ibm-nginx --replicas=${REPLICAS} -n ${PROJECT_CP4WAIOPS}
+
   when: INGRESS_PATCHED==false
   register: certificate_patch
   ignore_errors: true
@@ -143,39 +126,6 @@
   debug: 
     var: certificate_patch
     #verbosity: 2
-
-
-
-- name: 🌏 CERTIFICATES - Patch Ingress Certificates (you can ignore errors in this step)
-  shell: |
-    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-
-    ingress_pod=$(oc get secrets -n openshift-ingress | grep tls |grep -v router-token-| grep -v router-metrics-certs-default | awk '{print $1}')
-    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.crt}'  | base64 -d > /tmp/cert.crt
-    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.key}' | base64 -d > /tmp/cert.key
-    oc get secret -n $WAIOPS_NAMESPACE iaf-system-automationui-aui-zen-ca -o jsonpath='{.data.ca\.crt}' | base64 -d > /tmp/ca.crt
-
-    oc get secret -n $WAIOPS_NAMESPACE external-tls-secret --ignore-not-found -o yaml > /tmp/external-tls-secret-backup-$(date +%Y%m%d-%H%M).yaml
-    oc delete secret -n $WAIOPS_NAMESPACE --ignore-not-found external-tls-secret
-    oc create secret generic -n $WAIOPS_NAMESPACE external-tls-secret --from-file=ca.crt=/tmp/ca.crt --from-file=cert.crt=/tmp/cert.crt --from-file=cert.key=/tmp/cert.key --dry-run=client -o yaml | oc apply -f -
-    REPLICAS=2
-    oc scale Deployment/ibm-nginx --replicas=0
-    sleep 3
-    oc scale Deployment/ibm-nginx --replicas=${REPLICAS}
-  when: INGRESS_PATCHED==false
-  register: certificate_patch
-  ignore_errors: true
-
-- name: 🌏 CERTIFICATES - Patch Ingress Certificates
-  debug: 
-    var: certificate_patch
-    #verbosity: 2
-
-
-
-
-
-
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------
