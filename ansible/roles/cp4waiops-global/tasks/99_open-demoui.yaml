@@ -49,8 +49,8 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
-    appURL=$(oc get routes -n $WAIOPS_NAMESPACE waiops-demo-ui-python  -o jsonpath="{['spec']['host']}")|| true
-    appToken=$(oc get cm -n $WAIOPS_NAMESPACE demo-ui-python-config -o jsonpath='{.data.TOKEN}')
+    appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui cp4waiops-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+    appToken=$(oc get cm -n $WAIOPS_NAMESPACE-demo-ui cp4waiops-demo-ui-config -o jsonpath='{.data.TOKEN}')
     echo "            📥 Demo UI:"     >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "    "   >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "                🌏 URL:           http://$appURL/"  >> ../install_{{current_cp4waiops_feature.kind}}.log
