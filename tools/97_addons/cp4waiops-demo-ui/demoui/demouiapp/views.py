@@ -399,8 +399,12 @@ stream = os.popen('oc get route -n openshift-console console -o jsonpath={.spec.
 openshift_url = stream.read().strip()
 stream = os.popen("oc -n default get secret $(oc get secret -n default |grep -m1 demo-admin-token|awk '{print$1}') -o jsonpath='{.data.token}'|base64 --decode")
 openshift_token = stream.read().strip()
-stream = os.popen("oc status|head -1|awk '{print$6}'")
+stream = os.popen("cat ~/.kube/config|grep 'server:'| sed 's/.*server: .*\///'| head -1")
+#stream = os.popen("oc status|head -1|awk '{print$6}'")
 openshift_server = stream.read().strip()
+stream = os.popen("oc get deployment -n cp4waiops-demo-ui cp4waiops-demo-ui -ojson|jq -r '.spec.template.spec.containers[0].image'")
+demo_image = stream.read().strip()
+
 
 
 print('     ❓ Getting Details Vault')
@@ -539,7 +543,7 @@ def injectAllREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -598,7 +602,7 @@ def injectAllFanREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -651,7 +655,7 @@ def injectLogsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -702,7 +706,7 @@ def injectEventsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -751,7 +755,7 @@ def injectMetricsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -808,7 +812,7 @@ def clearAllREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
 
 
@@ -863,7 +867,7 @@ def clearEventsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -912,7 +916,7 @@ def clearStoriesREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -954,7 +958,7 @@ def login(request):
             'INSTANCE_NAME': INSTANCE_NAME,
             'ADMIN_MODE': ADMIN_MODE,
             'SIMULATION_MODE': SIMULATION_MODE,
-            'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+            'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
             'PAGE_NAME': 'index'
         }
     else:
@@ -982,7 +986,7 @@ def login(request):
             'INSTANCE_NAME': INSTANCE_NAME,
             'ADMIN_MODE': ADMIN_MODE,
             'SIMULATION_MODE': SIMULATION_MODE,
-            'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+            'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
             'PAGE_NAME': 'login'
         }
 
@@ -1079,7 +1083,7 @@ def index(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🚀 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
         
     }
@@ -1274,7 +1278,7 @@ def apps_demo(request):
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
-        'PAGE_TITLE': '🌏 Demo Scenarios',
+        'PAGE_TITLE': '🔥 Demo Scenarios',
         'PAGE_NAME': 'demo'
         
     }
@@ -1353,9 +1357,8 @@ def about(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'PAGE_TITLE': '👽 About',
         'PAGE_NAME': 'about',
+        'DEMO_IMAGE': demo_image,
         'ALL_LOGINS': ALL_LOGINS
-        
-
     }
     return HttpResponse(template.render(context, request))
 

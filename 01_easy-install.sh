@@ -286,8 +286,8 @@ if [[ $WAIOPS_PODS -gt $WAIOPS_PODS_MIN ]]; then
       export ELK_NAMESPACE=$(oc get ns openshift-logging  --ignore-not-found|awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚🥚 - Getting Istio Status                                          "
       export ISTIO_NAMESPACE=$(oc get ns istio-system  --ignore-not-found|awk '{print$1}')
-      printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚 - Getting Humio Status                                          "
-      export HUMIO_NAMESPACE=$(oc get ns humio-logging  --ignore-not-found|awk '{print$1}')
+      printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚 - Getting Insana Status                                          "
+      export INSTANA_NAMESPACE=$(oc get ns instana-core  --ignore-not-found|awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣 - GettingDEMO UI Status                                          "
       export DEMOUI_READY=$(oc get pods -n $WAIOPS_NAMESPACE |grep waiops-demo-ui-python|awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥 - Done ✅                                                        "
@@ -838,6 +838,75 @@ menu_JOB_TURBO () {
 
 }
 
+
+menu_JOB_INSTANA () {
+      echo "*****************************************************************************************************************************"
+      echo "*****************************************************************************************************************************"
+      echo " 🚀  Install Instana with K8s Job" 
+      echo "*****************************************************************************************************************************"
+      echo "*****************************************************************************************************************************"
+      echo ""
+
+      read -p " Please provide the Instana Sales Key" DO_SK
+      read -p " Please provide the Instana Agent Key" DO_AK
+
+      if [[ $DO_SK == "" ||  $DO_AK == "" ]]; then
+            echo "    ❗ No keys provided"
+            echo "    ⚠️  Skipping"
+            echo "--------------------------------------------------------------------------------------------"
+            echo  ""    
+            echo  ""
+            echo ""
+      else
+
+            cp ./ansible/configs/cp4waiops-roks-instana.yaml /tmp/cp4waiops-roks-instana.yaml
+            sed -i -e "s/sales_key: 'NONE'/sales_key: '$DO_SK'/g" /tmp/cp4waiops-roks-instana.yaml
+            sed -i -e "s/agent_key: 'NONE'/agent_key: '$DO_AK'/g" /tmp/cp4waiops-roks-instana.yaml
+
+            export CONFIG="/tmp/cp4waiops-roks-instana.yaml"
+            export JOB_NAME="waiops-easy-install-instana"
+            installViaJob
+
+            echo ""
+            echo ""
+            echo ""
+            read -p " Do you want to follow the installation Logs❓ [Y,n] " DO_COMM
+            if [[ $DO_COMM == "n" ||  $DO_COMM == "N" ]]; then
+
+
+                  echo "    ⚠️  Skipping"
+                  echo "--------------------------------------------------------------------------------------------"
+                  echo  ""    
+                  echo  ""
+                  echo ""
+
+                  else
+
+                  echo ""
+                  echo "----------------------------------------------------------------------------------------------------------------"
+                  echo " 🚀  Install Logs" 
+                  echo "----------------------------------------------------------------------------------------------------------------"
+                  echo " Waiting 30 seconds for Job to settle"
+                  sleep 30
+
+                  INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
+                  oc logs -n default -f $INSTALL_POD
+            fi
+      
+            echo "*****************************************************************************************************************************"
+            echo "*****************************************************************************************************************************"
+            echo "*****************************************************************************************************************************"
+            echo "*****************************************************************************************************************************"
+            echo "  "
+            echo "  ✅ Instana Installation done"
+            echo "  "
+            echo "*****************************************************************************************************************************"
+            echo "*****************************************************************************************************************************"
+      fi
+
+}
+
+
 menu_JOB_ELK () {
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
@@ -1314,6 +1383,7 @@ echo "      🔎 Verbose Mode:               ${Green}$ANSIBLE_DISPLAY_SKIPPED_HO
 echo "${NC}"
 echo "${BYellow}   "
 echo "*****************************************************************************************************************************"
+echo "  ❗ All installations are done in-cluster by creating a product specific installation Job" 
 echo "*****************************************************************************************************************************"
 echo "${NC}"
       echo "  "
@@ -1360,6 +1430,13 @@ echo "${NC}"
       echo "  "      
       echo "  "
       echo "  🐥 ${UBlue}Third Party Solutions K8s Job Install${NC}"   
+
+      if [[ $INSTANA_NAMESPACE == "" ]]; then
+            echo "         20  - Install Instana                                         - Install Instana (needs a separate license)"
+      else
+            echo "     ✅  20  - Install Instana                                         - ${Green}Already installed${NC}  "
+      fi
+
 
       if [[ $TURBO_NAMESPACE == "" ]]; then
             echo "         21  - Install Turbonomic                                      - Install Turbonomic (needs a separate license)"
@@ -1462,7 +1539,7 @@ echo "${NC}"
       18 ) clear ; menu_OPENDOC  ;;
       19 ) clear ; menu_CHECK  ;;
 
-
+      20 ) clear ; menu_JOB_INSTANA  ;;
       21 ) clear ; menu_JOB_TURBO  ;;
       22 ) clear ; menu_JOB_ELK  ;;
       30 ) clear ; menu_INSTALL_CUSTOM  ;;

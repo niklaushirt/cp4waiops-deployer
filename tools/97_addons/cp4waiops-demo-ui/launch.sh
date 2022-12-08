@@ -16,7 +16,7 @@ export METRIC_TIME_SKEW=240
 export METRIC_TIME_STEP=100
 
 
-export SLACK_URL="https://aiops-fry2953.slack.com/x-p1624757694871-3716524482480-3705437209041/messages/C01JZLFJFMJ"
+export SLACK_URL="https://app.slack.com/client/T01JCN9LERM/C049ALD884W"
 export SLACK_USER="ibmaiopsdemo@gmail.com"
 export SLACK_PWD="P4ssw0rd!"
 
