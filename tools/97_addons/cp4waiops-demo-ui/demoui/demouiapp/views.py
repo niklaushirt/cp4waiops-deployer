@@ -23,7 +23,7 @@ print ('                                                /_/            ')
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
 print ('')
-print ('    🛰️  DemoUI for CP4WAIOPS AI Manager')
+print ('    🛰️  DemoUI for IBM Automation AIOps')
 print ('')
 print ('       Provided by:')
 print ('        🇨🇭 Niklaus Hirt (nikh@ch.ibm.com)')
@@ -94,12 +94,12 @@ echo "<BR>"
     echo "<BR>"
 
 echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
-echo " <h3>   🚀 1.2 AI Manager</h3><BR>"
+echo " <h3>   🚀 1.2 CP4WAIOps</h3><BR>"
 
 appURL=$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
 
 echo "<table>"
-echo "<tr><td style=\"min-width:300px\"><h4>📥 AI Manager</h4></td><td></td></tr>"
+echo "<tr><td style=\"min-width:300px\"><h4>📥 CP4WAIOps</h4></td><td></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>demo</td></tr>"
 echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>P4ssw0rd!</td></tr>"
@@ -141,9 +141,9 @@ echo "    <BR>"
     appURL=$(oc get route -n $EVTMGR_NAMESPACE  evtmanager-ibm-hdm-common-ui -o jsonpath={.spec.host})
 
     echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
-    echo "    <h3>🚀 1.4 Event Manager (Netcool Operations Insight)</h3><BR>"
+    echo "    <h3>🚀 1.4 Netcool Operations Insight (Event Manager)</h3><BR>"
     echo "<table>"
-    echo "<tr><td style=\"min-width:300px\"><h4>📥 Event Manager</h4></td><td></td></tr>"
+    echo "<tr><td style=\"min-width:300px\"><h4>📥 Netcool Operations Insight</h4></td><td></td></tr>"
     echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a>https://</td></tr>"
     echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>demo</td></tr>"
     echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>P4ssw0rd!</td></tr>"
@@ -160,7 +160,7 @@ echo "    <BR>"
 echo "    <BR>"
 
 echo "<HR><BR>"
-echo "<h2>🚀 2. AI Manager Configuration Information</h2><BR>"
+echo "<h2>🚀 2. CP4WAIOps Configuration Information</h2><BR>"
 echo "    <BR>"
 echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
 echo "    <h3>🚀 2.1 Configure LDAP - Access Control </h3><BR>"
