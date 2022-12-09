@@ -268,7 +268,7 @@
 - name: 🚀 TURBONOMIC - Create Licensing Groups
   shell: |
     result=$(curl -s -k -X 'POST' \
-      "https://$TURBO_URL/api/v3/groups" -b /tmp/cookies\
+      "https://{{TURBO_URL}}/api/v3/groups" -b /tmp/cookies\
       -H 'accept: application/json' \
       -H 'Content-Type: application/json' \
       -d ' {
@@ -311,7 +311,7 @@
 
 
     result=$(curl -s -k -X 'POST' \
-      "https://$TURBO_URL/api/v3/groups" -b /tmp/cookies\
+      "https://{{TURBO_URL}}/api/v3/groups" -b /tmp/cookies\
       -H 'accept: application/json' \
       -H 'Content-Type: application/json' \
       -d '   {
@@ -358,7 +358,7 @@
 
 
 
-    result=$(curl -XPOST -s -k "https://$TURBO_URL/api/v3/markets/777777/policies" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '
+    result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/markets/777777/policies" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '
     {
       "policyName": "_DB_LICENSE",
       "type": "BIND_TO_GROUP_AND_LICENSE",
@@ -379,7 +379,7 @@
 
 
 
-    result=$(curl -XPOST -s -k "https://$TURBO_URL/api/v3/markets/777777/policies" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '
+    result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/markets/777777/policies" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '
     {
       "policyName": "_DB_PLACE",
       "type": "AT_MOST_N_BOUND",
