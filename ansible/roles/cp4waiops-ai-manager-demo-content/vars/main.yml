@@ -1,5 +1,5 @@
 # number of pods to be expected in final cp4waiops namespace
-waiops_ns_min_pods_final: 124
+waiops_ns_min_pods_final: 123
 
 # Create externally accessible Route for Topology
 create_topo_route: true

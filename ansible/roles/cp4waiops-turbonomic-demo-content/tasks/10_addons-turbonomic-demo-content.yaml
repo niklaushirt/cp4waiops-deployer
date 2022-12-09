@@ -368,7 +368,7 @@
       
       ],
       "mergeType": "Cluster",
-      "capacity": 0,
+      "capacity": 4,
       "enabled": true,
       "providerEntityType": "Application"
     }')
@@ -390,7 +390,7 @@
       
       ],
       "mergeType": "Cluster",
-      "capacity": 0,
+      "capacity": 4,
       "enabled": true,
       "providerEntityType": "Application"
     }')

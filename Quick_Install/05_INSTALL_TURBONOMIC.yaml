@@ -9,7 +9,7 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------"
-#  Installing CP4WAIOPS
+#  Installing CP4WAIOPS v3.5.0
 #
 #  CloudPak for Watson AIOps
 #
@@ -71,12 +71,13 @@ spec:
               #!/bin/bash
               #set -x
 
-       
+
 
               echo "*****************************************************************************************************************************"
               echo " ✅ STARTING: INSTALL Turbonomic"
               echo "*****************************************************************************************************************************"
               echo ""
+              echo "  ⏳ INSTALLATION START TIMESTAMP: $(date)"
               echo ""
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 📥 Clone Repo $INSTALL_REPO"
@@ -84,6 +85,165 @@ spec:
               cd cp4waiops-deployer
               echo ""
               echo ""
+
+
+
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo " 📝 Create Config File"
+              
+              cat <<EOF > ./ansible/configs/cp4waiops-roks-custom.yaml
+              ---
+              # *************************************************************************************************************************************************
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # CP4WAIOPS INSTANCES
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # *************************************************************************************************************************************************
+
+
+              global_config:
+                environment_name: cp4waiops
+                cloud_platform: existing-ocp
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # CP4WAIOPS Pull Registires
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                entitled_registry: cp.icr.io
+                entitled_registry_user: cp
+                catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+                create_cards: true
+                create_ocp_items: true
+
+
+              openshift:
+              - name: "mycluster"
+                ocp_version: "4.10"
+                cluster_name: "mycluster"
+                domain_name: example.com
+                openshift_storage:
+                - storage_name: ibm-cloud-storage
+                  storage_type: custom
+              # Use file storate class provided as part of ROKS cluster
+                  ocp_storage_class_file: automatic
+                  ocp_storage_class_block: automatic
+                  #ocp_storage_class_file: ibmc-file-gold-gid
+                  #ocp_storage_class_block: ibmc-block-gold
+
+
+              cp4waiops:
+              - project: cp4waiops-addons
+                instances:
+             
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # CP4WAIOPS INSTANA
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                - name: cp4waiops-instana
+                  kind: Instana
+                  install: true
+
+                  # ---------------------------------------------------------------------
+                  # INSTANA LICENSE
+                  sales_key: $INSTANA_SALES_KEY
+                  agent_key: $INSTANA_AGENT_KEY
+
+                  # ---------------------------------------------------------------------
+                  # INSTANA ADMIN LOGIN
+                  initial_admin_user: "admin@instana.local"
+                  initial_admin_pass: 'P4ssw0rd!'
+                  
+                  # ---------------------------------------------------------------------
+                  # INSTALL INSTANA AGENT
+                  install_agent: true
+
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # INTEGRATIONS
+                  integrate_aimanager: true
+                  #integrate_turbonomic: true
+                  
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # Storage Classes Override for this Instance (see comment below)
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  #storage_class_file: automatic
+                  #storage_class_block: automatic
+
+
+
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # CP4WAIOPS TURBONOMIC
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                - name: cp4waiops-turbonomic
+                  kind: Turbonomic
+                  install: true
+                  turbo_version: 8.7.0
+
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # Storage Classes Override for this Instance (see comment below)
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  #storage_class_file: automatic
+                  #storage_class_block: automatic
+
+
+                - name: cp4waiops-turbonomic-demo-content
+                  kind: TurbonomicDemoContent
+                  install: true
+                  turbo_password: P4ssw0rd!
+                  # ---------------------------------------------------------------------
+                  # Create Demo User
+                  create_user: true
+                  demo_user: demo
+                  demo_password: P4ssw0rd!
+                  # ---------------------------------------------------------------------
+                  # Create Groups
+                  group_vcenter_vms: true
+                  group_robotshop: true
+                  group_licensing: true
+              
+                  # ---------------------------------------------------------------------
+                  # Create Targets
+                  target_instana: true
+                  # ---------------------------------------------------------------------
+                  # Create Memory and CPU hogs
+                  resource_hogs: true
+                  # ---------------------------------------------------------------------
+                  # Create Metrics server, DIF integration and RobotShop BuisnessApp
+                  metrics_dif: true
+                  # ---------------------------------------------------------------------
+                  # Turbo License (optional)
+                  turbo_license: $TURBO_LICENSE
+
+
+
+
+
+
+              # *************************************************************************************************************************************************
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # CP4WAIOPS USAGE
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # *************************************************************************************************************************************************
+
+
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # CP4WAIOPS Storage Classes
+              # --------------------------------------------------------------------------------------------------------------------------------------
+
+              # Override the Storage Class auto detection (not_configured, ibmc-file-gold-gid, rook-cephfs, nfs-client, ...)
+              #storage_class_file: automatic
+              #storage_class_file: ibmc-file-gold-gid               # ROKS
+              #storage_class_file: ocs-storagecluster-cephfs        # ODF
+              #storage_class_file: ibmc-vpc-block-10iops-tier       # IBM VPC
+              #storage_class_file: rook-cephfs                      # FYRE
+              #storage_class_file: nfs-client                       # TEC
+
+              #storage_class_block: automatic
+              #storage_class_block: ibmc-block-gold                 # ROKS
+              #storage_class_block: ocs-storagecluster-ceph-rbd     # ODF
+              #storage_class_block: ibmc-vpc-block-10iops-tier      # IBM VPC
+              #storage_class_block: rook-cephfs                     # FYRE
+              #storage_class_block: nfs-client                      # TEC
+
+
+              EOF
+
+
 
 
 
@@ -103,10 +263,11 @@ spec:
               ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=$CONFIG" -e cp_entitlement_key=$ENTITLED_REGISTRY_KEY
               echo ""
               echo ""
+              echo "  ⏳ INSTALLATION END TIMESTAMP: $(date)"
+              echo ""
               echo "*****************************************************************************************************************************"
               echo " ✅ DONE"
               echo "*****************************************************************************************************************************"
-
 
 
               while true
@@ -114,13 +275,16 @@ spec:
                 sleep 1000
               done
 
+
           env:
           - name: INSTALL_REPO
             value : "https://github.com/niklaushirt/cp4waiops-deployer.git"
           - name: CONFIG
             #value : "./configs/cp4waiops-roks-aimanager-all-34.yaml"
-            value : "./configs/cp4waiops-roks-turbonomic.yaml"
-          - name: ENTITLED_REGISTRY_KEY
-            value : "not_needed"
+            value : "./configs/cp4waiops-roks-custom.yaml"
+            # The pull token for cp.icr.com from https://myibm.ibm.com/products-services/containerlibrary
+          - name: TURBO_LICENSE
+            value : "NONE"
       restartPolicy: Never
   backoffLimit: 4
+
