@@ -97,14 +97,12 @@
 
     ingress_pod=$(oc get secrets -n openshift-ingress | grep tls | grep -v router-metrics-certs-default | awk '{print $1}')
 
-    oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.crt"}}' ${ingress_pod} | base64 -d > cert.crt
-    oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.key"}}' ${ingress_pod} | base64 -d > cert.key
+    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.crt}'  | base64 -d > cert.crt
+    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.key}' | base64 -d > cert.key
+
     oc get secret -n ${PROJECT_CP4WAIOPS} external-tls-secret -o yaml > external-tls-secret.yaml
 
-    oc patch AutomationUIConfig ${AUTO_UI_INSTANCE} \
-    -n ${PROJECT_CP4WAIOPS} \
-    --type merge \
-    --patch '{"spec": {"tls": {"caSecret": {"key":"ca.crt", "secretName": "external-tls-secret"}, "certificateSecret": { "secretName": "external-tls-secret"}}}}'
+    oc patch AutomationUIConfig ${AUTO_UI_INSTANCE} -n ${PROJECT_CP4WAIOPS} --type merge --patch '{"spec": {"tls": {"caSecret": {"key":"ca.crt", "secretName": "external-tls-secret"}, "certificateSecret": { "secretName": "external-tls-secret"}}}}'
 
     oc create secret generic -n ${PROJECT_CP4WAIOPS} external-tls-secret --from-file=cert.crt=cert.crt --from-file=cert.key=cert.key -o yaml --dry-run=client | oc apply -f -
 
@@ -122,7 +120,7 @@
     executable: /bin/bash
 
 
-- name: 🌏 CERTIFICATES - Patch AutomationUIConfig Certificates
+- name: 🟢 DEBUG - Patch AutomationUIConfig Certificates
   debug: 
     var: certificate_patch
     #verbosity: 2
