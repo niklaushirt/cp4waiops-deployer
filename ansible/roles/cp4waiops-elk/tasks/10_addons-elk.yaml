@@ -44,7 +44,7 @@
 - name: 🕦 ELK - Wait for operators
   shell: oc get csv -n openshift-logging|grep "Succeeded" | wc -l|tr -d ' '
   register: kubectl_csv
-  until: kubectl_csv.stdout|int == 2
+  until: kubectl_csv.stdout|int > 1
   retries: 500
   delay: 15
 
