@@ -1,0 +1,198 @@
+
+---
+# Source: falco/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: falco
+  namespace: falco
+  labels:
+    helm.sh/chart: falco-2.4.3
+    app.kubernetes.io/name: falco
+    app.kubernetes.io/instance: falco
+    app.kubernetes.io/version: "0.33.1"
+    app.kubernetes.io/managed-by: Helm
+data:
+  falco.yaml: |-
+    buffered_outputs: false
+    file_output:
+      enabled: false
+      filename: ./events.txt
+      keep_alive: false
+    fileOutput:
+      enabled: true
+    grpc:
+      bind_address: unix:///run/falco/falco.sock
+      enabled: false
+      threadiness: 0
+    grpc_output:
+      enabled: false
+    http_output:
+      enabled: true
+      url: http://falco-falcosidekick:2801
+      user_agent: falcosecurity/falco
+    json_include_output_property: true
+    json_include_tags_property: true
+    json_output: true
+    jsonOutput: true
+    libs_logger:
+      enabled: false
+      severity: debug
+    load_plugins: []
+    log_level: info
+    log_stderr: true
+    log_syslog: true
+    metadata_download:
+      chunk_wait_us: 1000
+      max_mb: 100
+      watch_freq_sec: 1
+    output_timeout: 2000
+    outputs:
+      max_burst: 1000
+      rate: 1
+    plugins:
+    - init_config: null
+      library_path: libk8saudit.so
+      name: k8saudit
+      open_params: http://:9765/k8s-audit
+    - library_path: libcloudtrail.so
+      name: cloudtrail
+    - init_config: ""
+      library_path: libjson.so
+      name: json
+    priority: debug
+    program_output:
+      enabled: false
+      keep_alive: false
+      program: 'jq ''{text: .output}'' | curl -d @- -X POST https://hooks.slack.com/services/XXX'
+    rules_file:
+    - /etc/falco/falco_rules.yaml
+    - /etc/falco/falco_rules.local.yaml
+    - /etc/falco/rules.d
+    stdout_output:
+      enabled: true
+    syscall_buf_size_preset: 4
+    syscall_event_drops:
+      actions:
+      - log
+      - alert
+      max_burst: 1
+      rate: 0.03333
+      threshold: 0.1
+    syscall_event_timeouts:
+      max_consecutives: 1000
+    syslog_output:
+      enabled: true
+    time_format_iso_8601: false
+    watch_config_files: true
+    webserver:
+      enabled: true
+      k8s_healthz_endpoint: /healthz
+      listen_port: 8765
+      ssl_certificate: /etc/falco/falco.pem
+      ssl_enabled: false
+  application_rules.yaml: |-
+    #
+    # Copyright (C) 2019 The Falco Authors.
+    #
+    #
+    # Licensed under the Apache License, Version 2.0 (the "License");
+    # you may not use this file except in compliance with the License.
+    # You may obtain a copy of the License at
+    #
+    #     http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software
+    # distributed under the License is distributed on an "AS IS" BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    #
+  
+    - required_engine_version: 2
+  
+    ################################################################
+    # By default all application-related rules are disabled for
+    # performance reasons. Depending on the application(s) you use,
+    # uncomment the corresponding rule definitions for
+    # application-specific activity monitoring.
+    ################################################################
+  
+
+
+  falco_rules.local.yaml: |
+    #
+    # Copyright (C) 2019 The Falco Authors.
+    #
+    #
+    # Licensed under the Apache License, Version 2.0 (the "License");
+    # you may not use this file except in compliance with the License.
+    # You may obtain a copy of the License at
+    #
+    #     http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software
+    # distributed under the License is distributed on an "AS IS" BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    #
+  
+    ####################
+    # Your custom rules!
+    ####################
+  
+    # Add new rules, like this one
+    # - rule: The program "sudo" is run in a container
+    #   desc: An event will trigger every time you run sudo in a container
+    #   condition: evt.type = execve and evt.dir=< and container.id != host and proc.name = sudo
+    #   output: "Sudo run in container (user=%user.name %container.info parent=%proc.pname cmdline=%proc.cmdline)"
+    #   priority: ERROR
+    #   tags: [users, container]
+  
+    # Or override/append to any rule, macro, or list from the Default Rules
+  falco_rules.yaml: |
+    #
+    # Copyright (C) 2022 The Falco Authors.
+    #
+    #
+    # Licensed under the Apache License, Version 2.0 (the "License");
+    # you may not use this file except in compliance with the License.
+    # You may obtain a copy of the License at
+    #
+    #     http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software
+    # distributed under the License is distributed on an "AS IS" BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    #
+  
+    # Starting with version 8, the Falco engine supports exceptions.
+    # However the Falco rules file does not use them by default.
+    - required_engine_version: 13
+  
+
+  k8s_audit_rules.yaml: |
+    #
+    # Copyright (C) 2022 The Falco Authors.
+    #
+    #
+    # Licensed under the Apache License, Version 2.0 (the "License");
+    # you may not use this file except in compliance with the License.
+    # You may obtain a copy of the License at
+    #
+    #     http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software
+    # distributed under the License is distributed on an "AS IS" BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    #
+  
+    - required_engine_version: 12
+  
+
+---

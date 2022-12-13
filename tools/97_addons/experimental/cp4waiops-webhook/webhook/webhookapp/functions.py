@@ -4,8 +4,7 @@ import json
 import datetime
 import random
 import os
-
-
+from JsonDottedReadAccess import JsonDottedReadAccess
 
 
 
@@ -16,19 +15,12 @@ EVENT_MAPPING=os.environ.get('EVENT_MAPPING')
 EVENT_TEMPLATE=os.environ.get('EVENT_TEMPLATE')
 
 
-print ('   ------------------------------------------------------------------------------------------------')
-print ('   📛 TEST')
-
-
-
-
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # INJECT EVENTS IN ARRAY
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 def injectEvents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBUG):
-    print('')
     print ('   ------------------------------------------------------------------------------------------------')
-    print ('   📛 Inject Events')
+    print ('   📛 Inject Events Multiple')
 
     body_unicode = REQUEST.body.decode('utf-8')
     body = json.loads(body_unicode)
@@ -72,7 +64,12 @@ def injectEvents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBUG):
             else:
                 if DEBUG=='true':
                     print('   ❗ Input field missing - Setting empty:'+str(actOutputKey))
-                if 'EXPIRY' in actOutputKey:
+                if '@@' in actInputKey:
+                    defaultValue=actInputKey.replace('@@','')
+                    payload=payload.replace('@@'+str(actOutputKey),defaultValue)
+                    if DEBUG=='true':
+                        print('    📥 Replacing with default value:'+str(actInputKey))
+                elif 'EXPIRY' in actOutputKey:
                     payload=payload.replace('@@'+str(actOutputKey),'600000')
                 elif'override_with_date' in actInputKey:
                     timestamp = datetime.datetime.now()
@@ -82,7 +79,7 @@ def injectEvents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBUG):
                     payload=payload.replace('@@'+str(actOutputKey),'')
             
         if DEBUG=='true':
-            print ('PAYLOAD FINAL'+str(payload))
+            print ('  ✅ FINAL PAYLOAD: '+str(payload))
 
         
         #timestamp = str(datetime.datetime.now())
@@ -95,18 +92,14 @@ def injectEvents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBUG):
 
 
         response = requests.post(url, data=str(payload), headers=headers, auth=auth)#, verify=False)
-        print ('    RESULT:'+str(response.content))
-        print ('')
-        print ('')
-        print ('')
+        print ('      RESULT:'+str(response.content))
+
     #print(events)
 
 
 
     print ('   ✅ Inject Events')
     print ('   ------------------------------------------------------------------------------------------------')
-    print ('')
-    print ('')
     print ('')
     return 'OK'
 
@@ -115,29 +108,45 @@ def injectEvents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBUG):
 # INJECT SingleEVENTS
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 def injectEventsSingle(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBUG):
-    print('')
-    print ('   ------------------------------------------------------------------------------------------------')
     print ('   📛 Inject Events Single')
 
-    body_unicode = REQUEST.body.decode('utf-8')
-    body = json.loads(body_unicode)
-    if DEBUG=='true':
-        print('**************************************************************************************')
-        print('**************************************************************************************')
-        print('DEBUG PAYLOAD')
-        print('')
-        print(str(body))
-        print('**************************************************************************************')
-        print('DEBUG EVENT_TEMPLATE')
-        print('')
-        print(str(EVENT_TEMPLATE))
-        print('**************************************************************************************')
-        print('DEBUG EVENT_MAPPING')
-        print('')
-        print(str(EVENT_MAPPING))
-        print('**************************************************************************************')
-        print('**************************************************************************************')
+    body_unicode = REQUEST.body.decode('utf-8').replace(".", "@" )
 
+    body = json.loads(body_unicode)
+
+
+    dottedJSON = JsonDottedReadAccess(body)
+
+
+
+    if DEBUG=='true':
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('')
+        print('   🟢 **************************************************************************************')
+        print('   🟢 DEBUG')
+        print('   🟢 **************************************************************************************')
+        print('   🟢 DEBUG PAYLOAD')
+        print(str(body))
+        print('')
+        print('   🟢 **************************************************************************************')
+        print('   🟢 DEBUG EVENT_TEMPLATE')
+        print(str(EVENT_TEMPLATE))
+        print('')
+        print('   🟢 **************************************************************************************')
+        print('   🟢 DEBUG EVENT_MAPPING')
+        print(str(EVENT_MAPPING))
+        print('')
+        print('   🟢 **************************************************************************************')
+        print('   🟢 **************************************************************************************')
+        print('')
+        print('')
+        print('')
+        print('')
 
     payload=EVENT_TEMPLATE
     event = body
@@ -146,21 +155,40 @@ def injectEventsSingle(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBU
         line=line.strip()
         elements=line.split(',')
         if DEBUG=='true':
-            print('Mapping Line:'+str(line))
+            print('  📥 Mapping Line:'+str(line))
         actInputKey = elements[0].strip()
         actOutputKey = elements[1].strip()
 
-        if actInputKey in event:
-            actValue = str(event[actInputKey]).strip()
+        # print('   🔴 **************************************************************************************')
+        # print('   🔴 EVENT')
+        # print('   🔴 **************************************************************************************')
+        # print('   🔴 DEBUG EVENT')
+        # print(str(actInputKey))
+        # print(str(dottedJSON.get(actInputKey)))
+        # print('   🔴 **************************************************************************************')
+        # print('   🔴 EVENT')
+        # print('   🔴 **************************************************************************************')
+
+
+        actValue = dottedJSON.get(actInputKey)
+
+        if actValue != None:
+
+            #actValue = str(event[actInputKey]).strip()
             if DEBUG=='true':
-                print('    📥 actInputKey:'+str(actInputKey))
-                print('    💾 actOutputKey:'+str(actOutputKey))
-                print('    ✅ actValue:'+str(actValue))
+                print('         ▶️ actInputKey:'+str(actInputKey))
+                print('         ▶️ actOutputKey:'+str(actOutputKey))
+                print('      ✅ actValue:'+str(actValue))
             payload=payload.replace('@@'+str(actOutputKey),actValue)
         else:
             if DEBUG=='true':
-                print('   ❗ Input field missing - Setting empty:'+str(actOutputKey))
-            if 'EXPIRY' in actOutputKey:
+                print('   ❗ Input field missing: '+str(actOutputKey))
+            if '@@' in actInputKey:
+                defaultValue=actInputKey.replace('@@','')
+                payload=payload.replace('@@'+str(actOutputKey),defaultValue)
+                if DEBUG=='true':
+                    print('    📥 Replacing with default value: '+defaultValue)
+            elif 'EXPIRY' in actOutputKey:
                 payload=payload.replace('@@'+str(actOutputKey),'600000')
             elif'override_with_date' in actInputKey:
                 timestamp = datetime.datetime.now()
@@ -171,8 +199,9 @@ def injectEventsSingle(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBU
         
 
         if DEBUG=='true':
-            print ('PAYLOAD FINAL'+str(payload))
-        
+            print ('     🚀 PAYLOAD FINAL'+str(payload))
+            print('')
+            print('')
     #timestamp = str(datetime.datetime.now())
     #+%Y-%m-%dT%H:%M:%S
 
@@ -183,10 +212,7 @@ def injectEventsSingle(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBU
 
 
     response = requests.post(url, data=str(payload), headers=headers, auth=auth)#, verify=False)
-    print ('    RESULT:'+str(response.content))
-    print ('')
-    print ('')
-    print ('')
+    print ('      RESULT:'+str(response.content))
 #print(events)
 
 
@@ -194,8 +220,7 @@ def injectEventsSingle(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,REQUEST,DEBU
     print ('   ✅ Inject Events')
     print ('   ------------------------------------------------------------------------------------------------')
     print ('')
-    print ('')
-    print ('')
+
     return 'OK'
 
 

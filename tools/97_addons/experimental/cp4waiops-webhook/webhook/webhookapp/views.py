@@ -66,8 +66,11 @@ WEBHOOK_DEBUG=os.environ.get('WEBHOOK_DEBUG')
 
 
 
-
+print ('')
+print ('')
+print ('')
 print ('*************************************************************************************************')
+print (' 🔎 Parameters')
 print ('*************************************************************************************************')
 print ('')
 print ('    **************************************************************************************************')
@@ -84,7 +87,9 @@ for line in mappingelements:
 
     actOutputKey = elements[1].strip()
     actInputKey = elements[0].strip()
-    print ('           '+str(actInputKey)+'      -->       '+str(actOutputKey))
+    print ('           '+str(actInputKey))
+    print ('               -->       '+str(actOutputKey))
+    print ('')
 
 print ('')
 print ('')
@@ -92,19 +97,11 @@ print ('    ********************************************************************
 print ('     🔎 JSON Template')
 print ('    **************************************************************************************************')
 EVENT_TEMPLATE=os.environ.get('EVENT_TEMPLATE')
-print ('      TEMPLATE'+str(EVENT_TEMPLATE))
+print ('           📥 TEMPLATE'+str(EVENT_TEMPLATE))
 
 
 print ('')
 print ('')
-print ('    **************************************************************************************************')
-print ('')
-print ('')
-
-
-
-
-
 
 
 
@@ -120,9 +117,6 @@ TOKEN=os.environ.get('TOKEN')
 
 
 
-print ('*************************************************************************************************')
-print ('*************************************************************************************************')
-print ('')
 print ('    **************************************************************************************************')
 print ('     🔎 Connection Parameters')
 print ('    **************************************************************************************************')
@@ -130,17 +124,19 @@ print ('           🌏 Datalayer Route:    '+DATALAYER_ROUTE)
 print ('           👩‍💻 Datalayer User:     '+DATALAYER_USER)
 print ('           🔐 Datalayer Pwd:      '+DATALAYER_PWD)
 print ('')
-print ('')
-print ('')
 print ('           🔐 Token:              '+TOKEN)
 print ('')
 print ('    **************************************************************************************************')
 
 
-
+print ('')
+print ('')
+print ('')
 print ('*************************************************************************************************')
 print (' ✅ Webhook is READY')
 print ('*************************************************************************************************')
+print ('')
+print ('')
 
 
 from django.views.decorators.csrf import csrf_exempt
@@ -185,9 +181,9 @@ def webhook(request):
             return HttpResponse('Method not allowed: Please use POST Method', status=405)
 
 
-
 @csrf_exempt
 def webhookIterate(request):
+    print ('   ------------------------------------------------------------------------------------------------')
     print('🌏 webhookIterate')
     if request.method == 'POST':
         if 'token' in request.headers:
@@ -204,8 +200,10 @@ def webhookIterate(request):
     else:
             return HttpResponse('Method not allowed: Please use POST Method', status=405)
 
+
 @csrf_exempt
 def webhookSingle(request):
+    print ('   ------------------------------------------------------------------------------------------------')
     print('🌏 webhookSingle')
     if request.method == 'POST':
         if 'token' in request.headers:
