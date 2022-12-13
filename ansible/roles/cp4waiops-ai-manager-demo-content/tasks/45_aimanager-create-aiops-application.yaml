@@ -64,6 +64,7 @@
           "keyIndexName": "robot-shop",
           "_correlationEnabled": "true",
           "iconId": "application",
+          "businessCriticality": "Platinum",
           "vertexType": "group",
           "correlatable": "true",
           "disruptionCostPerMin": "1000",

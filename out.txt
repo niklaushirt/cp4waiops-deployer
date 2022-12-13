@@ -1,0 +1,1229 @@
+{
+  "_executionTime": 805,
+  "_offset": 0,
+  "_limit": 50,
+  "_items": [
+    {
+      "_id": "J8bH730DQCGqX4faTC1pgg",
+      "_correlationEnabled": "false",
+      "vertexType": "group",
+      "createTime": 1670672042605,
+      "_observedAt": "2022-12-10T11:30:26.750Z",
+      "_createdAt": "2022-12-10T11:34:02.605Z",
+      "observedTime": 1670671826750,
+      "uniqueId": "0004d76cbf4bb47e038f6e44c5ee6471758e383a-endpoints-group"
+    },
+    {
+      "_id": "3QW1gDsFRRudAmy3xo30WA",
+      "_correlationEnabled": "false",
+      "vertexType": "group",
+      "createTime": 1670672042618,
+      "_observedAt": "2022-12-10T11:30:26.751Z",
+      "_createdAt": "2022-12-10T11:34:02.618Z",
+      "observedTime": 1670671826751,
+      "uniqueId": "464b3c1fbf0fe0784b363581bfd6c769fbfc8f42-endpoints-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "HXuyMQaIQk2bxSH51Oy0mw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.866Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125866,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesCluster",
+      "steadyId": "Demo-OpenShift",
+      "createTime": 1670699222991,
+      "_createdAt": "2022-12-10T19:07:02.991Z",
+      "host": "",
+      "name": "Demo-OpenShift (cluster)",
+      "entityTypes": [
+        "cluster"
+      ],
+      "instana_label": "Demo-OpenShift (cluster)",
+      "uniqueId": "3lJ3QgvGANLEjGpqiBsnYUFIF2o-group"
+    },
+    {
+      "keyIndexName": "robot-shop::kubernetes::namespace::robot-shop",
+      "correlate": "true",
+      "_id": "tYo39qoqQ8eaYy3QS3M6uA",
+      "_correlationEnabled": "true",
+      "vertexType": "group",
+      "createTime": 1670581918971,
+      "dataCenter": "robot-shop",
+      "_observedAt": "2022-12-09T16:24:00.365Z",
+      "_createdAt": "2022-12-09T10:31:58.971Z",
+      "name": "robot-shop",
+      "memberTypes": [
+        "server",
+        "pod",
+        "service",
+        "statefulset",
+        "daemonset",
+        "deployment"
+      ],
+      "entityTypes": [
+        "namespace"
+      ],
+      "accessScopeTokens": [
+        "kubernetes.observer:robot-shop",
+        "robot-shop"
+      ],
+      "observedTime": 1670603040365
+    },
+    {
+      "_id": "3GB2tqsESFWxdTHSIlBcRQ",
+      "_correlationEnabled": "false",
+      "vertexType": "group",
+      "createTime": 1670748591888,
+      "_observedAt": "2022-12-11T00:49:00.577Z",
+      "_createdAt": "2022-12-11T08:49:51.888Z",
+      "observedTime": 1670719740577,
+      "uniqueId": "94a5f373680e2d9f1faed1ff7249dc6d5dbbc606-endpoints-group"
+    },
+    {
+      "_id": "juD_obEnTUSQKtYFXqoPIQ",
+      "_correlationEnabled": "false",
+      "vertexType": "group",
+      "createTime": 1670753722323,
+      "_observedAt": "2022-12-11T01:31:02.986Z",
+      "_createdAt": "2022-12-11T10:15:22.323Z",
+      "observedTime": 1670722262986,
+      "uniqueId": "4c2a8056a7ee7f098ec6e6c1a71ed252bd8526e5-endpoints-group"
+    },
+    {
+      "_id": "aXloe41cSqSpZDTpApQ-xg",
+      "_correlationEnabled": "false",
+      "vertexType": "group",
+      "createTime": 1670757301804,
+      "_observedAt": "2022-12-11T03:10:14.744Z",
+      "_createdAt": "2022-12-11T11:15:01.804Z",
+      "observedTime": 1670728214744,
+      "uniqueId": "1127ad304b95baef1f09fad762c86d160fe68ebd-endpoints-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "3nUHXp2ARGGPz9HiK3E-2g",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:24.909Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915124909,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "90078d67-1cbf-431e-b105-9ecb4437e545",
+      "createTime": 1670765222676,
+      "_createdAt": "2022-12-11T13:27:02.676Z",
+      "host": "",
+      "name": "openshift-config-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-config-operator (namespace)",
+      "uniqueId": "D_2JDDkyKUdFb0Afbn-gpqTAj60-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "d8lwV08rSS-HwcuDFBFDww",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.232Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125232,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "31bb1323-1e29-4576-a97c-2c73e578cf2a",
+      "createTime": 1670765226600,
+      "_createdAt": "2022-12-11T13:27:06.600Z",
+      "host": "",
+      "name": "openshift-service-ca-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-service-ca-operator (namespace)",
+      "uniqueId": "RNY-4xBkGFAI11XZdJmagRAz5IU-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "1AaBGSawTlC4xeDOv1Dfmw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.553Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125553,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "0ac635d9-1d66-4e05-9d0f-1b91d734400d",
+      "createTime": 1670765231616,
+      "_createdAt": "2022-12-11T13:27:11.616Z",
+      "host": "",
+      "name": "openshift-cloud-network-config-controller",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-cloud-network-config-controller (namespace)",
+      "uniqueId": "Yxb3sodyVFJKag9Wp0lBwP3J97A-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "UoLNOO0KRsmLeODAjVi6Mg",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.864Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125864,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "d9a6f904-18c1-4e33-8ad3-3f4bc4ca2760",
+      "createTime": 1670765234771,
+      "_createdAt": "2022-12-11T13:27:14.771Z",
+      "host": "",
+      "name": "instana-agent",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "instana-agent (namespace)",
+      "uniqueId": "hyDb24IGfVt2tV6LXhgRnZTgecE-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "fMaCDFqbSmm_6O7CUgHxWw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.865Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125865,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "2c430822-af4f-444a-a155-ec2a421c7975",
+      "createTime": 1670765234794,
+      "_createdAt": "2022-12-11T13:27:14.794Z",
+      "host": "",
+      "name": "openshift-controller-manager-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-controller-manager-operator (namespace)",
+      "uniqueId": "xrJyrJQEx1qc76acfYj7jceF-WA-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "H4gUN883RXOCUsbYtGD5iQ",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.878Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125878,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "4b29c07d-e571-4091-b588-795d04efca98",
+      "createTime": 1670765236874,
+      "_createdAt": "2022-12-11T13:27:16.874Z",
+      "host": "",
+      "name": "openshift-console-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-console-operator (namespace)",
+      "uniqueId": "YOCpPUJP8HcyOcRXh0EKzy3IaBk-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "ysA2iVrUTJ2U7yK8Fq7RVg",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.202Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126202,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "829ce5f1-949f-4c97-a9da-fe74aa138db7",
+      "createTime": 1670765241790,
+      "_createdAt": "2022-12-11T13:27:21.790Z",
+      "host": "",
+      "name": "cp4waiops",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "cp4waiops (namespace)",
+      "uniqueId": "wmkW-9plPC0QpK2DmD_RjKWRlao-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "vMEwGS4SS2uGequQXeBu-g",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.534Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126534,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "272e7e0e-b2db-4ea7-85fc-937beff2cca3",
+      "createTime": 1670765244398,
+      "_createdAt": "2022-12-11T13:27:24.398Z",
+      "host": "",
+      "name": "ibm-cert-store",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "ibm-cert-store (namespace)",
+      "uniqueId": "2ijwpSWpK7PmkSShCy4hGcNrgIU-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "-p8HqkyURUSBD0qSDI9YUg",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:24.907Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915124907,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "c1ac5b79-70e0-45e4-8437-cf318c1b21e6",
+      "createTime": 1670765222179,
+      "_createdAt": "2022-12-11T13:27:02.179Z",
+      "host": "",
+      "name": "openshift-ingress-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-ingress-operator (namespace)",
+      "uniqueId": "U3u3fj72s9cBkg7TOrxbdnAaz3I-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "wnQZ8UotSvOXl9yaAubIRw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.857Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126857,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "df7dfc06-ce02-4215-9bea-7b69bfd5fc9e",
+      "createTime": 1670765247587,
+      "_createdAt": "2022-12-11T13:27:27.587Z",
+      "host": "",
+      "name": "openldap",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openldap (namespace)",
+      "uniqueId": "q5PO-NqcdX-VOQZRvV6FRA_ATw4-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "mqanhecWTWek1_eYcC2qjw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:27.841Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915127841,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "d84fc9ab-e226-4b68-9cc1-5b95fdb0fa12",
+      "createTime": 1670765261426,
+      "_createdAt": "2022-12-11T13:27:41.426Z",
+      "host": "",
+      "name": "openshift-machine-config-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-machine-config-operator (namespace)",
+      "uniqueId": "BnM7OcIotP4LRf77s6fbryKplUk-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "yJpMkZaSQN6GuJr7TXDzTA",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:24.910Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915124910,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "8e20e773-7a89-4f77-959e-e5eb16305523",
+      "createTime": 1670765223002,
+      "_createdAt": "2022-12-11T13:27:03.002Z",
+      "host": "",
+      "name": "openshift-kube-storage-version-migrator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-kube-storage-version-migrator (namespace)",
+      "uniqueId": "_ywRJUoSuBCRfN88Z0E_HR1cmSk-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "L4RM2g3YQxenosYAi2vpWQ",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.188Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126188,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "5e7f94ad-c7e1-4953-a13c-68222ea16c36",
+      "createTime": 1670765238677,
+      "_createdAt": "2022-12-11T13:27:18.677Z",
+      "host": "",
+      "name": "openshift-etcd",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-etcd (namespace)",
+      "uniqueId": "7oxkg6EGorm0v2yXNvkcMuw_OE8-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "_inWl5dxRNeuXQHIeepbgA",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:28.179Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915128179,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "f082beb9-94a2-44bb-9ecb-f3302f3697a5",
+      "createTime": 1670765268100,
+      "_createdAt": "2022-12-11T13:27:48.100Z",
+      "host": "",
+      "name": "cp4waiops-tools",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "cp4waiops-tools (namespace)",
+      "uniqueId": "wgTnmX9yJnaldUKfYz18XNWYgTo-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "CSRzy1rWR5GWONWp6HKIDQ",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.528Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126528,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "8ad8c3e9-af97-420f-aa51-090a3db91ac6",
+      "createTime": 1670765243645,
+      "_createdAt": "2022-12-11T13:27:23.645Z",
+      "host": "",
+      "name": "openshift-multus",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-multus (namespace)",
+      "uniqueId": "Ah8iFcnokDmDB-l_k_90Ej1rVqc-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "96MqMPrTTq2S86_eTksYCg",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:27.526Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915127526,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "4636e302-df70-4c1d-8c43-78a962cfbdc3",
+      "createTime": 1670765259213,
+      "_createdAt": "2022-12-11T13:27:39.213Z",
+      "host": "",
+      "name": "openshift-kube-controller-manager",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-kube-controller-manager (namespace)",
+      "uniqueId": "5niNP5FlB2jSBZYOqnk9MNhptG4-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "KltL7M4bSDKuH3wr3uuNNw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:27.529Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915127529,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "c6c7ac13-426e-41c9-91a5-dbfa4be57948",
+      "createTime": 1670765259897,
+      "_createdAt": "2022-12-11T13:27:39.897Z",
+      "host": "",
+      "name": "openshift-dns",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-dns (namespace)",
+      "uniqueId": "rUVmZo-rXJ79VLMPBH1HmlvUbCU-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "umH1QkQ5SM6VmEwhlUJKLQ",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:28.168Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915128168,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "06cb9786-3a73-46dc-85a8-51391e31fda2",
+      "createTime": 1670765265275,
+      "_createdAt": "2022-12-11T13:27:45.275Z",
+      "host": "",
+      "name": "instana-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "instana-operator (namespace)",
+      "uniqueId": "L-7gUV2kVAqJWtCWYqUEW1kVIVM-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "Hs_pMJKYQL-xqvj3BTcPPg",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:28.178Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915128178,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "8f85b014-db9d-47d5-98dc-4a0829892e7e",
+      "createTime": 1670765267675,
+      "_createdAt": "2022-12-11T13:27:47.675Z",
+      "host": "",
+      "name": "ibm-system",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "ibm-system (namespace)",
+      "uniqueId": "woZTmSdD9KDlUCQFG_qxDvpEWeM-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "_i1Ecs_8SrWm14MYDwqPiQ",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:24.916Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915124916,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "0f4d4c4e-180b-46d9-a6bb-7c96edefeda8",
+      "createTime": 1670765224308,
+      "_createdAt": "2022-12-11T13:27:04.308Z",
+      "host": "",
+      "name": "instana-datastores",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "instana-datastores (namespace)",
+      "uniqueId": "ybikPl7SO2OC6r0M5QCsKnhAnnQ-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "MD7JNbJMQWixpdvAU8NnGg",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:24.918Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915124918,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "79a8498a-829f-4bb9-a426-59bc6ecac397",
+      "createTime": 1670765224875,
+      "_createdAt": "2022-12-11T13:27:04.875Z",
+      "host": "",
+      "name": "openshift-operators-redhat",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-operators-redhat (namespace)",
+      "uniqueId": "s9HBe8UFTaosPE7VGQ3Y24NjlRA-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "s68AqEBfQ-OQClPPyOdigA",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.224Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125224,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "cfe9889e-ab0b-492b-b979-e4a009609992",
+      "createTime": 1670765225514,
+      "_createdAt": "2022-12-11T13:27:05.514Z",
+      "host": "",
+      "name": "turbonomic",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "turbonomic (namespace)",
+      "uniqueId": "tC0w5QHJO-RU_su4a7BEYcOiF6w-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "9lGs06ZwQ0eNdg3b0IC9qw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.244Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125244,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "5078d4c4-3000-4cdf-9926-d35806966a6b",
+      "createTime": 1670765229091,
+      "_createdAt": "2022-12-11T13:27:09.091Z",
+      "host": "",
+      "name": "openshift-etcd-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-etcd-operator (namespace)",
+      "uniqueId": "LyW7U67QtOBayflGfci9H9OUxyE-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "ElNb8bY0SoKxfuTjNLqMgQ",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.557Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125557,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "224bb389-7ab7-4819-9fc7-af6affa82875",
+      "createTime": 1670765232916,
+      "_createdAt": "2022-12-11T13:27:12.916Z",
+      "host": "",
+      "name": "openshift-kube-storage-version-migrator-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-kube-storage-version-migrator-operator (namespace)",
+      "uniqueId": "ItolOoky0-_QLeJUaG84fK0AO4A-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "hKUOc1bGRlu7DswS0SUrhA",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.552Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125552,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "ade8d978-a395-47e4-8ee3-42e462715bb5",
+      "createTime": 1670765230997,
+      "_createdAt": "2022-12-11T13:27:10.997Z",
+      "host": "",
+      "name": "openshift-ingress",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-ingress (namespace)",
+      "uniqueId": "DZc4JD3Y13FiDK8WO8IwiacDLs0-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "HHxSATyqQoK4ofL3EkDtvw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.199Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126199,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "e33fdba0-2463-44f4-af17-5a8fc405add1",
+      "createTime": 1670765240793,
+      "_createdAt": "2022-12-11T13:27:20.793Z",
+      "host": "",
+      "name": "instana-units",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "instana-units (namespace)",
+      "uniqueId": "XMdlhFJgT1xcChNFwipX1gx8Qf8-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "FzCX_NLARbypABAiKd8BRA",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.542Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126542,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "ad0659e0-3a9b-454a-ac85-817dccf43c57",
+      "createTime": 1670765245852,
+      "_createdAt": "2022-12-11T13:27:25.852Z",
+      "host": "",
+      "name": "kube-system",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "kube-system (namespace)",
+      "uniqueId": "mJUdL-54BDSehbmabnsLUPDJKWw-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "BlGhn0yWSByC6BAqOTZudA",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.188Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126188,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "d7144f23-5705-4264-a357-e3341a79bd7a",
+      "createTime": 1670765238779,
+      "_createdAt": "2022-12-11T13:27:18.779Z",
+      "host": "",
+      "name": "openshift-infra",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-infra (namespace)",
+      "uniqueId": "Zy0vEZUUnBtj_v-s_SzwqH1qvkE-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "P1WhOThrQdCo-RUcfuS3Bg",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:24.910Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915124910,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "c79bfe44-e343-4038-91c2-5c9c20fad7d3",
+      "createTime": 1670765222795,
+      "_createdAt": "2022-12-11T13:27:02.795Z",
+      "host": "",
+      "name": "openshift-cluster-csi-drivers",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-cluster-csi-drivers (namespace)",
+      "uniqueId": "aoLNHTfaOEI6ptFMJsFWXejNsG0-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "0zWM4yc2QleTn86dTffe7w",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.858Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126858,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "183cce59-413b-40ee-b025-38ff989d742f",
+      "createTime": 1670765247887,
+      "_createdAt": "2022-12-11T13:27:27.887Z",
+      "host": "",
+      "name": "openshift-roks-metrics",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-roks-metrics (namespace)",
+      "uniqueId": "1Ri0TVI-0ZIowcYSurJh07tVMh0-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "AkEgqrkLSouujpnG9uiyZg",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.524Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126524,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "309bff67-55fa-4930-a040-b013c4fa8e2c",
+      "createTime": 1670765243305,
+      "_createdAt": "2022-12-11T13:27:23.305Z",
+      "host": "",
+      "name": "kube-public",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "kube-public (namespace)",
+      "uniqueId": "6YUBqCRF1K3v5RuTSQ6XI1Y3o3g-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "5CPnDrnURZmiGrakQYbMPg",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.556Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125556,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "f3011231-2248-40a3-a767-24ee3be9c480",
+      "createTime": 1670765232519,
+      "_createdAt": "2022-12-11T13:27:12.519Z",
+      "host": "",
+      "name": "openshift-cluster-samples-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-cluster-samples-operator (namespace)",
+      "uniqueId": "ByZ0dhqbRQeydadim-qdYX-qrIw-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "vGphBIRPTgavsweTlDx2ug",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.858Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126858,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "4462c87f-aac3-4078-b439-6a631c854dbe",
+      "createTime": 1670765247905,
+      "_createdAt": "2022-12-11T13:27:27.905Z",
+      "host": "",
+      "name": "openshift-apiserver-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-apiserver-operator (namespace)",
+      "uniqueId": "c4sjD3UMXyc8-QpjfBkCCkKqVn4-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "VRB5Q72UTzaeAQv7hpL58A",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.861Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126861,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "71927324-a775-405e-b5ba-6170d3cc98b4",
+      "createTime": 1670765248498,
+      "_createdAt": "2022-12-11T13:27:28.498Z",
+      "host": "",
+      "name": "openshift-network-diagnostics",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-network-diagnostics (namespace)",
+      "uniqueId": "8Z2MKEkuqfpjUY5L7kHgsNI55_Q-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "3ZASej0LRTSrU7uRPyayxw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.559Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125559,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "cf60c30d-b8fa-4ce7-bee1-dd5f38845139",
+      "createTime": 1670765233826,
+      "_createdAt": "2022-12-11T13:27:13.826Z",
+      "host": "",
+      "name": "kube-node-lease",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "kube-node-lease (namespace)",
+      "uniqueId": "dnoWTlsAwAqifgAGQxZWX8918ek-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "RsjBxCC2RlGF4wB1yLAu5Q",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:27.199Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915127199,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "87c133b6-b58f-4a37-a9a2-fa64269fa9f0",
+      "createTime": 1670765255012,
+      "_createdAt": "2022-12-11T13:27:35.012Z",
+      "host": "",
+      "name": "openshift-authentication-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-authentication-operator (namespace)",
+      "uniqueId": "jI9Ro3kjfW6e4QSoBNt2SgINXmk-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "4ci2qISiRF2SYP2XOYg_mQ",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:27.845Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915127845,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "15696ca3-6734-4c6e-a831-a2a52ee4595e",
+      "createTime": 1670765262038,
+      "_createdAt": "2022-12-11T13:27:42.038Z",
+      "host": "",
+      "name": "openshift-service-ca",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-service-ca (namespace)",
+      "uniqueId": "71zgBng5afK77UpfOUz7tiqSZiM-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "Fy1W0e5QQuO2vmOQ2vqdcA",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:25.877Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915125877,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "d9cf061a-a436-43cd-9342-3d788f394b53",
+      "createTime": 1670765236706,
+      "_createdAt": "2022-12-11T13:27:16.706Z",
+      "host": "",
+      "name": "robot-shop",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "robot-shop (namespace)",
+      "uniqueId": "C98ujC72gnb2ZEzupdD1pFkVAls-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "OfR0rD8tTlWorenQi35K7A",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:28.510Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915128510,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "d3e5c8f4-75f2-46d4-b93a-872c2c6dc07c",
+      "createTime": 1670765270985,
+      "_createdAt": "2022-12-11T13:27:50.985Z",
+      "host": "",
+      "name": "openshift-kube-controller-manager-operator",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-kube-controller-manager-operator (namespace)",
+      "uniqueId": "rnUy3Yn3ZbYwrXwcUAdCWt1bnm8-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "EUNW83IwS8azdR1A8ySRzA",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:26.850Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915126850,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "8cd1a317-855f-478c-8b37-af905485302f",
+      "createTime": 1670765247188,
+      "_createdAt": "2022-12-11T13:27:27.188Z",
+      "host": "",
+      "name": "openshift-config",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-config (namespace)",
+      "uniqueId": "uZYjmJh79WRthsphe7cxwrDD0tA-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "UyAAVHQuThOQ2xzkT4knSw",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:28.173Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915128173,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "1d65d6f6-b53d-40f0-8acc-834de8c2c719",
+      "createTime": 1670765266317,
+      "_createdAt": "2022-12-11T13:27:46.317Z",
+      "host": "",
+      "name": "openshift-console",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-console (namespace)",
+      "uniqueId": "uEu_o-bny2xoCQGJ7SImgT4Z3zY-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "c-tg8ulTQT6hkI4ZzAR7ew",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:27.525Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915127525,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "2043505f-da97-448a-a9d5-2fb85efb8b98",
+      "createTime": 1670765259024,
+      "_createdAt": "2022-12-11T13:27:39.024Z",
+      "host": "",
+      "name": "cp4waiops-evtmgr",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "cp4waiops-evtmgr (namespace)",
+      "uniqueId": "a9TrPRrMQOs_uZRN_XFNm-9Ki5k-group"
+    },
+    {
+      "correlate": "true",
+      "_id": "TSudMp8rTtykjAQ7tvJIHQ",
+      "_correlationEnabled": "true",
+      "iconId": "instana",
+      "_observedAt": "2022-12-13T07:05:28.509Z",
+      "accessScopeTokens": [
+        "https://dev-aiops.itzroks-270003bu3k-mtpyss-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud/"
+      ],
+      "observedTime": 1670915128509,
+      "tags": [
+        "instana"
+      ],
+      "vertexType": "group",
+      "plugin": "kubernetesNamespace",
+      "steadyId": "d05227e6-37d0-4efb-94c0-0638f7147a05",
+      "createTime": 1670765270887,
+      "_createdAt": "2022-12-11T13:27:50.887Z",
+      "host": "",
+      "name": "openshift-authentication",
+      "entityTypes": [
+        "namespace"
+      ],
+      "instana_label": "openshift-authentication (namespace)",
+      "uniqueId": "SWTcEwLUK5OihMw92pi8HzdB3t0-group"
+    }
+  ]
+}
