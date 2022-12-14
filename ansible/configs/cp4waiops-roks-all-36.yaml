@@ -12,12 +12,11 @@ global_config:
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS Pull Registires
   # --------------------------------------------------------------------------------------------------------------------------------------
-  entitled_registry: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com
-  entitled_registry_user: nikh@ch.ibm.com
-  catalog_image: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com/ia/relatedimages/ibm-watson-aiops-catalog:v3.6.0-20221114.1001-e30628169
+  entitled_registry: cp.icr.io
+  entitled_registry_user: cp
+  catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
   create_cards: true
   create_ocp_items: true
-
 
 
 openshift:
@@ -53,7 +52,9 @@ cp4waiops:
     # Name of the CP4WAIOPS instance
     waiops_name: ibm-cp-watson-aiops
     # Version of the catalog subscription
-    subscription_channel: v3.5
+    subscription_channel: v3.6
+    # Freeze the version of the Catalog
+    freeze_catalog: true
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
@@ -225,7 +226,9 @@ cp4waiops:
     kind: InfrastructureManagement
     install: false
     # Version of the catalog subscription
-    subscription_channel: v3.5
+    subscription_channel: v3.6
+    # Freeze the version of the Catalog
+    freeze_catalog: true
     #subscription_channel: 3.4-dev
     
     # --------------------------------------------------------------------------------------------------------------------------------------
@@ -320,7 +323,9 @@ cp4waiops:
     # ---------------------------------------------------------------------
     # Create Metrics server, DIF integration and RobotShop BuisnessApp
     metrics_dif: true
-    
+    # ---------------------------------------------------------------------
+    # Turbo License (optional)
+    turbo_license: NONE
 
 # *************************************************************************************************************************************************
 # --------------------------------------------------------------------------------------------------------------------------------------

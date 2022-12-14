@@ -42,9 +42,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager
     kind: AIManager
-    install: false
-
-    # current_cp4waiops_feature
+    install: true
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
     waiops_size: small
     # Custom Sizing File (waiops_size must be set to "custom")
@@ -66,13 +64,19 @@ cp4waiops:
     # Install with CASE Files
     # --------------------------------------------------------------------------------------------------------------------------------------
     case_install: false
-    # case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
-    # case_name: ibm-cp-waiops
-    # case_version: 1.4.1
-    # case_inventory_setup: cpwaiopsSetup
-
-
-
+    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
+    case_name: ibm-cp-waiops
+    case_version: 1.4.1
+    case_inventory_setup: cpwaiopsSetup
+    
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # CP4WAIOPS Pull Registires
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    entitled_registry: cp.icr.io
+    entitled_registry_user: cp
+    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+    create_cards: true
+    create_ocp_items: true
 
 
 
@@ -81,7 +85,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager-demo-content
     kind: AIManagerDemoContent
-    install: false
+    install: true
 
 
     # ---------------------------------------------------------------------
@@ -127,7 +131,6 @@ cp4waiops:
     integrate_awx_aimanager: true
     load_aimanager_runbooks: true
     create_runbook_policy: true
-
 
     # ---------------------------------------------------------------------
     # Demo UI
@@ -186,119 +189,6 @@ cp4waiops:
 
 
 
-
-- project: cp4waiops-evtmgr
-  instances:
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  # CP4WAIOPS Event Manager
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  - name: cp4waiops-eventmanager
-    kind: EventManager
-    install: false
-    # Version of the catalog subscription
-    subscription_channel: v1.10
-    starting_csv: noi.v1.6.0
-    noi_version: 1.6.6
-
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # Storage Classes Override for this Instance (see comment below)
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    #storage_class_file: automatic
-    #storage_class_block: automatic
-    
-
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  # CP4WAIOPS Event Manager Demo Content
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  - name: cp4waiops-eventmanager
-    kind: EventManagerDemoContent
-    install: false
-
-
-
-
-- project: cp4waiops-infra
-  instances:
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  # CP4WAIOPS Infrastructure Management
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  - name: cp4waiops-infrastructure-management
-    kind: InfrastructureManagement
-    install: false
-    # Version of the catalog subscription
-    subscription_channel: v3.6
-    # Freeze the version of the Catalog
-    freeze_catalog: true
-    #subscription_channel: 3.4-dev
-    
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # Storage Classes Override for this Instance (see comment below)
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    #storage_class_file: automatic
-    #storage_class_block: automatic
-    
-
-
-
-- project: cp4waiops-addons
-  instances:
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  # CP4WAIOPS ELK
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  - name: cp4waiops-elk
-    kind: ELK
-    install: false
-
-
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  # CP4WAIOPS TURBONOMIC
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  - name: cp4waiops-turbonomic
-    kind: Turbonomic
-    install: true
-    turbo_version: 8.7.0
-
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # Storage Classes Override for this Instance (see comment below)
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    #storage_class_file: automatic
-    #storage_class_block: automatic
-
-  - name: cp4waiops-turbonomic-demo-content
-    kind: TurbonomicDemoContent
-    install: true
-    turbo_password: P4ssw0rd!
-    # ---------------------------------------------------------------------
-    # Turbo License (optional)
-    turbo_license: NONE
-    
-    # ---------------------------------------------------------------------
-    # Create Demo User
-    create_user: true
-    demo_user: demo
-    demo_password: P4ssw0rd!
-
-    # ---------------------------------------------------------------------
-    # Create Groups
-    group_vcenter_vms: true
-    group_robotshop: true
-    group_licensing: true
-
-
-    # ---------------------------------------------------------------------
-    # Create Targets
-    target_instana: true
-
-
-    # ---------------------------------------------------------------------
-    # Create Memory and CPU hogs
-    resource_hogs: true
-
-    # ---------------------------------------------------------------------
-    # Create Metrics server, DIF integration and RobotShop BuisnessApp
-    metrics_dif: true
-
-    
 # *************************************************************************************************************************************************
 # --------------------------------------------------------------------------------------------------------------------------------------
 # CP4WAIOPS USAGE
@@ -324,7 +214,4 @@ cp4waiops:
 #storage_class_block: ibmc-vpc-block-10iops-tier      # IBM VPC
 #storage_class_block: rook-cephfs                     # FYRE
 #storage_class_block: nfs-client                      # TEC
-
-
-
 

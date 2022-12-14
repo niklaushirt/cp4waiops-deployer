@@ -42,7 +42,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager
     kind: AIManager
-    install: false
+    install: true
 
     # current_cp4waiops_feature
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
@@ -66,10 +66,10 @@ cp4waiops:
     # Install with CASE Files
     # --------------------------------------------------------------------------------------------------------------------------------------
     case_install: false
-    # case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
-    # case_name: ibm-cp-waiops
-    # case_version: 1.4.1
-    # case_inventory_setup: cpwaiopsSetup
+    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
+    case_name: ibm-cp-waiops
+    case_version: 1.4.1
+    case_inventory_setup: cpwaiopsSetup
 
 
 
@@ -81,7 +81,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager-demo-content
     kind: AIManagerDemoContent
-    install: false
+    install: true
 
 
     # ---------------------------------------------------------------------
@@ -249,6 +249,41 @@ cp4waiops:
     kind: ELK
     install: false
 
+    
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  # CP4WAIOPS INSTANA
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  - name: cp4waiops-instana
+    kind: Instana
+    install: true
+    version: 235-5
+
+    
+    # ---------------------------------------------------------------------
+    # INSTANA LICENSE
+    sales_key: 'NONE'
+    agent_key: 'NONE'
+
+    # ---------------------------------------------------------------------
+    # INSTANA ADMIN LOGIN
+    initial_admin_user: "admin@instana.local"
+    initial_admin_pass: 'P4ssw0rd!'
+    
+    # ---------------------------------------------------------------------
+    # INSTALL INSTANA AGENT
+    install_agent: true
+
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # INTEGRATIONS
+    integrate_aimanager: true
+    #integrate_turbonomic: true
+    
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Storage Classes Override for this Instance (see comment below)
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    #storage_class_file: automatic
+    #storage_class_block: automatic
+
 
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS TURBONOMIC
@@ -264,39 +299,34 @@ cp4waiops:
     #storage_class_file: automatic
     #storage_class_block: automatic
 
+
   - name: cp4waiops-turbonomic-demo-content
     kind: TurbonomicDemoContent
     install: true
     turbo_password: P4ssw0rd!
     # ---------------------------------------------------------------------
-    # Turbo License (optional)
-    turbo_license: NONE
-    
-    # ---------------------------------------------------------------------
     # Create Demo User
     create_user: true
     demo_user: demo
     demo_password: P4ssw0rd!
-
     # ---------------------------------------------------------------------
     # Create Groups
     group_vcenter_vms: true
     group_robotshop: true
     group_licensing: true
 
-
     # ---------------------------------------------------------------------
     # Create Targets
     target_instana: true
-
-
     # ---------------------------------------------------------------------
     # Create Memory and CPU hogs
     resource_hogs: true
-
     # ---------------------------------------------------------------------
     # Create Metrics server, DIF integration and RobotShop BuisnessApp
     metrics_dif: true
+    # ---------------------------------------------------------------------
+    # Turbo License (optional)
+    turbo_license: NONE
 
     
 # *************************************************************************************************************************************************
