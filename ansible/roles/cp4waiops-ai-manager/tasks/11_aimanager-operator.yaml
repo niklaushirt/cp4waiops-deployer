@@ -203,7 +203,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🟣 OUTPUT - FREEZE
   debug: 
-    var: POLICY_RESULT.stdout_lines
+    var: current_cp4waiops_feature.freeze_catalog.stdout_lines
 
 
 - name:   🚀 AIMANAGER CATALOG - Freeze IBM Operator Catalog version
