@@ -53,8 +53,8 @@ cp4waiops:
     waiops_name: ibm-cp-watson-aiops
     # Version of the catalog subscription
     subscription_channel: v3.6
-    # Freeze the version of the Catalog
-    freeze_catalog: true
+    # Freeze the version of the Catalog image by patching CatalogSource
+    freeze_catalog: false
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
@@ -227,8 +227,8 @@ cp4waiops:
     install: false
     # Version of the catalog subscription
     subscription_channel: v3.6
-    # Freeze the version of the Catalog
-    freeze_catalog: true
+    # Freeze the version of the Catalog image by patching CatalogSource
+    freeze_catalog: false
     #subscription_channel: 3.4-dev
     
     # --------------------------------------------------------------------------------------------------------------------------------------
