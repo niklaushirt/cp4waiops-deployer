@@ -201,6 +201,10 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Freeze IBM Operator Catalog version (if enabled)
 # --------------------------------------------------------------------------------------------------------------------------------------
+- name: 🟣 OUTPUT - FREEZE
+  debug: 
+    var: POLICY_RESULT.stdout_lines
+
 
 - name:   🚀 AIMANAGER CATALOG - Freeze IBM Operator Catalog version
   shell: |
@@ -213,7 +217,13 @@
     else
       echo " NOT Freezing Catalog Version"
     fi
+  register: output
   ignore_errors: true
+
+
+- name: 🟣 OUTPUT - FREEZE
+  debug: 
+    var: output.stdout_lines
 
 
 - name: Log
