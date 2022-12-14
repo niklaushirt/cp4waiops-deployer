@@ -210,7 +210,7 @@
   shell: |
     export FREEZE={{current_cp4waiops_feature.freeze_catalog | default("false") }}
     echo "FREEZE:$FREEZE"
-    if [[ $FREEZE == "True" ]];
+    if [[ $FREEZE ]];
     then
       echo " Freezing Catalog Version"
       IMGDIGEST=`oc get pods -n openshift-marketplace -l=olm.catalogSource=ibm-operator-catalog --no-headers -o=jsonpath="{.items[0].status.containerStatuses[0].imageID}" -n openshift-marketplace` && \
