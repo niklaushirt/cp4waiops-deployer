@@ -75,6 +75,7 @@
 
       "name": "Gold",
       "keyIndexName": "waiopsBusinessCriticalityMetadata::gold",
+      "description": "Gold priority",
       "de   scription": "Gold priority",
       "entityTypes": [
         "WAIOPS_BUSINESS_CRITICALITY"

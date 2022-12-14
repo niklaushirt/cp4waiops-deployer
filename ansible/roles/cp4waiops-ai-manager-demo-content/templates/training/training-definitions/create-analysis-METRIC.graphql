@@ -2,7 +2,6 @@ mutation createTrainingDefinition {
   createTrainingDefinition(
     definitionName: "MetricAnomaly"
     algorithmName: "Metric_Anomaly_Detection"
-    version: "v0"
     description: "Automatically created by Nick's scripts"
     createdBy: "demo"
     promoteOption: whenTrainingComplete,

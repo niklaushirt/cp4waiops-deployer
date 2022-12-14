@@ -2,7 +2,6 @@ mutation createTrainingDefinition {
   createTrainingDefinition(
     definitionName: "LogAnomalyDetection"
     algorithmName: "Log_Anomaly_Detection"
-    version: "v0"
     dataSetIds: "<DATA_SET_ID>"
     description: "Automatically created by Nick's scripts"
     createdBy: "demo"
