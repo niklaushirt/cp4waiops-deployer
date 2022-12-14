@@ -30,10 +30,7 @@
 
 
 
-- name:   🚀 AIMANAGER CATALOG - Freeze IBM Operator Catalog version (if enabled)
-  shell: |
-    export FREEZE={{current_cp4waiops_feature.freeze_catalog | default("false") }}
-  ignore_errors: true
+
 
 
 

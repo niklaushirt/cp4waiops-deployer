@@ -198,6 +198,24 @@
 
 
 
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Freeze IBM Operator Catalog version (if enabled)
+# --------------------------------------------------------------------------------------------------------------------------------------
+
+- name:   🚀 AIMANAGER CATALOG - Freeze IBM Operator Catalog version
+  shell: |
+    export FREEZE={{current_cp4waiops_feature.freeze_catalog | default("false") }}
+    if [[ $FREEZE == "true" ]];
+    then
+      echo " Freezing Catalog Version"
+      IMGDIGEST=`oc get pods -n openshift-marketplace -l=olm.catalogSource=ibm-operator-catalog --no-headers -o=jsonpath="{.items[0].status.containerStatuses[0].imageID}" -n openshift-marketplace` && \
+      oc patch catalogsource ibm-operator-catalog -n openshift-marketplace --type=json -p "[{ "op": "test", "path": "/spec/image", "value": "\"icr.io/cpopen/ibm-operator-catalog:latest\"" }, { "op": "replace", "path": "/spec/image", "value": "\"$IMGDIGEST\"" }]"
+    else
+      echo " NOT Freezing Catalog Version"
+    fi
+  ignore_errors: true
+
+
 - name: Log
   shell: |
     export MESSAGE=" ✅ CSVs are ready"
