@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [36.0.0] - 2022-12-14
+
+Release for 3.6.0 GA
+
+### Major changes
+
+- Support for CP4WAIOPS 3.6.0
+
+### Minor changes
+
+- Added Business Criticalities
+- Option to freeze the Catalog version
+
+
 
 
 
@@ -99,7 +113,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [35.0.2] - 2022-09-28
 
-Realease for 3.5.0 GA
+Release for 3.5.0 GA
 
 ### Major changes
 
