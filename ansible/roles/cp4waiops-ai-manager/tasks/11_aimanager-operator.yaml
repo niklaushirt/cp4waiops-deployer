@@ -203,12 +203,13 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🟣 OUTPUT - FREEZE
   debug: 
-    var: current_cp4waiops_feature.freeze_catalog.stdout_lines
+    var: current_cp4waiops_feature.freeze_catalog
 
 
 - name:   🚀 AIMANAGER CATALOG - Freeze IBM Operator Catalog version
   shell: |
     export FREEZE={{current_cp4waiops_feature.freeze_catalog | default("false") }}
+    echo "FREEZE:$FREEZE"
     if [[ $FREEZE == "true" ]];
     then
       echo " Freezing Catalog Version"
