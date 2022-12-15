@@ -5,7 +5,7 @@
       "ibm.com/aiops/uitemplate": "alert:createstory",
       "ibm.com/is-default": "false"
     },
-    "name": "DEMO Story creation policy for all alerts - Platinum and Gold Sev1",
+    "name": "DEMO Story creation policy for all alerts",
     "description": "Created by Nicks scripts",
     "createdBy": {
       "id": "demo",
@@ -174,60 +174,6 @@
             }
           }
         }]
-      }
-    },
-    {
-      "actionId": "lang/if",
-      "arguments": {
-        "name": "Condition set 5",
-        "conditions": {
-          "actionId": "lang/condition/and",
-          "arguments": {
-            "conditions": [
-              {
-                "actionId": "lang/array/some",
-                "arguments": {
-                  "elements": {
-                    "$variable": "alert.insights"
-                  },
-                  "elementVariableName": "insight",
-                  "conditions": {
-                    "actionId": "lang/condition/template",
-                    "arguments": {
-                      "template": "({{insight.type}} == \"aiops.ibm.com/insight-type/business/criticality\") and ({{insight.details.criticalityNumber}} >= 75)"
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        },
-        "then": [
-          {
-            "actionId": "aiops.ibm.com/action/internal/stories/derive",
-            "arguments": {
-              "entity": {
-                "$variable": "alert"
-              },
-              "priority": 1,
-              "retentionDays": 30,
-              "title": {
-                "$template": "{{ alert.summary }}"
-              },
-              "description": {
-                "$template": "{{ alert.summary }}"
-              },
-              "holdoffSec": 0,
-              "assignment": {
-                "owner": "demo",
-                "team": "All users"
-              },
-              "addRelatedAlerts": {
-                "update": false
-              }
-            }
-          }
-        ]
       }
     }]
   }
