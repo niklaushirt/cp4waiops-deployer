@@ -37,12 +37,11 @@ openshift:
 cp4waiops:
 - project: cp4waiops
   instances:
-  # --------------------------------------------------------------------------------------------------------------------------------------
-  # CP4WAIOPS AI Manager
-  # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager
     kind: AIManager
-    install: true
+    install: false
+
+    # current_cp4waiops_feature
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
     waiops_size: small
     # Custom Sizing File (waiops_size must be set to "custom")
@@ -50,7 +49,9 @@ cp4waiops:
     # Name of the CP4WAIOPS instance
     waiops_name: ibm-cp-watson-aiops
     # Version of the catalog subscription
-    subscription_channel: v3.5
+    subscription_channel: v3.6
+    # Freeze the version of the Catalog image by patching CatalogSource
+    freeze_catalog: false
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
@@ -66,16 +67,116 @@ cp4waiops:
     case_name: ibm-cp-waiops
     case_version: 1.5.0
     case_inventory_setup: cpwaiopsSetup
-    
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    # CP4WAIOPS Pull Registires
-    # --------------------------------------------------------------------------------------------------------------------------------------
-    entitled_registry: cp.icr.io
-    entitled_registry_user: cp
-    catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-  create_cards: true
-  create_ocp_items: true
 
+
+
+
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  # CP4WAIOPS AI Manager Demo Content
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  - name: cp4waiops-aimanager-demo-content
+    kind: AIManagerDemoContent
+    install: true
+
+
+    # ---------------------------------------------------------------------
+    # TRAINING
+    # Train the Models based on pre-canned content
+
+    training_create_training_temporal: false
+
+    training_load_data_logs: false
+    training_create_training_logs: false
+    training_run_training_logs: false
+
+    training_load_data_snow: false
+    training_create_training_snow: false
+    training_run_training_snow: false
+
+    training_load_data_metrics: false
+    training_create_training_metrics: false
+    training_run_training_metrics: false
+
+    training_data_url: https://github.com/niklaushirt/
+    training_data_repo: cp4waiops-trainingdata
+
+
+    # ---------------------------------------------------------------------
+    # TOPOLOGY
+    # Install RobotShop Application
+    install_robotshop: false
+    # Install RobotShop K8s Observer
+    install_robotshop_observer: true
+    # Create Topology
+    create_topology_templates: true
+    create_topology_apps: true
+    # Create RobotShop overlay topology
+    install_robotshop_topology: true
+
+
+    # ---------------------------------------------------------------------
+    # RUNBOOKS
+    # Install AWX and create Runbooks
+    install_awx: false
+    load_awx_playbooks: false
+    integrate_awx_aimanager: false
+    load_aimanager_runbooks: false
+    create_runbook_policy: false
+
+
+    # ---------------------------------------------------------------------
+    # Demo UI
+    install_demo_ui: false
+    demoui_slack_url: https://aiops-fry2953.slack.com/sign_in_with_password
+    # demoui_slack_url: https://aiops-fry2953.slack.com/x-p1624757694871-3716524482480-3705437209041/messages/C01JZLFJFMJ
+    demoui_slack_user: ibmaiopsdemo@gmail.com
+    demoui_slack_pwd: P4ssw0rd!
+    demoui_admin_mode: "true"
+    demoui_simulation_mode: "true"
+
+    demoui_aimanager_demo_user: demo
+    demoui_aimanager_demo_pwd: P4ssw0rd!
+
+
+    # ---------------------------------------------------------------------
+    # LDAP
+    install_ldap: false
+    # ldap domain
+    ldap_domain: ibm.com
+    # ldap base
+    ldap_base: dc=ibm,dc=com
+    # ldap admin password
+    ldap_admin_password: P4ssw0rd!
+    # ldap namespace
+    ldap_namespace: openldap
+    # ldap namespace
+    ldap_register: false
+
+    # ---------------------------------------------------------------------
+    # MISC PARAMETERS (you should not modify those)
+    # Create external routes (needed to create demo content)
+    create_external_routes: false
+
+    # Create a valid ingress certificate (needed for Slack integration)
+    create_valid_ingress_certificate: false
+
+    # Create Policy for Story Creation
+    create_story_policy: true
+
+    # Create Kafka connection for Log inception (needed to create log anomalies in the demo environment)
+    create_log_connection: false
+
+    # Create Service Account
+    create_account: false
+
+
+
+    # ---------------------------------------------------------------------
+    # OUTPUT
+    # Print all logins
+    print_logins: false
+    # Open the relevant Web UIs
+    open_web_ui: false
 
 
 
@@ -104,3 +205,4 @@ cp4waiops:
 #storage_class_block: ibmc-vpc-block-10iops-tier      # IBM VPC
 #storage_class_block: rook-cephfs                     # FYRE
 #storage_class_block: nfs-client                      # TEC
+

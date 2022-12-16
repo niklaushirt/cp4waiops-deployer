@@ -77,7 +77,8 @@
       echo "  Application already exists"
     fi
 
-    export APP_ID=$(curl -X "GET" "$TOPO_MGT_ROUTE/1.0/topology/groups?_field=*" --insecure -u $LOGIN -H 'Content-Type: application/json' -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255'|jq -r -c '._items[]| select( .keyIndexName == "robot-shop")|._id'| tail -1)
+    export APP_ID=$(curl -X "GET" "$TOPO_MGT_ROUTE/1.0/topology/groups?_field=*&_filter=keyIndexName%3Drobot-shop-app" --insecure -u $LOGIN -H 'Content-Type: application/json' -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255'|jq -r -c '._items[]|._id'| tail -1)
+    echo "    APP_ID:     "$APP_ID
 
     # # -------------------------------------------------------------------------------------------------------------------------------------------------
     # # CREATE EDGES
