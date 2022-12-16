@@ -106,12 +106,12 @@ cp4waiops:
     # Install RobotShop Application
     install_robotshop: false
     # Install RobotShop K8s Observer
-    install_robotshop_observer: true
+    install_robotshop_observer: tfalserue
     # Create Topology
-    create_topology_templates: true
-    create_topology_apps: true
+    create_topology_templates: false
+    create_topology_apps: false
     # Create RobotShop overlay topology
-    install_robotshop_topology: true
+    install_robotshop_topology: false
 
 
     # ---------------------------------------------------------------------

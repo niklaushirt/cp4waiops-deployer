@@ -13,7 +13,7 @@
     }
   },
   "state": "enabled",
-  "executionPriority": 50,
+  "executionPriority": 25,
   "spec": {
     "trigger": {
       "entityId": "alert",
