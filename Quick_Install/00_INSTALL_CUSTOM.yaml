@@ -9,13 +9,20 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------"
-#  Installing CP4WAIOPS
+#  Installing CP4WAIOPS v3.5.0
 #
 #  CloudPak for Watson AIOps
 #
 #  ©2022 nikh@ch.ibm.com
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Get a Cluster from TechZone: https://techzone.ibm.com/collection/custom-roks-vmware-requests
+#   Geograpy: prefer Dallas or London (others might be slower)
+#   Worker node count: 5
+#   Flavour: b3c.32x128 ❗ 
+#   OpenShift Version: 4.10
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Installs:
@@ -75,7 +82,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-custom
+  name: waiops-easy-install-all
   namespace: default
 spec:
   serviceAccountName: installer-default-default
@@ -83,7 +90,7 @@ spec:
     spec:
       containers:
         - name: install
-          image: niklaushirt/cp4waiops-tools:2.0
+          image: niklaushirt/cp4waiops-tools:1.3
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -99,8 +106,6 @@ spec:
               #!/bin/bash
               #set -x
 
-
-
               echo "*****************************************************************************************************************************"
               echo " ✅ STARTING: INSTALL AI Manager with Demo Content"
               echo "*****************************************************************************************************************************"
@@ -109,7 +114,7 @@ spec:
               echo ""
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 📥 Clone Repo $INSTALL_REPO"
-              git clone $INSTALL_REPO -b cp4waiops_stable
+              git clone $INSTALL_REPO
               cd cp4waiops-deployer
               echo ""
               echo ""
@@ -137,8 +142,14 @@ spec:
                 entitled_registry: cp.icr.io
                 entitled_registry_user: cp
                 catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+                # Create Welcome Cards in AI Manager
                 create_cards: true
+                # Create App Menu Items in OCP
                 create_ocp_items: true
+                # Use this Password for all Instances
+                global_password: P4ssw0rd!
+                # Key to decrypt Licenses
+                # license_token: NONE
 
 
               openshift:
@@ -176,7 +187,8 @@ spec:
                   # Version of the catalog subscription
                   subscription_channel: v3.6
                   # Freeze the version of the Catalog image by patching CatalogSource
-                  freeze_catalog: true
+                  freeze_catalog: false
+
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   # Storage Classes Override for this Instance (see comment below)
                   # --------------------------------------------------------------------------------------------------------------------------------------
@@ -262,7 +274,7 @@ spec:
 
                   demoui_aimanager_demo_user: demo
                   # Password for the Demo UI (OVERRIDES GLOBAL PASSWORD)
-    #demoui_aimanager_demo_pwd: P4ssw0rd!
+                  #demoui_aimanager_demo_pwd: P4ssw0rd!
 
 
                   # ---------------------------------------------------------------------
@@ -272,8 +284,10 @@ spec:
                   ldap_domain: ibm.com
                   # ldap base
                   ldap_base: dc=ibm,dc=com
-                  # ldap admin password
+                  # LDAP Admin Password (OVERRIDES GLOBAL PASSWORD)
                   #ldap_admin_password: P4ssw0rd!
+                  # LDAP Password for all Users (OVERRIDES GLOBAL PASSWORD)
+                  #ldap_user_password: P4ssw0rd!
                   # ldap namespace
                   ldap_namespace: openldap
                   # ldap namespace
@@ -320,7 +334,7 @@ spec:
                   # Version of the catalog subscription
                   subscription_channel: v1.11
                   starting_csv: noi.v1.7.0
-                  noi_version: 1.6.7
+                  noi_version: 1.6.6
 
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   # Storage Classes Override for this Instance (see comment below)
@@ -349,7 +363,8 @@ spec:
                   install: false
                   # Version of the catalog subscription
                   subscription_channel: v3.6
-                  #subscription_channel: 3.4-dev
+                  # Freeze the version of the Catalog image by patching CatalogSource
+                  freeze_catalog: false
                   
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   # Storage Classes Override for this Instance (see comment below)
@@ -376,15 +391,18 @@ spec:
                 - name: cp4waiops-instana
                   kind: Instana
                   install: true
+                  version: 235-5
 
                   # ---------------------------------------------------------------------
                   # INSTANA LICENSE
-                  sales_key: $INSTANA_SALES_KEY
-                  agent_key: $INSTANA_AGENT_KEY
+                  sales_key: 'NONE'
+                  agent_key: 'NONE'
 
                   # ---------------------------------------------------------------------
                   # INSTANA ADMIN LOGIN
+                  # Admin User Name
                   instana_admin_user: "admin@instana.local"
+                  # Admin User Password (OVERRIDES GLOBAL PASSWORD)
                   #instana_admin_pass: 'P4ssw0rd!'
                   
                   # ---------------------------------------------------------------------
@@ -402,7 +420,7 @@ spec:
                   #storage_class_file: automatic
                   #storage_class_block: automatic
 
-
+                  
 
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 # CP4WAIOPS TURBONOMIC
@@ -418,23 +436,24 @@ spec:
                   #storage_class_file: automatic
                   #storage_class_block: automatic
 
-
                 - name: cp4waiops-turbonomic-demo-content
                   kind: TurbonomicDemoContent
                   install: true
                   # Admin User Password (OVERRIDES GLOBAL PASSWORD)
-    #turbo_admin_password: P4ssw0rd!
+                  #turbo_admin_password: P4ssw0rd!
                   # ---------------------------------------------------------------------
                   # Create Demo User
                   create_user: true
+                  # Demo User Name
                   demo_user: demo
+                  # Demo User Password (OVERRIDES GLOBAL PASSWORD)
                   #turbo_demo_password: P4ssw0rd!
                   # ---------------------------------------------------------------------
                   # Create Groups
                   group_vcenter_vms: true
                   group_robotshop: true
                   group_licensing: true
-              
+
                   # ---------------------------------------------------------------------
                   # Create Targets
                   target_instana: true
@@ -446,12 +465,7 @@ spec:
                   metrics_dif: true
                   # ---------------------------------------------------------------------
                   # Turbo License (optional)
-                  turbo_license: $TURBO_LICENSE
-
-
-
-
-
+                  turbo_license: NONE
 
               # *************************************************************************************************************************************************
               # --------------------------------------------------------------------------------------------------------------------------------------
@@ -481,6 +495,8 @@ spec:
 
 
 
+
+                    
               EOF
 
 
@@ -525,12 +541,5 @@ spec:
             # The pull token for cp.icr.com from https://myibm.ibm.com/products-services/containerlibrary
           - name: ENTITLED_REGISTRY_KEY
             value : "<REGISTRY_TOKEN>"
-          - name: INSTANA_SALES_KEY
-            value : "<YOUR_SALES_KEY>"
-          - name: INSTANA_AGENT_KEY
-            value : "<YOUR_AGENT_KEY>"
-          - name: TURBO_LICENSE
-            value : "NONE"
       restartPolicy: Never
   backoffLimit: 4
-
