@@ -139,8 +139,8 @@ spec:
 
                   # ---------------------------------------------------------------------
                   # INSTANA ADMIN LOGIN
-                  initial_admin_user: "admin@instana.local"
-                  initial_admin_pass: 'P4ssw0rd!'
+                  instana_admin_user: "admin@instana.local"
+                  #instana_admin_pass: 'P4ssw0rd!'
                   
                   # ---------------------------------------------------------------------
                   # INSTALL INSTANA AGENT

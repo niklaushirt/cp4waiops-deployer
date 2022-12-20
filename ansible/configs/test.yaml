@@ -1,3 +1,9 @@
+---
+# *************************************************************************************************************************************************
+# --------------------------------------------------------------------------------------------------------------------------------------
+# CP4WAIOPS INSTANCES
+# --------------------------------------------------------------------------------------------------------------------------------------
+# *************************************************************************************************************************************************
 
 
 global_config:
@@ -41,10 +47,12 @@ cp4waiops:
   - name: cp4waiops-aimanager
     kind: AIManager
     install: false
+
+    # current_cp4waiops_feature
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
-    waiops_size: custom
+    waiops_size: small
     # Custom Sizing File (waiops_size must be set to "custom")
-    custom_size_file: ./custom-sizes/aiops-custom-size-profile-tiny.yaml
+    custom_size_file: none    # Name of the CP4WAIOPS instance
     # Name of the CP4WAIOPS instance
     waiops_name: ibm-cp-watson-aiops
     # Version of the catalog subscription
@@ -66,7 +74,12 @@ cp4waiops:
     case_name: ibm-cp-waiops
     case_version: 1.5.0
     case_inventory_setup: cpwaiopsSetup
-    
+
+
+
+
+
+
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS AI Manager Demo Content
   # --------------------------------------------------------------------------------------------------------------------------------------
@@ -146,6 +159,7 @@ cp4waiops:
     #ldap_admin_password: P4ssw0rd!
     # Ldap password for all users
     #ldap_user_password: P4ssw0rd!
+
     # ldap namespace
     ldap_namespace: openldap
     # ldap namespace
@@ -188,7 +202,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-eventmanager
     kind: EventManager
-    install: false
+    install: true
     # Version of the catalog subscription
     subscription_channel: v1.11
     starting_csv: noi.v1.7.0
@@ -199,13 +213,14 @@ cp4waiops:
     # --------------------------------------------------------------------------------------------------------------------------------------
     #storage_class_file: automatic
     #storage_class_block: automatic
+    
 
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS Event Manager Demo Content
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-eventmanager
     kind: EventManagerDemoContent
-    install: false
+    install: true
 
 
 
@@ -219,14 +234,17 @@ cp4waiops:
     kind: InfrastructureManagement
     install: false
     # Version of the catalog subscription
-    subscription_channel: v3.3
+    subscription_channel: v3.6
+    # Freeze the version of the Catalog image by patching CatalogSource
+    freeze_catalog: false
     #subscription_channel: 3.4-dev
-
+    
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
     # --------------------------------------------------------------------------------------------------------------------------------------
     #storage_class_file: automatic
     #storage_class_block: automatic
+    
 
 
 
@@ -238,7 +256,6 @@ cp4waiops:
   - name: cp4waiops-elk
     kind: ELK
     install: false
-
 
 
   # --------------------------------------------------------------------------------------------------------------------------------------
@@ -276,14 +293,15 @@ cp4waiops:
     #storage_class_file: automatic
     #storage_class_block: automatic
 
-
+    
 
   # --------------------------------------------------------------------------------------------------------------------------------------
   # CP4WAIOPS TURBONOMIC
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-turbonomic
     kind: Turbonomic
-    install: false
+    install: true
+    turbo_version: 8.7.0
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
@@ -293,7 +311,7 @@ cp4waiops:
 
   - name: cp4waiops-turbonomic-demo-content
     kind: TurbonomicDemoContent
-    install: false
+    install: true
     # Admin User Password (OVERRIDES GLOBAL PASSWORD)
     #turbo_admin_password: P4ssw0rd!
     # ---------------------------------------------------------------------
@@ -318,6 +336,10 @@ cp4waiops:
     # ---------------------------------------------------------------------
     # Create Metrics server, DIF integration and RobotShop BuisnessApp
     metrics_dif: true
+    # ---------------------------------------------------------------------
+    # Turbo License (optional)
+    turbo_license: NONE
+
 # *************************************************************************************************************************************************
 # --------------------------------------------------------------------------------------------------------------------------------------
 # CP4WAIOPS USAGE
@@ -343,3 +365,7 @@ cp4waiops:
 #storage_class_block: ibmc-vpc-block-10iops-tier      # IBM VPC
 #storage_class_block: rook-cephfs                     # FYRE
 #storage_class_block: nfs-client                      # TEC
+
+
+
+
