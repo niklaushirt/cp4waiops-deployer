@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [36.0.1] - 2022-12-20
+
+
+
+### Minor changes
+
+- Added encrypted Instana and Trubonomic licenses
+
+
+
+
+
 ## [36.0.0] - 2022-12-14
 
 Release for 3.6.0 GA
