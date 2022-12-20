@@ -83,7 +83,7 @@ spec:
     spec:
       containers:
         - name: install
-          image: niklaushirt/cp4waiops-tools:1.3
+          image: niklaushirt/cp4waiops-tools:2.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -109,7 +109,7 @@ spec:
               echo ""
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 📥 Clone Repo $INSTALL_REPO"
-              git clone $INSTALL_REPO
+              git clone $INSTALL_REPO -b cp4waiops_stable
               cd cp4waiops-deployer
               echo ""
               echo ""
@@ -317,9 +317,9 @@ spec:
                   kind: EventManager
                   install: true
                   # Version of the catalog subscription
-                  subscription_channel: v1.10
+                  subscription_channel: v1.11
                   starting_csv: noi.v1.7.0
-                  noi_version: 1.6.6
+                  noi_version: 1.6.7
 
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   # Storage Classes Override for this Instance (see comment below)

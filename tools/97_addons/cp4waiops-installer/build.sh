@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export CONT_VERSION=1.4
+export CONT_VERSION=2.0
 
 
 # Build Production AMD64

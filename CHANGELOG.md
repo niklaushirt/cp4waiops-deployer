@@ -9,8 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [36.0.1] - 2022-12-20
 
+### Fixes
 
-
+- Fix for Event Manager Version
 ### Minor changes
 
 - Added encrypted Instana and Trubonomic licenses
