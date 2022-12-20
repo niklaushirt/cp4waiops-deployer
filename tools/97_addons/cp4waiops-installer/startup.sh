@@ -18,7 +18,7 @@ echo ""
 
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 echo "   🌏  Get Installer files from $INSTALL_REPO"
-git clone $INSTALL_REPO cp4waiops| sed 's/^/      /'
+git clone $INSTALL_REPO -b cp4waiops_stable cp4waiops| sed 's/^/      /'
 cd cp4waiops/
 pwd| sed 's/^/         /'
 
