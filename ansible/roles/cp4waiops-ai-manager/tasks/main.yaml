@@ -141,7 +141,7 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # INSTALL CATALOG with YAML FILE
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 📥 Install AI Manager Catalog - Classic Way
+- name: 📥 Install AI Manager Catalog - Classic Way (skipped if CASE selected)
   include_tasks: 10_aimanager-catalog.yaml
   when: current_cp4waiops_feature.case_install==false
 
@@ -149,13 +149,13 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # INSTALL CATALOG with CASE FILE
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 📥 Install AI Manager Catalog - Save Case File (this can take some time)
+- name: 📥 Install AI Manager Catalog - Save Case File (this can take some time - skipped if not selected)
   include_role:
     name: cp4waiops-case-save
   when: current_cp4waiops_feature.case_install==true
 
 
-- name: 📥 Install AI Manager Catalog - Create CatalogSources from Case File (this can take some time)
+- name: 📥 Install AI Manager Catalog - Create CatalogSources from Case File (this can take some time - skipped if not selected)
   include_role:
     name: cp4waiops-case-catalog-source
   when: current_cp4waiops_feature.case_install==true
