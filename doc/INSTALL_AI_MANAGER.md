@@ -128,7 +128,7 @@ LDAP_DOMAIN: ibm.com
 # LDAP Base
 LDAP_BASE: dc=ibm,dc=com
 # LDAP Admin Password
-LDAP_ADMIN_PASSWORD: P4ssw0rd!
+#ldap_admin_password: P4ssw0rd!
 
 # Turbonomic Storage Class (ibmc-block-gold, rook-cephfs, nfs-client, ...)
 STORAGE_CLASS_TURBO: ibmc-block-gold

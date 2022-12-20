@@ -9,7 +9,7 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------"
-#  Installing CP4WAIOPS v3.6.0
+#  Installing CP4WAIOPS
 #
 #  CloudPak for Watson AIOps
 #
@@ -76,7 +76,7 @@ spec:
     spec:
       containers:
         - name: install
-          image: niklaushirt/cp4waiops-tools:1.3
+          image: niklaushirt/cp4waiops-tools:2.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -102,7 +102,7 @@ spec:
               echo ""
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 📥 Clone Repo $INSTALL_REPO"
-              git clone $INSTALL_REPO
+              git clone $INSTALL_REPO -b cp4waiops_stable
               cd cp4waiops-deployer
               echo ""
               echo ""
@@ -168,6 +168,8 @@ spec:
                   waiops_name: ibm-cp-watson-aiops
                   # Version of the catalog subscription
                   subscription_channel: v3.6
+                  # Freeze the version of the Catalog image by patching CatalogSource
+                  freeze_catalog: true
 
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   # Storage Classes Override for this Instance (see comment below)
@@ -253,7 +255,8 @@ spec:
                   demoui_simulation_mode: "true"
 
                   demoui_aimanager_demo_user: demo
-                  demoui_aimanager_demo_pwd: P4ssw0rd!
+                  # Password for the Demo UI (OVERRIDES GLOBAL PASSWORD)
+    #demoui_aimanager_demo_pwd: P4ssw0rd!
 
 
                   # ---------------------------------------------------------------------
@@ -264,7 +267,7 @@ spec:
                   # ldap base
                   ldap_base: dc=ibm,dc=com
                   # ldap admin password
-                  ldap_admin_password: P4ssw0rd!
+                  #ldap_admin_password: P4ssw0rd!
                   # ldap namespace
                   ldap_namespace: openldap
                   # ldap namespace
@@ -322,8 +325,8 @@ spec:
 
                   # ---------------------------------------------------------------------
                   # INSTANA ADMIN LOGIN
-                  initial_admin_user: "admin@instana.local"
-                  initial_admin_pass: 'P4ssw0rd!'
+                  instana_admin_user: "admin@instana.local"
+                  #instana_admin_pass: 'P4ssw0rd!'
                   
                   # ---------------------------------------------------------------------
                   # INSTALL INSTANA AGENT
@@ -360,12 +363,13 @@ spec:
                 - name: cp4waiops-turbonomic-demo-content
                   kind: TurbonomicDemoContent
                   install: true
-                  turbo_password: P4ssw0rd!
+                  # Admin User Password (OVERRIDES GLOBAL PASSWORD)
+    #turbo_admin_password: P4ssw0rd!
                   # ---------------------------------------------------------------------
                   # Create Demo User
                   create_user: true
                   demo_user: demo
-                  demo_password: P4ssw0rd!
+                  #turbo_demo_password: P4ssw0rd!
                   # ---------------------------------------------------------------------
                   # Create Groups
                   group_vcenter_vms: true
