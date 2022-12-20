@@ -525,7 +525,7 @@ Incidents are being created by using the high level APIs in order to simulate a 
 Clone the GitHub Repository
 
 ```
-git clone https://github.com/niklaushirt/cp4waiops-deployer.git
+git clone https://github.com/niklaushirt/cp4waiops-deployer.git -b cp4waiops_stable
 ```
 
 

@@ -114,7 +114,7 @@ spec:
               echo ""
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 📥 Clone Repo $INSTALL_REPO"
-              git clone $INSTALL_REPO
+              git clone $INSTALL_REPO -b cp4waiops_stable
               cd cp4waiops-deployer
               echo ""
               echo ""
