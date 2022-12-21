@@ -14,7 +14,7 @@
 Please drop me a note on Slack or by mail nikh@ch.ibm.com if you find glitches or problems.
 
 
-## 🚨 You can now also install Instana into your Cluster
+> ## 🚨 You can now also install Instana into your Cluster
 
 
 This is provided `as-is`:
@@ -176,15 +176,18 @@ The names should be self explaining and the headers of the files explain the mod
 > Basically you would to the following:
 > 
 > 1. In the the OCP Web UI click on the `+` sign in the right upper corner
-> 1. Select the `Quick Install File` from  [this directory](./Quick_Install/)
+> 1. Select the `Quick Install File` that fits your need from  [this directory](./Quick_Install/)
 > 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
 > 3. Click `Save`	
 
-Some examples in the following chapters.
+
+> ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
+
+You can find some examples below.
 
 ### 🐥 1.3.1 Install AI Manager with demo content, Turbonomic and Instana 
 
-This is probably the one that you want.
+> ### ✅ This is probably the one that you want.
 
 You get AIManager installed and pre-trained in one simple script.
 Ready to go.
@@ -197,7 +200,13 @@ On top of that you get Turbonomic and Instana instances to play around a bit (yo
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_TURBO_INSTANA.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
+4. Replace `<YOUR_SALES_KEY>` and  `<YOUR_AGENT_KEY>` at the end of the file with your Instana license
+5. Replace the TURBO_LICENSE `NONE` at the end of the file with your Turbonomic license
 3. Click `Save`
+
+### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
+
+This installation cocntains:
 
 > - **AI Manager**
 > 	- IBM Operator
@@ -249,6 +258,10 @@ Ready to go.
 1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_EVTMGR.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
 3. Click `Save`
+
+### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
+
+This installation cocntains:
 
 > - **AI Manager**
 > 	- IBM Operator
@@ -311,9 +324,13 @@ Ready to go.
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Paste the content
 1. Click `Save`
+2. 
+### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
+
+This installation cocntains:
 
 
-> ℹ️ If you get a ClusterRoleBinding already exists, just delete it at the beginning of the YAML
+
 
 
 ## 1.4 Configure Slack
@@ -525,7 +542,7 @@ Incidents are being created by using the high level APIs in order to simulate a 
 Clone the GitHub Repository
 
 ```
-git clone https://github.com/niklaushirt/cp4waiops-deployer.git
+git clone https://github.com/niklaushirt/cp4waiops-deployer.git -b cp4waiops_stable
 ```
 
 

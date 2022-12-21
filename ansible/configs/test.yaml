@@ -29,11 +29,11 @@ openshift:
   cluster_name: "mycluster"
   domain_name: example.com
   openshift_storage:
-  - storage_name: ibm-cloud-storage
-    storage_type: custom
-# Use file storate class provided as part of ROKS cluster
-    ocp_storage_class_file: automatic
-    ocp_storage_class_block: automatic
+  - storage_name: auto-storage
+    storage_type: auto
+    # Alternatively use
+    #storage_name: ibm-roks-storage
+    #storage_type: custom
     #ocp_storage_class_file: ibmc-file-gold-gid
     #ocp_storage_class_block: ibmc-block-gold
 
@@ -46,7 +46,7 @@ cp4waiops:
   # --------------------------------------------------------------------------------------------------------------------------------------
   - name: cp4waiops-aimanager
     kind: AIManager
-    install: false
+    install: true
 
     # current_cp4waiops_feature
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
@@ -155,11 +155,10 @@ cp4waiops:
     ldap_domain: ibm.com
     # ldap base
     ldap_base: dc=ibm,dc=com
-    # ldap admin password
+    # LDAP Admin Password (OVERRIDES GLOBAL PASSWORD)
     #ldap_admin_password: P4ssw0rd!
-    # Ldap password for all users
+    # LDAP Password for all Users (OVERRIDES GLOBAL PASSWORD)
     #ldap_user_password: P4ssw0rd!
-
     # ldap namespace
     ldap_namespace: openldap
     # ldap namespace

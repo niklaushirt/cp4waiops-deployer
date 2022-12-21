@@ -46,7 +46,9 @@ spec:
               echo ""
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 📥 Clone Repo https://github.com/niklaushirt/cp4waiops-deployer.git"
-              git clone https://github.com/niklaushirt/cp4waiops-deployer.git
+              git clone https://github.com/niklaushirt/cp4waiops-deployer.git -b cp4waiops_stable
+
+              
               cd cp4waiops-deployer
               echo ""
               echo ""
