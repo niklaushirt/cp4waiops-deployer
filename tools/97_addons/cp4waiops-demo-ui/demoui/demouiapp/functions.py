@@ -77,7 +77,7 @@ def closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
     url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/alerts'
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-    response = requests.patch(url, data=data, headers=headers, auth=auth)#, verify=False)
+    response = requests.patch(url, data=data, headers=headers, auth=auth, verify=False)
     print ('    RESULT:'+str(response.content))
     print ('✅ Close Alerts')
     print ('------------------------------------------------------------------------------------------------')
@@ -93,7 +93,7 @@ def closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
     url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-    response = requests.patch(url, data=data, headers=headers, auth=auth)#, verify=False)
+    response = requests.patch(url, data=data, headers=headers, auth=auth, verify=False)
     print ('    RESULT:'+str(response.content))
     print ('✅ Close Stories')
     print ('------------------------------------------------------------------------------------------------')
@@ -191,7 +191,7 @@ def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS
         timestampstr = timestamp.strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
         line = line.replace("MY_TIMESTAMP", timestampstr)
-        response = requests.post(url, data=line, headers=headers, auth=auth)#, verify=False)
+        response = requests.post(url, data=line, headers=headers, auth=auth, verify=False)
     print ('    RESULT:'+str(response.content))
 
 
