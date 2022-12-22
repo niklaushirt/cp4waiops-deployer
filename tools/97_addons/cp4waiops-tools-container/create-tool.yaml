@@ -31,5 +31,5 @@ spec:
             memory: "250Mi"
         env:
           - name: INSTALL_REPO
-            value : "https://github.com/niklaushirt/cp4waiops-deployer.git"
+            value : "https://github.com/paulsorelli/cp4waiops-deployer.git"
 
