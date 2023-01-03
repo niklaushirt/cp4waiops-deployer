@@ -1,5 +1,0 @@
-requests
-requests.auth
-datetime
-prodict
-python-box
