@@ -36,7 +36,7 @@
       spec:
         applicationMenu:
           imageURL: >-
-            https://raw.githubusercontent.com/niklaushirt/cp4waiops-deployer/main/doc/pics/icons/ansible-icon.svg
+            https://raw.githubusercontent.com/niklaushirt/cp4waiops-deployer/main/doc/pics/icons/stan1.svg
           section: CP4WAIOps Addons
         href: >-
           https://$appURL
