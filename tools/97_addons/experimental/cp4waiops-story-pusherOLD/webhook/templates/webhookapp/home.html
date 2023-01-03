@@ -1,0 +1,64 @@
+{% load static %}
+{% include "webhookapp/_header.html" %} 
+    <div role="main" class="container theme-showcase">
+        <div class="jumbotron container">
+            <table>
+                <tbody>
+                    <tr>
+                        {% include "webhookapp/_navbar.html" %}   
+                        <td style="width:90%; padding-left:50px;">
+                            <p style="font-size:2.5em;">IBM CloudPak for Watson AIOps</p>
+                            <h1>🚀 Generic Webhook</h1>
+                            <p></p>
+                            <p>A Simple way to inject generic webhook data into CP4WAIOPS.</p>
+                            <p> </p>
+                            <p> </p>
+                            <p> </p>
+                            <hr>
+                          
+                            <p></p>
+                            <h4>Mapping Parameters</h4>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td> EVENT_MAPPING: </td>
+                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>{{EVENT_MAPPING}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2"><hr> </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        
+                                        <td> EVENT_TEMPLATE: </td>
+                                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>{{EVENT_TEMPLATE}}</td>
+                                    </tr>
+        
+                                </tbody>
+                            </table>
+
+                        </td>
+                    </tr>
+            
+                      
+
+       
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+
+ 
+</p>
+<p></p>
+<p></p>
+</td>
+</tr>
+</tbody>
+</table>
+{% include "webhookapp/_footer.html" %} 
+

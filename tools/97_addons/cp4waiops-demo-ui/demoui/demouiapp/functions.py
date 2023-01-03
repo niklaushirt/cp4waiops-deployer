@@ -4,6 +4,7 @@ import json
 import datetime
 import random
 import os
+import time
 
 DEMO_EVENTS_MEM=os.environ.get('DEMO_EVENTS_MEM')
 DEMO_EVENTS_FAN=os.environ.get('DEMO_EVENTS_FAN')
@@ -87,15 +88,20 @@ def closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
 
 def closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
     print('')
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Close Stories')
-    data = '{"state": "resolved"}'
+    dataInProgress = '{"state": "inProgress"}'
+    dataResolved = '{"state": "resolved"}'
     url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-    response = requests.patch(url, data=data, headers=headers, auth=auth)#, verify=False)
+    print ('------------------------------------------------------------------------------------------------')
+    print ('📛 Set Stories to InProgress')
+    response = requests.patch(url, data=dataInProgress, headers=headers, auth=auth)#, verify=False)
+    time.sleep(10)
+    print ('------------------------------------------------------------------------------------------------')
+    print ('📛 Set Stories to Resolved')
+    response = requests.patch(url, data=dataResolved, headers=headers, auth=auth)#, verify=False)
     print ('    RESULT:'+str(response.content))
-    print ('✅ Close Stories')
+    print ('✅ DONE')
     print ('------------------------------------------------------------------------------------------------')
 
     return 'OK'
