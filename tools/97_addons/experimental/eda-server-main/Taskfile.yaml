@@ -1,0 +1,265 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  DEV_CMD: "scripts/eda_dev.sh"
+  MINIKUBE_CMD: "scripts/eda_kube.sh"
+  DOCKER_COMPOSE: "docker-compose"
+  DOCKER_COMPOSE_ARGS: "--project-name eda --file tools/docker/docker-compose.yml"
+
+tasks:
+  default:
+    desc: "Show this message and exit"
+    cmds:
+      - task -l
+    silent: true
+
+  lint:
+    desc: "Run all linters."
+    cmds:
+      - task: lint:black
+      - task: lint:isort
+      - task: lint:flake8
+
+  test:
+    desc: "Run project tests."
+    cmds:
+      - python -m pytest
+
+  lint:black:
+    desc: "Check code with `black`."
+    cmds:
+      - black --check .
+
+  lint:isort:
+    desc: "Check code with `isort`."
+    cmds:
+      - isort --check .
+
+  lint:flake8:
+    desc: "Check code with `flake8`."
+    cmds:
+      - flake8
+
+  format:
+    desc: "Run all code formatters."
+    cmds:
+      - task: format:isort
+      - task: format:black
+
+  format:isort:
+    desc: "Format code with `isort`."
+    cmds:
+      - isort .
+
+  format:black:
+    desc: "Format code with `black`."
+    cmds:
+      - black .
+
+  dev:
+    desc: "Run eda_dev.sh with specified CLI arguments."
+    summary: |
+      Run eda_dev.sh with specified CLI arguments.
+
+      Example:
+        $ task dev -- services-start
+    cmds:
+      - '{{.DEV_CMD}} {{.CLI_ARGS}}'
+
+  dev:services:start:
+    desc: "Start EDA service containers"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: services-start
+
+  dev:services:stop:
+    desc: "Stop EDA service containers"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: services-stop
+
+  dev:services:clean:
+    desc: "Clean up EDA service image(s) & volume(s)"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: services-clean
+
+  dev:run:migrations:
+    desc: "Run DB migrations"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: db-migrations
+
+  dev:rbac:loaddata:
+    desc: "Load RBAC user and roles from tools/initial_data.yml file"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: load-rbac-data
+
+  dev:api:start:
+    desc: "Start API server"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: api-start
+
+  dev:api:stop:
+    desc: "Stop API server"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: api-stop
+
+  dev:ui:start:
+    desc: "Start UI server"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: ui-start
+
+  dev:ui:stop:
+    desc: "Stop UI server"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: ui-stop
+
+  dev:all:start:
+    desc: "Start dev environment"
+    cmds:
+      - task: dev:services:start
+      - task: dev:run:migrations
+      - task: dev:api:start
+      - task: dev:ui:start
+
+  dev:all:stop:
+    desc: "Halt dev environment and cleanup services"
+    cmds:
+      - task: dev:ui:stop
+      - task: dev:api:stop
+      - task: dev:services:stop
+
+  docker:
+    desc: "Run docker-compose with specified CLI arguments."
+    summary: |
+      Run docker-compose with specified CLI arguments.
+      
+      Example:
+        $ task docker -- ls
+    cmds:
+      - '{{.DOCKER_COMPOSE}} {{.DOCKER_COMPOSE_ARGS}} {{.CLI_ARGS}}'
+
+  docker:build:
+    desc: "Build container images."
+    cmds:
+      - task: docker
+        vars:
+          CLI_ARGS: build
+
+  docker:up:
+    desc: "Start all services."
+    cmds:
+      - task: docker
+        vars:
+          CLI_ARGS: up --detach
+
+  docker:up:postgres:
+    desc: "Start PostgreSQL service."
+    cmds:
+      - task: docker
+        vars:
+          CLI_ARGS: up --detach postgres
+
+  docker:down:
+    desc: "Stop all services."
+    cmds:
+      - task: docker
+        vars:
+          CLI_ARGS: down
+
+  docker:purge:
+    desc: "Stop all containers and delete all volumes."
+    cmds:
+      - task: docker
+        vars:
+          CLI_ARGS: down --volumes
+
+  docker:devuser:add:
+    desc: "Add development user"
+    cmds:
+      - task: dev
+        vars:
+          CLI_ARGS: add-dev-user
+
+  minikube:
+    desc: "Run eda_kube.sh with specified CLI arguments."
+    summary: |
+      Run eda.sh with specified CLI arguments.
+
+      Example:
+        $ task minikube -- build
+    cmds:
+      - '{{.MINIKUBE_CMD}} {{.CLI_ARGS}}'
+
+  minikube:build:
+    desc: "Build docker image and push to minikube"
+    cmds:
+      - task: minikube
+        vars:
+          CLI_ARGS: build {{.CLI_ARGS}}
+
+  minikube:deploy:
+    desc: "Build deployment and deploy to minikube"
+    cmds:
+      - task: minikube
+        vars:
+          CLI_ARGS: deploy {{.CLI_ARGS}}
+
+  minikube:clean:
+    desc: "Clean deployment directory and clean minikube resources"
+    cmds:
+      - task: minikube
+        vars:
+          CLI_ARGS: clean {{.CLI_ARGS}}
+
+  minikube:fp:ui:
+    desc: "Forward local port to ui instance port in minikube"
+    cmds:
+      - task: minikube
+        vars:
+          CLI_ARGS: port-forward-ui {{.CLI_ARGS}}
+
+  minikube:devuser:add:
+    desc: "Add development user"
+    cmds:
+      - task: minikube
+        vars:
+          CLI_ARGS: add-dev-user
+
+  minikube:rbac:loaddata:
+    desc: "Load RBAC user and roles from tools/initial_data.yml file"
+    cmds:
+      - task: minikube
+        vars:
+          CLI_ARGS: load-rbac-data
+
+  minikube:logs:
+    desc: "Get eda-server pod logs"
+    cmds:
+      - task: minikube
+        vars:
+          CLI_ARGS: eda-server-logs {{.CLI_ARGS}}
+
+  minikube:all:
+    desc: "clean, build, deploy"
+    cmds:
+      - task: minikube:clean
+      - task: minikube:build
+      - task: minikube:deploy

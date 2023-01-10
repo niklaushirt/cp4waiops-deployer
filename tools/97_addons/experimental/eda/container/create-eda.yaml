@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eda-instance
+  namespace: eda
+  labels:
+      app: eda-instance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eda-instance
+  template:
+    metadata:
+      labels:
+        app: eda-instance
+    spec:
+      containers:
+      - image: niklaushirt/eda-container:0.1
+        imagePullPolicy: IfNotPresent
+        name: bastion
+        command:
+        ports:
+        - containerPort: 22
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+          limits:
+            cpu: "250m"
+            memory: "250Mi"
+        env:
+        - name: EDA_REPO
+          value: http://$(INSTANA_AGENT_HOST):4317
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rulebook-config
+  namespace: eda
+data:
+  default-rulebook.yaml: |-
+    ---
+    - name: Listen for events on a webhook
+      hosts: all
+
+      ## Define our source for events
+
+      sources:
+        - ansible.eda.webhook:
+            host: 0.0.0.0
+            port: 5000
+
+      ## Define the conditions we are looking for
+
+      rules:
+        - name: Say Hello
+          condition: event.payload.message == "Ansible is super cool!"
+
+      ## Define the action we should take should the condition be met
+
+          action:
+            run_playbook:
+              name: ./playbooks/say-what.yaml
+        - name: Ping
+          condition: event.payload.message == "ping"
+
+      ## Define the action we should take should the condition be met
+
+          action:
+            run_playbook:
+              name: ./playbooks/ping.yaml
+

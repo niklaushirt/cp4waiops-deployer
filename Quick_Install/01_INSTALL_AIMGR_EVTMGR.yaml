@@ -67,7 +67,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-all
+  name: waiops-easy-install-ai-event-manager
   namespace: default
 spec:
   serviceAccountName: installer-default-default
