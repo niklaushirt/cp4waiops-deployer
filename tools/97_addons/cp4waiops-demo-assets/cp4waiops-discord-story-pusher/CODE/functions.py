@@ -43,7 +43,7 @@ def closeStory(conn, story_id):
     debug('         🚀 closeStory: '+story_id)
     cursor = conn.execute("SELECT DISCORD_ID from STORIES where ID='"+str(story_id)+"'")
     discord_id = cursor.fetchone()
-    #debug(discord_id[0])
+    debug('DISCORD ID:'+discord_id[0])
     closeDiscord(discord_id[0])
     cursor = conn.execute("DELETE FROM STORIES where ID='"+str(story_id)+"'")
     conn.commit()

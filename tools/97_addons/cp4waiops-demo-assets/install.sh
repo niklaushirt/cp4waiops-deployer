@@ -1,0 +1,1 @@
+oc apply -f ./tools/97_addons/cp4waiops-demo-assets/

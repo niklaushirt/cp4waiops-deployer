@@ -28,7 +28,7 @@ export WAIT_RESTART=301
 export ACTIVE=True
 
 
-export DISCORD_BOT_TOKEN="MTA2MDI0OTE2NTg4MTQzMDAxNg.GwvZ7L.H_L-cNJazy7hNHtf7QjMxAb5uysRRxRqWz4DYo"
+export DISCORD_BOT_TOKEN="MTA2MDIlkhdlhkdDYo"
 
 
 export METRICS_TO_SIMULATE_MEM='mysql-predictive,MemoryUsagePercent,MemoryUsage,97,3;

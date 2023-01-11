@@ -385,7 +385,7 @@ def closeDiscord(discord_id):
     responseGet = readSession.get(DISCORD_WEBHOOK+"/messages/"+str(discord_id))
     currentMessage=responseGet.json()
 
-    currentMessage['embeds'][0]['fields']=''
+    currentMessage['embeds'][0]['fields'].clear()
     currentMessage['embeds'][0]['color']='15548997'
     currentMessage['embeds'][0]['url']=''
     currentMessage['embeds'][0]['author']['url']=''
@@ -394,7 +394,9 @@ def closeDiscord(discord_id):
     currentMessage['embeds'][0]['author']['name']='🔴 CP4WAIOPS ChatBot - Story Closed'
     currentMessage['content']='🔴 CP4WAIOPS Story - CLOSED'
 
-    #debug("CURRENT:"+str(currentMessage))
+    debug("CURRENT:"+str(currentMessage))
+    debug("A:"+str(DISCORD_WEBHOOK))
+    debug("B:"+str(discord_id))
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
@@ -402,9 +404,9 @@ def closeDiscord(discord_id):
     response = sendSession.patch(DISCORD_WEBHOOK+"/messages/"+str(discord_id), json=currentMessage)
     if response.status_code==200:
         print('           🟢 Query OK: '+str(response.status_code))
-        #debug(response.content)
+        debug(response.content)
         message=json.loads(response.content)
-        #debug(message['id'])
+        debug(message['id'])
 
     else:   
         print('           ❗ ERROR: '+str(response.status_code))

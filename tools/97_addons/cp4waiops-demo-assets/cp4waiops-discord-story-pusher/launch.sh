@@ -1,8 +1,8 @@
 
-export DEBUG_ME="False"
+export DEBUG_ME="True"
 export TOKEN="P4ssw0rd!"
 
-export DISCORD_WEBHOOK="https://discord.com/api/webhooks/aaa/bbbbb"
+export DISCORD_WEBHOOK="https://discord.com/api/webhooks/xxxxxxx"
 
 export MIN_RANK=3
 export ACTIVE=True
