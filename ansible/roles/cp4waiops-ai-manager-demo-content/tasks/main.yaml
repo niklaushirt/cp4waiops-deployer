@@ -170,8 +170,8 @@
 # CHECK FOR INSTALLATION READY
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Check that CP4WAIOPS has been completely installed
-- name: 📥  Wait for AI MAnager to be Ready
-  include_tasks: 99_aimanager-wait-cp4waiops.yaml
+# - name: 📥  Wait for AI MAnager to be Ready
+#   include_tasks: 99_aimanager-wait-cp4waiops.yaml
 
 - name: 📥  Start Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90-log-start.yaml"
