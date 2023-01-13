@@ -1,4 +1,0 @@
-resources:
-- ./eda-frontend
-- ./eda-server
-- ./postgres

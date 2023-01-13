@@ -1,4 +1,0 @@
-faker
-pytest
-pytest-asyncio
-httpx

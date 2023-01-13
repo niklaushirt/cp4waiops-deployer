@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
         - name: install
-          image: niklaushirt/cp4waiops-tools:2.0
+          image: docker.io/niklaushirt/cp4waiops-tools:2.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:

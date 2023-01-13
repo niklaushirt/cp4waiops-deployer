@@ -41,7 +41,7 @@ spec:
         app: cp4waiops-incident-simulator
     spec:
       containers:
-      - image: niklaushirt/cp4waiops-incident-simulator:0.1
+      - image: docker.io/niklaushirt/cp4waiops-incident-simulator:0.1
         imagePullPolicy: Always
         name: cp4waiops-incident-simulator
         command:
