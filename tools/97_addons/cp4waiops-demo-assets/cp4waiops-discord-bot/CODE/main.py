@@ -347,15 +347,23 @@ class StoryBot(commands.Bot):
             # ------------------------------------------------------------------------------------------------------------------------------------------------------------
             # EMPTY COMMAND
             if len(myArguments) < 2:
-                print(" 📥 Command: welcome")
-                await message.channel.send('**Welcome to the Watson AIOps Discord Bot**')
+                print(" 📥 Command: EMPTY")
+                await message.channel.send('**Welcome to the Watson AIOps Discord Bot for the '+INSTANCE_NAME+' Environment**')
 
-                view = StoriesActions()
-                await message.channel.send(view=view)
-
-                view = IncidentActions()
-                await message.channel.send(view=view)
-                await message.channel.send(' \ntype "'+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' help" to get a list of all possible commands.')
+                await message.channel.send(' You can use the following commands:')
+                await message.channel.send('   🚀 Command Buttons:')
+                await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **go**          :  Prints buttons to create or mitigate incidents')
+                await message.channel.send('   🚀 Information:')
+                await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **stories**     :  List all Stories')
+                await message.channel.send('   🚀 Simulation:')
+                await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **incident**    :  Simulates a Memory leak in RobotShop')
+                await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **incidentMem** :  Simulates a Memory leak in RobotShop')
+                await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **incidentFan** :  Simulates a Fan problem in RobotShop')
+                await message.channel.send('   🚀 Modify Stories:')
+                await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **progress**    :  Set all Stories to InProgress')
+                await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **resolve **    :  Set all Stories to Resolved')
+                await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **close**       :  Set all Stories to Resolved')
+                await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **reset**       :  Set all Stories to Resolved')
             else:
                 myArgument=myArguments[1]
 
@@ -363,10 +371,24 @@ class StoryBot(commands.Bot):
                 # ------------------------------------------------------------------------------------------------------------------------------------------------------------
                 # BOT COMMANDS
                 # ------------------------------------------------------------------------------------------------------------------------------------------------------------
+                 # COMMAND BUTTONS
+                if myArgument == "go":
+                    print(" 📥 Command: go")
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Quick Commands')
+
+                    view = StoriesActions()
+                    await message.channel.send(view=view)
+
+                    view = IncidentActions()
+                    await message.channel.send(view=view)
+                    await message.channel.send(' \ntype "'+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' help" to get a list of all possible commands.')
+
+                
+                
                 # CREATE INCIDENT MEMORY LEAK
-                if myArgument == "incident":
+                elif myArgument == "incident":
                     print(" 📥 Command: incident")
-                    await message.channel.send('🚀 Simulating Memory Incident')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Simulating Memory Incident')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=createIncidentMem)
                     print('    🟠 Start THREADS')
@@ -378,7 +400,7 @@ class StoryBot(commands.Bot):
                 # CREATE INCIDENT MEMORY LEAK
                 elif myArgument == "incidentMem":
                     print(" 📥 Command: incidentMem")
-                    await message.channel.send('🚀 Simulating Memory Incident')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Simulating Memory Incident')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=createIncidentMem)
                     print('    🟠 Start THREADS')
@@ -390,7 +412,7 @@ class StoryBot(commands.Bot):
                 # CREATE INCIDENT FAN FAILURE
                 elif myArgument == "incidentFan":
                     print(" 📥 Command: incidentFan")
-                    await message.channel.send('🚀 Simulating Fan Incident')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Simulating Fan Incident')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=createIncidentFan)
                     print('    🟠 Start THREADS')
@@ -402,7 +424,7 @@ class StoryBot(commands.Bot):
                  # SET STORIES TO InProgress
                 elif myArgument == "progress":
                     print(" 📥 Command: progress")
-                    await message.channel.send('🚀 Set Stories to InProgress')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Set Stories to InProgress')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=setInProgress)
                     print('    🟠 Start THREADS')
@@ -413,7 +435,7 @@ class StoryBot(commands.Bot):
                  # SET STORIES TO Resolved
                 elif myArgument == "resolve":
                     print(" 📥 Command: resolve")
-                    await message.channel.send('🚀 Set Stories to Resolved')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Set Stories to Resolved')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=setResolved)
                     print('    🟠 Start THREADS')
@@ -423,7 +445,7 @@ class StoryBot(commands.Bot):
                  # SET STORIES TO Resolved
                 elif myArgument == "close":
                     print(" 📥 Command: close")
-                    await message.channel.send('🚀 Set Stories to Resolved')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Set Stories to Resolved')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=setResolved)
                     print('    🟠 Start THREADS')
@@ -434,7 +456,7 @@ class StoryBot(commands.Bot):
                  # SET STORIES TO Resolved
                 elif myArgument == "reset":
                     print(" 📥 Command: reset")
-                    await message.channel.send('🚀 Reset Demo Environment')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Reset Demo Environment')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=setResolved)
                     print('    🟠 Start THREADS')
@@ -446,11 +468,11 @@ class StoryBot(commands.Bot):
                 # WELCOME MESSAGE
                 elif (myArgument == "welcome") or (myArgument == "help"):
                     print(" 📥 Command: "+myArgument)
-                    await message.channel.send('**Welcome to the Watson AIOps Discord Bot**')
+                    await message.channel.send('**Welcome to the Watson AIOps Discord Bot for the '+INSTANCE_NAME+' Environment**')
 
                     await message.channel.send(' You can use the following commands:')
                     await message.channel.send('   🚀 Command Buttons:')
-                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+'             :  Prints buttons to create or mitigate incidents')
+                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **go**          :  Prints buttons to create or mitigate incidents')
                     await message.channel.send('   🚀 Simulation:')
                     await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **incident**    :  Simulates a Memory leak in RobotShop')
                     await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **incidentMem** :  Simulates a Memory leak in RobotShop')
@@ -470,7 +492,7 @@ class StoryBot(commands.Bot):
                 # GET STORIES
                 elif myArgument == "stories":
                     print(" 📥 Command: stories")
-                    await message.channel.send('**🚀 Open Stories**')
+                    await message.channel.send('**🚀 '+INSTANCE_NAME+' Open Stories**')
                     await message.channel.send('-------------------------------------------------------------------')
                     actStories=getStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE)
                     for currentStory in actStories['stories']:

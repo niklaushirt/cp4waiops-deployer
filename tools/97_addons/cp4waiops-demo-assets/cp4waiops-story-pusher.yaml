@@ -76,12 +76,13 @@ spec:
             value: "False"
           - name: DEBUG_ME
             value : "False"
-          - name: DISCORD_WEBHOOK
-            value : "CHANGEME"
           - name: MIN_RANK
             value : "3"
           - name: POLL_DELAY
             value : "5"
+        envFrom:
+        - configMapRef:
+            name:  cp4waiops-simulation-config
       volumes:
         - persistentVolumeClaim:
             claimName: cp4waiops-story-pusher-pvc

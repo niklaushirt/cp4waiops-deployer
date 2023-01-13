@@ -8,6 +8,8 @@ DISCORD_WEBHOOK=os.environ.get('DISCORD_WEBHOOK','not provided')
 MAIL_USER=os.environ.get('MAIL_USER','not provided')
 MAIL_PWD=os.environ.get('MAIL_PWD','not provided')
 MIN_RANK=int(os.environ.get('MIN_RANK',1))
+INSTANCE_NAME=os.environ.get('INSTANCE_NAME','Demo')
+
 
 stream = os.popen("oc get pod -A|grep aiops-orchestrator-controller |awk '{print$1}'")
 aimanagerns = stream.read().strip()
@@ -153,7 +155,7 @@ def sendDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
         "content": "CP4WAIOPS Story",
         "embeds": [{
             "author": {
-            "name": "CP4WAIOPS ChatBot",
+            "name": INSTANCE_NAME+" ChatBot",
             "url": "https://"+CPD_ROUTE+"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories/all/"+id+"/overview",
             "icon_url": "https://github.com/niklaushirt/cp4waiops-deployer/raw/main/doc/avatars/hero_stan_sm_avatar.png"
             },
@@ -327,7 +329,7 @@ def updateDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, 
         "content": "CP4WAIOPS Story",
         "embeds": [{
             "author": {
-            "name": "CP4WAIOPS ChatBot - Story Updated",
+            "name": INSTANCE_NAME+" ChatBot - Story Updated",
             "url": "https://"+CPD_ROUTE+"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories/all/"+id+"/overview",
             "icon_url": "https://github.com/niklaushirt/cp4waiops-deployer/raw/main/doc/avatars/hero_stan_sm_avatar.png"
             },
@@ -391,7 +393,7 @@ def closeDiscord(discord_id):
     currentMessage['embeds'][0]['author']['url']=''
     currentMessage['embeds'][0]['author']['icon_url']=''
     currentMessage['embeds'][0]['author']['proxy_icon_url']=''
-    currentMessage['embeds'][0]['author']['name']='🔴 CP4WAIOPS ChatBot - Story Closed'
+    currentMessage['embeds'][0]['author']['name']='🔴 '+INSTANCE_NAME+' ChatBot - Story Closed'
     currentMessage['content']='🔴 CP4WAIOPS Story - CLOSED'
 
     debug("CURRENT:"+str(currentMessage))
