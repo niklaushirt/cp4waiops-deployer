@@ -1,0 +1,20 @@
+{
+    "actionMode": "MANUAL",
+    "actionState": "READY",
+    "actionType": "RESIZE",
+    "createTime": "2023-01-12T02:05:13Z",
+    "details": "Resize down VCPU for Virtual Machine VMware vCenter Server from 6 to 5 vCPUs",
+    "importance": "0.0",
+    "risk": {
+        "importance": "0.0",
+        "severity": "MINOR",
+        "subCategory": "Efficiency Improvement"
+    },
+    "target": {
+        "className": "VirtualMachine",
+        "displayName": "VMware vCenter Server",
+        "environmentType": "ONPREM",
+        "uuid": "74807936142691"
+    },
+    "uuid": "637758194051760"
+}

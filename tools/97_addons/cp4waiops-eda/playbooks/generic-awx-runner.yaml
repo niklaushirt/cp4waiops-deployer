@@ -1,0 +1,69 @@
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  tasks:
+    - name: 🟢  PLAYBOOK NAME
+      debug:
+        msg: "Generic AWX Playbook Launcher"
+        
+    - name: 🟠 PlaybookToRun
+      debug:
+        var: vars.rulebook_extra_vars.playbookToRun
+
+
+    - name: 🟠  PLAYBOOK VARIABLES
+      debug:
+        var: vars.rulebook_extra_vars
+
+
+    - name: 🟠  PLAYBOOK PLAYLOAD
+      debug:
+        var: vars.events.m_0.payload
+
+
+
+
+
+    - name: 🚀 AWX - Get AWX URL
+      shell: |
+        export AWX_ROUTE=$(oc get route -n awx awx -o jsonpath={.spec.host})
+        export AWX_URL=$(echo "https://$AWX_ROUTE")
+        echo $AWX_URL
+      ignore_errors: true
+      register: ACT_AWX_URL
+
+
+    - name: 🟠 AWX - Set Fact AWX_URL {{ ACT_AWX_URL.stdout }} 
+      set_fact: AWX_URL={{ ACT_AWX_URL.stdout }} 
+
+
+    - name: 🚀 AWX - Get AWX Password
+      shell: |
+        export ADMIN_PASSWORD=$(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)
+        echo $ADMIN_PASSWORD
+      ignore_errors: true
+      register: ACT_AWX_PWD
+
+    - name: 🟠 AWX - Set Fact AWX_PWD {{ ACT_AWX_PWD.stdout }} 
+      set_fact: AWX_PWD={{ ACT_AWX_PWD.stdout }} 
+
+
+    - name: 🚀 AWX - Run AWX Template
+      shell: |
+        export playbooks=$(curl -X "GET" "{{ AWX_URL }}/api/v2/job_templates/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json')
+        export playbookID=$(echo $playbooks|jq '.results[]|select(.name | contains("{{ vars.rulebook_extra_vars.playbookToRun }}"))|'.id''|head -n1)
+        echo "playbookID: $playbookID"
+
+
+        export result=$(curl -X "POST" "{{ AWX_URL }}/api/v2/job_templates/$playbookID/launch/" -u "admin:{{ AWX_PWD }}" --insecure -H 'content-type: application/json'  -d $'{"extra_vars": "{{ vars.rulebook_extra_vars }}"}')
+        echo $result
+      ignore_errors: true
+      register: AWX_RESULT
+      args:
+        executable: /bin/bash
+
+    - name: 🟠  RUN AWX PLAYBOOK RESULT
+      debug: 
+        msg="{{ AWX_RESULT.stdout }}"
+
+
