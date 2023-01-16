@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: eda-frontend
+  name: eda-frontend
+  namespace: eda-server
+spec:
+  ports:
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: eda-frontend
+status:
+  loadBalancer: {}

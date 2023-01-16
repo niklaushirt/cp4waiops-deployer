@@ -1,0 +1,21 @@
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  tasks:
+    - name: 🟢  PLAYBOOK NAME
+      debug:
+        msg: "Demo AWX Playbook"
+        
+
+
+    - name: 🟠  PLAYBOOK VARIABLES
+      debug:
+        var: vars.rulebook_extra_vars
+
+
+    - name: 🟠  PLAYBOOK VARS
+      debug:
+        var: vars
+
+
+

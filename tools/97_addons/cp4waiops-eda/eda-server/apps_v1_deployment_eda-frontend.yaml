@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: eda-frontend
+  name: eda-frontend
+  namespace: eda-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eda-frontend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: eda-frontend
+    spec:
+      containers:
+      - image: niklaushirt/eda-frontend:0.1
+        imagePullPolicy: IfNotPresent
+        name: eda-frontend
+        ports:
+        - containerPort: 8080
+        resources: {}
+      restartPolicy: Always
+      serviceAccount: eda-admin
+
+status: {}

@@ -60,7 +60,7 @@ spec:
         app:  waiops-event-gateway
     spec:
       containers:
-      - image: niklaushirt/cp4waiops-webhook-python:0.4
+      - image: docker.io/niklaushirt/cp4waiops-webhook-python:0.4
         imagePullPolicy: Always
         name: gateway
         command:

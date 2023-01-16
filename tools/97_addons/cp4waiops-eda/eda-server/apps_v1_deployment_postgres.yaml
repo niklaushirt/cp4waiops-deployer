@@ -1,0 +1,55 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: postgres
+  namespace: eda-server
+  labels:
+    app: eda-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eda-postgres
+  template:
+    metadata:
+      labels:
+        app: eda-postgres
+    spec:
+      restartPolicy: Always
+      serviceAccountName: eda-admin
+      terminationGracePeriodSeconds: 30
+      securityContext: {}
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              value: secret
+            - name: POSTGRESQL_DATABASE
+              value: eda_server
+            - name: POSTGRESQL_ADMIN_PASSWORD
+              value: secret
+            - name: POSTGRESQL_USER
+              value: demo
+            - name: POSTGRESQL_PASSWORD
+              value: secret
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+          terminationMessagePolicy: File
+          image: registry.redhat.io/rhel9/postgresql-13
+      serviceAccount: eda-admin
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-data
+      dnsPolicy: ClusterFirst
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

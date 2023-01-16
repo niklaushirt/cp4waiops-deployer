@@ -60,7 +60,7 @@ spec:
         app:  waiops-falco-gateway
     spec:
       containers:
-      - image: niklaushirt/cp4waiops-webhook-python:0.5
+      - image: docker.io/niklaushirt/cp4waiops-webhook-python:0.5
         imagePullPolicy: Always
         name: gateway
         command:

@@ -6,6 +6,7 @@ import os
 import sys 
 import time 
 import hashlib
+from threading import Thread
 sys.path.append(os.path.abspath("demouiapp"))
 from functions import *
 SLACK_URL=str(os.environ.get('SLACK_URL'))
@@ -501,9 +502,27 @@ def injectAllREST(request):
         print('🌏 Create RobotShop MySQL outage')
         os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql-outage\\"}}}"')
         
-        injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        injectMetricsMem(METRIC_ROUTE,METRIC_TOKEN)
-        injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
+        # injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        # injectMetricsMem(METRIC_ROUTE,METRIC_TOKEN)
+        # injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
+
+        print('  🟠 Create THREADS')
+        threadEvents = Thread(target=injectEventsMem, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
+        threadMetrics = Thread(target=injectMetricsMem, args=(METRIC_ROUTE,METRIC_TOKEN,))
+        threadLogs = Thread(target=injectLogs, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
+
+        print('  🟠 Start THREADS')
+        # start the threads
+        threadEvents.start()
+        threadMetrics.start()
+        threadLogs.start()
+        # print('  🟠 Join THREADS')
+        # # wait for the threads to complete
+        # threadEvents.join()
+        # threadMetrics.join()
+        # threadLogs.join()
+        time.sleep(3)
+
     else:
         template = loader.get_template('demouiapp/loginui.html')
 
@@ -559,11 +578,27 @@ def injectAllFanREST(request):
         print('🌏 Create RobotShop MySQL outage')
         os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql-outage\\"}}}"')
 
-        injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
+        # injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
+        # time.sleep(3)
+        # injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        # injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN)
+        # injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
+
+
+        print('  🟠 Create THREADS')
+        threadMetrics1 = Thread(target=injectMetricsFanTemp, args=(METRIC_ROUTE,METRIC_TOKEN,))
+        threadEvents = Thread(target=injectEventsFan, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
+        threadMetrics2 = Thread(target=injectEventsFan, args=(METRIC_ROUTE,METRIC_TOKEN,))
+        threadLogs = Thread(target=injectLogs, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
+
+        print('  🟠 Start THREADS')
+        # start the threads
+        threadMetrics1.start()
+        threadEvents.start()
+        threadMetrics2.start()
+        threadLogs.start()
         time.sleep(3)
-        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN)
-        injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
+
     else:
         template = loader.get_template('demouiapp/loginui.html')
 
@@ -773,8 +808,19 @@ def clearAllREST(request):
         os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql\\"}}}"')
         
 
-        closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        # closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        # closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+
+        print('  🟠 Create THREADS')
+        threadCloseAlerts = Thread(target=closeAlerts, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
+        threadCloseStories = Thread(target=closeStories, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
+
+        print('  🟠 Start THREADS')
+        # start the threads
+        threadCloseAlerts.start()
+        threadCloseStories.start()
+        time.sleep(3)
+
     else:
         template = loader.get_template('demouiapp/loginui.html')
 
