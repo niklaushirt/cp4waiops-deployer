@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [36.0.1] - 2022-01-16
+
+### Fixes
+
+- A lot of small bugfixes
+### Minor changes
+
+- Added EDA (Event Driven Ansible) Demo scripts for Turbo
+- Added custom, non-official Discord integrations 
+
+
+
+
+
 ## [36.0.2] - 2022-12-21
 
 Changes for Cloud Pak Deployer compatibility

@@ -111,7 +111,15 @@ You **might** get away with less if you don't install some components (Event Man
 
 ### ✅ 1.1.2 Get a ROKS Cluster (IBMers and IBM Partners only)
 
-IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collection/custom-roks-vmware-requests) (ususally valid for up to 8 days)
+IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collection/custom-roks-vmware-requests) (ususally valid for up to 8 days).
+
+
+1. Select `IBM RedHat Openshift Kubernetes Service (ROKS)` (recommended)
+ 
+   Those should also work if you prefer more control:
+	- IBM RedHat Openshift Kubernetes Service (ROKS) with NFS Storage
+	- IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)
+	- OpenShift Cluster (VMware on IBM Cloud) - IPI
 
 1. Create a cluster for `Practice/Self Education` if you don't have an Opportunity Number
 
