@@ -24,8 +24,11 @@ This is provided `as-is`:
 * It clearly can be improved
 
 
-**❗This has been tested for the new CP4WAIOPS v3.6.0 release on OpenShift 4.10 on ROKS**
-
+**❗This has been tested for the new CP4WAIOPS v3.6.0 release on OpenShift 4.10 on:**
+- IBM RedHat Openshift Kubernetes Service (ROKS) with IBM Cloud Storage (ibmc-xxx)
+- IBM RedHat Openshift Kubernetes Service (ROKS) with NFS Storage
+- IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)
+- OpenShift Cluster (VMware on IBM Cloud) - IPI
 
 
 
