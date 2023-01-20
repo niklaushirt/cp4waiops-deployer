@@ -146,6 +146,7 @@
     - "     🛠️ Create Policy for Story Creation:          {{current_cp4waiops_feature.create_story_policy}}"
     - "     🛠️ Create Kafka Log connection:               {{current_cp4waiops_feature.create_log_connection}}"
     - "     🛠️ Create Service Account:                    {{current_cp4waiops_feature.create_account}}"
+    - "     🛠️ Create Webhook Probe:                      {{current_cp4waiops_feature.install_webhook_probe  | default('not defined')}}"
     - "-----------------------------------------------------------------------------------------------"
     - "***********************************************************************************************"
     - "-----------------------------------------------------------------------------------------------"
@@ -399,6 +400,18 @@
 - name: 📥   Create Kafka ELK connection
   include_tasks: 65_aimanager-create-kafka-connections.yaml
   when: current_cp4waiops_feature.create_log_connection == true
+
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# IJNSTALL WEBHOOK PROBE
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Create Kafka Connections
+- name: 📥   Install Webhook Probe
+  include_tasks: 70_aimanager-install-probe.yml
+  when: current_cp4waiops_feature.install_webhook_probe | default('false') == true
+
 
 
 
