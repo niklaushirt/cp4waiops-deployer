@@ -114,13 +114,24 @@ You **might** get away with less if you don't install some components (Event Man
 IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collection/custom-roks-vmware-requests) (ususally valid for up to 8 days).
 
 
-1. Select `IBM RedHat Openshift Kubernetes Service (ROKS)` (recommended)
- 
-   Those should also work if you prefer more control:
-	- IBM RedHat Openshift Kubernetes Service (ROKS) with NFS Storage
-	- IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)
-	- OpenShift Cluster (VMware on IBM Cloud) - IPI
+IBMers can get a temporary one from **Techzone**
 
+You have different options:
+[IBM RedHat Openshift Kubernetes Service (ROKS)](https://techzone.ibm.com/my/reservations/create/60da20f935e6ac001f1c4086)
+
+Basic one that "just works)
+
+[IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)](https://techzone.ibm.com/my/reservations/create/61415dd831cf9f00174c914b)
+ROKS with ODF, but limited in CPU - you won't be able to install Instana AND Turbonomic on top
+
+[OpenShift Cluster (VMware on IBM Cloud) - IPI](https://techzone.ibm.com/my/reservations/create/638e78ec5cad290018089470)
+Gives you the most control
+
+
+1. Select the Openshift that you want to use above
+
+	The options might slightly vary depending on the option you choose.
+ 
 1. Create a cluster for `Practice/Self Education` if you don't have an Opportunity Number
 
 	![K8s CNI](./doc/pics/roks01.png)
@@ -137,7 +148,8 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 	2. Worker node count: **5**
 	3. Flavour: **b3c.16x64** ❗ 
 	4. OpenShift Version: **4.10**
-
+	5. If using IPI ro VPC select OCS/ODF Size 2TiB
+	
 	> ❗ If you want to install AIManager, Event Manager, Trubonomic and Instana please select **b3c.32x128** 
 
 	![K8s CNI](./doc/pics/roks02.png)
