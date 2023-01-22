@@ -111,8 +111,6 @@ You **might** get away with less if you don't install some components (Event Man
 
 ### ✅ 1.1.2 Get a ROKS Cluster (IBMers and IBM Partners only)
 
-IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collection/custom-roks-vmware-requests) (ususally valid for up to 8 days).
-
 
 IBMers can get a temporary one from **Techzone**
 
@@ -149,7 +147,7 @@ Gives you the most control
 	3. Flavour: **b3c.16x64** ❗ 
 	4. OpenShift Version: **4.10**
 	5. If using IPI ro VPC select OCS/ODF Size 2TiB
-	
+
 	> ❗ If you want to install AIManager, Event Manager, Trubonomic and Instana please select **b3c.32x128** 
 
 	![K8s CNI](./doc/pics/roks02.png)
