@@ -56,18 +56,17 @@ stream = os.popen("oc get route -n turbonomic api -o jsonpath={.spec.host}")
 TURBO_URL = stream.read().strip()
 
 
+
+
+print (str(TURBO_URL))
+
 stream = os.popen("curl -XPOST -s -k -c /tmp/cookies -H 'accept: application/json' 'https://"+TURBO_URL+"/api/v3/login?hateoas=true' -d 'username=administrator&password="+TURBO_PASSWORD+"'")
 TURBO_LOGIN = stream.read().strip()
 TURBO_LOGIN_JSON=json.loads(TURBO_LOGIN)
 #print(actStories['stories'])
 #print(actStories['stories'][0]['description'])
 
-print ("       🌏 Turbonomic API URL: "+str(TURBO_URL))
-
-print ("       🔐 Logged-in as:       "+str(TURBO_LOGIN_JSON["username"]))
-print ('')
-print ('')
-print ('')
+print (str(TURBO_LOGIN_JSON["username"]))
 
 
 globalEntities=[]
@@ -89,30 +88,19 @@ entitiesToParse = ["VirtualMachine",
 "BusinessApplication",
 "VirtualVolume",
 "Storage",
-"ComputeTier",
-"Namespace",
-"StorageTier",
-"DiskArray",
-"PhysicalMachine",
-"ContainerPlatformCluster",
 "Service"]
 
+
+
+for entityType in entitiesToParse:
+    entities=parseEntity(entityType, TURBO_URL, topology_file)
+    globalEntities=globalEntities+entities
+    #print (globalEntities)
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # Create Topology file for Entity Types
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-print ('-------------------------------------------------------------------------------------------------')
-print (' 🚀 Get Entities')
-for entityType in entitiesToParse:
-    entities=parseEntity(entityType, TURBO_URL, topology_file)
-    globalEntities=globalEntities+entities
-    #print (globalEntities)
-print ('')
-print ('-------------------------------------------------------------------------------------------------')
-print (' 🚀 Get Links')
-for entityType in entitiesToParse:
-    entities=parseDependencies(entityType, TURBO_URL, topology_file, globalEntities)
 
 
 
