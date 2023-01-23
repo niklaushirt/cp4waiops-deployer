@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export CONT_VERSION=1.00
+export CONT_VERSION=1.10
 
 # Create the Image
 docker buildx build --platform linux/amd64 -t niklaushirt/cp4waiops-demo-ui:$CONT_VERSION --load .

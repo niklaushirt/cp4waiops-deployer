@@ -52,7 +52,7 @@ topology_file = open("/tmp/topology.txt", "w")
 
 
 print('     ❓ Turbonomic Login')
-stream = os.popen("oc get route -n turbonomic api -o jsonpath={.spec.host}")
+stream = os.popen("oc get route -n turbonomic nginx -o jsonpath={.spec.host}")
 TURBO_URL = stream.read().strip()
 
 
