@@ -279,7 +279,7 @@
   # CHECKS
   # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 
-  when: current_sales_key != "NONE" and current_agent_key != "NONE"
+  #when: current_sales_key != "NONE" and current_agent_key != "NONE"
   ignore_errors: true
 
 
