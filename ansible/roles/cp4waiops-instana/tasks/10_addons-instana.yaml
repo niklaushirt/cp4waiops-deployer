@@ -140,7 +140,6 @@
 
 - name: 🚀 INSTANA - Create Operator Secret
   shell: |
-    oc -n instana-operator delete secret instana-registry --ignore-not-found
     oc -n instana-operator create secret docker-registry instana-registry \
         --docker-username=_ \
         --docker-password={{current_agent_key}} \
@@ -253,7 +252,6 @@
     #prep core resources
     #local directory must exist
     cat ./config.yaml
-    #oc -n instana-core delete secret instana-core
     oc -n instana-core create secret generic instana-core --namespace instana-core --from-file=./config.yaml
   ignore_errors: true
   register: output
@@ -274,7 +272,6 @@
     echo "initialAdminPassword: {{current_admin_pass}}" >> config.yaml
     echo "initialAdminUser: {{current_cp4waiops_feature.instana_admin_user}}" >> config.yaml
 
-    oc -n instana-units delete secret  aiops-dev
     oc -n instana-units create secret generic aiops-dev --from-file=./config.yaml
     cat ./config.yaml
 
