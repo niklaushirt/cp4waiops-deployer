@@ -1,0 +1,84 @@
+---
+- name: Listen for events on a webhook
+  hosts: all
+
+  ## Define our source for events
+
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+
+  ## Define the conditions we are looking for
+
+  rules:
+
+    - name: Ping
+      condition: event.payload.message == "ping"
+      action:
+        run_playbook:
+          name: ./playbooks/ping.yaml
+
+
+    - name: Turbo Resize - catalogue
+      condition: 
+        all:
+          - event.payload.actionType == "RESIZE"
+          - event.payload.actionState == "READY"
+          - event.payload.target.displayName == "catalogue"
+      action:
+        run_playbook:
+          name: ./playbooks/generic-awx-runner.yaml
+          rulebook_extra_vars:
+             playbookToRun: ResizeCatalogue
+             param1: 1
+             param2: R2D2
+             param3: event.payload.target.displayName
+
+
+    - name: Turbo Resize
+      condition: 
+        all:
+          - event.payload.actionType == "RESIZE" 
+          - event.payload.actionState == "READY"
+      action:
+        run_playbook:
+          name: ./playbooks/generic-awx-runner.yaml
+          copy_files: true
+          #var_root: payload
+          post_events: true
+          set_facts: true
+          rulebook_extra_vars:
+             playbookToRun: ResizeGeneric
+             param1: 1
+             param2: R2D2
+             param3: event.payload.target.displayName
+
+
+    - name: Turbo Reconfigure
+      condition: 
+        all:
+          - event.payload.actionType == "RECONFIGURE" 
+          - event.payload.actionState == "READY"
+      action:
+        run_playbook:
+          name: ./playbooks/generic-awx-runner.yaml
+          rulebook_extra_vars:
+             playbookToRun: ReconfigureGeneric
+             param1: 1
+             param2: R2D2
+             param3: Naboo
+
+
+    - name: Catch All
+      condition: event.payload.uuid != ''
+      action:
+        run_playbook:
+          name: ./playbooks/generic-awx-runner.yaml
+          rulebook_extra_vars:
+             playbookToRun: CatchAll
+             param1: 1
+             param2: R2D2
+             param3: Naboo
+
+

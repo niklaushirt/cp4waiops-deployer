@@ -16,7 +16,7 @@ spec:
       spec:
         containers:
         - name: kubetoy
-          image: niklaushirt/kubetoy:0.3
+          image: docker.io/niklaushirt/kubetoy:0.3
           resources:
           requests:
             memory: "64Mi"

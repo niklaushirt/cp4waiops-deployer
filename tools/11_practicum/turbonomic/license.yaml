@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cp4waiops-turbonomic-license
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - name: license
+          image: niklaushirt/cp4waiops-tools:2.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - |
+              #!/bin/bash
+              git clone https://github.com/niklaushirt/cp4waiops-deployer.git -b 3.6_dev && cd cp4waiops-deployer && echo $LICENSE_KEY > /tmp/SCRIPT_PWD.txt && ansible-vault decrypt  --vault-password-file /tmp/SCRIPT_PWD.txt ./tools/11_practicum/turbonomic/TURBO_LICENSE.enc --output /tmp/TURBO_LICENSE.sh && chmod +x /tmp/TURBO_LICENSE.sh && /tmp/TURBO_LICENSE.sh
+          env:
+          - name: LICENSE_KEY
+            value : "CHANGEME"
+      restartPolicy: Never
