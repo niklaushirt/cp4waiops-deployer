@@ -10,7 +10,7 @@ echo "    🌏 EDA_URL:   $EDA_URL"
 
 
 
-export TURBO_URL=$(oc get route -n turbonomic api -o jsonpath={.spec.host})
+export TURBO_URL=$(oc get route -n turbonomic nginx -o jsonpath={.spec.host})
 echo "    🌏 TURBO_URL: $TURBO_URL"
 echo ""
 

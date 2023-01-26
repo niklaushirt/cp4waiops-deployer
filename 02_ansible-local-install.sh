@@ -750,7 +750,7 @@ menuAWX_OPENISTIO () {
 }
 
 menuAWX_OPENTURBO () {
-      export ROUTE="https://"$(oc get route -n turbonomic api -o jsonpath={.spec.host})
+      export ROUTE="https://"$(oc get route -n turbonomic nginx -o jsonpath={.spec.host})
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    🚀 Turbonomic Dashboard "

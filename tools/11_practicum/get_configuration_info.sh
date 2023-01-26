@@ -402,7 +402,7 @@ then
     echo "    "
     echo "            📥 Turbonomic Dashboard :"
     echo ""
-    echo "                🌏 URL:           https://$(oc get route -n turbonomic api -o jsonpath={.spec.host})"
+    echo "                🌏 URL:           https://$(oc get route -n turbonomic nginx -o jsonpath={.spec.host})"
     echo "                🧑 User:          administrator"
     echo "                🔐 Password:      As set at init step"
     echo "    "
