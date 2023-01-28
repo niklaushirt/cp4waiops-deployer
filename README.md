@@ -73,7 +73,12 @@ Here is a quick video that walks you through the installation process
 # 🐥 1 Quick Install
 ---------------------------------------------------------------
 
-### ⚠️ **This method doesn't require you to install anything on your local machine.**
+### ⚠️ **This method creates an in-cluster installation**
+
+- It's way faster
+- You don't have to install all the tooling locally
+- You don’t need a connection to the cluster during the installation (fire and forget)
+
 
 * You get a OpenShift Cluster
 * You get your entitlement key/pull token
@@ -556,11 +561,11 @@ Incidents are being created by using the high level APIs in order to simulate a 
 ---------------------------------------------------------------
 
 ## ❗ This method will be deprecated and should not be used anymore. 
-## I DO NOT TEST THIS FOR NEW RELEASES GOING FORWARED
-## Plese use the in-cluster installation method in chapter 1:
-## - It's way faster
-## - You don't have to install all the tooling locally
-## - You don’t need a connection to the cluster during the installation (fire and forget)
+### ❗I WILL NOT TEST THIS FOR NEW RELEASES GOING FORWARD
+Please use the in-cluster installation method in chapter 1:
+- It's way faster
+- You don't have to install all the tooling locally
+- You don’t need a connection to the cluster during the installation (fire and forget)
 
 
 ## 3.1 Get the code 
