@@ -79,7 +79,7 @@ Here is a quick video that walks you through the installation process
 - You don't have to install all the tooling locally
 - You don’t need a connection to the cluster during the installation (fire and forget)
 
-### What yoou have to do:
+### What you have to do:
 
 * You get a OpenShift Cluster
 * You get your entitlement key/pull token
