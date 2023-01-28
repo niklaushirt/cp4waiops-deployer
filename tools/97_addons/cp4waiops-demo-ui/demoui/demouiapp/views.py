@@ -216,13 +216,13 @@ echo "    <BR>"
     echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
     echo "<tr><td style=\"min-width:300px\">🗺️  Mapping:</td><td>"
     echo "&nbsp;{ <BR>"
-    echo "&nbsp;&nbsp;&nbsp;  \"codec\": \"elk\",<BR>"
-    echo "&nbsp;&nbsp;&nbsp;  \"message_field\": \"message\",<BR>"
-    echo "&nbsp;&nbsp;&nbsp;  \"log_entity_types\": \"kubernetes.container_image_id, kubernetes.host, kubernetes.pod_name, kubernetes.namespace_name\",<BR>"
-    echo "&nbsp;&nbsp;&nbsp;  \"instance_id_field\": \"kubernetes.container_name\",<BR>"
-    echo "&nbsp;&nbsp;&nbsp;  \"rolling_time\": 10,<BR>"
-    echo "&nbsp;&nbsp;&nbsp;  \"timestamp_field\": \"@timestamp\"<BR>"
-    echo "&nbsp;}</td></tr>"
+    echo '&nbsp;&nbsp;&nbsp;  \"codec\": \"elk\",<BR>'
+    echo '&nbsp;&nbsp;&nbsp;  \"message_field\": \"message\",<BR>'
+    echo '&nbsp;&nbsp;&nbsp;  \"log_entity_types\": \"kubernetes.container_image_id, kubernetes.host, kubernetes.pod_name, kubernetes.namespace_name\",<BR>'
+    echo '&nbsp;&nbsp;&nbsp;  \"instance_id_field\": \"kubernetes.container_name\",<BR>'
+    echo '&nbsp;&nbsp;&nbsp;  \"rolling_time\": 10,<BR>'
+    echo '&nbsp;&nbsp;&nbsp;  \"timestamp_field\": \"@timestamp\"<BR>'
+    echo '&nbsp;}</td></tr>'
     echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
     echo "<tr><td style=\"min-width:300px\">🗺️  Filter: </td><td>"
     echo "&nbsp;      {<BR>"
