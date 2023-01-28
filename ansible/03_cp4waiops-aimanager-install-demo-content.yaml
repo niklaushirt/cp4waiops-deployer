@@ -63,7 +63,7 @@
 
 
   - name: 🛠️  Config File Path
-    set_fact: config_file_path="./configs/cp4waiops-roks-aimanager-demo-content-35.yaml"
+    set_fact: config_file_path="./configs/cp4waiops-roks-aimanager-demo-content-36.yaml"
 
 
   - name: 🛠️  Show Global Config

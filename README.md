@@ -555,6 +555,12 @@ Incidents are being created by using the high level APIs in order to simulate a 
 # 🚀 3 Detailed Ansible Install
 ---------------------------------------------------------------
 
+## ❗ This method will be deprecated and should not be used anymore. 
+## I DO NOT TEST THIS FOR NEW RELEASES GOING FORWARED
+## Plese use the in-cluster installation method in chapter 1:
+## - It's way faster
+## - You don't have to install all the tooling locally
+## - You don’t need a connection to the cluster during the installation (fire and forget)
 
 
 ## 3.1 Get the code 
