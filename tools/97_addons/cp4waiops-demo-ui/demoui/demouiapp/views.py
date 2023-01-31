@@ -294,8 +294,9 @@ print('     ❓ Getting ALL LOGINS - this may take a minute or two')
 #ALL_LOGINS = check_output(cmd, shell=True, executable='/bin/bash')
 
 
-stream = os.popen(cmd)
-ALL_LOGINS = stream.read().strip()
+#stream = os.popen(cmd)
+#ALL_LOGINS = stream.read().strip()
+ALL_LOGINS="aaa"
 #print ('           ALL_LOGINS:              '+ALL_LOGINS)
 
 
@@ -642,6 +643,72 @@ def injectAllFanREST(request):
     }
     return HttpResponse(template.render(context, request))
 
+
+
+def injectAllNetREST(request):
+    print('🌏 injectAllNetREST')
+    global loggedin
+    verifyLogin(request)
+    if loggedin=='true':
+        template = loader.get_template('demouiapp/home.html')
+
+        print('🌏 Create RobotShop Network outage')
+        #os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql-outage\\"}}}"')
+
+        print('  🟠 Create THREADS')
+        threadMetrics1 = Thread(target=injectMetricsNet, args=(METRIC_ROUTE,METRIC_TOKEN,))
+        threadEvents = Thread(target=injectEventsNet, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
+        threadLogs = Thread(target=injectLogs, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
+
+        print('  🟠 Start THREADS')
+        # start the threads
+        threadMetrics1.start()
+        threadEvents.start()
+        threadLogs.start()
+        time.sleep(3)
+
+    else:
+        template = loader.get_template('demouiapp/loginui.html')
+
+
+    context = {
+        'loggedin': loggedin,
+        'aimanager_url': aimanager_url,
+        'aimanager_user': aimanager_user,
+        'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
+        'awx_url': awx_url,
+        'awx_user': awx_user,
+        'awx_pwd': awx_pwd,
+        'elk_url': elk_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
+        'openshift_url': openshift_url,
+        'openshift_token': openshift_token,
+        'openshift_server': openshift_server,
+        'vault_url': vault_url,
+        'vault_token': vault_token,
+        'ladp_url': ladp_url,
+        'ladp_user': ladp_user,
+        'ladp_pwd': ladp_pwd,
+        'flink_url': flink_url,
+        'flink_url_policy': flink_url_policy,
+        'robotshop_url': robotshop_url,
+        'spark_url': spark_url,
+        'eventmanager_url': eventmanager_url,
+        'eventmanager_user': eventmanager_user,
+        'eventmanager_pwd': eventmanager_pwd,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_NAME': 'index'
+    }
+    return HttpResponse(template.render(context, request))
 
 
 
