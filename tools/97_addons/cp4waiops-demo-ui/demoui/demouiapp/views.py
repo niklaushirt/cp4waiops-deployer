@@ -294,9 +294,9 @@ print('     ❓ Getting ALL LOGINS - this may take a minute or two')
 #ALL_LOGINS = check_output(cmd, shell=True, executable='/bin/bash')
 
 
-#stream = os.popen(cmd)
-#ALL_LOGINS = stream.read().strip()
-ALL_LOGINS="aaa"
+stream = os.popen(cmd)
+ALL_LOGINS = stream.read().strip()
+#ALL_LOGINS="aaa"
 #print ('           ALL_LOGINS:              '+ALL_LOGINS)
 
 
