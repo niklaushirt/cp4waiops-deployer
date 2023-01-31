@@ -12,6 +12,8 @@
 #   Gives metrics values between 100 and 110
 #   If you put "fixed base value"=ITERATIONS then it will use the counter (for PodRestarts for example)
 declare -a MY_RES_IDS=(
+"dSwitch-1-vm-network-port-1,TransactionsPerSecond,TransactionsPerSecond,0,1"
+"dcwest1-switch023,TransactionsPerSecond,TransactionsPerSecond,60,30"
 "mysql-predictive,TransactionsPerSecond,TransactionsPerSecond,0,1"
 "mysql-predictive,Latency,Latency,1000,100"
 "ratings-predictive,TransactionsPerSecond,TransactionsPerSecond,160,40"
@@ -20,7 +22,7 @@ declare -a MY_RES_IDS=(
 
 
 # Number of Global Iterations
-export MAX_ITERATIONS=10
+export MAX_ITERATIONS=30
 
 
 
