@@ -8,6 +8,7 @@ import time
 
 DEMO_EVENTS_MEM=os.environ.get('DEMO_EVENTS_MEM')
 DEMO_EVENTS_FAN=os.environ.get('DEMO_EVENTS_FAN')
+DEMO_EVENTS_NET=os.environ.get('DEMO_EVENTS_NET')
 DEMO_LOGS=os.environ.get('DEMO_LOGS')
 LOG_ITERATIONS=int(os.environ.get('LOG_ITERATIONS'))
 LOG_TIME_FORMAT=os.environ.get('LOG_TIME_FORMAT')
@@ -27,6 +28,7 @@ METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
 METRICS_TO_SIMULATE_MEM=str(os.environ.get('METRICS_TO_SIMULATE_MEM')).split(';')
 METRICS_TO_SIMULATE_FAN_TEMP=str(os.environ.get('METRICS_TO_SIMULATE_FAN_TEMP')).split(';')
 METRICS_TO_SIMULATE_FAN=str(os.environ.get('METRICS_TO_SIMULATE_FAN')).split(';')
+METRICS_TO_SIMULATE_NET=str(os.environ.get('METRICS_TO_SIMULATE_NET')).split(';')
 
 SLACK_URL=str(os.environ.get('SLACK_URL'))
 SLACK_USER=str(os.environ.get('SLACK_USER'))
@@ -50,12 +52,14 @@ print ('')
 print ('           EVENTS_TIME_SKEW:               '+str(EVENTS_TIME_SKEW))
 print ('           DEMO_EVENTS_MEM:                '+str(len(DEMO_EVENTS_MEM)))
 print ('           DEMO_EVENTS_FAN:                '+str(len(DEMO_EVENTS_FAN)))
+print ('           DEMO_EVENTS_NET:                '+str(len(DEMO_EVENTS_NET)))
 print ('')
 print ('           METRIC_TIME_SKEW:               '+str(METRIC_TIME_SKEW))
 print ('           METRIC_TIME_STEP:               '+str(METRIC_TIME_STEP))
 print ('           METRICS_TO_SIMULATE_MEM:        '+str(len(METRICS_TO_SIMULATE_MEM)))
 print ('           METRICS_TO_SIMULATE_FAN_TEMP:   '+str(len(METRICS_TO_SIMULATE_FAN_TEMP)))
 print ('           METRICS_TO_SIMULATE_FAN:        '+str(len(METRICS_TO_SIMULATE_FAN)))
+print ('           METRICS_TO_SIMULATE_NET:        '+str(METRICS_TO_SIMULATE_NET))
 print ('')
 print ('           SLACK_URL:                      '+str(SLACK_URL))
 print ('           SLACK_USER:                     '+str(SLACK_USER))
@@ -168,20 +172,28 @@ def injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 def injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD): 
+    print ('📛 Inject Events MEM')
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_MEM)
     return 'OK'
 
 
 def injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):  
+    print ('📛 Inject Events FAN')
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_FAN)
     return 'OK'
 
+
+def injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):  
+    print ('📛 Inject Events NET')
+    injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_NET)
+    return 'OK'
 
 
 def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS):
     print('')
     print ('------------------------------------------------------------------------------------------------')
     print ('📛 Inject Events')
+    #print ('📛 Inject Events'+str(DEMO_EVENTS))
     
     timestamp = datetime.datetime.now()
     #timestamp = str(datetime.datetime.now())
@@ -245,6 +257,12 @@ def injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN):
     METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
     METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_FAN,METRIC_TIME_SKEW,METRIC_TIME_STEP)
+    return 'OK'
+
+def injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN):  
+    METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
+    METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
+    injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_NET,METRIC_TIME_SKEW,METRIC_TIME_STEP)
     return 'OK'
 
 
