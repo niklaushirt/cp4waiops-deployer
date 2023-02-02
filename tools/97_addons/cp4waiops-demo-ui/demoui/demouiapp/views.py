@@ -589,7 +589,7 @@ def injectAllFanREST(request):
         print('  🟠 Create THREADS')
         threadMetrics1 = Thread(target=injectMetricsFanTemp, args=(METRIC_ROUTE,METRIC_TOKEN,))
         threadEvents = Thread(target=injectEventsFan, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
-        threadMetrics2 = Thread(target=injectEventsFan, args=(METRIC_ROUTE,METRIC_TOKEN,))
+        threadMetrics2 = Thread(target=injectEventsFan, args=(METRIC_ROUTE,METRIC_TOKEN,DATALAYER_PWD))
         threadLogs = Thread(target=injectLogs, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
 
         print('  🟠 Start THREADS')
