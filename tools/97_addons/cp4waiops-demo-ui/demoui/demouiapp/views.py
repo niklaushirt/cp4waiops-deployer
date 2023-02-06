@@ -401,7 +401,7 @@ stream = os.popen('oc get route -n openshift-console console -o jsonpath={.spec.
 openshift_url = stream.read().strip()
 stream = os.popen("oc -n default get secret $(oc get secret -n default |grep -m1 demo-admin-token|awk '{print$1}') -o jsonpath='{.data.token}'|base64 --decode")
 openshift_token = stream.read().strip()
-stream = os.popen("cat ~/.kube/config|grep 'server:'| sed 's/.*server: .*\///'| head -1")
+stream = os.popen("oc config view --minify|grep 'server:'| sed 's/.*server: .*\///'| head -1")
 #stream = os.popen("oc status|head -1|awk '{print$6}'")
 openshift_server = stream.read().strip()
 stream = os.popen("oc get deployment -n cp4waiops-demo-ui cp4waiops-demo-ui -ojson|jq -r '.spec.template.spec.containers[0].image'")
