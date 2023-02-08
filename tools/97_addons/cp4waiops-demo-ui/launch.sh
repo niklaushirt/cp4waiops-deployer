@@ -40,9 +40,21 @@ export METRICS_TO_SIMULATE_MEM='mysql-predictive,MemoryUsagePercent,MemoryUsage,
                     ratings-predictive,TransactionsPerSecond,TransactionsPerSecond,160,40;
                     ratings-predictive,Latency,Latency,2,1'
 
-export METRICS_TO_SIMULATE_FAN_TEMP='DCWest1-Rack045-DELL3762,CPU1Temperature,System,ITERATIONS,90'
+export METRICS_TO_SIMULATE_FAN_TEMP='DCWest1-Rack045-DELL3762,CPU1Temperature,System,140,30;
+DCWest1-Rack045-DELL3762,CPU1Temperature,System,140,30;
+DCWest1-Rack045-DELL3762,CPU1Temperature,System,140,30;
+DCWest1-Rack045-DELL3762,CPU1Temperature,System,140,30;
+DCWest1-Rack045-DELL3762,CPU1Temperature,System,140,30;
+DCWest1-Rack045-DELL3762,CPU1Temperature,System,140,30;
+DCWest1-Rack045-DELL3762,CPU1Temperature,System,140,30;
+DCWest1-Rack045-DELL3762,CPU1Temperature,System,140,30'
 
 export METRICS_TO_SIMULATE_FAN='mysql-predictive,TransactionsPerSecond,TransactionsPerSecond,0,1;
+                    mysql-predictive,Latency,Latency,40000,1000;
+                    ratings-predictive,PodRestarts,PodRestarts,0,1;
+                    ratings-predictive,TransactionsPerSecond,TransactionsPerSecond,10,10;
+                    ratings-predictive,Latency,Latency,2000,1000;
+                    mysql-predictive,TransactionsPerSecond,TransactionsPerSecond,0,1;
                     mysql-predictive,Latency,Latency,40000,1000;
                     ratings-predictive,PodRestarts,PodRestarts,0,1;
                     ratings-predictive,TransactionsPerSecond,TransactionsPerSecond,10,10;
@@ -54,7 +66,13 @@ export METRICS_TO_SIMULATE_NET='dSwitch-1-vm-network-port-1,TransactionsPerSecon
                     mysql-predictive,TransactionsPerSecond,TransactionsPerSecond,0,1;
                     mysql-predictive,Latency,Latency,1000,100;
                     ratings-predictive,TransactionsPerSecond,TransactionsPerSecond,160,40;
-                    ratings-predictive,Latency,Latency,2,1';
+                    ratings-predictive,Latency,Latency,2,1;
+                    dSwitch-1-vm-network-port-1,TransactionsPerSecond,TransactionsPerSecond,0,1;
+                    dcwest1-switch023,TransactionsPerSecond,TransactionsPerSecond,60,30;
+                    mysql-predictive,TransactionsPerSecond,TransactionsPerSecond,0,1;
+                    mysql-predictive,Latency,Latency,1000,100;
+                    ratings-predictive,TransactionsPerSecond,TransactionsPerSecond,160,40;
+                    ratings-predictive,Latency,Latency,2,1'
 
 
 
