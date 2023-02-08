@@ -52,9 +52,9 @@ Please refer to the official IBM Documentation for production ready installation
 
 🚀 [Demo the Solution](#2-demo-the-solution)
 
-🤓 [Detailed Ansible Install](#-3-detailed-ansible-install) (optional)
+📱 [Slack integration](#3-slack-integration) (optional)
 
-📱 [Slack integration](#4-slack-integration) (optional)
+🤓 [Demo Setup - Explained](#4-demo-setup---explained)
 
 > ❗You can find a PDF version of this guide here: [PDF](./INSTALL_CP4WAIOPS.pdf).
 > 
@@ -351,7 +351,7 @@ This installation cocntains:
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Paste the content
 1. Click `Save`
-2. 
+
 ### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
 
 This installation cocntains:
@@ -417,9 +417,9 @@ To access the demo environment:
 
 ## 2.3 🚀 Demo the Solution
 
-Please use the [Demo Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md) to prepare for the demo.
+Please use the [Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md) to prepare for the demo.
 
-Then start the demo [Demo Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md#3-deliver-the-demo).
+Then start the demo with the [Demo Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md#3-deliver-the-demo).
 
 
 <div style="page-break-after: always;"></div>
