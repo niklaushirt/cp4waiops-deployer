@@ -84,18 +84,19 @@ Here is a quick video that walks you through the installation process
 * Paste the install file into the OpenShift web UI and insert your entitlement key
 * Grab a coffe and come back after 2-3 hours depending on the modules you're installing
 
+> 🤓 So this could basically be done from an iPhone or iPad	
 
 🚀 Already have a cluster? [Dive right in](#-131-install-ai-manager-with-demo-content-turbonomic-and-instana)
 
 
-> 🤓 So this could basically be done from an iPhone or iPad
+
  
 
 <div style="page-break-after: always;"></div>
 
 ## ✅ 1.1 Prerequisites 
 
-### ✅ 1.1.1 OpenShift requirements 
+### 1.1.1 OpenShift requirements 
 
 I installed the demo in a ROKS environment.
 
@@ -113,21 +114,18 @@ You **might** get away with less if you don't install some components (Event Man
 
 
 
-### ✅ 1.1.2 Get a ROKS Cluster (IBMers and IBM Partners only)
+### 1.1.2 Get a ROKS Cluster (IBMers and IBM Partners only)
 
 
 IBMers can get a temporary one from **Techzone**
 
 You have different options:
-[IBM RedHat Openshift Kubernetes Service (ROKS)](https://techzone.ibm.com/my/reservations/create/60da20f935e6ac001f1c4086)
 
-Basic one that "just works)
+[IBM RedHat Openshift Kubernetes Service (ROKS)](https://techzone.ibm.com/my/reservations/create/60da20f935e6ac001f1c4086) - RECOMMENDED: Basic one that "just works
 
-[IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)](https://techzone.ibm.com/my/reservations/create/61415dd831cf9f00174c914b)
-ROKS with ODF, but limited in CPU - you won't be able to install Instana AND Turbonomic on top
+[IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)](https://techzone.ibm.com/my/reservations/create/61415dd831cf9f00174c914b) - ROKS with ODF, but limited in CPU - you won't be able to install Instana AND Turbonomic on top
 
-[OpenShift Cluster (VMware on IBM Cloud) - IPI](https://techzone.ibm.com/my/reservations/create/638e78ec5cad290018089470)
-Gives you the most control
+[OpenShift Cluster (VMware on IBM Cloud) - IPI](https://techzone.ibm.com/my/reservations/create/638e78ec5cad290018089470) - Gives you the most control
 
 
 1. Select the Openshift that you want to use above
@@ -161,7 +159,7 @@ Gives you the most control
 1. Once the cluster is provisioned, don't forget to extend it to 8 days if needed.
 
 
-### ✅ 1.1.3 Get the CP4WAIOPS installation token (registry pull token) 
+### 1.1.3 Get the CP4WAIOPS installation token (registry pull token) 
 
 You can get the installation (registry pull token) token from [https://myibm.ibm.com/products-services/containerlibrary](https://myibm.ibm.com/products-services/containerlibrary).
 
@@ -352,7 +350,6 @@ This installation cocntains:
 
 ### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
 
-This installation cocntains:
 
 
 
@@ -360,7 +357,7 @@ This installation cocntains:
 
 ## 1.4 Configure Slack
 
-Continue [here](#4-slack-integration) for [Slack integration](#4-slack-integration)
+Continue [here](#3-slack-integration) for [Slack integration](#3-slack-integration)
 
 <div style="page-break-after: always;"></div>
 
