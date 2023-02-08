@@ -6,7 +6,7 @@
 
 
 
-![K8s CNI](./images/00_aimanager_insights.png)
+![K8s CNI](./demo/00_aimanager_insights.png)
 
 <center> ©2023 Włodzimierz Dymaczewski/Niklaus Hirt / IBM </center>
 
@@ -69,17 +69,17 @@ This takes about 15 minutes of your time and 2-3 hours for the installation to c
 
 1. Click on your reservation 
 
-	![image](./images/image.053.png)
+	![image](./demo/image.053.png)
 
 1. Click on `Open environment details` 
 
-	![image](./images/image.051.png)
+	![image](./demo/image.051.png)
 	
 	<div style="page-break-after: always;"></div>
 
 1. Click on `Open your demo environment`
 
-	![image](./images/image.052.png)
+	![image](./demo/image.052.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -87,7 +87,7 @@ This takes about 15 minutes of your time and 2-3 hours for the installation to c
 
 The Demo UI should open:
 
-![image](./images/image.054.png)
+![image](./demo/image.054.png)
 
 The most important functionalities are:
 
@@ -215,7 +215,7 @@ Now let's start the demo.
 
 
 
-![image](./images/image.054.png)
+![image](./demo/image.054.png)
 
 
 
@@ -243,7 +243,7 @@ Now let's start the demo.
 
 
 
-![image](./images/image.089.png)
+![image](./demo/image.089.png)
 
 
 
@@ -266,7 +266,7 @@ Let’s verify what’s going on with the RobotShop site. The application is up 
 
 
 
-![image](./images/image.088.png)
+![image](./demo/image.088.png)
 
 
 
@@ -284,14 +284,14 @@ I know that there are many ratings for each of the products that we sell, so whe
 
 ### 3.4.1 Login to AI Manager
 
-![image](./images/image.054.png)
+![image](./demo/image.054.png)
 
 >**🚀 Action**
 In the Demo UI, click **AI MAnager (1)**. *Result: The Watson AIOps web interface opens showing the welcome screen.* 
 
 
 
-![image](./images/image.055.png)
+![image](./demo/image.055.png)
 
 **✋ Narration**
 
@@ -304,7 +304,7 @@ Let’s take a closer look at the incident that has been created in Watson AIOps
 
 ### 3.4.2 Open the Story
 
-![image](./images/image.056.png)  
+![image](./demo/image.056.png)  
 
 >**🚀 Action**
 Click the "hamburger menu" on the upper left. Click **Stories and alerts** *Result: Stories are displayed.*
@@ -312,7 +312,7 @@ Click the "hamburger menu" on the upper left. Click **Stories and alerts** *Resu
 
 
 
-![image](./images/image.057.png)
+![image](./demo/image.057.png)
 
 **✋ Narration**
 
@@ -324,7 +324,7 @@ The **Story** contains related log anomalies, topology, similar incidents, recom
 
 ### 3.4.3 Examining the Story
 
-![image](./images/image.056.png)  
+![image](./demo/image.056.png)  
 
 >**🚀 Action**
 Click the "hamburger menu" on the upper left. Click **Stories and alerts** *Result: Stories are displayed.*
@@ -332,14 +332,14 @@ Click the "hamburger menu" on the upper left. Click **Stories and alerts** *Resu
 
 
 
-![image](./images/image.057.png)
+![image](./demo/image.057.png)
 
 **✋ Narration**
 
 Now let's have a look at the **Story**.
 
 
-![image](./images/image.059.png)
+![image](./demo/image.059.png)
 
 As I said before, the Story regroups all relevant information concerning the incident at hand that have been identified by Watson AIOps.
 
@@ -361,7 +361,7 @@ As I said before, the Story regroups all relevant information concerning the inc
 >Click on  **In progress**
 
 
-![image](./images/image.079.png)  
+![image](./demo/image.079.png)  
 
 
 
@@ -377,7 +377,7 @@ First and before I continue examining the Story I want to let my colleagues know
 Click the first similar resolution ticket  *Result: A ServiceNow Ticket is displayed.*
 
 
-![image](./images/image.060.png)  
+![image](./demo/image.060.png)  
 
 
 
@@ -407,7 +407,7 @@ Let me check how the problem was resolved for this incident.
 >Click on the **Resolution Information** Tab
 
 
-![image](./images/image.076.png)  
+![image](./demo/image.076.png)  
 
 
 
@@ -427,14 +427,14 @@ To finish up, I will check if the incident was related to an official change.
 
 
 
-![image](./images/image.077.png)
+![image](./demo/image.077.png)
 
 >**🚀 Action**
 >Click on the **Related Records** Tab
 >
 >Click on the **i** Button next to **Caused by Change**
 
-![image](./images/image.078.png)  
+![image](./demo/image.078.png)  
 
 
 
@@ -458,7 +458,7 @@ But for the sake of the demo, let's dig a little deeper first.
 >**🚀 Action**
 Close the ServiceNow page and click the **Alerts** Tab. *Result: The list of Alerts is displayed.* 
 
-![image](./images/image.061.png)  
+![image](./demo/image.061.png)  
 
 **✋ Narration**
 
@@ -479,7 +479,7 @@ In the **Alert details,** you can see different types of groupings explaining wh
 Click **Scope-based grouping**. *Result: An explanation is displayed.* 
 
 
-![image](./images/image.027.png)
+![image](./demo/image.027.png)
 
 **✋ Narration**
 
@@ -491,7 +491,7 @@ Some alerts were added to the story because they occurred on the same resource w
 Click **Topological grouping**. *Result: The topological grouping is displayed*. 
 
 
-![image](./images/image.028.png)
+![image](./demo/image.028.png)
 
 **✋ Narration**
 
@@ -505,7 +505,7 @@ Other alerts were grouped because they occurred on the logically or physically r
 Click **Temporal correlation**. *Result: Temporal correlation is displayed*. 
 
 
-![image](./images/image.029.png)
+![image](./demo/image.029.png)
 
 
 **✋ Narration**
@@ -527,7 +527,7 @@ Finally, the temporal correlation adds to the story events that previously, in h
 
   
 
-![image](./images/image.063.png)  
+![image](./demo/image.063.png)  
 
 **✋ Narration**
 
@@ -549,7 +549,7 @@ Other events are confirming the hypothesis.
 
 * Cloud Pak for Watson AIOps has learned the normal, good patterns for logs coming from the applications. The Story contains a **Log Anomaly** that has been detected in the ratings service that cannot acces the mysql database.
 
-![image](./images/image.064.png)
+![image](./demo/image.064.png)
 
 >**🚀 Action**
 Click on a Alert line that has **ANOMALY:** in the Type column. Then open the **Metric Anomaly Details** accordion. 
@@ -560,7 +560,7 @@ Click on a Alert line that has **ANOMALY:** in the Type column. Then open the **
 * Cloud Pak for Watson AIOps is also capable of collecting metrics from multiple sources and detecting **Metric Anomalies**. It was trained on hundreds or thousands of metrics from the environment and constructs a dynamic baseline (shown in green). The graphic suddenly turns red which relates to detected anomaly when the database is consuming a higher amount of memory than usual.
 
 
-![image](./images/image.065.png)
+![image](./demo/image.065.png)
 
 >**🚀 Action**
 (1) In **Related Alerts** select some additional alerts.
@@ -582,7 +582,7 @@ Now let's zoom in to better see the anomalies
 
  
 
-![image](./images/image.066.png)
+![image](./demo/image.066.png)
 
 >**🚀 Action**
 Hover over a datapoint to show the before/after values. 
@@ -607,7 +607,7 @@ Close the Metric anomaly details view.
 
 
 
-![image](./images/image.067.png)
+![image](./demo/image.067.png)
 
 **✋ Narration**
 
@@ -617,7 +617,7 @@ You can see that there are some statuses attached to the different resources, ma
 
 <div style="page-break-after: always;"></div>
 
-![image](./images/image.068.png)  
+![image](./demo/image.068.png)  
 
 >**🚀 Action**
 >Find the resource which displays resource name “**mysql**”. Then, right-click and select **Resource details.** 
@@ -630,7 +630,7 @@ You can see that there are some statuses attached to the different resources, ma
 >***Result**: Detailed view of the Alerts specific for this resource.*
 
 
-![image](./images/image.069.png)
+![image](./demo/image.069.png)
 
 **✋ Narration** 
 
@@ -641,7 +641,7 @@ The topology service provides operations teams with complete up-to-date visibili
 
 ### 3.4.9 [Optional] Topology in-depth
 
-![image](./images/image.070.png)
+![image](./demo/image.070.png)
 
 >**🚀 Action**
 >Find the resource which displays resource name “mysql”. Then, right-click and select **Open in Topology Viewer.** 
@@ -650,7 +650,7 @@ The topology service provides operations teams with complete up-to-date visibili
 
 
 
-![image](./images/image.071.png)
+![image](./demo/image.071.png)
 
 
 
@@ -662,7 +662,7 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 
 
-![image](./images/image.072.png)
+![image](./demo/image.072.png)
 
 >**🚀 Action**
 >Change the number of hops to `4` and click **Render**.** 
@@ -677,7 +677,7 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 
 
-![image](./images/image.073.png)
+![image](./demo/image.073.png)
 
 >**🚀 Action**
 >Right-click om mysql and select **Show last change in timeline** and check **Delta**
@@ -686,7 +686,7 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 
 
-![image](./images/image.074.png)
+![image](./demo/image.074.png)
 
 
 
@@ -706,7 +706,7 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 >Click on the  **Overview**  Tab.
 
 
-![image](./images/image.080.png)
+![image](./demo/image.080.png)
 
 
 
@@ -723,13 +723,13 @@ Let’s execute the Runbook.
 >Click **Start Runbook**.
 
 
-![image](./images/image.082.png)
+![image](./demo/image.082.png)
 
 >**🚀 Action**
 >
 >Click **Run** in Step 1.
 
-![image](./images/image.083.png)
+![image](./demo/image.083.png)
 
 
 
@@ -745,7 +745,7 @@ The Runbook that I just started kicks off a Playbook on Ansible Tower. I can fol
 
 
 
-![image](./images/image.084.png)
+![image](./demo/image.084.png)
 
 
 
@@ -757,7 +757,7 @@ The Runbook that I just started kicks off a Playbook on Ansible Tower. I can fol
 
 
 
-![image](./images/image.087.png)
+![image](./demo/image.087.png)
 
 **✋ Narration**
 
@@ -765,7 +765,7 @@ Before confirming that the runbook worked as expected, I should check the RobotS
 
 
 
-![image](./images/image.085.png)
+![image](./demo/image.085.png)
 
 >**🚀 Action**
 >
@@ -789,7 +789,7 @@ So the runbook has resolved the problem. When I tell Watson AIOps that the Runbo
 >Click on  **Resolved**
 
 
-![image](./images/image.079.png)  
+![image](./demo/image.079.png)  
 
 
 
