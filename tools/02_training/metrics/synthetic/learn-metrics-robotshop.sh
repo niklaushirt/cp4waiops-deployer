@@ -24,6 +24,9 @@ declare -a MY_RES_IDS=(
   "ratings-predictive,PodRestarts,PodRestarts,1,1"
   "ratings-predictive,TransactionsPerSecond,TransactionsPerSecond,160,40"
   "ratings-predictive,Latency,Latency,2,1"
+  "DCWest1-Rack045-DELL3762,CPU1Temperature,System,ITERATIONS,90"
+  "dSwitch-1-vm-network-port-1,TransactionsPerSecond,TransactionsPerSecond,0,1"
+  "dcwest1-switch023,TransactionsPerSecond,TransactionsPerSecond,60,30"
 )
 
 

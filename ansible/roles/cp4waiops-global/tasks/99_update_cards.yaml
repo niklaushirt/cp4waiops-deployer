@@ -154,7 +154,7 @@
         ROWS=$ROWS'{"drilldown_url":  "https://'$instanaURL'/#/applications", "label": "→   Instana", "sub_text": " "},'
         ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: admin@instana.local - Password: P4ssw0rd! "},'
         fi
-        if [[ $turboURL =~ "api-turbonomic" ]]; then
+        if [[ $turboURL =~ "-turbonomic" ]]; then
         echo "Turbonomic Present"
         ROWS=$ROWS'{"drilldown_url":  "https://'$turboURL'", "label": "→   Turbonomic", "sub_text": " "},'
         ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: administrator - Password: P4ssw0rd! "},'

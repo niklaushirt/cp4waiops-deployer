@@ -324,8 +324,6 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
                 else:
                     CURRENT_VALUE = str(random.randint(int(MY_FIX_VALUE), int(MY_FIX_VALUE)+int(MY_VARIATION)))
 
-
-
                 CURRENT_LINE='{"timestamp":"'+MY_TIMESTAMP+'","resourceID":"'+MY_RESOURCE_ID+'","metrics":{"'+MY_METRIC_NAME+'":'+CURRENT_VALUE+'},"attributes":{"group":"'+MY_GROUP_ID+'","node":"'+MY_RESOURCE_ID+'"} },'
 
                 output_json=output_json+CURRENT_LINE

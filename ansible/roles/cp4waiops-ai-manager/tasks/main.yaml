@@ -67,7 +67,7 @@
     - "  📥 CONFIG"
     - "     ✅ Installation Name:                        {{current_cp4waiops_feature.waiops_name}}"
     - "     🔎 AIManager Size:                           {{current_cp4waiops_feature.waiops_size}}"
-    - "     🔽 Custom Siting File:                       {{current_cp4waiops_feature.custom_size_file}}"
+    - "     🔽 Custom Siting File:                       {{current_cp4waiops_feature.custom_size_file | default('none')}}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 VERSION "
     - "     🚀 Subscription Channel:                     {{current_cp4waiops_feature.subscription_channel}}"
