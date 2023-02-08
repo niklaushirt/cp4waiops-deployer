@@ -56,8 +56,6 @@ Please refer to the official IBM Documentation for production ready installation
 
 🤓 [Demo Setup - Explained](#4-demo-setup---explained)
 
-> ❗You can find a PDF version of this guide here: [PDF](./INSTALL_CP4WAIOPS.pdf).
-> 
 
 > ℹ️ You can find a more detailed presentation about how the automation works here: [PDF](https://ibm.box.com/s/gx0tcubl9k4phvdsrffd7taragrmvz02).
 > 
@@ -81,13 +79,13 @@ Here is a quick video that walks you through the installation process
 
 ### What you have to do:
 
-* You get a OpenShift Cluster
-* You get your entitlement key/pull token
-* You paste the install file into the OpenShift web UI
+* Get an OpenShift Cluster
+* Get your entitlement key/pull token
+* Paste the install file into the OpenShift web UI and insert your entitlement key
 * Grab a coffe and come back after 2-3 hours depending on the modules you're installing
 
 
-🚀 Already have a cluster? [Dive right in](#-12-install-ai-manager-with-demo-content)
+🚀 Already have a cluster? [Dive right in](#-131-install-ai-manager-with-demo-content-turbonomic-and-instana)
 
 
 > 🤓 So this could basically be done from an iPhone or iPad
