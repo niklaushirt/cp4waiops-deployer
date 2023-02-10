@@ -40,49 +40,9 @@ You should be familiar with the following terminology when discussing Cloud Pak 
 
 <div style="page-break-after: always;"></div>
 
-## 1.2 Get access to a live demo environment
-
-To get a demo environment you have two possibilities:
-
-### 1.2.1 Reserved preconfigured Instances
-
-To reserve a preconfigured demo environment, follow [this link](https://techzone.ibm.com/collection/cp4waiopsdemo#tab-1) to TechZone to create a reservation and to request access credentials. 
-
-**❗Due to the nature of the product, Cloud Pak for Watson AIOps demo environments can be used effectively by a single user at a time. Because of that, provided environments are intended for enablement and practicing rather than for actual client demo!**
-
-**⚠️ Please don't create your own applications in the shared demo environments or modify it in any shape or form. If you need to customize the demo install your own instance.**
-
-### 1.2.2 Install your own environment
-
-You can easily provision your own instance of the demo environment, as described in [Provisioning you own instance of CP4WAIOps demo](https://github.com/niklaushirt/cp4waiops-deployer#-1-quick-install).
-
-This takes about 15 minutes of your time and 2-3 hours for the installation to complete in the background.
+## 1.2 Navigating The Demo UI
 
 
-
-# 2. 🚀 Get started
-
-## 2.1 Connect to the Demo UI
-
-1. Click on your reservation 
-
-	![image](./demo/image.053.png)
-
-1. Click on `Open environment details` 
-
-	![image](./demo/image.051.png)
-	
-	<div style="page-break-after: always;"></div>
-
-1. Click on `Open your demo environment`
-
-	![image](./demo/image.052.png)
-
-<div style="page-break-after: always;"></div>
-
-## 2.2 Navigating The Demo UI
-
-The Demo UI should open:
 
 ![image](./demo/image.054.png)
 
@@ -101,14 +61,14 @@ The most important functionalities are:
 
 <div style="page-break-after: always;"></div>
 
-## 2.3 Demonstration scenario
+## 1.2 Demonstration scenario
 
-### 2.3.1 Overview
+### 1.2.1 Overview
 
 This use case shows clients how IBM Cloud Pak for Watson AIOps proactively helps avoid application downtimes and incidents impacting end-users. You play the role of an SRE/Operations person who has received a Slack message indicating that the RobotShop application is not displaying customer ratings. This is an important feature of the RobotShop application since RobotShop is the main platform from which the fictional company sells its robots.
 
 
-### 2.3.2 Use Case
+### 1.2.2 Use Case
 
 The use case demonstrates how Cloud Pak for Watson AIOps can assist the SRE/Operations team as they identify, verify, and ultimately correct the issue. The demonstration shows integration with Instana, Turbonomic, ServiceNow, and Slack. Slack is the ChatOps environment used for working on this incident. 
 
@@ -121,7 +81,7 @@ You will demonstrate the following major selling points around Cloud Pak for Wat
 
 <div style="page-break-after: always;"></div>
 
-## 2.4 Demonstration flow
+## 1.3 Demonstration flow
 1. Scenario introduction
 1. Trigger problem situation [In the background] 
 1. Verify the status of the Robot Shop application.
@@ -141,9 +101,9 @@ You will demonstrate the following major selling points around Cloud Pak for Wat
 
 
 
-# 3. Deliver the demo
+# 2. Deliver the demo
 
-## 3.1 Introduce the demo context
+## 2.1 Introduce the demo context
 
 **📣 <u>Narration</u>** 
 
@@ -200,7 +160,7 @@ Now let's start the demo.
 
 <div style="page-break-after: always;"></div>
 
-## 3.2 Trigger the incident
+## 2.2 Trigger the incident
 
 **❗ <u>Note</u>**: The following step does not have to be shown to the client – you may perform the action in the background if possible.
 
@@ -226,9 +186,9 @@ Now let's start the demo.
 
 <div style="page-break-after: always;"></div>
 
-## 3.3 Verify the status of the Robot Shop application
+## 2.3 Verify the status of the Robot Shop application
 
-### 3.3.1 Show the Application
+### 2.3.1 Show the Application
 
 
 
@@ -251,7 +211,7 @@ Let’s verify what’s going on with the RobotShop site. The application is up 
 
 <div style="page-break-after: always;"></div>
 
-### 3.3.2 Show ratings not working
+### 2.3.2 Show ratings not working
 
 
 
@@ -269,9 +229,9 @@ I know that there are many ratings for each of the products that we sell, so whe
 
 <div style="page-break-after: always;"></div>
 
-## 3.4 Understanding and resolving the incident
+## 2.4 Understanding the incident
 
-### 3.4.1 Login to AI Manager
+### 2.4.1 Login to AI Manager
 
 ![image](./demo/image.054.png)
 
@@ -291,7 +251,7 @@ Let’s take a closer look at the incident that has been created in Watson AIOps
 <div style="page-break-after: always;"></div>
 
 
-### 3.4.2 Open the Story
+### 2.4.2 Open the Story
 
 ![image](./demo/image.056.png)  
 
@@ -311,7 +271,7 @@ The **Story** contains related log anomalies, topology, similar incidents, recom
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.3 Examining the Story
+### 2.4.3 Examining the Story
 
 ![image](./demo/image.056.png)  
 
@@ -340,7 +300,7 @@ As I said before, the Story regroups all relevant information concerning the inc
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.4 Acknowledge the Story
+### 2.4.4 Acknowledge the Story
 
 >**🚀 <u>Action</u>**
 >Click on **Change Story Settings.**
@@ -360,7 +320,7 @@ First and before I continue examining the Story I want to let my colleagues know
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.5 Similar Incidents
+### 2.4.5 Similar Incidents
 
 >**🚀 <u>Action</u>**
 Click the first similar resolution ticket  
@@ -438,7 +398,7 @@ But for the sake of the demo, let's dig a little deeper first.
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.6 Examine the Alerts
+### 2.4.6 Examine the Alerts
 
 >**🚀 <u>Action</u>**
 Close the ServiceNow page and click the **Alerts** Tab. 
@@ -503,7 +463,7 @@ Finally, the temporal correlation adds to the story events that previously, in h
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.7 Understand the Incident
+### 2.4.7 Incident timeline
 
 >**🚀 <u>Action</u>**
 >Click twice on the  **Last occurence** Header. 
@@ -578,13 +538,15 @@ Close the Metric anomaly details view.
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.8 Examining the Topology
+## 2.5 Working with Topology
+
+
+
+### 2.5.1 Examining the Topology
 
 
 >**🚀 <u>Action</u>**
 >Click the **Topology** Tab. 
->
->***Result**: The topology is displayed.* 
 
 
 
@@ -603,12 +565,9 @@ You can see that there are some statuses attached to the different resources, ma
 >**🚀 <u>Action</u>**
 >Find the resource which displays resource name “**mysql**”. Then, right-click and select **Resource details.** 
 >
->***Result**: Detailed view displays.*
 
 >**🚀 <u>Action</u>**
 >Click on Tab **Alerts** 
->
->***Result**: Detailed view of the Alerts specific for this resource.*
 
 
 ![image](./demo/image.069.png)
@@ -620,14 +579,12 @@ The topology service provides operations teams with complete up-to-date visibili
 <div style="page-break-after: always;"></div>
 
 
-### 3.4.9 [Optional] Topology in-depth
+### 2.5.2 [Optional] Topology in-depth
 
 ![image](./demo/image.070.png)
 
 >**🚀 <u>Action</u>**
 >Find the resource which displays resource name “mysql”. Then, right-click and select **Open in Topology Viewer.** 
->
->***Result**: Topology Viewer displays.*
 
 
 
@@ -646,9 +603,7 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 ![image](./demo/image.072.png)
 
 >**🚀 <u>Action</u>**
->Change the number of hops to `4` and click **Render**.** 
->
->***Result**: Topology Viewer refreshes with bigger topology.*
+>Change the number of hops to `4` and click **Render**.
 
 
 
@@ -662,8 +617,6 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 >**🚀 <u>Action</u>**
 >Right-click om mysql and select **Show last change in timeline** and check **Delta**
->
->***Result**: Topology Viewer refreshes and shows the events over time.*
 
 
 
@@ -681,7 +634,13 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.10 Fixing the problem with runbook automation
+
+
+## 2.6 Resolving the incident
+
+
+
+### 2.6.1 Fixing the problem with runbook automation
 >**🚀 <u>Action</u>**
 >
 >Click on the  **Overview**  Tab.
@@ -694,6 +653,8 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 **📣 <u>Narration</u>**
 
 Now that we know what the problem is, let’s correct what has happened. A runbook has been automatically identified but have not been executed. Runbooks are guided steps that IT operations teams use to troubleshoot and resolve problems. Some organizations might call these standard operating procedures or playbooks. When an incident occurs, IBM Cloud Pak for Watson AIOps matches an appropriate runbook to the problem. The runbook can be set to run automatically when it is matched to an incident, or it can run with user approval and participation. 
+
+<div style="page-break-after: always;"></div>
 
 Let’s execute the Runbook.
 
@@ -758,7 +719,7 @@ So the runbook has resolved the problem. When I tell Watson AIOps that the Runbo
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.11 Resolve the Incident
+### 2.6.2 Resolve the Incident
 
 >**🚀 <u>Action</u>**
 >Click on **Change Story Settings.**
@@ -783,6 +744,8 @@ So now as we have resolved the problem,  I will inform the development team of t
 
 
 # Demonstration summary
+**📣 <u>Narration</u>**
+
 Today, I have shown you how Cloud Pak for Watson AIOps can assist the SRE/Operations team to identify, verify, and ultimately correct an issue with a modern, distributed application running in a cloud-native environment. The presented solution provides automatic application topology discovery, anomaly detection both with metrics and logs, and sophisticated methods of correlation of events coming from different sources. 
 
 
