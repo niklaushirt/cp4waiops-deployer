@@ -2,7 +2,7 @@ cat << EOF | oc apply -f -
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: installer-default-default
+  name: installer-default-default-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -18,7 +18,7 @@ metadata:
   name: waiops-easy-install-aimanager-practicum
   namespace: default
 spec:
-  serviceAccountName: installer-default-default
+  serviceAccountName: installer-default-default-admin
   template:
     spec:
       containers:

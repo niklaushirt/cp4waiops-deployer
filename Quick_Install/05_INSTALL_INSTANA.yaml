@@ -27,7 +27,7 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: installer-default-default
+  name: installer-default-default-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -43,7 +43,7 @@ metadata:
   name: waiops-easy-install-instana
   namespace: default
 spec:
-  serviceAccountName: installer-default-default
+  serviceAccountName: installer-default-default-admin
   template:
     spec:
       containers:
@@ -131,6 +131,8 @@ spec:
                 - name: cp4waiops-instana
                   kind: Instana
                   install: true
+                  version: 237-3
+                  # version: 237-3 
 
                   # ---------------------------------------------------------------------
                   # INSTANA LICENSE

@@ -21,6 +21,8 @@ global_config:
   create_ocp_items: true
   # Use this Password for all Instances
   global_password: P4ssw0rd!
+  # Set this value to True to accept all licenses
+  accept_all_licenses: False
 
 
 openshift:
@@ -47,7 +49,7 @@ cp4waiops:
   - name: cp4waiops-turbonomic
     kind: Turbonomic
     install: true
-    turbo_version: 8.7.5
+    turbo_version: 8.7.6
     
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
