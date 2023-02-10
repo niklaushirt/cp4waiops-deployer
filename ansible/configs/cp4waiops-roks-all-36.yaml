@@ -21,6 +21,8 @@ global_config:
   create_ocp_items: true
   # Use this Password for all Instances
   global_password: P4ssw0rd!
+  # Set this value to True to accept all licenses
+  accept_all_licenses: False
 
 
 openshift:
@@ -136,7 +138,7 @@ cp4waiops:
     # ---------------------------------------------------------------------
     # Demo UI
     install_demo_ui: true
-    demoui_slack_url: https://aiops-fry2953.slack.com/sign_in_with_password
+    demoui_slack_url: https://aiopsdemohq.slack.com/sign_in_with_password
     # demoui_slack_url: https://aiops-fry2953.slack.com/x-p1624757694871-3716524482480-3705437209041/messages/C01JZLFJFMJ
     demoui_slack_user: ibmaiopsdemo@gmail.com
     demoui_slack_pwd: P4ssw0rd!
@@ -263,7 +265,7 @@ cp4waiops:
   - name: cp4waiops-instana
     kind: Instana
     install: true
-    version: 235-5
+    version: 241-0
 
     # ---------------------------------------------------------------------
     # INSTANA LICENSE
@@ -300,7 +302,7 @@ cp4waiops:
   - name: cp4waiops-turbonomic
     kind: Turbonomic
     install: true
-    turbo_version: 8.7.5
+    turbo_version: 8.7.6
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)

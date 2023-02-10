@@ -11,7 +11,6 @@
 <center> ©2023 Włodzimierz Dymaczewski/Niklaus Hirt / IBM </center>
 
 
-<div style="page-break-after: always;"></div>
 
 
 # 1. Introduction
@@ -23,9 +22,9 @@ The script is intended to be used with live Cloud Pak for Watson AIOps 3.x demo 
 
 In the demo script, 
 
-- “**🚀 Action**” denotes a setup step for the presenter.
-- “**✋ Narration**” denotes what the presenter will say. 
-- “**ℹ️ Note**” denotes where the presenter may need to deviate from this demo script or add supplemental comments.
+- “**🚀 <u>Action</u>**” denotes a setup step for the presenter.
+- “**📣 <u>Narration</u>**” denotes what the presenter will say. 
+- “**ℹ️ <u>Note</u>**” denotes where the presenter may need to deviate from this demo script or add supplemental comments.
 
 <div style="page-break-after: always;"></div>
 
@@ -45,15 +44,13 @@ You should be familiar with the following terminology when discussing Cloud Pak 
 
 To get a demo environment you have two possibilities:
 
-### 1.2.1 Reserved Instances
+### 1.2.1 Reserved preconfigured Instances
 
-To reserve a preconfigured demo environment, follow this link to TechZone to create a reservation and to request access credentials. 
+To reserve a preconfigured demo environment, follow [this link](https://techzone.ibm.com/collection/cp4waiopsdemo#tab-1) to TechZone to create a reservation and to request access credentials. 
 
-<https://techzone.ibm.com/collection/cp4waiopsdemo#tab-1> 
+**❗Due to the nature of the product, Cloud Pak for Watson AIOps demo environments can be used effectively by a single user at a time. Because of that, provided environments are intended for enablement and practicing rather than for actual client demo!**
 
-> **❗Due to the nature of the product, Cloud Pak for Watson AIOps demo environments can be used effectively by a single user at a time. Because of that, provided environments are intended for enablement and practicing rather than for actual client demo!**
-
-⚠️ Please don't create your own applications in the shared demo environments or modify it in any shape or form. If you need to customize the demo install your own instance.
+**⚠️ Please don't create your own applications in the shared demo environments or modify it in any shape or form. If you need to customize the demo install your own instance.**
 
 ### 1.2.2 Install your own environment
 
@@ -61,7 +58,7 @@ You can easily provision your own instance of the demo environment, as described
 
 This takes about 15 minutes of your time and 2-3 hours for the installation to complete in the background.
 
-<div style="page-break-after: always;"></div>
+
 
 # 2. 🚀 Get started
 
@@ -142,13 +139,13 @@ You will demonstrate the following major selling points around Cloud Pak for Wat
    1. Resolve the Incident
 1. Summary
 
-<div style="page-break-after: always;"></div>
+
 
 # 3. Deliver the demo
 
 ## 3.1 Introduce the demo context
 
-**✋ Narration** 
+**📣 <u>Narration</u>** 
 
 Welcome to this demonstration of the Cloud Pak for Watson AIOps platform. In this demo, I am going to show you how Watson AIOps can help your operations team proactively identify, diagnose, and resolve incidents across mission-critical workloads.
 
@@ -160,12 +157,10 @@ You’ll see how:
 
 During the demonstration, we will be using the sample application called RobotShop, which serves as a proxy for any type of app. The application is built on a microservices architecture, and the services are running on Kubernetes cluster.
 
->**🚀 Action**
->Use demo [introductory PowerPoint presentation](https://github.com/niklaushirt/cp4waiops-deployer/blob/main/doc/CP4AIOPS_DEMO_2023_V1.pptx?raw=true), to illustrate the narration
->
->Adapt your details on Slide 1 and 13
+>**🚀 <u>Action</u>**
+>Use demo [introductory PowerPoint presentation](https://github.com/niklaushirt/cp4waiops-deployer/blob/main/doc/CP4AIOPS_DEMO_2023_V1.pptx?raw=true), to illustrate the narration. Adapt your details on Slide 1 and 13
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 **Slide 2**: Let’ look at the environment that we have set up. Our sample application: “RobotShop” is running as a set of microservices in a Kubernetes cluster. Typically, the Operations team maintaining such application has a collection of tools through which they collect various data types. 
 
@@ -195,12 +190,11 @@ Those Events are being grouped into Alerts to massively reduce the number of sig
 
 
 
->**ℹ️ Note**
-We're NOT using Slack in this demo.
+**ℹ️ <u>Note</u>**: We are NOT using Slack in this demo.
 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Now let's start the demo.
 
@@ -208,18 +202,13 @@ Now let's start the demo.
 
 ## 3.2 Trigger the incident
 
-
-
->**❗ Note** 
->The following step does not have to be shown to the client – you may perform the action in the background if possible.
-
-
+**❗ <u>Note</u>**: The following step does not have to be shown to the client – you may perform the action in the background if possible.
 
 ![image](./demo/image.054.png)
 
 
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Open AIManager **Demo** UI, and trigger the incident
 >
 >- Point your browser to the AIManager Demo UI, 
@@ -247,12 +236,12 @@ Now let's start the demo.
 
 
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Open the RobotShop application
 >
 >The Link can be found in the **Demo UI** under **Third-Party**. Play with the application UI.
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 In this demo I am the application SRE (Site Reliability Engineer) responsible for an e-commerce website called RobotShop, an online store operated by my company. In the middle of the day (when clients make most of the purchases) I received a slack message on my mobile, alerting me that there is some problem with the site.
 
@@ -270,10 +259,10 @@ Let’s verify what’s going on with the RobotShop site. The application is up 
 
 
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 Open any robot details to show that there are no ratings displayed.
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 I know that there are many ratings for each of the products that we sell, so when none are displayed, it means that there is a likely problem with `Ratings` service withing application that may heavily impact client’s purchasing decisions, as well as may be a sign of a wider outage.
 
@@ -286,14 +275,14 @@ I know that there are many ratings for each of the products that we sell, so whe
 
 ![image](./demo/image.054.png)
 
->**🚀 Action**
-In the Demo UI, click **AI MAnager (1)**. *Result: The Watson AIOps web interface opens showing the welcome screen.* 
+>**🚀 <u>Action</u>**
+In the Demo UI, click **AI MAnager `(1)`**
 
 
 
 ![image](./demo/image.055.png)
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Let’s take a closer look at the incident that has been created in Watson AIOps.
 
@@ -306,15 +295,15 @@ Let’s take a closer look at the incident that has been created in Watson AIOps
 
 ![image](./demo/image.056.png)  
 
->**🚀 Action**
-Click the "hamburger menu" on the upper left. Click **Stories and alerts** *Result: Stories are displayed.*
+>**🚀 <u>Action</u>**
+Click the "hamburger menu" on the upper left. Click **Stories and alerts**
 
 
 
 
 ![image](./demo/image.057.png)
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 We can see that the simulation has created a **Story**. The **Story** includes grouped information related to the incident at hand. It equates to a classic War Room that are usually put in place in case of an outage. 
 The **Story** contains related log anomalies, topology, similar incidents, recommended actions based on past trouble tickets, relevant events, runbooks, and more.
@@ -326,15 +315,15 @@ The **Story** contains related log anomalies, topology, similar incidents, recom
 
 ![image](./demo/image.056.png)  
 
->**🚀 Action**
-Click the "hamburger menu" on the upper left. Click **Stories and alerts** *Result: Stories are displayed.*
+>**🚀 <u>Action</u>**
+Click the "hamburger menu" on the upper left. Click **Stories and alerts** 
 
 
 
 
 ![image](./demo/image.057.png)
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Now let's have a look at the **Story**.
 
@@ -353,7 +342,7 @@ As I said before, the Story regroups all relevant information concerning the inc
 
 ### 3.4.4 Acknowledge the Story
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Click on **Change Story Settings.**
 >
 >Select **Change Status.**
@@ -365,7 +354,7 @@ As I said before, the Story regroups all relevant information concerning the inc
 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 First and before I continue examining the Story I want to let my colleagues know that I'm working on the incident. So let me set it to In Progress.
 
@@ -373,15 +362,15 @@ First and before I continue examining the Story I want to let my colleagues know
 
 ### 3.4.5 Similar Incidents
 
->**🚀 Action**
-Click the first similar resolution ticket  *Result: A ServiceNow Ticket is displayed.*
+>**🚀 <u>Action</u>**
+Click the first similar resolution ticket  
 
 
 ![image](./demo/image.060.png)  
 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Most large organizations use IT Service Management tools to govern processes around IT. Our organization is using ServiceNow for that purpose. Past incidents with resolution information are ingested and analysed by Watson AIOps.
 
@@ -393,9 +382,7 @@ In this particular example I can see that the problem was related to a GIT Commi
 
 Let me check how the problem was resolved for this incident.
 
-
->**ℹ️ Note**
-**IMPORTANT:** In the Robot Shop demo scenario, the integration with ServiceNow is simulated with the static content. 
+**❗ <u>Note</u>**:  In the Robot Shop demo scenario, the integration with ServiceNow is simulated with the static content. 
 
 <div style="page-break-after: always;"></div>
 
@@ -403,7 +390,7 @@ Let me check how the problem was resolved for this incident.
 
 
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Click on the **Resolution Information** Tab
 
 
@@ -411,7 +398,7 @@ Let me check how the problem was resolved for this incident.
 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 It seems that it was resolved by changing the mysql deployment and a Runbook had been created to mitigate the problem.
 
@@ -421,15 +408,13 @@ To finish up, I will check if the incident was related to an official change.
 
 <div style="page-break-after: always;"></div>
 
-
-
 #### Examine the Change
 
 
 
 ![image](./demo/image.077.png)
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Click on the **Related Records** Tab
 >
 >Click on the **i** Button next to **Caused by Change**
@@ -440,7 +425,7 @@ To finish up, I will check if the incident was related to an official change.
 
 <div style="page-break-after: always;"></div>
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Ok, so now I can see that the problem is related to a Change that aims to reduce the footprint of the mysql database.
 
@@ -455,19 +440,19 @@ But for the sake of the demo, let's dig a little deeper first.
 
 ### 3.4.6 Examine the Alerts
 
->**🚀 Action**
-Close the ServiceNow page and click the **Alerts** Tab. *Result: The list of Alerts is displayed.* 
+>**🚀 <u>Action</u>**
+Close the ServiceNow page and click the **Alerts** Tab. 
 
 ![image](./demo/image.061.png)  
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Notice, that alerts are not sorted by severity, but the AI engine ranked them by relevance. The ones that are likely related to the root cause are at the top. Let’s look at the first row for some more details. 
 
->**🚀 Action**
-Click on the first Alert in the list. *Result: The Alert details pane is displayed.* 
+>**🚀 <u>Action</u>**
+Click on the first Alert in the list. 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 In the **Alert details,** you can see different types of groupings explaining why the specific alert was added to the story.
 
@@ -475,25 +460,25 @@ In the **Alert details,** you can see different types of groupings explaining wh
 
 #### Scope based grouping
 
->**🚀 Action**
-Click **Scope-based grouping**. *Result: An explanation is displayed.* 
+>**🚀 <u>Action</u>**
+Click **Scope-based grouping**. 
 
 
 ![image](./demo/image.027.png)
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Some alerts were added to the story because they occurred on the same resource within a short period (default is 15 minutes)
 
 #### Topological grouping
 
->**🚀 Action**
-Click **Topological grouping**. *Result: The topological grouping is displayed*. 
+>**🚀 <u>Action</u>**
+Click **Topological grouping**. 
 
 
 ![image](./demo/image.028.png)
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Other alerts were grouped because they occurred on the logically or physically related resources. This correlation is using the application topology service that stitches topology information from different sources.
 
@@ -501,35 +486,33 @@ Other alerts were grouped because they occurred on the logically or physically r
 
 #### Temporal grouping
 
->**🚀 Action**
-Click **Temporal correlation**. *Result: Temporal correlation is displayed*. 
+>**🚀 <u>Action</u>**
+Click **Temporal correlation**. 
 
 
 ![image](./demo/image.029.png)
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Finally, the temporal correlation adds to the story events that previously, in history, are known to occur close to each other in the short time window. What is most important here is the fact that all these correlations happen automatically – there is no need to define any rules or program anything. In highly dynamic and distributed cloud-native applications this is a huge advantage that saves a lot of time and effort.
 
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 **Close** the Alert details window. 
 
 <div style="page-break-after: always;"></div>
 
 ### 3.4.7 Understand the Incident
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Click twice on the  **Last occurence** Header. 
 >
 >***Result**: The "Commit in repository robot-shop by Niklaus Hirt on file robot-shop.yaml" should be at the bottom* 
 
-  
-
 ![image](./demo/image.063.png)  
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 When trying to understand what happened during the incident, I sort the Alerts by occurence. This allows you to understand the chain of events.
 
@@ -551,48 +534,46 @@ Other events are confirming the hypothesis.
 
 ![image](./demo/image.064.png)
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 Click on a Alert line that has **ANOMALY:** in the Type column. Then open the **Metric Anomaly Details** accordion. 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 * Cloud Pak for Watson AIOps is also capable of collecting metrics from multiple sources and detecting **Metric Anomalies**. It was trained on hundreds or thousands of metrics from the environment and constructs a dynamic baseline (shown in green). The graphic suddenly turns red which relates to detected anomaly when the database is consuming a higher amount of memory than usual.
 
 
 ![image](./demo/image.065.png)
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 (1) In **Related Alerts** select some additional alerts.
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 You can display several alerts at the same time to better understand the temporal dependencies
 
 <div style="page-break-after: always;"></div>
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 (2) Select a portion of the graph with your mouse to zoom in
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Now let's zoom in to better see the anomalies
 
- 
-
 ![image](./demo/image.066.png)
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 Hover over a datapoint to show the before/after values. 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 I can clearly see that the incident caused the **Latencies** to skyrocket and the **Transactions per Seconds** are almost zero. This is yet another confirmation of the source of the problem.
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 Close the Metric anomaly details view. 
 
 <div style="page-break-after: always;"></div>
@@ -600,7 +581,7 @@ Close the Metric anomaly details view.
 ### 3.4.8 Examining the Topology
 
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Click the **Topology** Tab. 
 >
 >***Result**: The topology is displayed.* 
@@ -609,7 +590,7 @@ Close the Metric anomaly details view.
 
 ![image](./demo/image.067.png)
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 The interface shows the **topology** of the application that is relevant to the incident. IBM Cloud Pak for Watson AIOps’ topology service delivers a working understanding of the resources that you have in your environment, how the resources relate to each other, and how the environment has changed over time.
 
@@ -619,12 +600,12 @@ You can see that there are some statuses attached to the different resources, ma
 
 ![image](./demo/image.068.png)  
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Find the resource which displays resource name “**mysql**”. Then, right-click and select **Resource details.** 
 >
 >***Result**: Detailed view displays.*
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Click on Tab **Alerts** 
 >
 >***Result**: Detailed view of the Alerts specific for this resource.*
@@ -632,7 +613,7 @@ You can see that there are some statuses attached to the different resources, ma
 
 ![image](./demo/image.069.png)
 
-**✋ Narration** 
+**📣 <u>Narration</u>** 
 
 The topology service provides operations teams with complete up-to-date visibility over dynamic infrastructure, resources, and services. The topology service lets you query a specific resource for details, and other relevant information. Here I can see all Alerts for the mysql database resource for example.
 
@@ -643,7 +624,7 @@ The topology service provides operations teams with complete up-to-date visibili
 
 ![image](./demo/image.070.png)
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Find the resource which displays resource name “mysql”. Then, right-click and select **Open in Topology Viewer.** 
 >
 >***Result**: Topology Viewer displays.*
@@ -654,7 +635,7 @@ The topology service provides operations teams with complete up-to-date visibili
 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 The interface shows the topology surrounding the mysql resource. I can see that the **mysql** deployment is being called by the **ratings** service and that it runs on a certain worker node. 
 
@@ -664,14 +645,14 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 ![image](./demo/image.072.png)
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Change the number of hops to `4` and click **Render**.** 
 >
 >***Result**: Topology Viewer refreshes with bigger topology.*
 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
  I can also increase the size of the graph, still based on the **mysql** deployment.
 
@@ -679,7 +660,7 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 ![image](./demo/image.073.png)
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Right-click om mysql and select **Show last change in timeline** and check **Delta**
 >
 >***Result**: Topology Viewer refreshes and shows the events over time.*
@@ -690,7 +671,7 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
  Now I will examine the historical events for the **mysql** component. I can see the **Alerts** that have been raised on the **mysql** resource over time.
 
@@ -700,8 +681,8 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 <div style="page-break-after: always;"></div>
 
-## 3.4.10 Fixing the problem with runbook automation
->**🚀 Action**
+### 3.4.10 Fixing the problem with runbook automation
+>**🚀 <u>Action</u>**
 >
 >Click on the  **Overview**  Tab.
 
@@ -710,13 +691,13 @@ The interface shows the topology surrounding the mysql resource. I can see that 
 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Now that we know what the problem is, let’s correct what has happened. A runbook has been automatically identified but have not been executed. Runbooks are guided steps that IT operations teams use to troubleshoot and resolve problems. Some organizations might call these standard operating procedures or playbooks. When an incident occurs, IBM Cloud Pak for Watson AIOps matches an appropriate runbook to the problem. The runbook can be set to run automatically when it is matched to an incident, or it can run with user approval and participation. 
 
 Let’s execute the Runbook.
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >
 >Click on the three dots and click **Run**
 >
@@ -725,7 +706,7 @@ Let’s execute the Runbook.
 
 ![image](./demo/image.082.png)
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >
 >Click **Run** in Step 1.
 
@@ -733,13 +714,11 @@ Let’s execute the Runbook.
 
 
 
->**ℹ️ Note**
->
->❗The execution of the runbook can take few minutes. 
+**❗ <u>Note</u>**: The execution of the runbook can take few minutes. 
 
 <div style="page-break-after: always;"></div>
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 The Runbook that I just started kicks off a Playbook on Ansible Tower. I can follow the execution as it connects to the cluster and then scales up memory for the MySQL deployment.
 
@@ -749,7 +728,7 @@ The Runbook that I just started kicks off a Playbook on Ansible Tower. I can fol
 
 
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >
 >When finished, click **Complete**.
 >
@@ -759,7 +738,7 @@ The Runbook that I just started kicks off a Playbook on Ansible Tower. I can fol
 
 ![image](./demo/image.087.png)
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 Before confirming that the runbook worked as expected, I should check the RobotShop application to see if it is working as expected.
 
@@ -767,13 +746,13 @@ Before confirming that the runbook worked as expected, I should check the RobotS
 
 ![image](./demo/image.085.png)
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >
 >Rate the Runbook
 >
 >Then click **Runbook Worked**.
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 So the runbook has resolved the problem. When I tell Watson AIOps that the Runbook worked, it will learn over time to prioritize and suggest more relevant Runbooks.
 
@@ -781,7 +760,7 @@ So the runbook has resolved the problem. When I tell Watson AIOps that the Runbo
 
 ### 3.4.11 Resolve the Incident
 
->**🚀 Action**
+>**🚀 <u>Action</u>**
 >Click on **Change Story Settings.**
 >
 >Select **Change Status.**
@@ -793,7 +772,7 @@ So the runbook has resolved the problem. When I tell Watson AIOps that the Runbo
 
 
 
-**✋ Narration**
+**📣 <u>Narration</u>**
 
 So now as we have resolved the problem,  I will inform the development team of the problem by reopening the ServiceNow ticket and by closing the Story. 
 
@@ -805,4 +784,6 @@ So now as we have resolved the problem,  I will inform the development team of t
 
 # Demonstration summary
 Today, I have shown you how Cloud Pak for Watson AIOps can assist the SRE/Operations team to identify, verify, and ultimately correct an issue with a modern, distributed application running in a cloud-native environment. The presented solution provides automatic application topology discovery, anomaly detection both with metrics and logs, and sophisticated methods of correlation of events coming from different sources. 
+
+
 
