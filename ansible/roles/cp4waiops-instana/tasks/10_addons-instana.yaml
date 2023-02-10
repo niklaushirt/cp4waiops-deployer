@@ -62,15 +62,15 @@
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         echo "Installing Kubectl Instana Plugin for $OS"
         if [ "${OS}" == "darwin" ]; then
-              wget https://self-hosted.instana.io/kubectl/kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("235-5") }}.tar.gz
-              tar xfvz kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("235-5") }}.tar.gz
+              wget https://self-hosted.instana.io/kubectl/kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
+              tar xfvz kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
               sudo mv kubectl-instana /usr/local/bin/kubectl-instana
-              rm kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("235-5") }}.tar.gz
+              rm kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
         else
-            wget https://self-hosted.instana.io/kubectl/kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("235-5") }}.tar.gz
-            tar xfvz kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("235-5") }}.tar.gz
+            wget https://self-hosted.instana.io/kubectl/kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
+            tar xfvz kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
             mv kubectl-instana /usr/local/bin/kubectl-instana
-            rm kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("235-5") }}.tar.gz
+            rm kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
         fi
     fi
     if [ -x "$(command -v kubectl-instana)" ]; then
@@ -631,7 +631,7 @@
 # Wait for Core CR being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name:   🕦 INSTANA - Wait for Core Instance to become ready
-  shell: oc -n instana-core get core instana-core -o=custom-columns=STATUS:.status.status --no-headers
+  shell: oc -n instana-core get core instana-core -o=custom-columns=STATUS:.status.componentsStatus --no-headers
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "Ready"
   retries: 500
