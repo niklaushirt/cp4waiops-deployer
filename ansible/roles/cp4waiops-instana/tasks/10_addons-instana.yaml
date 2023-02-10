@@ -494,12 +494,12 @@
     oc adm policy add-scc-to-user privileged instana-datastore-sa -n instana-datastores
 
     #deploy datastores from the YAMLs, replacing with the images
-    oc -n instana-datastores set image deployment/zookeeper zookeeper=$ZOOKEEPER_IMAGE
-    oc -n instana-datastores set image deployment/kafka kafka=$KAFKA_IMAGE
-    oc -n instana-datastores set image deployment/clickhouse clickhouse=$CLICKHOUSE_IMAGE
-    oc -n instana-datastores set image deployment/cockroachdb cockroachdb=$COCKROACH_IMAGE
-    oc -n instana-datastores set image deployment/elasticsearch elasticsearch=$ELASTICSEARCH_IMAGE
-    oc -n instana-datastores set image deployment/cassandra cassandra=$CASSANDRA_IMAGE
+    # oc -n instana-datastores set image deployment/zookeeper zookeeper=$ZOOKEEPER_IMAGE
+    # oc -n instana-datastores set image deployment/kafka kafka=$KAFKA_IMAGE
+    # oc -n instana-datastores set image deployment/clickhouse clickhouse=$CLICKHOUSE_IMAGE
+    # oc -n instana-datastores set image deployment/cockroachdb cockroachdb=$COCKROACH_IMAGE
+    # oc -n instana-datastores set image deployment/elasticsearch elasticsearch=$ELASTICSEARCH_IMAGE
+    # oc -n instana-datastores set image deployment/cassandra cassandra=$CASSANDRA_IMAGE
 
 
     oc annotate namespace instana-datastores scheduler.alpha.kubernetes.io/defaultTolerations-
