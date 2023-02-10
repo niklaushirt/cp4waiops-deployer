@@ -648,7 +648,7 @@
 # Wait for Unit CR being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name:   🕦 INSTANA - Wait for Unit Instance to become ready
-  shell: oc -n instana-units get unit aiops-dev -o=custom-columns=STATUS:.status.status --no-headers
+  shell: oc -n instana-units get unit aiops-dev -o=custom-columns=STATUS:.status.componentsStatus --no-headers
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "Ready"
   retries: 500
