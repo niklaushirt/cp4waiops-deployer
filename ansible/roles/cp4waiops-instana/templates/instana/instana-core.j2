@@ -90,13 +90,13 @@ spec:
   # Use one of objectStorageConfig or pvcConfig
   storageConfigs:
     rawSpans:
-    pvcConfig:
-      accessModes:
-        - ReadWriteMany
-      resources:
-        requests:
-          storage: 100Gi
-      storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
+      pvcConfig:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 100Gi
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   enableNetworkPolicies: false
   properties:
     - name: retention.metrics.rollup5
