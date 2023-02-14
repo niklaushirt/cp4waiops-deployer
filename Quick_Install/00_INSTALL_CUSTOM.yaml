@@ -148,8 +148,8 @@ spec:
                 create_ocp_items: true
                 # Use this Password for all Instances
                 global_password: P4ssw0rd!
-  # Set this value to True to accept all licenses
-  accept_all_licenses: False
+                # Set this value to True to accept all licenses
+                accept_all_licenses: False
                 # Key to decrypt Licenses
                 # license_token: NONE
 
