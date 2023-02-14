@@ -802,17 +802,8 @@ menu_JOB_TURBO () {
       echo ""
       echo ""
       echo ""
-      read -p " Do you want to follow the installation Logs❓ [Y,n] " DO_COMM
-      if [[ $DO_COMM == "n" ||  $DO_COMM == "N" ]]; then
-
-
-            echo "    ⚠️  Skipping"
-            echo "--------------------------------------------------------------------------------------------"
-            echo  ""    
-            echo  ""
-            echo ""
-
-            else
+      read -p " Do you want to follow the installation Logs❓ [y,N] " DO_COMM
+      if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
 
             echo ""
             echo "----------------------------------------------------------------------------------------------------------------"
@@ -823,6 +814,14 @@ menu_JOB_TURBO () {
 
             INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
             oc logs -n default -f $INSTALL_POD
+
+     else
+            echo "    ⚠️  Skipping"
+            echo "--------------------------------------------------------------------------------------------"
+            echo  ""    
+            echo  ""
+            echo ""
+
       fi
    
        echo "*****************************************************************************************************************************"
@@ -847,8 +846,8 @@ menu_JOB_INSTANA () {
       echo "*****************************************************************************************************************************"
       echo ""
 
-      read -p " Please provide the Instana Sales Key" DO_SK
-      read -p " Please provide the Instana Agent Key" DO_AK
+      read -p " Please provide the Instana Sales Key:  " DO_SK
+      read -p " Please provide the Instana Agent Key:  " DO_AK
 
       if [[ $DO_SK == "" ||  $DO_AK == "" ]]; then
             echo "    ❗ No keys provided"
@@ -859,28 +858,17 @@ menu_JOB_INSTANA () {
             echo ""
       else
 
-            cp ./ansible/configs/cp4waiops-roks-instana.yaml /tmp/cp4waiops-roks-instana.yaml
-            sed -i -e "s/sales_key: 'NONE'/sales_key: '$DO_SK'/g" /tmp/cp4waiops-roks-instana.yaml
-            sed -i -e "s/agent_key: 'NONE'/agent_key: '$DO_AK'/g" /tmp/cp4waiops-roks-instana.yaml
+            cp ./Quick_Install/05_INSTALL_INSTANA.yaml /tmp/cp4waiops-roks-instana.yaml
+            sed -i -e "s/<YOUR_SALES_KEY>/$DO_SK/g" /tmp/cp4waiops-roks-instana.yaml
+            sed -i -e "s/<YOUR_AGENT_KEY>/$DO_AK/g" /tmp/cp4waiops-roks-instana.yaml
 
-            export CONFIG="/tmp/cp4waiops-roks-instana.yaml"
-            export JOB_NAME="waiops-easy-install-instana"
-            installViaJob
+            oc apply -n default -f /tmp/cp4waiops-roks-instana.yaml
 
             echo ""
             echo ""
             echo ""
             read -p " Do you want to follow the installation Logs❓ [Y,n] " DO_COMM
-            if [[ $DO_COMM == "n" ||  $DO_COMM == "N" ]]; then
-
-
-                  echo "    ⚠️  Skipping"
-                  echo "--------------------------------------------------------------------------------------------"
-                  echo  ""    
-                  echo  ""
-                  echo ""
-
-                  else
+            if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
 
                   echo ""
                   echo "----------------------------------------------------------------------------------------------------------------"
@@ -889,8 +877,15 @@ menu_JOB_INSTANA () {
                   echo " Waiting 30 seconds for Job to settle"
                   sleep 30
 
-                  INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
+                  INSTALL_POD=$(oc get po -n default|grep waiops-easy-install-instana|awk '{print$1}')
                   oc logs -n default -f $INSTALL_POD
+
+            else
+                  echo "    ⚠️  Skipping"
+                  echo "--------------------------------------------------------------------------------------------"
+                  echo  ""    
+                  echo  ""
+                  echo ""
             fi
       
             echo "*****************************************************************************************************************************"
