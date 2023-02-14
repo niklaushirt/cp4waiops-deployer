@@ -5,7 +5,7 @@
     <div hidden id="mydiv" class="alert alert-success" role="alert"
         style="min-height:100px; min-width: 700px; background-color: rgb(228, 252, 233); padding:10px; margin: 20px; margin-left: 250px; border-style:solid; border-color:rgb(0, 182, 39);border-width: 1px;">
         <h4 class="alert-heading">🚀 Running!</h4>
-        <br/>
+        <br />
         <p>Operation will continue running in the background.</p>
     </div>
 </center>
@@ -44,7 +44,8 @@
                                             <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
                                                 <a target="_blank" tabindex="0"
                                                     class="bx--btn bx--btn--primary bx--btn--expressive"
-                                                    href="https://{{ aimanager_url }}" style="width:200px;font-size: 18px;">CP4WAIOps
+                                                    href="https://{{ aimanager_url }}"
+                                                    style="width:200px;font-size: 18px;">CP4WAIOps
                                                     <svg focusable="false" preserveAspectRatio="xMidYMid meet"
                                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                         aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"
@@ -67,6 +68,8 @@
 
 
                     <td colspan="2" style="width: 30%; vertical-align:top">
+                        {% if SLACK_URL != 'none' %}
+
                         <p style="font-size:35px;">📨 Access Slack </p>
                         <p> &nbsp;</p>
                         <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
@@ -81,6 +84,7 @@
                                 </svg>
                             </a>
                         </div>
+                        {% endif %}
                     </td>
 
                 </tr>
@@ -96,7 +100,8 @@
 
 
                     {% if ADMIN_MODE == 'true' %}
-                    <td style="color:rgb(255, 255, 255);background-color: rgb(55, 86, 131); padding:10px; margin-left: 20px;" colspan="2">
+                    <td style="color:rgb(255, 255, 255);background-color: rgb(55, 86, 131); padding:10px; margin-left: 20px;"
+                        colspan="2">
                         <p style="font-size:18px;">👩‍💻&nbsp;&nbsp;{{ aimanager_user }}
                             &nbsp;&nbsp;&nbsp;&nbsp;</p>
                         <p style="font-size:18px;">🔐&nbsp;&nbsp;{{ aimanager_pwd }}</p>
@@ -112,14 +117,19 @@
                         &nbsp;
                     </td>
 
+                    {% if SLACK_URL != 'none' %}
                     <td style="padding-left:20px; color:rgb(255, 255, 255);background-color: #500050; padding:10px; margin: 20px;"
                         colspan="2">
+
+
                         <p style="font-size:18px;">👩‍💻&nbsp;&nbsp;{{ SLACK_USER }}
                             &nbsp;&nbsp;&nbsp;&nbsp;</p>
                         <p style="font-size:18px;">🔐&nbsp;&nbsp;{{ SLACK_PWD }}</p>
                         <p></p>
                         <p></p>
+
                     </td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <td>
@@ -197,7 +207,7 @@
                         <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
                             <a target="_blank" tabindex="0" class="bx--btn bx--btn--red bx--btn--expressive"
                                 style="font-size: 18px;max-width:450px;width:350px;" onclick="toggle(this)"
-                                data-arg1='injectAllREST'>Create
+                                data-arg1='injectAllREST'>Simulate
                                 Incident - Memory Leak
                                 <svg focusable="false" preserveAspectRatio="xMidYMid meet"
                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Table"
@@ -213,6 +223,65 @@
 
 
                     </td>
+                </tr>
+                <tr>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td style="width: 259px; vertical-align:top">
+                        <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                            <a target="_blank" tabindex="0" class="bx--btn bx--btn--red bx--btn--expressive"
+                                style="font-size: 18px;max-width:450px;width:350px;" onclick="toggle(this)"
+                                data-arg1='injectAllFanREST'>Simulate Incident - Server Fan
+                                <svg focusable="false" preserveAspectRatio="xMidYMid meet"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Table"
+                                    aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" role="img"
+                                    class="bx--btn__icon">
+                                    <path
+                                        d="M29,5a2,2,0,0,0-2-2H5A2,2,0,0,0,3,5V27a2,2,0,0,0,2,2H27a2,2,0,0,0,2-2ZM27,5V9H5V5Zm0,22H5V23H27Zm0-6H5V17H27Zm0-6H5V11H27Z">
+                                    </path>
+                                </svg>
+
+                            </a>
+                        </div>
+
+
+                    </td>
+
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td style="width: 259px; vertical-align:top">
+                        <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                            <a target="_blank" tabindex="0" class="bx--btn bx--btn--red bx--btn--expressive"
+                                style="font-size: 18px;max-width:450px;width:350px;" onclick="toggle(this)"
+                                data-arg1='injectAllNetREST'>Simulate Incident - Network
+                                <svg focusable="false" preserveAspectRatio="xMidYMid meet"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Table"
+                                    aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" role="img"
+                                    class="bx--btn__icon">
+                                    <path
+                                        d="M29,5a2,2,0,0,0-2-2H5A2,2,0,0,0,3,5V27a2,2,0,0,0,2,2H27a2,2,0,0,0,2-2ZM27,5V9H5V5Zm0,22H5V23H27Zm0-6H5V17H27Zm0-6H5V11H27Z">
+                                    </path>
+                                </svg>
+
+                            </a>
+                        </div>
+
+
+                    </td>
+
                     <td width="40px">
                         &nbsp;
                     </td>
@@ -244,10 +313,9 @@
                     </td>
                     <td
                         style="width: 30%; vertical-align:top; background-color: rgb(255, 198, 198); padding:10px; margin: 20px;">
-                        <p style="font-size:16px;">Create Incident simulating a Git Commit for the Robotshop
-                            Application.</p>
+                        <p style="font-size:16px;">Create Incident by simulating an error condition.</p>
                         <p style="font-size:16px;">Creates Events and Log and Metric Anomalies, linked to ServiceNow
-                            Incidents and Ansible Runbooks for the mysql component of the application.</p>
+                            Incidents and Ansible Runbooks.</p>
                     </td>
 
 

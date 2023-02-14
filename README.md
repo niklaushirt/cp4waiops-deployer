@@ -14,7 +14,6 @@
 Please drop me a note on Slack or by mail nikh@ch.ibm.com if you find glitches or problems.
 
 
-> ## 🚨 You can now also install Instana into your Cluster
 
 
 This is provided `as-is`:
@@ -98,64 +97,54 @@ Here is a quick video that walks you through the installation process
 
 ### 1.1.1 OpenShift requirements 
 
-I installed the demo in a ROKS environment.
+I installed the demo in a Techzone environment.
 
 You'll need:
 
 - ROKS 4.10
-- 5x worker nodes Flavour `b3c.16x64` (so **16 CPU / 64 GB**)  ❗
+- 5x worker nodes with **32 CPU / 128 GB**  ❗
+
+
+You **might** get away with less if you don't install some components (Event Manager, ELK, Turbonomic,...) but no guarantee.
 
 
 
-
-You **might** get away with less if you don't install some components (Event Manager, ELK, Turbonomic,...) but no guarantee:
-
-- Typically 4x worker nodes Flavour `b3c.16x64` _**for only AI Manager**_
+### 1.1.2 Get an OpenShift Cluster (IBMers and IBM Partners only)
 
 
-
-### 1.1.2 Get a ROKS Cluster (IBMers and IBM Partners only)
-
-
-IBMers can get a temporary one from **Techzone**
-
-You have different options:
-
-[IBM RedHat Openshift Kubernetes Service (ROKS)](https://techzone.ibm.com/my/reservations/create/60da20f935e6ac001f1c4086) - RECOMMENDED: Basic one that "just works
-
-[IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)](https://techzone.ibm.com/my/reservations/create/61415dd831cf9f00174c914b) - ROKS with ODF, but limited in CPU - you won't be able to install Instana AND Turbonomic on top
-
-[OpenShift Cluster (VMware on IBM Cloud) - IPI](https://techzone.ibm.com/my/reservations/create/638e78ec5cad290018089470) - Gives you the most control
+IBMers and Partners can get a temporary cluster from [**Techzone**](https://techzone.ibm.com/collection/tech-zone-certified-base-images).
 
 
-1. Select the Openshift that you want to use above
+1. Select `OpenShift Cluster (VMware on IBM Cloud) - IPI - Public` Openshift that you want to use above
 
-	The options might slightly vary depending on the option you choose.
- 
-1. Create a cluster for `Practice/Self Education` if you don't have an Opportunity Number
+1. Create a cluster for `Practice/Self Education` or `Test` if you don't have an Opportunity Number
 
-	![K8s CNI](./doc/pics/roks01.png)
+1. Select your preferred Geograpy
 
-<div style="page-break-after: always;"></div>
+  ![K8s CNI](./doc/pics/roks01.png)
 
 1. Select the maximum end date that fits your needs (you can extend the duration once after creation)
 
 	![K8s CNI](./doc/pics/roks03.png)
-	
-1. Fill-in the remaining fields
 
-	1. Geograpy: prefer **Dallas or London** (others might be slower)
-	2. Worker node count: **5**
-	3. Flavour: **b3c.16x64** ❗ 
-	4. OpenShift Version: **4.10**
-	5. If using IPI ro VPC select OCS/ODF Size 2TiB
+1. Select Openshift Storage
 
-	> ❗ If you want to install AIManager, Event Manager, Trubonomic and Instana please select **b3c.32x128** 
+   - Storage OCS/ODF Size: **2TiB** - This is important as with the 500MiB option your installation will run out of space rapidly.
+
+   - OpenShift Version: **4.10**
 
 	![K8s CNI](./doc/pics/roks02.png)
 
+1. Select the Cluster Size
+
+	- Worker node count: **5**
+	- Flavour: **32 vCPU X 128 GB** ❗ 
+
+	> ❗ If you want to install AIManager, Event Manager, Trubonomic and Instana please select **32 vCPU X 128 GB** 
+
+	![K8s CNI](./doc/pics/roks04.png)
+
 1. Click `Submit`
-	
 1. Once the cluster is provisioned, don't forget to extend it to 8 days if needed.
 
 
@@ -177,10 +166,9 @@ Those scripts have been tested thoroughly on different environments and have pro
 
 If you think that you hit a problem:
 
-* Make sure that you have provisioned a cluster with **5 worker nodes with 16 CPU and 64 GB** each (`b3c.16x64` - it's easy to select the wrong size). If you have Pods in `0/0` state verify the `Events`. If you get `Not enough CPU` then delete the cluster and provision the correct size.
-* If you want to install AIManager, Event Manager, Trubonomic and Instana please select **5 worker nodes with 32 CPU and 128 GB** (`b3c.32x128`)
-* When deploying ROKS I usually use Dallas or London, they are the fastest. On other regions we have seen much worse performance - deployment can take 4-5 times longer.
-* The complete installation takes about 2.5 to 8 hours depending on your region where you deployed ROKS to (see above).
+* Make sure that you have provisioned a cluster with **5 worker nodes with 32 CPU and 128 GB** each (`b3c.16x64` - it's easy to select the wrong size). If you have Pods in `0/0` state verify the `Events`. If you get `Not enough CPU` then delete the cluster and provision the correct size.
+* If you want to install AIManager, Event Manager, Trubonomic and Instana please select **5 worker nodes with 32 CPU and 128 GB**
+* The complete installation takes about 2.5 to 8 hours depending on your region where and how you deployed ROKS to (see above).
 * If you see Pods in `CrashLoop` or other error states, try to wait it out (this can be due to dependencies on other componenets that are not ready yet). Chances are that the deployment will eventually go through. If after 8h you are still stuck, ping me.
 * **Select and use ONLY ONE of the scripts** below, depending on which components you want to install.
 
@@ -562,7 +550,7 @@ In the AI Manager (CP4WAIOPS)
 
 1. In the `AI Manager` "Hamburger" Menu select `Define`/`Data and tool integrations`
 1. Click `Add connection`
- 
+
 	![K8s CNI](./doc/pics/doc14.png)
 	
 1. Under `Slack`, click on `Add Connection`
@@ -778,11 +766,11 @@ It contains the following components (which can be installed independently):
       - Load Overlay Topology
       - Create AI Manager Application
     - **Misc**
- 	   - Creates valid certificate for Ingress (Slack) 
- 	   - External Routes (Flink, Topology, ...)
- 	   - Disables ASM Service match rule 
- 	   - Create Policy Creation for Stories and Runbooks 
- 	   - Demo Service Account 
+     	   - Creates valid certificate for Ingress (Slack) 
+     	   	   	   	   - External Routes (Flink, Topology, ...)
+     	   	   	   	    	   	   	    	   	    	   - Disables ASM Service match rule 
+     	   	   	   	    	   	   	    	   	    	   	   	   	    	   	    	   	   	    	   	   - Create Policy Creation for Stories and Runbooks 
+     	   	   	   	    	   	   	    	   	    	   	   	   	    	   	    	   	   	    	   	    	   	   	    	   	    	   	   	    	   	    	   	    	   	    	   - Demo Service Account 
  - **Event Manager**  (optional)
  	- Event Manager
  - **Event Manager Demo Content**  (optional)
@@ -855,5 +843,4 @@ Incidents are being created by using the high level APIs in order to simulate a 
 
 
 <div style="page-break-after: always;"></div>
-
 

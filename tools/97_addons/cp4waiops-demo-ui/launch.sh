@@ -16,7 +16,7 @@ export METRIC_TIME_SKEW=240
 export METRIC_TIME_STEP=100
 
 
-export SLACK_URL="https://app.slack.com/client/T01JCN9LERM/C049ALD884W"
+export SLACK_URL="none"
 export SLACK_USER="ibmaiopsdemo@gmail.com"
 export SLACK_PWD="P4ssw0rd!"
 
