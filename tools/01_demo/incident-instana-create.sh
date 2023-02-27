@@ -21,7 +21,7 @@ echo " "
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 echo "   🚀  Deactivating Services for CATALOGUE for Demo Scenario..."
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-oc set env deployment catalogue -n robot-shop MONGO_URL=mongodb://mongodb:27017/catalogue-dev
+oc set env deployment catalogue -n robot-shop MONGO_URL=mongodb://mongodb-dev:27017/catalogue
 #oc set env deployment catalogue -n robot-shop GO_SLOW=1
 
 
