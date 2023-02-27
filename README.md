@@ -73,7 +73,7 @@ Here is a quick video that walks you through the installation process
 
 > 🤓 So this could basically be done from an iPhone or iPad	
 
-🚀 Already have a cluster? [Dive right in](#-131-install-ai-manager-with-demo-content-turbonomic-and-instana)
+🚀 Already have a cluster? [Dive right in](#-21-install-ai-manager-with-demo-content-turbonomic-and-instana)
 
 
 
@@ -227,7 +227,7 @@ On top of that you get Turbonomic and Instana instances to play around a bit (yo
 5. Replace the TURBO_LICENSE `NONE` at the end of the file with your Turbonomic license
 3. Click `Save`
 
-### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
+### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
 
 This installation cocntains:
 
@@ -286,7 +286,7 @@ Ready to go.
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
 3. Click `Save`
 
-### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
+### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
 
 This installation cocntains:
 
@@ -355,7 +355,7 @@ This installation cocntains:
 1. Paste the content
 1. Click `Save`
 
-### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
+### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
 
 
 </details>
