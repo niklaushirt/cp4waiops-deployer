@@ -12,16 +12,16 @@ echo " "
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 echo "   🚀  Deactivating Services for RATINGS for Demo Scenario..."
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-oc patch service mysql -n robot-shop --patch '{"spec": {"selector": {"service": "mysql-outage"}}}'
-#oc set env deployment ratings -n robot-shop PDO_URL=mysql:host=mysql-outage;dbname=ratings;charset=utf8mb4
-#oc set env deployment ratings -n robot-shop CATALOGUE_URL=catalogue
+#oc patch service mysql -n robot-shop --patch '{"spec": {"selector": {"service": "mysql-outage"}}}'
+oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"
+oc set env deployment ratings -n robot-shop CATALOGUE_URL=catalogue-outage
 
 
 echo " "
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 echo "   🚀  Deactivating Services for CATALOGUE for Demo Scenario..."
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-oc set env deployment catalogue -n robot-shop MONGO_URL=mongodb://mongodb-outage:27017/catalogue
+oc set env deployment catalogue -n robot-shop MONGO_URL=mongodb://mongodb:27017/catalogue-dev
 #oc set env deployment catalogue -n robot-shop GO_SLOW=1
 
 

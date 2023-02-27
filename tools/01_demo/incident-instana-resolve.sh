@@ -12,9 +12,9 @@ echo " "
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 echo "   🚀  Deactivating Services for RATINGS for Demo Scenario..."
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-oc patch service mysql -n robot-shop --patch '{"spec": {"selector": {"service": "mysql"}}}'
-#oc set env deployment ratings -n robot-shop PDO_URL=mysql:host=mysql;dbname=ratings;charset=utf8mb4
-#oc set env deployment ratings -n robot-shop CATALOGUE_URL=catalogue
+#oc patch service mysql -n robot-shop --patch '{"spec": {"selector": {"service": "mysql"}}}'
+oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings;charset=utf8mb4"
+oc set env deployment ratings -n robot-shop CATALOGUE_URL=catalogue
 
 
 echo " "
