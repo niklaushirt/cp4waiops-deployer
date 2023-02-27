@@ -1,0 +1,3709 @@
+{"stories":[
+{
+  "id": "7c182a85-ad95-4f5e-b678-10f28912a663",
+  "createdBy": "system",
+  "title": "All Services - Sudden drop in the number of requests",
+  "description": "All Services - Sudden drop in the number of requests",
+  "priority": 3,
+  "state": "resolved",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T12:12:27.712Z",
+  "lastChangedTime": "2022-12-22T12:23:24.639Z",
+  "insights": [
+    {
+      "id": "ecb21e67-b727-4e8f-a73c-93cc16b5a82b",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "ecb21e67-b727-4e8f-a73c-93cc16b5a82b",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "fbbb10a3-0bc5-49ff-88d5-732bf95b38b0",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": []
+      }
+    },
+    {
+      "id": "bd01fb38-7037-41d7-968c-86f5a2fb6207",
+      "type": "aiops.ibm.com/insight-type/chatops/notification",
+      "details": {
+        "notification": [
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "slack",
+            "details": {}
+          },
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "msteams",
+            "details": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "7c182a85-ad95-4f5e-b678-10f28912a663",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0199223.html",
+            "score": 0.6278925,
+            "title": "Sudden increase in the number of erroneous calls - This can be a sign of a problem on one side of the connection",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-09T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "0523839b-6f4a-4bdd-acb1-7d880d9cf989",
+            "source_incident_id": "INC0189203"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.5373107,
+            "title": "Request for a new service",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2020-09-10T17:34:56+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "aaaff67b-634b-4ae9-b92a-eaf558bb91f6",
+            "source_incident_id": "INC0000037"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.5337161,
+            "title": "RobotShop sudden increase in the number of erroneous calls - This can be a sign of a problem on one side of the connection",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-04-28T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "14d6a23a-14cf-4d21-bec6-50a22087e7ef",
+            "source_incident_id": "INC0089202"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "0523839b-6f4a-4bdd-acb1-7d880d9cf989"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "0523839b-6f4a-4bdd-acb1-7d880d9cf989"
+          }
+        ]
+      }
+    }
+  ],
+  "alertIds": [
+    "ecb21e67-b727-4e8f-a73c-93cc16b5a82b"
+  ],
+  "contextualAlertIds": []
+},
+{
+  "id": "0e7af27c-4196-4247-85d5-e08e5456b011",
+  "createdBy": "system",
+  "title": "iaf-system-elasticsearch-cluster: iaf-system-elasticsearch-es-aiops-0 - Elasticsearch node status is YELLOW",
+  "description": "iaf-system-elasticsearch-cluster: iaf-system-elasticsearch-es-aiops-0 - Elasticsearch node status is YELLOW",
+  "priority": 3,
+  "state": "assignedToIndividual",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T11:37:25.725Z",
+  "lastChangedTime": "2022-12-22T11:52:23.293Z",
+  "insights": [
+    {
+      "id": "b2507f98-d884-47d8-9a6f-90b71c531509",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "b2507f98-d884-47d8-9a6f-90b71c531509",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "92d23aa0-121f-40ba-a7ff-8f1d362c2833",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": [
+          "a7998d50-c0cf-4c89-bad6-35beac6efc49",
+          "cd7da711-24a6-4e83-8fa2-59264cbe9df2"
+        ]
+      }
+    },
+    {
+      "id": "58fcd716-42fb-4327-bdb7-1ce4411a7c7d",
+      "type": "aiops.ibm.com/insight-type/chatops/notification",
+      "details": {
+        "notification": [
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "slack",
+            "details": {}
+          },
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "msteams",
+            "details": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "0e7af27c-4196-4247-85d5-e08e5456b011",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099225.html",
+            "score": 0.44020024,
+            "title": "Cluster PROD-027-OCP001  degraded",
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 141,
+                  "begin_offset": 131
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 158,
+                    "begin_offset": 146
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "Cause: MySQL Pod was restarted.\n❗ Ratings Service is unable to pick up the restart and has to be restarted as well. \n🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "bfbfd3ed-a51f-48eb-81a2-3255d39bdf9c",
+            "source_incident_id": "INC0899226"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099225.html",
+            "score": 0.39207342,
+            "title": "Migrating VM PROD-027-OCP001-WORKER01 to new Host in cluster PROD-027",
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 141,
+                  "begin_offset": 131
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 158,
+                    "begin_offset": 146
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "Cause: MySQL Pod was restarted.\n❗ Ratings Service is unable to pick up the restart and has to be restarted as well. \n🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "28455ba4-2ece-4147-ba24-2920157f1598",
+            "source_incident_id": "INC0899224"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0199223.html",
+            "score": 0.36488962,
+            "title": "Ratings - Alert Description: resource.name=ratings  (Error: unable to contact MYSQL failed with status code 500)",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-22T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "bd828e76-3c01-4ecd-9bce-95e80abd7902",
+            "source_incident_id": "INC0199226"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 24,
+                  "begin_offset": 14
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 41,
+                    "begin_offset": 29
+                  }
+                ]
+              }
+            ],
+            "sentence": "🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "incident_id": "bfbfd3ed-a51f-48eb-81a2-3255d39bdf9c"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "bd828e76-3c01-4ecd-9bce-95e80abd7902"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "bd828e76-3c01-4ecd-9bce-95e80abd7902"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0e7af27c-4196-4247-85d5-e08e5456b011",
+      "type": "aiops.ibm.com/insight-type/topology/resource",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "mjD9SsK1RGifA4U3RGbHLA",
+        "rank": 0,
+        "time": 968809184
+      }
+    },
+    {
+      "id": "68b4b679-1db8-4712-b881-8bda8946c355",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "68b4b679-1db8-4712-b881-8bda8946c355",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "e407d1e1-3760-499d-86cb-f7ba8336a777",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "e407d1e1-3760-499d-86cb-f7ba8336a777",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "1704588f-fc98-480f-a1bd-1678657e6c2e",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "1704588f-fc98-480f-a1bd-1678657e6c2e",
+        "rank": 4,
+        "time": 0
+      }
+    },
+    {
+      "id": "3a86c6ed-48f1-4c23-98e1-e81930621c5a",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "3a86c6ed-48f1-4c23-98e1-e81930621c5a",
+        "rank": 4,
+        "time": 0
+      }
+    },
+    {
+      "id": "6bc811ca-bc10-4898-8625-274422cda21f",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "6bc811ca-bc10-4898-8625-274422cda21f",
+        "rank": 6,
+        "time": 0
+      }
+    },
+    {
+      "id": "bc28b738-4d85-480d-b10c-516001f549b9",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "bc28b738-4d85-480d-b10c-516001f549b9",
+        "rank": 10,
+        "time": 0
+      }
+    },
+    {
+      "id": "68a8abde-c595-4dbc-a0a8-a2b71b93ee75",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "68a8abde-c595-4dbc-a0a8-a2b71b93ee75",
+        "rank": 13,
+        "time": 0
+      }
+    },
+    {
+      "id": "e8386679-975f-410d-9952-78f3cbc3b81c",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "e8386679-975f-410d-9952-78f3cbc3b81c",
+        "rank": 14,
+        "time": 0
+      }
+    },
+    {
+      "id": "19c44576-e52d-4972-9c46-46afbf142083",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "19c44576-e52d-4972-9c46-46afbf142083",
+        "rank": 2,
+        "time": 0
+      }
+    },
+    {
+      "id": "313fd048-ccbf-4b31-8359-370b62fd8ebd",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "313fd048-ccbf-4b31-8359-370b62fd8ebd",
+        "rank": 2,
+        "time": 0
+      }
+    },
+    {
+      "id": "5b50252d-fcad-4807-a171-e6e56249fc4b",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "5b50252d-fcad-4807-a171-e6e56249fc4b",
+        "rank": 2,
+        "time": 0
+      }
+    },
+    {
+      "id": "370a7e02-9766-44af-a71c-b4a162ea0335",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "370a7e02-9766-44af-a71c-b4a162ea0335",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "410007d5-5082-43d9-958f-9abf7532d22e",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "410007d5-5082-43d9-958f-9abf7532d22e",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "8456989e-a858-455a-96fe-06b7647d4c45",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "8456989e-a858-455a-96fe-06b7647d4c45",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "affb9d72-3098-43c4-953b-9384d1433e7b",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "affb9d72-3098-43c4-953b-9384d1433e7b",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "6fc08ddf-04ca-44dd-b69c-89b7d36fabfe",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "6fc08ddf-04ca-44dd-b69c-89b7d36fabfe",
+        "rank": 5,
+        "time": 0
+      }
+    },
+    {
+      "id": "9017e43e-0aba-4920-a084-5ae23c04b49d",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "9017e43e-0aba-4920-a084-5ae23c04b49d",
+        "rank": 5,
+        "time": 0
+      }
+    },
+    {
+      "id": "b7b7252a-9f30-45f8-a95d-e0d7330d3a2c",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "b7b7252a-9f30-45f8-a95d-e0d7330d3a2c",
+        "rank": 7,
+        "time": 0
+      }
+    },
+    {
+      "id": "ed2bc931-82a8-4667-9287-2b71919d0310",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "ed2bc931-82a8-4667-9287-2b71919d0310",
+        "rank": 8,
+        "time": 0
+      }
+    },
+    {
+      "id": "331dee07-8f6f-4758-958e-926d035c0b48",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "331dee07-8f6f-4758-958e-926d035c0b48",
+        "rank": 9,
+        "time": 0
+      }
+    },
+    {
+      "id": "38bf4ffc-f9fe-4851-80ab-c84db260a258",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "38bf4ffc-f9fe-4851-80ab-c84db260a258",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "7fabb126-46ce-44df-a71f-721de33c16a7",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "7fabb126-46ce-44df-a71f-721de33c16a7",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "c39bffb8-9f5a-44f1-93a1-b82da9d20822",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "c39bffb8-9f5a-44f1-93a1-b82da9d20822",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "c4cddde5-68a7-412b-9a61-a3bc1936a292",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "c4cddde5-68a7-412b-9a61-a3bc1936a292",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "f7a36392-244b-4ccf-a1ef-1f45cc8e9660",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "f7a36392-244b-4ccf-a1ef-1f45cc8e9660",
+        "rank": 12,
+        "time": 0
+      }
+    },
+    {
+      "id": "24395ad5-a781-4ac7-88ad-9996b7e41cb0",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "24395ad5-a781-4ac7-88ad-9996b7e41cb0",
+        "rank": 13,
+        "time": 0
+      }
+    },
+    {
+      "id": "ea5cea12-568c-4bf2-8383-31ddff74b580",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "ea5cea12-568c-4bf2-8383-31ddff74b580",
+        "rank": 15,
+        "time": 0
+      }
+    }
+  ],
+  "alertIds": [
+    "bc28b738-4d85-480d-b10c-516001f549b9",
+    "331dee07-8f6f-4758-958e-926d035c0b48",
+    "3a86c6ed-48f1-4c23-98e1-e81930621c5a",
+    "1704588f-fc98-480f-a1bd-1678657e6c2e",
+    "68a8abde-c595-4dbc-a0a8-a2b71b93ee75",
+    "6bc811ca-bc10-4898-8625-274422cda21f",
+    "b7b7252a-9f30-45f8-a95d-e0d7330d3a2c",
+    "e8386679-975f-410d-9952-78f3cbc3b81c",
+    "ea5cea12-568c-4bf2-8383-31ddff74b580",
+    "68b4b679-1db8-4712-b881-8bda8946c355",
+    "24395ad5-a781-4ac7-88ad-9996b7e41cb0",
+    "e407d1e1-3760-499d-86cb-f7ba8336a777"
+  ],
+  "contextualAlertIds": [
+    "affb9d72-3098-43c4-953b-9384d1433e7b",
+    "19c44576-e52d-4972-9c46-46afbf142083",
+    "9017e43e-0aba-4920-a084-5ae23c04b49d",
+    "7fabb126-46ce-44df-a71f-721de33c16a7",
+    "370a7e02-9766-44af-a71c-b4a162ea0335",
+    "ed2bc931-82a8-4667-9287-2b71919d0310",
+    "8456989e-a858-455a-96fe-06b7647d4c45",
+    "c39bffb8-9f5a-44f1-93a1-b82da9d20822",
+    "c4cddde5-68a7-412b-9a61-a3bc1936a292",
+    "6fc08ddf-04ca-44dd-b69c-89b7d36fabfe",
+    "f7a36392-244b-4ccf-a1ef-1f45cc8e9660",
+    "38bf4ffc-f9fe-4851-80ab-c84db260a258",
+    "313fd048-ccbf-4b31-8359-370b62fd8ebd",
+    "5b50252d-fcad-4807-a171-e6e56249fc4b",
+    "410007d5-5082-43d9-958f-9abf7532d22e",
+    "b2507f98-d884-47d8-9a6f-90b71c531509"
+  ]
+},
+{
+  "id": "7c00fd14-3e66-4274-9a18-b8dbb9c87c7d",
+  "createdBy": "system",
+  "title": "janusgraph.edgestore - Complete drop in the number of requests",
+  "description": "janusgraph.edgestore - Complete drop in the number of requests",
+  "priority": 1,
+  "state": "resolved",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T12:12:27.402Z",
+  "lastChangedTime": "2022-12-22T12:23:24.643Z",
+  "insights": [
+    {
+      "id": "2fda5b26-e37e-4433-9e0b-2f2342b408df",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": []
+      }
+    },
+    {
+      "id": "0368d00b-da24-4305-906e-c637d1624273",
+      "type": "aiops.ibm.com/insight-type/chatops/notification",
+      "details": {
+        "notification": [
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "slack",
+            "details": {}
+          },
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "msteams",
+            "details": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "7c00fd14-3e66-4274-9a18-b8dbb9c87c7d",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0199223.html",
+            "score": 0.3170652,
+            "title": "RobotShop dudden increase in the number of erroneous calls - This can be a sign of a problem on one side of the connection",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-11T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "829ac3b4-1249-4fd7-a6a2-31df4df62143",
+            "source_incident_id": "INC0199215"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.29213023,
+            "title": "Sudden increase in the number of erroneous calls - This can be a sign of a problem on one side of the connection",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-09T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "0f364a24-a63f-40ff-aac2-2a6b9c07e633",
+            "source_incident_id": "INC0099213"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.26865536,
+            "title": "Request for a new service",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2020-09-10T17:34:56+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "aaaff67b-634b-4ae9-b92a-eaf558bb91f6",
+            "source_incident_id": "INC0000037"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "829ac3b4-1249-4fd7-a6a2-31df4df62143"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "829ac3b4-1249-4fd7-a6a2-31df4df62143"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c4dbd53a-53d1-4a4a-86c1-aa320ba2dc27",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "c4dbd53a-53d1-4a4a-86c1-aa320ba2dc27",
+        "rank": 1,
+        "time": 0
+      }
+    }
+  ],
+  "alertIds": [
+    "c4dbd53a-53d1-4a4a-86c1-aa320ba2dc27"
+  ],
+  "contextualAlertIds": []
+},
+{
+  "id": "801bb750-76e8-435a-a154-f16103c4e0e7",
+  "createdBy": "system",
+  "title": "Test Cluster: 028105f3-1dfa-4f09-b5b5-8abd79ee54f8 - Sudden drop in the number of cassandra write requests",
+  "description": "Test Cluster: 028105f3-1dfa-4f09-b5b5-8abd79ee54f8 - Sudden drop in the number of cassandra write requests",
+  "priority": 3,
+  "state": "assignedToIndividual",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T12:15:27.170Z",
+  "lastChangedTime": "2022-12-22T12:15:27.170Z",
+  "insights": [
+    {
+      "id": "2c5f2548-494f-4a59-85e1-22eec7ab7f72",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": []
+      }
+    },
+    {
+      "id": "5e06832e-e046-4115-bcae-790c77b0bb4c",
+      "type": "aiops.ibm.com/insight-type/chatops/notification",
+      "details": {
+        "notification": [
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "slack",
+            "details": {}
+          },
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "msteams",
+            "details": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "801bb750-76e8-435a-a154-f16103c4e0e7",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0199223.html",
+            "score": 0.7974098,
+            "title": "Test",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-25T13:26:46+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "613c24a2-fb79-499a-acf4-c17746ab6d9c",
+            "source_incident_id": "INC0110002"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0199223.html",
+            "score": 0.6278879,
+            "title": "Sudden increase in the number of erroneous calls - This can be a sign of a problem on one side of the connection",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-09T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "0523839b-6f4a-4bdd-acb1-7d880d9cf989",
+            "source_incident_id": "INC0189203"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.5337122,
+            "title": "RobotShop sudden increase in the number of erroneous calls - This can be a sign of a problem on one side of the connection",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-04-28T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "14d6a23a-14cf-4d21-bec6-50a22087e7ef",
+            "source_incident_id": "INC0089202"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "613c24a2-fb79-499a-acf4-c17746ab6d9c"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "613c24a2-fb79-499a-acf4-c17746ab6d9c"
+          }
+        ]
+      }
+    },
+    {
+      "id": "086a1f4b-40e3-424b-ba18-b6ec687cb396",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "086a1f4b-40e3-424b-ba18-b6ec687cb396",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "a0a496ac-1767-4aea-80df-4af03545776c",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "a0a496ac-1767-4aea-80df-4af03545776c",
+        "rank": 2,
+        "time": 0
+      }
+    },
+    {
+      "id": "801bb750-76e8-435a-a154-f16103c4e0e7",
+      "type": "aiops.ibm.com/insight-type/topology/resource",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "CPYLYQmET-yaMLZ3g4yqOA",
+        "rank": 0,
+        "time": 969349652
+      }
+    }
+  ],
+  "alertIds": [
+    "086a1f4b-40e3-424b-ba18-b6ec687cb396",
+    "a0a496ac-1767-4aea-80df-4af03545776c"
+  ],
+  "contextualAlertIds": []
+},
+{
+  "id": "5bf230c9-65b3-4149-b723-663b9daae054",
+  "createdBy": "system",
+  "title": "appdata-processor (instana-units/tu-aiops-dev-appdata-processor-6dd9f8496f-7ww2v) - Container memory usage is getting closer to memory limit: 2 GB",
+  "description": "appdata-processor (instana-units/tu-aiops-dev-appdata-processor-6dd9f8496f-7ww2v) - Container memory usage is getting closer to memory limit: 2 GB",
+  "priority": 3,
+  "state": "resolved",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T12:22:27.895Z",
+  "lastChangedTime": "2022-12-22T12:25:24.673Z",
+  "insights": [
+    {
+      "id": "4588417f-a4ad-484f-b97a-c3347e5897b6",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": []
+      }
+    },
+    {
+      "id": "91e5fc23-11c3-4d7a-9889-77f71da07b5e",
+      "type": "aiops.ibm.com/insight-type/chatops/notification",
+      "details": {
+        "notification": [
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "slack",
+            "details": {}
+          },
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "msteams",
+            "details": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "5bf230c9-65b3-4149-b723-663b9daae054",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0299223.html",
+            "score": 1.5151832,
+            "title": "MySQL memory peak usage anomaly",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-19T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "00cbb8a0-1714-4be7-a960-b4395290aeda",
+            "source_incident_id": "INC0299223"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0299223.html",
+            "score": 0.75061744,
+            "title": "Commit in repository robot-shop by Niklaus Hirt on file robot-shop.yaml - New Memory Limits",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-15T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "71d0e225-00b0-442d-b2bb-8929a243ae6d",
+            "source_incident_id": "INC0299219"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0299223.html",
+            "score": 0.41295582,
+            "title": "MySQL - change detected - The value **resources/limits** has changed",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "5466bd9b-b89a-4bfb-a28d-b302dba459a8",
+            "source_incident_id": "INC0299220"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "00cbb8a0-1714-4be7-a960-b4395290aeda"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "00cbb8a0-1714-4be7-a960-b4395290aeda"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a9403187-0a3f-45f8-8e0b-cb7d377ddd06",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "a9403187-0a3f-45f8-8e0b-cb7d377ddd06",
+        "rank": 1,
+        "time": 0
+      }
+    }
+  ],
+  "alertIds": [
+    "a9403187-0a3f-45f8-8e0b-cb7d377ddd06"
+  ],
+  "contextualAlertIds": []
+},
+{
+  "id": "38cc898a-d99b-4b85-bc1c-05f18407914a",
+  "createdBy": "system",
+  "title": "turbonomic/prometheus-server (deployment) - Available replicas is less than desired replicas",
+  "description": "turbonomic/prometheus-server (deployment) - Available replicas is less than desired replicas",
+  "priority": 1,
+  "state": "inProgress",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T11:26:26.072Z",
+  "lastChangedTime": "2022-12-22T12:25:27.336Z",
+  "insights": [
+    {
+      "id": "c55bd2a8-4dc6-4c87-a3e0-681fe7b3ff93",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": []
+      }
+    },
+    {
+      "id": "790ac1a4-c632-4a4e-88c7-d195390b9cc6",
+      "type": "aiops.ibm.com/insight-type/chatops/notification",
+      "details": {
+        "notification": [
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "slack",
+            "details": {}
+          },
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "msteams",
+            "details": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "38cc898a-d99b-4b85-bc1c-05f18407914a",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0199223.html",
+            "score": 2.5011013,
+            "title": "MySQL - available replicas is less than desired replicas - Check conditions and error events",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-24T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "ece0aa50-0075-4374-beb5-58c7df6cda40",
+            "source_incident_id": "INC0199228"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099224.html",
+            "score": 2.1962712,
+            "title": "MySQL - available replicas is less than desired replicas - Check conditions and error events",
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 141,
+                  "begin_offset": 131
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 158,
+                    "begin_offset": 146
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "Cause: MySQL Pod was restarted.\n❗ Ratings Service is unable to pick up the restart and has to be restarted as well. \n🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "26c1317e-2090-4b8f-b810-772176939884",
+            "source_incident_id": "INC0899229"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0199223.html",
+            "score": 0.5550749,
+            "title": "MySQL - K8s Deployment Modified",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-17T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "8843cabf-7985-460e-9cc2-4c2a8cdcdc7f",
+            "source_incident_id": "INC0199221"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "ece0aa50-0075-4374-beb5-58c7df6cda40"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "ece0aa50-0075-4374-beb5-58c7df6cda40"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 24,
+                  "begin_offset": 14
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 41,
+                    "begin_offset": 29
+                  }
+                ]
+              }
+            ],
+            "sentence": "🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "incident_id": "26c1317e-2090-4b8f-b810-772176939884"
+          }
+        ]
+      }
+    },
+    {
+      "id": "055bcaec-7ec0-4053-9d57-29da0e9232e2",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "055bcaec-7ec0-4053-9d57-29da0e9232e2",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "38cc898a-d99b-4b85-bc1c-05f18407914a",
+      "type": "aiops.ibm.com/insight-type/topology/resource",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "Qg4oExtZTg-xfsVnmC78zQ",
+        "rank": 0,
+        "time": 966142772
+      }
+    }
+  ],
+  "alertIds": [
+    "055bcaec-7ec0-4053-9d57-29da0e9232e2"
+  ],
+  "contextualAlertIds": []
+},
+{
+  "id": "01f30c78-4cf3-4ca0-954d-1a8773c807d1",
+  "createdBy": "system",
+  "title": "kafka.Kafka /tmp/strimzi.properties - Garbage Collection Activity High (19.18%)",
+  "description": "kafka.Kafka /tmp/strimzi.properties - Garbage Collection Activity High (19.18%)",
+  "priority": 3,
+  "state": "assignedToIndividual",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T12:16:29.003Z",
+  "lastChangedTime": "2022-12-22T12:16:29.003Z",
+  "insights": [
+    {
+      "id": "ff8751b1-55ed-47a5-92e8-42b20fb57352",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "ff8751b1-55ed-47a5-92e8-42b20fb57352",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "01f30c78-4cf3-4ca0-954d-1a8773c807d1",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.46155104,
+            "title": "RobotShop call rate is too high - RobotShop call rate stays at a high level for an extended period of time",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-04-27T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "4048fb26-bd6c-4346-a9a4-3c2c53d946ce",
+            "source_incident_id": "INC0099201"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.39412707,
+            "title": "Robotshop Homepage call rate is too high- Robotshop call rate stays at a high level for an extended period of time",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-25T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "ff08e351-2595-4c31-94a0-7bb32744a1b7",
+            "source_incident_id": "INC0099229"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099224.html",
+            "score": 0.3495396,
+            "title": "Robotshop Homepage call rate is too high- Robotshop call rate stays at a high level for an extended period of time",
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 141,
+                  "begin_offset": 131
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 158,
+                    "begin_offset": 146
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "Cause: MySQL Pod was restarted.\n❗ Ratings Service is unable to pick up the restart and has to be restarted as well. \n🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "1950f2b7-d00e-494f-88f6-3584c197d12a",
+            "source_incident_id": "INC0899230"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "4048fb26-bd6c-4346-a9a4-3c2c53d946ce"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "4048fb26-bd6c-4346-a9a4-3c2c53d946ce"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 24,
+                  "begin_offset": 14
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 41,
+                    "begin_offset": 29
+                  }
+                ]
+              }
+            ],
+            "sentence": "🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "incident_id": "1950f2b7-d00e-494f-88f6-3584c197d12a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "01f30c78-4cf3-4ca0-954d-1a8773c807d1",
+      "type": "aiops.ibm.com/insight-type/topology/resource",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "GPNgWNvhRsyWRU7FvSOWSQ",
+        "rank": 0,
+        "time": 969112138
+      }
+    },
+    {
+      "id": "9651802e-9f71-4c05-8946-a19136526cb2",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": []
+      }
+    },
+    {
+      "id": "3eb3da62-df06-43ec-97a9-35c2b14b6804",
+      "type": "aiops.ibm.com/insight-type/chatops/notification",
+      "details": {
+        "notification": [
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "slack",
+            "details": {}
+          },
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "msteams",
+            "details": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    }
+  ],
+  "alertIds": [
+    "ff8751b1-55ed-47a5-92e8-42b20fb57352"
+  ],
+  "contextualAlertIds": []
+},
+{
+  "id": "d204a282-5f9d-4206-b3e4-3906529fa75d",
+  "createdBy": "system",
+  "title": "/usr/lib/jvm/java-17/bin/java - Abnormal termination",
+  "description": "/usr/lib/jvm/java-17/bin/java - Abnormal termination",
+  "priority": 1,
+  "state": "inProgress",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T12:23:27.056Z",
+  "lastChangedTime": "2022-12-22T12:25:27.340Z",
+  "insights": [
+    {
+      "id": "0cf00716-5faa-47b6-9f8f-db654c6b3f29",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "0cf00716-5faa-47b6-9f8f-db654c6b3f29",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "16be1c90-6e55-4bf2-beda-4580ccfd66f2",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "16be1c90-6e55-4bf2-beda-4580ccfd66f2",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "185e5749-14bb-4617-bb55-7817202a9841",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "185e5749-14bb-4617-bb55-7817202a9841",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "2babe9a8-5fdf-48b8-8684-a137d83f46aa",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "2babe9a8-5fdf-48b8-8684-a137d83f46aa",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "2ffd6db0-338c-4880-bcbb-73e0ee8227e7",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "2ffd6db0-338c-4880-bcbb-73e0ee8227e7",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "3c6d4451-c6a2-4066-ac06-ea82d1145c75",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "3c6d4451-c6a2-4066-ac06-ea82d1145c75",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "63df62be-2c48-426e-9240-ae9077df56ae",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "63df62be-2c48-426e-9240-ae9077df56ae",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "6d5ea442-31ef-4fe4-be8b-4c76e9d9f2a1",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "6d5ea442-31ef-4fe4-be8b-4c76e9d9f2a1",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "efe0179d-d686-4999-8461-8c65e8886751",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": []
+      }
+    },
+    {
+      "id": "8a58ba30-e2fa-43b3-a7c4-0f8a6d85e965",
+      "type": "aiops.ibm.com/insight-type/chatops/notification",
+      "details": {
+        "notification": [
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "slack",
+            "details": {}
+          },
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "msteams",
+            "details": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "d204a282-5f9d-4206-b3e4-3906529fa75d",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [],
+        "recommended_actions": []
+      }
+    },
+    {
+      "id": "7e42502a-cfa8-4487-95ad-b66ba34ee5fe",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "7e42502a-cfa8-4487-95ad-b66ba34ee5fe",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "9567a174-aa12-419e-9ed0-486e6850c410",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "9567a174-aa12-419e-9ed0-486e6850c410",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "97080d10-2445-44a6-a8e7-fc241509eff2",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "97080d10-2445-44a6-a8e7-fc241509eff2",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "9935e495-309e-4cb6-9fc9-af5e3752f620",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "9935e495-309e-4cb6-9fc9-af5e3752f620",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "998da8e4-e016-4f33-811b-b54ac26864a8",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "998da8e4-e016-4f33-811b-b54ac26864a8",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "abd38a6c-1f4a-46b3-a9aa-600baef37754",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "abd38a6c-1f4a-46b3-a9aa-600baef37754",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "bcbb28da-84ce-42e4-a31f-5aa0e623f17a",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "bcbb28da-84ce-42e4-a31f-5aa0e623f17a",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "c670b6af-ef39-4bc6-ba39-76baf9816b49",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "c670b6af-ef39-4bc6-ba39-76baf9816b49",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "d1f3a146-8972-4083-ba92-8f1ebad05d0f",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "d1f3a146-8972-4083-ba92-8f1ebad05d0f",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "d4bc3b29-0909-47bb-bb3d-92b7e81d6da1",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "d4bc3b29-0909-47bb-bb3d-92b7e81d6da1",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "eba1e5a9-ffa7-43de-87c1-68e3152b8260",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "eba1e5a9-ffa7-43de-87c1-68e3152b8260",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "f3cbccc3-8a2a-4ebd-9d03-3097336df8e8",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "f3cbccc3-8a2a-4ebd-9d03-3097336df8e8",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "fa7173ef-255d-4e7b-96c9-4954cc45d367",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "fa7173ef-255d-4e7b-96c9-4954cc45d367",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "fc561742-bb46-4bf0-a808-c69a7488add2",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "fc561742-bb46-4bf0-a808-c69a7488add2",
+        "rank": 1,
+        "time": 0
+      }
+    }
+  ],
+  "alertIds": [
+    "d1f3a146-8972-4083-ba92-8f1ebad05d0f",
+    "c670b6af-ef39-4bc6-ba39-76baf9816b49",
+    "fa7173ef-255d-4e7b-96c9-4954cc45d367"
+  ],
+  "contextualAlertIds": [
+    "fc561742-bb46-4bf0-a808-c69a7488add2",
+    "3c6d4451-c6a2-4066-ac06-ea82d1145c75",
+    "eba1e5a9-ffa7-43de-87c1-68e3152b8260",
+    "bcbb28da-84ce-42e4-a31f-5aa0e623f17a",
+    "9935e495-309e-4cb6-9fc9-af5e3752f620",
+    "2ffd6db0-338c-4880-bcbb-73e0ee8227e7",
+    "0cf00716-5faa-47b6-9f8f-db654c6b3f29",
+    "97080d10-2445-44a6-a8e7-fc241509eff2",
+    "abd38a6c-1f4a-46b3-a9aa-600baef37754",
+    "d4bc3b29-0909-47bb-bb3d-92b7e81d6da1",
+    "7e42502a-cfa8-4487-95ad-b66ba34ee5fe",
+    "63df62be-2c48-426e-9240-ae9077df56ae",
+    "f3cbccc3-8a2a-4ebd-9d03-3097336df8e8",
+    "16be1c90-6e55-4bf2-beda-4580ccfd66f2",
+    "9567a174-aa12-419e-9ed0-486e6850c410",
+    "998da8e4-e016-4f33-811b-b54ac26864a8",
+    "185e5749-14bb-4617-bb55-7817202a9841",
+    "2babe9a8-5fdf-48b8-8684-a137d83f46aa",
+    "6d5ea442-31ef-4fe4-be8b-4c76e9d9f2a1"
+  ]
+},
+{
+  "id": "4835792b-a133-4ac9-b57b-8edd8b326fbe",
+  "createdBy": "system",
+  "title": "[Instana] MySQL - change detected - The value **resources/limits** has changed                                                ",
+  "description": "[Instana] MySQL - change detected - The value **resources/limits** has changed                                                ",
+  "priority": 1,
+  "state": "inProgress",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T11:35:31.722Z",
+  "lastChangedTime": "2022-12-22T12:25:27.339Z",
+  "insights": [
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "4835792b-a133-4ac9-b57b-8edd8b326fbe",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0199223.html",
+            "score": 3.6323195,
+            "title": "MySQL - change detected - The value **resources/limits** has changed",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "c396feb9-264d-41be-88f4-411a77a9b55c",
+            "source_incident_id": "INC0199220"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099224.html",
+            "score": 0.5346698,
+            "title": "CPU1Temperature is outside its predominant range of values",
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 141,
+                  "begin_offset": 131
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 158,
+                    "begin_offset": 146
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "Cause: MySQL Pod was restarted.\n❗ Ratings Service is unable to pick up the restart and has to be restarted as well. \n🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "c60a268a-8b2e-472d-9d4f-dd85d88cdb46",
+            "source_incident_id": "INC0899232"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.46697894,
+            "title": "mysql with 1 event - Story 75",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-07-28T00:44:06+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "2f513f72-e9f7-4533-b8f7-6b11e96b8459",
+            "source_incident_id": "INC0010021"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "c396feb9-264d-41be-88f4-411a77a9b55c"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "c396feb9-264d-41be-88f4-411a77a9b55c"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 24,
+                  "begin_offset": 14
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 41,
+                    "begin_offset": 29
+                  }
+                ]
+              }
+            ],
+            "sentence": "🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "incident_id": "c60a268a-8b2e-472d-9d4f-dd85d88cdb46"
+          }
+        ]
+      }
+    },
+    {
+      "id": "92d23aa0-121f-40ba-a7ff-8f1d362c2833",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": [
+          "a7998d50-c0cf-4c89-bad6-35beac6efc49",
+          "cd7da711-24a6-4e83-8fa2-59264cbe9df2"
+        ]
+      }
+    },
+    {
+      "id": "370a7e02-9766-44af-a71c-b4a162ea0335",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "370a7e02-9766-44af-a71c-b4a162ea0335",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "4835792b-a133-4ac9-b57b-8edd8b326fbe",
+      "type": "aiops.ibm.com/insight-type/topology/resource",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "v0BwTeg-Sa2dhZeKvlaaBA",
+        "rank": 0,
+        "time": 966656951
+      }
+    },
+    {
+      "id": "19c44576-e52d-4972-9c46-46afbf142083",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "19c44576-e52d-4972-9c46-46afbf142083",
+        "rank": 2,
+        "time": 0
+      }
+    },
+    {
+      "id": "f7a36392-244b-4ccf-a1ef-1f45cc8e9660",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "f7a36392-244b-4ccf-a1ef-1f45cc8e9660",
+        "rank": 14,
+        "time": 0
+      }
+    },
+    {
+      "id": "313fd048-ccbf-4b31-8359-370b62fd8ebd",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "313fd048-ccbf-4b31-8359-370b62fd8ebd",
+        "rank": 2,
+        "time": 0
+      }
+    },
+    {
+      "id": "68b4b679-1db8-4712-b881-8bda8946c355",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "68b4b679-1db8-4712-b881-8bda8946c355",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "e407d1e1-3760-499d-86cb-f7ba8336a777",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "e407d1e1-3760-499d-86cb-f7ba8336a777",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "410007d5-5082-43d9-958f-9abf7532d22e",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "410007d5-5082-43d9-958f-9abf7532d22e",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "affb9d72-3098-43c4-953b-9384d1433e7b",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "affb9d72-3098-43c4-953b-9384d1433e7b",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "b2507f98-d884-47d8-9a6f-90b71c531509",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "b2507f98-d884-47d8-9a6f-90b71c531509",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "1704588f-fc98-480f-a1bd-1678657e6c2e",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "1704588f-fc98-480f-a1bd-1678657e6c2e",
+        "rank": 4,
+        "time": 0
+      }
+    },
+    {
+      "id": "3a86c6ed-48f1-4c23-98e1-e81930621c5a",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "3a86c6ed-48f1-4c23-98e1-e81930621c5a",
+        "rank": 4,
+        "time": 0
+      }
+    },
+    {
+      "id": "8456989e-a858-455a-96fe-06b7647d4c45",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "8456989e-a858-455a-96fe-06b7647d4c45",
+        "rank": 5,
+        "time": 0
+      }
+    },
+    {
+      "id": "6fc08ddf-04ca-44dd-b69c-89b7d36fabfe",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "6fc08ddf-04ca-44dd-b69c-89b7d36fabfe",
+        "rank": 6,
+        "time": 0
+      }
+    },
+    {
+      "id": "9017e43e-0aba-4920-a084-5ae23c04b49d",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "9017e43e-0aba-4920-a084-5ae23c04b49d",
+        "rank": 6,
+        "time": 0
+      }
+    },
+    {
+      "id": "6bc811ca-bc10-4898-8625-274422cda21f",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "6bc811ca-bc10-4898-8625-274422cda21f",
+        "rank": 7,
+        "time": 0
+      }
+    },
+    {
+      "id": "b7b7252a-9f30-45f8-a95d-e0d7330d3a2c",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "b7b7252a-9f30-45f8-a95d-e0d7330d3a2c",
+        "rank": 8,
+        "time": 0
+      }
+    },
+    {
+      "id": "ed2bc931-82a8-4667-9287-2b71919d0310",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "ed2bc931-82a8-4667-9287-2b71919d0310",
+        "rank": 9,
+        "time": 0
+      }
+    },
+    {
+      "id": "bc28b738-4d85-480d-b10c-516001f549b9",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "bc28b738-4d85-480d-b10c-516001f549b9",
+        "rank": 10,
+        "time": 0
+      }
+    },
+    {
+      "id": "38bf4ffc-f9fe-4851-80ab-c84db260a258",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "38bf4ffc-f9fe-4851-80ab-c84db260a258",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "c39bffb8-9f5a-44f1-93a1-b82da9d20822",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "c39bffb8-9f5a-44f1-93a1-b82da9d20822",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "c4cddde5-68a7-412b-9a61-a3bc1936a292",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "c4cddde5-68a7-412b-9a61-a3bc1936a292",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "331dee07-8f6f-4758-958e-926d035c0b48",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "331dee07-8f6f-4758-958e-926d035c0b48",
+        "rank": 12,
+        "time": 0
+      }
+    },
+    {
+      "id": "7fabb126-46ce-44df-a71f-721de33c16a7",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "7fabb126-46ce-44df-a71f-721de33c16a7",
+        "rank": 13,
+        "time": 0
+      }
+    },
+    {
+      "id": "24395ad5-a781-4ac7-88ad-9996b7e41cb0",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "24395ad5-a781-4ac7-88ad-9996b7e41cb0",
+        "rank": 15,
+        "time": 0
+      }
+    },
+    {
+      "id": "68a8abde-c595-4dbc-a0a8-a2b71b93ee75",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "68a8abde-c595-4dbc-a0a8-a2b71b93ee75",
+        "rank": 15,
+        "time": 0
+      }
+    },
+    {
+      "id": "e8386679-975f-410d-9952-78f3cbc3b81c",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "e8386679-975f-410d-9952-78f3cbc3b81c",
+        "rank": 16,
+        "time": 0
+      }
+    },
+    {
+      "id": "ea5cea12-568c-4bf2-8383-31ddff74b580",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "ea5cea12-568c-4bf2-8383-31ddff74b580",
+        "rank": 17,
+        "time": 0
+      }
+    },
+    {
+      "id": "5b50252d-fcad-4807-a171-e6e56249fc4b",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "5b50252d-fcad-4807-a171-e6e56249fc4b",
+        "rank": 2,
+        "time": 0
+      }
+    }
+  ],
+  "alertIds": [
+    "9017e43e-0aba-4920-a084-5ae23c04b49d",
+    "c39bffb8-9f5a-44f1-93a1-b82da9d20822",
+    "c4cddde5-68a7-412b-9a61-a3bc1936a292",
+    "7fabb126-46ce-44df-a71f-721de33c16a7",
+    "ed2bc931-82a8-4667-9287-2b71919d0310",
+    "8456989e-a858-455a-96fe-06b7647d4c45",
+    "f7a36392-244b-4ccf-a1ef-1f45cc8e9660",
+    "370a7e02-9766-44af-a71c-b4a162ea0335",
+    "6fc08ddf-04ca-44dd-b69c-89b7d36fabfe"
+  ],
+  "contextualAlertIds": [
+    "331dee07-8f6f-4758-958e-926d035c0b48",
+    "3a86c6ed-48f1-4c23-98e1-e81930621c5a",
+    "1704588f-fc98-480f-a1bd-1678657e6c2e",
+    "38bf4ffc-f9fe-4851-80ab-c84db260a258",
+    "68a8abde-c595-4dbc-a0a8-a2b71b93ee75",
+    "6bc811ca-bc10-4898-8625-274422cda21f",
+    "313fd048-ccbf-4b31-8359-370b62fd8ebd",
+    "68b4b679-1db8-4712-b881-8bda8946c355",
+    "24395ad5-a781-4ac7-88ad-9996b7e41cb0",
+    "e407d1e1-3760-499d-86cb-f7ba8336a777",
+    "bc28b738-4d85-480d-b10c-516001f549b9",
+    "ea5cea12-568c-4bf2-8383-31ddff74b580",
+    "b7b7252a-9f30-45f8-a95d-e0d7330d3a2c",
+    "e8386679-975f-410d-9952-78f3cbc3b81c",
+    "410007d5-5082-43d9-958f-9abf7532d22e",
+    "5b50252d-fcad-4807-a171-e6e56249fc4b",
+    "affb9d72-3098-43c4-953b-9384d1433e7b",
+    "19c44576-e52d-4972-9c46-46afbf142083",
+    "b2507f98-d884-47d8-9a6f-90b71c531509"
+  ]
+},
+{
+  "id": "e1b8d0d7-27a0-4775-a0e1-d300afcce9b0",
+  "createdBy": "system",
+  "title": "License Service 1.19.0 - Garbage Collection Activity High (19.57%)",
+  "description": "License Service 1.19.0 - Garbage Collection Activity High (19.57%)",
+  "priority": 3,
+  "state": "assignedToIndividual",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T12:22:26.924Z",
+  "lastChangedTime": "2022-12-22T12:22:26.924Z",
+  "insights": [
+    {
+      "id": "4a362180-82fb-4e3e-aa44-5fca4de97407",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": []
+      }
+    },
+    {
+      "id": "4e966130-6f21-466a-b2fe-bb377edacb1e",
+      "type": "aiops.ibm.com/insight-type/chatops/notification",
+      "details": {
+        "notification": [
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "slack",
+            "details": {}
+          },
+          {
+            "name": "AIOPSSystemDefault",
+            "type": "msteams",
+            "details": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "3a881cf4-82c2-4186-9c84-1f8243105514",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "3a881cf4-82c2-4186-9c84-1f8243105514",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "401fc395-d231-48e1-bb8f-fe7ef62f283b",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "401fc395-d231-48e1-bb8f-fe7ef62f283b",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "e1b8d0d7-27a0-4775-a0e1-d300afcce9b0",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.4615443,
+            "title": "RobotShop call rate is too high - RobotShop call rate stays at a high level for an extended period of time",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-04-27T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "4048fb26-bd6c-4346-a9a4-3c2c53d946ce",
+            "source_incident_id": "INC0099201"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099223.html",
+            "score": 0.39412135,
+            "title": "Robotshop Homepage call rate is too high- Robotshop call rate stays at a high level for an extended period of time",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-25T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "ff08e351-2595-4c31-94a0-7bb32744a1b7",
+            "source_incident_id": "INC0099229"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099224.html",
+            "score": 0.34953454,
+            "title": "Robotshop Homepage call rate is too high- Robotshop call rate stays at a high level for an extended period of time",
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 141,
+                  "begin_offset": 131
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 158,
+                    "begin_offset": 146
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "Cause: MySQL Pod was restarted.\n❗ Ratings Service is unable to pick up the restart and has to be restarted as well. \n🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "1950f2b7-d00e-494f-88f6-3584c197d12a",
+            "source_incident_id": "INC0899230"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "4048fb26-bd6c-4346-a9a4-3c2c53d946ce"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "4048fb26-bd6c-4346-a9a4-3c2c53d946ce"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 24,
+                  "begin_offset": 14
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 41,
+                    "begin_offset": 29
+                  }
+                ]
+              }
+            ],
+            "sentence": "🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "incident_id": "1950f2b7-d00e-494f-88f6-3584c197d12a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e1b8d0d7-27a0-4775-a0e1-d300afcce9b0",
+      "type": "aiops.ibm.com/insight-type/topology/resource",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "DygA_7_5RHWs7jBTj5DFmg",
+        "rank": 0,
+        "time": 969470373
+      }
+    }
+  ],
+  "alertIds": [
+    "401fc395-d231-48e1-bb8f-fe7ef62f283b",
+    "3a881cf4-82c2-4186-9c84-1f8243105514"
+  ],
+  "contextualAlertIds": []
+},
+{
+  "id": "836159d9-35b0-4707-ba5c-a919eda32a81",
+  "createdBy": "system",
+  "title": "Latency is Higher than expected. Actual: 2.6500 Expected: 1.5428",
+  "description": "Latency is Higher than expected. Actual: 2.6500 Expected: 1.5428",
+  "priority": 1,
+  "state": "inProgress",
+  "owner": "demo",
+  "team": "All users",
+  "createdTime": "2022-12-22T11:36:19.628Z",
+  "lastChangedTime": "2022-12-22T12:25:27.344Z",
+  "insights": [
+    {
+      "id": "836159d9-35b0-4707-ba5c-a919eda32a81",
+      "type": "aiops.ibm.com/insight-type/similar-incidents",
+      "details": {
+        "similar_incidents": [
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099224.html",
+            "score": 2.7701552,
+            "title": "Latency is Higher than expected",
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 141,
+                  "begin_offset": 131
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 158,
+                    "begin_offset": 146
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "Cause: MySQL Pod was restarted.\n❗ Ratings Service is unable to pick up the restart and has to be restarted as well. \n🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "9bd6441d-aedb-4539-a3e8-3a7e12b0198c",
+            "source_incident_id": "INC0899231"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0099224.html",
+            "score": 1.5834275,
+            "title": "TransactionsPerSecond is Lower than expected",
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 141,
+                  "begin_offset": 131
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 158,
+                    "begin_offset": 146
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "Cause: MySQL Pod was restarted.\n❗ Ratings Service is unable to pick up the restart and has to be restarted as well. \n🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "started_at": "2021-05-16T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "f8587e96-b115-44c5-875e-4a0c0028a82d",
+            "source_incident_id": "INC0899233"
+          },
+          {
+            "url": "https://pirsoscom.github.io/SNOW_INC0199223.html",
+            "score": 0.355123,
+            "title": "MySQL - available replicas is less than desired replicas - Check conditions and error events",
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 60,
+                  "begin_offset": 50
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 67,
+                    "begin_offset": 61
+                  }
+                ]
+              },
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 82,
+                  "begin_offset": 72
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 92,
+                    "begin_offset": 83
+                  }
+                ]
+              }
+            ],
+            "closed_by": "",
+            "resolution": "MySQL Deployment was out of Memory. \n\nResolved by increasing memory and restarting mysql pod: \noc delete pod -n robot-shop $(oc get po -n robot-shop|grep mysql|awk '{print$1}",
+            "started_at": "2021-05-24T20:47:22+00:00",
+            "explanation": "Based on similarity from query and incidents",
+            "incident_id": "ece0aa50-0075-4374-beb5-58c7df6cda40",
+            "source_incident_id": "INC0199228"
+          }
+        ],
+        "recommended_actions": [
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 24,
+                  "begin_offset": 14
+                },
+                "components": [
+                  {
+                    "text": "ratings pods",
+                    "end_offset": 41,
+                    "begin_offset": 29
+                  }
+                ]
+              }
+            ],
+            "sentence": "🚀 Resolved by restarting the ratings pods: oc delete pod -n robot-shop $(oc get po -n robot-shop|grep ratings|awk '{print$1}'",
+            "incident_id": "9bd6441d-aedb-4539-a3e8-3a7e12b0198c"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "increasing",
+                  "end_offset": 22,
+                  "begin_offset": 12
+                },
+                "components": [
+                  {
+                    "text": "memory",
+                    "end_offset": 29,
+                    "begin_offset": 23
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "ece0aa50-0075-4374-beb5-58c7df6cda40"
+          },
+          {
+            "actions": [
+              {
+                "action": {
+                  "text": "restarting",
+                  "end_offset": 44,
+                  "begin_offset": 34
+                },
+                "components": [
+                  {
+                    "text": "mysql pod",
+                    "end_offset": 54,
+                    "begin_offset": 45
+                  }
+                ]
+              }
+            ],
+            "sentence": "Resolved by increasing memory and restarting mysql pod:",
+            "incident_id": "ece0aa50-0075-4374-beb5-58c7df6cda40"
+          }
+        ]
+      }
+    },
+    {
+      "id": "836159d9-35b0-4707-ba5c-a919eda32a81",
+      "type": "aiops.ibm.com/insight-type/topology/resource",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "P2xgrNwCQ-q2HokisHY-0Q",
+        "rank": 0,
+        "time": 968802675
+      }
+    },
+    {
+      "id": "92d23aa0-121f-40ba-a7ff-8f1d362c2833",
+      "type": "aiops.ibm.com/insight-type/relationship/causal-union",
+      "details": {
+        "policyId": "4ea73270-8115-11ed-be36-5b727ab9b4d9",
+        "subsumedUnions": [
+          "a7998d50-c0cf-4c89-bad6-35beac6efc49",
+          "cd7da711-24a6-4e83-8fa2-59264cbe9df2"
+        ]
+      }
+    },
+    {
+      "id": "affb9d72-3098-43c4-953b-9384d1433e7b",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "affb9d72-3098-43c4-953b-9384d1433e7b",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "38bf4ffc-f9fe-4851-80ab-c84db260a258",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "38bf4ffc-f9fe-4851-80ab-c84db260a258",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "19c44576-e52d-4972-9c46-46afbf142083",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "19c44576-e52d-4972-9c46-46afbf142083",
+        "rank": 2,
+        "time": 0
+      }
+    },
+    {
+      "id": "370a7e02-9766-44af-a71c-b4a162ea0335",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "370a7e02-9766-44af-a71c-b4a162ea0335",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "6fc08ddf-04ca-44dd-b69c-89b7d36fabfe",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "6fc08ddf-04ca-44dd-b69c-89b7d36fabfe",
+        "rank": 6,
+        "time": 0
+      }
+    },
+    {
+      "id": "9017e43e-0aba-4920-a084-5ae23c04b49d",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "9017e43e-0aba-4920-a084-5ae23c04b49d",
+        "rank": 6,
+        "time": 0
+      }
+    },
+    {
+      "id": "c4cddde5-68a7-412b-9a61-a3bc1936a292",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "c4cddde5-68a7-412b-9a61-a3bc1936a292",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "7fabb126-46ce-44df-a71f-721de33c16a7",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "7fabb126-46ce-44df-a71f-721de33c16a7",
+        "rank": 13,
+        "time": 0
+      }
+    },
+    {
+      "id": "8456989e-a858-455a-96fe-06b7647d4c45",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "8456989e-a858-455a-96fe-06b7647d4c45",
+        "rank": 5,
+        "time": 0
+      }
+    },
+    {
+      "id": "39225430-8119-11ed-bb5b-8983728fb5fa",
+      "type": "aiops.ibm.com/insight-type/proposed-by",
+      "details": {
+        "policyId": "39225430-8119-11ed-bb5b-8983728fb5fa"
+      }
+    },
+    {
+      "id": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9#aiops.ibm.com/action/internal/stories/create",
+      "type": "aiops.ibm.com/insight-type/created-by",
+      "details": {
+        "actionId": "aiops.ibm.com/action/internal/stories/create",
+        "policyId": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9",
+        "partitionKey": "4ef5eeb0-8115-11ed-be36-5b727ab9b4d9"
+      }
+    },
+    {
+      "id": "313fd048-ccbf-4b31-8359-370b62fd8ebd",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "313fd048-ccbf-4b31-8359-370b62fd8ebd",
+        "rank": 2,
+        "time": 0
+      }
+    },
+    {
+      "id": "68b4b679-1db8-4712-b881-8bda8946c355",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "68b4b679-1db8-4712-b881-8bda8946c355",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "e407d1e1-3760-499d-86cb-f7ba8336a777",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "e407d1e1-3760-499d-86cb-f7ba8336a777",
+        "rank": 1,
+        "time": 0
+      }
+    },
+    {
+      "id": "410007d5-5082-43d9-958f-9abf7532d22e",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "410007d5-5082-43d9-958f-9abf7532d22e",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "b2507f98-d884-47d8-9a6f-90b71c531509",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "b2507f98-d884-47d8-9a6f-90b71c531509",
+        "rank": 3,
+        "time": 0
+      }
+    },
+    {
+      "id": "1704588f-fc98-480f-a1bd-1678657e6c2e",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "1704588f-fc98-480f-a1bd-1678657e6c2e",
+        "rank": 4,
+        "time": 0
+      }
+    },
+    {
+      "id": "3a86c6ed-48f1-4c23-98e1-e81930621c5a",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "3a86c6ed-48f1-4c23-98e1-e81930621c5a",
+        "rank": 4,
+        "time": 0
+      }
+    },
+    {
+      "id": "6bc811ca-bc10-4898-8625-274422cda21f",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "6bc811ca-bc10-4898-8625-274422cda21f",
+        "rank": 7,
+        "time": 0
+      }
+    },
+    {
+      "id": "b7b7252a-9f30-45f8-a95d-e0d7330d3a2c",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "b7b7252a-9f30-45f8-a95d-e0d7330d3a2c",
+        "rank": 8,
+        "time": 0
+      }
+    },
+    {
+      "id": "ed2bc931-82a8-4667-9287-2b71919d0310",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "ed2bc931-82a8-4667-9287-2b71919d0310",
+        "rank": 9,
+        "time": 0
+      }
+    },
+    {
+      "id": "bc28b738-4d85-480d-b10c-516001f549b9",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "bc28b738-4d85-480d-b10c-516001f549b9",
+        "rank": 10,
+        "time": 0
+      }
+    },
+    {
+      "id": "c39bffb8-9f5a-44f1-93a1-b82da9d20822",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "c39bffb8-9f5a-44f1-93a1-b82da9d20822",
+        "rank": 11,
+        "time": 0
+      }
+    },
+    {
+      "id": "331dee07-8f6f-4758-958e-926d035c0b48",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "331dee07-8f6f-4758-958e-926d035c0b48",
+        "rank": 12,
+        "time": 0
+      }
+    },
+    {
+      "id": "f7a36392-244b-4ccf-a1ef-1f45cc8e9660",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "f7a36392-244b-4ccf-a1ef-1f45cc8e9660",
+        "rank": 14,
+        "time": 0
+      }
+    },
+    {
+      "id": "24395ad5-a781-4ac7-88ad-9996b7e41cb0",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "24395ad5-a781-4ac7-88ad-9996b7e41cb0",
+        "rank": 15,
+        "time": 0
+      }
+    },
+    {
+      "id": "68a8abde-c595-4dbc-a0a8-a2b71b93ee75",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "68a8abde-c595-4dbc-a0a8-a2b71b93ee75",
+        "rank": 15,
+        "time": 0
+      }
+    },
+    {
+      "id": "e8386679-975f-410d-9952-78f3cbc3b81c",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "e8386679-975f-410d-9952-78f3cbc3b81c",
+        "rank": 16,
+        "time": 0
+      }
+    },
+    {
+      "id": "ea5cea12-568c-4bf2-8383-31ddff74b580",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "ea5cea12-568c-4bf2-8383-31ddff74b580",
+        "rank": 17,
+        "time": 0
+      }
+    },
+    {
+      "id": "5b50252d-fcad-4807-a171-e6e56249fc4b",
+      "type": "aiops.ibm.com/insight-type/probable-cause",
+      "source": "aiops.ibm.com/insight-source/probable-cause",
+      "details": {
+        "id": "5b50252d-fcad-4807-a171-e6e56249fc4b",
+        "rank": 2,
+        "time": 0
+      }
+    }
+  ],
+  "alertIds": [
+    "19c44576-e52d-4972-9c46-46afbf142083",
+    "5b50252d-fcad-4807-a171-e6e56249fc4b",
+    "affb9d72-3098-43c4-953b-9384d1433e7b",
+    "38bf4ffc-f9fe-4851-80ab-c84db260a258",
+    "313fd048-ccbf-4b31-8359-370b62fd8ebd",
+    "410007d5-5082-43d9-958f-9abf7532d22e",
+    "b2507f98-d884-47d8-9a6f-90b71c531509"
+  ],
+  "contextualAlertIds": [
+    "9017e43e-0aba-4920-a084-5ae23c04b49d",
+    "370a7e02-9766-44af-a71c-b4a162ea0335",
+    "c39bffb8-9f5a-44f1-93a1-b82da9d20822",
+    "7fabb126-46ce-44df-a71f-721de33c16a7",
+    "ed2bc931-82a8-4667-9287-2b71919d0310",
+    "c4cddde5-68a7-412b-9a61-a3bc1936a292",
+    "6fc08ddf-04ca-44dd-b69c-89b7d36fabfe",
+    "8456989e-a858-455a-96fe-06b7647d4c45",
+    "f7a36392-244b-4ccf-a1ef-1f45cc8e9660",
+    "331dee07-8f6f-4758-958e-926d035c0b48",
+    "3a86c6ed-48f1-4c23-98e1-e81930621c5a",
+    "1704588f-fc98-480f-a1bd-1678657e6c2e",
+    "68a8abde-c595-4dbc-a0a8-a2b71b93ee75",
+    "6bc811ca-bc10-4898-8625-274422cda21f",
+    "68b4b679-1db8-4712-b881-8bda8946c355",
+    "24395ad5-a781-4ac7-88ad-9996b7e41cb0",
+    "e407d1e1-3760-499d-86cb-f7ba8336a777",
+    "bc28b738-4d85-480d-b10c-516001f549b9",
+    "ea5cea12-568c-4bf2-8383-31ddff74b580",
+    "b7b7252a-9f30-45f8-a95d-e0d7330d3a2c",
+    "e8386679-975f-410d-9952-78f3cbc3b81c"
+  ]
+}
+]}

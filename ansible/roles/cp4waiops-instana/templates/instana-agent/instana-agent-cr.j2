@@ -13,7 +13,10 @@ spec:
     key: {{current_agent_key}}
     endpointHost: agent.{{BASE_DOMAIN}}
     endpointPort: "443"
-    env: {}
+    env: 
+      AWS_ACCESS_KEY_ID: changeme
+      AWS_SECRET_ACCESS_KEY: changeme 
+      INSTANA_AWS_REGION_CONFIG: eu-central-1 
     configuration_yaml: |
       # Host
       com.instana.plugin.host:
@@ -21,3 +24,11 @@ spec:
           - 'dev'
           - 'aiops'
           - 'openshift'
+      com.instana.plugin.azure:
+        enabled: true
+        subscription: YourSubscriptionID
+        tenant: YourDirectoryTenantID
+        principals:
+          - id: YourApplicationClientID
+            secret: YourSecretValue
+

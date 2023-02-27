@@ -1,0 +1,90 @@
+---
+apiVersion: v1                     
+kind: Namespace
+metadata:
+  name: cp4waiops-experimental
+---  
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cp4waiops-experimental-admin
+  namespace: cp4waiops-experimental
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cp4waiops-experimental-admin-crb
+subjects:
+  - kind: ServiceAccount
+    name: cp4waiops-experimental-admin
+    namespace: cp4waiops-experimental
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cp4waiops-pagerduty-story-pusher-pvc
+  namespace: cp4waiops-experimental
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 32Mi
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cp4waiops-pagerduty-story-pusher
+  namespace: cp4waiops-experimental
+  labels:
+      app:  cp4waiops-pagerduty-story-pusher
+spec:
+  serviceAccountName: cp4waiops-pagerduty-story-pusher
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  cp4waiops-pagerduty-story-pusher
+  template:
+    metadata:
+      labels:
+        app:  cp4waiops-pagerduty-story-pusher
+    spec:
+      containers:
+      - image: docker.io/niklaushirt/cp4waiops-pagerduty-story-pusher:0.2
+        imagePullPolicy: Always
+        name: gateway
+        command:
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+          limits:
+            cpu: "550m"
+            memory: "550Mi"
+        volumeMounts:
+          - mountPath: /home/app/db
+            name: cp4waiops-pagerduty-story-pusher-store
+        env:
+          - name: ACTIVE
+            value: "False"
+          - name: DEBUG_ME
+            value : "False"
+          - name: MIN_RANK
+            value : "3"
+          - name: POLL_DELAY
+            value : "5"
+        envFrom:
+        - configMapRef:
+            name:  cp4waiops-simulation-config
+      volumes:
+        - persistentVolumeClaim:
+            claimName: cp4waiops-pagerduty-story-pusher-pvc
+          name: cp4waiops-pagerduty-story-pusher-store
+      serviceAccountName: cp4waiops-experimental-admin

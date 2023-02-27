@@ -26,7 +26,7 @@ roleRef:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: cp4waiops-story-pusher-pvc
+  name: cp4waiops-discord-story-pusher-pvc
   namespace: cp4waiops-experimental
 spec:
   accessModes:
@@ -39,23 +39,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cp4waiops-story-pusher
+  name: cp4waiops-discord-story-pusher
   namespace: cp4waiops-experimental
   labels:
-      app:  cp4waiops-story-pusher
+      app:  cp4waiops-discord-story-pusher
 spec:
-  serviceAccountName: cp4waiops-story-pusher
+  serviceAccountName: cp4waiops-discord-story-pusher
   replicas: 1
   selector:
     matchLabels:
-      app:  cp4waiops-story-pusher
+      app:  cp4waiops-discord-story-pusher
   template:
     metadata:
       labels:
-        app:  cp4waiops-story-pusher
+        app:  cp4waiops-discord-story-pusher
     spec:
       containers:
-      - image: docker.io/niklaushirt/cp4waiops-story-pusher:0.8
+      - image: docker.io/niklaushirt/cp4waiops-discord-story-pusher:0.8
         imagePullPolicy: Always
         name: gateway
         command:
@@ -70,7 +70,7 @@ spec:
             memory: "550Mi"
         volumeMounts:
           - mountPath: /home/app/db
-            name: cp4waiops-story-pusher-store
+            name: cp4waiops-discord-story-pusher-store
         env:
           - name: ACTIVE
             value: "False"
@@ -85,6 +85,6 @@ spec:
             name:  cp4waiops-simulation-config
       volumes:
         - persistentVolumeClaim:
-            claimName: cp4waiops-story-pusher-pvc
-          name: cp4waiops-story-pusher-store
+            claimName: cp4waiops-discord-story-pusher-pvc
+          name: cp4waiops-discord-story-pusher-store
       serviceAccountName: cp4waiops-experimental-admin
