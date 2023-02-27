@@ -40,13 +40,13 @@ Please contact me if you have feedback or if you find glitches or problems.
 ## 🚀 Get started
 
 
-🐥 [Quick Install](https://github.com/niklaushirt/cp4waiops-deployer#-1-quick-install)
+🐥 [Quick Install](https://github.com/niklaushirt/cp4waiops-deployer#-2-quick-install)
 
-🚀 [Demo the Solution](#2-demo-the-solution)
+🚀 [Demo the Solution](#3-demo-the-solution)
 
-📱 [Slack integration](#3-slack-integration) (optional)
+📱 [Slack integration](#4-slack-integration) (optional)
 
-🤓 [Demo Setup - Explained](#4-demo-setup---explained)
+🤓 [Demo Setup - Explained](#5-demo-setup---explained)
 
 
 > ℹ️ You can find a more detailed presentation about how the automation works here: [PDF](https://ibm.box.com/s/gx0tcubl9k4phvdsrffd7taragrmvz02).
@@ -158,6 +158,7 @@ This allows the CP4WAIOPS images to be pulled from the IBM Container Registry.
 </details>
 <details>
 <summary>Important remarks before you start</summary>
+
 ## ⚠️⚠️ 1.2 Important remarks before you start ⚠️⚠️
 
 Those are remarks to feedback and problem reports I got from the field.
@@ -206,6 +207,7 @@ You can find some examples below.
 
 <details>
 <summary>Install AI Manager with demo content, Turbonomic and Instana</summary>
+
 ## 🐥 2.1 Install AI Manager with demo content, Turbonomic and Instana 
 
 > ### ✅ This is probably the one that you want.
@@ -269,6 +271,7 @@ This installation cocntains:
 </details>
 <details>
 <summary>Install AI Manager, Event Manager with demo content</summary>
+
 ## 🐥 2.2 Install AI Manager, Event Manager with demo content
 
 You get all the CP4WAIOPS components installed and pre-trained in one simple script.
@@ -326,6 +329,7 @@ This installation cocntains:
 </details>
 <details>
 <summary>Custom Install</summary>
+
 ## 🐥 2.3 Custom Install
 
 1. Open the [00\_INSTALL_CUSTOM.yaml](./Quick_Install/00_INSTALL_CUSTOM.yaml) file
@@ -369,6 +373,7 @@ This installation cocntains:
 
 <details>
 <summary>Access the Environment</summary>
+
 ## 3.1 Access the Environment
 
 To access the demo environment:
@@ -387,6 +392,7 @@ To access the demo environment:
 </details>
 <details>
 <summary>Login to AI Manager as demo User</summary>
+
 ## 3.2 Login to AI Manager as demo User
 
 * Click on the blue `AI Manager` button
@@ -399,6 +405,7 @@ To access the demo environment:
 </details>
 <details>
 <summary>🚀 Demo the Solution</summary>
+
 ## 3.3 🚀 Demo the Solution
 
 Please use the [Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md) to prepare for the demo.
@@ -744,6 +751,7 @@ or
 
 <details>
 <summary>Basic Architecture</summary>
+
 ## 5.1 Basic Architecture
 
 The environement (Kubernetes, Applications, ...) create logs that are being fed into a Log Management Tool (ELK in this case).
@@ -763,6 +771,7 @@ The environement (Kubernetes, Applications, ...) create logs that are being fed 
 </details>
 <details>
 <summary>Optimized Demo Architecture</summary>
+
 ## 5.2 Optimized Demo Architecture
 
 The idea of this repo is to provide a optimised, complete, pre-trained demo environment that is self-contained (e.g. can be deployed in only one cluster)
@@ -833,6 +842,7 @@ This allows us to:
 </details>
 <details>
 <summary> Training </summary>
+
 ## 5.3 Training
 
 ### 5.3.1 Loading training data
@@ -856,6 +866,7 @@ The models can be trained directly on the data that has been loaded as described
 </details>
 <details>
 <summary>Incident creation</summary>
+
 ## 5.4 Incident creation (inception)
 
 ![demo](./doc/pics/waiops_arch_inception.jpg)
