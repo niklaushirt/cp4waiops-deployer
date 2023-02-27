@@ -10,43 +10,50 @@
 <div style="page-break-after: always;"></div>
 
 
-### ❗ This is provided `as-is`:
+### ❗ THIS IS WORK IN PROGRESS
+Please drop me a note on Slack or by mail nikh@ch.ibm.com if you find glitches or problems.
+
+
+
+
+This is provided `as-is`:
 
 * I'm sure there are errors
 * I'm sure it's not complete
 * It clearly can be improved
 
 
-Please contact me if you have feedback or if you find glitches or problems.
-
-- on Slack: @niklaushirt or
-- by Mail: nikh@ch.ibm.com
-
-
-**❗The installation has been tested for the CP4WAIOPS v3.6.0 release on OpenShift 4.10 on:**
-
+**❗This has been tested for the new CP4WAIOPS v3.6.0 release on OpenShift 4.10 on:**
 - IBM RedHat Openshift Kubernetes Service (ROKS) with IBM Cloud Storage (ibmc-xxx)
 - IBM RedHat Openshift Kubernetes Service (ROKS) with NFS Storage
 - IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)
 - OpenShift Cluster (VMware on IBM Cloud) - IPI
 
 
-> ❗Those are **non-production** installations and are suited only for demo and PoC environments. ❗
-> Please refer to the official IBM Documentation for production ready installations.
+
+So please if you have any feedback contact me 
+
+- on Slack: @niklaushirt or
+- by Mail: nikh@ch.ibm.com
+
+
+❗Those are **non-production** installations and are suited only for demo and PoC environments. ❗
+
+Please refer to the official IBM Documentation for production ready installations.
 
 <div style="page-break-after: always;"></div>
 
 
-## 🚀 Get started
+## 🚀 Demo Installation
 
 
-🐥 [Quick Install](https://github.com/niklaushirt/cp4waiops-deployer#-2-quick-install)
+🐥 [Quick Install](https://github.com/niklaushirt/cp4waiops-deployer#-1-quick-install)
 
-🚀 [Demo the Solution](#3-demo-the-solution)
+🚀 [Demo the Solution](#2-demo-the-solution)
 
-📱 [Slack integration](#4-slack-integration) (optional)
+📱 [Slack integration](#3-slack-integration) (optional)
 
-🤓 [Demo Setup - Explained](#5-demo-setup---explained)
+🤓 [Demo Setup - Explained](#4-demo-setup---explained)
 
 
 > ℹ️ You can find a more detailed presentation about how the automation works here: [PDF](https://ibm.box.com/s/gx0tcubl9k4phvdsrffd7taragrmvz02).
@@ -57,6 +64,11 @@ Please contact me if you have feedback or if you find glitches or problems.
 Here is a quick video that walks you through the installation process
 ![K8s CNI](./doc/pics/JOB_INSTALL.gif)
 
+<div style="page-break-after: always;"></div>
+
+---------------------------------------------------------------
+# 🐥 1 Quick Install
+---------------------------------------------------------------
 
 ### ⚠️ **This method creates an in-cluster installation**
 
@@ -73,24 +85,13 @@ Here is a quick video that walks you through the installation process
 
 > 🤓 So this could basically be done from an iPhone or iPad	
 
-🚀 Already have a cluster? [Dive right in](#-21-install-ai-manager-with-demo-content-turbonomic-and-instana)
+🚀 Already have a cluster? [Dive right in](#-131-install-ai-manager-with-demo-content-turbonomic-and-instana)
 
-
-
-<div style="page-break-after: always;"></div>
-
-
----------------------------------------------------------------
-# 🚀 1 Preparation
----------------------------------------------------------------
 
 
  
 
 <div style="page-break-after: always;"></div>
-
-<details>
-<summary>Prerequisites</summary>
 
 ## ✅ 1.1 Prerequisites 
 
@@ -155,9 +156,7 @@ This allows the CP4WAIOPS images to be pulled from the IBM Container Registry.
 
 <div style="page-break-after: always;"></div>
 
-</details>
-<details>
-<summary>Important remarks before you start</summary>
+
 
 ## ⚠️⚠️ 1.2 Important remarks before you start ⚠️⚠️
 
@@ -180,14 +179,7 @@ If you think that you hit a problem:
 
 <div style="page-break-after: always;"></div>
 
-</details>
-
-
----------------------------------------------------------------
-# 🐥 2 Quick Install
----------------------------------------------------------------
-
-
+## 🐥 1.3 Quick Install 
 
 You can use the scritps in the `Quick_Install` folder to rapidly spin up a demo environment.
 The names should be self explaining and the headers of the files explain the modules to be installed.
@@ -204,11 +196,7 @@ The names should be self explaining and the headers of the files explain the mod
 
 You can find some examples below.
 
-
-<details>
-<summary>Install AI Manager with demo content, Turbonomic and Instana</summary>
-
-## 🐥 2.1 Install AI Manager with demo content, Turbonomic and Instana 
+### 🐥 1.3.1 Install AI Manager with demo content, Turbonomic and Instana 
 
 > ### ✅ This is probably the one that you want.
 
@@ -227,7 +215,7 @@ On top of that you get Turbonomic and Instana instances to play around a bit (yo
 5. Replace the TURBO_LICENSE `NONE` at the end of the file with your Turbonomic license
 3. Click `Save`
 
-### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
+### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
 
 This installation cocntains:
 
@@ -268,11 +256,7 @@ This installation cocntains:
 
 <div style="page-break-after: always;"></div>
 
-</details>
-<details>
-<summary>Install AI Manager, Event Manager with demo content</summary>
-
-## 🐥 2.2 Install AI Manager, Event Manager with demo content
+### 🐥 1.3.2 Install AI Manager, Event Manager with demo content
 
 You get all the CP4WAIOPS components installed and pre-trained in one simple script.
 Ready to go.
@@ -286,7 +270,7 @@ Ready to go.
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
 3. Click `Save`
 
-### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
+### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
 
 This installation cocntains:
 
@@ -326,11 +310,8 @@ This installation cocntains:
 <div style="page-break-after: always;"></div>
 
 
-</details>
-<details>
-<summary>Custom Install</summary>
 
-## 🐥 2.3 Custom Install
+### 🐥 1.3.2 Custom Install
 
 1. Open the [00\_INSTALL_CUSTOM.yaml](./Quick_Install/00_INSTALL_CUSTOM.yaml) file
 1. Adap the installation configuration to your needs. Select the modules to install and their configuration.
@@ -355,26 +336,44 @@ This installation cocntains:
 1. Paste the content
 1. Click `Save`
 
-### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
+### **🚀 You can now go to [Demo the Solution](#2-demo-the-solution)**
 
 
-</details>
 
 
+
+
+## 1.4 Configure Slack
+
+Continue [here](#3-slack-integration) for [Slack integration](#3-slack-integration)
+
+<div style="page-break-after: always;"></div>
+
+## 1.5 Access the Environment
+
+Once the installation has finisehd, you can access the demo environment:
+
+
+
+* Click on the Application Menu <svg fill="currentColor" height="1em" width="1em" viewBox="0 0 512 512" aria-hidden="true" role="img" style="vertical-align: -0.125em;"><path d="M149.333 56v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zm181.334 240v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm32-240v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24zm-32 80V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm-205.334 56H24c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm386.667-56H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm0 160H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zM181.333 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24z"></path></svg> in your Openshift Web Console.
+* Select `CP4WAIOps Demo UI`
+* Login with the password `P4ssw0rd!`
+
+	![demo](./doc/pics/demo-menu.png)
+
+
+
+<div style="page-break-after: always;"></div>
 
 ---------------------------------------------------------------
-# 3 Demo the Solution
+# 2 Demo the Solution
 ---------------------------------------------------------------
 
 📹 Please use the [Demo Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md) to prepare for the demo.
 
 📹 I have also added a short [Demo Walkthrough video](https://ibm.box.com/s/a4zbl8rjevxqfe48yxgatgmhomsiu8wl) that you can watch to get an idea on how to do the demo. This is based on 3.2 and the [Click Through PPT](https://ibm.box.com/s/icgkxzlt2ja6dth16dpdin055uyysej1), but should work more or less with your own instance.
 
-
-<details>
-<summary>Access the Environment</summary>
-
-## 3.1 Access the Environment
+## 2.1 Access the Environment
 
 To access the demo environment:
 
@@ -389,11 +388,7 @@ To access the demo environment:
 
 <div style="page-break-after: always;"></div>
 
-</details>
-<details>
-<summary>Login to AI Manager as demo User</summary>
-
-## 3.2 Login to AI Manager as demo User
+## 2.2 Login to AI Manager as demo User
 
 * Click on the blue `AI Manager` button
 * Login as User `demo` with the Password `P4ssw0rd!`
@@ -402,23 +397,20 @@ To access the demo environment:
 ![demo](./doc/pics/demo01.png)
 
 
-</details>
-<details>
-<summary>🚀 Demo the Solution</summary>
 
-## 3.3 🚀 Demo the Solution
+## 2.3 🚀 Demo the Solution
 
 Please use the [Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md) to prepare for the demo.
 
 Then start the demo with the [Demo Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md#3-deliver-the-demo).
 
-</details>
+
 <div style="page-break-after: always;"></div>
 
 
 
 ---------------------------------------------------------------
-# 4 Slack integration
+# 3 Slack integration
 ---------------------------------------------------------------
 
 
@@ -436,10 +428,7 @@ For the system to work you need to follow those steps:
 <div style="page-break-after: always;"></div>
 
 
-<details>
-<summary>Detailed Instructions</summary>
-
-## 4.1 Create your Slack Workspace
+## 3.1 Create your Slack Workspace
 
 1. Create a Slack workspace by going to https://slack.com/get-started#/createnew and logging in with an email <i>**which is not your IBM email**</i>. Your IBM email is part of the IBM Slack enterprise account and you will not be able to create an independent Slack workspace outside if the IBM slack service. 
 
@@ -478,8 +467,7 @@ At this point you have created your own Slack workspace where you are the admini
 
 <div style="page-break-after: always;"></div>
 
-
-## 4.2 Create Your Slack App
+## 3.2 Create Your Slack App
 
 1. Create a Slack app, by going to https://api.slack.com/apps and clicking `Create New App`. 
 
@@ -511,8 +499,7 @@ At this point you have created your own Slack workspace where you are the admini
 
 <div style="page-break-after: always;"></div>
 
-
-## 4.3 Create Your Slack Channels
+## 3.3 Create Your Slack Channels
 
 
 1. In Slack add a two new channels:
@@ -547,7 +534,7 @@ At this point you have created your own Slack workspace where you are the admini
 
 <div style="page-break-after: always;"></div>
 
-## 4.4 Integrate Your Slack App
+## 3.4 Integrate Your Slack App
 
 In the Slack App: 
 
@@ -590,8 +577,7 @@ In the AI Manager (CP4WAIOPS)
 
 <div style="page-break-after: always;"></div>
 
-
-## 4.5 Create the Integration URL
+## 3.5 Create the Integration URL
 
 In the AI Manager (CP4WAIOPS) 
 
@@ -606,12 +592,11 @@ This is the URL you will be using for step 6.
 
 <div style="page-break-after: always;"></div>
 
-
-## 4.6 Create Slack App Communications
+## 3.6 Create Slack App Communications
 
 Return to the browser tab for the Slack app. 
 
-### 4.6.1 Event Subscriptions
+### 3.6.1 Event Subscriptions
 
 1. Select `Event Subscriptions`.
 
@@ -637,7 +622,7 @@ Return to the browser tab for the Slack app.
 6. Click `Save Changes` button.
 
 
-### 4.6.2 Interactivity & Shortcuts
+### 3.6.2 Interactivity & Shortcuts
 
 7. Select `Interactivity & Shortcuts`. 
 
@@ -649,7 +634,7 @@ Return to the browser tab for the Slack app.
 
 9. Click `Save Changes` button.
 
-### 4.6.3 Slash Commands
+### 3.6.3 Slash Commands
 
 Now, configure the `welcome` slash command. With this command, you can trigger the welcome message again if you closed it. 
 
@@ -668,7 +653,7 @@ Now, configure the `welcome` slash command. With this command, you can trigger t
 
 3. Click `Save`.
 
-### 4.6.4 Reinstall App
+### 3.6.4 Reinstall App
 
 The Slack app must be reinstalled, as several permissions have changed. 
 
@@ -687,10 +672,10 @@ If you run into problems validating the `Event Subscription` in the Slack Applic
 
 <div style="page-break-after: always;"></div>
 
-## 4.7 Slack Reset
+## 3.7 Slack Reset
 
 
-### 4.7.1 Get the User OAUTH Token
+### 3.7.1 Get the User OAUTH Token
 
 This is needed for the reset scripts in order to empty/reset the Slack channels.
 
@@ -725,7 +710,7 @@ In file `./tools/98_maintenance/scripts/14_reset-slack-changerisk.sh`
 
 
 
-### 4.7.2 Perform Slack Reset
+### 3.7.2 Perform Slack Reset
 
 Call either of the scripts above to reset the channel:
 
@@ -738,21 +723,11 @@ or
 ./tools/98_maintenance/scripts/14_reset-slack-changerisk.sh
 
 ```
-</details>
 
 
+# 4 Demo Setup - Explained
 
----------------------------------------------------------------
-# 5 Demo Setup - Explained
----------------------------------------------------------------
-
-
-![demo](./doc/pics/waiops_arch_overview.jpg)
-
-<details>
-<summary>Basic Architecture</summary>
-
-## 5.1 Basic Architecture
+## 4.1 Basic Architecture
 
 The environement (Kubernetes, Applications, ...) create logs that are being fed into a Log Management Tool (ELK in this case).
 
@@ -768,11 +743,7 @@ The environement (Kubernetes, Applications, ...) create logs that are being fed 
 
 <div style="page-break-after: always;"></div>
 
-</details>
-<details>
-<summary>Optimized Demo Architecture</summary>
-
-## 5.2 Optimized Demo Architecture
+## 4.2 Optimized Demo Architecture
 
 The idea of this repo is to provide a optimised, complete, pre-trained demo environment that is self-contained (e.g. can be deployed in only one cluster)
 
@@ -839,13 +810,9 @@ This allows us to:
 
 <div style="page-break-after: always;"></div>
 
-</details>
-<details>
-<summary> Training </summary>
+## 4.3 Training
 
-## 5.3 Training
-
-### 5.3.1 Loading training data
+### 4.3.1 Loading training data
 
 ![demo](./doc/pics/waiops_arch_training.jpg)
 
@@ -856,18 +823,15 @@ Loading Training data is done at the lowest possible level (for efficiency and s
 * Metrics: Loading Cassandra dumps of metric data - 3 months of synthetic data for 13 KPIs
 
 
-### 5.3.2 Training the models
+### 4.3.2 Training the models
 
 The models can be trained directly on the data that has been loaded as described above.
 
 
 <div style="page-break-after: always;"></div>
 
-</details>
-<details>
-<summary>Incident creation</summary>
 
-## 5.4 Incident creation (inception)
+## 4.4 Incident creation (inception)
 
 ![demo](./doc/pics/waiops_arch_inception.jpg)
 
@@ -876,7 +840,6 @@ Incidents are being created by using the high level APIs in order to simulate a 
 * Events: Pre-canned events are being injected through the corresponding REST API
 * Logs: Pre-canned anomalous logs for a 30 min timerange are injected through Kafka
 * Metrics: Anomalous metric data are generated on the fly and injected via the corresponding REST API
-</details>
 
 
 <div style="page-break-after: always;"></div>
