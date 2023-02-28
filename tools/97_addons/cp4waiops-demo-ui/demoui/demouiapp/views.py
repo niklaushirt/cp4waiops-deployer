@@ -31,7 +31,7 @@ print ('        🇨🇭 Niklaus Hirt (nikh@ch.ibm.com)')
 print ('')
 
 print ('*************************************************************************************************')
-print (' 🚀 Initializing')
+print (' 🚀 Warming up')
 print ('*************************************************************************************************')
 
 #os.system('ls -l')
@@ -276,7 +276,7 @@ echo "<tr><td style=\"min-width:300px\">🛠️  Name:</td><td>RobotShop</td></t
 echo "<tr><td>🛠️  Data center:</td><td>robot-shop</td></tr>"
 echo "<tr><td>🛠️  Kubernetes master IP address:</td><td>172.21.0.1</td></tr>"
 echo "<tr><td>🛠️  Kubernetes API port:</td><td>443</td></tr>"
-echo "<tr><td>🛠️  Token:</td><td>$API_TOKEN<</td></tr>"
+echo "<tr><td>🛠️  Token:</td><td>$API_TOKEN</td></tr>"
 echo "<tr><td>🛠️  Trust all HTTPS certificates:</td><td>true</td></tr>"
 echo "<tr><td>🛠️  Correlate analytics events:</td><td>true</td></tr>"
 echo "<tr><td>🛠️  Namespaces to observe:</td><td>robot-shop</td></tr>"
@@ -489,6 +489,121 @@ print ('************************************************************************
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # REST ENDPOINTS
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
+#    INSTANA
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+def instanaCreateIncident(request):
+    print('🌏 instanaCreateIncident')
+    global loggedin
+    verifyLogin(request)
+    if loggedin=='true':
+        template = loader.get_template('demouiapp/home.html')
+
+        print('🌏 Create Instana outage')
+        os.system('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
+        os.system('oc set env deployment load -n robot-shop ERROR=1')
+
+    else:
+        template = loader.get_template('demouiapp/loginui.html')
+    context = {
+        'loggedin': loggedin,
+        'aimanager_url': aimanager_url,
+        'aimanager_user': aimanager_user,
+        'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
+        'awx_url': awx_url,
+        'awx_user': awx_user,
+        'awx_pwd': awx_pwd,
+        'elk_url': elk_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
+        'openshift_url': openshift_url,
+        'openshift_token': openshift_token,
+        'openshift_server': openshift_server,
+        'vault_url': vault_url,
+        'vault_token': vault_token,
+        'ladp_url': ladp_url,
+        'ladp_user': ladp_user,
+        'ladp_pwd': ladp_pwd,
+        'flink_url': flink_url,
+        'flink_url_policy': flink_url_policy,
+        'robotshop_url': robotshop_url,
+        'spark_url': spark_url,
+        'eventmanager_url': eventmanager_url,
+        'eventmanager_user': eventmanager_user,
+        'eventmanager_pwd': eventmanager_pwd,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_NAME': 'index'
+    }
+    return HttpResponse(template.render(context, request))
+
+def instanaMitigateIncident(request):
+    print('🌏 instanaMitigateIncident')
+    global loggedin
+    verifyLogin(request)
+    if loggedin=='true':
+        template = loader.get_template('demouiapp/home.html')
+
+        print('🌏 Mitigate Instana outage')
+        os.system('oc set env deployment ratings -n robot-shop PDO_URL-')
+        os.system('oc set env deployment load -n robot-shop ERROR=0')
+
+    else:
+        template = loader.get_template('demouiapp/loginui.html')
+    context = {
+        'loggedin': loggedin,
+        'aimanager_url': aimanager_url,
+        'aimanager_user': aimanager_user,
+        'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
+        'awx_url': awx_url,
+        'awx_user': awx_user,
+        'awx_pwd': awx_pwd,
+        'elk_url': elk_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
+        'openshift_url': openshift_url,
+        'openshift_token': openshift_token,
+        'openshift_server': openshift_server,
+        'vault_url': vault_url,
+        'vault_token': vault_token,
+        'ladp_url': ladp_url,
+        'ladp_user': ladp_user,
+        'ladp_pwd': ladp_pwd,
+        'flink_url': flink_url,
+        'flink_url_policy': flink_url_policy,
+        'robotshop_url': robotshop_url,
+        'spark_url': spark_url,
+        'eventmanager_url': eventmanager_url,
+        'eventmanager_user': eventmanager_user,
+        'eventmanager_pwd': eventmanager_pwd,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'ADMIN_MODE': ADMIN_MODE,
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_NAME': 'index'
+    }
+    return HttpResponse(template.render(context, request))
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
+#    WAIOPS
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
+
 def injectAllREST(request):
     print('🌏 injectAllREST')
     global loggedin

@@ -30,11 +30,26 @@
     state: present
     namespace: awx
     src: ./templates/awx/operator-install.yaml
-  
+  ignore_errors: true
+
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Wait for Operator ready
+# --------------------------------------------------------------------------------------------------------------------------------------
+- name: 🕦 CHECK -  Wait AWX Operator
+  shell: |
+    NUM_PODS=$(oc get po -n awx | grep operator| grep 2/2| wc -l)
+    echo $NUM_PODS
+  register: kubectl_num_pods
+  until: kubectl_num_pods.stdout|int >= 1
+  retries: 100
+  delay: 15
+
+
 - name: 🚀 AWX - Create AWX Instance (while waiting for CP4WAIOPS Installation to progress)
   community.kubernetes.k8s:
     state: present
     namespace: awx
     src: ./templates/awx/awx-deploy-cr.yml
-
+  ignore_errors: true
 
