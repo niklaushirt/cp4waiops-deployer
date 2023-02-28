@@ -6,53 +6,53 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------------------------------------------------------------
-#  Deactivating MYSQL Service
+#  Resolving MYSQL Service
 #------------------------------------------------------------------------------------------------------------------------------------
 echo " "
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Deactivating Services for RATINGS for Demo Scenario..."
+echo "   🚀  Resolving Services for RATINGS for Demo Scenario..."
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 #oc patch service mysql -n robot-shop --patch '{"spec": {"selector": {"service": "mysql"}}}'
-oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings;charset=utf8mb4"
-oc set env deployment ratings -n robot-shop CATALOGUE_URL=catalogue
+oc set env deployment ratings -n robot-shop PDO_URL-
+#oc set env deployment ratings -n robot-shop CATALOGUE_URL=catalogue
 
 
-echo " "
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Deactivating Services for CATALOGUE for Demo Scenario..."
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-oc set env deployment catalogue -n robot-shop MONGO_URL=mongodb://mongodb:27017/catalogue
+# echo " "
+# echo "   ------------------------------------------------------------------------------------------------------------------------------"
+# echo "   🚀  Resolving Services for CATALOGUE for Demo Scenario..."
+# echo "   ------------------------------------------------------------------------------------------------------------------------------"
+# oc set env deployment catalogue -n robot-shop MONGO_URL-
 #oc set env deployment catalogue -n robot-shop GO_SLOW=0
 
 
 
 # echo " "
 # echo "   ------------------------------------------------------------------------------------------------------------------------------"
-# echo "   🚀  Deactivating Services for USERS for Demo Scenario..."
+# echo "   🚀  Resolving Services for USERS for Demo Scenario..."
 # echo "   ------------------------------------------------------------------------------------------------------------------------------"
-# oc set env deployment user -n robot-shop MONGO_URL=mongodb://mongodb:27017/users
+# oc set env deployment user -n robot-shop MONGO_URL-
 # oc set env deployment user -n robot-shop REDIS_HOST=redis
 
 
 
 # echo " "
 # echo "   ------------------------------------------------------------------------------------------------------------------------------"
-# echo "   🚀  Deactivating RATINGS Service for WEB for Demo Scenario..."
+# echo "   🚀  Resolving RATINGS Service for WEB for Demo Scenario..."
 # echo "   ------------------------------------------------------------------------------------------------------------------------------"
 # oc set env deployment web -n robot-shop RATINGS_HOST=ratings1234
 
 
 # echo " "
 # echo "   ------------------------------------------------------------------------------------------------------------------------------"
-# echo "   🚀  Deactivating Services for CART for Demo Scenario..."
+# echo "   🚀  Resolving Services for CART for Demo Scenario..."
 # echo "   ------------------------------------------------------------------------------------------------------------------------------"
-# oc set env deployment user -n robot-shop CATALOGUE_HOST=catalogue
-# oc set env deployment user -n robot-shop REDIS_HOST=redis
+# oc set env deployment cart -n robot-shop CATALOGUE_HOST=catalogue
+# oc set env deployment cart -n robot-shop REDIS_HOST=redis
 
 
 # echo " "
 # echo "   ------------------------------------------------------------------------------------------------------------------------------"
-# echo "   🚀  Deactivating RATINGS Service for WEB for Demo Scenario..."
+# echo "   🚀  Resolving RATINGS Service for WEB for Demo Scenario..."
 # echo "   ------------------------------------------------------------------------------------------------------------------------------"
 # oc set env deployment web -n robot-shop RATINGS_HOST=ratings
 # oc set env deployment web -n robot-shop CATALOGUE_HOST=catalogue
@@ -63,3 +63,8 @@ oc set env deployment catalogue -n robot-shop MONGO_URL=mongodb://mongodb:27017/
 # oc set env deployment web -n robot-shop RATINGS_HOST=ratings
 
 
+echo " "
+echo "   ------------------------------------------------------------------------------------------------------------------------------"
+echo "   🚀  Resolving Services for LOAD for Demo Scenario..."
+echo "   ------------------------------------------------------------------------------------------------------------------------------"
+oc set env deployment load -n robot-shop ERROR=0

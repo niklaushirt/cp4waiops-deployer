@@ -7,6 +7,8 @@ import os
 
 DEMO_EVENTS_MEM=os.environ.get('DEMO_EVENTS_MEM')
 DEMO_EVENTS_FAN=os.environ.get('DEMO_EVENTS_FAN')
+DEMO_EVENTS_NET=os.environ.get('DEMO_EVENTS_NET')
+
 DEMO_LOGS=os.environ.get('DEMO_LOGS')
 LOG_ITERATIONS=int(os.environ.get('LOG_ITERATIONS'))
 LOG_TIME_FORMAT=os.environ.get('LOG_TIME_FORMAT')
@@ -26,6 +28,7 @@ METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
 METRICS_TO_SIMULATE_MEM=str(os.environ.get('METRICS_TO_SIMULATE_MEM')).split(';')
 METRICS_TO_SIMULATE_FAN_TEMP=str(os.environ.get('METRICS_TO_SIMULATE_FAN_TEMP')).split(';')
 METRICS_TO_SIMULATE_FAN=str(os.environ.get('METRICS_TO_SIMULATE_FAN')).split(';')
+METRICS_TO_SIMULATE_NET=str(os.environ.get('METRICS_TO_SIMULATE_NET')).split(';')
 
 
 
@@ -118,7 +121,32 @@ def updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE):
 
     return 'OK'
 
- 
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
+# INSTANA INCIDENT
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
+def instanaCreateIncident():
+    stream = os.popen('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
+    RESULT = stream.read().strip()
+    print(str(RESULT))
+    stream = os.popen('oc set env deployment load -n robot-shop ERROR=1')
+    RESULT = stream.read().strip()
+    print(str(RESULT))
+
+
+def instanaMitigateIncident():
+    stream = os.popen('oc set env deployment ratings -n robot-shop PDO_URL-')
+    RESULT = stream.read().strip()
+    print(str(RESULT))
+    stream = os.popen('oc set env deployment load -n robot-shop ERROR=0')
+    RESULT = stream.read().strip()
+    print(str(RESULT))
+
+
+
+
+
+
+
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # INJECT LOGS
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -187,6 +215,9 @@ def injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_FAN)
     return 'OK'
 
+def injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):  
+    injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_NET)
+    return 'OK'
 
 
 def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS):
@@ -258,6 +289,12 @@ def injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN):
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_FAN,METRIC_TIME_SKEW,METRIC_TIME_STEP)
     return 'OK'
 
+def injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN): 
+    METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
+    METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
+    injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_NET,METRIC_TIME_SKEW,METRIC_TIME_STEP)
+    return 'OK'
+
 
 def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW,METRIC_TIME_STEP):
     #print('              ')
@@ -287,6 +324,8 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
     CURR_ITERATIONS=0
     url = 'https://'+METRIC_ROUTE+'/aiops/api/app/metric-api/v1/metrics'
 
+    #print('url:'+url)
+    #print('METRIC_TOKEN:'+METRIC_TOKEN)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'Authorization': 'Bearer '+METRIC_TOKEN, 'X-TenantID' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
 
     for i in range (1,40):
@@ -295,6 +334,7 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
 
         for i in range (1,40):
             for line in METRICS_TO_SIMULATE:
+
                 line=line.strip()
                 timestamp = timestamp + datetime.timedelta(milliseconds=METRIC_TIME_STEP)
                 MY_TIMESTAMP = timestamp.strftime("%s")
@@ -330,7 +370,7 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
         #print (output_json)
         #print (MY_TIMESTAMP_READABLE)
         #print (MY_TIMESTAMP)
-
+        #print('output_json:'+output_json)
         response = requests.post(url, data=output_json, headers=headers, verify=False)
         #print('                   RESULT:'+str(response.content))
     #print('               ✅ Inject Metrics')
