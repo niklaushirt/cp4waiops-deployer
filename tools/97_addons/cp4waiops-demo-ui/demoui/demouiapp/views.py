@@ -276,7 +276,7 @@ echo "<tr><td style=\"min-width:300px\">🛠️  Name:</td><td>RobotShop</td></t
 echo "<tr><td>🛠️  Data center:</td><td>robot-shop</td></tr>"
 echo "<tr><td>🛠️  Kubernetes master IP address:</td><td>172.21.0.1</td></tr>"
 echo "<tr><td>🛠️  Kubernetes API port:</td><td>443</td></tr>"
-echo "<tr><td>🛠️  Token:</td><td>$API_TOKEN<</td></tr>"
+echo "<tr><td>🛠️  Token:</td><td>$API_TOKEN</td></tr>"
 echo "<tr><td>🛠️  Trust all HTTPS certificates:</td><td>true</td></tr>"
 echo "<tr><td>🛠️  Correlate analytics events:</td><td>true</td></tr>"
 echo "<tr><td>🛠️  Namespaces to observe:</td><td>robot-shop</td></tr>"
