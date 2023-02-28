@@ -372,7 +372,7 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
         #print (MY_TIMESTAMP)
         #print('output_json:'+output_json)
         response = requests.post(url, data=output_json, headers=headers, verify=False)
-        #print('                   RESULT:'+str(response.content))
+        print('                   RESULT:'+str(response.content))
     #print('               ✅ Inject Metrics')
     #print('               ------------------------------------------------------------------------------------------------')
     print('              ✅ LAST RESULT:'+str(response.content))

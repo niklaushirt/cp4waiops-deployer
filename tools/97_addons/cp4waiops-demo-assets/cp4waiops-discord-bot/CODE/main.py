@@ -47,7 +47,7 @@ DISCORD_BOT_PREFIX=os.environ.get('DISCORD_BOT_PREFIX',"/")
 ITERATE_ELEMENT=os.environ.get('ITERATE_ELEMENT')
 WEBHOOK_DEBUG=os.environ.get('WEBHOOK_DEBUG')
 
-
+TOKEN=os.environ.get('TOKEN',"None")
 
 
 print ('*************************************************************************************************')
@@ -86,7 +86,7 @@ print('        ✅ AIManager Namespace:       '+aimanagerns)
 # ('--------------------------------------------------')('--------------------------------------------------')--------------
 # DEFAULT VALUES
 # ('--------------------------------------------------')('--------------------------------------------------')--------------
-TOKEN='test'
+
 
 
 # ('--------------------------------------------------')('--------------------------------------------------')--------------
@@ -428,7 +428,7 @@ class StoryBot(commands.Bot):
 
 
                 await message.channel.send('--------------------------------------------------')
-                await message.channel.send('**🚀 '+INSTANCE_NAME+' Open Stories**')
+                await message.channel.send('**🚀 Open Stories**')
                 await message.channel.send('--------------------------------------------------')
                 actStories=getStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE)
                 for currentStory in actStories['stories']:
