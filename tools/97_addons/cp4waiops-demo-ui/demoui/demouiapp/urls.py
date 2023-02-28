@@ -23,4 +23,6 @@ urlpatterns = [
     path('clearAllREST', views.clearAllREST, name='clearAllREST'),
     path('clearEventsREST', views.clearEventsREST, name='clearEventsREST'),
     path('clearStoriesREST', views.clearStoriesREST, name='clearStoriesREST'),
+    path('instanaCreateIncident', views.instanaCreateIncident, name='instanaCreateIncident'),
+    path('instanaMitigateIncident', views.instanaMitigateIncident, name='instanaMitigateIncident'),
 ]
