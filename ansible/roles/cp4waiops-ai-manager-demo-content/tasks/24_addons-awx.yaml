@@ -30,11 +30,12 @@
     state: present
     namespace: awx
     src: ./templates/awx/operator-install.yaml
+  ignore_errors: true
   
 - name: 🚀 AWX - Create AWX Instance (while waiting for CP4WAIOPS Installation to progress)
   community.kubernetes.k8s:
     state: present
     namespace: awx
     src: ./templates/awx/awx-deploy-cr.yml
-
+  ignore_errors: true
 
