@@ -4,7 +4,7 @@ metadata:
   name: netcool-integrations-operator
   namespace: {{ current_cp4waiops_cluster.project }}
 spec:
-  channel: "v3.6"
+  channel: {{current_cp4waiops_feature.subscription_channel}}
   installPlanApproval: Automatic
   name: netcool-integrations-operator
   source: ibm-operator-catalog
