@@ -1,4 +1,4 @@
-<center> <h1>CP4WatsonAIOps CP4WAIOPS v3.6.0</h1> </center>
+<center> <h1>CP4WatsonAIOps CP4WAIOPS v3.7.0</h1> </center>
 <center> <h2>Demo Environment Installation 🚀</h2> </center>
 
 ![K8s CNI](./doc/pics/front.png)
@@ -23,7 +23,7 @@ Please contact me if you have feedback or if you find glitches or problems.
 - by Mail: nikh@ch.ibm.com
 
 
-**❗The installation has been tested for the CP4WAIOPS v3.6.0 release on OpenShift 4.10 on:**
+**❗The installation has been tested for the CP4WAIOPS v3.7.0 release on OpenShift 4.10 on:**
 
 - IBM RedHat Openshift Kubernetes Service (ROKS) with IBM Cloud Storage (ibmc-xxx)
 - IBM RedHat Openshift Kubernetes Service (ROKS) with NFS Storage
@@ -345,7 +345,7 @@ This installation cocntains:
 	  waiops_size: small
 	  ...
 	  # Version of the catalog subscription
-	  subscription_channel: v3.6
+	  subscription_channel: v3.7
 	
 	```
 	

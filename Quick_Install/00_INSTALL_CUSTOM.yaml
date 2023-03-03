@@ -9,7 +9,7 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------"
-#  Installing CP4WAIOPS v3.5.0
+#  Installing CP4WAIOPS v3.7.0
 #
 #  CloudPak for Watson AIOps
 #
@@ -187,7 +187,7 @@ spec:
                   # Name of the CP4WAIOPS instance
                   waiops_name: ibm-cp-watson-aiops
                   # Version of the catalog subscription
-                  subscription_channel: v3.6
+                  subscription_channel: v3.7
                   # Freeze the version of the Catalog image by patching CatalogSource
                   freeze_catalog: false
 
@@ -364,7 +364,7 @@ spec:
                   kind: InfrastructureManagement
                   install: false
                   # Version of the catalog subscription
-                  subscription_channel: v3.6
+                  subscription_channel: v3.7
                   # Freeze the version of the Catalog image by patching CatalogSource
                   freeze_catalog: false
                   

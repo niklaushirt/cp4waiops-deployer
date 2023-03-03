@@ -167,7 +167,7 @@ spec:
                   # Name of the CP4WAIOPS instance
                   waiops_name: ibm-cp-watson-aiops
                   # Version of the catalog subscription
-                  subscription_channel: v3.6
+                  subscription_channel: v3.7
                   # Freeze the version of the Catalog image by patching CatalogSource
                   freeze_catalog: true
 
