@@ -51,7 +51,7 @@
 - name: 🚀 INSTANA - Install cert-manager
   shell: |
     oc apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml
-    sleep 30
+    sleep 15
     oc create clusterrolebinding instana-cert-manager-admin --clusterrole=cluster-admin --serviceaccount=cert-manager:cert-manager
     oc create clusterrolebinding instana-cert-manager-cainjector-admin --clusterrole=cluster-admin --serviceaccount=cert-manager:cert-manager-cainjector
     oc create clusterrolebinding instana-cert-manager-webhook-admin --clusterrole=cluster-admin --serviceaccount=cert-manager:cert-manager-webhook
@@ -60,7 +60,7 @@
 
 
 - name:   🕦 INSTANA - Wait for CertManager to become ready
-  shell: oc -n cert-manager get pod cert-manager
+  shell: oc -n cert-manager get pod | grep cert-manager-webhook
   register: kubectl_get_pods
   until: '"1/1" in kubectl_get_pods.stdout'
   retries: 500
