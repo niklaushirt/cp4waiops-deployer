@@ -257,7 +257,7 @@ if ACTIVE=="True":
                 else:
                     if checkIDExistsDB(conn, story_id) > 0:
                         print('       🔴 Closing Story: '+story_id)
-                        closeStory(conn, story_id)
+                        closeStory(conn, story_id, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE)
 
             debug ('     🕦 Wait '+str(POLL_DELAY)+' seconds')
 

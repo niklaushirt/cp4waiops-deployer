@@ -26,7 +26,7 @@
 
   
 - name: 🚀 AWX - Create AWX Operator
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     namespace: awx
     src: ./templates/awx/operator-install.yaml
@@ -47,7 +47,7 @@
 
 
 - name: 🚀 AWX - Create AWX Instance (while waiting for CP4WAIOPS Installation to progress)
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     namespace: awx
     src: ./templates/awx/awx-deploy-cr.yml

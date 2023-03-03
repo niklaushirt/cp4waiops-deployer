@@ -22,14 +22,14 @@
 
 
 - name: 🚀 INSTALL PROBE - Install Webhook Probe Subscription
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/probe/1_probe-subscription.j2
 
 
 
 - name: 🚀 INSTALL PROBE - Install Probe Rules File
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/probe/2_generic-probe-rules.j2
 

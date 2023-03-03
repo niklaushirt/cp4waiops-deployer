@@ -260,7 +260,7 @@ def resolvePagerduty(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_RO
     "event_action": "resolve",
     "dedup_key": currentStoryID,
     "payload": {
-        "summary": Resolved,
+        "summary": "Resolved",
         }
     }
     

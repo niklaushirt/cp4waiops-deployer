@@ -25,7 +25,7 @@
 
 # Create IBM AIOps Operator Group
 - name:   🚀 AIMANAGER CATALOG - Install Operator Group
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/waiops/2_opgroup-ibm-aiops.j2
 
@@ -121,14 +121,14 @@
 
 # Create IBM AIOps Subscription
 - name:   🚀 AIMANAGER OPERATOR - Install Subscription - ONLINE
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/waiops/3_sub-ibm-aiops-subscription.j2
   when: current_cp4waiops_feature.case_install==false
 
 # Create IBM AIOps Subscription
 - name:   🚀 AIMANAGER OPERATOR - Install Subscription - CASE
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/waiops/3_sub-ibm-aiops-subscription-case.j2
   when: current_cp4waiops_feature.case_install==true

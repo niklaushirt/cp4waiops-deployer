@@ -63,7 +63,7 @@
 
 
 - name: 🚀 INSTANA AGENT - Create Subscription
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-agent
     state: present
     template: ./templates/instana-agent/instana-agent-sub.yaml
@@ -81,7 +81,7 @@
 
 
 - name: 🚀 INSTANA AGENT - Create Agent
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-agent
     state: present
     template: ./templates/instana-agent/instana-agent-cr.j2

@@ -288,147 +288,147 @@
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/clickhouse/deployment.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/clickhouse/service.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/clickhouse/pvc.j2
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/zookeeper/service.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/zookeeper/pvc.j2
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/zookeeper/deployment.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/common/datastores_sa.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/common/datastores_ns.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/common/datastores_crb.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/kafka/deployment.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/kafka/service.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/kafka/pvc.j2
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/cassandra/deployment.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/cassandra/service.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/cassandra/pvc.j2
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/cockroachdb/deployment.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/cockroachdb/service.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/cockroachdb/pvc.j2
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/elasticsearch/deployment.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/elasticsearch/service.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastores
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana-k8s-datastores/elasticsearch/pvc.j2
@@ -621,7 +621,7 @@
 
 
 - name: 🚀 INSTANA - Create Instana Core Instance
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/instana/instana-core.j2
 
@@ -639,7 +639,7 @@
 
 
 - name: 🚀 INSTANA - Create Instana Unit Instance
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/instana/instana-unit.j2
 
@@ -656,7 +656,7 @@
 
 
 - name: 🚀 INSTANA - Create Routes
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana/instana-routes.j2

@@ -556,6 +556,7 @@ def instanaMitigateIncident(request):
         print('🌏 Mitigate Instana outage')
         os.system('oc set env deployment ratings -n robot-shop PDO_URL-')
         os.system('oc set env deployment load -n robot-shop ERROR=0')
+        os.system("oc delete pod $(oc get po -n robot-shop|grep shipping|awk '{print$1}') -n robot-shop --ignore-not-found")
 
     else:
         template = loader.get_template('demouiapp/loginui.html')

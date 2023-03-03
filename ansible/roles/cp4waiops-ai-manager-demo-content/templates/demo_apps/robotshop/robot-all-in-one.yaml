@@ -698,14 +698,6 @@ spec:
           requests:
             cpu: 1200m
             memory: 500Mi
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 15
-          periodSeconds: 60
-          failureThreshold: 300000
-          successThreshold: 1
       restartPolicy: Always
 ---
 # Source: robot-shop/templates/user-deployment.yaml
