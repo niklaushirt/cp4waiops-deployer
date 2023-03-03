@@ -641,7 +641,7 @@ spec:
         resources:
           limits:
             cpu: 200m
-            memory: 100Mi
+            memory: 500Mi
           requests:
             cpu: 100m
             memory: 50Mi
@@ -698,13 +698,13 @@ spec:
           requests:
             cpu: 1200m
             memory: 500Mi
-        # readinessProbe:
-        #   httpGet:
-        #     path: /health
-        #     port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          failureThreshold: 300
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 60
+          failureThreshold: 300000
           successThreshold: 1
       restartPolicy: Always
 ---
