@@ -417,7 +417,7 @@ spec:
             value : "https://github.com/niklaushirt/cp4waiops-deployer.git"
           - name: CONFIG
             #value : "./configs/cp4waiops-roks-aimanager-all-34.yaml"
-            value : "./configs/cp4waiops-roks-aimanager-all-36.yaml"
+            value : "./configs/cp4waiops-roks-aimanager-all-latest.yaml"
           - name: ENTITLED_REGISTRY_KEY
             value : "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1Nzg0NzQzMjgsImp0aSI6IjRjYTM3ODkwMzExNjQxZDdiMDJhMjRmMGMxMWMwYmZhIn0.Z-rqfSLJA-R-ow__tI3RmLx4m9EH-abvdc53DYEkbYY"
       restartPolicy: Never
