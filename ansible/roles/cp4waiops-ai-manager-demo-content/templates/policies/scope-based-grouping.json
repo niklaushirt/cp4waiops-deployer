@@ -1,0 +1,73 @@
+{
+  "id": "scopebased",
+  "metadata": {
+    "labels": {
+      "ibm.com/aiops/uitemplate": "alert:scopebased",
+      "ibm.com/is-default": "false"
+    },
+    "name": "Scope Grouping",
+    "description": "Created by Nicks scripts",
+    "createdBy": {
+      "id": "demo",
+      "type": "user"
+    }
+  },
+  "state": "enabled",
+  "executionPriority": 25,
+  "spec": {
+    "triggers": [{
+      "entityId": "alert",
+      "triggerId": "aiops.ibm.com/trigger/alert-pre-create",
+      "arguments": {
+        "condition": {
+          "$variable": "constants.baseTriggerCondition"
+        }
+      }
+    }],
+    "constants": {
+      "baseTriggerCondition": {
+        "actionId": "lang/condition/template",
+        "arguments": {
+          "template": "{{alert.state}} != \"clear\" and {{alert.state}} != \"closed\""
+        }
+      }
+    },
+    "actions": [{
+      "actionId": "lang/if",
+      "arguments": {
+        "name": "Condition set 1",
+        "conditions": {
+          "actionId": "lang/condition/and",
+          "arguments": {
+            "conditions": [{
+              "actionId": "lang/condition/template",
+              "arguments": {
+                "template": "({{alert.state}} == \"open\")"
+              }
+            }]
+          }
+        },
+        "then": [{
+          "actionId": "aiops.ibm.com/action/internal/insights/correlate",
+          "output": "alert.insights.[]",
+          "arguments": {
+            "correlationKey": {
+              "$template": "{{alert.type.eventType}}"
+            },
+            "relationshipType": "aiops.ibm.com/insight-type/relationship/causal",
+            "relationshipSource": "aiops.ibm.com/insight-source/relationship/causal/custom",
+            "relationshipDetails": {
+              "policyId": {
+                "$variable": "policy.id"
+              }
+            },
+            "window": {
+              "durationMS": 240000,
+              "type": "rolling"
+            }
+          }
+        }]
+      }
+    }]
+  }
+}

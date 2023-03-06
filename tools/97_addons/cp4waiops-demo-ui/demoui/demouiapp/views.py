@@ -555,6 +555,7 @@ def instanaMitigateIncident(request):
         template = loader.get_template('demouiapp/home.html')
 
         print('🌏 Mitigate Instana outage')
+        os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql\\"}}}"')
         os.system('oc set env deployment ratings -n robot-shop PDO_URL-')
         os.system('oc set env deployment load -n robot-shop ERROR=0')
         os.system("oc delete pod $(oc get po -n robot-shop|grep shipping|awk '{print$1}') -n robot-shop --ignore-not-found")
@@ -616,7 +617,8 @@ def injectAllREST(request):
         template = loader.get_template('demouiapp/home.html')
         
         print('🌏 Create RobotShop MySQL outage')
-        os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql-outage\\"}}}"')
+        os.system('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
+        os.system('oc set env deployment load -n robot-shop ERROR=1')
         
         # injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
         # injectMetricsMem(METRIC_ROUTE,METRIC_TOKEN)
@@ -693,7 +695,8 @@ def injectAllFanREST(request):
         template = loader.get_template('demouiapp/home.html')
 
         print('🌏 Create RobotShop MySQL outage')
-        os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql-outage\\"}}}"')
+        os.system('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
+        os.system('oc set env deployment load -n robot-shop ERROR=1')
 
         # injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
         # time.sleep(3)
@@ -994,7 +997,13 @@ def clearAllREST(request):
 
         print('🌏 Reset RobotShop MySQL outage')
         os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql\\"}}}"')
-        
+        os.system('oc set env deployment ratings -n robot-shop PDO_URL-')
+        os.system('oc set env deployment load -n robot-shop ERROR=0')
+        os.system("oc delete pod $(oc get po -n robot-shop|grep shipping|awk '{print$1}') -n robot-shop --ignore-not-found")
+
+stream = os.popen("oc get kafkatopics -n "+aimanagerns+"  | grep -v cp4waiopscp4waiops| grep cp4waiops-cartridge-logs-elk| awk '{print $1;}'")
+KAFKA_TOPIC_LOGS = stream.read().strip()
+
 
         # closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
         # closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)

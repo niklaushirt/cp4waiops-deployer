@@ -184,7 +184,7 @@ cp4waiops:
     create_account: false
 
     # Install Webhook Probe
-    install_webhook_probe: true
+    install_webhook_probe: false
 
     # ---------------------------------------------------------------------
     # OUTPUT
