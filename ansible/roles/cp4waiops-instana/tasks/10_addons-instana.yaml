@@ -65,6 +65,8 @@
   until: '"1/1" in kubectl_get_pods.stdout'
   retries: 500
   delay: 15
+  when: cert_check.stdout == "0"
+
 
 # - name: 🚀 INSTANA - Fail cert-manager
 #   fail: msg="You need a cert-manager running. You can install it with kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml"

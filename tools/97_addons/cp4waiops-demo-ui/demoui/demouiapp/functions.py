@@ -5,6 +5,7 @@ import datetime
 import random
 import os
 import time
+from pathlib import Path
 
 DEMO_EVENTS_MEM=os.environ.get('DEMO_EVENTS_MEM')
 DEMO_EVENTS_FAN=os.environ.get('DEMO_EVENTS_FAN')
@@ -21,6 +22,16 @@ EVENTS_TIME_SKEW=int(os.environ.get('EVENTS_TIME_SKEW'))
 INSTANCE_NAME=os.environ.get('INSTANCE_NAME')
 if INSTANCE_NAME == None:
     INSTANCE_NAME="CP4WAIOPS"
+
+image_name=INSTANCE_NAME.lower()+".png"
+path = Path('./static/images/characters/'+image_name)
+
+if path.is_file():
+    print('Custom Image:'+str(path))
+    INSTANCE_IMAGE=path
+else:
+    INSTANCE_IMAGE="None"
+
 
 
 METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))

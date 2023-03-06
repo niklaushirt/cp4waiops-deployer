@@ -408,10 +408,12 @@ class StoryBot(commands.Bot):
                 await message.channel.send(view=view)
                 view = AIOPSLink(CPD_ROUTE,'CP4WAIOps')
                 await message.channel.send(view=view)
-                view = AIOPSLink(INSTANA_ROUTE,'Instana')
-                await message.channel.send(view=view)
-                view = AIOPSLink(TURBO_ROUTE,'Turbonomic')
-                await message.channel.send(view=view)
+                if INSTANA_ROUTE != '':
+                    view = AIOPSLink(INSTANA_ROUTE,'Instana')
+                    await message.channel.send(view=view)
+                if TURBO_ROUTE != '':
+                    view = AIOPSLink(TURBO_ROUTE,'Turbonomic')
+                    await message.channel.send(view=view)
 
                 await message.channel.send('--------------------------------------------------')
                 await message.channel.send('**🚀 WAIOps Incidents**')

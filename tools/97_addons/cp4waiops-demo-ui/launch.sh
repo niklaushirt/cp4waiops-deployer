@@ -5,7 +5,7 @@
 export TOKEN=test
 export LOG_ITERATIONS=5
 
-export INSTANCE_NAME="Tyrion"
+export INSTANCE_NAME="John"
 
 export LOG_TIME_FORMAT="%Y-%m-%dT%H:%M:%S.000000"
 export LOG_TIME_STEPS=1000
