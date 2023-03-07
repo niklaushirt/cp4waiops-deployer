@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Start in separate Terminal: while true; do oc port-forward statefulset/iaf-system-elasticsearch-es-aiops 9200; done"
+echo "Start in separate Terminal: while true; do oc port-forward -n cp4waiops statefulset/iaf-system-elasticsearch-es-aiops 9200; done"
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
 
