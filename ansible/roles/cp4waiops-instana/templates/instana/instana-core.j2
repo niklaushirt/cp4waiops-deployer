@@ -5,7 +5,7 @@ metadata:
   name: instana-core
 spec:
   # set resource profile: small, medium, large, xlarge, xxlarge
-  resoureProfile: small
+  resoureProfile: medium
   # Base domain for Instana
   baseDomain: {{BASE_DOMAIN}}
   # Host and port for the agent acceptor, usually a subdomain of the base domain
@@ -21,19 +21,8 @@ spec:
   # Datastore configs
   datastoreConfigs:
     featureFlags: 
-#      - name:  feature.beeinstana.infra.metrics.enabled
-#        enabled: true
-      - name:  feature.infra.metrics.widget.enabled 
-        enabled: true
-      - name:  feature.infra.explore.presentation.enabled 
-        enabled: true
-      - name: feature.logging.enabled
-        enabled: true
       - name: feature.synthetics.enabled
         enabled: true
-#    beeInstanaConfig:
-#      hosts:
-#        - 70.85.21.15
     cassandraConfigs:
       - hosts:
           - cassandra-service.instana-datastores.svc
