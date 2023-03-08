@@ -5,7 +5,7 @@
       "ibm.com/aiops/uitemplate": "alert:scopebased",
       "ibm.com/is-default": "false"
     },
-    "name": "Scope Grouping",
+    "name": "DEMO Scope Grouping",
     "description": "Created by Nicks scripts",
     "createdBy": {
       "id": "demo",

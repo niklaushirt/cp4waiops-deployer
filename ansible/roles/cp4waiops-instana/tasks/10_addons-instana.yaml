@@ -98,6 +98,8 @@
         echo "✅ Kubectl Instana Plugin installed"
     else
         echo "❗❗❗ Kubectl Instana Plugin NOT installed. ERROR!!!!!"
+        echo "❗❗❗ Probably wrong version. Check at https://self-hosted.instana.io"
+        
     fi
   ignore_errors: true
   register: output

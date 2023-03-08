@@ -266,7 +266,7 @@ cp4waiops:
   - name: cp4waiops-instana
     kind: Instana
     install: false
-    version: 241-0
+    version: 241-3
 
     # ---------------------------------------------------------------------
     # INSTANA LICENSE

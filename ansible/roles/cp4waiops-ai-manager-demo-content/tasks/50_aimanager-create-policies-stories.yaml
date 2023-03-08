@@ -96,7 +96,7 @@
     export result=$(curl -XGET -k -s "https://$POLICY_ROUTE/policyregistry.ibm-netcool-prod.aiops.io/v1alpha/system/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/"  \
       -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
       -H 'content-type: application/json' \
-      -u $POLICY_LOGIN|grep "DEMO Story creation policy for all alerts"|wc -l|tr -d ' ')
+      -u $POLICY_LOGIN|grep "DEMO Scope Grouping"|wc -l|tr -d ' ')
     if [[ $result == "0" ]]; then
       export result=$(curl -XPOST -k -s "https://$POLICY_ROUTE/policyregistry.ibm-netcool-prod.aiops.io/v1alpha/system/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/policies"  \
         -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
