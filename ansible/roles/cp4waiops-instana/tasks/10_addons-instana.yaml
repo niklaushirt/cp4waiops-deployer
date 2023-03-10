@@ -155,7 +155,10 @@
     #datastores
     oc create ns instana-datastores
     oc label ns instana-datastores app.kubernetes.io/name=instana-datastores
-    oc -n instana-datastores adm policy add-scc-to-user anyuid -z default;
+    oc -n instana-datastores adm policy add-scc-to-user anyuid -z default
+    oc -n instana-datastores adm policy add-scc-to-group anyuid -z instana-datastores
+    oc adm policy add-scc-to-user privileged system:serviceaccount:instana-datastores:default
+    oc adm policy add-scc-to-group privileged system:serviceaccount:instana-datastores
   ignore_errors: true
   register: output
 - name: 🟣  DEBUG
