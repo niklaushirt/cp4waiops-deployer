@@ -39,7 +39,9 @@
     var: current_admin_pass
 
 
-
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Install Cert Manager if needed
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Check cert-manager
   shell: |
     CERT_MANAGER_CRD=$(oc get customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io|grep "certificates.cert-manager.io"|wc -l|tr -d ' ') 
@@ -68,12 +70,10 @@
   when: cert_check.stdout == "0"
 
 
-# - name: 🚀 INSTANA - Fail cert-manager
-#   fail: msg="You need a cert-manager running. You can install it with kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml"
-#   when: cert_check.stdout == "0"
-#   ignore_errors: false
 
-
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Install Instana Kubectl plugin
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Install Kubectl Instana Plugin
   shell: |
     if [ -x "$(command -v kubectl-instana)" ]; then
@@ -111,6 +111,9 @@
 
 
 
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Get Info
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Get BASE_DOMAIN
   shell: |
     CLUSTER_ROUTE=$(oc get routes console -n openshift-console | tail -n 1 2>&1 ) 
@@ -130,7 +133,9 @@
 
 
 
-
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Create Namespaces
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Create Namespaces
   shell: |
     # namespaces
@@ -159,7 +164,9 @@
     verbosity: 1
 
 
-
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Create Pull Secrets
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Create Pull Secrets
   shell: |
     oc -n instana-operator create secret docker-registry instana-registry \
@@ -178,6 +185,19 @@
         --docker-username=_ \
         --docker-password={{current_agent_key}} \
         --docker-server=containers.instana.io  
+
+    # create core secrets
+    oc -n instana-core label secret instana-registry app.kubernetes.io/name=instana
+    oc -n instana-units label secret instana-registry app.kubernetes.io/name=instana
+    oc -n instana-datastores label secret instana-registry app.kubernetes.io/name=instana
+
+    kubectl patch -n instana-operator serviceaccount default -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
+    kubectl patch -n instana-datastores serviceaccount default -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
+    kubectl patch -n instana-units serviceaccount default -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
+    kubectl patch -n instana-core serviceaccount default -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
+
+
+
   ignore_errors: true
   register: output
 - name: 🟣  DEBUG
@@ -186,7 +206,9 @@
     verbosity: 1
 
 
-
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Create Operator
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Create Operator
   shell: |
     #switch project
@@ -196,11 +218,11 @@
 
     oc create clusterrolebinding instana-operator-admin --clusterrole=cluster-admin --serviceaccount=instana-operator:instana-operator
 
-
     # deploy operator
     oc -n instana-operator secrets link instana-operator instana-registry --for=pull
     oc -n instana-operator secrets link instana-operator-webhook instana-registry --for=pull
 
+    # Enable Datastores CRD 
     cat <<EOF > values.yaml
     operator:
       extraArgs:
@@ -210,10 +232,7 @@
     kubectl instana operator apply --namespace=instana-operator --values ./values.yaml
 
 
-    # create core secrets
 
-    oc -n instana-core label secret instana-registry app.kubernetes.io/name=instana
-    oc -n instana-units label secret instana-registry app.kubernetes.io/name=instana
 
     #get license
     kubectl instana license download --sales-key {{current_sales_key}}
@@ -297,13 +316,15 @@
 
 
 
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Create DataStores
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Create Backend Datastores
   kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
     template: ./templates/instana/instana-datastores.j2
-
-
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -354,14 +375,16 @@
 
 
 
-
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Install Core CR
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Create Instana Core Instance
   kubernetes.core.k8s:
     state: present
     template: ./templates/instana/instana-core.j2
 
 
-    
+  
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for Core CR being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -373,6 +396,12 @@
   delay: 15
 
 
+
+
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Install Unit CR
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Create Instana Unit Instance
   kubernetes.core.k8s:
     state: present
@@ -390,6 +419,10 @@
   delay: 15
 
 
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Create Routes
+# --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Create Routes
   kubernetes.core.k8s:
     namespace: instana-datastores

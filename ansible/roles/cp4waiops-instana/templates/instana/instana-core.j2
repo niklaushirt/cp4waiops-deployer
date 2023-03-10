@@ -25,7 +25,7 @@ spec:
         enabled: true
     cassandraConfigs:
       - hosts:
-          - cassandra-service.instana-datastores.svc
+          - default-cassandra.instana-datastores.svc
         ports:
           - name: tcp
             port: 9042
@@ -35,7 +35,7 @@ spec:
           - profiles
     clickhouseConfigs:
       - hosts:
-          - clickhouse-service.instana-datastores.svc
+          - default-clickhouse.instana-datastores.svc
         clusterName: local
         ports:
           - name: tcp
@@ -47,7 +47,7 @@ spec:
           - logs
     cockroachdbConfigs:
       - hosts:
-          - cockroachdb-service.instana-datastores.svc
+          - default-cockroachdb.instana-datastores.svc
         ports:
           - name: tcp
             port: 26257
@@ -57,7 +57,7 @@ spec:
           - sales
     elasticsearchConfig:
       hosts:
-        - elasticsearch-service.instana-datastores.svc
+        - default-elasticsearch.instana-datastores.svc
       clusterName: onprem_onprem
       ports:
         - name: tcp
@@ -68,7 +68,7 @@ spec:
         - metadata_ng
     kafkaConfig:
       hosts:
-        - kafka-service.instana-datastores.svc
+        - default-kafka.instana-datastores.svc
   # Use one of smtpConfig or sesConfig
   emailConfig:
     smtpConfig:
