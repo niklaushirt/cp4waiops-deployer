@@ -34,7 +34,7 @@ spec:
           - spans
           - metrics
           - state
-        authEnabled: true
+        authEnabled: false
     clickhouseConfigs:
       - hosts:
           - default-clickhouse.instana-datastores.svc
@@ -47,7 +47,7 @@ spec:
         schemas:
           - application
           - logs
-        authEnabled: true
+        authEnabled: false
     elasticsearchConfig:
       hosts:
         - default-elasticsearch.instana-datastores.svc
@@ -59,24 +59,25 @@ spec:
           port: 9200
       schemas:
         - metadata_ng
-      authEnabled: true
+      authEnabled: false
     kafkaConfig:
       hosts:
         - default-kafka.instana-datastores.svc
       ports:
         - name: tcp
           port: 9092
-      authEnabled: true
+      authEnabled: false
     postgresConfigs:
-      - hosts: default-postgres.instana-datastores.svc
-        ports:
-          - name: tcp
-            port: 5432
-        databases:
-          - butlerdb
-          - tenantdb
-          - sales
-        authEnabled: true   
+    - hosts:
+        - default-postgres.instana-datastores.svc
+      ports:
+        - name: tcp
+          port: 5432
+      databases:
+        - butlerdb
+        - tenantdb
+        - sales
+      authEnabled: false   
   # Use one of smtpConfig or sesConfig
   emailConfig:
     smtpConfig:

@@ -7,7 +7,7 @@ spec:
     - name: instana-registry
   cassandra:
     - name: "default"
-      authEnabled: true
+      authEnabled: false
       pvcConfig:
         accessModes:
           - ReadWriteOnce
@@ -17,7 +17,7 @@ spec:
         storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   clickhouse:
     - name: "default"
-      authEnabled: true
+      authEnabled: false
       pvcConfig:
         accessModes:
           - ReadWriteOnce
@@ -35,7 +35,7 @@ spec:
           storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   elasticsearch:
     name: "default"
-    authEnabled: true
+    authEnabled: false
     pvcConfig:
       accessModes:
         - ReadWriteOnce
@@ -45,7 +45,7 @@ spec:
       storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   kafka:
     name: "default"
-    authEnabled: true
+    authEnabled: false
     pvcConfig:
       accessModes:
         - ReadWriteOnce
@@ -63,7 +63,7 @@ spec:
         storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   postgres:
     - name: "default"
-      authEnabled: true
+      authEnabled: false
       pvcConfig:
         accessModes:
           - ReadWriteOnce
