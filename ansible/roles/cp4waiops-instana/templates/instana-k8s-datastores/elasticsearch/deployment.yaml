@@ -21,7 +21,7 @@ spec:
       imagePullSecrets:
       - name: instana-pullsecret
       containers:
-      - image: containers.instana.io/instana/release/product/elasticsearch:7.16.3_v0.41.0
+      - image: containers.instana.io/instana/release/product/k8s/elasticsearch:7.16.3_v0.21.0
         name: elasticsearch
         env:
           - name: LISTEN_ADDR
