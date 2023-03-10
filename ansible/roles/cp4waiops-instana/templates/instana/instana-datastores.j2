@@ -24,7 +24,7 @@ spec:
         resources:
           requests:
             storage: 200Gi
-        storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
       zookeeper:
         pvcConfig:
           accessModes:
@@ -71,3 +71,133 @@ spec:
           requests:
             storage: 200Gi
         storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
+---
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: default-cockroachdb
+  namespace: instana-datastores
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: default-cockroachdb
+      app.kubernetes.io/name: instana
+      app.kubernetes.io/part-of: datastores
+      instana.io/group: datastore
+  template:
+    metadata:
+      name: default-cockroachdb
+      namespace: instana-datastores
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/component: default-cockroachdb
+        app.kubernetes.io/name: instana
+        app.kubernetes.io/part-of: datastores
+        instana.io/group: datastore
+    spec:
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: instana-registry
+      schedulerName: default-scheduler
+      enableServiceLinks: false
+      terminationGracePeriodSeconds: 120
+      securityContext: {}
+      serviceAccountName: instana-datastore-sa
+      containers:
+        - resources:
+            limits:
+              cpu: '8'
+              memory: 16Gi
+            requests:
+              cpu: '512m'
+              memory: 1Gi
+          stdin: true
+          terminationMessagePath: /dev/termination-log
+          name: cockroachdb
+          ports:
+            - containerPort: 26257
+          env:
+            - name: LISTEN_ADDR
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP          
+          imagePullPolicy: IfNotPresent
+
+          terminationMessagePolicy: File
+          image: >-
+            containers.instana.io/instana/release/product/cockroachdb:21.1.7_v0.36.0
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - mountPath: /mnt/data
+              name: cockroach-data
+            - mountPath: /mnt/logs
+              name: cockroach-logs
+      volumes:
+        - name: cockroach-data
+          persistentVolumeClaim:
+            claimName: cockroach-data
+        - name: cockroach-logs
+          persistentVolumeClaim:
+            claimName: cockroach-logs
+      dnsPolicy: ClusterFirst
+  volumeClaimTemplates:
+    - kind: PersistentVolumeClaim
+      apiVersion: v1
+      metadata:
+        name: cockroach-data
+        namespace: instana-datastores
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/component: default-cockroachdb
+          app.kubernetes.io/name: instana
+          app.kubernetes.io/part-of: datastores
+          instana.io/group: datastore
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 200Gi
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
+        volumeMode: Filesystem
+    - kind: PersistentVolumeClaim
+      apiVersion: v1
+      metadata:
+        name: cockroach-logs
+        namespace: instana-datastores
+        creationTimestamp: null
+        labels:
+          app.kubernetes.io/component: default-cockroachdb
+          app.kubernetes.io/name: instana
+          app.kubernetes.io/part-of: datastores
+          instana.io/group: datastore
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 200Gi
+        storageClassName: ocs-storagecluster-cephfs
+        volumeMode: Filesystem
+  serviceName: default-cockroachdb
+  podManagementPolicy: OrderedReady
+  updateStrategy:
+    type: RollingUpdate
+  revisionHistoryLimit: 10
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: default-cockroachdb
+spec:
+  selector:
+    app: cockroachdb
+  ports:
+    - protocol: TCP
+      port: 26257
+      targetPort: 26257
+  type: ClusterIP
+
