@@ -301,7 +301,7 @@
   kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
-    template: ./templates/instana/instana-datastores.yaml
+    template: ./templates/instana/instana-datastores.j2
 
 
 
