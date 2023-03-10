@@ -320,6 +320,12 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Create DataStores
 # --------------------------------------------------------------------------------------------------------------------------------------
+- name: 🚀 INSTANA - Create Backend Datastores Secrets
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana/instana-datastores-secrets.j2
+    
 - name: 🚀 INSTANA - Create Backend Datastores
   kubernetes.core.k8s:
     namespace: instana-datastores
