@@ -101,7 +101,6 @@
         echo "❗❗❗ Probably wrong version. Check at https://self-hosted.instana.io"
         
     fi
-  ignore_errors: true
   register: output
   args:
     executable: /bin/bash
