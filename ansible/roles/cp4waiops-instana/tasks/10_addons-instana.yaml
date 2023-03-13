@@ -99,7 +99,7 @@
     else
         echo "❗❗❗ Kubectl Instana Plugin NOT installed. ERROR!!!!!"
         echo "❗❗❗ Probably wrong version. Check at https://self-hosted.instana.io"
-        
+        exit 1
     fi
   register: output
   args:
