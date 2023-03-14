@@ -63,7 +63,11 @@
       export result="Already exists"
     fi 
     echo $result
-
+  ignore_errors: true
+  register: POLICY_RESULT
+  args:
+    executable: /bin/bash
+    
 - name: 🟣 OUTPUT
   debug: 
     var: POLICY_RESULT.stdout_lines
