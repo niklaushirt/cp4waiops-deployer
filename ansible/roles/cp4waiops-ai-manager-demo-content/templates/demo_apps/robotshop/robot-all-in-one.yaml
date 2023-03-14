@@ -716,6 +716,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           failureThreshold: 3
+
       restartPolicy: Always
 ---
 # Source: robot-shop/templates/user-deployment.yaml
