@@ -95,7 +95,7 @@ spec:
         resources:
           requests:
             storage: 300Gi
-        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
   enableNetworkPolicies: false
   properties:
     - name: retention.metrics.rollup5
