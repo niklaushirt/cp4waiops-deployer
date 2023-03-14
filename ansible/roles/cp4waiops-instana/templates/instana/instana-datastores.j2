@@ -14,7 +14,7 @@ spec:
         resources:
           requests:
             storage: 200Gi
-        storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   clickhouse:
     - name: "default"
       authEnabled: false
@@ -24,7 +24,7 @@ spec:
         resources:
           requests:
             storage: 200Gi
-        storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
       zookeeper:
         pvcConfig:
           accessModes:
@@ -32,7 +32,7 @@ spec:
           resources:
             requests:
               storage: 200Gi
-          storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
+          storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   elasticsearch:
     name: "default"
     authEnabled: false
@@ -42,7 +42,7 @@ spec:
       resources:
         requests:
           storage: 200Gi
-      storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
+      storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   kafka:
     name: "default"
     authEnabled: false
@@ -52,7 +52,7 @@ spec:
       resources:
         requests:
           storage: 200Gi
-      storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
+      storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
     zookeeper:
       pvcConfig:
         accessModes:
@@ -60,7 +60,7 @@ spec:
         resources:
           requests:
             storage: 200Gi
-        storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   postgres:
     - name: "default"
       authEnabled: false
@@ -70,4 +70,4 @@ spec:
         resources:
           requests:
             storage: 200Gi
-        storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
