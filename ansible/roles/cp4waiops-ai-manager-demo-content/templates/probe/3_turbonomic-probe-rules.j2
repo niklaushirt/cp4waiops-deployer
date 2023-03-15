@@ -1,0 +1,259 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: turbonomic-probe-mb-webhook-rules
+  namespace: {{ current_cp4waiops_cluster.project }}
+data:
+  message_bus.rules: >-
+    ########################################################################
+
+    #
+
+    #   Licensed Materials - Property of IBM
+
+    #   "Restricted Materials of IBM"
+
+    #
+
+    #   5724-S44
+
+    #
+
+    #   (C) Copyright IBM Corp. 2022
+
+    #
+
+    #   IBM Tivoli Netcool/OMNIbus Probe for Message Bus
+
+    #
+
+    ########################################################################
+
+    #
+
+    # Probe rules for IBM Turbonomic
+
+    #
+
+    # Version History:
+
+    #    Version 1.0 - Initial Version
+
+    #
+
+    ########################################################################
+
+    #
+
+    # List of elements with sample data:
+
+    #
+
+    # actionID="637511934669008"
+
+    # actionImpactID="637511934669008"
+
+    # actionMode="MANUAL"
+
+    # actionState="READY"
+
+    # actionType="RESIZE"
+
+    # createTime="2022-07-21T00:30:34Z"
+
+    # currentLocation.className="DataCenter"
+
+    # currentLocation.discoveredBy.category="Hypervisor"
+
+    # currentLocation.discoveredBy.displayName="9.37.205.36"
+
+    # currentLocation.discoveredBy.readonly="false"
+
+    # currentLocation.discoveredBy.type="vCenter"
+
+    # currentLocation.discoveredBy.uuid="74364096834448"
+
+    # currentLocation.displayName="RTP"
+
+    # currentLocation.environmentType="ONPREM"
+
+    # currentLocation.staleness="CURRENT"
+
+    # currentLocation.state="ACTIVE"
+
+    # currentLocation.uuid="74364098425681"
+
+    # currentLocation.vendorIds.9.37.205.36="datacenter-2001"
+
+    # currentValue="33554432.0
+
+    # details="Resize down VMem and Reservation for Virtual Machine mcm2m3 from
+    32 GB to 29 GB"
+
+    # displayName="MANUAL"
+
+    # importance="0.0"
+
+    # marketID="777777"
+
+    # newLocation.className="DataCenter"
+
+    # newLocation.discoveredBy.category="Hypervisor"
+
+    # newLocation.discoveredBy.displayName="9.37.205.36"
+
+    # newLocation.discoveredBy.readonly="false"
+
+    # newLocation.discoveredBy.type="vCenter"
+
+    # newLocation.discoveredBy.uuid="74364096834448"
+
+    # newLocation.displayName="RTP"
+
+    # newLocation.environmentType="ONPREM"
+
+    # newLocation.staleness="CURRENT"
+
+    # newLocation.state="ACTIVE"
+
+    # newLocation.uuid="74364098425681"
+
+    # newLocation.vendorIds.9.37.205.36="datacenter-2001"
+
+    # newValue="30408704.0"
+
+    # risk.description="Underutilized VMem in Virtual Machine mcm2m3"
+
+    # risk.importance="0.0"
+
+    # risk.reasonCommodities.0="VMem"
+
+    # risk.reasonCommodity="VMem"
+
+    # risk.severity="MINOR"
+
+    # risk.subCategory="Efficiency Improvement"
+
+    # target.className="VirtualMachine"
+
+    # target.discoveredBy.displayName="9.37.205.36"
+
+    # target.discoveredBy.readonly="false"
+
+    # target.discoveredBy.type="vCenter"
+
+    # target.discoveredBy.uuid="74364096834448"
+
+    # target.displayName="mcm2m3"
+
+    # target.environmentType="ONPREM"
+
+    # target.state="ACTIVE"
+
+    # target.uuid="74559458302560"
+
+    # target.vendorIds.9.37.205.36="vm-5029"
+
+    # uuid="637511934669008"
+
+    # valueUnits="KB"
+
+    # 
+
+    ########################################################################
+
+
+    if( match( @Manager, "ProbeWatch" ) )
+
+    {
+      #
+      # This section deals with internal probe events
+      #
+      switch(@Summary)
+      {
+          case "Running ...":
+            @Severity = 1  # Clear (1 is actually indeterminate, but needed for auto deletion of active)
+            @AlertGroup = "probestat"
+            @Type = 2      # Clear (Resolution)
+          case "Going Down ...":
+            @Severity = 5  # Critical
+            @AlertGroup = "probestat"
+            @Type = 1
+          default:
+            @Severity = 2  # Warning
+            @Type = 1      # Problem
+            @AlertGroup = "probestat"
+      }
+      @AlertKey = @Agent
+      @Summary = @Agent + " probe on " + @Node + ": " + @Summary
+    }
+
+    else
+
+    {
+        #
+        # This section deals with Turbonomic alerts
+        #
+        log(DEBUG, "<<<<< Entering... IBM Turbonomic rules >>>>>")
+        
+        @Manager = "Turbonomic"
+        
+        @Class = 89210
+        @Agent = $(target.discoveredBy.type)
+      
+        @AlertKey = $(target.uuid)
+        @AlertGroup = $(target.className) + " - " + $actionType
+        @Node = $(target.displayName)
+        @NodeAlias = @Node
+        foreach (e in $* )
+        {
+          if ( nmatch( e, "target.vendorIds" ) )
+          {
+            @NodeAlias = $e
+            break
+          }
+        }
+        # Define severity
+        $severity_caps = upper($(risk.severity))
+        switch($severity_caps)
+        {
+            case "UNKNOWN":
+              @Severity = 1
+              @Type = 1
+            case "MINOR":
+              @Severity = 3
+              @Type = 1
+            case "MAJOR":
+              @Severity = 4
+              @Type = 1
+            case "CRITICAL":
+              @Severity = 5
+              @Type = 1
+            default:
+              @Severity = 1
+              @Type = 0
+        }
+        # Handle CLEAR events. They are based on the action state
+        $actionstate_caps = upper($actionState)
+        switch($actionstate_caps)
+        {
+            case "SUCCEEDED":
+              @Type = 2
+              @Severity = 1
+            case "CLEARED":
+              @Type = 2
+              @Severity = 1
+            default:
+        }
+        # For test webhook events, set it to expire
+        if (match($actionID,"-1"))
+        {
+          @Type = 13  # Informational
+          @ExpireTime = 300
+        }
+        # Set Summary
+        @Summary = $details
+        @ExtendedAttr = nvp_add($*)
+        @Identifier = @Node + " " + @AlertKey + " " + @AlertGroup + " " + @Type + " " + @Agent + " " + @Manager
+        log(DEBUG, "<<<<< Exiting... IBM Turbonomic rules >>>>>")
+    }

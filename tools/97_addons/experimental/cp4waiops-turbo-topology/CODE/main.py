@@ -95,7 +95,8 @@ entitiesToParse = ["VirtualMachine",
 "DiskArray",
 "PhysicalMachine",
 "ContainerPlatformCluster",
-"Service"]
+"Service",
+"VirtualMachineSpec"]
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------

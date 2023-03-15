@@ -1,6 +1,6 @@
-# https://www.ibm.com/docs/en/netcoolomnibus/8?topic=aiops-deploying-generic-webhook-probe
+# https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.6.2?topic=turbonomic-probe-integration-ai-manager
 
-- name: 🛰️  START - INSTALL WEBHOOK PROBE
+- name: 🛰️  START - INSTALL TURBONOMIC PROBE
   debug: 
     msg="{{ lookup('pipe','date +%d.%m.%Y---%H:%M:%S') }}"
 
@@ -8,7 +8,7 @@
 
 - name: Log
   shell: |
-    export MESSAGE="Install Webhook Probe"
+    export MESSAGE="Install Turbonomic Probe"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
@@ -16,23 +16,10 @@
 
 
 
-
-
-
-
-
-- name: 🚀 INSTALL PROBE - Install Webhook Probe Subscription
+- name: 🚀 INSTALL PROBE - Install Turbonomic Probe Subscription
   kubernetes.core.k8s:
     state: present
     template: ./templates/probe/1_probe-subscription.j2
-
-
-
-- name: 🚀 INSTALL PROBE - Install Probe Rules File
-  kubernetes.core.k8s:
-    state: present
-    template: ./templates/probe/2_generic-probe-rules.j2
-
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -50,10 +37,10 @@
 
 
 
-- name: 🚀 INSTALL PROBE - INSTALL PROBE
+- name: 🚀 INSTALL TURBONOMIC PROBE - INSTALL PROBE
   shell: |
     set -x
-    export PROBE_INSTANCE_NAME=generic-probe
+    export PROBE_INSTANCE_NAME=turbonomic-probe
 
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
@@ -78,10 +65,7 @@
     echo "IRC_OMNI_USERNAME:$IRC_OMNI_USERNAME"
     echo "IRC_OMNI_PASSWORD:$IRC_OMNI_PASSWORD"
 
-
-    oc project cp4waiops
-
-
+    oc project $WAIOPS_NAMESPACE
 
     export PROBE_OMNI_SECRET=noi-probe-secret
     oc create secret generic $PROBE_OMNI_SECRET \
@@ -120,7 +104,7 @@
     EOF
 
 
-    cat <<EOF | oc apply -n $WAIOPS_NAMESPACE -f -
+    cat << EOF | tee >(oc apply -f -) | cat
     apiVersion: probes.integrations.noi.ibm.com/v1
     kind: WebhookProbe
     metadata:
@@ -129,14 +113,9 @@
         app.kubernetes.io/name: ${PROBE_INSTANCE_NAME}
         app.kubernetes.io/managed-by: netcool-integrations-operator
         app.kubernetes.io/instance: ${PROBE_INSTANCE_NAME}
-      namespace: ${NAMESPACE}
+      namespace: ${WAIOPS_NAMESPACE}
     spec:
       helmValues:
-        global:
-          image:
-            secretName: ibm-entitlement-key
-          serviceAccountName: default
-          enableNetworkPolicy: true
         netcool:
           backupHost: '${IRC_BACKUP_OBJECTSERVER_SVC}.${WAIOPS_NAMESPACE}.svc'
           backupPort: ${IRC_BACKUP_OBJECTSERVER_PORT}
@@ -154,16 +133,15 @@
               messageDepth: 3
               messageHeader: ''
               messagePayload: json
-          integration: generic
+          integration: Turbonomic
           enableTransportDebugLog: false
           messageLevel: debug
-          rulesConfigmap: generic-probe-rules
         ingress:
           enabled: true
           host: ''
         arch: amd64
         webhook:
-          uri: /probe
+          uri: /probe/turbonomic
           serverBasicAuthenticationCredentialsSecretName: '${PROBE_AUTH_SECRET}'
           tls:
             enabled: true
@@ -187,7 +165,7 @@
 # Wait for CSV being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name:   🕦 INSTALL PROBE - Wait for Probe to become ready
-  shell: oc get pod -n {{ current_cp4waiops_cluster.project }}|grep generic-probe|grep "1/1" | grep -c ""
+  shell: oc get pod -n {{ current_cp4waiops_cluster.project }}|grep turbonomic-probe|grep "1/1" | grep -c ""
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "1"
   retries: 500
@@ -202,9 +180,11 @@
     set -x
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
-    export PROBE_WEBHOOK_URL="https://"$(oc get routes generic-probe-mb-webhook -n $WAIOPS_NAMESPACE -o=jsonpath='{.status.ingress[0].host}{"\n"}')"/probe"
-
+    PROBE_HOSTNAME=$(oc get route turbonomic-probe-mb-webhook -o jsonpath='{.spec.host}')
+    PROBE_URI=$(oc get route turbonomic-probe-mb-webhook -o jsonpath='{.spec.path}')
+    PROBE_WEBHOOK_URL=https://$PROBE_HOSTNAME$PROBE_URI
     echo "$PROBE_WEBHOOK_URL"
+
   register: output_string
   ignore_errors: true
 - name: 🟣  DEBUG

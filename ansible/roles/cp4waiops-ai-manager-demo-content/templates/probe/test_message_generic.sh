@@ -1,10 +1,12 @@
-export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-export PROBE_WEBHOOK_URL="https://"$(oc get routes generic-probe-mb-webhook -n $WAIOPS_NAMESPACE -o=jsonpath='{.status.ingress[0].host}{"\n"}')"/probe"
-echo "$PROBE_WEBHOOK_URL"
+
+PROBE_HOSTNAME=$(oc get route generic-probe-mb-webhook -o jsonpath='{.spec.host}')
+PROBE_URI=$(oc get route generic-probe-mb-webhook -o jsonpath='{.spec.path}')
+PROBE_GENERIC_URL=https://$PROBE_HOSTNAME$PROBE_URI
+echo "$PROBE_GENERIC_URL"
 
 
 ## WEBHOOK PROBE TEST
-curl -X "POST" "$PROBE_WEBHOOK_URL" \
+curl -X "POST" "$PROBE_GENERIC_URL" \
      -H 'Content-Type: text/plain; charset=utf-8' \
      -H 'Cookie: 8a3ca3e7036a020dcf1e98075251e2b8=6b0d31808967c487642156d942be194f' \
      -u 'administrator:P4ssw0rd!' \
