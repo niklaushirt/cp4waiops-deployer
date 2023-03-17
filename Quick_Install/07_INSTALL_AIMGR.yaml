@@ -66,7 +66,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-aimanager
+  name: cp4waiops-install-aimanager
   namespace: cp4waiops-installation
 spec:
   serviceAccountname: cp4waiops-installer-admin

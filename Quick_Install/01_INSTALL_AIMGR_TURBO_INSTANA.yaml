@@ -73,7 +73,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-cp-inst-turbo
+  name: cp4waiops-install-cp-inst-turbo
   namespace: cp4waiops-installation
 spec:
   serviceAccountname: cp4waiops-installer-admin

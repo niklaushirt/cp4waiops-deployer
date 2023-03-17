@@ -87,7 +87,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-all
+  name: cp4waiops-install-all-custom
   namespace: cp4waiops-installation
 spec:
   serviceAccountname: cp4waiops-installer-admin

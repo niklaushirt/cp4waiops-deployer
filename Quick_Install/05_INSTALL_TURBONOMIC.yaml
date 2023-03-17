@@ -52,7 +52,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-turbonomic
+  name: turbonomic-install
   namespace: cp4waiops-installation
 spec:
   serviceAccountname: cp4waiops-installer-admin

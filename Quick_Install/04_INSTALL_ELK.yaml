@@ -45,7 +45,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-elk
+  name: cp4waiops-install-elk
   namespace: cp4waiops-installation
 spec:
   serviceAccountname: cp4waiops-installer-admin

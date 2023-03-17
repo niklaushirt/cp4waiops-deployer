@@ -43,7 +43,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: check-aiops-install
+  name: cp4waiops-check-install
   namespace: cp4waiops-installation
 spec:
   serviceAccountname: cp4waiops-installer-admin

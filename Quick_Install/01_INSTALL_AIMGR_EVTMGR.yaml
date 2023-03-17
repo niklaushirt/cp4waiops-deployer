@@ -72,7 +72,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-ai-event-manager
+  name: cp4waiops-install-ai-event-manager
   namespace: cp4waiops-installation
 spec:
   serviceAccountname: cp4waiops-installer-admin
