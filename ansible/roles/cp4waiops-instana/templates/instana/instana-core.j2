@@ -19,12 +19,12 @@ spec:
   imagePullSecrets:
     - name: instana-registry
   # Datastore configs
+  featureFlags: 
+    - name: feature.synthetics.enabled
+      enabled: true
+    - name: feature.logging.enabled
+      enabled: true
   datastoreConfigs:
-    featureFlags: 
-      - name: feature.synthetics.enabled
-        enabled: true
-      - name: feature.logging.enabled
-        enabled: true
     cassandraConfigs:
       - hosts:
           - default-cassandra.instana-datastores.svc
