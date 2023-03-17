@@ -18,6 +18,13 @@ spec:
   clickhouse:
     - name: "default"
       authEnabled: false
+      resources:
+        limits:
+          cpu: '2'
+          memory: 12Gi
+        requests:
+          cpu: '1'
+          memory: 1Gi
       pvcConfig:
         accessModes:
           - ReadWriteOnce
