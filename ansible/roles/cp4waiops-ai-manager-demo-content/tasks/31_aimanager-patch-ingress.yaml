@@ -95,16 +95,14 @@
 
     AUTO_UI_INSTANCE=$(oc get AutomationUIConfig -n ${PROJECT_CP4WAIOPS} --no-headers -o custom-columns=":metadata.name")
 
-    INGRESS_SECRET=$(oc get secret --no-headers --field-selector type=kubernetes.io/tls -n openshift-ingress | awk '!/metrics/ { print $1 }')
+    ingress_pod=$(oc get secrets -n openshift-ingress | grep tls | grep -v router-metrics-certs-default | awk '{print $1}')
 
-    oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.crt"}}' ${INGRESS_SECRET} | base64 -d > cert.crt
-    oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.key"}}' ${INGRESS_SECRET} | base64 -d > cert.key
+    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.crt}'  | base64 -d > cert.crt
+    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.key}' | base64 -d > cert.key
+
     oc get secret -n ${PROJECT_CP4WAIOPS} external-tls-secret -o yaml > external-tls-secret.yaml
 
-    oc patch AutomationUIConfig ${AUTO_UI_INSTANCE} \
-    -n ${PROJECT_CP4WAIOPS} \
-    --type merge \
-    --patch '{"spec": {"tls": {"caSecret": {"key":"ca.crt", "secretName": "external-tls-secret"}, "certificateSecret": { "secretName": "external-tls-secret"}}}}'
+    oc patch AutomationUIConfig ${AUTO_UI_INSTANCE} -n ${PROJECT_CP4WAIOPS} --type merge --patch '{"spec": {"tls": {"caSecret": {"key":"ca.crt", "secretName": "external-tls-secret"}, "certificateSecret": { "secretName": "external-tls-secret"}}}}'
 
     oc create secret generic -n ${PROJECT_CP4WAIOPS} external-tls-secret --from-file=cert.crt=cert.crt --from-file=cert.key=cert.key -o yaml --dry-run=client | oc apply -f -
 
