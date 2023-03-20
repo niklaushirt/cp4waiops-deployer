@@ -276,7 +276,7 @@ if [[ $WAIOPS_PODS -gt $WAIOPS_PODS_MIN ]]; then
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚🥚🥚🥚🥚🥚 - Getting AWX Status                                            "
       export AWX_NAMESPACE=$(oc get ns awx  --ignore-not-found|awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚🥚🥚🥚🥚 - Getting LDAP Status                                           "
-      export LDAP_NAMESPACE=$(oc get po -n default --ignore-not-found| grep ldap |awk '{print$1}')
+      export LDAP_NAMESPACE=$(oc get po -n openldap --ignore-not-found| grep ldap |awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚🥚🥚🥚 - Getting Aiops Toolbox Status                                  "
       export TOOLBOX_READY=$(oc get po -n default|grep cp4waiops-tools| grep 1/1 |awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚🥚🥚 - Getting ELK Status                                            "
@@ -792,7 +792,7 @@ menuAWX_OPENHUMIO () {
 
 
 menuAWX_OPENLDAP () {
-      export ROUTE="http://"$(oc get route -n default openldap-admin -o jsonpath={.spec.host})
+      export ROUTE="http://"$(oc get route -n openldap openldap-admin -o jsonpath={.spec.host})
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    🚀 LDAP "

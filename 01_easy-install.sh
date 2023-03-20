@@ -279,7 +279,7 @@ if [[ $WAIOPS_PODS -gt $WAIOPS_PODS_MIN ]]; then
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚🥚🥚🥚🥚🥚 - Getting AWX Status                                            "
       export AWX_NAMESPACE=$(oc get ns awx  --ignore-not-found|awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚🥚🥚🥚🥚 - Getting LDAP Status                                           "
-      export LDAP_NAMESPACE=$(oc get po -n default --ignore-not-found| grep ldap |awk '{print$1}')
+      export LDAP_NAMESPACE=$(oc get po -n openldap --ignore-not-found| grep ldap |awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚🥚🥚🥚 - Getting Aiops Toolbox Status                                  "
       export TOOLBOX_READY=$(oc get po -n default|grep cp4waiops-tools| grep 1/1 |awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐣🥚🥚🥚 - Getting ELK Status                                            "
@@ -413,7 +413,7 @@ checkEventManager () {
 installViaJob() {
         
 
-cat <<EOF | oc apply -n default -f -
+cat <<EOF | oc apply -n cp4waiops-installer -f -
 apiVersion: v1                     
 kind: Namespace
 metadata:
@@ -545,8 +545,8 @@ menu_JOB_AI_ALL () {
             echo " Waiting 30 seconds for Job to settle"
             sleep 30
 
-            INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
-            oc logs -n default -f $INSTALL_POD
+            INSTALL_POD=$(oc get po -n cp4waiops-installer|grep $JOB_NAME|awk '{print$1}')
+            oc logs -n cp4waiops-installer -f $INSTALL_POD
       fi
    
       echo "*****************************************************************************************************************************"
@@ -600,8 +600,8 @@ menu_JOB_EVENT_ALL () {
             echo " Waiting 30 seconds for Job to settle"
             sleep 30
 
-            INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
-            oc logs -n default -f $INSTALL_POD
+            INSTALL_POD=$(oc get po -n cp4waiops-installer|grep $JOB_NAME|awk '{print$1}')
+            oc logs -n cp4waiops-installer -f $INSTALL_POD
       fi
    
  
@@ -657,8 +657,8 @@ menu_JOB_AI_ONLY () {
             echo " Waiting 30 seconds for Job to settle"
             sleep 30
 
-            INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
-            oc logs -n default -f $INSTALL_POD
+            INSTALL_POD=$(oc get po -n cp4waiops-installer|grep $JOB_NAME|awk '{print$1}')
+            oc logs -n cp4waiops-installer -f $INSTALL_POD
       fi
    
  
@@ -713,8 +713,8 @@ menu_JOB_EVENT_ONLY () {
             echo " Waiting 30 seconds for Job to settle"
             sleep 30
 
-            INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
-            oc logs -n default -f $INSTALL_POD
+            INSTALL_POD=$(oc get po -n cp4waiops-installer|grep $JOB_NAME|awk '{print$1}')
+            oc logs -n cp4waiops-installer -f $INSTALL_POD
       fi
    
  
@@ -772,8 +772,8 @@ menu_JOB_ALL () {
             echo " Waiting 30 seconds for Job to settle"
             sleep 30
 
-            INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
-            oc logs -n default -f $INSTALL_POD
+            INSTALL_POD=$(oc get po -n cp4waiops-installer|grep $JOB_NAME|awk '{print$1}')
+            oc logs -n cp4waiops-installer -f $INSTALL_POD
       fi
    
  
@@ -817,8 +817,8 @@ menu_JOB_TURBO () {
             echo " Waiting 30 seconds for Job to settle"
             sleep 30
 
-            INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
-            oc logs -n default -f $INSTALL_POD
+            INSTALL_POD=$(oc get po -n cp4waiops-installer|grep $JOB_NAME|awk '{print$1}')
+            oc logs -n cp4waiops-installer -f $INSTALL_POD
 
      else
             echo "    ⚠️  Skipping"
@@ -867,7 +867,7 @@ menu_JOB_INSTANA () {
             sed -i -e "s/<YOUR_SALES_KEY>/$DO_SK/g" /tmp/cp4waiops-roks-instana.yaml
             sed -i -e "s/<YOUR_AGENT_KEY>/$DO_AK/g" /tmp/cp4waiops-roks-instana.yaml
 
-            oc apply -n default -f /tmp/cp4waiops-roks-instana.yaml
+            oc apply -n cp4waiops-intallation -f /tmp/cp4waiops-roks-instana.yaml
 
             echo ""
             echo ""
@@ -882,8 +882,8 @@ menu_JOB_INSTANA () {
                   echo " Waiting 30 seconds for Job to settle"
                   sleep 30
 
-                  INSTALL_POD=$(oc get po -n default|grep waiops-easy-install-instana|awk '{print$1}')
-                  oc logs -n default -f $INSTALL_POD
+                  INSTALL_POD=$(oc get po -n cp4waiops-installer|grep waiops-easy-install-instana|awk '{print$1}')
+                  oc logs -n cp4waiops-installer -f $INSTALL_POD
 
             else
                   echo "    ⚠️  Skipping"
@@ -941,8 +941,8 @@ menu_JOB_ELK () {
             echo " Waiting 30 seconds for Job to settle"
             sleep 30
 
-            INSTALL_POD=$(oc get po -n default|grep $JOB_NAME|awk '{print$1}')
-            oc logs -n default -f $INSTALL_POD
+            INSTALL_POD=$(oc get po -n cp4waiops-installer|grep $JOB_NAME|awk '{print$1}')
+            oc logs -n cp4waiops-installer -f $INSTALL_POD
       fi
    
       echo "*****************************************************************************************************************************"
@@ -991,8 +991,8 @@ menu_JOB_TURBO_INT () {
             echo " Waiting 30 seconds for Job to settle"
             sleep 30
 
-            INSTALL_POD=$(oc get po -n default|grep waiops-easy-install|awk '{print$1}')
-            oc logs -n default -f $INSTALL_POD
+            INSTALL_POD=$(oc get po -n cp4waiops-installer|grep waiops-easy-install|awk '{print$1}')
+            oc logs -n cp4waiops-installer -f $INSTALL_POD
       fi
    
 
@@ -1258,7 +1258,7 @@ menuAWX_OPENHUMIO () {
 
 
 menuAWX_OPENLDAP () {
-      export ROUTE="http://"$(oc get route -n default openldap-admin -o jsonpath={.spec.host})
+      export ROUTE="http://"$(oc get route -n openldap openldap-admin -o jsonpath={.spec.host})
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    🚀 LDAP "
