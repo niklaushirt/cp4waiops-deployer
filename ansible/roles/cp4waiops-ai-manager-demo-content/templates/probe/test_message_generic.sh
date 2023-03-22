@@ -25,7 +25,7 @@ curl -X "POST" "$PROBE_GENERIC_URL" \
         "linkType": "webpage",
         "name": "GitHub",
         "description": "GitHub",
-        "url": "https://pirsoscom.github.io/git-commit-robot.html"
+        "url": "https://pirsoscom.github.io/git-commit-mysql-vm.html"
     }],
     "sender": {
         "type": "host",
