@@ -111,7 +111,8 @@ echo " "
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 echo "   🚀  Deactivating MYSQL Service for Demo Scenario..."
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-oc patch service mysql -n robot-shop --patch '{"spec": {"selector": {"service": "mysql-outage"}}}'
+oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"
+oc set env deployment load -n robot-shop ERROR=1
 
 
 
