@@ -25,10 +25,11 @@ Please contact me if you have feedback or if you find glitches or problems.
 
 **❗The installation has been tested for the CP4WAIOPS v3.7.0 release on OpenShift 4.10 on:**
 
+- OpenShift Cluster (VMware on IBM Cloud) - IPI
 - IBM RedHat Openshift Kubernetes Service (ROKS) with IBM Cloud Storage (ibmc-xxx)
 - IBM RedHat Openshift Kubernetes Service (ROKS) with NFS Storage
 - IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)
-- OpenShift Cluster (VMware on IBM Cloud) - IPI
+
 
 
 > ❗Those are **non-production** installations and are suited only for demo and PoC environments. ❗
@@ -90,7 +91,7 @@ Here is a quick video that walks you through the installation process
 <div style="page-break-after: always;"></div>
 
 <details>
-<summary>Prerequisites</summary>
+<summary>🚀 Prerequisites</summary>
 
 ## ✅ 1.1 Prerequisites 
 
