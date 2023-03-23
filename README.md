@@ -38,10 +38,15 @@ Please contact me if you have feedback or if you find glitches or problems.
 <div style="page-break-after: always;"></div>
 
 
-## 🚀 Get started
+# 🚀 Quickstart
 
 
 🐥 [Quick Install](https://github.com/niklaushirt/cp4waiops-deployer#-2-quick-install)
+
+* Get an OpenShift Cluster
+* Get your entitlement key/pull token
+* Paste the install file into the OpenShift web UI and insert your entitlement key
+* Grab a coffe and come back after 2-3 hours depending on the modules you're installing
 
 🚀 [Demo the Solution](#3-demo-the-solution)
 
@@ -65,12 +70,7 @@ Here is a quick video that walks you through the installation process
 - You don't have to install all the tooling locally
 - You don’t need a connection to the cluster during the installation (fire and forget)
 
-### What you have to do:
 
-* Get an OpenShift Cluster
-* Get your entitlement key/pull token
-* Paste the install file into the OpenShift web UI and insert your entitlement key
-* Grab a coffe and come back after 2-3 hours depending on the modules you're installing
 
 > 🤓 So this could basically be done from an iPhone or iPad	
 
