@@ -158,7 +158,7 @@ This allows the CP4WAIOPS images to be pulled from the IBM Container Registry.
 
 </details>
 <details>
-<summary>✅ Important remarks before you start</summary>
+<summary>⚠️ Important remarks before you start</summary>
 
 ## ⚠️⚠️ 1.2 Important remarks before you start ⚠️⚠️
 
@@ -373,7 +373,7 @@ This installation cocntains:
 
 
 <details>
-<summary>✅ Access the Environment</summary>
+<summary>🌏 Access the Environment</summary>
 
 ## 3.1 Access the Environment
 
@@ -392,7 +392,7 @@ To access the demo environment:
 
 </details>
 <details>
-<summary>✅ Login to AI Manager as demo User</summary>
+<summary>🔐 Login to AI Manager as demo User</summary>
 
 ## 3.2 Login to AI Manager as demo User
 
@@ -405,7 +405,7 @@ To access the demo environment:
 
 </details>
 <details>
-<summary>✅ 🚀 Demo the Solution</summary>
+<summary>🚀 Demo the Solution</summary>
 
 ## 3.3 🚀 Demo the Solution
 
