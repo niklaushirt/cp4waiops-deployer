@@ -27,8 +27,8 @@ Please contact me if you have feedback or if you find glitches or problems.
 
 - OpenShift Cluster (VMware on IBM Cloud) - IPI
 - IBM RedHat Openshift Kubernetes Service (ROKS) with IBM Cloud Storage (ibmc-xxx)
-- IBM RedHat Openshift Kubernetes Service (ROKS) with NFS Storage
-- IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)
+
+
 
 
 
@@ -37,11 +37,12 @@ Please contact me if you have feedback or if you find glitches or problems.
 
 <div style="page-break-after: always;"></div>
 
-
+---------------------------------------------------------------
 # 🚀 Quickstart
+---------------------------------------------------------------
 
 
-🐥 [Quick Install](https://github.com/niklaushirt/cp4waiops-deployer#-2-quick-install)
+🐥 [Quick Install](https://github.com/niklaushirt/cp4waiops-deployer#1-preparation)
 
 * Get an OpenShift Cluster
 * Get your entitlement key/pull token
