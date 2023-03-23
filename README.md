@@ -82,7 +82,7 @@ Here is a quick video that walks you through the installation process
 
 
 ---------------------------------------------------------------
-# 🚀 1 Preparation
+# 1. Preparation
 ---------------------------------------------------------------
 
 
@@ -185,7 +185,7 @@ If you think that you hit a problem:
 
 
 ---------------------------------------------------------------
-# 🐥 2 Quick Install
+# 2. Quick Install
 ---------------------------------------------------------------
 
 
@@ -364,7 +364,7 @@ This installation cocntains:
 
 
 ---------------------------------------------------------------
-# 3 Demo the Solution
+# 3. Demo the Solution
 ---------------------------------------------------------------
 
 📹 Please use the [Demo Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md) to prepare for the demo.
@@ -419,7 +419,7 @@ Then start the demo with the [Demo Script](/./doc/CP4AIOps%20Live%20Environment%
 
 
 ---------------------------------------------------------------
-# 4 Slack integration
+# 4. Slack integration
 ---------------------------------------------------------------
 
 
@@ -744,7 +744,7 @@ or
 
 
 ---------------------------------------------------------------
-# 5 Demo Setup - Explained
+# 5. Demo Setup - Explained
 ---------------------------------------------------------------
 
 
