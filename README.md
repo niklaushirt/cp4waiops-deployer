@@ -438,7 +438,7 @@ For the system to work you need to follow those steps:
 
 
 <details>
-<summary>✅ Detailed Instructions</summary>
+<summary>📥 Detailed Instructions</summary>
 
 ## 4.1 Create your Slack Workspace
 
@@ -751,7 +751,7 @@ or
 ![demo](./doc/pics/waiops_arch_overview.jpg)
 
 <details>
-<summary>✅ Basic Architecture</summary>
+<summary>📥 Basic Architecture</summary>
 
 ## 5.1 Basic Architecture
 
@@ -771,7 +771,7 @@ The environement (Kubernetes, Applications, ...) create logs that are being fed 
 
 </details>
 <details>
-<summary>✅ Optimized Demo Architecture</summary>
+<summary>📥 Optimized Demo Architecture</summary>
 
 ## 5.2 Optimized Demo Architecture
 
@@ -842,7 +842,7 @@ This allows us to:
 
 </details>
 <details>
-<summary>✅  Training </summary>
+<summary>📥 Training </summary>
 
 ## 5.3 Training
 
@@ -866,7 +866,7 @@ The models can be trained directly on the data that has been loaded as described
 
 </details>
 <details>
-<summary>✅ Incident creation</summary>
+<summary>📥 Incident creation</summary>
 
 ## 5.4 Incident creation (inception)
 
