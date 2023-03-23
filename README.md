@@ -91,7 +91,7 @@ Here is a quick video that walks you through the installation process
 <div style="page-break-after: always;"></div>
 
 <details>
-<summary>🚀 Prerequisites</summary>
+<summary>🟢 Prerequisites</summary>
 
 ## ✅ 1.1 Prerequisites 
 
@@ -158,7 +158,7 @@ This allows the CP4WAIOPS images to be pulled from the IBM Container Registry.
 
 </details>
 <details>
-<summary>🚀 Important remarks before you start</summary>
+<summary>🟢 Important remarks before you start</summary>
 
 ## ⚠️⚠️ 1.2 Important remarks before you start ⚠️⚠️
 
@@ -207,7 +207,7 @@ You can find some examples below.
 
 
 <details>
-<summary>🚀 Install AI Manager with demo content, Turbonomic and Instana</summary>
+<summary>🟢 Install AI Manager with demo content, Turbonomic and Instana</summary>
 
 ## 🐥 2.1 Install AI Manager with demo content, Turbonomic and Instana 
 
@@ -271,7 +271,7 @@ This installation cocntains:
 
 </details>
 <details>
-<summary>🚀 Install AI Manager, Event Manager with demo content</summary>
+<summary>🟢 Install AI Manager, Event Manager with demo content</summary>
 
 ## 🐥 2.2 Install AI Manager, Event Manager with demo content
 
@@ -329,7 +329,7 @@ This installation cocntains:
 
 </details>
 <details>
-<summary>🚀 Custom Install</summary>
+<summary>🟢 Custom Install</summary>
 
 ## 🐥 2.3 Custom Install
 
@@ -373,7 +373,7 @@ This installation cocntains:
 
 
 <details>
-<summary>🚀 Access the Environment</summary>
+<summary>🟢 Access the Environment</summary>
 
 ## 3.1 Access the Environment
 
@@ -392,7 +392,7 @@ To access the demo environment:
 
 </details>
 <details>
-<summary>🚀 Login to AI Manager as demo User</summary>
+<summary>🟢 Login to AI Manager as demo User</summary>
 
 ## 3.2 Login to AI Manager as demo User
 
@@ -405,7 +405,7 @@ To access the demo environment:
 
 </details>
 <details>
-<summary>🚀 🚀 Demo the Solution</summary>
+<summary>🟢 🚀 Demo the Solution</summary>
 
 ## 3.3 🚀 Demo the Solution
 
@@ -438,7 +438,7 @@ For the system to work you need to follow those steps:
 
 
 <details>
-<summary>🚀 Detailed Instructions</summary>
+<summary>🟢 Detailed Instructions</summary>
 
 ## 4.1 Create your Slack Workspace
 
@@ -751,7 +751,7 @@ or
 ![demo](./doc/pics/waiops_arch_overview.jpg)
 
 <details>
-<summary>🚀 Basic Architecture</summary>
+<summary>🟢 Basic Architecture</summary>
 
 ## 5.1 Basic Architecture
 
@@ -771,7 +771,7 @@ The environement (Kubernetes, Applications, ...) create logs that are being fed 
 
 </details>
 <details>
-<summary>🚀 Optimized Demo Architecture</summary>
+<summary>🟢 Optimized Demo Architecture</summary>
 
 ## 5.2 Optimized Demo Architecture
 
@@ -842,7 +842,7 @@ This allows us to:
 
 </details>
 <details>
-<summary>🚀  Training </summary>
+<summary>🟢  Training </summary>
 
 ## 5.3 Training
 
@@ -866,7 +866,7 @@ The models can be trained directly on the data that has been loaded as described
 
 </details>
 <details>
-<summary>🚀 Incident creation</summary>
+<summary>🟢 Incident creation</summary>
 
 ## 5.4 Incident creation (inception)
 
