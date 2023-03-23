@@ -194,15 +194,6 @@ If you think that you hit a problem:
 You can use the scritps in the `Quick_Install` folder to rapidly spin up a demo environment.
 The names should be self explaining and the headers of the files explain the modules to be installed.
 
-> Basically you would to the following:
-> 
-> 1. In the the OCP Web UI click on the `+` sign in the right upper corner
-> 1. Select the `Quick Install File` that fits your need from  [this directory](./Quick_Install/)
-> 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
-> 3. Click `Save`	
-
-
-> ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
 
 You can find some examples below.
 
@@ -225,9 +216,12 @@ On top of that you get Turbonomic and Instana instances to play around a bit (yo
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_TURBO_INSTANA.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
-4. Replace `<YOUR_SALES_KEY>` and  `<YOUR_AGENT_KEY>` at the end of the file with your Instana license
-5. Replace the TURBO_LICENSE `NONE` at the end of the file with your Turbonomic license
+4. Replace `<YOUR_SALES_KEY>` and  `<YOUR_AGENT_KEY>` at the end of the file with your Instana license if you have one
+5. Replace the TURBO_LICENSE `NONE` at the end of the file with your Turbonomic license if you have one
 3. Click `Save`
+
+> ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
+
 
 ### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
 
@@ -287,6 +281,9 @@ Ready to go.
 1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_EVTMGR.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
 3. Click `Save`
+
+> ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
+
 
 ### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
 
@@ -356,6 +353,9 @@ This installation cocntains:
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Paste the content
 1. Click `Save`
+
+> ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
+
 
 ### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
 
