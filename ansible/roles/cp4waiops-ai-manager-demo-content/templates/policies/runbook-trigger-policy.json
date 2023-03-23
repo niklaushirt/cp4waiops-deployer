@@ -23,7 +23,7 @@
             "actionId": "aiops.ibm.com/action/internal/conditional",
             "arguments": {
                 "name": "",
-                "condition": "({{contains alert.resource.name \"mysql-db\"}})",
+                "condition": "({{contains alert.resource.name \"mysql\"}})",
                 "then": [{
                     "actionId": "aiops.ibm.com/action/internal/runbooks/add",
                     "output": "alert.insights.[]",
