@@ -97,7 +97,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Delete lingering Pods before check for reinstall
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER CATALOG - Delete operator for pull secret (hack 3.5)
+- name:   🚀 AIMANAGER CATALOG - Delete operator for pull secret (hack)
   shell: |
     oc delete pod $(oc get po -n openshift-marketplace|grep ImagePullBackOff|awk '{print$1}') -n openshift-marketplace
   register: kubectl_get_pods

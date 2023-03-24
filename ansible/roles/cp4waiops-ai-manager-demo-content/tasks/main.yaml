@@ -430,7 +430,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Delete lingering Luigi Pods 
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   ⚠️ HACK - Delete lingering Luigi Pods  (hack 3.5)
+- name:   ⚠️ HACK - Delete lingering Luigi Pods  (hack)
   shell: |
     oc delete pod $(oc get po -n {{ current_cp4waiops_cluster.project }}|grep ImagePullBackOff|awk '{print$1}'):-notfound -n {{ current_cp4waiops_cluster.project }} --ignore-not-found
   register: kubectl_get_pods

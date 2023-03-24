@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
+
+## [37.0.0] - 2023-03-24
+
+Release for 3.7.0 FVT
+
+### Major changes
+
+- Support for CP4WAIOPS 3.7.0
+- Support for Instana Datastores CRD
+
+### Minor changes
+
+- New RobotShop Overlay Topology
+
+
+
+
+
 ## [36.0.1] - 2022-01-20
 
 ### Minor changes
