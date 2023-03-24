@@ -232,7 +232,10 @@
     operator:
       extraArgs:
         - "--datastores=true"
-      securityContext: '{"allowPrivilegeEscalation":true,"readOnlyRootFilesystem":false,"runAsNonRoot":false}'
+      # securityContext:
+      #   allowPrivilegeEscalation: true
+      #   readOnlyRootFilesystem: false
+      #   runAsNonRoot: false
     EOF
 
     kubectl instana operator apply --namespace=instana-operator --values ./values.yaml
