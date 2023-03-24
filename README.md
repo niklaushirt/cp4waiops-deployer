@@ -23,7 +23,7 @@ Please contact me if you have feedback or if you find glitches or problems.
 - by Mail: nikh@ch.ibm.com
 
 
-**❗The installation has been tested for the CP4WAIOPS v3.7.0 release on OpenShift 4.12 on:**
+**❗The installation has been tested for the CP4WAIOPS v3.7.0 release on OpenShift 4.10 on:**
 
 - OpenShift Cluster (VMware on IBM Cloud) - IPI
 - IBM RedHat Openshift Kubernetes Service (ROKS) with IBM Cloud Storage (ibmc-xxx)
@@ -102,7 +102,7 @@ I installed the demo in a Techzone environment.
 
 You'll need:
 
-- ROKS 4.12
+- ROKS 4.10
 - 5x worker nodes with **32 CPU / 128 GB**  ❗
 
 
@@ -132,7 +132,7 @@ IBMers and Partners can get a temporary cluster from [**Techzone**](https://tech
 
    - Storage OCS/ODF Size: **5TiB** - This is important as with the 500MiB option your installation will run out of space rapidly.
 
-   - OpenShift Version: **4.12**
+   - OpenShift Version: **4.10**
 
 	![K8s CNI](./doc/pics/roks02.png)
 
