@@ -222,7 +222,7 @@ cp4waiops:
     install: false
     # Version of the catalog subscription
     subscription_channel: v3.3
-    #subscription_channel: 3.4-dev
+    
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)

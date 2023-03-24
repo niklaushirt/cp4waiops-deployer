@@ -53,7 +53,7 @@ cp4waiops:
     subscription_channel: v3.7
     # Freeze the version of the Catalog image by patching CatalogSource
     freeze_catalog: false
-    #subscription_channel: 3.4-dev
+    
     # LDAP
     install_ldap: true
     # ldap domain
