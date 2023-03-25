@@ -351,7 +351,8 @@
     do
       oc annotate namespace instana-datastores openshift.io/node-selector-
       oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}') -n instana-datastores --ignore-not-found
-      sleep 15
+      oc delete pod $(oc -n instana-operator get pods| grep '0/1'|awk '{print$1}') -n instana-operator --ignore-not-found
+      sleep 30
     done
   ignore_errors: true
   register: output
