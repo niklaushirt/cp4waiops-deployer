@@ -86,17 +86,14 @@ print ('')
 # CLOSE ALERTS AND STORIES
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 def closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
-    print('')
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Close Alerts')
+    print ('📛 START - Close Alerts')
     data = '{"state": "closed"}'
     url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/alerts'
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
     response = requests.patch(url, data=data, headers=headers, auth=auth) #, verify=False)
-    print ('    Close Alerts-RESULT:'+str(response.content))
-    print ('✅ Close Alerts')
-    print ('------------------------------------------------------------------------------------------------')
+    print ('    Close Alerts:'+str(response.content))
+    print ('✅ END - Close Alerts')
 
     return 'OK'
 
@@ -108,16 +105,13 @@ def closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
     url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Set Stories to InProgress')
+    print ('📛 START - Set Stories to InProgress')
     response = requests.patch(url, data=dataInProgress, headers=headers, auth=auth) #, verify=False)
     time.sleep(10)
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Set Stories to Resolved')
+    print ('📛 START - Set Stories to Resolved')
     response = requests.patch(url, data=dataResolved, headers=headers, auth=auth) #, verify=False)
-    print ('    Close Stories-RESULT:'+str(response.content))
-    print ('✅ DONE')
-    print ('------------------------------------------------------------------------------------------------')
+    print ('    Close Stories-:'+str(response.content))
+    print ('✅ END - Close Stories')
 
     return 'OK'
 

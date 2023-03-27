@@ -41,7 +41,7 @@ spec:
         app: cp4waiops-discord-bot
     spec:
       containers:
-      - image: docker.io/niklaushirt/cp4waiops-discord-bot:0.1
+      - image: docker.io/niklaushirt/cp4waiops-discord-bot:0.2
         imagePullPolicy: Always
         name: cp4waiops-discord-bot
         command:
@@ -69,8 +69,6 @@ spec:
             value: "False"
           - name: DISCORD_BOT_TOKEN
             value: "CHANGEME"
-          - name: DISCORD_BOT_NAME
-            value: "tyrion"
           - name: DISCORD_BOT_PREFIX
             value: "/"
         envFrom:
