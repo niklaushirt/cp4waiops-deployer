@@ -14,13 +14,15 @@ TOKEN=os.environ.get('TOKEN',"P4ssw0rd!")
 
 MIN_RANK=int(os.environ.get('MIN_RANK',1))
 
-DISCORD_WEBHOOK=os.environ.get('DISCORD_WEBHOOK','CHANGEME')
 MAIL_USER=os.environ.get('MAIL_USER','not provided')
 MAIL_PWD=os.environ.get('MAIL_PWD','not provided')
 
 POLL_DELAY=int(os.environ.get('POLL_DELAY',5))
 
 ACTIVE=os.environ.get('ACTIVE',"False")
+
+PAGERDUTY_URL=os.environ.get('PAGERDUTY_URL','https://events.pagerduty.com/v2/enqueue')
+PAGERDUTY_TOKEN=os.environ.get('PAGERDUTY_TOKEN','not provided')
 
 
 print ('*************************************************************************************************')
@@ -34,7 +36,7 @@ print ('                                              /_/')
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
 print ('')
-print ('    🛰️  PAgerduty Story Pusher for CP4WAIOPS AI Manager')
+print ('    🛰️  Pagerduty Story Pusher for CP4WAIOPS AI Manager')
 print ('')
 print ('       Provided by:')
 print ('        🇨🇭 Niklaus Hirt (nikh@ch.ibm.com)')
@@ -130,7 +132,7 @@ print ('')
 print ('    ---------------------------------------------------------------------------------------------')
 print ('     🔎 Target Connection Parameters')
 print ('    ---------------------------------------------------------------------------------------------')
-print ('           🌏 Discord Webhook:    '+DISCORD_WEBHOOK)
+print ('           🌏 Pagerduty Token:    '+PAGERDUTY_TOKEN)
 print ('')
 print ('           👩‍💻 Mail User:          '+MAIL_USER)
 print ('           🔐 Mail Pwd:           '+MAIL_PWD)
@@ -198,9 +200,9 @@ print('')
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 if ACTIVE=="True": 
-    if DISCORD_WEBHOOK=="CHANGEME": 
+    if PAGERDUTY_TOKEN=="CHANGEME": 
         print ('-------------------------------------------------------------------------------------------------')
-        print (' ❗ Discord Webhook not defined!!!')
+        print (' ❗ Pagerduty Token not defined!!!')
         print ('-------------------------------------------------------------------------------------------------')
     else:
         print ('-------------------------------------------------------------------------------------------------')

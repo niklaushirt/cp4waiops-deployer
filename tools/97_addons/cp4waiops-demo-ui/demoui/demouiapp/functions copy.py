@@ -221,7 +221,7 @@ def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS
 
         line = line.replace("MY_TIMESTAMP", timestampstr)
         response = requests.post(url, data=line, headers=headers, auth=auth) #, verify=False)
-    print ('    Events-RESULT:'+str(response.content))
+    print ('    Events-RESULT:'+str(response.content)+' - '+str(line))
 
 
     print ('✅ Inject Events')
