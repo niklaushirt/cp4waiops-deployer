@@ -130,7 +130,9 @@ from confluent_kafka import Producer
 import socket
 
 def injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS):
-    print ('📛 START - Inject Logs')
+    print('')
+    print ('------------------------------------------------------------------------------------------------')
+    print ('📛 Inject Logs')
 
     stream = os.popen('echo "'+KAFKA_CERT+'" > ./demouiapp/ca.crt')
     stream.read().strip()
@@ -163,10 +165,13 @@ def injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG
 
             producer.produce(KAFKA_TOPIC_LOGS, value=line)
         producer.flush()
-        print('Logs-Injection: '+str(i)+'  :  '+str(timestamp))
+        print('Logs-Iteration: '+str(i)+'  :  '+str(timestamp))
 
 
-    print ('✅ END - Inject Logs')
+
+
+    print ('✅ Inject Logs')
+    print ('------------------------------------------------------------------------------------------------')
 
     return 'OK'
 
@@ -178,25 +183,27 @@ def injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 def injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD): 
-    print ('📛 START - Inject Events - MEM')
+    print ('📛 Inject Events MEM')
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_MEM)
     return 'OK'
 
 
 def injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):  
-    print ('📛 START - Inject Events - FAN')
+    print ('📛 Inject Events FAN')
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_FAN)
     return 'OK'
 
 
 def injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):  
-    print ('📛 START - Inject Events - NET')
+    print ('📛 Inject Events NET')
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_NET)
     return 'OK'
 
 
 def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS):
-    #print ('📛 START - Inject Events')
+    print('')
+    print ('------------------------------------------------------------------------------------------------')
+    print ('📛 Inject Events')
     #print ('📛 Inject Events'+str(DEMO_EVENTS))
     
     timestamp = datetime.datetime.now()
@@ -214,9 +221,11 @@ def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS
 
         line = line.replace("MY_TIMESTAMP", timestampstr)
         response = requests.post(url, data=line, headers=headers, auth=auth) #, verify=False)
-        print ('    Events-Injection:'+str(response.content))
+    print ('    Events-RESULT:'+str(response.content))
 
-    print ('✅ END - Inject Events')
+
+    print ('✅ Inject Events')
+    print ('------------------------------------------------------------------------------------------------')
 
     return 'OK'
 
@@ -243,28 +252,25 @@ def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS
 # ]
 
 def injectMetricsMem(METRIC_ROUTE,METRIC_TOKEN): 
-    print ('📛 START - Inject Metrics - MEM')
     METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
     METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_MEM,METRIC_TIME_SKEW,METRIC_TIME_STEP)
     return 'OK'
 
 def injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN):  
-    print ('📛 START - Inject Metrics - FAN-TEMP')
     METRIC_TIME_SKEW=0
     METRIC_TIME_STEP=120
+
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_FAN_TEMP,METRIC_TIME_SKEW,METRIC_TIME_STEP)
     return 'OK'
 
 def injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN):  
-    print ('📛 START - Inject Metrics - FAN')
     METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
     METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_FAN,METRIC_TIME_SKEW,METRIC_TIME_STEP)
     return 'OK'
 
 def injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN):  
-    print ('📛 START - Inject Metrics - NET')
     METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
     METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_NET,METRIC_TIME_SKEW,METRIC_TIME_STEP)
@@ -272,15 +278,18 @@ def injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN):
 
 
 def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW,METRIC_TIME_STEP):
-    #print ('📛 START - Inject Metrics')
-    #print ('           METRIC_TIME_SKEW:               '+str(METRIC_TIME_SKEW))
-    #print ('           METRIC_TIME_STEP:               '+str(METRIC_TIME_STEP))
-    #print('     ❓ Getting AIManager Namespace')
+    print('')
+    print ('------------------------------------------------------------------------------------------------')
+    print ('📛 Inject Metrics')
+    
+    print ('           METRIC_TIME_SKEW:               '+str(METRIC_TIME_SKEW))
+    print ('           METRIC_TIME_STEP:               '+str(METRIC_TIME_STEP))
+    print('     ❓ Getting AIManager Namespace')
     stream = os.popen("oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}'")
     aimanagerns = stream.read().strip()
-    #print('        ✅ AIManager Namespace:       '+aimanagerns)
+    print('        ✅ AIManager Namespace:       '+aimanagerns)
 
-    #print('     ❓ Getting Details Metric Endpoint')
+    print('     ❓ Getting Details Metric Endpoint')
     stream = os.popen("oc get route -n "+aimanagerns+" | grep ibm-nginx-svc | awk '{print $2}'")
     METRIC_ROUTE = stream.read().strip()
     stream = os.popen("oc get secret  -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d")
@@ -335,12 +344,13 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
         output_json=output_json+LAST_LINE
         output_json=output_json+']}'
         #print (output_json)
-        #print (MY_TIMESTAMP_READABLE)
+        print (MY_TIMESTAMP_READABLE)
         #print (MY_TIMESTAMP)
 
         response = requests.post(url, data=output_json, headers=headers, verify=False)
-        print ('    Metrics-Injection:'+str(MY_TIMESTAMP_READABLE)+' - '+str(response.content))
-    print ('✅ END - Inject Metrics')
+        print ('    Metrics-RESULT:'+str(response.content))
+    print ('✅ Inject Metrics')
+    print ('------------------------------------------------------------------------------------------------')
 
     return 'OK'
 
