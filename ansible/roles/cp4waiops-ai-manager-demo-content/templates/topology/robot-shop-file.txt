@@ -39,4 +39,6 @@ V:{"_operation":"InsertReplace","businessCriticality": "Platinum","app": "robots
 E:{"_fromUniqueId":"mysql-db", "_toUniqueId":"DCW1-000484","_edgeType":"dependsOn"}
 E:{"_fromUniqueId":"mysql-db", "_toUniqueId":"dSwitch-1-vm-network-port-1","_edgeType":"dependsOn"}
 
+V:{"_operation":"InsertReplace","businessCriticality": "Gold","app": "robotshop","availableReplicas": 1,"createdReplicas": 1,"dataCenter": "demo","desiredReplicas": 1,"entityTypes": ["deployment"],"mergeTokens": ["cities"],"matchTokens": ["cities-deployment","cities-synthetic","cities-instana"],"name": "cities","namespace": "robot-shop","readyReplicas": 1,"tags": ["app:robotshop","namespace:robot-shop"],"vertexType": "resource","uniqueId": "cities-id"}
+E:{"_fromUniqueId":"shipping-id", "_toUniqueId":"cities-id","_edgeType":"dependsOn"}
 

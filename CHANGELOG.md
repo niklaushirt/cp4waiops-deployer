@@ -8,9 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-## [37.0.0] - 2023-03-24
+## [37.0.0] - 2023-03-29
 
-Release for 3.7.0 FVT
+Release for 3.7.0 GA
 
 ### Major changes
 

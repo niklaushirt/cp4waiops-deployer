@@ -447,6 +447,50 @@
 
 
 
+
+- name: 🚀 TURBONOMIC - Create Schedule and Maintenance Policy
+  shell: |
+    result=$(curl -s -k -X 'POST' \
+      "https://{{TURBO_URL}}/api/v3/schedules" -b /tmp/cookies \
+      -H 'accept: application/json' \
+      -H 'Content-Type: application/json' \
+      -d '  
+        {
+          "displayName": "MaintenanceFirstSaturdayOfMonth",
+          "startTime": "2023-03-29T01:30",
+          "endTime": "2023-03-29T02:30",
+          "recurrence": {
+            "type": "MONTHLY",
+            "daysOfWeek": [
+              "Sat"
+            ],
+            "weekOfTheMonth": [
+              1
+            ],
+            "interval": 1
+          },
+          "timeZone": "Europe/Paris"
+        }
+      ')
+
+    echo $result
+    echo ""
+    echo ""
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+  when: current_cp4waiops_feature.group_robotshop == true
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    #verbosity: 1
+  when: current_cp4waiops_feature.group_robotshop == true
+
+
+
+
+
 # --------------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------------
 # CREATE TARGETS
