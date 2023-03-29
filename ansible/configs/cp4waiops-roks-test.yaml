@@ -265,7 +265,7 @@ cp4waiops:
   - name: cp4waiops-turbonomic
     kind: Turbonomic
     install: true
-    turbo_version: 8.8.1
+    turbo_version: 8.8.3
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
