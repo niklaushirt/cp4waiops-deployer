@@ -24,7 +24,7 @@
 
 # Create Namespace 
 - name: 🚀 INFRA MGT - Create CP4WAIOPS Infra namespace {{ current_cp4waiops_cluster.project }}
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     api_version: v1
     kind: Namespace
     name: "{{ current_cp4waiops_cluster.project }}"
@@ -53,28 +53,28 @@
 
 # Create IBM Operator Catalog
 - name: 🚀 INFRA MGT - Install IBM Operator Catalog
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/infra-automation/1_cat-ibm-operator.j2
 
 
 # Create IBM AIOps Catalog
 # - name: 🚀 INFRA MGT - Install IBM AIOps Catalog
-#   community.kubernetes.k8s:
+#   kubernetes.core.k8s:
 #     state: present
 #     template: ./templates/infra-automation/2_cat-ibm-aiops.j2
 
 
 # Create IBM AIOps Operator Group
 - name: 🚀 INFRA MGT - Install Operator Group
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/infra-automation/2_opgroup-ibm-aiops.j2
 
 
 # Create IBM AIOps Subscription
 - name: 🚀 INFRA MGT - Install Subscription
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/infra-automation/3_sub-ibm-aiops-infra.j2
 
@@ -105,7 +105,7 @@
 
 # Create IBM AIOps Subscription
 - name: 🚀 INFRA MGT - Create IA Config
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/infra-automation/4_iaconfig-aiops-infra.j2
 
@@ -171,7 +171,7 @@
 
 # Create Infrastructure Management
 - name: 🚀 INFRA MGT - Install Infrastructure Management with {{ INFRA_NAME }}
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/infra-automation/5_iminstall.j2
 

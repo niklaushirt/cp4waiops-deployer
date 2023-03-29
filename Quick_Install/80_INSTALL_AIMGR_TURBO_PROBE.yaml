@@ -21,10 +21,15 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 
+apiVersion: v1                     
+kind: Namespace
+metadata:
+  name: cp4waiops-installation
+---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: installer-default-default-admin
+  name: cp4waiops-installer-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -32,15 +37,15 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: default
+    namespace: cp4waiops-installation
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: waiops-easy-install-turbo-probe
-  namespace: default
+  name: turbonomic-probe-install
+  namespace: cp4waiops-installation
 spec:
-  serviceAccountName: installer-default-default-admin
+  serviceAccountname: cp4waiops-installer-admin
   template:
     spec:
       containers:
@@ -117,7 +122,7 @@ spec:
                 name: netcool-integrations-operator
                 namespace: ${WAIOPS_NAMESPACE}
               spec:
-                channel: v3.6
+                channel: v3.7
                 installPlanApproval: Automatic
                 name: netcool-integrations-operator
                 source: ibm-operator-catalog
@@ -417,7 +422,7 @@ spec:
             value : "https://github.com/niklaushirt/cp4waiops-deployer.git"
           - name: CONFIG
             #value : "./configs/cp4waiops-roks-aimanager-all-34.yaml"
-            value : "./configs/cp4waiops-roks-aimanager-all-36.yaml"
+            value : "./configs/cp4waiops-roks-aimanager-all-latest.yaml"
           - name: ENTITLED_REGISTRY_KEY
             value : "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1Nzg0NzQzMjgsImp0aSI6IjRjYTM3ODkwMzExNjQxZDdiMDJhMjRmMGMxMWMwYmZhIn0.Z-rqfSLJA-R-ow__tI3RmLx4m9EH-abvdc53DYEkbYY"
       restartPolicy: Never

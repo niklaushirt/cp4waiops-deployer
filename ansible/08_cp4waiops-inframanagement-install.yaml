@@ -46,7 +46,7 @@
       - "***************************************************************************************************************************************************"
 
   - name: 🛠️  Config File Path
-    set_fact: config_file_path="./configs/cp4waiops-roks-inframgt-36.yaml"
+    set_fact: config_file_path="./configs/cp4waiops-roks-inframgt-latest.yaml"
 
 
   - name: 🛠️  Show Global Config

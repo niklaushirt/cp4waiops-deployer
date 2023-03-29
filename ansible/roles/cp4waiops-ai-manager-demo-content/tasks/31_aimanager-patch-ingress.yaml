@@ -106,13 +106,7 @@
 
     oc create secret generic -n ${PROJECT_CP4WAIOPS} external-tls-secret --from-file=cert.crt=cert.crt --from-file=cert.key=cert.key -o yaml --dry-run=client | oc apply -f -
 
-    REPLICAS=$(oc get Deployment/ibm-nginx -n ${PROJECT_CP4WAIOPS} -o jsonpath='{.spec.replicas}')
-    echo "Scale to 0"
-    oc scale Deployment/ibm-nginx --replicas=0 -n ${PROJECT_CP4WAIOPS}
-    sleep 3
-    echo "Scale to $REPLICAS"
-    oc scale Deployment/ibm-nginx --replicas=${REPLICAS} -n ${PROJECT_CP4WAIOPS}
-
+    oc delete pod -n ${PROJECT_CP4WAIOPS} -l component=ibm-nginx
   when: INGRESS_PATCHED==false
   register: certificate_patch
   ignore_errors: true

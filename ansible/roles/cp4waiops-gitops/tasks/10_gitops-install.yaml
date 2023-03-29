@@ -21,7 +21,7 @@
 
 
 - name:  🚀 GITOPS INSTALL - Install GITOPS Subscription
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: './templates/1-gitops_sub.j2'
 
@@ -42,7 +42,7 @@
 
 
 - name:  🚀 GITOPS INSTALL - Install GITOPS
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: './templates/2-gitops_install.j2'
 
@@ -76,7 +76,7 @@
 
 
 - name:  🚀 GITOPS INSTALL - Install MAIN MODULE
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: './templates/3-gitops-installer.j2'
 

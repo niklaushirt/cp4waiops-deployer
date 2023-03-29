@@ -5,6 +5,7 @@ mutation createTrainingDefinition {
     dataSetIds: "<DATA_SET_ID>"
     description: "Automatically created by Nick's scripts"
     createdBy: "demo"
+    enableSelectiveTraining: true
     promoteOption: whenTrainingComplete
     trainingSchedule: {
       frequency: manual

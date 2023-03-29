@@ -1,4 +1,4 @@
-<center> <h1>CP4WatsonAIOps CP4WAIOPS v3.6.0</h1> </center>
+<center> <h1>CP4WatsonAIOps CP4WAIOPS v3.7.0</h1> </center>
 <center> <h2>Demo Environment Installation 🚀</h2> </center>
 
 ![K8s CNI](./doc/pics/front.png)
@@ -23,12 +23,13 @@ Please contact me if you have feedback or if you find glitches or problems.
 - by Mail: nikh@ch.ibm.com
 
 
-**❗The installation has been tested for the CP4WAIOPS v3.6.0 release on OpenShift 4.10 on:**
+**❗The installation has been tested for the CP4WAIOPS v3.7.0 release on OpenShift 4.10 on:**
 
-- IBM RedHat Openshift Kubernetes Service (ROKS) with IBM Cloud Storage (ibmc-xxx)
-- IBM RedHat Openshift Kubernetes Service (ROKS) with NFS Storage
-- IBM RedHat Openshift Kubernetes Service (VPC Gen2 with ODF)
 - OpenShift Cluster (VMware on IBM Cloud) - IPI
+- IBM RedHat Openshift Kubernetes Service (ROKS) with IBM Cloud Storage (ibmc-xxx)
+
+But it should work on other Openshift Platforms as well
+
 
 
 > ❗Those are **non-production** installations and are suited only for demo and PoC environments. ❗
@@ -36,11 +37,17 @@ Please contact me if you have feedback or if you find glitches or problems.
 
 <div style="page-break-after: always;"></div>
 
+---------------------------------------------------------------
+# 🚀 Quickstart
+---------------------------------------------------------------
 
-## 🚀 Get started
 
+🐥 [Quick Install](#1-preparation)
 
-🐥 [Quick Install](https://github.com/niklaushirt/cp4waiops-deployer#-2-quick-install)
+* Get an OpenShift Cluster
+* Get your entitlement key/pull token
+* Paste the install file into the OpenShift web UI and insert your entitlement key
+* Grab a coffe and come back after 2-3 hours depending on the modules you're installing
 
 🚀 [Demo the Solution](#3-demo-the-solution)
 
@@ -64,12 +71,7 @@ Here is a quick video that walks you through the installation process
 - You don't have to install all the tooling locally
 - You don’t need a connection to the cluster during the installation (fire and forget)
 
-### What you have to do:
 
-* Get an OpenShift Cluster
-* Get your entitlement key/pull token
-* Paste the install file into the OpenShift web UI and insert your entitlement key
-* Grab a coffe and come back after 2-3 hours depending on the modules you're installing
 
 > 🤓 So this could basically be done from an iPhone or iPad	
 
@@ -81,7 +83,7 @@ Here is a quick video that walks you through the installation process
 
 
 ---------------------------------------------------------------
-# 🚀 1 Preparation
+# 1. Preparation
 ---------------------------------------------------------------
 
 
@@ -90,9 +92,9 @@ Here is a quick video that walks you through the installation process
 <div style="page-break-after: always;"></div>
 
 <details>
-<summary>Prerequisites</summary>
+<summary>✅ Prerequisites</summary>
 
-## ✅ 1.1 Prerequisites 
+## 1.1 Prerequisites 
 
 ### 1.1.1 OpenShift requirements 
 
@@ -128,7 +130,7 @@ IBMers and Partners can get a temporary cluster from [**Techzone**](https://tech
 
 1. Select Openshift Storage
 
-   - Storage OCS/ODF Size: **2TiB** - This is important as with the 500MiB option your installation will run out of space rapidly.
+   - Storage OCS/ODF Size: **5TiB** - This is important as with the 500MiB option your installation will run out of space rapidly.
 
    - OpenShift Version: **4.10**
 
@@ -157,7 +159,7 @@ This allows the CP4WAIOPS images to be pulled from the IBM Container Registry.
 
 </details>
 <details>
-<summary>Important remarks before you start</summary>
+<summary>⚠️ Important remarks before you start</summary>
 
 ## ⚠️⚠️ 1.2 Important remarks before you start ⚠️⚠️
 
@@ -184,7 +186,7 @@ If you think that you hit a problem:
 
 
 ---------------------------------------------------------------
-# 🐥 2 Quick Install
+# 2. Quick Install
 ---------------------------------------------------------------
 
 
@@ -192,23 +194,14 @@ If you think that you hit a problem:
 You can use the scritps in the `Quick_Install` folder to rapidly spin up a demo environment.
 The names should be self explaining and the headers of the files explain the modules to be installed.
 
-> Basically you would to the following:
-> 
-> 1. In the the OCP Web UI click on the `+` sign in the right upper corner
-> 1. Select the `Quick Install File` that fits your need from  [this directory](./Quick_Install/)
-> 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
-> 3. Click `Save`	
-
-
-> ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
 
 You can find some examples below.
 
 
 <details>
-<summary>Install AI Manager with demo content, Turbonomic and Instana</summary>
+<summary>✅ Install AI Manager with demo content, Turbonomic and Instana</summary>
 
-## 🐥 2.1 Install AI Manager with demo content, Turbonomic and Instana 
+## 2.1 Install AI Manager with demo content, Turbonomic and Instana 
 
 > ### ✅ This is probably the one that you want.
 
@@ -223,9 +216,12 @@ On top of that you get Turbonomic and Instana instances to play around a bit (yo
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_TURBO_INSTANA.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
-4. Replace `<YOUR_SALES_KEY>` and  `<YOUR_AGENT_KEY>` at the end of the file with your Instana license
-5. Replace the TURBO_LICENSE `NONE` at the end of the file with your Turbonomic license
+4. Replace `<YOUR_SALES_KEY>` and  `<YOUR_AGENT_KEY>` at the end of the file with your Instana license if you have one
+5. Replace the TURBO_LICENSE `NONE` at the end of the file with your Turbonomic license if you have one
 3. Click `Save`
+
+> ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
+
 
 ### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
 
@@ -270,9 +266,9 @@ This installation cocntains:
 
 </details>
 <details>
-<summary>Install AI Manager, Event Manager with demo content</summary>
+<summary>☑️ Install AI Manager, Event Manager with demo content</summary>
 
-## 🐥 2.2 Install AI Manager, Event Manager with demo content
+## 2.2 Install AI Manager, Event Manager with demo content
 
 You get all the CP4WAIOPS components installed and pre-trained in one simple script.
 Ready to go.
@@ -285,6 +281,9 @@ Ready to go.
 1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_EVTMGR.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
 3. Click `Save`
+
+> ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
+
 
 ### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
 
@@ -328,9 +327,9 @@ This installation cocntains:
 
 </details>
 <details>
-<summary>Custom Install</summary>
+<summary>☑️ Custom Install</summary>
 
-## 🐥 2.3 Custom Install
+## 2.3 Custom Install
 
 1. Open the [00\_INSTALL_CUSTOM.yaml](./Quick_Install/00_INSTALL_CUSTOM.yaml) file
 1. Adap the installation configuration to your needs. Select the modules to install and their configuration.
@@ -345,7 +344,7 @@ This installation cocntains:
 	  waiops_size: small
 	  ...
 	  # Version of the catalog subscription
-	  subscription_channel: v3.6
+	  subscription_channel: v3.7
 	
 	```
 	
@@ -355,6 +354,9 @@ This installation cocntains:
 1. Paste the content
 1. Click `Save`
 
+> ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
+
+
 ### **🚀 You can now go to [Demo the Solution](#3-demo-the-solution)**
 
 
@@ -363,7 +365,7 @@ This installation cocntains:
 
 
 ---------------------------------------------------------------
-# 3 Demo the Solution
+# 3. Demo the Solution
 ---------------------------------------------------------------
 
 📹 Please use the [Demo Script](/./doc/CP4AIOps%20Live%20Environment%20Sample%20Demo%20Script_NO_CHATOPS.md) to prepare for the demo.
@@ -372,7 +374,7 @@ This installation cocntains:
 
 
 <details>
-<summary>Access the Environment</summary>
+<summary>🌏 Access the Environment</summary>
 
 ## 3.1 Access the Environment
 
@@ -391,7 +393,7 @@ To access the demo environment:
 
 </details>
 <details>
-<summary>Login to AI Manager as demo User</summary>
+<summary>🔐 Login to AI Manager as demo User</summary>
 
 ## 3.2 Login to AI Manager as demo User
 
@@ -418,7 +420,7 @@ Then start the demo with the [Demo Script](/./doc/CP4AIOps%20Live%20Environment%
 
 
 ---------------------------------------------------------------
-# 4 Slack integration
+# 4. Slack integration
 ---------------------------------------------------------------
 
 
@@ -437,7 +439,7 @@ For the system to work you need to follow those steps:
 
 
 <details>
-<summary>Detailed Instructions</summary>
+<summary>📥 Detailed Instructions</summary>
 
 ## 4.1 Create your Slack Workspace
 
@@ -743,14 +745,14 @@ or
 
 
 ---------------------------------------------------------------
-# 5 Demo Setup - Explained
+# 5. Demo Setup - Explained
 ---------------------------------------------------------------
 
 
 ![demo](./doc/pics/waiops_arch_overview.jpg)
 
 <details>
-<summary>Basic Architecture</summary>
+<summary>📥 Basic Architecture</summary>
 
 ## 5.1 Basic Architecture
 
@@ -770,7 +772,7 @@ The environement (Kubernetes, Applications, ...) create logs that are being fed 
 
 </details>
 <details>
-<summary>Optimized Demo Architecture</summary>
+<summary>📥 Optimized Demo Architecture</summary>
 
 ## 5.2 Optimized Demo Architecture
 
@@ -841,7 +843,7 @@ This allows us to:
 
 </details>
 <details>
-<summary> Training </summary>
+<summary>📥 Training </summary>
 
 ## 5.3 Training
 
@@ -865,7 +867,7 @@ The models can be trained directly on the data that has been loaded as described
 
 </details>
 <details>
-<summary>Incident creation</summary>
+<summary>📥 Incident creation</summary>
 
 ## 5.4 Incident creation (inception)
 

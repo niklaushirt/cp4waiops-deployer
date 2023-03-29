@@ -61,7 +61,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Create Namespace 
 - name: 🚀 EVENTMANAGER - Create EventManager namespace {{current_cp4waiops_cluster.project}}
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     api_version: v1
     kind: Namespace
     name: "{{current_cp4waiops_cluster.project}}"
@@ -80,7 +80,7 @@
 
 # Create EventManager Catalog
 - name: 🚀 EVENTMANAGER - Install Catalog
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/eventmanager/1_cat-ibm-eventmanager.j2
 
@@ -88,14 +88,14 @@
 
 # Create EventManager Operator Group
 - name: 🚀 EVENTMANAGER - Install Operator Group
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/eventmanager/2_group-ibm-eventmanager.j2
 
 
 # Create EventManager Subscription
 - name: 🚀 EVENTMANAGER - Install Subscription
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/eventmanager/3_sub-ibm-eventmanager.j2
 
@@ -112,7 +112,7 @@
 
 # Create EventManager Instance
 - name: 🚀 EVENTMANAGER - Install EventManager
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/eventmanager/4_eventmanager-install-template.j2
 

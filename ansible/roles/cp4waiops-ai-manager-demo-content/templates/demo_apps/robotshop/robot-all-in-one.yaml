@@ -25,32 +25,7 @@ spec:
     termination: edge
     insecureEdgeTerminationPolicy: Allow
   wildcardPolicy: None
----
-# Source: robot-shop/templates/podsecuritypolicy.yaml
-apiVersion: policy/v1beta1
-kind: PodSecurityPolicy
-metadata:
-  name: robot-shop
-spec:
-  allowPrivilegeEscalation: false
-  fsGroup:
-    rule: RunAsAny
-  privileged: false
-  runAsUser:
-    rule: RunAsAny
-  seLinux:
-    rule: RunAsAny
-  supplementalGroups:
-    rule: RunAsAny
-  allowedCapabilities:
-  - 'NET_ADMIN'
-  volumes:
-  - configMap
-  - downwardAPI
-  - emptyDir
-  - persistentVolumeClaim
-  - secret
-  - projected
+
 ---
 # Source: robot-shop/templates/serviceaccount.yaml
 apiVersion: v1
@@ -58,21 +33,6 @@ kind: ServiceAccount
 metadata:
   name: robot-shop
   namespace: robot-shop
----
-# Source: robot-shop/templates/clusterrole.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: robot-shop
-rules:
-- apiGroups:
-  - policy
-  resourceNames:
-  - robot-shop
-  resources:
-  - podsecuritypolicies
-  verbs:
-  - use
 ---
 # Source: robot-shop/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -82,7 +42,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: robot-shop
+  name: cluster-admin
 subjects:
 - kind: ServiceAccount
   name: robot-shop
@@ -597,7 +557,7 @@ spec:
         resources:
           limits:
             cpu: 200m
-            memory: 512Mi
+            memory: 1Gi
           requests:
             cpu: 100m
             memory: 256Mi
@@ -641,7 +601,7 @@ spec:
         resources:
           limits:
             cpu: 200m
-            memory: 100Mi
+            memory: 500Mi
           requests:
             cpu: 100m
             memory: 50Mi
@@ -704,8 +664,19 @@ spec:
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 5
-          failureThreshold: 300
+          failureThreshold: 30
           successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+
       restartPolicy: Always
 ---
 # Source: robot-shop/templates/user-deployment.yaml

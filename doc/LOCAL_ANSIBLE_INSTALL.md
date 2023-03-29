@@ -274,7 +274,7 @@ This will create alerts and a story in AI Manager.
 In the terminal type 
 
 ```bash
-./22_simulate_incident_robotshop.sh
+./22_simulate_incident_memory.sh
 ```
 
 This will delete all existing Alerts/Stories and inject pre-canned event, metrics and logs to create a story.

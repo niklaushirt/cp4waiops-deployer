@@ -1,0 +1,825 @@
+---
+# Source: synthetic-pop/templates/networkpolicy.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+apiVersion: v1                     
+kind: Namespace
+metadata:
+  name: instana-synthetic
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: synthetic
+  namespace: instana-core
+  labels:
+    app.kubernetes.io/component: synthetics-acceptor
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: core
+    instana.io/group: service
+spec:
+  to:
+    kind: Service
+    name: synthetics-acceptor
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: Redirect
+    certificate: ''
+    key: ''
+    caCertificate: ''
+    destinationCACertificate: ''
+  port:
+    targetPort: http-service
+
+
+# helm template synthetic-pop \
+#     --repo https://agents.instana.io/helm  \
+#     --namespace instana-synthetic \
+#     --create-namespace \
+#     --set downloadKey="yourdownloadkey" \
+#     --set controller.location="DemoPOP;My PoP;Switzerland;Geneva;46.20;6.14;This is a demo Synthetic Point of Presence" \
+#     --set controller.instanaKey="instanaAgentkey" \
+#     --set controller.instanaSyntheticEndpoint="https://synthetics-blue-saas.instana.host" \
+#     --set redis.tls.enabled=false \
+#     --set redis.password="a1fc5d01bcbb" \
+#     synthetic-pop > pop.yaml
+
+---
+#To use network policies, you must be using a networking solution which supports NetworkPolicy.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: synthetic-pop-controller-network-policy
+  namespace: instana-synthetic
+#deny all ingress traffic
+spec:
+  podSelector:
+    matchLabels:
+      component: synthetic-pop-controller
+  policyTypes:
+    - Ingress
+---
+# Source: synthetic-pop/templates/networkpolicy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: synthetic-redis-egress-network-policy
+  namespace: instana-synthetic
+#deny all egress traffic
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  policyTypes:
+    - Egress
+---
+# Source: synthetic-pop/templates/networkpolicy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: synthetic-redis-ingress-network-policy
+  namespace: instana-synthetic
+#only allow ingress from pop controller and playback engines
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            component: synthetic-pop-controller
+      - podSelector:
+          matchLabels:
+            role: playbackengine
+---
+# Source: synthetic-pop/templates/networkpolicy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: synthetic-playbackengine-network-policy
+  namespace: instana-synthetic
+#deny all ingress traffic
+#add egress here to block access to some certain ip or ip range e.g, restrict pod access to the metadata API
+#See also: https://kubernetes.io/docs/concepts/services-networking/network-policies/
+spec:
+  podSelector:
+    matchLabels:
+      role: playbackengine
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - {}
+---
+# Source: synthetic-pop/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pop-controller-synthetic-pop-serviceaccount
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+automountServiceAccountToken: false
+---
+# Source: synthetic-pop/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: http-synthetic-pop-serviceaccount
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+automountServiceAccountToken: false
+---
+# Source: synthetic-pop/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: javascript-synthetic-pop-serviceaccount
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+automountServiceAccountToken: false
+---
+# Source: synthetic-pop/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: redis-synthetic-pop-serviceaccount
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+automountServiceAccountToken: false
+---
+# Source: synthetic-pop/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: synthetic-pop-instana-key
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+type: Opaque
+data:
+  instana-key: "aW5zdGFuYUFnZW50a2V5"
+---
+# Source: synthetic-pop/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: instana-io
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: eyJhdXRocyI6IHsiY29udGFpbmVycy5pbnN0YW5hLmlvIjogeyJhdXRoIjogIlh6cDViM1Z5Wkc5M2JteHZZV1JyWlhrPSJ9fX0=
+---
+# Source: synthetic-pop/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: synthetic-pop-redis
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+type: Opaque
+data:
+  redis-password: "YTFmYzVkMDFiY2Ji"
+---
+# Source: synthetic-pop/templates/service.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: synthetic-pop-redis
+  namespace: instana-synthetic
+  labels:
+    app: redis
+spec:
+  type: ClusterIP
+  ports:
+    - name: synthetic-pop-redis-connect
+      port: 6378
+      targetPort: 6379
+      protocol: TCP
+  selector:
+    app: redis
+---
+# Source: synthetic-pop/templates/controller-deployment.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: synthetic-pop-controller
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+    app.kubernetes.io/name: controller
+    component: synthetic-pop-controller
+spec:
+  selector:
+    matchLabels:
+      
+      app.kubernetes.io/instance: synthetic-pop
+      app: synthetic-pop
+      app.kubernetes.io/name: controller
+      component: synthetic-pop-controller
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/version: 1.0.8
+        app.kubernetes.io/instance: synthetic-pop
+        app.kubernetes.io/managed-by: Helm
+        helm.sh/chart: synthetic-pop-1.0.8
+        app: synthetic-pop
+        release: synthetic-pop
+        app.kubernetes.io/name: controller
+        component: synthetic-pop-controller
+    spec:
+      serviceAccountName: pop-controller-synthetic-pop-serviceaccount
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+      imagePullSecrets:
+        - name: instana-io
+      
+      containers:
+      - name: synthetic-pop-controller
+        image: containers.instana.io/instana/release/synthetic/synthetic-pop-controller:latest
+        imagePullPolicy: Always
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - ALL
+        resources:
+          limits:
+            cpu: 1
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 300Mi
+        volumeMounts:
+          - mountPath: /opt/ibm/apm/pop/controller/logs
+            name: logs
+          - mountPath: /tmp
+            name: tmp
+          - name: instana-key
+            mountPath: /etc/pop/instanakey
+            readOnly: true
+          - name: redis
+            mountPath: "/etc/redis/redispass"
+            readOnly: true
+        livenessProbe:
+          exec:
+            command:
+            - /opt/ibm/apm/pop/controller/synthetic-pop-controller.sh
+            - health
+          initialDelaySeconds: 240
+          timeoutSeconds: 15
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /opt/ibm/apm/pop/controller/logs/pop.readiness
+          initialDelaySeconds: 60
+          periodSeconds: 10          
+        env:
+        - name: LOCATION
+          value: "DemoPOP;My PoP;Switzerland;Geneva;46.20;6.14;This is a demo Synthetic Point of Presence"
+        - name: PLAYBACK_CAPABILITIES
+          value: "syntheticType=HTTPAction,HTTPScript;browserType=firefox,chrome"
+        - name: CUSTOM_PROPERTIES
+          value: ""
+        - name: HTTPACTION_PLAYBACK_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=HttpPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: HTTPSCRIPT_PLAYBACK_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=HttpScriptPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: WEBPAGEACTION_PLAYBACK_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=BrowserScriptPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: BROWSERSCRIPT_PLAYBACK_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=BrowserScriptPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: WEBPAGESCRIPT_PLAYBACK_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=BrowserScriptPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: DNSACTION_PLAYBACK_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=ISMPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: TLS_ENABLED
+          value: "false"
+        - name: REDIS_PASSWORD_PATH
+          value: "/etc/redis/redispass"
+        # reserve this variable for container not supporting volume mount
+        - name: REDIS_PASSWORD
+          value: ""
+        # reserve this variable for container not supporting volume mount
+        - name: IRA_API_TENANT_ID
+          value: ""
+        - name: INSTANA_KEY_PATH
+          value: "/etc/pop/instanakey"
+        - name: TRACE_LEVEL
+          value: "INFO"
+        - name: JVM_ARGS
+          value: "-Xms128M -Xmx128M -Xtune:virtualized"
+        - name: INSTANA_ENDPOINT_URL
+          value: "https://synthetic-instana-core.{{BASE_DOMAIN}}"
+        # The thread pool size for publishing result messages into Ingress service in parallel, default is 5
+        - name: PUBLISHAAR_THREAD_POOL_SIZE
+          value: "5"
+        # PoP proxy server for communicating with instana backend server
+        - name: POP_PROXY_SERVER
+          value: ""
+        - name: NAMESPACE
+          value: instana-synthetic
+        - name: CLUSTERNAME
+          value: ""
+      volumes:
+      - name: logs
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}
+      - name: redis
+        secret:
+          secretName: synthetic-pop-redis
+          optional: false
+      - name: instana-key
+        secret:
+          secretName: synthetic-pop-instana-key
+          optional: false
+---
+# Source: synthetic-pop/templates/http-deployment.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: synthetic-pop-http-playback-engine
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+    app.kubernetes.io/name: http
+    component: synthetic-playback-http
+spec:
+  selector:
+    matchLabels:
+      
+      app.kubernetes.io/instance: synthetic-pop
+      app: synthetic-pop
+      release: synthetic-pop
+      app.kubernetes.io/name: http
+      component: synthetic-playback-http
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/version: 1.0.8
+        app.kubernetes.io/instance: synthetic-pop
+        app.kubernetes.io/managed-by: Helm
+        helm.sh/chart: synthetic-pop-1.0.8
+        app: synthetic-pop
+        release: synthetic-pop
+        app.kubernetes.io/name: http
+        component: synthetic-playback-http
+        role: playbackengine
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+      imagePullSecrets:
+      - name: instana-io
+      serviceAccountName: http-synthetic-pop-serviceaccount
+      
+      containers:
+      - name: synthetic-playback-http
+        image: containers.instana.io/instana/release/synthetic/synthetic-playback-http:latest
+        imagePullPolicy: Always
+        securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+        resources:
+          limits:
+            cpu: 1
+            memory: 300Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
+        livenessProbe:
+         httpGet:
+            path: 1.0/synthetics/javascript/status
+            port: 8080
+         initialDelaySeconds: 30
+         timeoutSeconds: 15
+        readinessProbe:
+         httpGet:
+            path: 1.0/synthetics/javascript/readiness
+            port: 8080
+         initialDelaySeconds: 30
+         timeoutSeconds: 15
+        ports:
+         - containerPort: 8080
+           name: web
+           protocol: TCP
+        volumeMounts:
+          - mountPath: /opt/ibm/microservice/javascript-playback/logs
+            name: logs
+          - mountPath: /tmp
+            name: tmp
+          - name: redis
+            mountPath: "/etc/redis/redispass"
+            readOnly: true
+        env:
+        - name: MODE
+          value: "http"
+        # REDIS URL: For connecting to REDIS server.
+        # Both parameters should match the values in the synthetic PoP controller.
+        # ConfigurationQueue is the redis queue that test config is pushed onto.
+        - name: HTTPSCRIPT_REDIS_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=HttpScriptPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: HTTP_REDIS_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=HttpPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: TLS_ENABLED
+          value: "false"
+        - name: REDIS_PASSWORD_PATH
+          value: "/etc/redis/redispass"
+        - name: REDIS_PASSWORD
+          value: ""
+        - name: ENABLEREDIS
+          value: "on"
+        # length of sandbox pool, only used in httpscript mode
+        - name: SANDBOX_LENGTH
+          value: "3"
+        # disable HTTP Agent that keeps socket connections alive between keep-alive requests,HTTP connection will be reused
+        - name: DISABLE_REQUEST_KEEP_ALIVE
+          value: "yes"
+        # mins of execution time out, used in http mode
+        - name: HTTP_TIMEOUT
+          value: "1"
+        # How many CPU core will be used by the playback, less than the core number of your host
+        - name: CORE_USED
+          value: "1"
+        # concurrency request number,only used in http mode , default is 500
+        - name: CONCURRENCY_REQUESTS
+          value: "500"
+        # Loglevel: ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, MARK, OFF
+        - name: LOGLEVEL
+          value: "INFO"
+      volumes:
+      - name: tmp
+        emptyDir: {} 
+      - name: logs
+        emptyDir: {}
+      - name: redis
+        secret:
+          secretName: "synthetic-pop-redis"
+          optional: false
+---
+# Source: synthetic-pop/templates/javascript-deployment.yaml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: synthetic-pop-javascript-playback-engine
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    app: synthetic-pop
+    release: synthetic-pop
+    app.kubernetes.io/name: javascript
+    component: synthetic-playback-javascript
+spec:
+  selector:
+    matchLabels:
+      
+      app.kubernetes.io/instance: synthetic-pop
+      app: synthetic-pop
+      release: synthetic-pop
+      app.kubernetes.io/name: javascript
+      component: synthetic-playback-javascript
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/version: 1.0.8
+        app.kubernetes.io/instance: synthetic-pop
+        app.kubernetes.io/managed-by: Helm
+        helm.sh/chart: synthetic-pop-1.0.8
+        app: synthetic-pop
+        release: synthetic-pop
+        app.kubernetes.io/name: javascript
+        component: synthetic-playback-javascript
+        role: playbackengine
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
+      imagePullSecrets:
+      - name: instana-io
+      serviceAccountName: javascript-synthetic-pop-serviceaccount
+      
+      containers:
+      - name: synthetic-playback-javascript
+        image: containers.instana.io/instana/release/synthetic/synthetic-playback-javascript:latest
+        imagePullPolicy: Always
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - ALL
+        resources:
+          limits:
+            cpu: 1
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 400Mi
+        livenessProbe:
+         httpGet:
+            path: 1.0/synthetics/javascript/status
+            port: 8080
+         initialDelaySeconds: 30
+         timeoutSeconds: 15
+        readinessProbe:
+         httpGet:
+            path: 1.0/synthetics/javascript/readiness
+            port: 8080
+         initialDelaySeconds: 30
+         timeoutSeconds: 15
+        ports:
+         - containerPort: 8080
+           name: web
+           protocol: TCP
+        volumeMounts:
+          - mountPath: /opt/ibm/microservice/javascript-playback/logs
+            name: javascript-logs
+          - mountPath: /tmp
+            name: tmp
+          - name: redis
+            mountPath: "/etc/redis/redispass"
+            readOnly: true
+        env:
+        - name: MODE
+          value: "httpscript"
+        # REDIS URL: For connecting to REDIS server.
+        # Both parameters should match the values in the synthetic PoP controller.
+        # ConfigurationQueue is the redis queue that test config is pushed onto.
+        # AARQueue is the queue http playback will push resulting AARs onto.
+        # httpscript mode REDIS URL
+        - name: HTTPSCRIPT_REDIS_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=HttpScriptPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: HTTP_REDIS_URL
+          value: "redis://synthetic-pop-redis:6378/0?ConfigurationQueue=HttpPlaybackConfigQueue&AARQueue=AARQueue"
+        - name: TLS_ENABLED
+          value: "false"
+        - name: REDIS_PASSWORD_PATH
+          value: "/etc/redis/redispass"
+        - name: REDIS_PASSWORD
+          value: ""
+        # on for Redis transport to be enabled off for not.
+        - name: ENABLEREDIS
+          value: "on"
+        # length of sandbox pool, only used in httpscript mode
+        - name: SANDBOX_LENGTH
+          value: "3"
+        - name: DISABLE_REQUEST_KEEP_ALIVE
+          value: "yes"
+        # mins of execution time out, used in httpscript mode
+        - name: HTTPSCRIPT_TIMEOUT
+          value: "1"
+        # How many CPU core will be used by the playback, less than the core number of your host
+        - name: CORE_USED
+          value: "1"
+        # concurrency request number,only used in http mode , default is 500
+        - name: CONCURRENCY_REQUESTS
+          value: "500"
+        # Loglevel: ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, MARK, OFF
+        - name: LOGLEVEL
+          value: "INFO"
+      volumes:
+      - name: javascript-logs
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}
+      - name: redis
+        secret:
+          secretName: synthetic-pop-redis
+          optional: false
+---
+# Source: synthetic-pop/templates/redis-deployment.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: synthetic-pop-redis
+  namespace: instana-synthetic
+  labels:
+    app.kubernetes.io/version: 1.0.8
+    app.kubernetes.io/instance: synthetic-pop
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: synthetic-pop-1.0.8
+    release: synthetic-pop
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/version: 1.0.8
+        app.kubernetes.io/instance: synthetic-pop
+        app.kubernetes.io/managed-by: Helm
+        helm.sh/chart: synthetic-pop-1.0.8
+        release: synthetic-pop
+        app: redis
+    spec:
+      serviceAccountName: redis-synthetic-pop-serviceaccount
+      imagePullSecrets:
+      - name: instana-io
+      
+      containers:
+      - name: redis
+        image: containers.instana.io/instana/release/synthetic/redis:latest
+        imagePullPolicy: Always
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+              drop:
+                - ALL
+        volumeMounts:
+          - name: redis
+            mountPath: "/etc/redis/redispass"
+            readOnly: true
+        env:
+        - name: TLS_ENABLED
+          value: "false"
+        - name: REDIS_PASSWORD_PATH
+          value: "/etc/redis/redispass"
+        - name: REDIS_PASSWORD
+          value: ""
+        ports:
+        - containerPort: 6379
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 1
+            memory: 1Gi
+        livenessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - /etc/redis/run.sh
+            - health
+          initialDelaySeconds: 60
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - /etc/redis/run.sh
+            - health
+          initialDelaySeconds: 45
+          timeoutSeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+      volumes:
+      - name: redis
+        secret:
+          secretName: synthetic-pop-redis
+          optional: false
+---
+# Source: synthetic-pop/templates/browserscript-deployment.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+---
+# Source: synthetic-pop/templates/ism-deployment.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+---
+# Source: synthetic-pop/templates/javascript-deployment.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+---
+# Source: synthetic-pop/templates/namespace.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+---
+# Source: synthetic-pop/templates/secret.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#
+---
+# Source: synthetic-pop/templates/serviceaccount.yaml
+# IBM Confidential
+# PID 5737-N85, 5900-AG5
+# Copyright IBM Corp. 2022
+#

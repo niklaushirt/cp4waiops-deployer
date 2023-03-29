@@ -77,7 +77,7 @@ spec:
           - name: DEBUG_ME
             value : "False"
           - name: MIN_RANK
-            value : "3"
+            value : "1"
           - name: POLL_DELAY
             value : "5"
         envFrom:

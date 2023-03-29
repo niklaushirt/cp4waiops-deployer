@@ -4,7 +4,6 @@ import os
 import time
 
 DEBUG_ME=os.environ.get('DEBUG_ME',"False")
-DISCORD_WEBHOOK=os.environ.get('DISCORD_WEBHOOK','not provided')
 PAGERDUTY_URL=os.environ.get('PAGERDUTY_URL','https://events.pagerduty.com/v2/enqueue')
 PAGERDUTY_TOKEN=os.environ.get('PAGERDUTY_TOKEN','not provided')
 MAIL_USER=os.environ.get('MAIL_USER','not provided')
@@ -260,7 +259,7 @@ def resolvePagerduty(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_RO
     "event_action": "resolve",
     "dedup_key": currentStoryID,
     "payload": {
-        "summary": Resolved,
+        "summary": "Resolved",
         }
     }
     

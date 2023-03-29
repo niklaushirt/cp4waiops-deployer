@@ -3,7 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: load-log-indexes
-  namespace: default
+  namespace: cp4waiops-installation
 spec:
   serviceAccountName: demo-admin
   template:

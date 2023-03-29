@@ -3,8 +3,9 @@ mutation createDataSet {
     startTimestamp: "2022-03-03T00:00:00.000+01:00"
     endTimestamp: "2022-03-04T00:00:00.000+01:00"
     notes: "Automatically created by Nick's scripts"
-    connections:"",
-    exclusionStartTimestamps: [],
+    connections:""
+    automaticDataSelection: true
+    exclusionStartTimestamps: []
     exclusionEndTimestamps: []
   ) {
     dataSetId

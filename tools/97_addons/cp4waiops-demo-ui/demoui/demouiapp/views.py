@@ -15,12 +15,12 @@ SLACK_PWD=str(os.environ.get('SLACK_PWD'))
 
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
-print ('         __________  __ ___       _____    ________            ')
-print ('        / ____/ __ \\/ // / |     / /   |  /  _/ __ \\____  _____')
-print ('       / /   / /_/ / // /| | /| / / /| |  / // / / / __ \\/ ___/')
-print ('      / /___/ ____/__  __/ |/ |/ / ___ |_/ // /_/ / /_/ (__  ) ')
-print ('      \\____/_/      /_/  |__/|__/_/  |_/___/\\____/ .___/____/  ')
-print ('                                                /_/            ')
+print ('            ________  __  ___     ___    ________       ')
+print ('           /  _/ __ )/  |/  /    /   |  /  _/ __ \____  _____')
+print ('           / // __  / /|_/ /    / /| |  / // / / / __ \/ ___/')
+print ('         _/ // /_/ / /  / /    / ___ |_/ // /_/ / /_/ (__  ) ')
+print ('        /___/_____/_/  /_/    /_/  |_/___/\____/ .___/____/  ')
+print ('                                              /_/')
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
 print ('')
@@ -539,9 +539,10 @@ def instanaCreateIncident(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -554,8 +555,10 @@ def instanaMitigateIncident(request):
         template = loader.get_template('demouiapp/home.html')
 
         print('🌏 Mitigate Instana outage')
+        os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql\\"}}}"')
         os.system('oc set env deployment ratings -n robot-shop PDO_URL-')
         os.system('oc set env deployment load -n robot-shop ERROR=0')
+        os.system("oc delete pod $(oc get po -n robot-shop|grep shipping|awk '{print$1}') -n robot-shop --ignore-not-found")
 
     else:
         template = loader.get_template('demouiapp/loginui.html')
@@ -591,9 +594,10 @@ def instanaMitigateIncident(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -613,7 +617,8 @@ def injectAllREST(request):
         template = loader.get_template('demouiapp/home.html')
         
         print('🌏 Create RobotShop MySQL outage')
-        os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql-outage\\"}}}"')
+        os.system('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
+        os.system('oc set env deployment load -n robot-shop ERROR=1')
         
         # injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
         # injectMetricsMem(METRIC_ROUTE,METRIC_TOKEN)
@@ -673,9 +678,10 @@ def injectAllREST(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -689,7 +695,8 @@ def injectAllFanREST(request):
         template = loader.get_template('demouiapp/home.html')
 
         print('🌏 Create RobotShop MySQL outage')
-        os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql-outage\\"}}}"')
+        os.system('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
+        os.system('oc set env deployment load -n robot-shop ERROR=1')
 
         # injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
         # time.sleep(3)
@@ -748,9 +755,10 @@ def injectAllFanREST(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -815,9 +823,10 @@ def injectAllNetREST(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -867,9 +876,10 @@ def injectLogsREST(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -918,9 +928,10 @@ def injectEventsREST(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -967,9 +978,10 @@ def injectMetricsREST(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -985,7 +997,13 @@ def clearAllREST(request):
 
         print('🌏 Reset RobotShop MySQL outage')
         os.system('oc patch service mysql -n robot-shop --patch "{\\"spec\\": {\\"selector\\": {\\"service\\": \\"mysql\\"}}}"')
-        
+        os.system('oc set env deployment ratings -n robot-shop PDO_URL-')
+        os.system('oc set env deployment load -n robot-shop ERROR=0')
+        os.system("oc delete pod $(oc get po -n robot-shop|grep shipping|awk '{print$1}') -n robot-shop --ignore-not-found")
+
+        stream = os.popen("oc get kafkatopics -n "+aimanagerns+"  | grep -v cp4waiopscp4waiops| grep cp4waiops-cartridge-logs-elk| awk '{print $1;}'")
+        KAFKA_TOPIC_LOGS = stream.read().strip()
+
 
         # closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
         # closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
@@ -1035,9 +1053,10 @@ def clearAllREST(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
 
 
@@ -1090,9 +1109,10 @@ def clearEventsREST(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -1139,9 +1159,10 @@ def clearStoriesREST(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
     }
     return HttpResponse(template.render(context, request))
@@ -1181,9 +1202,10 @@ def login(request):
             'ADMIN_MODE': ADMIN_MODE,
             'SIMULATION_MODE': SIMULATION_MODE,  
             'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
             'ADMIN_MODE': ADMIN_MODE,
             'SIMULATION_MODE': SIMULATION_MODE,
-            'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+            'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
             'PAGE_NAME': 'index'
         }
     else:
@@ -1209,9 +1231,10 @@ def login(request):
             'ADMIN_MODE': ADMIN_MODE,
             'SIMULATION_MODE': SIMULATION_MODE,  
             'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
             'ADMIN_MODE': ADMIN_MODE,
             'SIMULATION_MODE': SIMULATION_MODE,
-            'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+            'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
             'PAGE_NAME': 'login'
         }
 
@@ -1306,9 +1329,10 @@ def index(request):
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
-        'PAGE_TITLE': '🐣 Demo UI for ' + INSTANCE_NAME,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
         
     }
@@ -1351,6 +1375,7 @@ def doc(request):
         'eventmanager_user': eventmanager_user,
         'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'CloudPak for Watson AIOps Demo UI',
@@ -1402,7 +1427,8 @@ def apps(request):
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
-        'PAGE_TITLE': '🚀 IBM AIOps Applications',
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
+        'PAGE_TITLE': 'IBM AIOps Applications',
         'PAGE_NAME': 'apps'
         
     }
@@ -1452,7 +1478,8 @@ def apps_system(request):
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
-        'PAGE_TITLE': '🛠️ System Links',
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
+        'PAGE_TITLE': 'System Links',
         'PAGE_NAME': 'system'
         
     }
@@ -1503,7 +1530,8 @@ def apps_demo(request):
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
-        'PAGE_TITLE': '🔥 Demo Scenarios',
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
+        'PAGE_TITLE': 'Demo Scenarios',
         'PAGE_NAME': 'demo'
         
     }
@@ -1555,7 +1583,8 @@ def apps_additional(request):
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
-        'PAGE_TITLE': '📥 Third-party Applications',
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
+        'PAGE_TITLE': 'Third-party Applications',
         'PAGE_NAME': 'TEST'
         
     }
@@ -1577,10 +1606,12 @@ def about(request):
     context = {
         'loggedin': loggedin,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'INSTANCE_NAME': INSTANCE_NAME,
-        'PAGE_TITLE': '👽 About',
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
+        'PAGE_TITLE': 'About',
         'PAGE_NAME': 'about',
         'DEMO_IMAGE': demo_image,
         'ALL_LOGINS': ALL_LOGINS
@@ -1600,10 +1631,12 @@ def config(request):
     context = {
         'loggedin': loggedin,
         'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'INSTANCE_NAME': INSTANCE_NAME,
-        'PAGE_TITLE': '📥 Configuration for the IBM AIOps Training',
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
+        'PAGE_TITLE': 'Configuration for the IBM AIOps Training',
         'PAGE_NAME': 'config',
         'ALL_LOGINS': ALL_LOGINS
 

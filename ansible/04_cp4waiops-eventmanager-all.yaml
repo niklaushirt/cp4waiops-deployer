@@ -49,7 +49,7 @@
 
 
   - name: 🛠️  Config File Path
-    set_fact: config_file_path="./configs/cp4waiops-roks-eventmanager-all-36.yaml"
+    set_fact: config_file_path="./configs/cp4waiops-roks-eventmanager-all-latest.yaml"
 
 
   - name: 🛠️  Show Global Config

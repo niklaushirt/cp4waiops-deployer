@@ -106,7 +106,7 @@ curl -X "POST" "http://<YOUR-CLUSTER>/webhookIterate" \
      -d $'{
 "events": [
   {
-    "URL": "https://pirsoscom.github.io/git-commit-robot.html",
+    "URL": "https://pirsoscom.github.io/git-commit-mysql-vm.html",
     "Manager": "ELK",
     "Severity": 2,
     "@rawstring": "[Git] Commit in repository robot-shop by Niklaus Hirt on file robot-shop.yaml - New Memory Limits",
@@ -115,7 +115,7 @@ curl -X "POST" "http://<YOUR-CLUSTER>/webhookIterate" \
     "@timestamp": "robot-shop"
   },
   {
-    "URL": "https://pirsoscom.github.io/git-commit-robot.html",
+    "URL": "https://pirsoscom.github.io/git-commit-mysql-vm.html",
     "Manager": "ELK",
     "Severity": 3,
     "@rawstring": "[Instana] MySQL - change detected - The value **resources/limits** has changed",
@@ -124,7 +124,7 @@ curl -X "POST" "http://<YOUR-CLUSTER>/webhookIterate" \
     "@timestamp": "robot-shop"
   },
   {
-    "URL": "https://pirsoscom.github.io/git-commit-robot.html",
+    "URL": "https://pirsoscom.github.io/git-commit-mysql-vm.html",
     "Manager": "ELK",
     "Severity": 4,
     "@rawstring": "[Turbonomic] Container Resize - Controller Resize - Resize UP VMem Limit from 50 MB to 328 MB in Container Spec mysql ",
@@ -133,7 +133,7 @@ curl -X "POST" "http://<YOUR-CLUSTER>/webhookIterate" \
     "@timestamp": "robot-shop"
   },
     {
-    "URL": "https://pirsoscom.github.io/git-commit-robot.html",
+    "URL": "https://pirsoscom.github.io/git-commit-mysql-vm.html",
     "Manager": "ELK",
     "Severity": 5,
     "@rawstring": "[Log] Ratings - Error: unable to contact MYSQL failed with status code 500",
@@ -142,7 +142,7 @@ curl -X "POST" "http://<YOUR-CLUSTER>/webhookIterate" \
     "@timestamp": "robot-shop"
   },
     {
-    "URL": "https://pirsoscom.github.io/git-commit-robot.html",
+    "URL": "https://pirsoscom.github.io/git-commit-mysql-vm.html",
     "Manager": "ELK",
     "Severity": 6,
     "@rawstring": "[Instana] Robotshop Homepage call rate is too high- Robotshop call rate stays at a high level for an extended period of time",

@@ -653,7 +653,7 @@ delete_crossplane(){
 }
 
 # Function to delete leftover vault catalog source for airgap installs.
-# To be removed in v3.6.1
+# To be removed in v3.7.1
 delete_vault_catalog() {
     vault_catalog_exists=$( check_oc_resource_exists catalogsource ibm-vault-operator-catalog openshift-marketplace  )
 

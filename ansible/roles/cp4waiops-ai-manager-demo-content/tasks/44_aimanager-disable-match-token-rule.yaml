@@ -52,7 +52,7 @@
 
     echo "Disable Match Token RULE for Services..."
 
-    export result=$(curl -X "GET" "https://topology-merge-$WAIOPS_NAMESPACE.$CLUSTER_NAME/1.0/merge/rules?_filter=name%3Dk8ServiceName&ruleType=matchTokensRule" --insecure \
+    export result=$(curl -X "GET" "https://topology-merge-$WAIOPS_NAMESPACE.$CLUSTER_NAME/1.0/merge/rules?_filter=name%3Dk8sGenericNameMatchTokens&ruleType=matchTokensRule" --insecure \
         -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
         -H 'content-type: application/json' \
         -u $LOGIN)
