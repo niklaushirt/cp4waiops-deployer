@@ -17,7 +17,7 @@ spec:
         app: cp4waiops-demo-ui
     spec:
       containers:
-      - image: docker.io/niklaushirt/cp4waiops-demo-ui:1.12
+      - image: docker.io/niklaushirt/cp4waiops-demo-ui:1.13
         imagePullPolicy: Always
         name: cp4waiops-demo-ui
         command:
@@ -29,7 +29,7 @@ spec:
             memory: "128Mi"
           limits:
             cpu: "256m"
-            memory: "256Mi"
+            memory: "512Mi"
         readinessProbe:
           httpGet:
             path: /health

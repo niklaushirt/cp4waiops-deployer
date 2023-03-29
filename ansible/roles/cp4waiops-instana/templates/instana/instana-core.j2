@@ -5,7 +5,7 @@ metadata:
   name: instana-core
 spec:
   # set resource profile: small, medium, large, xlarge, xxlarge
-  resoureProfile: small
+  resoureProfile: medium
   # Base domain for Instana
   baseDomain: {{BASE_DOMAIN}}
   # Host and port for the agent acceptor, usually a subdomain of the base domain
@@ -19,34 +19,27 @@ spec:
   imagePullSecrets:
     - name: instana-registry
   # Datastore configs
+  featureFlags: 
+    - name: feature.synthetics.enabled
+      enabled: true
+    - name: feature.logging.enabled
+      enabled: true
   datastoreConfigs:
-    featureFlags: 
-#      - name:  feature.beeinstana.infra.metrics.enabled
-#        enabled: true
-      - name:  feature.infra.metrics.widget.enabled 
-        enabled: true
-      - name:  feature.infra.explore.presentation.enabled 
-        enabled: true
-      - name: feature.logging.enabled
-        enabled: true
-      - name: feature.synthetics.enabled
-        enabled: true
-#    beeInstanaConfig:
-#      hosts:
-#        - 70.85.21.15
     cassandraConfigs:
       - hosts:
-          - cassandra-service.instana-datastores.svc
+          - default-cassandra.instana-datastores.svc
         ports:
           - name: tcp
             port: 9042
         schemas:
+          - profiles
           - spans
           - metrics
-          - profiles
+          - state
+        authEnabled: false
     clickhouseConfigs:
       - hosts:
-          - clickhouse-service.instana-datastores.svc
+          - default-clickhouse.instana-datastores.svc
         clusterName: local
         ports:
           - name: tcp
@@ -56,19 +49,10 @@ spec:
         schemas:
           - application
           - logs
-    cockroachdbConfigs:
-      - hosts:
-          - cockroachdb-service.instana-datastores.svc
-        ports:
-          - name: tcp
-            port: 26257
-        schemas:
-          - butlerdb
-          - tenantdb
-          - sales
+        authEnabled: false
     elasticsearchConfig:
       hosts:
-        - elasticsearch-service.instana-datastores.svc
+        - default-elasticsearch.instana-datastores.svc
       clusterName: onprem_onprem
       ports:
         - name: tcp
@@ -77,9 +61,26 @@ spec:
           port: 9200
       schemas:
         - metadata_ng
+      authEnabled: false
     kafkaConfig:
       hosts:
-        - kafka-service.instana-datastores.svc
+        - default-kafka.instana-datastores.svc
+      ports:
+        - name: tcp
+          port: 9092
+      authEnabled: false
+      saslMechanism: PLAIN
+    postgresConfigs:
+    - hosts:
+        - default-postgres.instana-datastores.svc
+      ports:
+        - name: tcp
+          port: 5432
+      databases:
+        - butlerdb
+        - tenantdb
+        - sales
+      authEnabled: false   
   # Use one of smtpConfig or sesConfig
   emailConfig:
     smtpConfig:

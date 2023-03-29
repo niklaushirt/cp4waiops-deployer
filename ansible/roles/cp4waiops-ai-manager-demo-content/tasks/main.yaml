@@ -396,7 +396,6 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # CREATE CONNECTIONS FOR INCEPTION
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-# Create Kafka Connections
 - name: 📥   Create Kafka ELK connection
   include_tasks: 65_aimanager-create-kafka-connections.yaml
   when: current_cp4waiops_feature.create_log_connection == true
@@ -407,9 +406,12 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # IJNSTALL WEBHOOK PROBE
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-# Create Kafka Connections
-- name: 📥   Install Webhook Probe
-  include_tasks: 70_aimanager-install-probe.yml
+- name: 📥   Install Turbonomic Probe
+  include_tasks: 70_aimanager-install-turbonomic-probe.yml
+  when: current_cp4waiops_feature.install_webhook_probe | default('false') == true
+
+- name: 📥   Install Generic Webhook Probe
+  include_tasks: 71_aimanager-install-generic-probe.yml
   when: current_cp4waiops_feature.install_webhook_probe | default('false') == true
 
 
@@ -428,7 +430,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Delete lingering Luigi Pods 
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   ⚠️ HACK - Delete lingering Luigi Pods  (hack 3.5)
+- name:   ⚠️ HACK - Delete lingering Luigi Pods  (hack)
   shell: |
     oc delete pod $(oc get po -n {{ current_cp4waiops_cluster.project }}|grep ImagePullBackOff|awk '{print$1}'):-notfound -n {{ current_cp4waiops_cluster.project }} --ignore-not-found
   register: kubectl_get_pods

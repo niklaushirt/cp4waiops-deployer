@@ -1,0 +1,108 @@
+---
+# *************************************************************************************************************************************************
+# --------------------------------------------------------------------------------------------------------------------------------------
+# CP4WAIOPS INSTANCES
+# --------------------------------------------------------------------------------------------------------------------------------------
+# *************************************************************************************************************************************************
+
+
+global_config:
+  environment_name: cp4waiops
+  cloud_platform: existing-ocp
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  # CP4WAIOPS Pull Registires
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  entitled_registry: cp.icr.io
+  entitled_registry_user: cp
+  catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+  # Create Welcome Cards in AI Manager
+  create_cards: true
+  # Create App Menu Items in OCP
+  create_ocp_items: true
+  # Use this Password for all Instances
+  global_password: P4ssw0rd!
+  # Set this value to True to accept all licenses
+  accept_all_licenses: False
+
+
+openshift:
+- name: "mycluster"
+  ocp_version: "4.10"
+  cluster_name: "mycluster"
+  domain_name: example.com
+  openshift_storage:
+  - storage_name: auto-storage
+    storage_type: auto
+    # Alternatively use
+    #storage_name: ibm-roks-storage
+    #storage_type: custom
+    #ocp_storage_class_file: ibmc-file-gold-gid
+    #ocp_storage_class_block: ibmc-block-gold
+
+
+cp4waiops:
+- project: cp4waiops
+  instances:
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  # CP4WAIOPS AI Manager
+  # --------------------------------------------------------------------------------------------------------------------------------------
+  - name: cp4waiops-aimanager
+    kind: AIManager
+    install: true
+    # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
+    waiops_size: small
+    # Custom Sizing File (waiops_size must be set to "custom")
+    custom_size_file: none    # Name of the CP4WAIOPS instance
+    # Name of the CP4WAIOPS instance
+    waiops_name: ibm-cp-watson-aiops
+    # Version of the catalog subscription
+    subscription_channel: v3.7
+    # Freeze the version of the Catalog image by patching CatalogSource
+    freeze_catalog: false
+
+
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Storage Classes Override for this Instance (see comment below)
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    #storage_class_file: automatic
+    #storage_class_block: automatic
+
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    # Install with CASE Files
+    # --------------------------------------------------------------------------------------------------------------------------------------
+    case_install: false
+    case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
+    case_name: ibm-cp-waiops
+    case_version: 1.5.0
+    case_inventory_setup: cpwaiopsSetup
+    
+
+
+
+
+
+# *************************************************************************************************************************************************
+# --------------------------------------------------------------------------------------------------------------------------------------
+# CP4WAIOPS USAGE
+# --------------------------------------------------------------------------------------------------------------------------------------
+# *************************************************************************************************************************************************
+
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# CP4WAIOPS Storage Classes
+# --------------------------------------------------------------------------------------------------------------------------------------
+
+# Override the Storage Class auto detection (not_configured, ibmc-file-gold-gid, rook-cephfs, nfs-client, ...)
+#storage_class_file: automatic
+#storage_class_file: ibmc-file-gold-gid               # ROKS
+#storage_class_file: ocs-storagecluster-cephfs        # ODF
+#storage_class_file: ibmc-vpc-block-10iops-tier       # IBM VPC
+#storage_class_file: rook-cephfs                      # FYRE
+#storage_class_file: nfs-client                       # TEC
+
+#storage_class_block: automatic
+#storage_class_block: ibmc-block-gold                 # ROKS
+#storage_class_block: ocs-storagecluster-ceph-rbd     # ODF
+#storage_class_block: ibmc-vpc-block-10iops-tier      # IBM VPC
+#storage_class_block: rook-cephfs                     # FYRE
+#storage_class_block: nfs-client                      # TEC

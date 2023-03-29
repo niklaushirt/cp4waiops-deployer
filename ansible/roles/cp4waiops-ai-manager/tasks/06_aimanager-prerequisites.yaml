@@ -43,7 +43,7 @@
 
 # Create Namespace 
 - name:   🚀 PREREQUISITES - Create CP4WAIOPS namespace {{ current_cp4waiops_cluster.project }}
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     api_version: v1
     kind: Namespace
     name: "{{ current_cp4waiops_cluster.project }}"

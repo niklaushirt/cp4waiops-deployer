@@ -44,7 +44,7 @@ def updateStory(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, me
 
 
 
-def closeStory(conn, story_id):
+def closeStory(conn, story_id, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     debug('         🚀 closeStory: '+story_id)
     cursor = conn.execute("SELECT DISCORD_ID from STORIES where ID='"+str(story_id)+"'")
     discord_id = cursor.fetchone()

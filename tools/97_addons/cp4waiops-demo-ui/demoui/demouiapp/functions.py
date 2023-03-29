@@ -5,6 +5,7 @@ import datetime
 import random
 import os
 import time
+from pathlib import Path
 
 DEMO_EVENTS_MEM=os.environ.get('DEMO_EVENTS_MEM')
 DEMO_EVENTS_FAN=os.environ.get('DEMO_EVENTS_FAN')
@@ -21,6 +22,16 @@ EVENTS_TIME_SKEW=int(os.environ.get('EVENTS_TIME_SKEW'))
 INSTANCE_NAME=os.environ.get('INSTANCE_NAME')
 if INSTANCE_NAME == None:
     INSTANCE_NAME="CP4WAIOPS"
+
+image_name=INSTANCE_NAME.lower()+".png"
+path = Path('./static/images/characters/'+image_name)
+
+if path.is_file():
+    print('Custom Image:'+str(path))
+    INSTANCE_IMAGE=path
+else:
+    INSTANCE_IMAGE="None"
+
 
 
 METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
@@ -75,17 +86,14 @@ print ('')
 # CLOSE ALERTS AND STORIES
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 def closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
-    print('')
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Close Alerts')
+    print ('📛 START - Close Alerts')
     data = '{"state": "closed"}'
     url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/alerts'
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
     response = requests.patch(url, data=data, headers=headers, auth=auth) #, verify=False)
-    print ('    RESULT:'+str(response.content))
-    print ('✅ Close Alerts')
-    print ('------------------------------------------------------------------------------------------------')
+    print ('    Close Alerts:'+str(response.content))
+    print ('✅ END - Close Alerts')
 
     return 'OK'
 
@@ -97,16 +105,13 @@ def closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
     url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Set Stories to InProgress')
+    print ('📛 START - Set Stories to InProgress')
     response = requests.patch(url, data=dataInProgress, headers=headers, auth=auth) #, verify=False)
     time.sleep(10)
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Set Stories to Resolved')
+    print ('📛 START - Set Stories to Resolved')
     response = requests.patch(url, data=dataResolved, headers=headers, auth=auth) #, verify=False)
-    print ('    RESULT:'+str(response.content))
-    print ('✅ DONE')
-    print ('------------------------------------------------------------------------------------------------')
+    print ('    Close Stories-:'+str(response.content))
+    print ('✅ END - Close Stories')
 
     return 'OK'
 
@@ -119,9 +124,7 @@ from confluent_kafka import Producer
 import socket
 
 def injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS):
-    print('')
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Inject Logs')
+    print ('📛 START - Inject Logs')
 
     stream = os.popen('echo "'+KAFKA_CERT+'" > ./demouiapp/ca.crt')
     stream.read().strip()
@@ -154,13 +157,10 @@ def injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG
 
             producer.produce(KAFKA_TOPIC_LOGS, value=line)
         producer.flush()
-        print('Iteration: '+str(i)+'  :  '+str(timestamp))
+        print('Logs-Injection: '+str(i)+'  :  '+str(timestamp))
 
 
-
-
-    print ('✅ Inject Logs')
-    print ('------------------------------------------------------------------------------------------------')
+    print ('✅ END - Inject Logs')
 
     return 'OK'
 
@@ -172,27 +172,25 @@ def injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 def injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD): 
-    print ('📛 Inject Events MEM')
+    print ('📛 START - Inject Events - MEM')
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_MEM)
     return 'OK'
 
 
 def injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):  
-    print ('📛 Inject Events FAN')
+    print ('📛 START - Inject Events - FAN')
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_FAN)
     return 'OK'
 
 
 def injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):  
-    print ('📛 Inject Events NET')
+    print ('📛 START - Inject Events - NET')
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_NET)
     return 'OK'
 
 
 def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS):
-    print('')
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Inject Events')
+    #print ('📛 START - Inject Events')
     #print ('📛 Inject Events'+str(DEMO_EVENTS))
     
     timestamp = datetime.datetime.now()
@@ -210,11 +208,9 @@ def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS
 
         line = line.replace("MY_TIMESTAMP", timestampstr)
         response = requests.post(url, data=line, headers=headers, auth=auth) #, verify=False)
-    print ('    RESULT:'+str(response.content))
+        print ('    Events-Injection:'+str(response.content))
 
-
-    print ('✅ Inject Events')
-    print ('------------------------------------------------------------------------------------------------')
+    print ('✅ END - Inject Events')
 
     return 'OK'
 
@@ -241,25 +237,28 @@ def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS
 # ]
 
 def injectMetricsMem(METRIC_ROUTE,METRIC_TOKEN): 
+    print ('📛 START - Inject Metrics - MEM')
     METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
     METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_MEM,METRIC_TIME_SKEW,METRIC_TIME_STEP)
     return 'OK'
 
 def injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN):  
+    print ('📛 START - Inject Metrics - FAN-TEMP')
     METRIC_TIME_SKEW=0
     METRIC_TIME_STEP=120
-
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_FAN_TEMP,METRIC_TIME_SKEW,METRIC_TIME_STEP)
     return 'OK'
 
 def injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN):  
+    print ('📛 START - Inject Metrics - FAN')
     METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
     METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_FAN,METRIC_TIME_SKEW,METRIC_TIME_STEP)
     return 'OK'
 
 def injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN):  
+    print ('📛 START - Inject Metrics - NET')
     METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
     METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_NET,METRIC_TIME_SKEW,METRIC_TIME_STEP)
@@ -267,18 +266,15 @@ def injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN):
 
 
 def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW,METRIC_TIME_STEP):
-    print('')
-    print ('------------------------------------------------------------------------------------------------')
-    print ('📛 Inject Metrics')
-    
-    print ('           METRIC_TIME_SKEW:               '+str(METRIC_TIME_SKEW))
-    print ('           METRIC_TIME_STEP:               '+str(METRIC_TIME_STEP))
-    print('     ❓ Getting AIManager Namespace')
+    #print ('📛 START - Inject Metrics')
+    #print ('           METRIC_TIME_SKEW:               '+str(METRIC_TIME_SKEW))
+    #print ('           METRIC_TIME_STEP:               '+str(METRIC_TIME_STEP))
+    #print('     ❓ Getting AIManager Namespace')
     stream = os.popen("oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}'")
     aimanagerns = stream.read().strip()
-    print('        ✅ AIManager Namespace:       '+aimanagerns)
+    #print('        ✅ AIManager Namespace:       '+aimanagerns)
 
-    print('     ❓ Getting Details Metric Endpoint')
+    #print('     ❓ Getting Details Metric Endpoint')
     stream = os.popen("oc get route -n "+aimanagerns+" | grep ibm-nginx-svc | awk '{print $2}'")
     METRIC_ROUTE = stream.read().strip()
     stream = os.popen("oc get secret  -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d")
@@ -296,7 +292,7 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
 
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'Authorization': 'Bearer '+METRIC_TOKEN, 'X-TenantID' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
 
-    for i in range (1,40):
+    for i in range (1,80):
         output_json='{"groups":['
         CURR_ITERATIONS=CURR_ITERATIONS+1
 
@@ -333,13 +329,12 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
         output_json=output_json+LAST_LINE
         output_json=output_json+']}'
         #print (output_json)
-        print (MY_TIMESTAMP_READABLE)
+        #print (MY_TIMESTAMP_READABLE)
         #print (MY_TIMESTAMP)
 
         response = requests.post(url, data=output_json, headers=headers, verify=False)
-        print ('    RESULT:'+str(response.content))
-    print ('✅ Inject Metrics')
-    print ('------------------------------------------------------------------------------------------------')
+        print ('    Metrics-Injection:'+str(MY_TIMESTAMP_READABLE)+' - '+str(response.content))
+    print ('✅ END - Inject Metrics')
 
     return 'OK'
 

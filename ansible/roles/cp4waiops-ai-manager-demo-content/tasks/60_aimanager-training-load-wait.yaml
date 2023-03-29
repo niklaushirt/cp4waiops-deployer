@@ -19,7 +19,7 @@
 - name: 🕦 TRAINING WAIT - WAIT FOR COMPLETION METRICS LOAD
   shell: |
     while : ; do
-          READY=$(oc get jobs -n default --ignore-not-found load-metric-cassandra)
+          READY=$(oc get jobs -n cp4waiops-installation --ignore-not-found load-metric-cassandra)
           if [[ $READY  == "" ]]; then 
                 break
           elif [[ ! $READY  =~ "1/1" ]]; then
@@ -36,7 +36,7 @@
 
 
 - name: 🧻 TRAINING WAIT - CLEANUP JOB METRICS LOAD
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: absent
     template: ./templates/training/load-job-metric.j2
   
@@ -44,7 +44,7 @@
 
 - name: 🧻 TRAINING WAIT - CLEANUP COMPLETED JOBS METRICS LOAD
   shell: |
-    oc delete pod  -n default --ignore-not-found $(oc get po -n default|grep load-metric-cassandra|awk '{print$1}')
+    oc delete pod  -n cp4waiops-installation --ignore-not-found $(oc get po -n cp4waiops-installation|grep load-metric-cassandra|awk '{print$1}')
   register: ES_READY
   ignore_errors: true
 
@@ -52,7 +52,7 @@
 - name: 🕦 TRAINING WAIT - WAIT FOR COMPLETION SNOW LOAD
   shell: |
       while : ; do
-          READY=$(oc get jobs -n default --ignore-not-found load-snow-indexes)
+          READY=$(oc get jobs -n cp4waiops-installation --ignore-not-found load-snow-indexes)
           if [[ $READY  == "" ]]; then 
                 break
           elif [[ ! $READY  =~ "1/1" ]]; then
@@ -69,7 +69,7 @@
 
 
 - name: 🧻 TRAINING WAIT - CLEANUP JOB SNOW LOAD
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: absent
     template: ./templates/training/load-job-snow.j2
   
@@ -77,7 +77,7 @@
 
 - name: 🧻 TRAINING WAIT - CLEANUP COMPLETED JOBS SNOW LOAD
   shell: |
-    oc delete pod  -n default --ignore-not-found $(oc get po -n default|grep load-snow-indexes|awk '{print$1}')
+    oc delete pod  -n cp4waiops-installation --ignore-not-found $(oc get po -n cp4waiops-installation|grep load-snow-indexes|awk '{print$1}')
   register: ES_READY
   ignore_errors: true
 
@@ -88,7 +88,7 @@
 - name: 🕦 TRAINING WAIT - WAIT FOR COMPLETION LAD LOAD
   shell: |
       while : ; do
-          READY=$(oc get jobs -n default --ignore-not-found load-log-indexes)
+          READY=$(oc get jobs -n cp4waiops-installation --ignore-not-found load-log-indexes)
           if [[ $READY  == "" ]]; then 
                 break
           elif [[ ! $READY  =~ "1/1" ]]; then
@@ -105,7 +105,7 @@
 
 
 - name: 🧻 TRAINING WAIT - CLEANUP JOB LAD LOAD
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: absent
     template: ./templates/training/load-job-logs.j2
   
@@ -113,7 +113,7 @@
 
 - name: 🧻 TRAINING WAIT - CLEANUP COMPLETED JOBS LAD LOAD
   shell: |
-    oc delete pod  -n default --ignore-not-found $(oc get po -n default|grep load-log-indexes|awk '{print$1}')
+    oc delete pod  -n cp4waiops-installation --ignore-not-found $(oc get po -n cp4waiops-installation|grep load-log-indexes|awk '{print$1}')
   register: ES_READY
   ignore_errors: true
 

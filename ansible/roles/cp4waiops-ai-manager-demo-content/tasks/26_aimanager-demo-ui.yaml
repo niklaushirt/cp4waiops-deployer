@@ -57,7 +57,7 @@
 
 
 - name: 🚀 DEMO-UI - Create CP4WAIOPS Demo UI Configuration
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/waiops-demo-ui/create-cp4waiops-demo-cm.j2
 
@@ -75,7 +75,7 @@
 
 
 - name: 🚀 DEMO-UI - Create CP4WAIOPS Demo UI Deployment
-  community.kubernetes.k8s:
+  kubernetes.core.k8s:
     state: present
     template: ./templates/waiops-demo-ui/create-cp4waiops-demo-deploy.j2
 

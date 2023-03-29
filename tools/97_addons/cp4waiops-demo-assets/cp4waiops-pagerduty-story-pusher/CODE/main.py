@@ -14,7 +14,6 @@ TOKEN=os.environ.get('TOKEN',"P4ssw0rd!")
 
 MIN_RANK=int(os.environ.get('MIN_RANK',1))
 
-DISCORD_WEBHOOK=os.environ.get('DISCORD_WEBHOOK','CHANGEME')
 MAIL_USER=os.environ.get('MAIL_USER','not provided')
 MAIL_PWD=os.environ.get('MAIL_PWD','not provided')
 
@@ -22,19 +21,22 @@ POLL_DELAY=int(os.environ.get('POLL_DELAY',5))
 
 ACTIVE=os.environ.get('ACTIVE',"False")
 
+PAGERDUTY_URL=os.environ.get('PAGERDUTY_URL','https://events.pagerduty.com/v2/enqueue')
+PAGERDUTY_TOKEN=os.environ.get('PAGERDUTY_TOKEN','not provided')
+
 
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
-print ('         __________  __ ___       _____    ________            ')
-print ('        / ____/ __ \\/ // / |     / /   |  /  _/ __ \\____  _____')
-print ('       / /   / /_/ / // /| | /| / / /| |  / // / / / __ \\/ ___/')
-print ('      / /___/ ____/__  __/ |/ |/ / ___ |_/ // /_/ / /_/ (__  ) ')
-print ('      \\____/_/      /_/  |__/|__/_/  |_/___/\\____/ .___/____/  ')
-print ('                                                /_/            ')
+print ('            ________  __  ___     ___    ________       ')
+print ('           /  _/ __ )/  |/  /    /   |  /  _/ __ \____  _____')
+print ('           / // __  / /|_/ /    / /| |  / // / / / __ \/ ___/')
+print ('         _/ // /_/ / /  / /    / ___ |_/ // /_/ / /_/ (__  ) ')
+print ('        /___/_____/_/  /_/    /_/  |_/___/\____/ .___/____/  ')
+print ('                                              /_/')
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
 print ('')
-print ('    🛰️  PAgerduty Story Pusher for CP4WAIOPS AI Manager')
+print ('    🛰️  Pagerduty Story Pusher for CP4WAIOPS AI Manager')
 print ('')
 print ('       Provided by:')
 print ('        🇨🇭 Niklaus Hirt (nikh@ch.ibm.com)')
@@ -130,7 +132,7 @@ print ('')
 print ('    ---------------------------------------------------------------------------------------------')
 print ('     🔎 Target Connection Parameters')
 print ('    ---------------------------------------------------------------------------------------------')
-print ('           🌏 Discord Webhook:    '+DISCORD_WEBHOOK)
+print ('           🌏 Pagerduty Token:    '+PAGERDUTY_TOKEN)
 print ('')
 print ('           👩‍💻 Mail User:          '+MAIL_USER)
 print ('           🔐 Mail Pwd:           '+MAIL_PWD)
@@ -198,9 +200,9 @@ print('')
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 if ACTIVE=="True": 
-    if DISCORD_WEBHOOK=="CHANGEME": 
+    if PAGERDUTY_TOKEN=="CHANGEME": 
         print ('-------------------------------------------------------------------------------------------------')
-        print (' ❗ Discord Webhook not defined!!!')
+        print (' ❗ Pagerduty Token not defined!!!')
         print ('-------------------------------------------------------------------------------------------------')
     else:
         print ('-------------------------------------------------------------------------------------------------')
@@ -257,7 +259,7 @@ if ACTIVE=="True":
                 else:
                     if checkIDExistsDB(conn, story_id) > 0:
                         print('       🔴 Closing Story: '+story_id)
-                        closeStory(conn, story_id)
+                        closeStory(conn, story_id, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE)
 
             debug ('     🕦 Wait '+str(POLL_DELAY)+' seconds')
 

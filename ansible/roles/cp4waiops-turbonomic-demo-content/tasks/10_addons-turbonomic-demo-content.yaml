@@ -249,7 +249,7 @@
       -H 'Content-Type: application/json' \
       -d '  
       {
-        "displayName": "RobotShop AppComponents",
+        "displayName": "RobotShopSynthetic AppComponents",
         "className": "Group",
         "groupType": "ApplicationComponent",
         "severity": "NORMAL",
@@ -447,6 +447,50 @@
 
 
 
+
+- name: 🚀 TURBONOMIC - Create Schedule and Maintenance Policy
+  shell: |
+    result=$(curl -s -k -X 'POST' \
+      "https://{{TURBO_URL}}/api/v3/schedules" -b /tmp/cookies \
+      -H 'accept: application/json' \
+      -H 'Content-Type: application/json' \
+      -d '  
+        {
+          "displayName": "MaintenanceFirstSaturdayOfMonth",
+          "startTime": "2023-03-29T01:30",
+          "endTime": "2023-03-29T02:30",
+          "recurrence": {
+            "type": "MONTHLY",
+            "daysOfWeek": [
+              "Sat"
+            ],
+            "weekOfTheMonth": [
+              1
+            ],
+            "interval": 1
+          },
+          "timeZone": "Europe/Paris"
+        }
+      ')
+
+    echo $result
+    echo ""
+    echo ""
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+  when: current_cp4waiops_feature.group_robotshop == true
+- name: 🟣  DEBUG
+  debug:
+    var: output.stdout_lines
+    #verbosity: 1
+  when: current_cp4waiops_feature.group_robotshop == true
+
+
+
+
+
 # --------------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------------
 # CREATE TARGETS
@@ -511,7 +555,7 @@
     result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/topologydefinitions" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '  
     {
       "uuid": "285815442727328",
-      "displayName": "RobotShop",
+      "displayName": "RobotShopSynthetic",
       "contextBased": true,
       "entityType": "BusinessApplication",
       "entityDefinitionData": {
@@ -594,8 +638,8 @@
     oc apply -f ./roles/cp4waiops-turbonomic-demo-content/templates/create-data-ingestion.yaml
     echo ""
     echo ""
-    export robotshopUUID=$(curl -XGET -s -k "https://{{TURBO_URL}}/api/v3/topologydefinitions" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq -r '.[]|select(.displayName=="RobotShop").uuid')
-    echo "  🌏 Synthetic Metric URL: http://turbo-dif-service.default:3000/businessApplication/RobotShop/$robotshopUUID"
+    export robotshopUUID=$(curl -XGET -s -k "https://{{TURBO_URL}}/api/v3/topologydefinitions" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq -r '.[]|select(.displayName=="RobotShopSynthetic").uuid')
+    echo "  🌏 Synthetic Metric URL: http://turbo-dif-service.default:3000/businessApplication/RobotShopSynthetic/$robotshopUUID"
     echo ""
     echo ""
   ignore_errors: true
@@ -664,11 +708,11 @@
         "inputFields": [
           {
             "name": "Name",
-            "value": "RobotShop"
+            "value": "RobotShopSynthetic"
           },
           {
             "name": "targetIdentifier",
-            "value": "http://turbo-metrics-dif-service.turbonomic:3000/businessApplication/RobotShop/'$robotshopUUID'"
+            "value": "http://turbo-metrics-dif-service.turbonomic:3000/businessApplication/RobotShopSynthetic/'$robotshopUUID'"
           }
         ],
         "type": "DataIngestionFramework-Turbonomic",

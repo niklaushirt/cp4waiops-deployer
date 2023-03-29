@@ -1,1 +1,1 @@
-./tools/01_demo/incident_robotshop.sh
+./tools/01_demo/incident_memory.sh

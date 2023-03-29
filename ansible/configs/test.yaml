@@ -58,7 +58,7 @@ cp4waiops:
     # Name of the CP4WAIOPS instance
     waiops_name: ibm-cp-watson-aiops
     # Version of the catalog subscription
-    subscription_channel: v3.6
+    subscription_channel: v3.7
     # Freeze the version of the Catalog image by patching CatalogSource
     freeze_catalog: false
 
@@ -184,7 +184,7 @@ cp4waiops:
     create_account: false
 
     # Install Webhook Probe
-    install_webhook_probe: true
+    install_webhook_probe: false
 
     # ---------------------------------------------------------------------
     # OUTPUT
@@ -236,10 +236,10 @@ cp4waiops:
     kind: InfrastructureManagement
     install: false
     # Version of the catalog subscription
-    subscription_channel: v3.6
+    subscription_channel: v3.7
     # Freeze the version of the Catalog image by patching CatalogSource
     freeze_catalog: false
-    #subscription_channel: 3.4-dev
+    
     
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
@@ -266,7 +266,7 @@ cp4waiops:
   - name: cp4waiops-instana
     kind: Instana
     install: false
-    version: 241-0
+    version: 241-3
 
     # ---------------------------------------------------------------------
     # INSTANA LICENSE
@@ -303,7 +303,7 @@ cp4waiops:
   - name: cp4waiops-turbonomic
     kind: Turbonomic
     install: false
-    turbo_version: 8.7.6
+    turbo_version: 8.8.1
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)

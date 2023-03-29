@@ -50,7 +50,7 @@ cp4waiops:
     # Name of the CP4WAIOPS instance
     waiops_name: ibm-cp-watson-aiops
     # Version of the catalog subscription
-    subscription_channel: v3.6
+    subscription_channel: v3.7
     # Freeze the version of the Catalog image by patching CatalogSource
     freeze_catalog: false
 
@@ -222,7 +222,7 @@ cp4waiops:
     install: false
     # Version of the catalog subscription
     subscription_channel: v3.3
-    #subscription_channel: 3.4-dev
+    
 
     # --------------------------------------------------------------------------------------------------------------------------------------
     # Storage Classes Override for this Instance (see comment below)
@@ -249,7 +249,7 @@ cp4waiops:
   - name: cp4waiops-instana
     kind: Instana
     install: true
-    version: 241-0
+    version: 241-3
 
     # ---------------------------------------------------------------------
     # INSTANA LICENSE
