@@ -151,7 +151,7 @@
         sed -e '1,34d' cert.crt > ca.crt
 
         oc -n ibm-common-services patch managementingress default --type merge --patch '{"spec":{"ignoreRouteCert":true}}'
-        oc -n ibm-common-services get secret route-tls-secret -o yaml > backup_route-tls-secret.yaml # for backup purposes
+        oc -n ibm-common-services get secret route-tls-secret -o yaml > backup_route-tls-secret.yaml
         echo "Common Service signed cert"
 
         oc -n ibm-common-services delete certificates.v1alpha1.certmanager.k8s.io route-cert
@@ -161,7 +161,7 @@
         oc -n ibm-common-services delete pod -l app=auth-idp
         oc -n ibm-common-services delete pod -l name=operand-deployment-lifecycle-manager
 
-        podname=$(oc -n ibm-common-services get pods | grep '^management-ingress' | awk '{print$1}') #get the pod
+        podname=$(oc -n ibm-common-services get pods | grep '^management-ingress' | awk '{print$1}')
         oc -n ibm-common-services delete pod $podname
     else
         echo "✅ Seems that you're NOT on Techzone IPI"  
