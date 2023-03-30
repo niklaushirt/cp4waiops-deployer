@@ -146,8 +146,11 @@
     then
         echo "✅ Seems that you're on Techzone IPI"  
         echo "✅ Let's patch the certificates"  
-        oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.crt"}}' letsencrypt-certs | base64 -d > cert.crt
-        oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.key"}}' letsencrypt-certs | base64 -d > cert.key
+        oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}'  | base64 -d > cert.crt
+        oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 -d > cert.key
+
+        # oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.crt"}}' letsencrypt-certs | base64 -d > cert.crt
+        # oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.key"}}' letsencrypt-certs | base64 -d > cert.key
         sed -e '1,34d' cert.crt > ca.crt
 
         oc -n ibm-common-services patch managementingress default --type merge --patch '{"spec":{"ignoreRouteCert":true}}'
@@ -160,9 +163,7 @@
         oc -n ibm-common-services delete secret ibmcloud-cluster-ca-cert
         oc -n ibm-common-services delete pod -l app=auth-idp
         oc -n ibm-common-services delete pod -l name=operand-deployment-lifecycle-manager
-
-        podname=$(oc -n ibm-common-services get pods | grep '^management-ingress' | awk '{print$1}')
-        oc -n ibm-common-services delete pod $podname
+        oc -n ibm-common-services delete pod $(oc -n ibm-common-services get pods | grep '^management-ingress' | awk '{print$1}')
     else
         echo "✅ Seems that you're NOT on Techzone IPI"  
         echo "✅ No need to patch the certificates any further"  
