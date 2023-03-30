@@ -148,12 +148,9 @@
         echo "✅ Let's patch the certificates"  
         oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}'  | base64 -d > cert.crt
         oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 -d > cert.key
-
-        # oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.crt"}}' letsencrypt-certs | base64 -d > cert.crt
-        # oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.key"}}' letsencrypt-certs | base64 -d > cert.key
         sed -e '1,34d' cert.crt > ca.crt
 
-        oc -n ibm-common-services patch managementingress default --type merge --patch '{"spec":{"ignoreRouteCert":true}}'
+        oc -n ibm-common-services patch managementingress default --type merge --patch '{"spec":{"ignoreRouteCert":true} }'
         oc -n ibm-common-services get secret route-tls-secret -o yaml > backup_route-tls-secret.yaml
         echo "Common Service signed cert"
 
