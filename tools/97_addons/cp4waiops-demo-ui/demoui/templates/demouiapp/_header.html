@@ -161,8 +161,54 @@
                                     tabindex="-1">About</a>
                             </li>
 
+                            
+                        </ul>
+                    </ul>
+                    <ul role="tablist" tabindex="-1" class="bx--tabs--scrollable__nav">
+                    </ul>
+                    <ul role="tablist" tabindex="-1" class="bx--tabs--scrollable__nav">
+                    </ul>
+                    <ul role="tablist" tabindex="-1" class="bx--tabs--scrollable__nav">
+                    </ul>
+                    <ul role="tablist" tabindex="-1" class="bx--tabs--scrollable__nav">
+                    </ul>
+                    <ul role="tablist" tabindex="-1" class="bx--tabs--scrollable__nav">
+                    </ul>
+                    <ul role="tablist" tabindex="-1" class="bx--tabs--scrollable__nav">
 
-                        </ul><button aria-hidden="true" aria-label="Scroll right"
+                        <ul role="tablist" tabindex="-1" class="bx--tabs--scrollable__nav">
+                            <li class="bx--tabs--scrollable__nav-item" role="presentation">
+                                <a type="button" role="tab" aria-selected="false" aria-controls="favorites__panel"
+                                    id="favorites" class="bx--tabs--scrollable__nav-link" href="/about"
+                                    tabindex="-1">
+                                    {% if STORY_ACTIVE == True %}
+                                    🔴 Active Story
+                                    {% else %}
+                                    🟢 No Active Story
+                                {% endif %}
+                                </a>
+                            </li>
+                            <li class="bx--tabs--scrollable__nav-item" role="presentation">
+                                <a type="button" role="tab" aria-selected="false" aria-controls="favorites__panel"
+                                    id="favorites" class="bx--tabs--scrollable__nav-link" href="/about"
+                                    tabindex="-1">
+                                    {% if ROBOT_SHOP_OUTAGE_ACTIVE == True %}
+                                    🔴 Active RobotShop Outage
+                                    {% else %}
+                                    🟢 No Active RobotShop Outage
+                                {% endif %}
+                                </a>
+                            </li>
+
+                    
+
+                        </ul>
+                
+
+
+                    
+
+                        <button aria-hidden="true" aria-label="Scroll right"
                             class="bx--tab--overflow-nav-button--hidden" tabindex="-1" type="button"><svg
                                 focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
