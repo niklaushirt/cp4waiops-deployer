@@ -167,7 +167,7 @@
         echo "✅ Seems that you're NOT on Techzone IPI"  
         echo "✅ No need to patch the certificates any further"  
     fi
-  when: INGRESS_PATCHED==false
+  #when: INGRESS_PATCHED==false
   register: certificate_patch
   ignore_errors: true
   args:
