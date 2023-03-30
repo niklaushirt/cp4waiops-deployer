@@ -86,7 +86,7 @@
   ignore_errors: true
 
 
-- name: 🌏 CERTIFICATES - Patch AutomationUIConfig and Nginx Certificates
+- name: 💊 CERTIFICATES - Patch AutomationUIConfig and Nginx Certificates
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
@@ -131,6 +131,54 @@
   until: kubectl_get_pods.stdout == "2"
   retries: 50
   delay: 15
+
+
+
+
+- name: 💊 CERTIFICATES - Patch Certificates for TechZone IPI
+  shell: |
+    CLUSTER_ROUTE=$(oc get routes console -n openshift-console | tail -n 1 2>&1 )
+    CLUSTER_FQDN=$( echo $CLUSTER_ROUTE | awk '{print $2}')
+    CLUSTER_NAME=${CLUSTER_FQDN##*console.}
+
+
+    if [[ $CLUSTER_NAME =~ "cloud.techzone.ibm.com" ]];
+    then
+        echo "✅ Seems that you're on Techzone IPI"  
+        echo "✅ Let's patch the certificates"  
+        oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.crt"}}' letsencrypt-certs | base64 -d > cert.crt
+        oc get secret -n openshift-ingress -o 'go-template={{index .data "tls.key"}}' letsencrypt-certs | base64 -d > cert.key
+        sed -e '1,34d' cert.crt > ca.crt
+
+        oc -n ibm-common-services patch managementingress default --type merge --patch '{"spec":{"ignoreRouteCert":true}}'
+        oc -n ibm-common-services get secret route-tls-secret -o yaml > backup_route-tls-secret.yaml # for backup purposes
+        echo "Common Service signed cert"
+
+        oc -n ibm-common-services delete certificates.v1alpha1.certmanager.k8s.io route-cert
+        oc -n ibm-common-services delete secret route-tls-secret
+        oc -n ibm-common-services create secret generic route-tls-secret  --from-file=ca.crt=./ca.crt --from-file=tls.crt=./cert.crt --from-file=tls.key=./cert.key
+        oc -n ibm-common-services delete secret ibmcloud-cluster-ca-cert
+        oc -n ibm-common-services delete pod -l app=auth-idp
+        oc -n ibm-common-services delete pod -l name=operand-deployment-lifecycle-manager
+
+        podname=$(oc -n ibm-common-services get pods | grep '^management-ingress' | awk '{print$1}') #get the pod
+        oc -n ibm-common-services delete pod $podname
+    else
+        echo "✅ Seems that you're NOT on Techzone IPI"  
+        echo "✅ No need to patch the certificates any further"  
+    fi
+  when: INGRESS_PATCHED==false
+  register: certificate_patch
+  ignore_errors: true
+  args:
+    executable: /bin/bash
+
+
+- name: 🟢 DEBUG - Patch AutomationUIConfig Certificates
+  debug: 
+    var: certificate_patch
+
+
 
 
 

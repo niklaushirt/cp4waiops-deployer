@@ -51,6 +51,23 @@ eventmanagerns = stream.read().strip()
 print('        ✅ EventManager Namespace:    '+eventmanagerns)
 
 
+print('     ❓ Getting Details Datalayer')
+stream = os.popen("oc get route  -n "+aimanagerns+" datalayer-api  -o jsonpath='{.status.ingress[0].host}'")
+DATALAYER_ROUTE = stream.read().strip()
+stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode")
+DATALAYER_USER = stream.read().strip()
+stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode")
+DATALAYER_PWD = stream.read().strip()
+
+
+
+url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
+auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
+headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
+response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+print (' 🚀🚀🚀🚀🚀🚀   TEST:'+str(response.json()))
+
+
 
 cmd = '''
 echo "  <BR>"
@@ -334,6 +351,16 @@ stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secr
 DATALAYER_USER = stream.read().strip()
 stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode")
 DATALAYER_PWD = stream.read().strip()
+
+
+
+url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
+auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
+headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
+response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+print (' 🚀🚀🚀🚀🚀🚀   TEST:'+str(response.content))
+
+
 
 print('     ❓ Getting Details Metric Endpoint')
 stream = os.popen("oc get route -n "+aimanagerns+"| grep ibm-nginx-svc | awk '{print $2}'")
