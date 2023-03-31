@@ -118,7 +118,7 @@
 
       cat /tmp/xl_patch_ingress.yaml
       oc -n turbonomic delete secret nginx-ingressgateway-certs --ignore-not-found
-      oc patch Xl/xl-release --type merge --patch-file /tmp/xl_patch_ingress.yaml
+      oc patch Xl/xl-release -n turbonomic --type merge --patch-file /tmp/xl_patch_ingress.yaml
 
   register: certificate_patch
   ignore_errors: true
