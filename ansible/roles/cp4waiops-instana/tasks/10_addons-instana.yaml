@@ -458,6 +458,10 @@
 
       oc delete pod $(oc -n instana-core get pods| grep acceptor|awk '{print$1}') -n instana-core --ignore-not-found
       oc delete pod $(oc -n instana-core get pods| grep gateway|awk '{print$1}') -n instana-core --ignore-not-found
+    else
+        echo "✅ Seems that you're NOT on Techzone IPI"  
+        echo "✅ No need to patch the certificates any further"  
+    fi
 
   register: certificate_patch
   ignore_errors: true

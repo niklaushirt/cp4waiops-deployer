@@ -119,6 +119,10 @@
       cat /tmp/xl_patch_ingress.yaml
       oc -n turbonomic delete secret nginx-ingressgateway-certs --ignore-not-found
       oc patch Xl/xl-release -n turbonomic --type merge --patch-file /tmp/xl_patch_ingress.yaml
+    else
+        echo "✅ Seems that you're NOT on Techzone IPI"  
+        echo "✅ No need to patch the certificates any further"  
+    fi
 
   register: certificate_patch
   ignore_errors: true
