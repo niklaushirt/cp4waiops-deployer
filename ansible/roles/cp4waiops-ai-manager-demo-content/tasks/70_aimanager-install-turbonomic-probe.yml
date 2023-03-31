@@ -103,56 +103,7 @@
       - Ingress
     EOF
 
-    cat << EOF >> /tmp/test.yaml
-    apiVersion: probes.integrations.noi.ibm.com/v1
-    kind: WebhookProbe
-    metadata:
-      name: ${PROBE_INSTANCE_NAME}
-      labels:
-        app.kubernetes.io/name: ${PROBE_INSTANCE_NAME}
-        app.kubernetes.io/managed-by: netcool-integrations-operator
-        app.kubernetes.io/instance: ${PROBE_INSTANCE_NAME}
-      namespace: ${WAIOPS_NAMESPACE}
-    spec:
-      helmValues:
-        netcool:
-          backupHost: '${IRC_BACKUP_OBJECTSERVER_SVC}.${WAIOPS_NAMESPACE}.svc'
-          backupPort: ${IRC_BACKUP_OBJECTSERVER_PORT}
-          backupServer: 'AGGB'
-          connectionMode: SSLAndAuth
-          primaryHost: '${IRC_PRIMARY_OBJECTSERVER_SVC}.${WAIOPS_NAMESPACE}.svc'
-          primaryPort: ${IRC_PRIMARY_OBJECTSERVER_PORT}
-          primaryServer: 'AGGP'
-          secretName: '${PROBE_OMNI_SECRET}'
-        probe:
-          jsonParserConfig:
-            notification:
-              jsonNestedHeader: ''
-              jsonNestedPayload: ''
-              messageDepth: 3
-              messageHeader: ''
-              messagePayload: json
-          integration: Turbonomic
-          enableTransportDebugLog: false
-          messageLevel: debug
-        ingress:
-          enabled: true
-          host: ''
-        arch: amd64
-        webhook:
-          uri: /probe/turbonomic
-          serverBasicAuthenticationCredentialsSecretName: '${PROBE_AUTH_SECRET}'
-          tls:
-            enabled: true
-            secretName: ''
-      license:
-        accept: true
-      version: 3.1.0
-    EOF
-
-    cat /tmp/test.yaml
-
-    cat << EOF | tee >(oc apply -f -) | cat
+    cat <<EOF | oc apply -n $WAIOPS_NAMESPACE -f -
     apiVersion: probes.integrations.noi.ibm.com/v1
     kind: WebhookProbe
     metadata:
