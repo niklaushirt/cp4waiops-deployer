@@ -183,6 +183,9 @@ cp4waiops:
     # Create Service Account
     create_account: true
 
+    # Install Webhook Probe
+    install_webhook_probe: false
+    subscription_channel: v3.7
 
 
     # ---------------------------------------------------------------------
