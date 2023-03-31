@@ -317,7 +317,12 @@ spec:
                   # Create Service Account
                   create_account: true
 
+                  # Create Service Account
+                  create_account: true
 
+                  # Install Webhook Probe
+                  install_webhook_probe: false
+                  subscription_channel: v3.7
 
                   # ---------------------------------------------------------------------
                   # OUTPUT
