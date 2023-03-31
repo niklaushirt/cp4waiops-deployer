@@ -103,8 +103,7 @@
       - Ingress
     EOF
 
-
-    cat << EOF | tee >(oc apply -f -) | cat
+    cat <<EOF | oc apply -n $WAIOPS_NAMESPACE -f -
     apiVersion: probes.integrations.noi.ibm.com/v1
     kind: WebhookProbe
     metadata:
@@ -157,7 +156,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output_string.stdout_lines
-    verbosity: 1
+    #verbosity: 1
 
 
 

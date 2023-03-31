@@ -12,6 +12,8 @@ from functions import *
 SLACK_URL=str(os.environ.get('SLACK_URL'))
 SLACK_USER=str(os.environ.get('SLACK_USER'))
 SLACK_PWD=str(os.environ.get('SLACK_PWD'))
+STORY_ACTIVE=False
+ROBOT_SHOP_OUTAGE_ACTIVE=False
 
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
@@ -50,6 +52,45 @@ stream = os.popen("oc get po -A|grep noi-operator |awk '{print$1}'")
 eventmanagerns = stream.read().strip()
 print('        ✅ EventManager Namespace:    '+eventmanagerns)
 
+
+print('     ❓ Getting Details Datalayer')
+stream = os.popen("oc get route  -n "+aimanagerns+" datalayer-api  -o jsonpath='{.status.ingress[0].host}'")
+DATALAYER_ROUTE = stream.read().strip()
+stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode")
+DATALAYER_USER = stream.read().strip()
+stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode")
+DATALAYER_PWD = stream.read().strip()
+
+
+url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
+auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
+headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
+response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+responseJSON=response.json()
+responseStr=str(json.dumps(responseJSON))
+print(responseStr)
+#if 'pirsoscom.github.io/SNOW_INC' in responseStr and '"closed"' not in responseStr and '"resolved"' not in responseStr:
+if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
+    print('     🔴 STORY FOUND')
+    STORY_ACTIVE=True
+else:
+    print('     🟢 NO STORY')
+    STORY_ACTIVE=False
+
+stream = os.popen("oc get deployment  -n robot-shop ratings  -o yaml")
+RATINGS_YAML = stream.read().strip()
+if 'ratings-dev' in RATINGS_YAML:
+    print('     🔴 ROBOT SHOP OUTAGE ACTIVE')
+    ROBOT_SHOP_OUTAGE_ACTIVE=True
+else:
+    print('     🟢 ROBOT SHOP OUTAGE INACTIVE')
+    ROBOT_SHOP_OUTAGE_ACTIVE=False
+
+
+print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+
+#assignedToIndividual
+#inProgress
 
 
 cmd = '''
@@ -327,13 +368,8 @@ KAFKA_BROKER = stream.read().strip()
 stream = os.popen("oc get secret -n "+aimanagerns+" kafka-secrets  -o jsonpath='{.data.ca\.crt}'| base64 -d")
 KAFKA_CERT = stream.read().strip()
 
-print('     ❓ Getting Details Datalayer')
-stream = os.popen("oc get route  -n "+aimanagerns+" datalayer-api  -o jsonpath='{.status.ingress[0].host}'")
-DATALAYER_ROUTE = stream.read().strip()
-stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode")
-DATALAYER_USER = stream.read().strip()
-stream = os.popen("oc get secret -n "+aimanagerns+" aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode")
-DATALAYER_PWD = stream.read().strip()
+
+
 
 print('     ❓ Getting Details Metric Endpoint')
 stream = os.popen("oc get route -n "+aimanagerns+"| grep ibm-nginx-svc | awk '{print $2}'")
@@ -497,6 +533,10 @@ print ('************************************************************************
 def instanaCreateIncident(request):
     print('🌏 instanaCreateIncident')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -504,6 +544,20 @@ def instanaCreateIncident(request):
         print('🌏 Create Instana outage')
         os.system('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
         os.system('oc set env deployment load -n robot-shop ERROR=1')
+
+        url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
+        auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
+        headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
+        response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+        responseJSON=response.json()
+        responseStr=str(json.dumps(responseJSON))
+        if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
+            print('     🔴 STORY FOUND')
+            STORY_ACTIVE=True
+        else:
+            print('     🟢 NO STORY')
+            STORY_ACTIVE=False
+        ROBOT_SHOP_OUTAGE_ACTIVE=True
 
     else:
         template = loader.get_template('demouiapp/loginui.html')
@@ -541,6 +595,8 @@ def instanaCreateIncident(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -550,6 +606,9 @@ def instanaCreateIncident(request):
 def instanaMitigateIncident(request):
     print('🌏 instanaMitigateIncident')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -560,6 +619,21 @@ def instanaMitigateIncident(request):
         os.system('oc set env deployment load -n robot-shop ERROR=0')
         os.system("oc delete pod $(oc get po -n robot-shop|grep shipping|awk '{print$1}') -n robot-shop --ignore-not-found")
 
+        url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
+        auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
+        headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
+        response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+        responseJSON=response.json()
+        responseStr=str(json.dumps(responseJSON))
+        if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
+            print('     🔴 STORY FOUND')
+            STORY_ACTIVE=True
+        else:
+            print('     🟢 NO STORY')
+            STORY_ACTIVE=False
+
+        ROBOT_SHOP_OUTAGE_ACTIVE=False
+
     else:
         template = loader.get_template('demouiapp/loginui.html')
     context = {
@@ -596,6 +670,8 @@ def instanaMitigateIncident(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -611,6 +687,9 @@ def instanaMitigateIncident(request):
 def injectAllREST(request):
     print('🌏 injectAllREST')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
 
     if loggedin=='true':
@@ -641,6 +720,9 @@ def injectAllREST(request):
         # threadLogs.join()
         time.sleep(3)
 
+        STORY_ACTIVE=True
+        ROBOT_SHOP_OUTAGE_ACTIVE=True
+
     else:
         template = loader.get_template('demouiapp/loginui.html')
 
@@ -680,6 +762,8 @@ def injectAllREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -690,6 +774,9 @@ def injectAllREST(request):
 def injectAllFanREST(request):
     print('🌏 injectAllFanREST')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -697,6 +784,10 @@ def injectAllFanREST(request):
         print('🌏 Create RobotShop MySQL outage')
         os.system('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
         os.system('oc set env deployment load -n robot-shop ERROR=1')
+
+        STORY_ACTIVE=True
+        ROBOT_SHOP_OUTAGE_ACTIVE=True
+
 
         # injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
         # time.sleep(3)
@@ -757,6 +848,8 @@ def injectAllFanREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -768,6 +861,9 @@ def injectAllFanREST(request):
 def injectAllNetREST(request):
     print('🌏 injectAllNetREST')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -786,6 +882,17 @@ def injectAllNetREST(request):
         threadEvents.start()
         threadLogs.start()
         time.sleep(3)
+
+        STORY_ACTIVE=True
+
+        stream = os.popen("oc get deployment  -n robot-shop ratings  -o yaml")
+        RATINGS_YAML = stream.read().strip()
+        if 'ratings-dev' in RATINGS_YAML:
+            print('     🔴 ROBOT SHOP OUTAGE ACTIVE')
+            ROBOT_SHOP_OUTAGE_ACTIVE=True
+        else:
+            print('     🟢 ROBOT SHOP OUTAGE INACTIVE')
+            ROBOT_SHOP_OUTAGE_ACTIVE=True
 
     else:
         template = loader.get_template('demouiapp/loginui.html')
@@ -825,6 +932,8 @@ def injectAllNetREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -837,6 +946,9 @@ def injectAllNetREST(request):
 def injectLogsREST(request):
     print('🌏 injectLogsREST')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -878,6 +990,8 @@ def injectLogsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -888,6 +1002,9 @@ def injectLogsREST(request):
 def injectEventsREST(request):
     print('🌏 injectEventsREST')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
 
     if loggedin=='true':
@@ -930,6 +1047,8 @@ def injectEventsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -939,6 +1058,9 @@ def injectEventsREST(request):
 def injectMetricsREST(request):
     print('🌏 injectMetricsREST')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
 
     if loggedin=='true':
@@ -980,6 +1102,8 @@ def injectMetricsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -991,6 +1115,9 @@ def injectMetricsREST(request):
 def clearAllREST(request):
     print('🌏 clearAllREST')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -1017,6 +1144,9 @@ def clearAllREST(request):
         threadCloseAlerts.start()
         threadCloseStories.start()
         time.sleep(3)
+
+        STORY_ACTIVE=False
+        ROBOT_SHOP_OUTAGE_ACTIVE=False
 
     else:
         template = loader.get_template('demouiapp/loginui.html')
@@ -1055,6 +1185,8 @@ def clearAllREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1070,6 +1202,9 @@ def clearAllREST(request):
 def clearEventsREST(request):
     print('🌏 clearEventsREST')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -1111,6 +1246,8 @@ def clearEventsREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1120,12 +1257,17 @@ def clearEventsREST(request):
 def clearStoriesREST(request):
     print('🌏 injectLogsREST')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
         closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
     else:
         template = loader.get_template('demouiapp/loginui.html')
+        STORY_ACTIVE=False
+        ROBOT_SHOP_OUTAGE_ACTIVE=False
 
     context = {
         'loggedin': loggedin,
@@ -1161,6 +1303,8 @@ def clearStoriesREST(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1172,6 +1316,9 @@ def login(request):
 
     global loggedin
     global loginip
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
     response = HttpResponse()
 
@@ -1200,10 +1347,11 @@ def login(request):
             'DEMO_USER': DEMO_USER,
             'DEMO_PWD': DEMO_PWD,
             'ADMIN_MODE': ADMIN_MODE,
+            'STORY_ACTIVE': STORY_ACTIVE,
+            'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
             'SIMULATION_MODE': SIMULATION_MODE,  
             'INSTANCE_NAME': INSTANCE_NAME,
-        'INSTANCE_IMAGE': INSTANCE_IMAGE,
-            'ADMIN_MODE': ADMIN_MODE,
+            'INSTANCE_IMAGE': INSTANCE_IMAGE,
             'SIMULATION_MODE': SIMULATION_MODE,
             'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
             'PAGE_NAME': 'index'
@@ -1229,10 +1377,11 @@ def login(request):
             'DEMO_USER': DEMO_USER,
             'DEMO_PWD': DEMO_PWD,
             'ADMIN_MODE': ADMIN_MODE,
+            'STORY_ACTIVE': STORY_ACTIVE,
+            'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
             'SIMULATION_MODE': SIMULATION_MODE,  
             'INSTANCE_NAME': INSTANCE_NAME,
-        'INSTANCE_IMAGE': INSTANCE_IMAGE,
-            'ADMIN_MODE': ADMIN_MODE,
+            'INSTANCE_IMAGE': INSTANCE_IMAGE,
             'SIMULATION_MODE': SIMULATION_MODE,
             'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
             'PAGE_NAME': 'login'
@@ -1309,13 +1458,39 @@ def loginui(request):
 def index(request):
     print('🌏 index')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
+        url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
+        auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
+        headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
+        response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+        responseJSON=response.json()
+        responseStr=str(json.dumps(responseJSON))
+        if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
+            print('     🔴 STORY FOUND')
+            STORY_ACTIVE=True
+        else:
+            print('     🟢 NO STORY')
+            STORY_ACTIVE=False
+
+        stream = os.popen("oc get deployment  -n robot-shop ratings  -o yaml")
+        RATINGS_YAML = stream.read().strip()
+        if 'ratings-dev' in RATINGS_YAML:
+            print('     🔴 ROBOT SHOP OUTAGE ACTIVE')
+            ROBOT_SHOP_OUTAGE_ACTIVE=True
+        else:
+            print('     🟢 ROBOT SHOP OUTAGE INACTIVE')
+            ROBOT_SHOP_OUTAGE_ACTIVE=False
+
     else:
         template = loader.get_template('demouiapp/loginui.html')
+
     context = {
         'loggedin': loggedin,
         'aimanager_url': aimanager_url,
@@ -1325,12 +1500,16 @@ def index(request):
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1341,6 +1520,9 @@ def index(request):
 def doc(request):
     print('🌏 doc')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1377,6 +1559,8 @@ def doc(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'CloudPak for Watson AIOps Demo UI',
         'PAGE_NAME': 'doc'
@@ -1386,6 +1570,9 @@ def doc(request):
 def apps(request):
     print('🌏 apps')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1423,6 +1610,8 @@ def apps(request):
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
@@ -1437,6 +1626,9 @@ def apps(request):
 def apps_system(request):
     print('🌏 apps_system')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1474,6 +1666,8 @@ def apps_system(request):
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
@@ -1489,6 +1683,9 @@ def apps_system(request):
 def apps_demo(request):
     print('🌏 apps_demo')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1526,6 +1723,8 @@ def apps_demo(request):
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
@@ -1542,6 +1741,9 @@ def apps_demo(request):
 def apps_additional(request):
     print('🌏 apps_additional')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1579,6 +1781,8 @@ def apps_additional(request):
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
@@ -1596,6 +1800,9 @@ def about(request):
     print('🌏 about')
 
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1608,6 +1815,8 @@ def about(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
@@ -1621,6 +1830,9 @@ def about(request):
 def config(request):
     print('🌏 config')
     global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1633,6 +1845,8 @@ def config(request):
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
