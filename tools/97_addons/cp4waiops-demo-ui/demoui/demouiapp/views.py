@@ -69,7 +69,8 @@ response = requests.get(url, headers=headers, auth=auth) #, verify=False)
 responseJSON=response.json()
 responseStr=str(json.dumps(responseJSON))
 print(responseStr)
-if 'pirsoscom.github.io/SNOW_INC' in responseStr and '"closed"' not in responseStr and '"resolved"' not in responseStr:
+#if 'pirsoscom.github.io/SNOW_INC' in responseStr and '"closed"' not in responseStr and '"resolved"' not in responseStr:
+if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
     print('     🔴 STORY FOUND')
     STORY_ACTIVE=True
 else:
@@ -88,7 +89,8 @@ else:
 
 print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
 
-
+#assignedToIndividual
+#inProgress
 
 
 cmd = '''
@@ -549,7 +551,7 @@ def instanaCreateIncident(request):
         response = requests.get(url, headers=headers, auth=auth) #, verify=False)
         responseJSON=response.json()
         responseStr=str(json.dumps(responseJSON))
-        if 'pirsoscom.github.io/SNOW_INC' in responseStr and '"closed"' not in responseStr and '"resolved"' not in responseStr:
+        if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
             print('     🔴 STORY FOUND')
             STORY_ACTIVE=True
         else:
@@ -623,7 +625,7 @@ def instanaMitigateIncident(request):
         response = requests.get(url, headers=headers, auth=auth) #, verify=False)
         responseJSON=response.json()
         responseStr=str(json.dumps(responseJSON))
-        if 'pirsoscom.github.io/SNOW_INC' in responseStr and '"closed"' not in responseStr and '"resolved"' not in responseStr:
+        if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
             print('     🔴 STORY FOUND')
             STORY_ACTIVE=True
         else:
@@ -1470,7 +1472,7 @@ def index(request):
         response = requests.get(url, headers=headers, auth=auth) #, verify=False)
         responseJSON=response.json()
         responseStr=str(json.dumps(responseJSON))
-        if 'pirsoscom.github.io/SNOW_INC' in responseStr and '"closed"' not in responseStr and '"resolved"' not in responseStr:
+        if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
             print('     🔴 STORY FOUND')
             STORY_ACTIVE=True
         else:

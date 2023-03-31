@@ -82,6 +82,55 @@
 - name: 🕦 TURBONOMIC - Wait for 120 seconds
   shell: sleep 120
 
+
+- name: 💊 CERTIFICATES - Patch Certificates for TechZone IPI
+  shell: |
+    CLUSTER_ROUTE=$(oc get routes console -n openshift-console | tail -n 1 2>&1 )
+    CLUSTER_FQDN=$( echo $CLUSTER_ROUTE | awk '{print $2}')
+    CLUSTER_NAME=${CLUSTER_FQDN##*console.}
+
+
+    if [[ $CLUSTER_NAME =~ "cloud.techzone.ibm.com" ]];
+    then
+      echo "✅ Seems that you're on Techzone IPI"  
+      echo "✅ Let's patch the certificates"  
+      echo "--------------------------------------------------------------------------------------------------------------------------"
+      export certcrt=$(oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}' | base64 -d)
+      export cacrt=$(echo "$certcrt" | sed -e '1,34d')
+      export certkey=$(oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 -d)
+      export cacrt=$(echo $cacrt|tr -d '\n')
+      export certkey=$(echo $certkey|tr -d '\n')
+
+      echo "--------------------------------------------------------------------------------------------------------------------------"
+      echo $cacrt
+      echo "--------------------------------------------------------------------------------------------------------------------------"
+      echo $certkey
+
+
+
+      echo "spec:" > /tmp/xl_patch_ingress.yaml
+      echo "  global:" >> /tmp/xl_patch_ingress.yaml
+      echo "    ingress:" >> /tmp/xl_patch_ingress.yaml
+      echo "      secrets:" >> /tmp/xl_patch_ingress.yaml
+      echo "        - certificate: $cacrt" >> /tmp/xl_patch_ingress.yaml
+      echo "          key: $certkey" >> /tmp/xl_patch_ingress.yaml
+      echo "          name: nginx-ingressgateway-certs" >> /tmp/xl_patch_ingress.yaml
+
+      cat /tmp/xl_patch_ingress.yaml
+      oc -n turbonomic delete secret nginx-ingressgateway-certs --ignore-not-found
+      oc patch Xl/xl-release --type merge --patch-file /tmp/xl_patch_ingress.yaml
+
+  register: certificate_patch
+  ignore_errors: true
+  args:
+    executable: /bin/bash
+
+
+- name: 🟢 DEBUG - Patch AutomationUIConfig Certificates
+  debug: 
+    var: certificate_patch
+
+
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for turbonomic Namespace to be ready
 # --------------------------------------------------------------------------------------------------------------------------------------
