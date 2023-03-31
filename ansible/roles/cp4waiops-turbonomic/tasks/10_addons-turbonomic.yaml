@@ -106,19 +106,21 @@
       echo "--------------------------------------------------------------------------------------------------------------------------"
       echo $certkey
 
-
-
       echo "spec:" > /tmp/xl_patch_ingress.yaml
       echo "  global:" >> /tmp/xl_patch_ingress.yaml
       echo "    ingress:" >> /tmp/xl_patch_ingress.yaml
       echo "      secrets:" >> /tmp/xl_patch_ingress.yaml
-      echo "        - certificate: $cacrt" >> /tmp/xl_patch_ingress.yaml
-      echo "          key: $certkey" >> /tmp/xl_patch_ingress.yaml
+      echo "        - certificate: |" >> /tmp/xl_patch_ingress.yaml
+      echo "$certcrt"| sed 's/^/           /' >> /tmp/xl_patch_ingress.yaml
+      echo "          key: |" >> /tmp/xl_patch_ingress.yaml
+      echo "$certkey"| sed 's/^/           /' >> /tmp/xl_patch_ingress.yaml
       echo "          name: nginx-ingressgateway-certs" >> /tmp/xl_patch_ingress.yaml
 
       cat /tmp/xl_patch_ingress.yaml
       oc -n turbonomic delete secret nginx-ingressgateway-certs --ignore-not-found
-      oc patch Xl/xl-release -n turbonomic --type merge --patch-file /tmp/xl_patch_ingress.yaml
+      oc patch Xl/xl-release --type merge --patch-file /tmp/xl_patch_ingress.yaml
+
+
     else
         echo "✅ Seems that you're NOT on Techzone IPI"  
         echo "✅ No need to patch the certificates any further"  
