@@ -227,7 +227,7 @@
 - name: 🚀 INSTANA - Create TLS Ingress Secrets
   shell: |
     oc -n instana-core delete secret  instana-tls
-    openssl req -x509 -newkey rsa:2048 -keyout tls.key -out tls.crt -days 365 -nodes -subj "/O=IBM/CN=*.containers.appdomain.cloud" -addext "subjectAltName = DNS:{{BASE_DOMAIN}}"
+    openssl req -x509 -newkey rsa:2048 -keyout tls.key -out tls.crt -days 365 -nodes -subj "/O=IBM/CN=*.cloud.techzone.ibm.com" -addext "subjectAltName = DNS:{{BASE_DOMAIN}}"
     oc -n instana-core create secret tls instana-tls --cert=./tls.crt --key=./tls.key
     oc -n instana-core label secret instana-tls app.kubernetes.io/name=instana
   ignore_errors: true

@@ -265,7 +265,7 @@
 - name: 🚀 INSTANA - Create TLS Ingress Secrets
   shell: |
     oc -n instana-core delete secret  instana-tls
-    openssl req -x509 -newkey rsa:2048 -keyout tls.key -out tls.crt -days 365 -nodes -subj "/O=IBM/CN=*.containers.appdomain.cloud" -addext "subjectAltName = DNS:{{BASE_DOMAIN}}"
+    openssl req -x509 -newkey rsa:2048 -keyout tls.key -out tls.crt -days 365 -nodes -subj "/O=IBM/CN=*.{{BASE_DOMAIN}}" -addext "subjectAltName = DNS:{{BASE_DOMAIN}}"
     oc -n instana-core create secret tls instana-tls --cert=./tls.crt --key=./tls.key
     oc -n instana-core label secret instana-tls app.kubernetes.io/name=instana
   ignore_errors: true
@@ -435,38 +435,38 @@
   delay: 15
 
 
-- name: 💊 CERTIFICATES - Patch Certificates for TechZone IPI
-  shell: |
-    CLUSTER_ROUTE=$(oc get routes console -n openshift-console | tail -n 1 2>&1 )
-    CLUSTER_FQDN=$( echo $CLUSTER_ROUTE | awk '{print $2}')
-    CLUSTER_NAME=${CLUSTER_FQDN##*console.}
+# - name: 💊 CERTIFICATES - Patch Certificates for TechZone IPI
+#   shell: |
+#     CLUSTER_ROUTE=$(oc get routes console -n openshift-console | tail -n 1 2>&1 )
+#     CLUSTER_FQDN=$( echo $CLUSTER_ROUTE | awk '{print $2}')
+#     CLUSTER_NAME=${CLUSTER_FQDN##*console.}
 
 
-    if [[ $CLUSTER_NAME =~ "cloud.techzone.ibm.com" ]];
-    then
-      echo "✅ Seems that you're on Techzone IPI"  
-      echo "✅ Let's patch the certificates"  
-      oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}'  | base64 -d > cert.crt
-      oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 -d > cert.key
-      sed -e '1,34d' cert.crt > ca.crt
+#     if [[ $CLUSTER_NAME =~ "cloud.techzone.ibm.com" ]];
+#     then
+#       echo "✅ Seems that you're on Techzone IPI"  
+#       echo "✅ Let's patch the certificates"  
+#       oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}'  | base64 -d > cert.crt
+#       oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 -d > cert.key
+#       sed -e '1,34d' cert.crt > ca.crt
 
-      oc -n instana-core get secret instana-tls -o yaml > backup_instana-tls.yaml
+#       oc -n instana-core get secret instana-tls -o yaml > backup_instana-tls.yaml
 
-      oc -n instana-core delete secret instana-tls
-      oc -n instana-core create secret tls instana-tls  --cert=./cert.crt --key=./cert.key
+#       oc -n instana-core delete secret instana-tls
+#       oc -n instana-core create secret tls instana-tls  --cert=./cert.crt --key=./cert.key
 
 
-      oc delete pod $(oc -n instana-core get pods| grep acceptor|awk '{print$1}') -n instana-core --ignore-not-found
-      oc delete pod $(oc -n instana-core get pods| grep gateway|awk '{print$1}') -n instana-core --ignore-not-found
-    else
-        echo "✅ Seems that you're NOT on Techzone IPI"  
-        echo "✅ No need to patch the certificates any further"  
-    fi
+#       oc delete pod $(oc -n instana-core get pods| grep acceptor|awk '{print$1}') -n instana-core --ignore-not-found
+#       oc delete pod $(oc -n instana-core get pods| grep gateway|awk '{print$1}') -n instana-core --ignore-not-found
+#     else
+#         echo "✅ Seems that you're NOT on Techzone IPI"  
+#         echo "✅ No need to patch the certificates any further"  
+#     fi
 
-  register: certificate_patch
-  ignore_errors: true
-  args:
-    executable: /bin/bash
+#   register: certificate_patch
+#   ignore_errors: true
+#   args:
+#     executable: /bin/bash
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Create Routes
