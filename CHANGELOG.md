@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+
+## [37.0.1] - 2023-03-31
+
+
+### Minor changes
+
+- Probes (generic and Turbonomic)
+- Ingress credentials for ITZ IPI (Thanks to Włodzimierz Dymaczewski)
+
+
+
+
 ## [37.0.0] - 2023-03-29
 
 Release for 3.7.0 GA
