@@ -2,13 +2,13 @@
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# SIMULATE INCIDENT ON ROBOTSHOP
+# SIMULATE INCIDENT ON ACME
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
-export APP_NAME=fan-problem
+export APP_NAME=acme
 export LOG_TYPE=elk   # humio, elk, splunk, ...
 export EVENTS_TYPE=noi
 export EVENTS_SKEW="-120M"
@@ -47,7 +47,7 @@ echo "**************************************************************************
 
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 if [ "${OS}" == "darwin" ]; then
-      echo "OK"
+      echo "       ✅ OK - MacOS"
 else
       echo "❗ This tool currently only runs on Mac OS due to shell limitations."
       echo "❌ Exiting....."
@@ -98,44 +98,6 @@ oc project $WAIOPS_NAMESPACE  >/tmp/demo.log 2>&1  || true
 
 
 
-export USER_PASS="$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode):$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode)"
-oc apply -n $WAIOPS_NAMESPACE -f ./tools/01_demo/scripts/datalayer-api-route.yaml >/tmp/demo.log 2>&1  || true
-sleep 2
-export DATALAYER_ROUTE=$(oc get route  -n $WAIOPS_NAMESPACE datalayer-api  -o jsonpath='{.status.ingress[0].host}')
-
-
-echo ""
-echo ""
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-read -p "    ❓ Do you want to close existing Stories and Alerts❓ [y,N] " DO_COMM
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
-      echo ""
-      echo ""
-      echo "   ------------------------------------------------------------------------------------------------------------------------------"
-      echo "   🚀  ❎ Closing existing Stories and Alerts..."
-      echo "   ------------------------------------------------------------------------------------------------------------------------------"
-
-      export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/stories" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"state": "resolved"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
-      echo "       Stories closed: "$(echo $result | jq ".affected")
-
-      #export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/alerts?filter=type.classification%20%3D%20%27robot-shop%27" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"state": "closed"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
-      export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/alerts" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"state": "closed"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
-      echo "       Alerts closed: "$(echo $result | jq ".affected")
-      #curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/alerts" -X GET -u "${USER_PASS}" -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255" | grep '"state": "open"' | wc -l
-fi
-
-#------------------------------------------------------------------------------------------------------------------------------------
-#  Deactivating MYSQL Service
-#------------------------------------------------------------------------------------------------------------------------------------
-echo " "
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Deactivating MYSQL Service for Demo Scenario..."
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"
-oc set env deployment load -n robot-shop ERROR=1
-
-
 #------------------------------------------------------------------------------------------------------------------------------------
 #  Get Credentials
 #------------------------------------------------------------------------------------------------------------------------------------
@@ -143,7 +105,6 @@ echo " "
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 echo "   🚀  Initializing..."
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-
 
 
 echo "     📥 Get Kafka Topics"
@@ -167,15 +128,15 @@ export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS
 export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
 export TOPO_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-rest -o jsonpath={.spec.host})
 export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
-
-
-
-
 echo " "
 
+echo "     📥 Get Connections"
+export USER_PASS="$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode):$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode)"
+export DATALAYER_ROUTE=$(oc get route  -n $WAIOPS_NAMESPACE datalayer-api  -o jsonpath='{.status.ingress[0].host}')
+echo " "
+
+
 echo "     📥 Get Date Formats"
-
-
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 if [ "${OS}" == "darwin" ]; then
       # Suppose we're on Mac
@@ -200,7 +161,6 @@ else
       #export DATE_FORMAT_LOGS="-d$LOGS_SKEW +%Y-%m-%dT%H:%M:%S.000000+00:00" 
       # HUMIO export DATE_FORMAT_LOGS="+%s000"
 fi
-
 echo " "
 
 
@@ -316,9 +276,9 @@ echo "   -----------------------------------------------------------------------
 
 
 # Inject the Metric Anomalies Fan/Temp
-./tools/01_demo/scripts/simulate-metrics-fan-temp.sh
+./tools/01_demo/scripts/simulate-metrics-acme-temp.sh
 
-echo "   🕦 Waiting 10 seconds"
+# echo "   🕦 Waiting 10 seconds"
 sleep 10
 
 # Inject the Events Inception files
@@ -331,7 +291,7 @@ sleep 10
 ./tools/01_demo/scripts/simulate-logs.sh 
 
 # Inject the Metric Anomalies
-./tools/01_demo/scripts/simulate-metrics-fan-app.sh
+./tools/01_demo/scripts/simulate-metrics-acme-app.sh
 
 
 echo " "

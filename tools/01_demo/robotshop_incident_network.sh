@@ -8,7 +8,7 @@
 
 
 
-export APP_NAME=robot-shop
+export APP_NAME=network-switch
 export LOG_TYPE=elk   # humio, elk, splunk, ...
 export EVENTS_TYPE=noi
 export EVENTS_SKEW="-120M"
@@ -47,7 +47,7 @@ echo "**************************************************************************
 
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 if [ "${OS}" == "darwin" ]; then
-      echo "OK"
+      echo "       ✅ OK - MacOS"
 else
       echo "❗ This tool currently only runs on Mac OS due to shell limitations."
       echo "❗ Please use the Demo Web UI for Incident simulation."
@@ -205,15 +205,6 @@ if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
       fi
 fi
 
-#------------------------------------------------------------------------------------------------------------------------------------
-#  Deactivating MYSQL Service
-#------------------------------------------------------------------------------------------------------------------------------------
-echo " "
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Deactivating MYSQL Service for Demo Scenario..."
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"
-oc set env deployment load -n robot-shop ERROR=1
 
 
 
@@ -388,7 +379,7 @@ echo "   -----------------------------------------------------------------------
 ./tools/01_demo/scripts/simulate-logs.sh 
 
 # Inject the Metric Anomalies
-./tools/01_demo/scripts/simulate-metrics.sh
+./tools/01_demo/scripts/simulate-metrics-network.sh
 
 # Inject the Log Inception files
 ./tools/01_demo/scripts/simulate-logs.sh 

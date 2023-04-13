@@ -2,17 +2,17 @@
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# SIMULATE INCIDENT ON ACME
+# SIMULATE INCIDENT ON ROBOTSHOP
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
-export APP_NAME=acme
+export APP_NAME=robot-shop
 export LOG_TYPE=elk   # humio, elk, splunk, ...
 export EVENTS_TYPE=noi
 export EVENTS_SKEW="-120M"
-export LOGS_SKEW="0M"
+export LOGS_SKEW="-90M"
 export METRICS_SKEW="+5M"
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,9 +47,10 @@ echo "**************************************************************************
 
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 if [ "${OS}" == "darwin" ]; then
-      echo "OK"
+      echo "       ✅ OK - MacOS"
 else
       echo "❗ This tool currently only runs on Mac OS due to shell limitations."
+      echo "❗ Please use the Demo Web UI for Incident simulation."
       echo "❌ Exiting....."
       exit 1 
 fi
@@ -97,6 +98,124 @@ fi
 oc project $WAIOPS_NAMESPACE  >/tmp/demo.log 2>&1  || true
 
 
+export USER_PASS="$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode):$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode)"
+oc apply -n $WAIOPS_NAMESPACE -f ./tools/01_demo/scripts/datalayer-api-route.yaml >/tmp/demo.log 2>&1  || true
+sleep 2
+export DATALAYER_ROUTE=$(oc get route  -n $WAIOPS_NAMESPACE datalayer-api  -o jsonpath='{.status.ingress[0].host}')
+
+
+echo ""
+echo ""
+echo "   ------------------------------------------------------------------------------------------------------------------------------"
+read  -t 5 -p "    ❓ Do you want to close existing Stories and Alerts❓ [y,N] " DO_COMM
+echo "   ------------------------------------------------------------------------------------------------------------------------------"
+if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
+      echo ""
+      echo ""
+      echo "   ------------------------------------------------------------------------------------------------------------------------------"
+      echo "   🚀  ❎ Closing existing Stories and Alerts..."
+      echo "   ------------------------------------------------------------------------------------------------------------------------------"
+
+      export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/stories" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"state": "resolved"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
+      echo "       Stories closed: "$(echo $result | jq ".affected")
+
+      #export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/alerts?filter=type.classification%20%3D%20%27robot-shop%27" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"state": "closed"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
+      export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/alerts" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"state": "closed"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
+      echo "       Alerts closed: "$(echo $result | jq ".affected")
+      #curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/alerts" -X GET -u "${USER_PASS}" -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255" | grep '"state": "open"' | wc -l
+fi
+
+
+
+
+
+echo ""
+echo ""
+echo "   ------------------------------------------------------------------------------------------------------------------------------"
+read  -t 5 -p "    ❓ Do you want to open the webpages for the demo❓ [y,N] " DO_COMM
+echo "   ------------------------------------------------------------------------------------------------------------------------------"
+if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
+      export DEMOUI_ROUTE="http://"$(oc get route -n $WAIOPS_NAMESPACE waiops-demo-ui-python -o jsonpath={.spec.host})
+      export AIMANAGER_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
+      export ROBOTSHOP_ROUTE="http://"$(oc get routes -n robot-shop web  -o jsonpath="{['spec']['host']}")|| true
+      export AWX_ROUTE="http://"$(oc get route -n awx awx -o jsonpath={.spec.host})|| true
+
+      echo ""
+      echo ""
+      echo ""      
+      echo "            📥 AI Manager"
+      echo ""
+      echo "                🌏 URL:           $AIMANAGER_ROUTE"
+      echo "                🧑 User:          demo"
+      echo "                🔐 Password:      P4ssw0rd!"
+      echo ""    
+      echo "                🧑 User:          $(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode && echo)"
+      echo "                🔐 Password:      $(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode)"
+      echo ""
+      echo ""
+      echo ""
+      appToken=$(oc get cm -n $WAIOPS_NAMESPACE demo-ui-python-config -o jsonpath='{.data.TOKEN}')
+      echo "            📥 Demo UI:"   
+      echo "    " 
+      echo "                🌏 URL:           $DEMOUI_ROUTE"
+      echo "                🔐 Token:         $(oc get cm -n $WAIOPS_NAMESPACE demo-ui-python-config -o jsonpath='{.data.TOKEN}' && echo)"
+      echo ""
+      echo ""
+      echo ""
+      echo "            📥 RobotShop:"   
+      echo "    " 
+      echo "                🌏 APP URL:      $ROBOTSHOP_ROUTE"
+      echo ""
+      echo ""
+      echo ""
+      echo "            📥 AWX :"
+      echo ""
+      echo "                🌏 URL:           $AWX_ROUTE"
+      echo "                🧑 User:          admin"
+      echo "                🔐 Password:      $(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)"
+
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+
+
+
+      if [ -x "$(command -v open)" ]; then
+      open $DEMOUI_ROUTE
+      open $AWX_ROUTE"/#/jobs"
+      open $AIMANAGER_ROUTE"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories"
+      open $ROBOTSHOP_ROUTE
+      else 
+      if [ -x "$(command -v firefox)" ]; then
+            firefox $DEMOUI_ROUTE
+            firefox $AWX_ROUTE"/#/jobs"
+            firefox $AIMANAGER_ROUTE"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories"
+            firefox $ROBOTSHOP_ROUTE
+      else 
+            if [ -x "$(command -v google-chrome)" ]; then
+            google-chrome $DEMOUI_ROUTE
+            google-chrome $AWX_ROUTE"/#/jobs"
+            google-chrome $AIMANAGER_ROUTE"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories"
+            google-chrome $ROBOTSHOP_ROUTE
+            fi
+      fi
+      fi
+fi
+
+#------------------------------------------------------------------------------------------------------------------------------------
+#  Deactivating MYSQL Service
+#------------------------------------------------------------------------------------------------------------------------------------
+echo " "
+echo "   ------------------------------------------------------------------------------------------------------------------------------"
+echo "   🚀  Deactivating MYSQL Service for Demo Scenario..."
+echo "   ------------------------------------------------------------------------------------------------------------------------------"
+oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"
+oc set env deployment load -n robot-shop ERROR=1
+
+
 
 #------------------------------------------------------------------------------------------------------------------------------------
 #  Get Credentials
@@ -123,15 +242,6 @@ echo "     📥 Get Working Directories"
 export WORKING_DIR_LOGS="./tools/01_demo/INCIDENT_FILES/$APP_NAME/logs"
 export WORKING_DIR_EVENTS="./tools/01_demo/INCIDENT_FILES/$APP_NAME/events_rest"
 export WORKING_DIR_METRICS="./tools/01_demo/INCIDENT_FILES/$APP_NAME/metrics"
-
-echo "     📥 Get ASM Connection"
-export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
-export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
-export TOPO_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-rest -o jsonpath={.spec.host})
-export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
-
-
-
 
 echo " "
 
@@ -260,7 +370,6 @@ echo "   -----------------------------------------------------------------------
 
 
 
-
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -268,20 +377,6 @@ echo "   -----------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # RUNNING Injection
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-# curl -X "POST" "$TOPO_ROUTE/1.0/rest-observer/rest/resources" --insecure -H 'Content-Type: application/json' -u $LOGIN -H 'JobId: restTopology' -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' -d $'{  "status":"not available", "dataCenter": "demo","architecture": "x86_64",  "cpuName": "DCWest1-Rack045-DELL3762-cpu",  "entityTypes": ["server"],  "hypervisor": "vsphere",  "matchTokens": ["DCWest1-Rack045-DELL3762"],  "monitoring-state": "disabled",  "name": "Baremetal DCWest1-Rack045-DELL3762",  "privateDnsName": "ip-172-31-22-67.dcwest1.compute.internal",  "privateIpAddress": "172.31.22.67",  "publicDnsName": "ec2-3-72-4-84.dcwest1.compute.amazonaws.com",  "publicIpAddress": "3.72.4.84",  "ramdiskId": "",  "requesterId": "",  "rootDeviceName": "/dev/sda1",  "rootDeviceType": "ebs",  "tags": ["Name:CustomerRelations", "DCWest1-Rack045-DELL3762"],  "uniqueId": "DCWest1-Rack045-DELL3762",  "vertexType": "resource",  "virtualizationType": "vsphere"}'
-# curl -X "POST" "$TOPO_ROUTE/1.0/rest-observer/rest/resources" --insecure -H 'Content-Type: application/json' -u $LOGIN -H 'JobId: restTopology' -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' -d $'{  "status":"not found", "dataCenter": "demo","architecture": "x86_64",  "cpuName": "DCW1-000483-cpu",  "entityTypes": ["vm"],  "hypervisor": "vsphere",  "matchTokens": ["DCW1-000483"],  "monitoring-state": "disabled",  "name": "VM DCW1-000483",  "privateDnsName": "ip-172-31-22-67.dcwest1.compute.internal",  "privateIpAddress": "172.31.22.67",  "publicDnsName": "ec2-3-72-4-84.dcwest1.compute.amazonaws.com",  "publicIpAddress": "3.72.4.84",  "ramdiskId": "",  "requesterId": "",  "rootDeviceName": "/dev/sda1",  "rootDeviceType": "ebs",  "tags": ["Name:CustomerRelations", "DCW1-000483"],  "uniqueId": "DCW1-000483",  "vertexType": "resource",  "virtualizationType": "vsphere"}'
-# curl -X "POST" "$TOPO_ROUTE/1.0/rest-observer/rest/resources" --insecure -H 'Content-Type: application/json' -u $LOGIN -H 'JobId: restTopology' -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' -d $'{  "status":"degraded", "dataCenter": "demo","dataCenter": "demo",  "entityTypes": ["cluster"],  "matchTokens": ["PROD-027-OCP001"],  "name": "K8s Cluster PROD-027-OCP001",  "tags": [],  "vertexType": "resource",  "uniqueId": "PROD-027-OCP001"}'
-# curl -X "POST" "$TOPO_ROUTE/1.0/rest-observer/rest/resources" --insecure -H 'Content-Type: application/json' -u $LOGIN -H 'JobId: restTopology' -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' -d $'{  "status":"not ready", "dataCenter": "demo","bootID": "c0dd874c-5c15-413d-b869-f460cb4ee65c",  "containerRuntimeVersion": "cri-o://1.21.6-2.rhaos4.8.gitb948fcd.el7",    "entityTypes": ["server"],  "hostname": "10.13.177.175",  "kernelVersion": "3.10.0-1160.62.1.el7.x86_64",  "kubeProxyVersion": "v1.21.8+ee73ea2",  "kubeletVersion": "v1.21.8+ee73ea2",    "machineID": "0865b9a9bc8944dd810f3626309faa7b",  "management": "N/A",  "matchTokens": ["worker-10.13.177.175","PROD-027-OCP001-WORKER01"],  "name": "Node PROD-027-OCP001-WORKER01",  "node_uid": "86c5007d-b47d-4e73-bbf3-b3c23087a5f7",    "pods_allocatable": "160",  "pods_capacity": "160",  "proxy": "N/A",  "role": "worker",  "systemUUID": "D015E6BB-83AC-8886-8606-4F6CC0BAEC06",  "tags": ["os:Red Hat", "robot-shop", "role:master"],  "uniqueId": "PROD-027-OCP001-WORKER01",  "vertexType": "resource"}'
-
-
-# # Inject the Metric Anomalies Fan/Temp
-# ./tools/01_demo/scripts/simulate-metrics-acme-temp.sh
-
-# # echo "   🕦 Waiting 10 seconds"
-# sleep 10
 
 # Inject the Events Inception files
 ./tools/01_demo/scripts/simulate-events-rest.sh
@@ -293,7 +388,15 @@ echo "   -----------------------------------------------------------------------
 ./tools/01_demo/scripts/simulate-logs.sh 
 
 # Inject the Metric Anomalies
-./tools/01_demo/scripts/simulate-metrics-acme-app.sh
+./tools/01_demo/scripts/simulate-metrics.sh
+
+# Inject the Log Inception files
+./tools/01_demo/scripts/simulate-logs.sh 
+./tools/01_demo/scripts/simulate-logs.sh 
+./tools/01_demo/scripts/simulate-logs.sh 
+
+export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/stories" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"priority": 1,"state": "inProgress","owner": "demo","team": "All users"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
+echo "       Stories assigned: "$(echo $result | jq ".affected")
 
 
 echo " "
@@ -308,6 +411,3 @@ echo "  ✅  Done..... "
 echo ""
 echo "***************************************************************************************************************************************************"
 echo "***************************************************************************************************************************************************"
-
-
-

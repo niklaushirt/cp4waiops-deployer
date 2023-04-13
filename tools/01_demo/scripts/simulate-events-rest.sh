@@ -20,8 +20,10 @@ echo "   -----------------------------------------------------------------------
 echo "   ----------------------------------------------------------------------------------------------------------------------------------------"
 echo "     🔐  Getting credentials"
 echo "   ----------------------------------------------------------------------------------------------------------------------------------------"
-export DATALAYER_ROUTE=$(oc get route  -n $WAIOPS_NAMESPACE datalayer-api  -o jsonpath='{.status.ingress[0].host}')
+export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+echo "       ✅ OK - AI Manager:    $WAIOPS_NAMESPACE"
 export USER_PASS="$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode):$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode)"
+export DATALAYER_ROUTE=$(oc get route  -n $WAIOPS_NAMESPACE datalayer-api  -o jsonpath='{.status.ingress[0].host}')
 
 
 for actFile in $(ls -1 $WORKING_DIR_EVENTS | grep "json"); 

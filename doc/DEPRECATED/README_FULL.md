@@ -788,7 +788,7 @@ oc set env deployment/$(oc get deploy -l app.kubernetes.io/component=chatops-sla
 In the terminal type 
 
 ```bash
-./tools/01_demo/incident_memory.sh
+./tools/01_demo/robotshop_incident_memory.sh
 ```
 
 This will delete all existing Alerts/Stories and inject pre-canned event and logs to create a story.
