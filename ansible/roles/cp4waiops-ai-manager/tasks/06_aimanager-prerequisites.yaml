@@ -87,6 +87,23 @@
   ignore_errors: true
 
 
+# Create aiops-topology-service-account
+- name:   🚀 PREREQUISITES - Patch default storage class if non defined
+  shell: |
+    export default=$(oc get storageclass -oyaml|grep "is-default-class"|wc -l|tr -d " ")
+    echo $default
+    if [ $default -lt 1 ]; then
+        echo "Patching"
+        kubectl patch storageclass ocs-storagecluster-cephfs -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+      else
+        echo "Patching not needed"
+      fi
+  ignore_errors: true
+
+
+
+
+
 # Patch builder service account
 #- name:   🚀 PREREQUISITES - 🩹 Patch builder service account
 #   shell: |
