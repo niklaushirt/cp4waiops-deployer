@@ -87,7 +87,7 @@ spec:
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 🚀 Starting Uninstall"
               cd cp4waiops-deployer/
-              ./tools/99_uninstall/3.6/uninstall-cp4waiops.sh -s
+              ./tools/99_uninstall/3.7/uninstall-cp4waiops.sh -s
               echo ""
               echo ""
               echo "  ⏳ INSTALLATION END TIMESTAMP: $(date)"

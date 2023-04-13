@@ -141,6 +141,8 @@
                     </td>
                 </tr>
                 {% endif %}
+                {% if SLACK_URL != 'none' %}
+
                 <tr>
                     <td style="width:90%; padding-left:50px;">
                         <div style="max-height: 120px;  background-color:#f2f7ff; padding: 20px; margin: 5px;">
@@ -183,6 +185,8 @@
                         </div>
                     </td>
                 </tr>
+                {% endif %}
+
             </tbody>
         </table>
     </div>

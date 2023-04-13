@@ -63,7 +63,7 @@ E:{"_fromUniqueId":"acme-booking-service", "_toUniqueId":"acme-booking-db","_edg
 E:{"_fromUniqueId":"acme-authentication-service", "_toUniqueId":"acme-authentication-db","_edgeType":"dependsOn"}
 
 
-V:{  "_operation": "InsertReplace",  "businessCriticality": "Platinum",  "app": "acme",  "dataCenter": "acme",  "entityTypes": ["application"],  "mergeTokens": ["acme-web"],  "matchTokens": ["acme-web"],  "name": "ACME Web",  "tags": ["app:acme", "namespace:acme"],  "vertexType": "resource",  "uniqueId": "acme-web"}
+V:{  "_operation": "InsertReplace",  "businessCriticality": "Platinum",  "app": "acme",  "dataCenter": "acme",  "entityTypes": ["application"],  "mergeTokens": ["acme-web"],  "matchTokens": ["acme-web"],  "name": "ACME Air",  "tags": ["app:acme", "namespace:acme"],  "vertexType": "resource",  "uniqueId": "acme-web"}
 E:{"_fromUniqueId":"acme-web", "_toUniqueId":"acme-customer-service","_edgeType":"dependsOn"}
 E:{"_fromUniqueId":"acme-web", "_toUniqueId":"acme-flight-service","_edgeType":"dependsOn"}
 E:{"_fromUniqueId":"acme-web", "_toUniqueId":"acme-booking-service","_edgeType":"dependsOn"}

@@ -1,0 +1,46 @@
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["front-end"], "namespace": "sock-shop", "name": "front-end",  "uniqueId": "front-end",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["orders"], "namespace": "sock-shop", "name": "orders",  "uniqueId": "orders",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["catalog"], "namespace": "sock-shop", "name": "catalog",  "uniqueId": "catalog",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["catalogue-db"], "namespace": "sock-shop", "name": "catalogue-db",  "uniqueId": "catalogue-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["orders-db"], "namespace": "sock-shop", "name": "orders-db",  "uniqueId": "orders-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["carts"], "namespace": "sock-shop", "name": "carts",  "uniqueId": "carts",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["carts-db"], "namespace": "sock-shop", "name": "carts-db",  "uniqueId": "carts-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["user"], "namespace": "sock-shop", "name": "user",  "uniqueId": "user",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["user-db"], "namespace": "sock-shop", "name": "user-db",  "uniqueId": "user-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["ship"], "namespace": "sock-shop", "name": "ship",  "uniqueId": "ship",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["shipping-db"], "namespace": "sock-shop", "name": "shipping-db",  "uniqueId": "shipping-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["rabbit"], "namespace": "sock-shop", "name": "rabbit",  "uniqueId": "rabbit",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["queue-master"], "namespace": "sock-shop", "name": "queue-master",  "uniqueId": "queue-master",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+
+V:{"_operation":"InsertReplace","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["pay"], "namespace": "sock-shop", "name": "pay",  "uniqueId": "pay",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+
+
+
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"orders","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"catalog","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"carts","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"user","_edgeType":"dependsOn"}
+
+
+E:{"_fromUniqueId":"orders", "_toUniqueId":"user","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"carts","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"pay","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"ship","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"ship", "_toUniqueId":"rabbit","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"queue-master", "_toUniqueId":"rabbit","_edgeType":"dependsOn"}
+
+
+
+
+E:{"_fromUniqueId":"orders", "_toUniqueId":"orders-db","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"catalog", "_toUniqueId":"catalogue-db","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"carts", "_toUniqueId":"carts-db","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"user", "_toUniqueId":"user-db","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"ship", "_toUniqueId":"shipping-db","_edgeType":"dependsOn"}
+

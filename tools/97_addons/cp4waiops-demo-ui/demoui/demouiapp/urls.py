@@ -19,6 +19,7 @@ urlpatterns = [
     path('injectMetricsREST', views.injectMetricsREST, name='injectMetricsREST'),
     path('injectAllREST', views.injectAllREST, name='injectAllREST'),
     path('injectAllFanREST', views.injectAllFanREST, name='injectAllFanREST'),
+    path('injectAllFanACMEREST', views.injectAllFanACMEREST, name='injectAllFanACMEREST'),
     path('injectAllNetREST', views.injectAllNetREST, name='injectAllNetREST'),
     path('clearAllREST', views.clearAllREST, name='clearAllREST'),
     path('clearEventsREST', views.clearEventsREST, name='clearEventsREST'),

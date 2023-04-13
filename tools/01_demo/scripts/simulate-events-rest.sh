@@ -17,6 +17,13 @@ echo "   -----------------------------------------------------------------------
 echo "    🚀  Launching Event Injection" 
 echo "   ----------------------------------------------------------------------------------------------------------------------------------------"
 
+echo "   ----------------------------------------------------------------------------------------------------------------------------------------"
+echo "     🔐  Getting credentials"
+echo "   ----------------------------------------------------------------------------------------------------------------------------------------"
+export DATALAYER_ROUTE=$(oc get route  -n $WAIOPS_NAMESPACE datalayer-api  -o jsonpath='{.status.ingress[0].host}')
+export USER_PASS="$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode):$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode)"
+
+
 for actFile in $(ls -1 $WORKING_DIR_EVENTS | grep "json"); 
 do 
 

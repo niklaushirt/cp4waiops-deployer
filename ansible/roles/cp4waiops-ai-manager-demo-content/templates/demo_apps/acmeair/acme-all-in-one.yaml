@@ -1,0 +1,554 @@
+apiVersion: v1                     
+kind: Namespace
+metadata:
+  name: acme-air
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: acmeair-auth-route
+  namespace: acme-air
+spec:
+  path: /auth
+  to:
+    kind: Service
+    name: acmeair-auth-service
+  port:
+    targetPort: 9080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: acmeair-booking-route
+  namespace: acme-air
+spec:
+  path: /booking
+  to:
+    kind: Service
+    name: acmeair-booking-service
+  port:
+    targetPort: 9080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: acmeair-customer-route
+  namespace: acme-air
+spec:
+  path: /customer
+  to:
+    kind: Service
+    name: acmeair-customer-service
+  port:
+    targetPort: 9080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: acmeair-flight-route
+  namespace: acme-air
+spec:
+  path: /flight
+  to:
+    kind: Service
+    name: acmeair-flight-service
+  port:
+    targetPort: 9080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: acmeair-main-route
+  namespace: acme-air
+spec:
+  path: /acmeair
+  to:
+    kind: Service
+    name: acmeair-main-service
+  port:
+    targetPort: 9080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+###### Main Service ######
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acmeair-authservice
+  namespace: acme-air
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: acmeair-auth-deployment
+  template:
+    metadata:
+      labels:
+        name: acmeair-auth-deployment
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9080"
+    spec:
+      containers:
+      - name: acmeair-authservice-java
+        image: niklaushirt/acmeair-authservice-java:v1.0
+        ports:
+          - containerPort: 9080
+          - containerPort: 9443
+        imagePullPolicy: Always
+        env:
+        - name: USERNAME
+          value: admin
+        - name: PASSWORD
+          value: password
+        - name: ACMEAIR_STACKAA_CUSTOMER_URL
+          value: "http://acmeair-customer-service:9080/customer"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          initialDelaySeconds: 120
+          periodSeconds: 15
+---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: acmeair-auth-service
+  namespace: acme-air
+spec:
+  ports:
+    - port: 9080
+  selector:
+    name: acmeair-auth-deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acmeair-bookingservice
+  namespace: acme-air
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: acmeair-booking-deployment
+  template:
+    metadata:
+      labels:
+        name: acmeair-booking-deployment
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9080"
+    spec:
+      containers:
+      - name: acmeair-bookingservice-java
+        image: niklaushirt/acmeair-bookingservice-java:v1.0
+        ports:
+          - containerPort: 9080
+          - containerPort: 9443
+        imagePullPolicy: Always
+        env:
+        - name: USERNAME
+          value: admin
+        - name: PASSWORD
+          value: password
+        - name: MONGO_HOST
+          value: acmeair-booking-db
+        - name: ACMEAIR_STACKAA_AUTH_URL
+          value: "http://acmeair-auth-service:9080/auth"
+        - name: ACMEAIR_STACKAA_CUSTOMER_URL
+          value: "http://acmeair-customer-service:9080/customer"
+        - name: ACMEAIR_STACKAA_FLIGHT_URL
+          value: "http://acmeair-flight-service:9080/flight"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          initialDelaySeconds: 20
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          initialDelaySeconds: 120
+          periodSeconds: 15
+---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: acmeair-booking-service
+  namespace: acme-air
+spec:
+  ports:
+    - port: 9080
+  selector:
+    name: acmeair-booking-deployment
+---
+##### Booking Database  #####
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: acmeair-booking-db
+  name: acmeair-booking-db
+  namespace: acme-air
+spec:
+  ports:
+  - name: "27017"
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    name: acmeair-booking-db
+status:
+  loadBalancer: {}
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: acmeair-booking-db
+  namespace: acme-air
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: acmeair-booking-db
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: acmeair-booking-db
+    spec:
+      volumes:
+        - name: acmeair-booking-db-1
+          emptyDir: {}
+        - name: acmeair-booking-db-2
+          emptyDir: {}
+      containers:
+      - image: mongo 
+        name: acmeair-booking-db
+        ports:
+        - containerPort: 27017
+          protocol: TCP
+        resources: {}
+        volumeMounts:
+          - name: acmeair-booking-db-1
+            mountPath: /data/configdb
+          - name: acmeair-booking-db-2
+            mountPath: /data/db
+      restartPolicy: Always
+status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acmeair-customerservice
+  namespace: acme-air
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: acmeair-customer-deployment
+  template:
+    metadata:
+      labels:
+        name: acmeair-customer-deployment
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9080"
+    spec:
+      containers:
+      - name: acmeair-customerservice-java
+        image: niklaushirt/acmeair-customerservice-java:v1.0
+        ports:
+          - containerPort: 9080
+          - containerPort: 9443
+        imagePullPolicy: Always
+        env:
+        - name: USERNAME
+          value: admin
+        - name: PASSWORD
+          value: password
+        - name: MONGO_HOST
+          value: acmeair-customer-db
+        - name: SECURE_SERVICE_CALLS
+          value: 'true'
+        - name: ACMEAIR_STACKAA_AUTH_URL
+          value: "http://acmeair-auth-service:9080/auth"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          initialDelaySeconds: 120
+          periodSeconds: 15
+---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: acmeair-customer-service
+  namespace: acme-air
+spec:
+  ports:
+    - port: 9080
+  selector:
+    name: acmeair-customer-deployment
+---
+##### Customer Database #####
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: acmeair-customer-db
+  name: acmeair-customer-db
+  namespace: acme-air
+spec:
+  ports:
+  - name: "27017"
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    name: acmeair-customer-db
+status:
+  loadBalancer: {}
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: acmeair-customer-db
+  namespace: acme-air
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: acmeair-customer-db
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: acmeair-customer-db
+    spec:
+      volumes:
+        - name: acmeair-customer-db-1
+          emptyDir: {}
+        - name: acmeair-customer-db-2
+          emptyDir: {}
+      containers:
+      - image: mongo
+        name: acmeair-customer-db
+        ports:
+        - containerPort: 27017
+          protocol: TCP
+        resources: {}
+        volumeMounts:
+          - name: acmeair-customer-db-1
+            mountPath: /data/configdb
+          - name: acmeair-customer-db-2
+            mountPath: /data/db
+      restartPolicy: Always
+status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acmeair-flightservice
+  namespace: acme-air
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: acmeair-flight-deployment
+  template:
+    metadata:
+      labels:
+        name: acmeair-flight-deployment
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9080"
+    spec:
+      containers:
+      - name: acmeair-flightservice-java
+        image: niklaushirt/acmeair-flightservice-java:v1.0
+        ports:
+          - containerPort: 9080
+          - containerPort: 9443
+        imagePullPolicy: Always
+        env:
+        - name: USERNAME
+          value: admin
+        - name: PASSWORD
+          value: password
+        - name: MONGO_HOST
+          value: acmeair-flight-db
+        - name: SECURE_SERVICE_CALLS
+          value: 'true'
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9080
+          initialDelaySeconds: 120
+          periodSeconds: 15
+---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: acmeair-flight-service
+  namespace: acme-air
+spec:
+  ports:
+    - port: 9080
+  selector:
+    name: acmeair-flight-deployment
+---
+##### Flight Database #####
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: acmeair-flight-db
+  name: acmeair-flight-db
+  namespace: acme-air
+spec:
+  ports:
+  - name: "27017"
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    name: acmeair-flight-db
+status:
+  loadBalancer: {}
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: acmeair-flight-db
+  namespace: acme-air
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: acmeair-flight-db
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: acmeair-flight-db
+    spec:
+      volumes:
+        - name: acmeair-flight-db-1
+          emptyDir: {}
+        - name: acmeair-flight-db-2
+          emptyDir: {}
+      containers:
+      - image: mongo
+        name: acmeair-flight-db
+        ports:
+        - containerPort: 27017
+          protocol: TCP
+        resources: {}
+        volumeMounts:
+          - name: acmeair-flight-db-1
+            mountPath: /data/configdb
+          - name: acmeair-flight-db-2
+            mountPath: /data/db
+      restartPolicy: Always
+status: {}
+###### Main Service ######
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acmeair-mainservice
+  namespace: acme-air
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: acmeair-main-deployment
+  template:
+    metadata:
+      labels:
+        name: acmeair-main-deployment
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9080"
+    spec:
+      containers:
+      - name: acmeair-mainservice-java
+        image: niklaushirt/acmeair-mainservice-java:v1.0
+        ports:
+        - containerPort: 9080
+        - containerPort: 9443
+        imagePullPolicy: Always
+        env:
+        - name: USERNAME
+          value: admin
+        - name: PASSWORD
+          value: password
+---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: acmeair-main-service
+  namespace: acme-air
+spec:
+  ports:
+    - port: 9080
+  selector:
+    name: acmeair-main-deployment

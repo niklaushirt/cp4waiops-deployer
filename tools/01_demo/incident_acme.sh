@@ -2,7 +2,7 @@
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# SIMULATE INCIDENT ON ROBOTSHOP
+# SIMULATE INCIDENT ON ACME
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -96,44 +96,6 @@ fi
 
 oc project $WAIOPS_NAMESPACE  >/tmp/demo.log 2>&1  || true
 
-
-
-export USER_PASS="$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode):$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode)"
-oc apply -n $WAIOPS_NAMESPACE -f ./tools/01_demo/scripts/datalayer-api-route.yaml >/tmp/demo.log 2>&1  || true
-sleep 2
-export DATALAYER_ROUTE=$(oc get route  -n $WAIOPS_NAMESPACE datalayer-api  -o jsonpath='{.status.ingress[0].host}')
-
-
-echo ""
-echo ""
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-read -p "    ❓ Do you want to close existing Stories and Alerts❓ [y,N] " DO_COMM
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
-      echo ""
-      echo ""
-      echo "   ------------------------------------------------------------------------------------------------------------------------------"
-      echo "   🚀  ❎ Closing existing Stories and Alerts..."
-      echo "   ------------------------------------------------------------------------------------------------------------------------------"
-
-      export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/stories" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"state": "resolved"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
-      echo "       Stories closed: "$(echo $result | jq ".affected")
-
-      #export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/alerts?filter=type.classification%20%3D%20%27robot-shop%27" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"state": "closed"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
-      export result=$(curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/alerts" --insecure --silent -X PATCH -u "${USER_PASS}" -d '{"state": "closed"}' -H 'Content-Type: application/json' -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255")
-      echo "       Alerts closed: "$(echo $result | jq ".affected")
-      #curl "https://$DATALAYER_ROUTE/irdatalayer.aiops.io/active/v1/alerts" -X GET -u "${USER_PASS}" -H "x-username:admin" -H "x-subscription-id:cfd95b7e-3bc7-4006-a4a8-a73a79c71255" | grep '"state": "open"' | wc -l
-fi
-
-#------------------------------------------------------------------------------------------------------------------------------------
-#  Deactivating MYSQL Service
-#------------------------------------------------------------------------------------------------------------------------------------
-echo " "
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Deactivating MYSQL Service for Demo Scenario..."
-echo "   ------------------------------------------------------------------------------------------------------------------------------"
-oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"
-oc set env deployment load -n robot-shop ERROR=1
 
 
 #------------------------------------------------------------------------------------------------------------------------------------
@@ -315,23 +277,23 @@ echo "   -----------------------------------------------------------------------
 # curl -X "POST" "$TOPO_ROUTE/1.0/rest-observer/rest/resources" --insecure -H 'Content-Type: application/json' -u $LOGIN -H 'JobId: restTopology' -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' -d $'{  "status":"not ready", "dataCenter": "demo","bootID": "c0dd874c-5c15-413d-b869-f460cb4ee65c",  "containerRuntimeVersion": "cri-o://1.21.6-2.rhaos4.8.gitb948fcd.el7",    "entityTypes": ["server"],  "hostname": "10.13.177.175",  "kernelVersion": "3.10.0-1160.62.1.el7.x86_64",  "kubeProxyVersion": "v1.21.8+ee73ea2",  "kubeletVersion": "v1.21.8+ee73ea2",    "machineID": "0865b9a9bc8944dd810f3626309faa7b",  "management": "N/A",  "matchTokens": ["worker-10.13.177.175","PROD-027-OCP001-WORKER01"],  "name": "Node PROD-027-OCP001-WORKER01",  "node_uid": "86c5007d-b47d-4e73-bbf3-b3c23087a5f7",    "pods_allocatable": "160",  "pods_capacity": "160",  "proxy": "N/A",  "role": "worker",  "systemUUID": "D015E6BB-83AC-8886-8606-4F6CC0BAEC06",  "tags": ["os:Red Hat", "robot-shop", "role:master"],  "uniqueId": "PROD-027-OCP001-WORKER01",  "vertexType": "resource"}'
 
 
-# Inject the Metric Anomalies Fan/Temp
-#./tools/01_demo/scripts/simulate-metrics-fan-temp.sh
+# # Inject the Metric Anomalies Fan/Temp
+# ./tools/01_demo/scripts/simulate-metrics-acme-temp.sh
 
-# echo "   🕦 Waiting 10 seconds"
+# # echo "   🕦 Waiting 10 seconds"
 # sleep 10
 
 # Inject the Events Inception files
 ./tools/01_demo/scripts/simulate-events-rest.sh
 
-# # Prepare the Log Inception files
-# ./tools/01_demo/scripts/prepare-logs-fast.sh
+# Prepare the Log Inception files
+./tools/01_demo/scripts/prepare-logs-fast.sh
 
-# # Inject the Log Inception files
-# ./tools/01_demo/scripts/simulate-logs.sh 
+# Inject the Log Inception files
+./tools/01_demo/scripts/simulate-logs.sh 
 
-# # Inject the Metric Anomalies
-# ./tools/01_demo/scripts/simulate-metrics-fan-app.sh
+# Inject the Metric Anomalies
+./tools/01_demo/scripts/simulate-metrics-acme-app.sh
 
 
 echo " "

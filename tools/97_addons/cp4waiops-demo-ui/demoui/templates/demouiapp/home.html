@@ -100,6 +100,9 @@
 
 
                     {% if ADMIN_MODE == 'true' %}
+                    <td>
+                        &nbsp;
+                    </td>
                     <td style="color:rgb(255, 255, 255);background-color: rgb(55, 86, 131); padding:10px; margin-left: 20px;"
                         colspan="2">
                         <p style="font-size:18px;">👩‍💻&nbsp;&nbsp;{{ aimanager_user }}
@@ -167,14 +170,15 @@
 
                 </tr>
                 <tr>
-                    <td style="width: 30%; vertical-align:top">
+                    <td style="width: 30%; vertical-align:top" colspan="3">
                         <p style="font-size:25px;">Step1: Clear Incident</p>
                         <p> &nbsp;</p>
                     </td>
                     <td width="40px">
                         &nbsp;
                     </td>
-                    <td style="width: 30%; vertical-align:top">
+
+                    <td style="width: 30%; vertical-align:top" colspan="5">
                         <p style="font-size:25px;">Step2: Create Incident</p>
                         <p> &nbsp;</p>
                     </td>
@@ -203,12 +207,18 @@
                     <td width="40px">
                         &nbsp;
                     </td>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
                     <td style="width: 259px; vertical-align:top">
                         <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
                             <a target="_blank" tabindex="0" class="bx--btn bx--btn--red bx--btn--expressive"
                                 style="font-size: 18px;max-width:450px;width:350px;" onclick="toggle(this)"
-                                data-arg1='injectAllREST'>Simulate
-                                Incident - Memory Leak
+                                data-arg1='injectAllREST'>RobotShop
+                                 - Memory Leak
                                 <svg focusable="false" preserveAspectRatio="xMidYMid meet"
                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Table"
                                     aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" role="img"
@@ -223,8 +233,7 @@
 
 
                     </td>
-                </tr>
-                <tr>
+  
                     <td width="40px">
                         &nbsp;
                     </td>
@@ -235,7 +244,7 @@
                         <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
                             <a target="_blank" tabindex="0" class="bx--btn bx--btn--red bx--btn--expressive"
                                 style="font-size: 18px;max-width:450px;width:350px;" onclick="toggle(this)"
-                                data-arg1='injectAllFanREST'>Simulate Incident - Server Fan
+                                data-arg1='injectAllFanREST'>RobotShop - Server Fan
                                 <svg focusable="false" preserveAspectRatio="xMidYMid meet"
                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Table"
                                     aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" role="img"
@@ -262,11 +271,54 @@
                     <td width="40px">
                         &nbsp;
                     </td>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
                     <td style="width: 259px; vertical-align:top">
                         <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
                             <a target="_blank" tabindex="0" class="bx--btn bx--btn--red bx--btn--expressive"
                                 style="font-size: 18px;max-width:450px;width:350px;" onclick="toggle(this)"
-                                data-arg1='injectAllNetREST'>Simulate Incident - Network
+                                data-arg1='injectAllNetREST'>RobotShop - Network
+                                <svg focusable="false" preserveAspectRatio="xMidYMid meet"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Table"
+                                    aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" role="img"
+                                    class="bx--btn__icon">
+                                    <path
+                                        d="M29,5a2,2,0,0,0-2-2H5A2,2,0,0,0,3,5V27a2,2,0,0,0,2,2H27a2,2,0,0,0,2-2ZM27,5V9H5V5Zm0,22H5V23H27Zm0-6H5V17H27Zm0-6H5V11H27Z">
+                                    </path>
+                                </svg>
+
+                            </a>
+                        </div>
+
+
+                    </td>
+
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td width="40px">
+                        &nbsp;
+                    </td>
+                    <td style="width: 259px; vertical-align:top">
+                        <div style="padding-bottom: 1rem;" class="sc-ftTHYK jxfOQM">
+                            <a target="_blank" tabindex="0" class="bx--btn bx--btn--red bx--btn--expressive"
+                                style="font-size: 18px;max-width:450px;width:350px;" onclick="toggle(this)"
+                                data-arg1='injectAllFanACMEREST'>ACME - Server Fan
                                 <svg focusable="false" preserveAspectRatio="xMidYMid meet"
                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Table"
                                     aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" role="img"
@@ -302,7 +354,7 @@
                 </tr>
                 <tr>
                     <td
-                        style="max-width:450px;width:400px; vertical-align:top; background-color: rgb(228, 252, 233); padding:10px; margin: 20px;">
+                        style="max-width:450px;width:400px; vertical-align:top; background-color: rgb(228, 252, 233); padding:10px; margin: 20px;" colspan="3">
                         <p style="font-size:16px;">Clear Stories and Events to reset environment if needed . </p>
                         <p style="font-size:16px;">If you want all Stories and Alerts to disappear you'll have to wait
                             up
@@ -312,10 +364,11 @@
                         &nbsp;
                     </td>
                     <td
-                        style="width: 30%; vertical-align:top; background-color: rgb(255, 198, 198); padding:10px; margin: 20px;">
+                        style="width: 30%; vertical-align:top; background-color: rgb(255, 198, 198); padding:10px; margin: 20px;" colspan="5">
                         <p style="font-size:16px;">Create Incident by simulating an error condition.</p>
                         <p style="font-size:16px;">Creates Events and Log and Metric Anomalies, linked to ServiceNow
                             Incidents and Ansible Runbooks.</p>
+                            <p>You can find more details on the <a href="apps_demo">Scenarios</a> Tab.</p>
                     </td>
 
 
@@ -330,14 +383,13 @@
                         &nbsp;
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <p></p>Other Demo scenarios can be found <a href="apps_demo">here</a>
-                    </td>
-                </tr>
+    
             </tbody>
         </table>
     </div>
+
+
+    
     {% else %}
     <p> </p>
     <p> </p>

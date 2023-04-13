@@ -942,6 +942,88 @@ def injectAllNetREST(request):
 
 
 
+def injectAllFanACMEREST(request):
+    print('🌏 injectAllFanACMEREST')
+    global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - ACME-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    verifyLogin(request)
+    if loggedin=='true':
+        template = loader.get_template('demouiapp/home.html')
+
+        STORY_ACTIVE=True
+        ROBOT_SHOP_OUTAGE_ACTIVE=True
+
+
+        # injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
+        # time.sleep(3)
+        # injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        # injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN)
+        # injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
+
+
+        print('  🟠 Create THREADS')
+        threadMetrics1 = Thread(target=injectMetricsFanTempACME, args=(METRIC_ROUTE,METRIC_TOKEN,))
+        threadEvents = Thread(target=injectEventsFanACME, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
+        threadMetrics2 = Thread(target=injectEventsFanACME, args=(METRIC_ROUTE,METRIC_TOKEN,DATALAYER_PWD))
+
+        print('  🟠 Start THREADS')
+        # start the threads
+        threadMetrics1.start()
+        threadEvents.start()
+        threadMetrics2.start()
+        time.sleep(3)
+
+    else:
+        template = loader.get_template('demouiapp/loginui.html')
+
+
+    context = {
+        'loggedin': loggedin,
+        'aimanager_url': aimanager_url,
+        'aimanager_user': aimanager_user,
+        'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
+        'awx_url': awx_url,
+        'awx_user': awx_user,
+        'awx_pwd': awx_pwd,
+        'elk_url': elk_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
+        'openshift_url': openshift_url,
+        'openshift_token': openshift_token,
+        'openshift_server': openshift_server,
+        'vault_url': vault_url,
+        'vault_token': vault_token,
+        'ladp_url': ladp_url,
+        'ladp_user': ladp_user,
+        'ladp_pwd': ladp_pwd,
+        'flink_url': flink_url,
+        'flink_url_policy': flink_url_policy,
+        'robotshop_url': robotshop_url,
+        'spark_url': spark_url,
+        'eventmanager_url': eventmanager_url,
+        'eventmanager_user': eventmanager_user,
+        'eventmanager_pwd': eventmanager_pwd,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
+        'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
+        'PAGE_NAME': 'index'
+    }
+    return HttpResponse(template.render(context, request))
+
+
+
+
 
 def injectLogsREST(request):
     print('🌏 injectLogsREST')
