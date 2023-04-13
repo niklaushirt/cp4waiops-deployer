@@ -94,7 +94,7 @@
     echo $default
     if [ $default -lt 1 ]; then
         echo "Patching"
-        kubectl patch storageclass ocs-storagecluster-cephfs -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+        kubectl patch storageclass {{ WAIOPS_STORAGE_CLASS_FILE }} -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
       else
         echo "Patching not needed"
       fi
