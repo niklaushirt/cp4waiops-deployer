@@ -447,7 +447,8 @@
               "waiopsApplication"
           ],
           "tags": [
-            "app:acme"
+            "app:acmeair",
+            "app:acme-air"
           ]
       }'
     else
