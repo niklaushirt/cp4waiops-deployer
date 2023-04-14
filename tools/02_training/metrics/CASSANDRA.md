@@ -19,7 +19,7 @@ and here:
 	```bash
 	export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 	export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE| grep ibm-nginx-svc | awk '{print $2}')
-	PASS=$(oc get secret -n $WAIOPS_NAMESPACE admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d)
+	PASS=$(oc get secret -n $WAIOPS_NAMESPACE admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 --decode)
 	export TOKEN=$(curl -k -X POST https://$ROUTE/icp4d-api/v1/authorize -H 'Content-Type: application/json' -d "{\"username\": \"admin\",\"password\": \"$PASS\"}" | jq .token | sed 's/\"//g')
 	
 	echo "ROUTE:    "$ROUTE

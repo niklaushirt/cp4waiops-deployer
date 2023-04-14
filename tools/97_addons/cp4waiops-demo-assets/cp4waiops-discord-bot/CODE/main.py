@@ -111,7 +111,7 @@ stream = os.popen("oc get secret "+KAFKA_SECRET+" -n "+aimanagerns+" --template=
 KAFKA_PWD = stream.read().strip()
 stream = os.popen("oc get routes iaf-system-kafka-0 -n "+aimanagerns+" -o=jsonpath={.status.ingress[0].host}")
 KAFKA_BROKER = stream.read().strip()
-stream = os.popen("oc get secret -n "+aimanagerns+" kafka-secrets  -o jsonpath='{.data.ca\.crt}'| base64 -d")
+stream = os.popen("oc get secret -n "+aimanagerns+" kafka-secrets  -o jsonpath='{.data.ca\.crt}'| base64 --decode")
 KAFKA_CERT = stream.read().strip()
 
 print('     ❓ Getting Details Datalayer')
@@ -125,7 +125,7 @@ DATALAYER_PWD = stream.read().strip()
 print('     ❓ Getting Details Metric Endpoint')
 stream = os.popen("oc get route -n "+aimanagerns+"| grep ibm-nginx-svc | awk '{print $2}'")
 METRIC_ROUTE = stream.read().strip()
-stream = os.popen("oc get secret -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d")
+stream = os.popen("oc get secret -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 --decode")
 tmppass = stream.read().strip()
 stream = os.popen('curl -k -s -X POST https://'+METRIC_ROUTE+'/icp4d-api/v1/authorize -H "Content-Type: application/json" -d "{\\\"username\\\": \\\"admin\\\",\\\"password\\\": \\\"'+tmppass+'\\\"}" | jq .token | sed "s/\\\"//g"')
 METRIC_TOKEN = stream.read().strip()
@@ -260,7 +260,7 @@ def resolveIncidentInstana():
 # --------------------------------------------------------------------------------
 def createIncidentMem():
     print ('    --------------------------------------------------------------------------------')
-    print ('     🚀 Running Simulator - Memory')
+    print ('     🚀 Running Simulator - RobotShop Memory')
     print ('    --------------------------------------------------------------------------------')
     stream = os.popen('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
     RESULT = stream.read().strip()
@@ -284,14 +284,8 @@ def createIncidentMem():
 
 def createIncidentFan():
     print ('    --------------------------------------------------------------------------------')
-    print ('     🚀 Running Simulator - Fan')
+    print ('     🚀 Running Simulator - ACME Fan')
     print ('    --------------------------------------------------------------------------------')
-    stream = os.popen('oc set env deployment ratings -n robot-shop PDO_URL="mysql:host=mysql;dbname=ratings-dev;charset=utf8mb4"')
-    RESULT = stream.read().strip()
-    print(str(RESULT))
-    stream = os.popen('oc set env deployment load -n robot-shop ERROR=1')
-    RESULT = stream.read().strip()
-    print(str(RESULT))
 
 
     print ('         🚀 Simulating Events Fan')
@@ -301,15 +295,16 @@ def createIncidentFan():
     injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
     time.sleep(3)
 
-    print ('         🚀 Simulating Logs')
-    injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
     print ('     ✅ DONE"')
 
 
 def createIncidentNet():
     print ('    --------------------------------------------------------------------------------')
-    print ('     🚀 Running Simulator - Network')
+    print ('     🚀 Running Simulator - SockShop Network')
     print ('    --------------------------------------------------------------------------------')
+    stream = os.popen('oc patch service catalogue -n sock-shop --patch "{\\"spec\\": {\\"selector\\": {\\"name\\": \\"catalog-outage\\"}}}"')
+    RESULT = stream.read().strip()
+    print(str(RESULT))
 
 
     print ('         🚀 Simulating Events')
@@ -318,8 +313,6 @@ def createIncidentNet():
     print ('         🚀 Simulating Metrics')
     injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN)
 
-    print ('         🚀 Simulating Logs')
-    injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
     print ('     ✅ DONE"')
 
 
@@ -341,6 +334,9 @@ def setResolvedID(story_id):
     RESULT = stream.read().strip()
     print(str(RESULT))
     stream = os.popen('oc set env deployment load -n robot-shop ERROR=0')
+    RESULT = stream.read().strip()
+    print(str(RESULT))
+    stream = os.popen('oc patch service catalogue -n sock-shop --patch "{\\"spec\\": {\\"selector\\": {\\"name\\": \\"catalog\\"}}}"')
     RESULT = stream.read().strip()
     print(str(RESULT))
 
@@ -371,6 +367,11 @@ def setResolved():
     stream = os.popen('oc set env deployment load -n robot-shop ERROR=0')
     RESULT = stream.read().strip()
     print(str(RESULT))
+
+    stream = os.popen('oc patch service catalogue -n sock-shop --patch "{\\"spec\\": {\\"selector\\": {\\"name\\": \\"catalog-outage\\"}}}"')
+    RESULT = stream.read().strip()
+    print(str(RESULT))
+
 
     print ('         🚀 Updating Stories to "resolved"')
     updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved")
@@ -799,7 +800,7 @@ class IncidentActions(discord.ui.View):
     def __init__(self):
         super().__init__()
 
-    @discord.ui.button(label='Create Incident - Memory Leak', style=discord.ButtonStyle.red, custom_id='persistent_view:mem')
+    @discord.ui.button(label='RobotShop - Memory Leak', style=discord.ButtonStyle.red, custom_id='persistent_view:mem')
     async def green(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message('🚀 Simulating Memory Incident', ephemeral=True)
         print('    🟠 Create THREADS')
@@ -807,16 +808,7 @@ class IncidentActions(discord.ui.View):
         print('    🟠 Start THREADS')
         threadRun.start()
 
-
-    @discord.ui.button(label='Create Incident - Fan Failure', style=discord.ButtonStyle.red, custom_id='persistent_view:fan')
-    async def red(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message('🚀 Simulating Fan Incident', ephemeral=True)
-        print('    🟠 Create THREADS')
-        threadRun = Thread(target=createIncidentFan)
-        print('    🟠 Start THREADS')
-        threadRun.start()
-
-    @discord.ui.button(label='Create Incident - Network Failure', style=discord.ButtonStyle.red, custom_id='persistent_view:net')
+    @discord.ui.button(label='SockShop - Network Failure', style=discord.ButtonStyle.red, custom_id='persistent_view:net')
     async def orange(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message('🚀 Simulating Network Incident', ephemeral=True)
         print('    🟠 Create THREADS')
@@ -824,6 +816,14 @@ class IncidentActions(discord.ui.View):
         print('    🟠 Start THREADS')
         threadRun.start()
 
+
+    @discord.ui.button(label='ACME - Fan Failure', style=discord.ButtonStyle.red, custom_id='persistent_view:fan')
+    async def red(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message('🚀 Simulating Fan Incident', ephemeral=True)
+        print('    🟠 Create THREADS')
+        threadRun = Thread(target=createIncidentFan)
+        print('    🟠 Start THREADS')
+        threadRun.start()
 
 
 class IncidentInstana(discord.ui.View):

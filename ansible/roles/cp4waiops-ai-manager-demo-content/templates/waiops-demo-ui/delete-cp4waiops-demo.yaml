@@ -46,7 +46,7 @@ spec:
               export KAFKA_USER=$(oc get secret $KAFKA_SECRET -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
               export KAFKA_PWD=$(oc get secret $KAFKA_SECRET -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
               export KAFKA_BROKER=$(oc get routes iaf-system-kafka-0 -n $WAIOPS_NAMESPACE -o=jsonpath='{.status.ingress[0].host}{"\n"}'):443
-              export CERT_ELEMENT=$(oc get secret -n $WAIOPS_NAMESPACE kafka-secrets  -o=jsonpath='{.data.ca\.crt}'| base64 -d| tr -d '\r\n')
+              export CERT_ELEMENT=$(oc get secret -n $WAIOPS_NAMESPACE kafka-secrets  -o=jsonpath='{.data.ca\.crt}'| base64 --decode| tr -d '\r\n')
               export LOG_ITERATIONS=5
               export TOKEN="test"
 

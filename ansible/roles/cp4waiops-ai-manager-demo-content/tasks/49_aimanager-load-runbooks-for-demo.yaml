@@ -273,6 +273,76 @@
 
 
 
+- name: 🚀 AWX - Create WAIOPS Runbook - Mitigate SockShop Switch Outage
+  shell: |
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+    export ZEN_TOKEN={{ZEN_TOKEN}}
+    export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
+    export DEMO_TOKEN=$(oc -n default get secret $(oc get secret -n default |grep -m1 demo-admin-token|awk '{print$1}') -o jsonpath='{.data.token}'|base64 --decode)
+    export DEMO_URL=$(oc status|grep -m1 "In project"|awk '{print$6}')
+
+
+
+    export result=$(curl -X "GET" -k "https://$ROUTE/aiops/api/story-manager/rba/v1/runbooks?publish=true" \
+        -H "Authorization: bearer $ZEN_TOKEN" \
+        -H 'Content-Type: application/json; charset=utf-8'|grep "CP4WAIOPS Mitigate SockShop Switch Outage"|wc -l|tr -d ' ')
+
+    if [[ $result == "0" ]]; then
+
+      export PAYLOAD=$(echo "{
+              \"tags\": [],
+              \"steps\": [
+                {
+                  \"mappings\": [
+                    {
+                      \"parameterMappingType\": \"parameter\",
+                      \"parameterValue\": \"clusterCredentials\",
+                      \"automationParameterName\": \"extraVariables\"
+                    }
+                  ],
+                  \"number\": 1,
+                  \"title\": \"\",
+                  \"automationId\": \"AWX:job:CP4WAIOPS Mitigate SockShop Switch Outage\",
+                  \"type\": \"automation\"
+                }
+              ],
+              \"name\": \"Mitigate SockShop Switch Outage\",
+              \"description\": \"Mitigate SockShop Switch Outage\",
+              \"parameters\": [
+                {
+                  \"minLength\": 0,
+                  \"format\": \"multiline\",
+                  \"name\": \"clusterCredentials\",
+                        \"default\": \"{ \\\"my_k8s_apiurl\\\": \\\"$DEMO_URL\\\", \\\"my_k8s_apikey\\\": \\\"$DEMO_TOKEN\\\" }\",
+                  \"description\": \"Cluster Credentials encoded as JSON..\",
+                  \"type\": \"string\"
+                }
+              ]
+          }")
+
+      echo $PAYLOAD>/tmp/runbook.json
+
+      
+      export result=$(curl -X "POST" -k "https://$ROUTE/aiops/api/story-manager/rba/v1/runbooks?publish=true" \
+          -H "Authorization: bearer $ZEN_TOKEN" \
+          -H 'Content-Type: application/json; charset=utf-8' \
+          -d @/tmp/runbook.json)
+
+
+      rm /tmp/runbook.json
+    else 
+      export result="Already exists"
+    fi 
+
+
+    echo "$result"
+  ignore_errors: true
+  register: RBA_RESULT
+  args:
+    executable: /bin/bash
+
+
+
 
 # - name: 🟣 OUTPUT
 #   debug: 

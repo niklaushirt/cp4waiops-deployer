@@ -29,7 +29,7 @@ spec:
               export GIT_REPO=https://github.com/niklaushirt/cp4waiops-trainingdata.git
               git clone $GIT_REPO
               cd cp4waiops-trainingdata
-              ./tools/01_demo/incident_memory.sh
+              ./tools/01_demo/robotshop_incident_memory.sh
               sleep 6000000
       restartPolicy: Never
 

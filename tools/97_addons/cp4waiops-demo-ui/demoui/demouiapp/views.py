@@ -14,6 +14,7 @@ SLACK_USER=str(os.environ.get('SLACK_USER'))
 SLACK_PWD=str(os.environ.get('SLACK_PWD'))
 STORY_ACTIVE=False
 ROBOT_SHOP_OUTAGE_ACTIVE=False
+SOCK_SHOP_OUTAGE_ACTIVE=False
 
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
@@ -68,7 +69,7 @@ headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-use
 response = requests.get(url, headers=headers, auth=auth) #, verify=False)
 responseJSON=response.json()
 responseStr=str(json.dumps(responseJSON))
-print(responseStr)
+#print(responseStr)
 #if 'pirsoscom.github.io/SNOW_INC' in responseStr and '"closed"' not in responseStr and '"resolved"' not in responseStr:
 if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
     print('     🔴 STORY FOUND')
@@ -85,6 +86,16 @@ if 'ratings-dev' in RATINGS_YAML:
 else:
     print('     🟢 ROBOT SHOP OUTAGE INACTIVE')
     ROBOT_SHOP_OUTAGE_ACTIVE=False
+
+stream = os.popen("oc get service  -n sock-shop catalogue  -o yaml")
+CATALOG_YAML = stream.read().strip()
+if '-outage' in CATALOG_YAML:
+    print('     🔴 SOCK SHOP OUTAGE ACTIVE')
+    SOCK_SHOP_OUTAGE_ACTIVE=True
+else:
+    print('     🟢 SOCK SHOP OUTAGE INACTIVE')
+    SOCK_SHOP_OUTAGE_ACTIVE=False
+
 
 
 print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
@@ -312,11 +323,15 @@ echo "<BR>"
 echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
 echo "    <h3>🚀 2.5 Configure Applications - RobotShop Kubernetes Observer </h3><BR>"
 API_TOKEN=$(oc -n default get secret $(oc get secret -n default |grep -m1 demo-admin-token|awk '{print$1}') -o jsonpath='{.data.token}'|base64 --decode)
+API_URL=$(oc status|grep -m1 "In project"|awk '{print$6}')
+API_SERVER=$(echo $API_URL| cut -d ":" -f 2| tr -d '/')
+API_PORT=$(echo $API_URL| cut -d ":" -f 3)
+
 echo "<table>"
 echo "<tr><td style=\"min-width:300px\">🛠️  Name:</td><td>RobotShop</td></tr>"
 echo "<tr><td>🛠️  Data center:</td><td>robot-shop</td></tr>"
-echo "<tr><td>🛠️  Kubernetes master IP address:</td><td>172.21.0.1</td></tr>"
-echo "<tr><td>🛠️  Kubernetes API port:</td><td>443</td></tr>"
+echo "<tr><td>🛠️  Kubernetes master IP address:</td><td>$API_SERVER</td></tr>"
+echo "<tr><td>🛠️  Kubernetes API port:</td><td>$API_PORT</td></tr>"
 echo "<tr><td>🛠️  Token:</td><td>$API_TOKEN</td></tr>"
 echo "<tr><td>🛠️  Trust all HTTPS certificates:</td><td>true</td></tr>"
 echo "<tr><td>🛠️  Correlate analytics events:</td><td>true</td></tr>"
@@ -365,7 +380,7 @@ stream = os.popen("oc get secret "+KAFKA_SECRET+" -n "+aimanagerns+" --template=
 KAFKA_PWD = stream.read().strip()
 stream = os.popen("oc get routes iaf-system-kafka-0 -n "+aimanagerns+" -o=jsonpath={.status.ingress[0].host}")
 KAFKA_BROKER = stream.read().strip()
-stream = os.popen("oc get secret -n "+aimanagerns+" kafka-secrets  -o jsonpath='{.data.ca\.crt}'| base64 -d")
+stream = os.popen("oc get secret -n "+aimanagerns+" kafka-secrets  -o jsonpath='{.data.ca\.crt}'| base64 --decode")
 KAFKA_CERT = stream.read().strip()
 
 
@@ -374,7 +389,7 @@ KAFKA_CERT = stream.read().strip()
 print('     ❓ Getting Details Metric Endpoint')
 stream = os.popen("oc get route -n "+aimanagerns+"| grep ibm-nginx-svc | awk '{print $2}'")
 METRIC_ROUTE = stream.read().strip()
-stream = os.popen("oc get secret -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d")
+stream = os.popen("oc get secret -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 --decode")
 tmppass = stream.read().strip()
 stream = os.popen('curl -k -s -X POST https://'+METRIC_ROUTE+'/icp4d-api/v1/authorize -H "Content-Type: application/json" -d "{\\\"username\\\": \\\"admin\\\",\\\"password\\\": \\\"'+tmppass+'\\\"}" | jq .token | sed "s/\\\"//g"')
 METRIC_TOKEN = stream.read().strip()
@@ -469,6 +484,9 @@ stream = os.popen('oc get routes -n robot-shop robotshop  -o jsonpath={.spec.hos
 robotshop_url = stream.read().strip()
 
 
+print('     ❓ Getting Details SockShop')
+stream = os.popen('oc get routes -n sock-shop front-end  -o jsonpath={.spec.host}')
+sockshop_url = stream.read().strip()
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # GET ENVIRONMENT VALUES
@@ -535,7 +553,8 @@ def instanaCreateIncident(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
     if loggedin=='true':
@@ -588,6 +607,7 @@ def instanaCreateIncident(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -597,6 +617,7 @@ def instanaCreateIncident(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -608,7 +629,9 @@ def instanaMitigateIncident(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -618,6 +641,8 @@ def instanaMitigateIncident(request):
         os.system('oc set env deployment ratings -n robot-shop PDO_URL-')
         os.system('oc set env deployment load -n robot-shop ERROR=0')
         os.system("oc delete pod $(oc get po -n robot-shop|grep shipping|awk '{print$1}') -n robot-shop --ignore-not-found")
+        print('🌏 Mitigate Sockshop Catalog outage')
+        os.system('oc patch service catalogue -n sock-shop --patch "{\\"spec\\": {\\"selector\\": {\\"name\\": \\"catalog\\"}}}"')
 
         url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
         auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
@@ -633,6 +658,7 @@ def instanaMitigateIncident(request):
             STORY_ACTIVE=False
 
         ROBOT_SHOP_OUTAGE_ACTIVE=False
+        SOCK_SHOP_OUTAGE_ACTIVE=False
 
     else:
         template = loader.get_template('demouiapp/loginui.html')
@@ -663,6 +689,7 @@ def instanaMitigateIncident(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -672,6 +699,7 @@ def instanaMitigateIncident(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -689,7 +717,8 @@ def injectAllREST(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
 
     if loggedin=='true':
@@ -755,6 +784,7 @@ def injectAllREST(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -764,6 +794,7 @@ def injectAllREST(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -776,7 +807,8 @@ def injectAllFanREST(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -841,6 +873,7 @@ def injectAllFanREST(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -850,6 +883,7 @@ def injectAllFanREST(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -863,7 +897,9 @@ def injectAllNetREST(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
+
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -925,6 +961,7 @@ def injectAllNetREST(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -934,6 +971,7 @@ def injectAllNetREST(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -942,13 +980,180 @@ def injectAllNetREST(request):
 
 
 
+def injectAllFanACMEREST(request):
+    print('🌏 injectAllFanACMEREST')
+    global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - ACME-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    verifyLogin(request)
+    if loggedin=='true':
+        template = loader.get_template('demouiapp/home.html')
+
+        STORY_ACTIVE=True
+        ROBOT_SHOP_OUTAGE_ACTIVE=True
+
+
+        # injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
+        # time.sleep(3)
+        # injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        # injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN)
+        # injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
+
+
+        print('  🟠 Create THREADS')
+        threadMetrics1 = Thread(target=injectMetricsFanTempACME, args=(METRIC_ROUTE,METRIC_TOKEN,))
+        threadEvents = Thread(target=injectEventsFanACME, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
+        threadMetrics2 = Thread(target=injectMetricsFanACME, args=(METRIC_ROUTE,METRIC_TOKEN,))
+
+        print('  🟠 Start THREADS')
+        # start the threads
+        threadMetrics1.start()
+        threadEvents.start()
+        threadMetrics2.start()
+        time.sleep(3)
+
+    else:
+        template = loader.get_template('demouiapp/loginui.html')
+
+
+    context = {
+        'loggedin': loggedin,
+        'aimanager_url': aimanager_url,
+        'aimanager_user': aimanager_user,
+        'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
+        'awx_url': awx_url,
+        'awx_user': awx_user,
+        'awx_pwd': awx_pwd,
+        'elk_url': elk_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
+        'openshift_url': openshift_url,
+        'openshift_token': openshift_token,
+        'openshift_server': openshift_server,
+        'vault_url': vault_url,
+        'vault_token': vault_token,
+        'ladp_url': ladp_url,
+        'ladp_user': ladp_user,
+        'ladp_pwd': ladp_pwd,
+        'flink_url': flink_url,
+        'flink_url_policy': flink_url_policy,
+        'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
+        'spark_url': spark_url,
+        'eventmanager_url': eventmanager_url,
+        'eventmanager_user': eventmanager_user,
+        'eventmanager_pwd': eventmanager_pwd,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
+        'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
+        'PAGE_NAME': 'index'
+    }
+    return HttpResponse(template.render(context, request))
+
+
+
+def injectAllNetSOCKREST(request):
+    print('🌏 injectAllNetSOCKREST')
+    global loggedin
+    global STORY_ACTIVE
+    global ROBOT_SHOP_OUTAGE_ACTIVE
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - SOCK-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    verifyLogin(request)
+    if loggedin=='true':
+        template = loader.get_template('demouiapp/home.html')
+
+        STORY_ACTIVE=True
+        SOCK_SHOP_OUTAGE_ACTIVE=True
+
+        print('🌏 Create Sockshop Catalog outage')
+        os.system('oc patch service catalogue -n sock-shop --patch "{\\"spec\\": {\\"selector\\": {\\"name\\": \\"catalog-outage\\"}}}"')
+        # injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
+        # time.sleep(3)
+        # injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        # injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN)
+        # injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
+
+
+        print('  🟠 Create THREADS')
+        threadEvents = Thread(target=injectEventsNetSock, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
+        threadMetrics = Thread(target=injectMetricsSockNet, args=(METRIC_ROUTE,METRIC_TOKEN,))
+
+        print('  🟠 Start THREADS')
+        # start the threads
+        threadMetrics.start()
+        threadEvents.start()
+        time.sleep(3)
+
+    else:
+        template = loader.get_template('demouiapp/loginui.html')
+
+
+    context = {
+        'loggedin': loggedin,
+        'aimanager_url': aimanager_url,
+        'aimanager_user': aimanager_user,
+        'aimanager_pwd': aimanager_pwd,
+        'SLACK_URL': SLACK_URL,
+        'SLACK_USER': SLACK_USER,
+        'SLACK_PWD': SLACK_PWD,
+        'DEMO_USER': DEMO_USER,
+        'DEMO_PWD': DEMO_PWD,
+        'awx_url': awx_url,
+        'awx_user': awx_user,
+        'awx_pwd': awx_pwd,
+        'elk_url': elk_url,
+        'turbonomic_url': turbonomic_url,
+        'instana_url': instana_url,
+        'openshift_url': openshift_url,
+        'openshift_token': openshift_token,
+        'openshift_server': openshift_server,
+        'vault_url': vault_url,
+        'vault_token': vault_token,
+        'ladp_url': ladp_url,
+        'ladp_user': ladp_user,
+        'ladp_pwd': ladp_pwd,
+        'flink_url': flink_url,
+        'flink_url_policy': flink_url_policy,
+        'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
+        'spark_url': spark_url,
+        'eventmanager_url': eventmanager_url,
+        'eventmanager_user': eventmanager_user,
+        'eventmanager_pwd': eventmanager_pwd,
+        'INSTANCE_NAME': INSTANCE_NAME,
+        'INSTANCE_IMAGE': INSTANCE_IMAGE,
+        'ADMIN_MODE': ADMIN_MODE,
+        'STORY_ACTIVE': STORY_ACTIVE,
+        'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
+        'SIMULATION_MODE': SIMULATION_MODE,
+        'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
+        'PAGE_NAME': 'index'
+    }
+    return HttpResponse(template.render(context, request))
+
+
 
 def injectLogsREST(request):
     print('🌏 injectLogsREST')
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -983,6 +1188,7 @@ def injectLogsREST(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -992,6 +1198,7 @@ def injectLogsREST(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1004,7 +1211,8 @@ def injectEventsREST(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
 
     if loggedin=='true':
@@ -1040,6 +1248,7 @@ def injectEventsREST(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1049,6 +1258,7 @@ def injectEventsREST(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1060,7 +1270,8 @@ def injectMetricsREST(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
 
     if loggedin=='true':
@@ -1095,6 +1306,7 @@ def injectMetricsREST(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1104,6 +1316,7 @@ def injectMetricsREST(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1117,7 +1330,8 @@ def clearAllREST(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -1127,6 +1341,8 @@ def clearAllREST(request):
         os.system('oc set env deployment ratings -n robot-shop PDO_URL-')
         os.system('oc set env deployment load -n robot-shop ERROR=0')
         os.system("oc delete pod $(oc get po -n robot-shop|grep shipping|awk '{print$1}') -n robot-shop --ignore-not-found")
+        print('🌏 Mitigate Sockshop Catalog outage')
+        os.system('oc patch service catalogue -n sock-shop --patch "{\\"spec\\": {\\"selector\\": {\\"name\\": \\"catalog\\"}}}"')
 
         stream = os.popen("oc get kafkatopics -n "+aimanagerns+"  | grep -v cp4waiopscp4waiops| grep cp4waiops-cartridge-logs-elk| awk '{print $1;}'")
         KAFKA_TOPIC_LOGS = stream.read().strip()
@@ -1147,6 +1363,8 @@ def clearAllREST(request):
 
         STORY_ACTIVE=False
         ROBOT_SHOP_OUTAGE_ACTIVE=False
+        SOCK_SHOP_OUTAGE_ACTIVE=False
+
 
     else:
         template = loader.get_template('demouiapp/loginui.html')
@@ -1178,6 +1396,7 @@ def clearAllREST(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1187,6 +1406,7 @@ def clearAllREST(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1204,7 +1424,8 @@ def clearEventsREST(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -1239,6 +1460,7 @@ def clearEventsREST(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1248,6 +1470,7 @@ def clearEventsREST(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1259,7 +1482,8 @@ def clearStoriesREST(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
@@ -1268,6 +1492,7 @@ def clearStoriesREST(request):
         template = loader.get_template('demouiapp/loginui.html')
         STORY_ACTIVE=False
         ROBOT_SHOP_OUTAGE_ACTIVE=False
+        SOCK_SHOP_OUTAGE_ACTIVE=False
 
     context = {
         'loggedin': loggedin,
@@ -1296,6 +1521,7 @@ def clearStoriesREST(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1305,6 +1531,7 @@ def clearStoriesREST(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1318,7 +1545,8 @@ def login(request):
     global loginip
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     response = HttpResponse()
 
@@ -1349,6 +1577,7 @@ def login(request):
             'ADMIN_MODE': ADMIN_MODE,
             'STORY_ACTIVE': STORY_ACTIVE,
             'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+            'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
             'SIMULATION_MODE': SIMULATION_MODE,  
             'INSTANCE_NAME': INSTANCE_NAME,
             'INSTANCE_IMAGE': INSTANCE_IMAGE,
@@ -1379,6 +1608,7 @@ def login(request):
             'ADMIN_MODE': ADMIN_MODE,
             'STORY_ACTIVE': STORY_ACTIVE,
             'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+            'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
             'SIMULATION_MODE': SIMULATION_MODE,  
             'INSTANCE_NAME': INSTANCE_NAME,
             'INSTANCE_IMAGE': INSTANCE_IMAGE,
@@ -1460,7 +1690,8 @@ def index(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1488,6 +1719,16 @@ def index(request):
             print('     🟢 ROBOT SHOP OUTAGE INACTIVE')
             ROBOT_SHOP_OUTAGE_ACTIVE=False
 
+        stream = os.popen("oc get service  -n sock-shop catalogue  -o yaml")
+        CATALOG_YAML = stream.read().strip()
+        if '-outage' in CATALOG_YAML:
+            print('     🔴 SOCK SHOP OUTAGE ACTIVE')
+            SOCK_SHOP_OUTAGE_ACTIVE=True
+        else:
+            print('     🟢 SOCK SHOP OUTAGE INACTIVE')
+            SOCK_SHOP_OUTAGE_ACTIVE=False
+
+
     else:
         template = loader.get_template('demouiapp/loginui.html')
 
@@ -1502,6 +1743,7 @@ def index(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
@@ -1510,6 +1752,7 @@ def index(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'Demo UI for ' + INSTANCE_NAME,
         'PAGE_NAME': 'index'
@@ -1522,7 +1765,8 @@ def doc(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1552,6 +1796,7 @@ def doc(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1561,6 +1806,7 @@ def doc(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'PAGE_TITLE': 'CloudPak for Watson AIOps Demo UI',
         'PAGE_NAME': 'doc'
@@ -1572,7 +1818,8 @@ def apps(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1602,6 +1849,7 @@ def apps(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1612,6 +1860,7 @@ def apps(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
@@ -1628,7 +1877,8 @@ def apps_system(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1658,6 +1908,7 @@ def apps_system(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1668,6 +1919,7 @@ def apps_system(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
@@ -1685,7 +1937,8 @@ def apps_demo(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1715,6 +1968,7 @@ def apps_demo(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1725,6 +1979,7 @@ def apps_demo(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
@@ -1743,7 +1998,8 @@ def apps_additional(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1773,6 +2029,7 @@ def apps_additional(request):
         'flink_url': flink_url,
         'flink_url_policy': flink_url_policy,
         'robotshop_url': robotshop_url,
+        'sockshop_url': sockshop_url,
         'spark_url': spark_url,
         'eventmanager_url': eventmanager_url,
         'eventmanager_user': eventmanager_user,
@@ -1783,6 +2040,7 @@ def apps_additional(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,  
         'DEMO_USER': DEMO_USER,
         'DEMO_PWD': DEMO_PWD,
@@ -1802,7 +2060,8 @@ def about(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1817,6 +2076,7 @@ def about(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
@@ -1832,7 +2092,8 @@ def config(request):
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
-    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE))
+    global SOCK_SHOP_OUTAGE_ACTIVE
+    print('     🟠 OUTAGE - Story:'+str(STORY_ACTIVE)+' - RS-OUTAGE:'+str(ROBOT_SHOP_OUTAGE_ACTIVE)+' - SOCK-OUTAGE:'+str(SOCK_SHOP_OUTAGE_ACTIVE))
 
     verifyLogin(request)
 
@@ -1847,6 +2108,7 @@ def config(request):
         'ADMIN_MODE': ADMIN_MODE,
         'STORY_ACTIVE': STORY_ACTIVE,
         'ROBOT_SHOP_OUTAGE_ACTIVE': ROBOT_SHOP_OUTAGE_ACTIVE,
+        'SOCK_SHOP_OUTAGE_ACTIVE': SOCK_SHOP_OUTAGE_ACTIVE,
         'SIMULATION_MODE': SIMULATION_MODE,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
