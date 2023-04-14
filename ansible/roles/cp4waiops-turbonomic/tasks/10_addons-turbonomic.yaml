@@ -95,9 +95,9 @@
 #       echo "✅ Seems that you're on Techzone IPI"  
 #       echo "✅ Let's patch the certificates"  
 #       echo "--------------------------------------------------------------------------------------------------------------------------"
-#       export certcrt=$(oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}' | base64 -d)
+#       export certcrt=$(oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}' | base64 --decode)
 #       export cacrt=$(echo "$certcrt" | sed -e '1,34d')
-#       export certkey=$(oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 -d)
+#       export certkey=$(oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 --decode)
 #       export cacrt=$(echo $cacrt|tr -d '\n')
 #       export certkey=$(echo $certkey|tr -d '\n')
 

@@ -108,8 +108,8 @@
 #- name:   🚀 PREREQUISITES - 🩹 Patch builder service account
 #   shell: |
 #     INTERNAL=$(oc get secret -n {{ current_cp4waiops_cluster.project }} | grep '^builder-dockercfg' | cut -f1 -d ' ')
-#     BASE=$(oc get secret ibm-entitlement-key -n {{ current_cp4waiops_cluster.project }} -o json | jq ".data[]" | sed -e 's/^"//' -e 's/"$//' | base64 -d | sed -e 's/}}$/,/')
-#     ADDITIONAL=$(oc get secret $INTERNAL -n {{ current_cp4waiops_cluster.project }} -o json | jq ".data[]" | sed -e 's/^"//' -e 's/"$//' | base64 -d | sed -e 's/^{//')
+#     BASE=$(oc get secret ibm-entitlement-key -n {{ current_cp4waiops_cluster.project }} -o json | jq ".data[]" | sed -e 's/^"//' -e 's/"$//' | base64 --decode | sed -e 's/}}$/,/')
+#     ADDITIONAL=$(oc get secret $INTERNAL -n {{ current_cp4waiops_cluster.project }} -o json | jq ".data[]" | sed -e 's/^"//' -e 's/"$//' | base64 --decode | sed -e 's/^{//')
 #     echo $BASE$ADDITIONAL} > builder-secret.tmp
 #     oc create secret generic merged-secret --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=builder-secret.tmp -n {{ current_cp4waiops_cluster.project }} || true
 #     rm builder-secret.tmp

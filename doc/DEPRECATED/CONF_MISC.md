@@ -119,7 +119,7 @@ export KAFKA_TOPIC=$(oc get kafkatopics -n $WAIOPS_NAMESPACE | grep -v cp4waiops
 export KAFKA_USER=$(oc get secret $KAFKA_SECRET -n $WAIOPS_NAMESPACE --template={{.data.username}} | base64 --decode)
 export KAFKA_PWD=$(oc get secret $KAFKA_SECRET -n $WAIOPS_NAMESPACE --template={{.data.password}} | base64 --decode)
 export KAFKA_BROKER=$(oc get routes iaf-system-kafka-0 -n $WAIOPS_NAMESPACE -o=jsonpath='{.status.ingress[0].host}{"\n"}'):443
-export CERT_ELEMENT=$(oc get secret -n $WAIOPS_NAMESPACE kafka-secrets  -o 'go-template={{index .data "ca.crt"}}'| base64 -d)
+export CERT_ELEMENT=$(oc get secret -n $WAIOPS_NAMESPACE kafka-secrets  -o 'go-template={{index .data "ca.crt"}}'| base64 --decode)
 
 echo "KAFKA_BROKER: '"$KAFKA_BROKER"'"
 echo "KAFKA_USER: '"$KAFKA_USER"'"

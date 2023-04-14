@@ -270,7 +270,7 @@ export KAFKA_SECRET=$(oc get secret -n $WAIOPS_NAMESPACE |grep 'aiops-kafka-secr
 export KAFKA_USER=$(oc get secret $KAFKA_SECRET -n $WAIOPS_NAMESPACE --template={{.data.username}} | base64 --decode)
 export KAFKA_PWD=$(oc get secret $KAFKA_SECRET -n $WAIOPS_NAMESPACE --template={{.data.password}} | base64 --decode)
 export KAFKA_BROKER=$(oc get routes iaf-system-kafka-0 -n $WAIOPS_NAMESPACE -o=jsonpath='{.status.ingress[0].host}{"\n"}'):443
-export KAFKA_CERT=$(oc get secret -n $WAIOPS_NAMESPACE kafka-secrets  -o jsonpath='{.data.ca\.crt}'| base64 -d)
+export KAFKA_CERT=$(oc get secret -n $WAIOPS_NAMESPACE kafka-secrets  -o jsonpath='{.data.ca\.crt}'| base64 --decode)
 export LOG_ITERATIONS=5
 export TOKEN=test
 
@@ -285,7 +285,7 @@ export DATALAYER_PWD=$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath=
 
 
 export METRIC_ROUTE=$(oc get route | grep ibm-nginx-svc | awk '{print $2}')
-PASS=$(oc get secret admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d)
+PASS=$(oc get secret admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 --decode)
 export METRIC_TOKEN=$(curl -k -s -X POST https://$METRIC_ROUTE/icp4d-api/v1/authorize -H 'Content-Type: application/json' -d "{\"username\": \"admin\",\"password\": \"$PASS\"}" | jq .token | sed 's/\"//g')
 
 

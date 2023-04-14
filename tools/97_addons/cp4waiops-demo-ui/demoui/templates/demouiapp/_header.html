@@ -199,6 +199,17 @@
                                 {% endif %}
                                 </a>
                             </li>
+                            <li class="bx--tabs--scrollable__nav-item" role="presentation">
+                                <a type="button" role="tab" aria-selected="false" aria-controls="favorites__panel"
+                                    id="favorites" class="bx--tabs--scrollable__nav-link" href="/about"
+                                    tabindex="-1">
+                                    {% if SOCK_SHOP_OUTAGE_ACTIVE == True %}
+                                    🔴 Active SockShop Outage
+                                    {% else %}
+                                    🟢 No Active SockShop Outage
+                                {% endif %}
+                                </a>
+                            </li>
 
                     
 

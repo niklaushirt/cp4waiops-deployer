@@ -7,6 +7,7 @@ import os
 
 DEMO_EVENTS_MEM=os.environ.get('DEMO_EVENTS_MEM')
 DEMO_EVENTS_FAN=os.environ.get('DEMO_EVENTS_FAN')
+DEMO_EVENTS_NET=os.environ.get('DEMO_EVENTS_NET')
 DEMO_LOGS=os.environ.get('DEMO_LOGS')
 LOG_ITERATIONS=int(os.environ.get('LOG_ITERATIONS'))
 LOG_TIME_FORMAT=os.environ.get('LOG_TIME_FORMAT')
@@ -26,6 +27,7 @@ METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
 METRICS_TO_SIMULATE_MEM=str(os.environ.get('METRICS_TO_SIMULATE_MEM')).split(';')
 METRICS_TO_SIMULATE_FAN_TEMP=str(os.environ.get('METRICS_TO_SIMULATE_FAN_TEMP')).split(';')
 METRICS_TO_SIMULATE_FAN=str(os.environ.get('METRICS_TO_SIMULATE_FAN')).split(';')
+METRICS_TO_SIMULATE_NET=str(os.environ.get('METRICS_TO_SIMULATE_NET')).split(';')
 
 
 
@@ -145,6 +147,9 @@ def injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_FAN)
     return 'OK'
 
+def injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):  
+    injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_NET)
+    return 'OK'
 
 
 def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS):
@@ -216,6 +221,13 @@ def injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN):
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_FAN,METRIC_TIME_SKEW,METRIC_TIME_STEP)
     return 'OK'
 
+def injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN): 
+    METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
+    METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
+    injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_NET,METRIC_TIME_SKEW,METRIC_TIME_STEP)
+    return 'OK'
+
+
 
 def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW,METRIC_TIME_STEP):
     #print('              ')
@@ -232,7 +244,7 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
     #print('                   ❓ Getting Details Metric Endpoint')
     stream = os.popen("oc get route -n "+aimanagerns+" | grep ibm-nginx-svc | awk '{print $2}'")
     METRIC_ROUTE = stream.read().strip()
-    stream = os.popen("oc get secret  -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d")
+    stream = os.popen("oc get secret  -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 --decode")
     tmppass = stream.read().strip()
     stream = os.popen('curl -k -s -X POST https://'+METRIC_ROUTE+'/icp4d-api/v1/authorize -H "Content-Type: application/json" -d "{\\\"username\\\": \\\"admin\\\",\\\"password\\\": \\\"'+tmppass+'\\\"}" | jq .token | sed "s/\\\"//g"')
     METRIC_TOKEN = stream.read().strip()

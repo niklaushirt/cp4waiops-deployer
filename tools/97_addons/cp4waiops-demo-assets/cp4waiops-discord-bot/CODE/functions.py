@@ -311,7 +311,7 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
     #print('                   ❓ Getting Details Metric Endpoint')
     stream = os.popen("oc get route -n "+aimanagerns+" | grep ibm-nginx-svc | awk '{print $2}'")
     METRIC_ROUTE = stream.read().strip()
-    stream = os.popen("oc get secret  -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d")
+    stream = os.popen("oc get secret  -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 --decode")
     tmppass = stream.read().strip()
     stream = os.popen('curl -k -s -X POST https://'+METRIC_ROUTE+'/icp4d-api/v1/authorize -H "Content-Type: application/json" -d "{\\\"username\\\": \\\"admin\\\",\\\"password\\\": \\\"'+tmppass+'\\\"}" | jq .token | sed "s/\\\"//g"')
     METRIC_TOKEN = stream.read().strip()
@@ -328,7 +328,7 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
     #print('METRIC_TOKEN:'+METRIC_TOKEN)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'Authorization': 'Bearer '+METRIC_TOKEN, 'X-TenantID' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
 
-    for i in range (1,40):
+    for i in range (1,80):
         output_json='{"groups":['
         CURR_ITERATIONS=CURR_ITERATIONS+1
 
@@ -368,14 +368,14 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
         output_json=output_json+LAST_LINE
         output_json=output_json+']}'
         #print (output_json)
-        #print (MY_TIMESTAMP_READABLE)
-        #print (MY_TIMESTAMP)
+        # print (MY_TIMESTAMP_READABLE)
+        # print (MY_TIMESTAMP)
         #print('output_json:'+output_json)
         response = requests.post(url, data=output_json, headers=headers, verify=False)
-        print('                   RESULT:'+str(response.content))
+        print('                   RESULT:'+str(response.content)+' at '+MY_TIMESTAMP_READABLE)
     #print('               ✅ Inject Metrics')
     #print('               ------------------------------------------------------------------------------------------------')
-    print('              ✅ LAST RESULT:'+str(response.content))
+    print('              ✅ LAST RESULT:'+str(response.content)+' at '+MY_TIMESTAMP_READABLE)
 
     return 'OK'
 

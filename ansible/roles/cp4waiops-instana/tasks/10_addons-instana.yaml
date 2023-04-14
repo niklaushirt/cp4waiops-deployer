@@ -446,8 +446,8 @@
 #     then
 #       echo "✅ Seems that you're on Techzone IPI"  
 #       echo "✅ Let's patch the certificates"  
-#       oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}'  | base64 -d > cert.crt
-#       oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 -d > cert.key
+#       oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}'  | base64 --decode > cert.crt
+#       oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 --decode > cert.key
 #       sed -e '1,34d' cert.crt > ca.crt
 
 #       oc -n instana-core get secret instana-tls -o yaml > backup_instana-tls.yaml
