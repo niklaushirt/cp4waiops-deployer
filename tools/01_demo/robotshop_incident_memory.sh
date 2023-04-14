@@ -47,7 +47,7 @@ echo "**************************************************************************
 
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 if [ "${OS}" == "darwin" ]; then
-      echo "OK"
+      echo "       ✅ OK - MacOS"
 else
       echo "❗ This tool currently only runs on Mac OS due to shell limitations."
       echo "❗ Please use the Demo Web UI for Incident simulation."

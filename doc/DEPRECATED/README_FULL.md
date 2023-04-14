@@ -719,9 +719,9 @@ Again, **ensure that you are in the project for AIOps** and run the following to
 
 ```bash
 ingress_pod=$(oc get secrets -n openshift-ingress | grep tls | grep -v router-metrics-certs-default | awk '{print $1}')
-oc get secret -n openshift-ingress -o jsonpath='{.data.tls\.crt}' ${ingress_pod} | base64 -d > /tmp/cert.crt
-oc get secret -n openshift-ingress -o jsonpath='{.data.tls\.key}' ${ingress_pod} | base64 -d > /tmp/cert.key
-oc get secret -n $WAIOPS_NAMESPACE iaf-system-automationui-aui-zen-ca -o jsonpath='{.data.ca\.crt}' | base64 -d > /tmp/ca.crt
+oc get secret -n openshift-ingress -o jsonpath='{.data.tls\.crt}' ${ingress_pod} | base64 --decode > /tmp/cert.crt
+oc get secret -n openshift-ingress -o jsonpath='{.data.tls\.key}' ${ingress_pod} | base64 --decode > /tmp/cert.key
+oc get secret -n $WAIOPS_NAMESPACE iaf-system-automationui-aui-zen-ca -o jsonpath='{.data.ca\.crt}' | base64 --decode > /tmp/ca.crt
 
 oc get secret -n $WAIOPS_NAMESPACE external-tls-secret --ignore-not-found -o yaml > /tmp/external-tls-secret-backup-$(date +%Y%m%d-%H%M).yaml
 oc delete secret -n $WAIOPS_NAMESPACE --ignore-not-found external-tls-secret
@@ -788,7 +788,7 @@ oc set env deployment/$(oc get deploy -l app.kubernetes.io/component=chatops-sla
 In the terminal type 
 
 ```bash
-./tools/01_demo/incident_memory.sh
+./tools/01_demo/robotshop_incident_memory.sh
 ```
 
 This will delete all existing Alerts/Stories and inject pre-canned event and logs to create a story.

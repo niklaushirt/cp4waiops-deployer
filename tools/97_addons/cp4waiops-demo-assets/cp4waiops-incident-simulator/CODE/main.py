@@ -109,7 +109,7 @@ stream = os.popen("oc get secret "+KAFKA_SECRET+" -n "+aimanagerns+" --template=
 KAFKA_PWD = stream.read().strip()
 stream = os.popen("oc get routes iaf-system-kafka-0 -n "+aimanagerns+" -o=jsonpath={.status.ingress[0].host}")
 KAFKA_BROKER = stream.read().strip()
-stream = os.popen("oc get secret -n "+aimanagerns+" kafka-secrets  -o jsonpath='{.data.ca\.crt}'| base64 -d")
+stream = os.popen("oc get secret -n "+aimanagerns+" kafka-secrets  -o jsonpath='{.data.ca\.crt}'| base64 --decode")
 KAFKA_CERT = stream.read().strip()
 
 print('     ❓ Getting Details Datalayer')
@@ -123,7 +123,7 @@ DATALAYER_PWD = stream.read().strip()
 print('     ❓ Getting Details Metric Endpoint')
 stream = os.popen("oc get route -n "+aimanagerns+"| grep ibm-nginx-svc | awk '{print $2}'")
 METRIC_ROUTE = stream.read().strip()
-stream = os.popen("oc get secret -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 -d")
+stream = os.popen("oc get secret -n "+aimanagerns+" admin-user-details -o jsonpath='{.data.initial_admin_password}' | base64 --decode")
 tmppass = stream.read().strip()
 stream = os.popen('curl -k -s -X POST https://'+METRIC_ROUTE+'/icp4d-api/v1/authorize -H "Content-Type: application/json" -d "{\\\"username\\\": \\\"admin\\\",\\\"password\\\": \\\"'+tmppass+'\\\"}" | jq .token | sed "s/\\\"//g"')
 METRIC_TOKEN = stream.read().strip()
@@ -226,76 +226,238 @@ print ('------------------------------------------------------------------------
 
 while True:
     if ACTIVE=="True": 
-        print ('     🚀 Simulating Events')
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 SIMULATOR ROBOT SHOP')
+        print ('-------------------------------------------------------------------------------------------------')
+
+        print ('     🚀 Simulating Events ROBOTSHOP')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
 
-        print ('     🚀 Simulating Metrics')
+        print ('     🚀 Simulating Metrics ROBOTSHOP')
         injectMetricsMem(METRIC_ROUTE,METRIC_TOKEN)
 
-        print ('     🚀 Simulating Logs')
+        print ('     🚀 Simulating Logs ROBOTSHOP')
         injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
 
-        print ('     🚀 Simulating Metrics')
+        print ('     🚀 Simulating Metrics ROBOTSHOP')
         injectMetricsMem(METRIC_ROUTE,METRIC_TOKEN)
 
-        print ('     🚀 Simulating Logs')
+        print ('     🚀 Simulating Logs ROBOTSHOP')
         injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
 
-        print ('     🚀 Simulating Events')
+        print ('     🚀 Simulating Events ROBOTSHOP')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        print ('     🚀 Simulating Events')
+        print ('     🚀 Simulating Events ROBOTSHOP')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        print ('     🚀 Simulating Events')
+        print ('     🚀 Simulating Events ROBOTSHOP')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        print ('     🚀 Simulating Events')
+        print ('     🚀 Simulating Events ROBOTSHOP')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        print ('     🚀 Simulating Events')
+        print ('     🚀 Simulating Events ROBOTSHOP')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        print ('     🚀 Simulating Events')
+        print ('     🚀 Simulating Events ROBOTSHOP')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        print ('     🚀 Simulating Events')
+        print ('     🚀 Simulating Events ROBOTSHOP')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        print ('     🚀 Simulating Events')
+        print ('     🚀 Simulating Events ROBOTSHOP')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-        print ('     🚀 Simulating Events')
+        print ('     🚀 Simulating Event ROBOTSHOPs')
         injectEventsMem(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
 
-        print ('     🕦 Waiting '+str(WAIT_INPROGRESS)+' Seconds')
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting '+str(WAIT_INPROGRESS)+' Seconds before Acknowledge')
+        print ('-------------------------------------------------------------------------------------------------')
         time.sleep(WAIT_INPROGRESS)
-        print ('     🚀 Updating Stories to "inProgress"')
-        updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress")
 
 
-        print ('     🕦 Waiting '+str(WAIT_BASE)+' Seconds')
-        time.sleep(WAIT_BASE)
-        print ('     🚀 Simulating Metrics Fan Temp')
-        injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
-        time.sleep(3)
-
-        print ('     🚀 Simulating Events Fan')
-        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
-
-        print ('     🚀 Simulating Metrics Fan')
-        injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN)
-
-        print ('     🚀 Updating Stories to "inProgress"')
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 Update Stories to InProgress')
+        print ('-------------------------------------------------------------------------------------------------')
         updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress")
 
 
 
-        print ('     🕦 Waiting '+str(WAIT_RESOLVE)+' Seconds')
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting '+str(WAIT_RESOLVE)+' Seconds before Resolve')
+        print ('-------------------------------------------------------------------------------------------------')
         time.sleep(WAIT_RESOLVE)
-        print ('     🚀 Updating Stories to "resolved"')
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 Update Stories to Resolved')
+        print ('-------------------------------------------------------------------------------------------------')
         updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved")
 
 
-        print ('     🕦 Waiting '+str(WAIT_BASE)+' Seconds')
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting 30 Seconds before Close')
+        print ('-------------------------------------------------------------------------------------------------')
         time.sleep(30)
-        print ('     🚀 Updating Stories and Alerts to "closed"')
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 Update Stories to Closed')
+        print ('-------------------------------------------------------------------------------------------------')
         updateAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"closed")
         updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"closed")
         
-        print ('     🕦 Waiting '+str(WAIT_RESTART)+' Seconds for Stories and Alerts to be deleted')
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting '+str(WAIT_RESTART)+' Seconds before recreating scenario')
+        print ('-------------------------------------------------------------------------------------------------')
+        time.sleep(WAIT_RESTART)
+
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 SIMULATOR SOCK SHOP')
+        print ('-------------------------------------------------------------------------------------------------')
+
+        print ('     🚀 Simulating Events SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+
+        print ('     🚀 Simulating Metrics SOCKSHOP')
+        injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN)
+
+        print ('     🚀 Simulating Metrics SOCKSHOP')
+        injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN)
+
+        print ('     🚀 Simulating Events SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Event SOCKSHOP')
+        injectEventsNet(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+
+        print ('     🚀 Simulating Metrics SOCKSHOP')
+        injectMetricsNet(METRIC_ROUTE,METRIC_TOKEN)
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting '+str(WAIT_INPROGRESS)+' Seconds before Acknowledge')
+        print ('-------------------------------------------------------------------------------------------------')
+        time.sleep(WAIT_INPROGRESS)
+
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 Update Stories to InProgress')
+        print ('-------------------------------------------------------------------------------------------------')
+        updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress")
+
+
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting '+str(WAIT_RESOLVE)+' Seconds before Resolve')
+        print ('-------------------------------------------------------------------------------------------------')
+        time.sleep(WAIT_RESOLVE)
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 Update Stories to Resolved')
+        print ('-------------------------------------------------------------------------------------------------')
+        updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved")
+
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting 30 Seconds before Close')
+        print ('-------------------------------------------------------------------------------------------------')
+        time.sleep(30)
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 Update Stories to Closed')
+        print ('-------------------------------------------------------------------------------------------------')
+        updateAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"closed")
+        updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"closed")
+        
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting '+str(WAIT_RESTART)+' Seconds before recreating scenario')
+        print ('-------------------------------------------------------------------------------------------------')
+        time.sleep(WAIT_RESTART)
+
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 SIMULATOR ACME AIR')
+        print ('-------------------------------------------------------------------------------------------------')
+
+        print ('     🚀 Simulating Events ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+
+        print ('     🚀 Simulating Metrics ACME AIR')
+        injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN)
+
+        print ('     🚀 Simulating Metrics ACME AIR')
+        injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN)
+
+        print ('     🚀 Simulating Events ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Events ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        print ('     🚀 Simulating Event ACME AIR')
+        injectEventsFan(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD)
+        
+        print ('     🚀 Simulating Metrics ACME AIR')
+        injectMetricsFan(METRIC_ROUTE,METRIC_TOKEN)
+
+
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting '+str(WAIT_INPROGRESS)+' Seconds before Acknowledge')
+        print ('-------------------------------------------------------------------------------------------------')
+        time.sleep(WAIT_INPROGRESS)
+
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 Update Stories to InProgress')
+        print ('-------------------------------------------------------------------------------------------------')
+        updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress")
+
+
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting '+str(WAIT_RESOLVE)+' Seconds before Resolve')
+        print ('-------------------------------------------------------------------------------------------------')
+        time.sleep(WAIT_RESOLVE)
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 Update Stories to Resolved')
+        print ('-------------------------------------------------------------------------------------------------')
+        updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved")
+
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting 30 Seconds before Close')
+        print ('-------------------------------------------------------------------------------------------------')
+        time.sleep(30)
+
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🚀 Update Stories to Closed')
+        print ('-------------------------------------------------------------------------------------------------')
+        updateAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"closed")
+        updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"closed")
+        
+        print ('-------------------------------------------------------------------------------------------------')
+        print (' 🕦 Waiting '+str(WAIT_RESTART)+' Seconds before recreating scenario')
+        print ('-------------------------------------------------------------------------------------------------')
         time.sleep(WAIT_RESTART)
     else:
         print ('     ❌ Inactive - Waiting 15 Seconds')

@@ -97,8 +97,8 @@
 
     ingress_pod=$(oc get secrets -n openshift-ingress | grep tls | grep -v router-metrics-certs-default | awk '{print $1}')
 
-    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.crt}'  | base64 -d > cert.crt
-    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.key}' | base64 -d > cert.key
+    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.crt}'  | base64 --decode > cert.crt
+    oc get secret -n openshift-ingress ${ingress_pod} -o jsonpath='{.data.tls\.key}' | base64 --decode > cert.key
 
     oc get secret -n ${PROJECT_CP4WAIOPS} external-tls-secret -o yaml > external-tls-secret.yaml
 
@@ -146,8 +146,8 @@
     then
         echo "✅ Seems that you're on Techzone IPI"  
         echo "✅ Let's patch the certificates"  
-        oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}'  | base64 -d > cert.crt
-        oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 -d > cert.key
+        oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.crt}'  | base64 --decode > cert.crt
+        oc get secret -n openshift-ingress letsencrypt-certs -o jsonpath='{.data.tls\.key}' | base64 --decode > cert.key
         sed -e '1,34d' cert.crt > ca.crt
 
         oc -n ibm-common-services patch managementingress default --type merge --patch '{"spec":{"ignoreRouteCert":true} }'

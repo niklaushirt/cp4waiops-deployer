@@ -325,4 +325,27 @@
 
 
 
+- name: 🚀 AWX - Create AWX Template Mitigate SockShop Switch Outage
+  shell: |
+    export result=$(curl -X "POST" -s "{{ AWX_URL }}/api/v2/job_templates/" -u "admin:{{ AWX_PWD }}" --insecure \
+    -H 'content-type: application/json' \
+    -d $'{
+      "name": "CP4WAIOPS Mitigate SockShop Switch Outage",
+      "description": "Mitigate SockShop Switch Outage",
+      "job_type": "run",
+      "inventory": {{AWX_INVENTORY_ID}},
+      "project": {{AWX_PROJECT_ID}},
+      "playbook": "cp4waiops/sockshop/mitigate-sockshop.yaml",
+      "scm_branch": "",
+      "extra_vars": "",
+      "ask_variables_on_launch": true,
+      "extra_vars": "PROVIDE: my_k8s_apiurl and my_k8s_apikey",
+      "execution_environment": {{EXENV_ID}}
+    }')
+
+    echo $result
+  ignore_errors: true
+  register: AWX_RESULT
+  args:
+    executable: /bin/bash
 
