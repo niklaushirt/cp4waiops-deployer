@@ -32,8 +32,8 @@ python ./CODE/main.py
 
 exit 1
 
-  --form-string "token=a1f4fzcp9o22b9t3a38o5wepo6arb8" \
-  --form-string "user=uqgyUSaHZN4ZpbToaL6z7X3WwpTCzv" \
+  --form-string "token=a1f4fzfhfsdgsdgpo6arb8" \
+  --form-string "user=uqgyUSaadfhfds6z7X3WwpTCzv" \
   --form-string "message=hello world" \
   https://api.pushover.net/1/messages.json
 
