@@ -125,3 +125,46 @@
     verbosity: 1
 
 
+
+
+- name: 🛠️  POLICIES - Delete Default scope policy
+  shell: |
+      
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+
+
+    export POLICY_USERNAME=$(oc get secret -n $WAIOPS_NAMESPACE aiops-ir-lifecycle-policy-registry-svc -o jsonpath='{.data.username}' | base64 --decode)
+    export POLICY_PASSWORD=$(oc get secret -n $WAIOPS_NAMESPACE aiops-ir-lifecycle-policy-registry-svc -o jsonpath='{.data.password}' | base64 --decode)
+    export POLICY_LOGIN="$POLICY_USERNAME:$POLICY_PASSWORD"
+    echo $POLICY_LOGIN
+
+    export POLICY_ROUTE=$(oc get routes -n $WAIOPS_NAMESPACE policy-api -o jsonpath="{['spec']['host']}")
+    echo $POLICY_ROUTE
+
+    # echo "{{role_path}}/templates/policies/runbook-trigger-policy.json"
+
+    export policyid=$(curl -XGET -k -s "https://$POLICY_ROUTE/policyregistry.ibm-netcool-prod.aiops.io/v1alpha/system/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/"  \
+      -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
+      -H 'content-type: application/json' \
+      -u $POLICY_LOGIN|jq -r '.[] | select( .metadata | contains ("Default scope policy")) | .policyid')
+
+      
+    export result=$(curl -XDELETE -k -s "https://$POLICY_ROUTE/policyregistry.ibm-netcool-prod.aiops.io/v1alpha/system/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/policies/$policyid"  \
+      -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
+      -H 'content-type: application/json' \
+      -u $POLICY_LOGIN \
+      -d '{ "state": "enabled" }')
+
+
+    echo $result
+  ignore_errors: true
+  register: POLICY_RESULT
+  args:
+    executable: /bin/bash
+
+
+- name: 🟣 OUTPUT
+  debug: 
+    var: POLICY_RESULT.stdout_lines
+    verbosity: 1
+

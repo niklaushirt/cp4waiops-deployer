@@ -76,6 +76,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Install Kubectl Instana Plugin
   shell: |
+    # https://self-hosted.instana.io/
     if [ -x "$(command -v kubectl-instana)" ]; then
         echo "Kubectl Instana Plugin already installed"
     else
