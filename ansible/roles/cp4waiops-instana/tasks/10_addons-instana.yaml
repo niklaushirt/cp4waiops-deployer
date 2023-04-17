@@ -245,7 +245,13 @@
 
 
     #get license
+    echo "Current Sales Key: {{current_sales_key}}"
     kubectl instana license download --sales-key {{current_sales_key}}
+    echo "Downloaded License"
+    echo "-----------------------------------------------------------"
+    cat ./license.json
+    echo "-----------------------------------------------------------"
+
     oc annotate namespace instana-datastores scheduler.alpha.kubernetes.io/defaultTolerations-
     oc annotate namespace instana-datastores openshift.io/node-selector-
 
