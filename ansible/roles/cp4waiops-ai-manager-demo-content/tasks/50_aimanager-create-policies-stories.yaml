@@ -128,10 +128,8 @@
 
 
 - name: 🛠️  POLICIES - Delete Default scope policy
-  shell: |
-      
+  shell: |    
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-
 
     export POLICY_USERNAME=$(oc get secret -n $WAIOPS_NAMESPACE aiops-ir-lifecycle-policy-registry-svc -o jsonpath='{.data.username}' | base64 --decode)
     export POLICY_PASSWORD=$(oc get secret -n $WAIOPS_NAMESPACE aiops-ir-lifecycle-policy-registry-svc -o jsonpath='{.data.password}' | base64 --decode)
