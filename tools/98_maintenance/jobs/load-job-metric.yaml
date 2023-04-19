@@ -40,7 +40,7 @@ spec:
               echo "    🚀 Starting Data Load"
               echo "   ------------------------------------------------------------------------------------------------------------------------------"
               cd cp4waiops-trainingdata
-              ./training/robotshop-load-metric-for-training.sh
+              ./training/load-metric-for-training.sh
 
               echo "*****************************************************************************************************************************"
               echo " ✅ DONE"
