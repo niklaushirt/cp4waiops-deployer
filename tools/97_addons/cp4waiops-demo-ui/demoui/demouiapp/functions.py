@@ -215,7 +215,7 @@ def injectEventsFanACME(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
 
 
 def injectEventsNetSock(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):  
-    print ('📛 START - Inject Events - NET SOCKETSHOP')
+    print ('📛 START - Inject Events - NET SOCKSHOP')
     injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS_NET_SOCK)
     return 'OK'
 
@@ -317,7 +317,7 @@ def injectMetricsFanACME(METRIC_ROUTE,METRIC_TOKEN):
 
 
 def injectMetricsSockNet(METRIC_ROUTE,METRIC_TOKEN):  
-    print ('📛 START - Inject Metrics - NET ROBOTSHOP')
+    print ('📛 START - Inject Metrics - NET SOCKSHOP')
     METRIC_TIME_SKEW=int(os.environ.get('METRIC_TIME_SKEW'))
     METRIC_TIME_STEP=int(os.environ.get('METRIC_TIME_STEP'))
     injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE_NET_SOCK,METRIC_TIME_SKEW,METRIC_TIME_STEP,"injectMetricsSockNet")
