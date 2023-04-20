@@ -13,6 +13,7 @@ DEMO_EVENTS_MEM=os.environ.get('DEMO_EVENTS_MEM')
 DEMO_EVENTS_FAN=os.environ.get('DEMO_EVENTS_FAN')
 DEMO_EVENTS_NET=os.environ.get('DEMO_EVENTS_NET')
 DEMO_LOGS=os.environ.get('DEMO_LOGS')
+DEMO_LOGS_SOCK=os.environ.get('DEMO_LOGS_SOCK')
 METRICS_TO_SIMULATE_MEM=str(os.environ.get('METRICS_TO_SIMULATE_MEM')).split(';')
 METRICS_TO_SIMULATE_FAN_TEMP=str(os.environ.get('METRICS_TO_SIMULATE_FAN_TEMP')).split(';')
 METRICS_TO_SIMULATE_FAN=str(os.environ.get('METRICS_TO_SIMULATE_FAN')).split(';')
@@ -110,7 +111,7 @@ def closeAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
     url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/alerts'
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-    response = requests.patch(url, data=data, headers=headers, auth=auth) #, verify=False)
+    response = requests.patch(url, data=data, headers=headers, auth=auth, verify=False)
     print ('    Close Alerts:'+str(response.content))
     print ('✅ END - Close Alerts')
 
@@ -125,10 +126,10 @@ def closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
     print ('📛 START - Set Stories to InProgress')
-    response = requests.patch(url, data=dataInProgress, headers=headers, auth=auth) #, verify=False)
+    response = requests.patch(url, data=dataInProgress, headers=headers, auth=auth, verify=False)
     time.sleep(10)
     print ('📛 START - Set Stories to Resolved')
-    response = requests.patch(url, data=dataResolved, headers=headers, auth=auth) #, verify=False)
+    response = requests.patch(url, data=dataResolved, headers=headers, auth=auth, verify=False)
     print ('    Close Stories-:'+str(response.content))
     print ('✅ END - Close Stories')
 
@@ -142,9 +143,19 @@ def closeStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD):
 from confluent_kafka import Producer
 import socket
 
+def injectLogsRobotShop(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS): 
+    print ('📛 START - Inject Logs - ROBOTSHOP')
+    injectLogsGeneric(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
+    return 'OK'
 
-def injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS):
-    print ('📛 START - Inject Logs')
+
+def injectLogsSockShop(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS_SOCK):  
+    print ('📛 START - Inject Logs - SOCKSHOP')
+    injectLogsGeneric(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS_SOCK)
+    return 'OK'
+
+def injectLogsGeneric(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS_GENERIC):
+    
 
     stream = os.popen('echo "'+KAFKA_CERT+'" > ./demouiapp/ca.crt')
     stream.read().strip()
@@ -169,7 +180,7 @@ def injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG
     timestamp = timestamp + datetime.timedelta(minutes=LOG_TIME_SKEW)
 
     for i in range (1,LOG_ITERATIONS):
-        for line in DEMO_LOGS.split('\n'):
+        for line in DEMO_LOGS_GENERIC.split('\n'):
             timestamp = timestamp + datetime.timedelta(milliseconds=LOG_TIME_STEPS)            
             timestampstr = timestamp.strftime(LOG_TIME_FORMAT)+'+00:00'
             line = line.replace("MY_TIMESTAMP", timestampstr).strip()
@@ -239,7 +250,7 @@ def injectEventsGeneric(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,DEMO_EVENTS
         timestampstr = timestamp.strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
         line = line.replace("MY_TIMESTAMP", timestampstr)
-        response = requests.post(url, data=line, headers=headers, auth=auth) #, verify=False)
+        response = requests.post(url, data=line, headers=headers, auth=auth, verify=False)
         print ('    Events-Injection:'+str(response.content))
 
     print ('✅ END - Inject Events')

@@ -66,7 +66,7 @@ DATALAYER_PWD = stream.read().strip()
 url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
 auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
 headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+response = requests.get(url, headers=headers, auth=auth, verify=False)
 responseJSON=response.json()
 responseStr=str(json.dumps(responseJSON))
 #print(responseStr)
@@ -567,7 +567,7 @@ def instanaCreateIncident(request):
         url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
         auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
         headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-        response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+        response = requests.get(url, headers=headers, auth=auth, verify=False)
         responseJSON=response.json()
         responseStr=str(json.dumps(responseJSON))
         if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
@@ -647,7 +647,7 @@ def instanaMitigateIncident(request):
         url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
         auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
         headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-        response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+        response = requests.get(url, headers=headers, auth=auth, verify=False)
         responseJSON=response.json()
         responseStr=str(json.dumps(responseJSON))
         if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
@@ -735,7 +735,7 @@ def injectAllREST(request):
         print('  🟠 Create THREADS')
         threadEvents = Thread(target=injectEventsMem, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
         threadMetrics = Thread(target=injectMetricsMem, args=(METRIC_ROUTE,METRIC_TOKEN,))
-        threadLogs = Thread(target=injectLogs, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
+        threadLogs = Thread(target=injectLogsRobotShop, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
 
         print('  🟠 Start THREADS')
         # start the threads
@@ -832,7 +832,7 @@ def injectAllFanREST(request):
         threadMetrics1 = Thread(target=injectMetricsFanTemp, args=(METRIC_ROUTE,METRIC_TOKEN,))
         threadEvents = Thread(target=injectEventsFan, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
         threadMetrics2 = Thread(target=injectEventsFan, args=(METRIC_ROUTE,METRIC_TOKEN,DATALAYER_PWD))
-        threadLogs = Thread(target=injectLogs, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
+        threadLogs = Thread(target=injectLogsRobotShop, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
 
         print('  🟠 Start THREADS')
         # start the threads
@@ -910,7 +910,7 @@ def injectAllNetREST(request):
         print('  🟠 Create THREADS')
         threadMetrics1 = Thread(target=injectMetricsNet, args=(METRIC_ROUTE,METRIC_TOKEN,))
         threadEvents = Thread(target=injectEventsNet, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
-        threadLogs = Thread(target=injectLogs, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
+        threadLogs = Thread(target=injectLogsRobotShop, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS,))
 
         print('  🟠 Start THREADS')
         # start the threads
@@ -1090,12 +1090,19 @@ def injectAllNetSOCKREST(request):
         print('  🟠 Create THREADS')
         threadEvents = Thread(target=injectEventsNetSock, args=(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD))
         threadMetrics = Thread(target=injectMetricsSockNet, args=(METRIC_ROUTE,METRIC_TOKEN,))
+        threadLogs = Thread(target=injectLogsSockShop, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS_SOCK,))
+        threadLogs1 = Thread(target=injectLogsSockShop, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS_SOCK,))
+        threadLogs2 = Thread(target=injectLogsSockShop, args=(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS_SOCK,))
 
         print('  🟠 Start THREADS')
         # start the threads
         threadMetrics.start()
         threadEvents.start()
-        time.sleep(3)
+        threadLogs.start()
+        time.sleep(5)
+        threadLogs1.start()
+        time.sleep(5)
+        threadLogs2.start()
 
     else:
         template = loader.get_template('demouiapp/loginui.html')
@@ -1157,7 +1164,7 @@ def injectLogsREST(request):
     verifyLogin(request)
     if loggedin=='true':
         template = loader.get_template('demouiapp/home.html')
-        injectLogs(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
+        injectLogsRobotShop(KAFKA_BROKER,KAFKA_USER,KAFKA_PWD,KAFKA_TOPIC_LOGS,KAFKA_CERT,LOG_TIME_FORMAT,DEMO_LOGS)
     else:
         template = loader.get_template('demouiapp/loginui.html')
 
@@ -1478,7 +1485,7 @@ def clearEventsREST(request):
     return HttpResponse(template.render(context, request))
 
 def clearStoriesREST(request):
-    print('🌏 injectLogsREST')
+    print('🌏 clearStoriesREST')
     global loggedin
     global STORY_ACTIVE
     global ROBOT_SHOP_OUTAGE_ACTIVE
@@ -1700,7 +1707,7 @@ def index(request):
         url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
         auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
         headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
-        response = requests.get(url, headers=headers, auth=auth) #, verify=False)
+        response = requests.get(url, headers=headers, auth=auth, verify=False)
         responseJSON=response.json()
         responseStr=str(json.dumps(responseJSON))
         if '"state": "assignedToIndividual"' in responseStr or '"state": "inProgress"' in responseStr:
