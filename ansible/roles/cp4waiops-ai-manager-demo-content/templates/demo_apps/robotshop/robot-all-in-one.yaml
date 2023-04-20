@@ -275,7 +275,7 @@ spec:
     spec:
       containers:
       - name: cart
-        image: robotshop/rs-cart:latest
+        image: quay.io/niklaushirt/rs-cart:latest
         imagePullPolicy: IfNotPresent
         # agent networking access
         env:
@@ -320,7 +320,7 @@ spec:
     spec:
       containers:
       - name: catalogue
-        image: robotshop/rs-catalogue:latest
+        image: quay.io/niklaushirt/rs-catalogue:latest
         imagePullPolicy: IfNotPresent
         env:
           - name: INSTANA_AGENT_HOST
@@ -368,7 +368,7 @@ spec:
       
       containers:
       - name: dispatch
-        image: robotshop/rs-dispatch:latest
+        image: quay.io/niklaushirt/rs-dispatch:latest
         imagePullPolicy: IfNotPresent
         env:
           # agent networking access
@@ -413,7 +413,7 @@ spec:
       
       containers:
       - name: mongodb
-        image: robotshop/rs-mongodb:latest
+        image: quay.io/niklaushirt/rs-mongodb:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 27017
@@ -454,7 +454,7 @@ spec:
       
       containers:
       - name: mysql
-        image: robotshop/rs-mysql-db:latest
+        image: quay.io/niklaushirt/rs-mysql-db:latest
         imagePullPolicy: IfNotPresent
         # added for Istio
         securityContext:
@@ -502,7 +502,7 @@ spec:
       
       containers:
       - name: payment
-        image: robotshop/rs-payment:latest
+        image: quay.io/niklaushirt/rs-payment:latest
         imagePullPolicy: IfNotPresent
         # agent networking access
         env:
@@ -549,7 +549,7 @@ spec:
       
       containers:
       - name: rabbitmq
-        image: rabbitmq:3.7-management-alpine
+        image: quay.io/niklaushirt/rabbitmq:3.7-management-alpine
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5672
@@ -594,7 +594,7 @@ spec:
       
       containers:
       - name: ratings
-        image: robotshop/rs-ratings:latest
+        image: quay.io/niklaushirt/rs-ratings:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
@@ -646,7 +646,7 @@ spec:
       
       containers:
       - name: shipping
-        image: robotshop/rs-shipping:latest
+        image: quay.io/niklaushirt/rs-shipping:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -707,7 +707,7 @@ spec:
       
       containers:
       - name: user
-        image: robotshop/rs-user:latest
+        image: quay.io/niklaushirt/rs-user:latest
         imagePullPolicy: IfNotPresent
         env:
           # agent networking access
@@ -756,7 +756,7 @@ spec:
       
       containers:
       - name: web
-        image: robotshop/rs-web:latest
+        image: quay.io/niklaushirt/rs-web:latest
         imagePullPolicy: IfNotPresent
         env:
         - name: INSTANA_EUM_KEY
@@ -803,7 +803,7 @@ spec:
       
       containers:
       - name: redis
-        image: redis:4.0.6
+        image: quay.io/niklaushirt/redis:4.0.6
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 6379
