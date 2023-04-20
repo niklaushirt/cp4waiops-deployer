@@ -97,12 +97,12 @@ cp4waiops:
     training_data_repo: cp4waiops-trainingdata
 
     # TOPOLOGY
-    # Install RobotShop Application
-    install_robotshop: true
+    # Install DemoApps Application
+    install_demoapps: true
     # Create Topology
     create_topology: true
-    # Create RobotShop overlay topology
-    install_robotshop_topology: true
+    # Create Custom overlay topology
+    install_custom_topology: true
 
     # RUNBOOKS
     # Install AWX and create Runbooks

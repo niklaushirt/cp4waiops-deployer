@@ -78,7 +78,7 @@
     - "***********************************************************************************************"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 STORAGE"
-    - "     💾 Installation Options for SPECIFIC MODULE {{ current_cp4waiops_feature.kind}}"
+    - "     💾 Installation Options for SPECIFIC MODULE  {{ current_cp4waiops_feature.kind}}"
     - "        Storage Class File Override:             {{ current_cp4waiops_feature.storage_class_file | default('no override') }}"
     - "        Storage Class Block Override:            {{ current_cp4waiops_feature.storage_class_block | default('no override') }}"
     - "        Storage Class InfraManagement:           {{ current_cp4waiops_feature.storage_class_file | default('no override') }}"
@@ -106,11 +106,11 @@
     - "     🚀 Run Training for Similar Incidents:       {{current_cp4waiops_feature.training_run_training_snow}}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 TOPOLOGY"
-    - "     🈸 Install RobotShop Application:            {{current_cp4waiops_feature.install_robotshop}}"
-    - "     🛠️ Create RobotShop overlay topology:         {{current_cp4waiops_feature.install_robotshop_topology}}"
-    - "     🛠️ Create RobotShop K8s Observer:             {{current_cp4waiops_feature.install_robotshop_observer}}"
-    - "     🛠️ Create RobotShop Templates:                {{current_cp4waiops_feature.create_topology_templates}}"
-    - "     🈸 Create RobotShop App:                     {{current_cp4waiops_feature.create_topology_apps}}"
+    - "     🈸 Install Demo Applications:                {{current_cp4waiops_feature.install_demoapps}}"
+    - "     🛠️ Create Demo overlay topology:            {{current_cp4waiops_feature.install_custom_topology}}"
+    - "     🛠️ Create Demo K8s Observers:               {{current_cp4waiops_feature.install_demoapps_observer}}"
+    - "     🛠️ Create Demo Templates:                   {{current_cp4waiops_feature.create_topology_templates}}"
+    - "     🈸 Create Demo App:                          {{current_cp4waiops_feature.create_topology_apps}}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 RUNBOOKS"
     - "     ✅ Install AWX:                              {{current_cp4waiops_feature.install_awx}}"
@@ -122,10 +122,10 @@
     - "  📥 DEMO UI"
     - "     ✅ Install Demo UI:                          {{current_cp4waiops_feature.install_demo_ui}}"
     - "     🌏 Slack URL:                                {{current_cp4waiops_feature.demoui_slack_url}}"
-    - "     👩‍💻 Slack User:                               {{current_cp4waiops_feature.demoui_slack_user}}"
+    - "     👩‍💻 Slack User:                             {{current_cp4waiops_feature.demoui_slack_user}}"
     - "     🔐 Slack Password:                           {{current_cp4waiops_feature.demoui_slack_pwd}}"
-    - "     👩‍💻 AI Manager Demo User:                     {{current_cp4waiops_feature.demoui_aimanager_demo_user}}"
-    - "     🔐 AI Manager Demo Password (global override): {{current_cp4waiops_feature.demoui_aimanager_demo_pwd | default('not defined')}}"
+    - "     👩‍💻 AI Manager Demo User:                   {{current_cp4waiops_feature.demoui_aimanager_demo_user}}"
+    - "     🔐 AI Manager Demo Password (override):      {{current_cp4waiops_feature.demoui_aimanager_demo_pwd | default('not defined')}}"
     - "     ❗ Admin Mode:                               {{current_cp4waiops_feature.demoui_admin_mode}}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 OUTPUT"
@@ -142,11 +142,11 @@
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 MISC PARAMETERS"
     - "     🌏 Create external routes:                   {{current_cp4waiops_feature.create_external_routes}}"
-    - "     🛠️ Create a valid ingress cert:               {{current_cp4waiops_feature.create_valid_ingress_certificate}}"
-    - "     🛠️ Create Policy for Story Creation:          {{current_cp4waiops_feature.create_story_policy}}"
-    - "     🛠️ Create Kafka Log connection:               {{current_cp4waiops_feature.create_log_connection}}"
-    - "     🛠️ Create Service Account:                    {{current_cp4waiops_feature.create_account}}"
-    - "     🛠️ Create Webhook Probe:                      {{current_cp4waiops_feature.install_webhook_probe  | default('not defined')}}"
+    - "     🛠️ Create a valid ingress cert:             {{current_cp4waiops_feature.create_valid_ingress_certificate}}"
+    - "     🛠️ Create Policy for Story Creation:        {{current_cp4waiops_feature.create_story_policy}}"
+    - "     🛠️ Create Kafka Log connection:             {{current_cp4waiops_feature.create_log_connection}}"
+    - "     🛠️ Create Service Account:                  {{current_cp4waiops_feature.create_account}}"
+    - "     🛠️ Create Webhook Probe:                    {{current_cp4waiops_feature.install_webhook_probe  | default('not defined')}}"
     - "-----------------------------------------------------------------------------------------------"
     - "***********************************************************************************************"
     - "-----------------------------------------------------------------------------------------------"
@@ -198,7 +198,7 @@
 # Create Demo Apps (Robot-Shop)
 - name: 📥  Create Demo Apps 
   include_tasks: 23_addons-demoapps.yaml
-  when: current_cp4waiops_feature.install_robotshop == true
+  when: current_cp4waiops_feature.install_demoapps == true
 
 
 
@@ -241,19 +241,19 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 - name: 📥  Create Topology Observers
   include_tasks: 41_aimanager-create-observers.yaml
-  when: current_cp4waiops_feature.install_robotshop_observer == true
+  when: current_cp4waiops_feature.install_demoapps_observer == true
 
 - name: 📥  Load Topology Merge Rules
   include_tasks: 42_aimanager-load-topology-merge.yaml
-  when: current_cp4waiops_feature.install_robotshop_topology == true
+  when: current_cp4waiops_feature.install_custom_topology == true
 
 - name: 📥  Create Overlay Topology
   include_tasks: 43_aimanager-create-topology.yaml
-  when: current_cp4waiops_feature.install_robotshop_topology == true
+  when: current_cp4waiops_feature.install_custom_topology == true
 
 - name: 📥  Disable Topology Match Rules
   include_tasks: 44_aimanager-disable-match-token-rule.yaml
-  when: current_cp4waiops_feature.install_robotshop_topology == true
+  when: current_cp4waiops_feature.install_custom_topology == true
 
 
 

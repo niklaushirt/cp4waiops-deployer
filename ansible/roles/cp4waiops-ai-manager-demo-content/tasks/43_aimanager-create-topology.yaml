@@ -322,3 +322,69 @@
     verbosity: 1
 
 
+# --------------------------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------------------------
+# LOAD TOPOLOGY CONFIGURATION
+# --------------------------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------------------------
+- name: 🚀 TOPOLOGY - LOAD TOPOLOGY CONFIGURATION
+  shell: |
+    set -x
+    
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+
+    # kubectl exec -ti -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}') -- /opt/ibm/graph.tools/bin/backup_ui_config -out backup.json
+    # kubectl cp -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}'):/opt/ibm/netcool/asm/data/tools/backup.json ./backup.json
+    # open ./backup.json
+
+
+
+    echo "Delete existing Topology Customization"
+    curl -XGET -k \
+    "$TOPO_MGT_ROUTE/1.0/topology/metadata?_field=*" \
+    -H 'accept: application/json' \
+    -H 'content-type: application/json' \
+    -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
+    -u $LOGIN|jq -r '._items[] | select(.maxLabelLength=="")|._id'>/tmp/customItems.json
+
+    cat /tmp/customItems.json
+
+    while read line; 
+    do 
+      echo "DELETE: $line"
+      curl -XDELETE -k \
+      "$TOPO_MGT_ROUTE/1.0/topology/metadata/$line" \
+      -H 'accept: application/json' \
+      -H 'content-type: application/json' \
+      -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
+      -u $LOGIN
+    done < /tmp/customItems.json
+
+
+
+    echo "Upload Topology Customization"
+    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+    if [ "${OS}" == "darwin" ]; then
+          echo "MAC"
+          TOPOLOGY_CUSTOM_FILE=$(pwd)"/roles/cp4waiops-ai-manager-demo-content/templates/topology/asm_config.json"
+    else
+          TOPOLOGY_CUSTOM_FILE="{{role_path}}/templates/topology/asm_config.json"
+    fi    
+    kubectl cp $TOPOLOGY_CUSTOM_FILE -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}'):/opt/ibm/netcool/asm/data/tools/asm_config.json 
+    
+    echo "Import Topology Customization"
+    #kubectl exec -ti -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}') -- find /opt/ibm/netcool/asm/data/tools/
+    kubectl exec -ti -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}') -- /opt/ibm/graph.tools/bin/import_ui_config -file asm_config.json
+
+  register: output_string
+  ignore_errors: true
+  args:
+    executable: /bin/bash
+
+- name: 🟣  OUTPUT
+  debug: 
+    var: output_string.stdout_lines
+    verbosity: 1
+  #when: PRINT_LOGINS == true
+
+
