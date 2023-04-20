@@ -3,8 +3,8 @@
 export CONT_VERSION=0.2
 
 # Create the Image
-docker buildx build --platform linux/amd64 -t niklaushirt/cp4waiops-discord-bot:$CONT_VERSION --load .
-docker push niklaushirt/cp4waiops-discord-bot:$CONT_VERSION
+docker buildx build --platform linux/amd64 -t quay.io/niklaushirt/cp4waiops-discord-bot:$CONT_VERSION --load .
+docker push quay.io/niklaushirt/cp4waiops-discord-bot:$CONT_VERSION
 
 # Run the Image
 

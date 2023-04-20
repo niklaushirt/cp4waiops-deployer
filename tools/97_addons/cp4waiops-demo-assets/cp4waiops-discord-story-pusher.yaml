@@ -55,7 +55,7 @@ spec:
         app:  cp4waiops-discord-story-pusher
     spec:
       containers:
-      - image: docker.io/niklaushirt/cp4waiops-discord-story-pusher:0.8
+      - image: quay.io/niklaushirt/cp4waiops-discord-story-pusher:0.8
         imagePullPolicy: Always
         name: gateway
         command:
