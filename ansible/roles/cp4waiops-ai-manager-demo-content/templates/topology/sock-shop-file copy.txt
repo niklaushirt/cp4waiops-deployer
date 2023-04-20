@@ -5,8 +5,8 @@ V:{"_operation":"InsertReplace","businessCriticality": "Platinum","dataCenter": 
 V:{"_operation":"InsertReplace","businessCriticality": "Gold","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["orders-db"], "namespace": "sock-shop", "name": "orders-db",  "uniqueId": "orders-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
 V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["carts"], "namespace": "sock-shop", "name": "carts",  "uniqueId": "carts",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
 V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["carts-db"], "namespace": "sock-shop", "name": "carts-db",  "uniqueId": "carts-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
-V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["users"], "namespace": "sock-shop", "name": "users",  "uniqueId": "users",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
-V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["users-db"], "namespace": "sock-shop", "name": "users-db",  "uniqueId": "users-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["user"], "namespace": "sock-shop", "name": "user",  "uniqueId": "user",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["user-db"], "namespace": "sock-shop", "name": "user-db",  "uniqueId": "user-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
 
 V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["ship"], "namespace": "sock-shop", "name": "ship",  "uniqueId": "ship",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
 V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["shipping-db"], "namespace": "sock-shop", "name": "shipping-db",  "uniqueId": "shipping-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
@@ -18,27 +18,27 @@ V:{"_operation":"InsertReplace","businessCriticality": "Gold","dataCenter": "soc
 V:{"_operation":"InsertReplace","businessCriticality": "Gold","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["pay"], "namespace": "sock-shop", "name": "pay",  "uniqueId": "pay",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
 
 
-E:{"_fromUniqueId":"front-end", "_toUniqueId":"orders","_edgeType":"calls"}
-E:{"_fromUniqueId":"front-end", "_toUniqueId":"catalog","_edgeType":"calls"}
-E:{"_fromUniqueId":"front-end", "_toUniqueId":"carts","_edgeType":"calls"}
-E:{"_fromUniqueId":"front-end", "_toUniqueId":"users","_edgeType":"calls"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"orders","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"catalog","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"carts","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"user","_edgeType":"dependsOn"}
 
 
-E:{"_fromUniqueId":"orders", "_toUniqueId":"users","_edgeType":"calls"}
-E:{"_fromUniqueId":"orders", "_toUniqueId":"carts","_edgeType":"calls"}
-E:{"_fromUniqueId":"orders", "_toUniqueId":"pay","_edgeType":"calls"}
-E:{"_fromUniqueId":"orders", "_toUniqueId":"ship","_edgeType":"calls"}
-E:{"_fromUniqueId":"ship", "_toUniqueId":"rabbit","_edgeType":"accesses"}
-E:{"_fromUniqueId":"queue-master", "_toUniqueId":"rabbit","_edgeType":"accesses"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"user","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"carts","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"pay","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"ship","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"ship", "_toUniqueId":"rabbit","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"queue-master", "_toUniqueId":"rabbit","_edgeType":"dependsOn"}
 
 
 
 
-E:{"_fromUniqueId":"orders", "_toUniqueId":"orders-db","_edgeType":"accesses"}
-E:{"_fromUniqueId":"catalog", "_toUniqueId":"catalogue-db","_edgeType":"accesses"}
-E:{"_fromUniqueId":"carts", "_toUniqueId":"carts-db","_edgeType":"accesses"}
-E:{"_fromUniqueId":"users", "_toUniqueId":"users-db","_edgeType":"accesses"}
-E:{"_fromUniqueId":"ship", "_toUniqueId":"shipping-db","_edgeType":"accesses"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"orders-db","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"catalog", "_toUniqueId":"catalogue-db","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"carts", "_toUniqueId":"carts-db","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"user", "_toUniqueId":"user-db","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"ship", "_toUniqueId":"shipping-db","_edgeType":"dependsOn"}
 
 
 V:{"_operation":"InsertReplace","businessCriticality": "Platinum","uniqueId":"dcwest1-switch025","namespace": "sock-shop","matchTokens":["dcwest1-switch025"],"tags":["Network Topology","app:sockshop","namespace:sock-shop"],"name":"dcwest1-switch025","entityTypes":["router"]}
@@ -47,6 +47,6 @@ V:{"_operation":"InsertReplace","businessCriticality": "Silver","uniqueId":"dSwi
 
 E:{"_fromUniqueId":"dSwitch-5-vm-network", "_toUniqueId":"dcwest1-switch025","_edgeType":"dependsOn"}
 E:{"_fromUniqueId":"dSwitch-5-vm-network-port-1", "_toUniqueId":"dSwitch-5-vm-network","_edgeType":"dependsOn"}
-E:{"_fromUniqueId":"catalogue-db", "_toUniqueId":"dSwitch-5-vm-network-port-1","_edgeType":"exposedBy"}
+E:{"_fromUniqueId":"catalogue-db", "_toUniqueId":"dSwitch-5-vm-network-port-1","_edgeType":"dependsOn"}
 
 
