@@ -31,7 +31,7 @@ spec:
             value: "1"
           - name: ERROR
             value: "0"
-        image: quay.io/niklaushirt/rs-load:latest
+        image: quay.io/niklaushirt/rs-load:1.0
         resources:
           limits:
             cpu: 500m

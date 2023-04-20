@@ -275,7 +275,7 @@ spec:
     spec:
       containers:
       - name: cart
-        image: quay.io/niklaushirt/rs-cart:latest
+        image: quay.io/niklaushirt/rs-cart:1.0
         imagePullPolicy: IfNotPresent
         # agent networking access
         env:
@@ -320,7 +320,7 @@ spec:
     spec:
       containers:
       - name: catalogue
-        image: quay.io/niklaushirt/rs-catalogue:latest
+        image: quay.io/niklaushirt/rs-catalogue:1.0
         imagePullPolicy: IfNotPresent
         env:
           - name: INSTANA_AGENT_HOST
@@ -368,7 +368,7 @@ spec:
       
       containers:
       - name: dispatch
-        image: quay.io/niklaushirt/rs-dispatch:latest
+        image: quay.io/niklaushirt/rs-dispatch:1.0
         imagePullPolicy: IfNotPresent
         env:
           # agent networking access
@@ -413,7 +413,7 @@ spec:
       
       containers:
       - name: mongodb
-        image: quay.io/niklaushirt/rs-mongodb:latest
+        image: quay.io/niklaushirt/rs-mongodb:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 27017
@@ -454,7 +454,7 @@ spec:
       
       containers:
       - name: mysql
-        image: quay.io/niklaushirt/rs-mysql-db:latest
+        image: quay.io/niklaushirt/rs-mysql-db:1.0
         imagePullPolicy: IfNotPresent
         # added for Istio
         securityContext:
@@ -502,7 +502,7 @@ spec:
       
       containers:
       - name: payment
-        image: quay.io/niklaushirt/rs-payment:latest
+        image: quay.io/niklaushirt/rs-payment:1.0
         imagePullPolicy: IfNotPresent
         # agent networking access
         env:
@@ -594,7 +594,7 @@ spec:
       
       containers:
       - name: ratings
-        image: quay.io/niklaushirt/rs-ratings:latest
+        image: quay.io/niklaushirt/rs-ratings:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
@@ -646,7 +646,7 @@ spec:
       
       containers:
       - name: shipping
-        image: quay.io/niklaushirt/rs-shipping:latest
+        image: quay.io/niklaushirt/rs-shipping:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -707,7 +707,7 @@ spec:
       
       containers:
       - name: user
-        image: quay.io/niklaushirt/rs-user:latest
+        image: quay.io/niklaushirt/rs-user:1.0
         imagePullPolicy: IfNotPresent
         env:
           # agent networking access
@@ -756,7 +756,7 @@ spec:
       
       containers:
       - name: web
-        image: quay.io/niklaushirt/rs-web:latest
+        image: quay.io/niklaushirt/rs-web:1.0
         imagePullPolicy: IfNotPresent
         env:
         - name: INSTANA_EUM_KEY
