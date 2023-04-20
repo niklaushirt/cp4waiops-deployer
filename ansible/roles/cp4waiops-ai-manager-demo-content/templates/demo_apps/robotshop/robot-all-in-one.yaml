@@ -549,7 +549,7 @@ spec:
       
       containers:
       - name: rabbitmq
-        image: quay.io/niklaushirt/rabbitmq:3.7-management-alpine
+        image: rabbitmq:3.7-management-alpine
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5672
@@ -803,7 +803,7 @@ spec:
       
       containers:
       - name: redis
-        image: quay.io/niklaushirt/redis:4.0.6
+        image: redis:4.0.6
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 6379
