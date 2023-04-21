@@ -40,6 +40,11 @@ print ('************************************************************************
 #os.system('ls -l')
 loggedin='false'
 loginip='0.0.0.0'
+
+mod_time=os.path.getmtime('./demouiapp')
+mod_time_readable = datetime.datetime.fromtimestamp(mod_time)
+print('     🛠️ Build Date: '+str(mod_time_readable))
+
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # GET NAMESPACES
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2088,7 +2093,8 @@ def about(request):
         'PAGE_TITLE': 'About',
         'PAGE_NAME': 'about',
         'DEMO_IMAGE': demo_image,
-        'ALL_LOGINS': ALL_LOGINS
+        'ALL_LOGINS': ALL_LOGINS,
+        'mod_time_readable': mod_time_readable
     }
     return HttpResponse(template.render(context, request))
 
