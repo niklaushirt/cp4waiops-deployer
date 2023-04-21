@@ -53,6 +53,9 @@
 ,{"keyIndexName":"ASM::edgeType::dataFlow::accessedVia","vertexType":"edgeType","edgeType":"accessedVia","edgeLabel":"dataFlow","databaseSource":"edges"}
 ,{"keyIndexName":"ASM::edgeType::dependency::dependsOn","vertexType":"edgeType","edgeType":"dependsOn","edgeLabel":"dependency","databaseSource":"edges"}
 ,{"keyIndexName":"ASM::edgeType::dependency::runsOn","vertexType":"edgeType","edgeType":"runsOn","edgeLabel":"dependency","databaseSource":"edges"}
+,{"keyIndexName":"ASM::edgeType::dependency::accesses","vertexType":"edgeType","edgeType":"accesses","edgeLabel":"dependency","databaseSource":"edges"}
+,{"keyIndexName":"ASM::edgeType::dependency::calls","vertexType":"edgeType","edgeType":"calls","edgeLabel":"dependency","databaseSource":"edges"}
+,{"keyIndexName":"ASM::edgeType::dependency::exposedBy","vertexType":"edgeType","edgeType":"exposedBy","edgeLabel":"dependency","databaseSource":"edges"}
 ,{"linkLabel":"accesses","vertexType":"metadata","linkId":"qsG2nzzhRfCLf5llcpqUiw","linkType":"accesses","style":{"stroke":"#a702d2","strokeWidth":"2px","strokeDasharray":""},"entityTypes":["ASM_UI_LINK_TYPE_DEFINITION"],"uniqueId":"accesses","tags":["ASM_UI_CONFIG"],"databaseSource":"metadata"}
 ,{"linkLabel":"calls","vertexType":"metadata","linkId":"l11zKwTeT2ukGO--l_-nRA","linkType":"calls","style":{"stroke":"#009407","strokeWidth":"2px","strokeDasharray":""},"entityTypes":["ASM_UI_LINK_TYPE_DEFINITION"],"uniqueId":"calls","tags":["ASM_UI_CONFIG"],"databaseSource":"metadata"}
 ,{"linkLabel":"runsOn","vertexType":"metadata","linkType":"runsOn","style":{"stroke":"#9b0000","strokeWidth":"","strokeDasharray":""},"entityTypes":["ASM_UI_LINK_TYPE_DEFINITION"],"uniqueId":"runsOn","tags":["ASM_UI_CONFIG"],"databaseSource":"metadata"}
