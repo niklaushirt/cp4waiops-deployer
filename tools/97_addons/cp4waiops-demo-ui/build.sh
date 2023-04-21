@@ -1,4 +1,20 @@
 #!/bin/bash
+export CONT_VERSION=1.20
+
+# Create the Image
+docker buildx build --platform linux/amd64 -t quay.io/niklaushirt/cp4waiops-demo-ui:$CONT_VERSION --load .
+docker push quay.io/niklaushirt/cp4waiops-demo-ui:$CONT_VERSION
+
+
+
+
+
+
+
+
+
+
+
 
 export CONT_VERSION=1.20
 
@@ -8,11 +24,6 @@ docker push niklaushirt/cp4waiops-demo-ui:$CONT_VERSION
 
 
 
-export CONT_VERSION=1.20
-
-# Create the Image
-docker buildx build --platform linux/amd64 -t quay.io/niklaushirt/cp4waiops-demo-ui:$CONT_VERSION --load .
-docker push quay.io/niklaushirt/cp4waiops-demo-ui:$CONT_VERSION
 
 
 

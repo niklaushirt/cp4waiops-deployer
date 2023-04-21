@@ -992,8 +992,6 @@ def injectAllFanACMEREST(request):
         template = loader.get_template('demouiapp/home.html')
 
         STORY_ACTIVE=True
-        ROBOT_SHOP_OUTAGE_ACTIVE=True
-
 
         # injectMetricsFanTemp(METRIC_ROUTE,METRIC_TOKEN)
         # time.sleep(3)
