@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sockshop-load
+  namespace: sock-shop
+  labels:
+    service: load
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sock-shop
+      version: v1
+      service: sockshop-load
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: sock-shop
+        version: v1
+        service: sockshop-load
+    spec:
+      containers:
+      - name: load
+        image: quay.io/niklaushirt/sockshop-load:0.1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sockshop-load
+  namespace: sock-shop
+spec:
+  ports:
+    - name: sockshop-load
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    service: sockshop-load
+  type: ClusterIP
+  sessionAffinity: None
