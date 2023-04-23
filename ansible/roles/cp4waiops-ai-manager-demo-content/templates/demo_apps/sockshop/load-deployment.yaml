@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: load
-        image: quay.io/niklaushirt/sockshop-load:0.1
+        image: quay.io/niklaushirt/sock-load:0.1
         resources:
           limits:
             cpu: 500m
