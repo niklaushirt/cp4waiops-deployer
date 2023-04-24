@@ -183,14 +183,6 @@
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
 
 
-# ---------------------------------------------------------------------------------------------------------------------------------------------------"
-# INSTALL FEATURE FLAGS
-# ---------------------------------------------------------------------------------------------------------------------------------------------------"
-# Install  Feature Flags
-- name: 📥  Install Feature Flags
-  include_tasks: 20_aimanager-featureflags.yaml
-  when: current_cp4waiops_feature.training_create_training_experimental == true | default('false')
-
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
