@@ -104,6 +104,7 @@
     - "     🔽 Load Data for Similar Incidents:          {{current_cp4waiops_feature.training_load_data_logs}}"
     - "     ✅ Create Training for Similar Incidents:    {{current_cp4waiops_feature.training_create_training_snow}}"
     - "     🚀 Run Training for Similar Incidents:       {{current_cp4waiops_feature.training_run_training_snow}}"
+    - "     ✅ Create Training for Season/XinY:          {{current_cp4waiops_feature.training_create_training_experimental | default('not defined') }}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 TOPOLOGY"
     - "     🈸 Install Demo Applications:                {{current_cp4waiops_feature.install_demoapps}}"
@@ -180,6 +181,16 @@
 
 - name: 📥 Get Storage Class
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL FEATURE FLAGS
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Install  Feature Flags
+- name: 📥  Install Feature Flags
+  include_tasks: 20_aimanager-featureflags.yaml
+  when: current_cp4waiops_feature.training_create_training_experimental == true | default('false')
+
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -353,6 +364,10 @@
 - name: 📥  Create Training Logs
   include_tasks: 58_aimanager-training-create-logs-configuration.yaml
   when: current_cp4waiops_feature.training_create_training_logs == true and TRAINING_EXISTS==false
+
+- name: 📥  Create Training Seasonality and XinY
+  include_tasks: 59_aimanager-training-create-season-configuration.yaml
+  when: current_cp4waiops_feature.training_create_training_experimental == true | default('false') and TRAINING_EXISTS==false
 
 
 

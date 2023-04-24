@@ -1,0 +1,67 @@
+
+
+- name: 🛰️  START - CREATE SEASONALITY and XinY ANALYSIS DEFINITIONS
+  debug: 
+    msg="{{ lookup('pipe','date +%d.%m.%Y---%H:%M:%S') }}"
+
+
+
+- name: Log
+  shell: |
+    export MESSAGE="Create Seasonality an XinY Grouping Training Definition"
+    export currentDate=$(date +%Y-%m-%d_%H:%M)
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+  ignore_errors: true
+
+
+
+- name: 🚀 TRAINING CREATE EVENTS - CREATE SEASONALITY CONFIGURATION
+  shell: |
+    set -x
+    export ROUTE=""
+    pwd
+
+    echo "***************************************************************************************************************************************************"
+    echo "   🛠️   Create Analysis Definiton: Alert seasonality detection"
+    export FILE_NAME=create-analysis-SEASON{{current_cp4waiops_feature.training_suffix | default("") }}.graphql
+    export FILE_PATH="{{role_path}}/templates/training/training-definitions/"
+    {{role_path}}/templates/training/scripts/execute-graphql.sh
+
+
+  register: output_string
+  ignore_errors: true
+  args:
+    executable: /bin/bash
+
+
+- name: 🟣 TRAINING CREATE EVENTS - RESULT
+  debug: 
+    var: output_string.stdout_lines
+    #verbosity: 1
+
+
+
+- name: 🚀 TRAINING CREATE EVENTS - CREATE X IN Z SUPPRESION CONFIGURATION
+  shell: |
+    set -x
+    export ROUTE=""
+    pwd
+
+    echo "***************************************************************************************************************************************************"
+    echo "   🛠️   Create Analysis Definiton: Alert suppression XinY policies"
+    export FILE_NAME=create-analysis-XINY{{current_cp4waiops_feature.training_suffix | default("") }}.graphql
+    export FILE_PATH="{{role_path}}/templates/training/training-definitions/"
+    {{role_path}}/templates/training/scripts/execute-graphql.sh
+
+
+  register: output_string
+  ignore_errors: true
+  args:
+    executable: /bin/bash
+
+
+- name: 🟣 TRAINING CREATE EVENTS - RESULT
+  debug: 
+    var: output_string.stdout_lines
+    #verbosity: 1
