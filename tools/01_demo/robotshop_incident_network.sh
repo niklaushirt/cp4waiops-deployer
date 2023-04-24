@@ -136,7 +136,7 @@ read  -t 5 -p "    ❓ Do you want to open the webpages for the demo❓ [y,N] " 
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
       export DEMOUI_ROUTE="http://"$(oc get route -n $WAIOPS_NAMESPACE waiops-demo-ui-python -o jsonpath={.spec.host})
-      export AIMANAGER_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
+      export CP4WAIOPS_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
       export ROBOTSHOP_ROUTE="http://"$(oc get routes -n robot-shop web  -o jsonpath="{['spec']['host']}")|| true
       export AWX_ROUTE="http://"$(oc get route -n awx awx -o jsonpath={.spec.host})|| true
 
@@ -145,7 +145,7 @@ if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
       echo ""      
       echo "            📥 CP4WAIOps"
       echo ""
-      echo "                🌏 URL:           $AIMANAGER_ROUTE"
+      echo "                🌏 URL:           $CP4WAIOPS_ROUTE"
       echo "                🧑 User:          demo"
       echo "                🔐 Password:      P4ssw0rd!"
       echo ""    
@@ -186,19 +186,19 @@ if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
       if [ -x "$(command -v open)" ]; then
       open $DEMOUI_ROUTE
       open $AWX_ROUTE"/#/jobs"
-      open $AIMANAGER_ROUTE"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories"
+      open $CP4WAIOPS_ROUTE"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories"
       open $ROBOTSHOP_ROUTE
       else 
       if [ -x "$(command -v firefox)" ]; then
             firefox $DEMOUI_ROUTE
             firefox $AWX_ROUTE"/#/jobs"
-            firefox $AIMANAGER_ROUTE"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories"
+            firefox $CP4WAIOPS_ROUTE"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories"
             firefox $ROBOTSHOP_ROUTE
       else 
             if [ -x "$(command -v google-chrome)" ]; then
             google-chrome $DEMOUI_ROUTE
             google-chrome $AWX_ROUTE"/#/jobs"
-            google-chrome $AIMANAGER_ROUTE"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories"
+            google-chrome $CP4WAIOPS_ROUTE"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories"
             google-chrome $ROBOTSHOP_ROUTE
             fi
       fi

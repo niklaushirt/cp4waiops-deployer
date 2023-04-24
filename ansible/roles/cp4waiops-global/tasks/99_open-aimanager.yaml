@@ -19,13 +19,13 @@
 - name: 🌏 CP4WAIOPS - Get CP4WAIOPS LOGINS
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-    export AIMANAGER_ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
-    echo "                🌏 URL:      https://$AIMANAGER_ROUTE"
+    export CP4WAIOPS_ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
+    echo "                🌏 URL:      https://$CP4WAIOPS_ROUTE"
     echo ""
     echo "                🧑 User:     $(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode && echo)"
     echo "                🔐 Password: $(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode)"
 
-    export URL=https://$AIMANAGER_ROUTE
+    export URL=https://$CP4WAIOPS_ROUTE
     if [ -x "$(command -v open)" ]; then
       open $URL
     else 

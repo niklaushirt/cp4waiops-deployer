@@ -20,7 +20,7 @@
 
 
 
-- name:  🚀 AIMANAGER INSTALL - Create Custom Profile ConfigMap
+- name:  🚀 CP4WAIOPS INSTALL - Create Custom Profile ConfigMap
   shell: |
     oc apply -n {{ current_cp4waiops_cluster.project }} -f {{current_cp4waiops_feature.custom_size_file | default('none')}}
   register: kubectl_get_pods
@@ -28,7 +28,7 @@
 
 
 
-- name:  🚀 AIMANAGER INSTALL - Install Custom Resource with Custom Profile - INSTALL CP4WAIOPS
+- name:  🚀 CP4WAIOPS INSTALL - Install Custom Resource with Custom Profile - INSTALL CP4WAIOPS
   kubernetes.core.k8s:
     state: present
     template: './templates/waiops/4_waiops-install-template-custom.j2'
@@ -38,7 +38,7 @@
 
 
 
-- name:  🚀 AIMANAGER INSTALL - Install Custom Resource - INSTALL CP4WAIOPS
+- name:  🚀 CP4WAIOPS INSTALL - Install Custom Resource - INSTALL CP4WAIOPS
   kubernetes.core.k8s:
     state: present
     template: './templates/waiops/4_waiops-install-template.j2'

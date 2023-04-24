@@ -24,7 +24,7 @@
 
 
 # Create IBM AIOps Operator Group
-- name:   🚀 AIMANAGER CATALOG - Install Operator Group
+- name:   🚀 CP4WAIOPS CATALOG - Install Operator Group
   kubernetes.core.k8s:
     state: present
     template: ./templates/waiops/2_opgroup-ibm-aiops.j2
@@ -34,7 +34,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for serviceaccount being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER CATALOG - 🕦 Wait for serviceaccount ibm-operator-catalog to become ready
+- name:   🚀 CP4WAIOPS CATALOG - 🕦 Wait for serviceaccount ibm-operator-catalog to become ready
   shell: oc get -n openshift-marketplace serviceaccount ibm-operator-catalog --no-headers| grep -c ""
   register: kubectl_get_sa
   until: kubectl_get_sa.stdout == "1"
@@ -48,7 +48,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for CSV being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER CATALOG - Patch service account for pull secret
+- name:   🚀 CP4WAIOPS CATALOG - Patch service account for pull secret
   shell: |
     oc patch -n openshift-marketplace serviceaccount ibm-operator-catalog -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
     oc patch -n openshift-marketplace serviceaccount default -p '{"imagePullSecrets": [{"name": "ibm-entitlement-key"}]}'
@@ -65,7 +65,7 @@
 
 
 
-# - name: AIMANAGER OPERATOR -     🕦 Wait 120 seconds
+# - name: CP4WAIOPS OPERATOR -     🕦 Wait 120 seconds
 #   shell: |
 #     sleep 120
 #   ignore_errors: true
@@ -75,7 +75,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Delete lingering Pods before check for reinstall
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER CATALOG - Delete lingering Pods before check for reinstall
+- name:   🚀 CP4WAIOPS CATALOG - Delete lingering Pods before check for reinstall
   shell: |
     oc delete pod $(oc get po -n {{ current_cp4waiops_cluster.project }}|grep ContainerStatusUnknown|awk '{print$1}'):-notfound -n {{ current_cp4waiops_cluster.project }} --ignore-not-found
   register: kubectl_get_pods
@@ -85,7 +85,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for Operator to settle
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER CATALOG - Wait for Operator Catalog to settle
+- name:   🚀 CP4WAIOPS CATALOG - Wait for Operator Catalog to settle
   shell: |
     # Wait for Operator to settle
     sleep 20
@@ -97,7 +97,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Delete lingering Pods before check for reinstall
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER CATALOG - Delete operator for pull secret (hack)
+- name:   🚀 CP4WAIOPS CATALOG - Delete operator for pull secret (hack)
   shell: |
     oc delete pod $(oc get po -n openshift-marketplace|grep ImagePullBackOff|awk '{print$1}') -n openshift-marketplace
   register: kubectl_get_pods
@@ -108,7 +108,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for Marketplace being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🕦 AIMANAGER CATALOG - Wait for ibm-operator-catalog to become ready
+- name:   🕦 CP4WAIOPS CATALOG - Wait for ibm-operator-catalog to become ready
   shell: oc get po -n openshift-marketplace |grep ibm-operator-catalog| grep '1/1' | grep -c ""
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "1"
@@ -120,14 +120,14 @@
 
 
 # Create IBM AIOps Subscription
-- name:   🚀 AIMANAGER OPERATOR - Install Subscription - ONLINE
+- name:   🚀 CP4WAIOPS OPERATOR - Install Subscription - ONLINE
   kubernetes.core.k8s:
     state: present
     template: ./templates/waiops/3_sub-ibm-aiops-subscription.j2
   when: current_cp4waiops_feature.case_install==false
 
 # Create IBM AIOps Subscription
-- name:   🚀 AIMANAGER OPERATOR - Install Subscription - CASE
+- name:   🚀 CP4WAIOPS OPERATOR - Install Subscription - CASE
   kubernetes.core.k8s:
     state: present
     template: ./templates/waiops/3_sub-ibm-aiops-subscription-case.j2
@@ -178,7 +178,7 @@
 # Wait for CSV being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
 
-- name:   🕦 AIMANAGER OPERATOR - Wait for ibm-aiops-orchestrator Subscription to become ready
+- name:   🕦 CP4WAIOPS OPERATOR - Wait for ibm-aiops-orchestrator Subscription to become ready
   shell: oc get csv -n {{ current_cp4waiops_cluster.project }}|grep ibm-aiops-orchestrator|grep "Succeeded"| grep -v ibm-watson-aiops-ui-operator | grep -c ""
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "1"
@@ -189,7 +189,7 @@
 
 
 
-- name:   🕦 AIMANAGER OPERATOR - Wait for CSVs to become ready
+- name:   🕦 CP4WAIOPS OPERATOR - Wait for CSVs to become ready
   shell: oc get csv -n {{ current_cp4waiops_cluster.project }}|grep -v "Succeeded"| grep -v ibm-watson-aiops-ui-operator | grep -c ""
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "1"
@@ -201,7 +201,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Freeze IBM Operator Catalog version (if enabled)
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 AIMANAGER CATALOG - Freeze IBM Operator Catalog version
+- name:   🚀 CP4WAIOPS CATALOG - Freeze IBM Operator Catalog version
   shell: |
     export FREEZE={{current_cp4waiops_feature.freeze_catalog | default("false") }}
     #echo "FREEZE:$FREEZE"

@@ -1112,7 +1112,7 @@ menuAWX_OPENAWX () {
 }
 
 
-menuAIMANAGER_OPEN () {
+menuCP4WAIOPS_OPEN () {
       export ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
@@ -1549,7 +1549,7 @@ echo "${NC}"
       81 ) clear ; ./tools/20_get_logins.sh  ;;
       82 ) clear ; ./tools/20_get_logins.sh > LOGINS.txt  ;;
 
-      90 ) clear ; menuAIMANAGER_OPEN  ;;
+      90 ) clear ; menuCP4WAIOPS_OPEN  ;;
       91 ) clear ; menuDEMO_OPEN  ;;
       92 ) clear ; menuEVENTMANAGER_OPEN  ;;
       93 ) clear ; menuAWX_OPENTURBO  ;;
