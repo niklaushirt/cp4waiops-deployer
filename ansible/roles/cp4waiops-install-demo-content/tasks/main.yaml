@@ -52,7 +52,7 @@
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
     - "                                                                                                                                                   "
-    - "      🟡🟡🟡🟡🟡  🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}}                                                                                          "
+    - "      🟡🟡🟡🟡🟡  🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}} 🟡🟡🟡🟡🟡                                                        "
     - "                                                                                                                                                   "
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
@@ -179,7 +179,7 @@
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90-log-start.yaml"
 
 
-- name: 🟡🟡🟡 Get Storage Class
+- name: 🟡🟡🟡 Get Storage Classes
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
 
 
@@ -189,17 +189,17 @@
 # INSTALL ADDONS
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install OpenLDAP
-- name: 🟡🟡🟡  Install LDAP
+- name: 🟡🟡🟡  Install OpenLDAP
   include_tasks: 21_addons-ldap.yaml
   when: current_cp4waiops_feature.install_ldap == true
 
 # Create Service Account and USER
-- name: 🟡🟡🟡  Create Service Account
+- name: 🟡🟡🟡  Create the Admin Service Account
   include_tasks: 22_addons-user.yaml
   when: current_cp4waiops_feature.create_account == true
 
 # Create Demo Apps (Robot-Shop)
-- name: 🟡🟡🟡  Create Demo Apps 
+- name: 🟡🟡🟡  Create the Demo Apps 
   include_tasks: 23_addons-demoapps.yaml
   when: current_cp4waiops_feature.install_demoapps == true
 
@@ -221,15 +221,15 @@
 # LOAD MODEL TRAINING DATA ahead of time
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Load data
-- name: 🟡🟡🟡  Load Data SNOW
+- name: 🟡🟡🟡  Load SNOW Training Data
   include_tasks: 51_cp4waiops-training-load-snow.yaml
   when: current_cp4waiops_feature.training_load_data_snow == true
 
-- name: 🟡🟡🟡  Load Data LOGS
+- name: 🟡🟡🟡  Load LOGS Training Data
   include_tasks: 52_cp4waiops-training-load-logs.yaml
   when: current_cp4waiops_feature.training_load_data_logs == true
 
-- name: 🟡🟡🟡  Load Data METRICS
+- name: 🟡🟡🟡  Load METRICS Training Data
   include_tasks: 53_cp4waiops-training-load-metric.yaml
   when: current_cp4waiops_feature.training_load_data_metrics == true
 
@@ -250,7 +250,7 @@
   include_tasks: 42_cp4waiops-load-topology-merge.yaml
   when: current_cp4waiops_feature.install_custom_topology == true
 
-- name: 🟡🟡🟡  Create Overlay Topology
+- name: 🟡🟡🟡  Create Application Overlay Topology
   include_tasks: 43_cp4waiops-create-topology.yaml
   when: current_cp4waiops_feature.install_custom_topology == true
 
@@ -272,11 +272,11 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # CREATE TOPOLOGY (part 2)
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 🟡🟡🟡  Create Topology Templates
+- name: 🟡🟡🟡  Create Application Topology Templates
   include_tasks: 45_cp4waiops-create-aiops-application-templates.yaml
   when: current_cp4waiops_feature.create_topology_templates == true
 
-- name: 🟡🟡🟡  Create Topology Application
+- name: 🟡🟡🟡  Create Application Topology Application
   include_tasks: 45_cp4waiops-create-aiops-application.yaml
   when: current_cp4waiops_feature.create_topology_apps == true
 
@@ -287,11 +287,11 @@
 # POSTINSTALL TASKS
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Register LDAP Users
-- name: 🟡🟡🟡  Register LDAP Server
+- name: 🟡🟡🟡  Register LDAP Server with CP4WAIOPS
   include_tasks: 25-post-ldap-register.yaml
   when: current_cp4waiops_feature.install_ldap == true and current_cp4waiops_feature.ldap_register == true
 # Create valid certificate for Ingress (for Slack)
-- name: 🟡🟡🟡  Create valid certificate for Ingress
+- name: 🟡🟡🟡  Create a valid certificate for the CP4WAIOPS Ingress
   include_tasks: 31_cp4waiops-patch-ingress.yaml
   when: current_cp4waiops_feature.create_valid_ingress_certificate == true
 
@@ -305,20 +305,20 @@
 # CREATE RUNBOOKS
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Create Runbooks    
-- name: 🟡🟡🟡  Wait for AWX to be ready
+- name: 🟡🟡🟡  Wait for AWX to become ready
   include_tasks: 46_cp4waiops-wait-awx.yaml
   when: current_cp4waiops_feature.install_awx == true
 
-- name: 🟡🟡🟡  Load Demo Playbooks
+- name: 🟡🟡🟡  Load Demo Playbooks into AWX
   include_tasks: 48_cp4waiops-load-awx-playbooks-for-demo.yaml
   when: current_cp4waiops_feature.load_awx_playbooks == true 
 
-- name: 🟡🟡🟡  Create AWX Connection
+- name: 🟡🟡🟡  Create AWX Connection in CP4WAIOPS
   include_tasks: 47_cp4waiops-create-awx-connection.yaml
   when: current_cp4waiops_feature.integrate_awx == true
 
 # Load Demo Runbooks into CP4WAIOps
-- name: 🟡🟡🟡  Load Demo Runbooks
+- name: 🟡🟡🟡  Load Demo Runbooks into CP4WAIOPS
   include_tasks: 49_cp4waiops-load-runbooks-for-demo.yaml
   when: current_cp4waiops_feature.load_runbooks == true
 
@@ -338,26 +338,26 @@
 # CREATE MODEL TRAINING
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Create Training definitions
-- name: 🟡🟡🟡  Check if Models exist
+- name: 🟡🟡🟡  Check if AI Models exist
   include_tasks: 54_cp4waiops-training-check-exists.yaml
 
-- name: 🟡🟡🟡  Create Training Temporal Grouping
+- name: 🟡🟡🟡  Create Training Definition for Temporal Grouping
   include_tasks: 55_cp4waiops-training-create-tg-configuration.yaml
   when: current_cp4waiops_feature.training_create_training_temporal and TRAINING_EXISTS==false
 
-- name: 🟡🟡🟡  Create Training Metrics
+- name: 🟡🟡🟡  Create Training  Definition for Metrics
   include_tasks: 56_cp4waiops-training-create-metric-configuration.yaml
   when: current_cp4waiops_feature.training_create_training_metrics == true and TRAINING_EXISTS==false
 
-- name: 🟡🟡🟡  Create Training SNOW 
+- name: 🟡🟡🟡  Create Training  Definition for SNOW 
   include_tasks: 57_cp4waiops-training-create-snow-configuration.yaml
   when: current_cp4waiops_feature.training_create_training_snow == true and TRAINING_EXISTS==false
 
-- name: 🟡🟡🟡  Create Training Logs
+- name: 🟡🟡🟡  Create Training  Definition for Logs
   include_tasks: 58_cp4waiops-training-create-logs-configuration.yaml
   when: current_cp4waiops_feature.training_create_training_logs == true and TRAINING_EXISTS==false
 
-- name: 🟡🟡🟡  Create Training Seasonality and XinY
+- name: 🟡🟡🟡  Create Training  Definition for Seasonality and XinY
   include_tasks: 59_cp4waiops-training-create-season-configuration.yaml
   when: current_cp4waiops_feature.training_create_training_experimental == true | default('false')
 
@@ -367,11 +367,11 @@
 # Create Policies
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Create Story Creation and Runbook Policies
-- name: 🟡🟡🟡  Create Story Creation Policy
+- name: 🟡🟡🟡  Create Custom Story Creation Policy
   include_tasks: 50_cp4waiops-create-policies-stories.yaml
   when: current_cp4waiops_feature.create_story_policy == true
 
-- name: 🟡🟡🟡  Create Runbook Trigger Policy
+- name: 🟡🟡🟡  Create Custom Runbook Trigger Policy
   include_tasks: 50_cp4waiops-create-policies-runbooks.yaml
   when: current_cp4waiops_feature.create_runbook_policy == true
 
@@ -385,15 +385,15 @@
   include_tasks: 60_cp4waiops-training-load-wait.yaml
   when: (current_cp4waiops_feature.training_load_data_logs == true or current_cp4waiops_feature.training_load_data_snow == true or current_cp4waiops_feature.training_load_data_metrics == true) and TRAINING_EXISTS==false
 
-- name: 🟡🟡🟡  Run SNOW Training
+- name: 🟡🟡🟡  Run SNOW AI Model Training
   include_tasks: 61_cp4waiops-training-run-snow.yaml
   when: current_cp4waiops_feature.training_run_training_snow == true and TRAINING_EXISTS==false
 
-- name: 🟡🟡🟡  Run LAD Training
+- name: 🟡🟡🟡  Run LAD  AI Model Training
   include_tasks: 62_cp4waiops-training-run-logs.yaml
   when: current_cp4waiops_feature.training_run_training_logs == true and TRAINING_EXISTS==false
 
-- name: 🟡🟡🟡  Run METRICS Training
+- name: 🟡🟡🟡  Run METRICS  AI Model Training
   include_tasks: 63_cp4waiops-training-run-metric.yaml
   when: current_cp4waiops_feature.training_run_training_metrics == true and TRAINING_EXISTS==false
       
@@ -413,11 +413,11 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # IJNSTALL WEBHOOK PROBE
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 🟡🟡🟡   Install Turbonomic Probe
+- name: 🟡🟡🟡   Install the Turbonomic Probe
   include_tasks: 70_cp4waiops-install-turbonomic-probe.yml
   when: current_cp4waiops_feature.install_webhook_probe | default('false') == true
 
-- name: 🟡🟡🟡   Install Generic Webhook Probe
+- name: 🟡🟡🟡   Install the Generic Webhook Probe
   include_tasks: 71_cp4waiops-install-generic-probe.yml
   when: current_cp4waiops_feature.install_webhook_probe | default('false') == true
 
@@ -428,7 +428,7 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # CREATE DEMO UI APP
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 🟡🟡🟡  Install Demo UI
+- name: 🟡🟡🟡  Install the Demo UI
   include_tasks: 26_cp4waiops-demo-ui.yaml
   when: current_cp4waiops_feature.install_demo_ui == true
 

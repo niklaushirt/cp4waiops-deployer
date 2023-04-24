@@ -87,21 +87,21 @@
 # INITIALIZATION
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Placeholder for customization
-- name: 🟡🟡🟡 Init Custom Hook
+- name: 🟡🟡🟡 Initialize Custom Hook
   include_tasks: 00_init-custom-hook.yaml
 
 # Initialize Logging
-- name: 🟡🟡🟡 Init Logging
+- name: 🟡🟡🟡 Initialize Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/01_init-logging.yaml"
     
-- name: 🟡🟡🟡 Checks
+- name: 🟡🟡🟡 Initialization Checks
   include_tasks: 02_init_checks.yaml
 # Start block
 - name: 🟡🟡🟡 Start Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90-log-start.yaml"
 
 # Run Prerequisites
-- name: 🟡🟡🟡 Initialization
+- name: 🟡🟡🟡 Initialization of the Installation
   include_tasks: 03_init-initialization.yaml
   
 
@@ -125,11 +125,11 @@
 
 
 
-- name: 🟡🟡🟡 Get Storage Class
+- name: 🟡🟡🟡 Get Storage Classes
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
 
 
-- name: 🟡🟡🟡 CP4WAIOps Prerequisites 
+- name: 🟡🟡🟡 Install CP4WAIOps Prerequisites 
   include_tasks: 06_cp4waiops-prerequisites.yaml
       
 
@@ -166,7 +166,7 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # INSTALL CP4WAIOPS OPERATOR
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 🟡🟡🟡 Install CP4WAIOps Operator
+- name: 🟡🟡🟡 Install the CP4WAIOps Operator
   include_tasks: 11_cp4waiops-operator.yaml
 
 
@@ -174,7 +174,7 @@
 # INSTALL FEATURE FLAGS
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install  Feature Flags
-- name: 🟡🟡🟡  Install Feature Flags
+- name: 🟡🟡🟡  Install CP4WAIOPS Feature Flags
   include_tasks: 12_cp4waiops-featureflags.yaml
   when: current_cp4waiops_feature.install_feature_flags == true | default('false')
 
@@ -184,7 +184,7 @@
 # INSTALL CP4WAIOPS
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install CP4WAIOPS Instance
-- name: 🟡🟡🟡 Install CP4WAIOps Instance
+- name: 🟡🟡🟡 Install the CP4WAIOps Instance
   include_tasks: 19_cp4waiops-install.yaml
       
 
@@ -195,19 +195,19 @@
 # WAIT FOR INSTALLATION READY
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Wait for Common Services being completely installed
-- name: 🟡🟡🟡 Wait for CommonServices
+- name: 🟡🟡🟡 Wait for CommonServices to be ready
   include_tasks: 99_cp4waiops-wait-common-services.yaml
 - name: 🟡🟡🟡 Wait for Zen Initialisation
   include_tasks: 99_cp4waiops-wait-for-zen.yaml
       
 
 # Patching Topology Deployment
-- name: 🟡🟡🟡 Patch Topology
+- name: 🟡🟡🟡 Patch CP4WAIOPS Topology
   include_tasks: 20_cp4waiops-patch-topology.yaml
 
 
 # Wait for CP4WAIOPS being completely installed
-- name: 🟡🟡🟡 Wait for CP4WAIOps
+- name: 🟡🟡🟡 Wait for CP4WAIOps to be ready
   include_tasks: 99_cp4waiops-wait-cp4waiops.yaml
 
 # --------------------------------------------------------------------------------------------------------------------------------------
