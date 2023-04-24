@@ -42,8 +42,14 @@ oc delete cm -n ibm-common-services --all
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete OPERANDREQUESTS"
-oc delete operandrequests.operator.ibm.com -n cp4waiops --all --force --grace-period=0
-oc delete operandrequests.operator.ibm.com -n ibm-common-services --all --force --grace-period=0
+oc delete operandrequests.operator.ibm.com -n cp4waiops --all --force --grace-period=0 &
+oc delete operandrequests.operator.ibm.com -n ibm-common-services --all --force --grace-period=0 &
+
+kubectl patch operandrequests.operator.ibm.com -n cp4waiops iaf-core-operator  -p '{"metadata":{"finalizers":null}}' --type=merge          
+kubectl patch operandrequests.operator.ibm.com -n cp4waiops iaf-eventprocessing-operator  -p '{"metadata":{"finalizers":null}}' --type=merge
+kubectl patch operandrequests.operator.ibm.com -n cp4waiops iaf-operator  -p '{"metadata":{"finalizers":null}}' --type=merge               
+kubectl patch operandrequests.operator.ibm.com -n cp4waiops ibm-elastic-operator -p '{"metadata":{"finalizers":null}}' --type=merge       
+
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete KAFKA Claims"
