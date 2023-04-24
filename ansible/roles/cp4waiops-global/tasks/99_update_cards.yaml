@@ -139,14 +139,10 @@
     shell: |
       export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
       if [ "${WAIOPS_NAMESPACE}" != "" ]; then
-        export EVTMGR_NAMESPACE=$(oc get po -A|grep noi-operator |awk '{print$1}')
         export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd  -o jsonpath={.spec.host})          
 
         instanaURL=$(oc get routes -n instana-core dev-aiops -o jsonpath={.spec.host})
         turboURL=$(oc get route -n turbonomic nginx -o jsonpath={.spec.host})
-        evtMgrURL=$(oc get route -n $EVTMGR_NAMESPACE  evtmanager-ibm-hdm-common-ui -o jsonpath={.spec.host})
-        evtMgrPwd=$(oc get secret -n $EVTMGR_NAMESPACE  evtmanager-was-secret -o jsonpath='{.data.WAS_PASSWORD}'| base64 --decode && echo)
-
         export ROWS=""
 
         if [[ $instanaURL =~ "dev-aiops" ]]; then
@@ -158,11 +154,6 @@
         echo "Turbonomic Present"
         ROWS=$ROWS'{"drilldown_url":  "https://'$turboURL'", "label": "→   Turbonomic", "sub_text": " "},'
         ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: administrator - Password: P4ssw0rd! "},'
-        fi
-        if [[ $evtMgrURL =~ "evt" ]]; then
-        echo "EventManager Present "
-        ROWS=$ROWS'{"drilldown_url":  "https://'$evtMgrURL'", "label": "→  EventManager", "sub_text": " "},'
-        ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: smadmin - Password: '$evtMgrPwd' "},'
         fi
 
         ROWS=$ROWS'{"drilldown_url":  "", "label": "Select your IBM AIOps Application above.", "sub_text": ""}'

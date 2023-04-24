@@ -121,7 +121,7 @@ spec:
           - name: INSTALL_REPO
             value : "https://github.com/niklaushirt/cp4waiops-deployer.git"
           - name: CONFIG
-            #value : "./configs/cp4waiops-roks-aimanager-all-34.yaml"
+            #value : "./configs/cp4waiops-all-34.yaml"
             value : "./configs/cp4waiops-roks-inframgt-latest.yaml"
             # The pull token for cp.icr.com from https://myibm.ibm.com/products-services/containerlibrary
           - name: ENTITLED_REGISTRY_KEY

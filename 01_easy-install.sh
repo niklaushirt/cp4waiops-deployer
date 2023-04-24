@@ -21,7 +21,7 @@ export WAIOPS_VERSION=35
 
 export SHOW_MORE="false"
 export WAIOPS_PODS_MIN=115
-export DOC_URL="https://github.com/niklaushirt/cp4waiops-deployer#-demo-installation"
+export DOC_URL="https://github.com/niklaushirt/cp4waiops-deployer#-quickstart"
 
 export INSTALL_REPO="https://github.com/niklaushirt/cp4waiops-deployer.git"
 
@@ -266,8 +266,6 @@ export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '
 export WAIOPS_PODS=$(oc get pods -n $WAIOPS_NAMESPACE |grep -v Completed|grep -v "0/"|wc -l|tr -d ' ')
 
 if [[ $WAIOPS_PODS -gt $WAIOPS_PODS_MIN ]]; then
-      printf "\r  🐥🐥🐥🐣🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚 -  Getting Event Manager Namespace                              "
-      export EVTMGR_NAMESPACE=$(oc get po -A|grep noi-operator |awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐣🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚 - Getting RobotShop Status                                      "
       export RS_NAMESPACE=$(oc get ns robot-shop  --ignore-not-found|awk '{print$1}')
       printf "\r  🐥🐥🐥🐥🐥🐣🥚🥚🥚🥚🥚🥚🥚🥚🥚 - Check if models have been trained                             "
@@ -519,7 +517,7 @@ menu_JOB_AI_ALL () {
       checkCP4WAIOps
       checkToken
 
-      export CONFIG="./configs/cp4waiops-roks-aimanager-all-$WAIOPS_VERSION.yaml"
+      export CONFIG="./configs/cp4waiops-all-$WAIOPS_VERSION.yaml"
       export JOB_NAME="waiops-easy-install-aimanager-all"
       installViaJob
 
@@ -631,7 +629,7 @@ menu_JOB_AI_ONLY () {
       checkCP4WAIOps
       checkToken
 
-      export CONFIG="./configs/cp4waiops-roks-aimanager-$WAIOPS_VERSION.yaml"
+      export CONFIG="./configs/cp4waiops-$WAIOPS_VERSION.yaml"
       export JOB_NAME="waiops-easy-install-aimanager-only"
       installViaJob
 
@@ -1364,6 +1362,7 @@ echo "      / // __  / /|_/ /    / /| |  / // / / / __ \/ ___/"
 echo "    _/ // /_/ / /  / /    / ___ |_/ // /_/ / /_/ (__  ) "
 echo "   /___/_____/_/  /_/    /_/  |_/___/\____/ .___/____/  "
 echo "                                         /_/"
+echo ""
 echo "   🐥 CloudPak for Watson AIOPs - EASY INSTALL"
 echo ""
 echo "*****************************************************************************************************************************"
@@ -1392,16 +1391,8 @@ echo "${NC}"
       if [[ $WAIOPS_PODS -lt $WAIOPS_PODS_MIN ]]; then
             echo "     🚀  01  - Install CP4WAIOps Demo${NC}   ${Green}<-- Start here${NC}                - Install CP4WAIOps with Demo Content via Kubernetes in-cluster Job"
       else
-            echo "     ✅  01  - Install CP4WAIOps Demo${NC}                                 - ${Green}Already installed${NC}  "
+            echo "     ✅  01  - Install CP4WAIOps Demo${NC}                                  - ${Green}Already installed${NC}  "
       fi
-
-      if [[ $EVTMGR_NAMESPACE == "" ]]; then
-            echo "         02  - Install Event Manager Demo                              - Install Event Manager with Demo Content via Kubernetes in-cluster Job"
-      else
-            echo "     ✅  02  - Install Event Manager Demo${NC}                              - ${Green}Already installed${NC}  "
-      fi
-
-      echo "         03  - Install complete Demo                                   - Install AI/Event Manager, Demo Content and Turbonomic via Kubernetes in-cluster Job"
 
 
       echo "  "
@@ -1411,14 +1402,9 @@ echo "${NC}"
       if [[ $WAIOPS_PODS -lt $WAIOPS_PODS_MIN ]]; then
             echo "         10  - Install CP4WAIOps                                      - Install CP4WAIOPS CP4WAIOps Component Only"
       else
-            echo "     ✅  10  - Install CP4WAIOps                                      - ${Green}Already installed${NC}  "
+            echo "     ✅  10  - Install CP4WAIOps                                       - ${Green}Already installed${NC}  "
       fi
 
-      if [[ $EVTMGR_NAMESPACE == "" ]]; then
-            echo "         11  - Install Event Manager                                   - Install CP4WAIOPS Event Manager Component Only"
-      else
-            echo "     ✅  11  - Install Event Manager                                   - ${Green}Already installed${NC}  "
-      fi
 
       echo "  "
       echo "         18  - Open Documentation                                      - Open the CP4WAIOps installation Documentation"

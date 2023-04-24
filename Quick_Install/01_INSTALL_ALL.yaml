@@ -247,6 +247,9 @@ spec:
                   training_create_training_metrics: true
                   training_run_training_metrics: true
 
+                  # Install Feature Flags
+                  install_feature_flags: false
+
                   training_data_url: https://github.com/niklaushirt/
                   training_data_repo: cp4waiops-trainingdata
 
@@ -515,7 +518,7 @@ spec:
           - name: INSTALL_REPO
             value : "https://github.com/niklaushirt/cp4waiops-deployer.git"
           - name: CONFIG
-            #value : "./configs/cp4waiops-roks-aimanager-all-34.yaml"
+            #value : "./configs/cp4waiops-all-34.yaml"
             value : "./configs/cp4waiops-roks-custom.yaml"
             # The pull token for cp.icr.com from https://myibm.ibm.com/products-services/containerlibrary
           - name: ENTITLED_REGISTRY_KEY

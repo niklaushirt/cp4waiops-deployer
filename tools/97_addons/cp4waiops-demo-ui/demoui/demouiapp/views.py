@@ -53,11 +53,6 @@ stream = os.popen("oc get po -A|grep aiops-orchestrator-controller |awk '{print$
 aimanagerns = stream.read().strip()
 print('        ✅ CP4WAIOps Namespace:       '+aimanagerns)
 
-print('     ❓ Getting EventManager Namespace')
-stream = os.popen("oc get po -A|grep noi-operator |awk '{print$1}'")
-eventmanagerns = stream.read().strip()
-print('        ✅ EventManager Namespace:    '+eventmanagerns)
-
 
 print('     ❓ Getting Details Datalayer')
 stream = os.popen("oc get route  -n "+aimanagerns+" datalayer-api  -o jsonpath='{.status.ingress[0].host}'")
@@ -194,23 +189,6 @@ echo "    <BR>"
     echo "<BR>"
 
   
-
-
-    appURL=$(oc get route -n $EVTMGR_NAMESPACE  evtmanager-ibm-hdm-common-ui -o jsonpath={.spec.host})
-
-    echo "    -----------------------------------------------------------------------------------------------------------------------------------------------<BR>"
-    echo "    <h3>🚀 1.4 Netcool Operations Insight (Event Manager)</h3><BR>"
-    echo "<table>"
-    echo "<tr><td style=\"min-width:300px\"><h4>📥 Netcool Operations Insight</h4></td><td></td></tr>"
-    echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a>https://</td></tr>"
-    echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>smadmin</td></tr>"
-    echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>$(oc get secret -n $EVTMGR_NAMESPACE  evtmanager-was-secret -o jsonpath='{.data.WAS_PASSWORD}'| base64 --decode && echo)</td></tr>"
-    echo "</table>"
-
-
-
-echo "    <BR>"
-echo "    <BR>"
 echo "    <BR>"
 echo "    <BR>"
 
@@ -419,14 +397,6 @@ aimanager_user = stream.read().strip()
 stream = os.popen('oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath={.data.admin_password} | base64 --decode')
 aimanager_pwd = stream.read().strip()
 
-print('     ❓ Getting Details EventManager')
-stream = os.popen('oc get route -n '+eventmanagerns+'  evtmanager-ibm-hdm-common-ui -o jsonpath={.spec.host}')
-eventmanager_url = stream.read().strip()
-stream = os.popen('oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath={.data.admin_username} | base64 --decode && echo')
-eventmanager_user = 'smadmin'
-stream = os.popen('oc get secret -n '+eventmanagerns+'  evtmanager-was-secret -o jsonpath={.data.WAS_PASSWORD}| base64 --decode ')
-eventmanager_pwd = stream.read().strip()
-
 
 
 print('     ❓ Getting AWX Connection Details')
@@ -614,9 +584,6 @@ def instanaCreateIncident(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -696,9 +663,6 @@ def instanaMitigateIncident(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -791,9 +755,6 @@ def injectAllREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -880,9 +841,6 @@ def injectAllFanREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -968,9 +926,6 @@ def injectAllNetREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1050,9 +1005,6 @@ def injectAllFanACMEREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1140,9 +1092,6 @@ def injectAllNetSOCKREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1200,9 +1149,6 @@ def injectLogsREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1260,9 +1206,6 @@ def injectEventsREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1318,9 +1261,6 @@ def injectMetricsREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1408,9 +1348,6 @@ def clearAllREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1472,9 +1409,6 @@ def clearEventsREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1533,9 +1467,6 @@ def clearStoriesREST(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1808,9 +1739,6 @@ def doc(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
         'INSTANCE_NAME': INSTANCE_NAME,
         'INSTANCE_IMAGE': INSTANCE_IMAGE,
         'ADMIN_MODE': ADMIN_MODE,
@@ -1861,9 +1789,7 @@ def apps(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
+
         'SLACK_URL': SLACK_URL,
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
@@ -1920,9 +1846,7 @@ def apps_system(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
+
         'SLACK_URL': SLACK_URL,
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
@@ -1980,9 +1904,7 @@ def apps_demo(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
+
         'SLACK_URL': SLACK_URL,
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,
@@ -2041,9 +1963,7 @@ def apps_additional(request):
         'robotshop_url': robotshop_url,
         'sockshop_url': sockshop_url,
         'spark_url': spark_url,
-        'eventmanager_url': eventmanager_url,
-        'eventmanager_user': eventmanager_user,
-        'eventmanager_pwd': eventmanager_pwd,
+
         'SLACK_URL': SLACK_URL,
         'SLACK_USER': SLACK_USER,
         'SLACK_PWD': SLACK_PWD,

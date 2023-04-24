@@ -268,7 +268,6 @@ spec:
                         echo "   🛠️  Get Namespaces"
 
                         export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-                        export EVTMGR_NAMESPACE=$(oc get po -A|grep noi-operator |awk '{print$1}')
 
                         echo ""
                         echo "    ------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -369,8 +368,6 @@ spec:
                         export CURRENT_NAMESPACE=$WAIOPS_NAMESPACE
                         checkNamespace
 
-                        export CURRENT_NAMESPACE=$EVTMGR_NAMESPACE
-                        checkNamespace
 
                         export CURRENT_NAMESPACE=awx
                         checkNamespace

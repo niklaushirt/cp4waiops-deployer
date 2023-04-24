@@ -51,10 +51,8 @@ export TEMP_PATH=~/aiops-install
 
 
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-export EVTMGR_NAMESPACE=$(oc get po -A|grep noi-operator |awk '{print$1}')
 
 : "${WAIOPS_NAMESPACE:=cp4waiops}"
-: "${EVTMGR_NAMESPACE:=noi}"
 
 CLUSTER_ROUTE=$(oc get routes console -n openshift-console | tail -n 1 2>&1 ) 
 CLUSTER_FQDN=$( echo $CLUSTER_ROUTE | awk '{print $2}')
@@ -149,33 +147,6 @@ then
   
 fi
 
-
-EVTMGR_READY=$(oc get pod -n $EVTMGR_NAMESPACE --ignore-not-found| grep webgui-0|| true) 
-if [[ $EVTMGR_READY =~ "2/2" ]]; 
-then
-    echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
-    echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
-    echo "    🚀 1.4 Event Manager (Netcool Operations Insight)"
-    echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
-    echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
-    echo "    "
-    echo "      📥 Event Manager"
-    echo ""
-    echo "            🌏 URL:           https://$(oc get route -n $EVTMGR_NAMESPACE  evtmanager-ibm-hdm-common-ui -o jsonpath={.spec.host})"
-    echo "            🧑 User:          demo"
-    echo "            🔐 Password:      P4ssw0rd!"
-    echo ""
-    echo "            🧑 User:          smadmin"
-    echo "            🔐 Password:      $(oc get secret -n $EVTMGR_NAMESPACE  evtmanager-was-secret -o jsonpath='{.data.WAS_PASSWORD}'| base64 --decode && echo)"
-    echo ""
-    echo "       ---------------------------------------------------------------------------------------------"
-    echo "        EventManager/NOI WEBHOOK:"
-    echo "               URL:          <PASTE HERE FOR DOCUMENTATION WHEN CREATED>"
-    echo "    "
-    echo "    "
-    echo "    "
-    echo "    "
-fi
 
 
 

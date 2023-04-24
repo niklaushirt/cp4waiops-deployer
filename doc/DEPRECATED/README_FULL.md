@@ -894,7 +894,7 @@ Usually it's a good idea to store this in a file for later use:
 
 ## 19.5 Check status of installation
 
-At any moment you can run `./tools/11_check_install.sh` or for a more in-depth examination and troubleshooting `./tools/10_debug_install.sh` and select `Option 1` to check your installation.
+At any moment you can run `./tools/21_check_install.sh` or for a more in-depth examination and troubleshooting `./tools/10_debug_install.sh` and select `Option 1` to check your installation.
 
 
 <div style="page-break-after: always;"></div>

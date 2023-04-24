@@ -69,7 +69,7 @@ spec:
 
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 🚀 Starting Installation"
-              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=./configs/cp4waiops-roks-aimanager-practicum.yaml"
+              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=./configs/cp4waiops-practicum.yaml"
               echo ""
               echo ""
               echo "*****************************************************************************************************************************"

@@ -24,7 +24,7 @@
 |NOI_WEBHOOK_URL| netcool-evtmanager.apps.clustername.domain | Event Manager hostname |
 |NOI_WEBHOOK_PATH| /norml/xxxx | Webhook URL from Event Manager (does not inclue the hostname, only `/norml/xxxx`) |
 |TURBO_API_URL| api-turbonomic.apps.clustername.domain | Turbonomic API URL |
-|TURBO_BA_NAME| 'Quote of the Day Hybrid:qotd-hybrid' | Turbonomic application name in the format APPNAME:ALERTGROUP. This links an event manager alertgroup with an application |
+|TURBO_BA_NAME| 'Quote of the Day Hybrid:qotd-hybrid' | Turbonomic application name in the format APPNAME:ALERTGROUP. This links an alertgroup with an application |
 |ACTION_STATES| 'SUCCEEDED,FAILED,READY,IN_PROGRESS' | The list of ACTION_STATES to filter on |
 |ACTION_TYPES| 'MOVE,RESIZE_FOR_PERFORMANCE,RESIZE_FOR_EFFICIENCY,RESIZE' | The list of ACTION_TYPES to filter on |
 |DEBUG_ENABLED| 'false' | Enable additional log output |
