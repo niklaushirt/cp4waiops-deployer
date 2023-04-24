@@ -82,19 +82,19 @@
 # INITIALIZATION
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Placeholder for customization
-- name: 📥 Init Custom Hook
+- name: 🟡🟡🟡 Init Custom Hook
   include_tasks: 00_init-custom-hook.yaml
 
 # Initialize Logging
-- name: 📥 Init Logging
+- name: 🟡🟡🟡 Init Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/01_init-logging.yaml"
 
-- name: 📥 Get Storage Class
+- name: 🟡🟡🟡 Get Storage Class
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
 
   
 # Start block
-- name: 📥 Start Logging
+- name: 🟡🟡🟡 Start Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90-log-start.yaml"
 
 
@@ -104,25 +104,25 @@
 # INSTALL TURBONOMIC
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install TURBONOMIC
-- name: 📥 Install Turbonomic
+- name: 🟡🟡🟡 Install Turbonomic
   include_tasks: 10_addons-turbonomic.yaml
 
 
-- name: 📥 Restart Demo UI
+- name: 🟡🟡🟡 Restart Demo UI
   include_tasks: 21_addons-turbonomic-restart-demoui.yaml
 
-- name: 📥 Install OCP Menu Item
+- name: 🟡🟡🟡 Install OCP Menu Item
   include_tasks: 91_addons-turbonomic-create-ocp-tools-menu.yaml
   when: global_config.create_ocp_items | default(true) == true  
 
 # Update CP4WAIOps Cards
-- name: 📥 Update CP4WAIOps Cards
+- name: 🟡🟡🟡 Update CP4WAIOps Cards
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
 
 
 
-- name: 📥 End Logging
+- name: 🟡🟡🟡 End Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/91-log-end.yaml"
 
 

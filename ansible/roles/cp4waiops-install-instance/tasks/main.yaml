@@ -87,21 +87,21 @@
 # INITIALIZATION
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Placeholder for customization
-- name: 🟠🟠🟠 Init Custom Hook
+- name: 🟡🟡🟡 Init Custom Hook
   include_tasks: 00_init-custom-hook.yaml
 
 # Initialize Logging
-- name: 🟠🟠🟠 Init Logging
+- name: 🟡🟡🟡 Init Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/01_init-logging.yaml"
     
-- name: 🟠🟠🟠 Checks
+- name: 🟡🟡🟡 Checks
   include_tasks: 02_init_checks.yaml
 # Start block
-- name: 🟠🟠🟠 Start Logging
+- name: 🟡🟡🟡 Start Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90-log-start.yaml"
 
 # Run Prerequisites
-- name: 🟠🟠🟠 Initialization
+- name: 🟡🟡🟡 Initialization
   include_tasks: 03_init-initialization.yaml
   
 
@@ -111,11 +111,11 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # TEST
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-# - name: 🟠🟠🟠  Create Routes
+# - name: 🟡🟡🟡  Create Routes
 #   include_tasks: 30_cp4waiops-create-routes.yaml
 
 # # Update CP4WAIOps Cards
-# - name: 🟠🟠🟠 Update CP4WAIOps Cards
+# - name: 🟡🟡🟡 Update CP4WAIOps Cards
 #   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -125,16 +125,16 @@
 
 
 
-- name: 🟠🟠🟠 Get Storage Class
+- name: 🟡🟡🟡 Get Storage Class
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
 
 
-- name: 🟠🟠🟠 CP4WAIOps Prerequisites 
+- name: 🟡🟡🟡 CP4WAIOps Prerequisites 
   include_tasks: 06_cp4waiops-prerequisites.yaml
       
 
 # Install CP4WAIOPS Operator
-- name: 🟠🟠🟠 CP4WAIOps Custom Hook
+- name: 🟡🟡🟡 CP4WAIOps Custom Hook
   include_tasks: 08_cp4waiops-custom-hook.yaml
 
 
@@ -142,7 +142,7 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # INSTALL CATALOG with YAML FILE
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 🟠🟠🟠 Install CP4WAIOps Catalog - Classic Way (skipped if CASE selected)
+- name: 🟡🟡🟡 Install CP4WAIOps Catalog - Classic Way (skipped if CASE selected)
   include_tasks: 10_cp4waiops-catalog.yaml
   when: current_cp4waiops_feature.case_install==false
 
@@ -150,13 +150,13 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # INSTALL CATALOG with CASE FILE
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 🟠🟠🟠 Install CP4WAIOps Catalog - Save Case File (this can take some time - skipped if not selected)
+- name: 🟡🟡🟡 Install CP4WAIOps Catalog - Save Case File (this can take some time - skipped if not selected)
   include_role:
     name: cp4waiops-case-save
   when: current_cp4waiops_feature.case_install==true
 
 
-- name: 🟠🟠🟠 Install CP4WAIOps Catalog - Create CatalogSources from Case File (this can take some time - skipped if not selected)
+- name: 🟡🟡🟡 Install CP4WAIOps Catalog - Create CatalogSources from Case File (this can take some time - skipped if not selected)
   include_role:
     name: cp4waiops-case-catalog-source
   when: current_cp4waiops_feature.case_install==true
@@ -166,7 +166,7 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # INSTALL CP4WAIOPS OPERATOR
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-- name: 🟠🟠🟠 Install CP4WAIOps Operator
+- name: 🟡🟡🟡 Install CP4WAIOps Operator
   include_tasks: 11_cp4waiops-operator.yaml
 
 
@@ -174,7 +174,7 @@
 # INSTALL FEATURE FLAGS
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install  Feature Flags
-- name: 🟠🟠🟠  Install Feature Flags
+- name: 🟡🟡🟡  Install Feature Flags
   include_tasks: 12_cp4waiops-featureflags.yaml
   when: current_cp4waiops_feature.install_feature_flags == true | default('false')
 
@@ -184,7 +184,7 @@
 # INSTALL CP4WAIOPS
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install CP4WAIOPS Instance
-- name: 🟠🟠🟠 Install CP4WAIOps Instance
+- name: 🟡🟡🟡 Install CP4WAIOps Instance
   include_tasks: 19_cp4waiops-install.yaml
       
 
@@ -195,49 +195,49 @@
 # WAIT FOR INSTALLATION READY
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Wait for Common Services being completely installed
-- name: 🟠🟠🟠 Wait for CommonServices
+- name: 🟡🟡🟡 Wait for CommonServices
   include_tasks: 99_cp4waiops-wait-common-services.yaml
-- name: 🟠🟠🟠 Wait for Zen Initialisation
+- name: 🟡🟡🟡 Wait for Zen Initialisation
   include_tasks: 99_cp4waiops-wait-for-zen.yaml
       
 
 # Patching Topology Deployment
-- name: 🟠🟠🟠 Patch Topology
+- name: 🟡🟡🟡 Patch Topology
   include_tasks: 20_cp4waiops-patch-topology.yaml
 
 
 # Wait for CP4WAIOPS being completely installed
-- name: 🟠🟠🟠 Wait for CP4WAIOps
+- name: 🟡🟡🟡 Wait for CP4WAIOps
   include_tasks: 99_cp4waiops-wait-cp4waiops.yaml
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Create Openshift WebConsole Menu Item
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name: 🟠🟠🟠  Create CP4WAIOps Openshift WebConsole Menu Item
+- name: 🟡🟡🟡  Create CP4WAIOps Openshift WebConsole Menu Item
   include_tasks: 91_cp4waiops-create-ocp-menu.yaml
   when: global_config.create_ocp_items | default(true) == true  
 
 # Update CP4WAIOps Cards
-- name: 🟠🟠🟠 Update CP4WAIOps Cards
+- name: 🟡🟡🟡 Update CP4WAIOps Cards
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
   
 # Access and documentaiton
-- name: 🟠🟠🟠 Get all logins
+- name: 🟡🟡🟡 Get all logins
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90_core-get-all-logins.yaml"
 
 
 
-- name: 🟠🟠🟠 Open CP4WAIOps
+- name: 🟡🟡🟡 Open CP4WAIOps
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_open-aimanager.yaml"
 
 
-- name: 🟠🟠🟠 Open Documentation
+- name: 🟡🟡🟡 Open Documentation
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_open-doc.yaml"
 
 
 
-- name: 🟠🟠🟠 End Logging
+- name: 🟡🟡🟡 End Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/91-log-end.yaml"
 
 

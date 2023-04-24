@@ -196,19 +196,19 @@
   # INITIALIZATION
   # ---------------------------------------------------------------------------------------------------------------------------------------------------"
   # Placeholder for customization
-  - name: 📥 Init Custom Hook
+  - name: 🟡🟡🟡 Init Custom Hook
     include_tasks: 00_init-custom-hook.yaml
 
   # Initialize Logging
-  - name: 📥 Init Logging
+  - name: 🟡🟡🟡 Init Logging
     include_tasks: "{{role_path}}/../cp4waiops-global/tasks/01_init-logging.yaml"
 
-  - name: 📥 Get Storage Class
+  - name: 🟡🟡🟡 Get Storage Class
     include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
 
     
   # Start block
-  - name: 📥 Start Logging
+  - name: 🟡🟡🟡 Start Logging
     include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90-log-start.yaml"
 
 
@@ -216,32 +216,32 @@
   # INSTALL INSTANA
   # ---------------------------------------------------------------------------------------------------------------------------------------------------"
   # Install INSTANA
-  - name: 📥 Install Instana
+  - name: 🟡🟡🟡 Install Instana
     include_tasks: 10_addons-instana.yaml
 
 
   # Install INSTANA AGENT
-  - name: 📥 Install Instana Agent
+  - name: 🟡🟡🟡 Install Instana Agent
     include_tasks: 11_addons-instana-agent.yaml
     when: current_cp4waiops_feature.install_agent == true
 
 
   # Install INSTANA CP4WAIOps Connection
-  - name: 📥 Install CP4WAIOps to Instana Connection
+  - name: 🟡🟡🟡 Install CP4WAIOps to Instana Connection
     include_tasks: 12_addons-instana-create-connections.yaml
     when: current_cp4waiops_feature.integrate_cp4waiops == true
 
 
-  - name: 📥 Restart Demo UI
+  - name: 🟡🟡🟡 Restart Demo UI
     include_tasks: 21_addons-instana-restart-demoui.yaml
 
 
-  - name: 📥 Install OCP Menu Item
+  - name: 🟡🟡🟡 Install OCP Menu Item
     include_tasks: 91_addons-instana-create-ocp-tools-menu.yaml
     when: global_config.create_ocp_items | default(true) == true  
 
   # Update CP4WAIOps Cards
-  - name: 📥 Update CP4WAIOps Cards
+  - name: 🟡🟡🟡 Update CP4WAIOps Cards
     include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
 
@@ -283,7 +283,7 @@
   ignore_errors: true
 
 
-- name: 📥 End Logging
+- name: 🟡🟡🟡 End Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/91-log-end.yaml"
 
 

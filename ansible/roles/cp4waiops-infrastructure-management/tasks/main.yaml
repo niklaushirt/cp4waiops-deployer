@@ -78,22 +78,22 @@
 # INITIALIZATION
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Placeholder for customization
-- name: 📥  00_init-custom-hook
+- name: 🟡🟡🟡  00_init-custom-hook
   include_tasks: 00_init-custom-hook.yaml
 
 # Initialize Logging
-- name: 📥  01_init-logging
+- name: 🟡🟡🟡  01_init-logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/01_init-logging.yaml"
     
-- name: 📥  02_init_checks
+- name: 🟡🟡🟡  02_init_checks
   include_tasks: 02_init_checks.yaml
 # Start block
-- name: 📥  90-log-start
+- name: 🟡🟡🟡  90-log-start
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90-log-start.yaml"
 
   
 
-- name: 📥  05_init-get-storage-class
+- name: 🟡🟡🟡  05_init-get-storage-class
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
       
 
@@ -103,7 +103,7 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 
 # Install  Instance
-- name: 📥  16_inframanagement-install
+- name: 🟡🟡🟡  16_inframanagement-install
   include_tasks: 16_inframanagement-install.yaml
       
 
@@ -111,10 +111,10 @@
 # INSTALL ADDONS
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install OpenLDAP
-- name: 📥  21_addons-ldap
+- name: 🟡🟡🟡  21_addons-ldap
   include_tasks: 21_addons-ldap.yaml
 # Create Service Accoutn and USER
-- name: 📥   22_addons-user
+- name: 🟡🟡🟡   22_addons-user
   include_tasks: 22_addons-user.yaml
 
 
@@ -122,7 +122,7 @@
 # WAIT FOR INSTALLATION READY
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Wait for Common Services being completely installed
-- name: 📥  99_aimanager-wait-common-services
+- name: 🟡🟡🟡  99_aimanager-wait-common-services
   include_tasks: 99_aimanager-wait-common-services.yaml
 
 
@@ -131,13 +131,13 @@
 # POSTINSTALL TASKS
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Register LDAP Users
-- name: 📥  25-post-ldap-register
+- name: 🟡🟡🟡  25-post-ldap-register
   include_tasks: 25-post-ldap-register.yaml
       
 
 
 
-- name: 📥  91-log-end
+- name: 🟡🟡🟡  91-log-end
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/91-log-end.yaml"
 
 
