@@ -209,7 +209,7 @@ do
             if [[ $LINES_READ -ge $MAX_LINES_PER_CALL ]]; then
                   echo ""
                   echo ""
-                  echo "       🚀 Writing $MAX_LINES_PER_CALL lines to AI Manager"
+                  echo "       🚀 Writing $MAX_LINES_PER_CALL lines to CP4WAIOps"
                   echo ""
                   #Finalise injection file
                   echo "{\"timestamp\":\"$MY_TIMESTAMP\",\"resourceID\":\"$MY_RESOURCE_ID\",\"metrics\":{\"$MY_METRIC_NAME\":$CURRENT_VALUE},\"attributes\":{\"group\":\"$MY_GROUP_ID\",\"node\":\"$MY_RESOURCE_ID\"}}">> /tmp/tmp_inject.json

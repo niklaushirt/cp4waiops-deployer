@@ -18,27 +18,17 @@
 
 
 
-- name: cp4waiops-install-modules 🌡   CHECK for - AI Manager
+- name: cp4waiops-install-modules 🌡   CHECK for - CP4WAIOps
   include_role:
-    name: cp4waiops-ai-manager
-  when: current_cp4waiops_feature.kind=="AIManager" and current_cp4waiops_feature.install==true
+    name: cp4waiops-install-instance
+  when: current_cp4waiops_feature.kind=="CP4WAIOps" and current_cp4waiops_feature.install==true
 
 
-- name: cp4waiops-install-modules 🌡   CHECK for - AI Manager Demo Content
+- name: cp4waiops-install-modules 🌡   CHECK for - CP4WAIOps Demo Content
   include_role:
-    name: cp4waiops-ai-manager-demo-content
-  when: current_cp4waiops_feature.kind=="AIManagerDemoContent" and current_cp4waiops_feature.install==true
+    name: cp4waiops-install-demo-content
+  when: current_cp4waiops_feature.kind=="CP4WAIOpsDemoContent" and current_cp4waiops_feature.install==true
 
-
-- name: cp4waiops-install-modules 🌡   CHECK for - Event Manager
-  include_role:
-    name: cp4waiops-event-manager
-  when: current_cp4waiops_feature.kind=="EventManager" and current_cp4waiops_feature.install==true
-
-- name: cp4waiops-install-modules 🌡   CHECK for - Event Manager Demo Content
-  include_role:
-    name: cp4waiops-event-manager-demo-content
-  when: current_cp4waiops_feature.kind=="EventManagerDemoContent" and current_cp4waiops_feature.install==true
 
 
 - name: cp4waiops-install-modules 🌡   CHECK for - Infrastructure Management

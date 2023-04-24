@@ -116,7 +116,7 @@ Release for 3.6.0 GA
 
 ### Major changes
 
-- Added AI Manager Cards
+- Added CP4WAIOps Cards
 - Added Turbonomic Demo Content
 
 

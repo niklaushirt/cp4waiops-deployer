@@ -34,7 +34,7 @@ echo "    🔬 Getting Installation Namespace"
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-echo "       ✅ OK - AI Manager:    $WAIOPS_NAMESPACE"
+echo "       ✅ OK - CP4WAIOps:    $WAIOPS_NAMESPACE"
 
 echo " "
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
@@ -49,7 +49,7 @@ echo "     📥 Get Kafka Topics"
 export KAFKA_TOPIC_LOGS=$(oc get kafkatopics -n $WAIOPS_NAMESPACE | grep cp4waiops-cartridge-logs-$LOG_TYPE| awk '{print $1;}')
 
 if [[ "${KAFKA_TOPIC_LOGS}" == "" ]]; then
-    echo "          ❗ Please define a Kafka connection in AI Manager of type $LOG_TYPE."
+    echo "          ❗ Please define a Kafka connection in CP4WAIOps of type $LOG_TYPE."
     echo "          ❗ Existing Log Topics are:"
     oc get kafkatopics -n $WAIOPS_NAMESPACE | grep cp4waiops-cartridge-logs-| awk '{print $1;}'| sed 's/^/                /'
     echo ""

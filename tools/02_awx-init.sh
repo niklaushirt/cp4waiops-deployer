@@ -163,12 +163,12 @@ echo ""
 
 echo ""
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Create Job: Install CP4WAIOPS AI Manager And Demo Content - 3.3.2"
+echo "   🚀  Create Job: Install CP4WAIOPS CP4WAIOps And Demo Content - 3.3.2"
 export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u "$ADMIN_USER:$ADMIN_PASSWORD" --insecure \
 -H 'content-type: application/json' \
 -d $'{
-    "name": "01_Install CP4WAIOPS AI Manager And Demo Content - 3.3.2",
-    "description": "Install CP4WAIOPS AI Manager And Demo Content - 3.3.2",
+    "name": "01_Install CP4WAIOPS CP4WAIOps And Demo Content - 3.3.2",
+    "description": "Install CP4WAIOPS CP4WAIOps And Demo Content - 3.3.2",
     "job_type": "run",
     "inventory": '$INVENTORY_ID',
     "project": '$PROJECT_ID',
@@ -189,12 +189,12 @@ fi
 
 echo ""
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Create Job: Install CP4WAIOPS AI Manager Only - 3.3.2"
+echo "   🚀  Create Job: Install CP4WAIOPS CP4WAIOps Only - 3.3.2"
 export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u "$ADMIN_USER:$ADMIN_PASSWORD" --insecure \
 -H 'content-type: application/json' \
 -d $'{
-    "name": "02_Install CP4WAIOPS AI Manager Only - 3.3.2",
-    "description": "Install CP4WAIOPS AI Manager Only - 3.3.2",
+    "name": "02_Install CP4WAIOPS CP4WAIOps Only - 3.3.2",
+    "description": "Install CP4WAIOPS CP4WAIOps Only - 3.3.2",
     "job_type": "run",
     "inventory": '$INVENTORY_ID',
     "project": '$PROJECT_ID',
@@ -218,12 +218,12 @@ fi
 
 echo ""
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Create Job: Install CP4WAIOPS AI Manager Demo Content - 3.3.2"
+echo "   🚀  Create Job: Install CP4WAIOPS CP4WAIOps Demo Content - 3.3.2"
 export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u "$ADMIN_USER:$ADMIN_PASSWORD" --insecure \
 -H 'content-type: application/json' \
 -d $'{
-    "name": "03_Install CP4WAIOPS AI Manager Demo Content - 3.3.2",
-    "description": "Install CP4WAIOPS AI Manager Demo Content - 3.3.2",
+    "name": "03_Install CP4WAIOPS CP4WAIOps Demo Content - 3.3.2",
+    "description": "Install CP4WAIOPS CP4WAIOps Demo Content - 3.3.2",
     "job_type": "run",
     "inventory": '$INVENTORY_ID',
     "project": '$PROJECT_ID',
@@ -304,12 +304,12 @@ fi
 
 echo ""
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Create Job: Install CP4WAIOPS AI Manager And Demo Content - 3.4 FVT"
+echo "   🚀  Create Job: Install CP4WAIOPS CP4WAIOps And Demo Content - 3.4 FVT"
 export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u "$ADMIN_USER:$ADMIN_PASSWORD" --insecure \
 -H 'content-type: application/json' \
 -d $'{
-    "name": "01_Install CP4WAIOPS AI Manager And Demo Content - 3.4 FVT",
-    "description": "Install CP4WAIOPS AI Manager And Demo Content - 3.4 FVT",
+    "name": "01_Install CP4WAIOPS CP4WAIOps And Demo Content - 3.4 FVT",
+    "description": "Install CP4WAIOPS CP4WAIOps And Demo Content - 3.4 FVT",
     "job_type": "run",
     "inventory": '$INVENTORY_ID',
     "project": '$PROJECT_ID',
@@ -330,12 +330,12 @@ fi
 
 echo ""
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Create Job: Install CP4WAIOPS AI Manager Only - 3.4 FVT"
+echo "   🚀  Create Job: Install CP4WAIOPS CP4WAIOps Only - 3.4 FVT"
 export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u "$ADMIN_USER:$ADMIN_PASSWORD" --insecure \
 -H 'content-type: application/json' \
 -d $'{
-    "name": "02_Install CP4WAIOPS AI Manager Only - 3.4 FVT",
-    "description": "Install CP4WAIOPS AI Manager Only - 3.4 FVT",
+    "name": "02_Install CP4WAIOPS CP4WAIOps Only - 3.4 FVT",
+    "description": "Install CP4WAIOPS CP4WAIOps Only - 3.4 FVT",
     "job_type": "run",
     "inventory": '$INVENTORY_ID',
     "project": '$PROJECT_ID',
@@ -359,12 +359,12 @@ fi
 
 echo ""
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
-echo "   🚀  Create Job: Install CP4WAIOPS AI Manager Demo Content - 3.4 FVT"
+echo "   🚀  Create Job: Install CP4WAIOPS CP4WAIOps Demo Content - 3.4 FVT"
 export result=$(curl -X "POST" -s "https://$AWX_ROUTE/api/v2/job_templates/" -u "$ADMIN_USER:$ADMIN_PASSWORD" --insecure \
 -H 'content-type: application/json' \
 -d $'{
-    "name": "03_Install CP4WAIOPS AI Manager Demo Content - 3.4 FVT",
-    "description": "Install CP4WAIOPS AI Manager Demo Content - 3.4 FVT",
+    "name": "03_Install CP4WAIOPS CP4WAIOps Demo Content - 3.4 FVT",
+    "description": "Install CP4WAIOPS CP4WAIOps Demo Content - 3.4 FVT",
     "job_type": "run",
     "inventory": '$INVENTORY_ID',
     "project": '$PROJECT_ID',

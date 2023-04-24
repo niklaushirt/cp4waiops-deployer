@@ -4,14 +4,14 @@
 
 ## 11.1 Configure EventManager 
 
-❗ You only have to do this if you have installed EventManager/NOI (As described in Easy Install - Chapter 6). For basic demoing with AI MAnager this is not needed.
+❗ You only have to do this if you have installed EventManager/NOI (As described in Easy Install - Chapter 6). For basic demoing with CP4WAIOps this is not needed.
 
 
 
 
 ### 11.1.1 Create Kubernetes Observer for the Demo Applications 
 
-This is basically the same as for AI Manager as we need two separate instances of the Topology Manager. 
+This is basically the same as for CP4WAIOps as we need two separate instances of the Topology Manager. 
 
 
 * In the `Event Manager` "Hamburger" Menu select `Administration`/`Topology Management`

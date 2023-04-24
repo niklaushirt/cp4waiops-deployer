@@ -48,10 +48,10 @@ print('     🛠️ Build Date: '+str(mod_time_readable))
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # GET NAMESPACES
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
-print('     ❓ Getting AIManager Namespace')
+print('     ❓ Getting CP4WAIOps Namespace')
 stream = os.popen("oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}'")
 aimanagerns = stream.read().strip()
-print('        ✅ AIManager Namespace:       '+aimanagerns)
+print('        ✅ CP4WAIOps Namespace:       '+aimanagerns)
 
 print('     ❓ Getting EventManager Namespace')
 stream = os.popen("oc get po -A|grep noi-operator |awk '{print$1}'")
@@ -411,7 +411,7 @@ METRIC_TOKEN = stream.read().strip()
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # GET CONNECTION DETAILS
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
-print('     ❓ Getting Details AIManager')
+print('     ❓ Getting Details CP4WAIOps')
 stream = os.popen('oc get route -n '+aimanagerns+' cpd -o jsonpath={.spec.host}')
 aimanager_url = stream.read().strip()
 stream = os.popen('oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath={.data.admin_username} | base64 --decode && echo')

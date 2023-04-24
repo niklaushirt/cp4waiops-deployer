@@ -46,9 +46,9 @@ if [[  $WAIOPS_NAMESPACE == "" ]]; then
     echo "   🔬 Getting Installation Namespace"
     echo "   ------------------------------------------------------------------------------------------------------------------------------"
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-    echo "       ✅ AI Manager:         OK - $WAIOPS_NAMESPACE"
+    echo "       ✅ CP4WAIOps:         OK - $WAIOPS_NAMESPACE"
 else
-    echo "       ✅ AI Manager:         OK - $WAIOPS_NAMESPACE"
+    echo "       ✅ CP4WAIOps:         OK - $WAIOPS_NAMESPACE"
 fi
 
 oc project $WAIOPS_NAMESPACE 

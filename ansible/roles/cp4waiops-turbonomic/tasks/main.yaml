@@ -115,8 +115,8 @@
   include_tasks: 91_addons-turbonomic-create-ocp-tools-menu.yaml
   when: global_config.create_ocp_items | default(true) == true  
 
-# Update AI Manager Cards
-- name: 📥 Update AI Manager Cards
+# Update CP4WAIOps Cards
+- name: 📥 Update CP4WAIOps Cards
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
 

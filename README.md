@@ -141,7 +141,7 @@ IBMers and Partners can get a temporary cluster from [**Techzone**](https://tech
 	- Worker node count: **5**
 	- Flavour: **32 vCPU X 128 GB** ❗ 
 
-	> ❗ If you want to install AIManager, Event Manager, Trubonomic and Instana please select **32 vCPU X 128 GB** 
+	> ❗ If you want to install CP4WAIOps, Trubonomic and Instana please select **32 vCPU X 128 GB** 
 
 	![K8s CNI](./doc/pics/roks04.png)
 
@@ -170,7 +170,7 @@ Those scripts have been tested thoroughly on different environments and have pro
 If you think that you hit a problem:
 
 * Make sure that you have provisioned a cluster with **5 worker nodes with 32 CPU and 128 GB** each (`b3c.16x64` - it's easy to select the wrong size). If you have Pods in `0/0` state verify the `Events`. If you get `Not enough CPU` then delete the cluster and provision the correct size.
-* If you want to install AIManager, Event Manager, Trubonomic and Instana please select **5 worker nodes with 32 CPU and 128 GB**
+* If you want to install CP4WAIOps, Turbonomic and Instana please select **5 worker nodes with 32 CPU and 128 GB**
 * The complete installation takes about 2.5 to 8 hours depending on your region where and how you deployed ROKS to (see above).
 * If you see Pods in `CrashLoop` or other error states, try to wait it out (this can be due to dependencies on other componenets that are not ready yet). Chances are that the deployment will eventually go through. If after 8h you are still stuck, ping me.
 * **Select and use ONLY ONE of the scripts** below, depending on which components you want to install.
@@ -199,13 +199,13 @@ You can find some examples below.
 
 
 <details>
-<summary>✅ Install AI Manager with demo content, Turbonomic and Instana</summary>
+<summary>✅ Install CP4WAIOps with demo content, Turbonomic and Instana</summary>
 
-## 2.1 Install AI Manager with demo content, Turbonomic and Instana 
+## 2.1 Install CP4WAIOps with demo content, Turbonomic and Instana 
 
 > ### ✅ This is probably the one that you want.
 
-You get AIManager installed and pre-trained in one simple script.
+You get CP4WAIOps installed and pre-trained in one simple script.
 Ready to go.
 On top of that you get Turbonomic and Instana instances to play around a bit (you'll need a license key for each).
 
@@ -227,11 +227,11 @@ On top of that you get Turbonomic and Instana instances to play around a bit (yo
 
 This installation cocntains:
 
-> - **AI Manager**
+> - **CP4WAIOps**
 > 	- IBM Operator
-> 	- AI Manager Instance
-> - **AI Manager Demo Content**
->    - **OpenLDAP** & Register with AI Manager
+> 	- CP4WAIOps Instance
+> - **CP4WAIOps Demo Content**
+>    - **OpenLDAP** & Register with CP4WAIOps
 > 
 >    
 >    - **AWX** (Open Source Ansible Tower) with preloaded Playbooks
@@ -244,7 +244,7 @@ This installation cocntains:
 >      - Create K8s Observer
 >      - Create ASM merge rules
 >      - Load Overlay Topology
->      - Create AI Manager Application
+>      - Create CP4WAIOps Application
 >    - **Misc**
 > 	   - Creates valid certificate for Ingress (Slack) 
 > 	   - External Routes (Flink, Topology, ...)
@@ -266,9 +266,9 @@ This installation cocntains:
 
 </details>
 <details>
-<summary>☑️ Install AI Manager, Event Manager with demo content</summary>
+<summary>☑️ Install CP4WAIOps, Event Manager with demo content</summary>
 
-## 2.2 Install AI Manager, Event Manager with demo content
+## 2.2 Install CP4WAIOps, Event Manager with demo content
 
 You get all the CP4WAIOPS components installed and pre-trained in one simple script.
 Ready to go.
@@ -289,11 +289,11 @@ Ready to go.
 
 This installation cocntains:
 
-> - **AI Manager**
+> - **CP4WAIOps**
 > 	- IBM Operator
-> 	- AI Manager Instance
-> - **AI Manager Demo Content**
->    - **OpenLDAP** & Register with AI Manager
+> 	- CP4WAIOps Instance
+> - **CP4WAIOps Demo Content**
+>    - **OpenLDAP** & Register with CP4WAIOps
 > 
 >    
 >    - **AWX** (Open Source Ansible Tower) with preloaded Playbooks
@@ -306,7 +306,7 @@ This installation cocntains:
 >      - Create K8s Observer
 >      - Create ASM merge rules
 >      - Load Overlay Topology
->      - Create AI Manager Application
+>      - Create CP4WAIOps Application
 >    - **Misc**
 > 	   - Creates valid certificate for Ingress (Slack) 
 > 	   - External Routes (Flink, Topology, ...)
@@ -319,7 +319,7 @@ This installation cocntains:
 >   - **Topology**
 >     - Create ASM merge rules
 >     - Load ASM merge Topology
->     - Create AI Manager Application
+>     - Create CP4WAIOps Application
 > 
 
 <div style="page-break-after: always;"></div>
@@ -335,8 +335,8 @@ This installation cocntains:
 1. Adap the installation configuration to your needs. Select the modules to install and their configuration.
 
 	```yaml
-	- name: cp4waiops-aimanager
-	  kind: AIManager						<-- The feature to be configured
+	- name: cp4waiops
+	  kind: CP4WAIOps						<-- The feature to be configured
 	  install: true							<-- Install yes/no
 	
 	  # current_cp4waiops_feature			<-- Configuration of the feature
@@ -393,11 +393,11 @@ To access the demo environment:
 
 </details>
 <details>
-<summary>🔐 Login to AI Manager as demo User</summary>
+<summary>🔐 Login to CP4WAIOps as demo User</summary>
 
-## 3.2 Login to AI Manager as demo User
+## 3.2 Login to CP4WAIOps as demo User
 
-* Click on the blue `AI Manager` button
+* Click on the blue `CP4WAIOps` button
 * Login as User `demo` with the Password `P4ssw0rd!`
 
 
@@ -561,9 +561,9 @@ In the Slack App:
 
 	![K8s CNI](./doc/pics/doc48.png)
 
-In the AI Manager (CP4WAIOPS) 
+In the CP4WAIOps (CP4WAIOPS) 
 
-1. In the `AI Manager` "Hamburger" Menu select `Define`/`Data and tool integrations`
+1. In the `CP4WAIOps` "Hamburger" Menu select `Define`/`Data and tool integrations`
 1. Click `Add connection`
 
 	![K8s CNI](./doc/pics/doc14.png)
@@ -595,7 +595,7 @@ In the AI Manager (CP4WAIOPS)
 
 ## 4.5 Create the Integration URL
 
-In the AI Manager (CP4WAIOPS) 
+In the CP4WAIOps (CP4WAIOPS) 
 
 1. Go to `Data and tool integrations`
 2. Under `Slack` click on `1 integration`
@@ -760,11 +760,11 @@ The environement (Kubernetes, Applications, ...) create logs that are being fed 
 
 ![demo](./doc/pics/waiops_arch_overview.jpg)
 
-1. External Systems generate Alerts and send them into the AI Manager for Event Grouping.
-1. At the same time AI Manager ingests the raw logs coming from the Log Management Tool (ELK) and looks for anomalies in the stream based on the trained model.
+1. External Systems generate Alerts and send them into the CP4WAIOps for Event Grouping.
+1. At the same time CP4WAIOps ingests the raw logs coming from the Log Management Tool (ELK) and looks for anomalies in the stream based on the trained model.
 2. It also ingests Metric Data and looks for anomalies
 1. If it finds an anomaly (logs and/or metrics) it forwards it to the Event Grouping as well.
-1. Out of this, AI Manager creates a Story that is being enriched with Topology (Localization and Blast Radius) and with Similar Incidents that might help correct the problem.
+1. Out of this, CP4WAIOps creates a Story that is being enriched with Topology (Localization and Blast Radius) and with Similar Incidents that might help correct the problem.
 1. The Story is then sent to Slack.
 1. A Runbook is available to correct the problem but not launched automatically.
 
@@ -780,11 +780,11 @@ The idea of this repo is to provide a optimised, complete, pre-trained demo envi
 
 It contains the following components (which can be installed independently):
 
- - **AI Manager**
+ - **CP4WAIOps**
  	- IBM Operator
- 	- AI Manager Instance
- - **AI Manager Demo Content**  (optional)
-    - **OpenLDAP** & Register with AI Manager
+ 	- CP4WAIOps Instance
+ - **CP4WAIOps Demo Content**  (optional)
+    - **OpenLDAP** & Register with CP4WAIOps
     - **AWX** (Open Source Ansible Tower) with preloaded Playbooks
     - **AI Models** - Load and Train 
       - Create Training Definitions (TG, LAD, CR, SI. Turn off RSA) 
@@ -795,7 +795,7 @@ It contains the following components (which can be installed independently):
       - Create K8s Observer
       - Create ASM merge rules
       - Load Overlay Topology
-      - Create AI Manager Application
+      - Create CP4WAIOps Application
     - **Misc**
      	   - Creates valid certificate for Ingress (Slack) 
      	   	   	   	   - External Routes (Flink, Topology, ...)
@@ -808,7 +808,7 @@ It contains the following components (which can be installed independently):
    - **Topology**
      - Create ASM merge rules
      - Load ASM merge Topology
-     - Create AI Manager Application
+     - Create CP4WAIOps Application
  - **Turbonomic**  (optional)
  - **Turbonomic Demo Content** (optional)
 	- Demo User
@@ -826,7 +826,7 @@ For the this specific Demo environment:
 
 * ELK is not needed as I am using pre-canned logs for training and for the anomaly detection (inception)
 * Same goes for Metrics, I am using pre-canned metric data for training and for the anomaly detection (inception)
-* The Events are also created from pre-canned content that is injected into AI Manager
+* The Events are also created from pre-canned content that is injected into CP4WAIOps
 * There are also pre-canned ServiceNow Incidents if you don’t want to do the live integration with SNOW
 * The Webpages that are reachable from the Events are static and hosted on my GitHub
 * The same goes for ServiceNow Incident pages if you don’t integrate with live SNOW

@@ -258,7 +258,7 @@ else
 fi
 
 
-printf "  🐥🐥🐣🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚 - Getting AI Manager Namespace                                    "
+printf "  🐥🐥🐣🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚 - Getting CP4WAIOps Namespace                                    "
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 export WAIOPS_PODS=$(oc get pods -n $WAIOPS_NAMESPACE |grep -v Completed|grep -v "0/"|wc -l|tr -d ' ')
 
@@ -353,11 +353,11 @@ checkToken () {
       fi
 }
 
-checkAIManager () {
+checkCP4WAIOps () {
 
       # Check if ${Green}Already installed${NC} 
       if [[ ! $WAIOPS_NAMESPACE == "" ]]; then
-            echo "⚠️  CP4WAIOPS AI Manager seems to be installed already"
+            echo "⚠️  CP4WAIOPS CP4WAIOps seems to be installed already"
 
             read -p "   Are you sure you want to continue❓ [y,N] " DO_COMM
             if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
@@ -459,10 +459,10 @@ INSTALL_LOCAL () {
 
 
 menu_EASY_AI_ALL () {
-      export INSTALL_TITLE="Complete Demo Environment for AI Manager - cp4waiops-roks-aimanager-all-$WAIOPS_VERSION.yaml" 
+      export INSTALL_TITLE="Complete Demo Environment for CP4WAIOps - cp4waiops-roks-aimanager-all-$WAIOPS_VERSION.yaml" 
       export INSTALL_CONFIG_FILE_PATH="./configs/cp4waiops-roks-aimanager-all-$WAIOPS_VERSION.yaml"
 
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       INSTALL_LOCAL
@@ -485,10 +485,10 @@ menu_EASY_EVENT_ALL () {
 
 menu_INSTALL_AIMGR () {
 
-      export INSTALL_TITLE="Base Install for AI Manager - cp4waiops-roks-aimanager-$WAIOPS_VERSION.yaml" 
+      export INSTALL_TITLE="Base Install for CP4WAIOps - cp4waiops-roks-aimanager-$WAIOPS_VERSION.yaml" 
       export INSTALL_CONFIG_FILE_PATH="./configs/cp4waiops-roks-aimanager-$WAIOPS_VERSION.yaml"
 
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       INSTALL_LOCAL
@@ -500,7 +500,7 @@ menu_INSTALL_EVTMGR () {
       export INSTALL_TITLE="Base Install for Event Manager - cp4waiops-roks-eventmanager-$WAIOPS_VERSION.yaml" 
       export INSTALL_CONFIG_FILE_PATH="./configs/cp4waiops-roks-eventmanager-$WAIOPS_VERSION.yaml"
 
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       INSTALL_LOCAL
@@ -513,7 +513,7 @@ menu_INSTALL_TURBO () {
       export INSTALL_TITLE="Turbonomic - cp4waiops-roks-turbonomic.yaml" 
       export INSTALL_CONFIG_FILE_PATH="./configs/cp4waiops-roks-turbonomic.yaml"
 
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       INSTALL_LOCAL
@@ -526,7 +526,7 @@ menu_INSTALL_ELK () {
       export INSTALL_TITLE="OpenShift Logging (ELK) - cp4waiops-roks-elk.yaml" 
       export INSTALL_CONFIG_FILE_PATH="./configs/cp4waiops-roks-elk.yaml"
 
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       INSTALL_LOCAL
@@ -650,11 +650,11 @@ menuAIMANAGER_OPEN () {
       export ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "    🚀 AI Manager"
+      echo "    🚀 CP4WAIOps"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    "
-      echo "      📥 AI Manager"
+      echo "      📥 CP4WAIOps"
       echo ""
       echo "                🌏 URL:      $ROUTE"
       echo ""
@@ -926,9 +926,9 @@ echo "${NC}"
 
       echo "  🐥 ${UBlue}CP4WAIOPS - Local Ansible Install${NC}"
       if [[ $WAIOPS_PODS -lt $WAIOPS_PODS_MIN ]]; then
-            echo "     🚀  10  - Install AI Manager Demo${NC}                                 - Install AI Manager with Demo Content"
+            echo "     🚀  10  - Install CP4WAIOps Demo${NC}                                 - Install CP4WAIOps with Demo Content"
       else
-            echo "     ✅  10  - Install AI Manager Demo${NC}                                 - ${Green}Already installed${NC}  "
+            echo "     ✅  10  - Install CP4WAIOps Demo${NC}                                 - ${Green}Already installed${NC}  "
       fi
 
       if [[ $EVTMGR_NAMESPACE == "" ]]; then
@@ -938,9 +938,9 @@ echo "${NC}"
       fi
 
       if [[ $WAIOPS_PODS -lt $WAIOPS_PODS_MIN ]]; then
-            echo "         15  - Install AI Manager                                      - Install CP4WAIOPS AI Manager Component Only"
+            echo "         15  - Install CP4WAIOps                                      - Install CP4WAIOPS CP4WAIOps Component Only"
       else
-            echo "     ✅  15  - Install AI Manager                                      - ${Green}Already installed${NC}  "
+            echo "     ✅  15  - Install CP4WAIOps                                      - ${Green}Already installed${NC}  "
       fi
 
       if [[ $EVTMGR_NAMESPACE == "" ]]; then
@@ -951,7 +951,7 @@ echo "${NC}"
 
 
 
-      echo "         19  - Open Documentation                                      - Open the AI Manager installation Documentation"
+      echo "         19  - Open Documentation                                      - Open the CP4WAIOps installation Documentation"
       echo "  "
       echo "  "
       echo "  "
@@ -982,11 +982,11 @@ echo "${NC}"
       echo "  "
 
       if [[ ! $WAIOPS_NAMESPACE == "" ]]; then
-            echo "         90  - Open AI Manager                                         - Open AI Manager"
+            echo "         90  - Open CP4WAIOps                                         - Open CP4WAIOps"
       fi
 
       if [[ ! $DEMOUI_READY == "" ]]; then
-            echo "         91  - Open AI Manager Demo                                    - Open AI Manager Incident Demo UI"
+            echo "         91  - Open CP4WAIOps Demo                                    - Open CP4WAIOps Incident Demo UI"
       fi
 
       if [[ ! $EVTMGR_NAMESPACE == "" ]]; then

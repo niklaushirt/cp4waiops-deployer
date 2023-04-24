@@ -193,8 +193,8 @@
   include_tasks: 10_addons-turbonomic-demo-content.yaml
 
 
-# Update AI Manager Cards
-- name: 📥 Update AI Manager Cards
+# Update CP4WAIOps Cards
+- name: 📥 Update CP4WAIOps Cards
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
 

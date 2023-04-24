@@ -45,7 +45,7 @@
 
 - name: Log
   shell: |
-    export MESSAGE=" 🕦 Wait for AI Manager to become ready"
+    export MESSAGE=" 🕦 Wait for CP4WAIOps to become ready"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log

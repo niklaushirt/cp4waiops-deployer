@@ -61,7 +61,7 @@ echo "    🔬 Getting Installation Namespace"
 echo "   ------------------------------------------------------------------------------------------------------------------------------"
 
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-echo "       ✅ OK - AI Manager:    $WAIOPS_NAMESPACE"
+echo "       ✅ OK - CP4WAIOps:    $WAIOPS_NAMESPACE"
 
 
 
@@ -143,7 +143,7 @@ if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
       echo ""
       echo ""
       echo ""      
-      echo "            📥 AI Manager"
+      echo "            📥 CP4WAIOps"
       echo ""
       echo "                🌏 URL:           $AIMANAGER_ROUTE"
       echo "                🧑 User:          demo"

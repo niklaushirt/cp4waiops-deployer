@@ -9,7 +9,7 @@
 
 - name: Log
   shell: |
-    export MESSAGE=" 🌏 Update AI Manager Cards"
+    export MESSAGE=" 🌏 Update CP4WAIOps Cards"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
@@ -55,7 +55,7 @@
         ZEN_TOKEN=$(echo "${ZEN_LOGIN_RESPONSE}" | jq -r .token)
         echo "${ZEN_TOKEN}"
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output   
@@ -81,7 +81,7 @@
         curl -X "DELETE" -k "https://$ROUTE/zen-data/v1/custom_cards/appscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json"
         curl -X "DELETE" -k "https://$ROUTE/zen-data/v1/custom_cards/systemcard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json"
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output
@@ -122,7 +122,7 @@
         echo "      🔎 Result: "
         echo "       "$result
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output
@@ -176,7 +176,7 @@
         echo "      🔎 Result: "
         echo "       "$result
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output
@@ -240,7 +240,7 @@
         echo "      🔎 Result: "
         echo "       "$result
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output
@@ -300,7 +300,7 @@
         echo "      🔎 Result: "
         echo "       "$result
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
 
     ignore_errors: true

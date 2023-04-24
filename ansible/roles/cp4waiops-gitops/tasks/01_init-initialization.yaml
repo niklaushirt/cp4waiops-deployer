@@ -51,8 +51,8 @@
 - name:   🚀 INITIALIZATION - Installation Parameters"
   debug:
     msg:
-    - "** CP4WAIOPS AI Manager Parameters ***********************************************************************"
-    - " AI Manager Installation Name:      {{current_cp4waiops_feature.test}}"
+    - "** CP4WAIOPS CP4WAIOps Parameters ***********************************************************************"
+    - " CP4WAIOps Installation Name:      {{current_cp4waiops_feature.test}}"
 
 
 

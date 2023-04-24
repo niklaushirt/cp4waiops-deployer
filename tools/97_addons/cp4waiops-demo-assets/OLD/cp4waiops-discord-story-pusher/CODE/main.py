@@ -34,7 +34,7 @@ print ('                                              /_/')
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
 print ('')
-print ('    🛰️  Generic Story Pusher for CP4WAIOPS AI Manager')
+print ('    🛰️  Generic Story Pusher for CP4WAIOPS CP4WAIOps')
 print ('')
 print ('       Provided by:')
 print ('        🇨🇭 Niklaus Hirt (nikh@ch.ibm.com)')
@@ -67,10 +67,10 @@ except sqlite3.OperationalError as e:
 
 print ('')
 
-print('     ❓ Getting AIManager Namespace')
+print('     ❓ Getting CP4WAIOps Namespace')
 stream = os.popen("oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}'")
 aimanagerns = stream.read().strip()
-print('        ✅ AIManager Namespace:       '+aimanagerns)
+print('        ✅ CP4WAIOps Namespace:       '+aimanagerns)
 
 
 
@@ -120,7 +120,7 @@ print ('')
 print ('')
 
 print ('    ---------------------------------------------------------------------------------------------')
-print ('     🔎 AI Manager Connection Parameters')
+print ('     🔎 CP4WAIOps Connection Parameters')
 print ('    ---------------------------------------------------------------------------------------------')
 print ('           🌏 Datalayer Route:    '+DATALAYER_ROUTE)
 print ('           👩‍💻 Datalayer User:     '+DATALAYER_USER)

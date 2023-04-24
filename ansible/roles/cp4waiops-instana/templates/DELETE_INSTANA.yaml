@@ -66,7 +66,7 @@ spec:
               #set -x
 
               echo "*****************************************************************************************************************************"
-              echo " ✅ STARTING: INSTALL AI Manager with Demo Content"
+              echo " ✅ STARTING: INSTALL CP4WAIOps with Demo Content"
               echo "*****************************************************************************************************************************"
               echo ""
               echo "  ⏳ INSTALLATION START TIMESTAMP: $(date)"

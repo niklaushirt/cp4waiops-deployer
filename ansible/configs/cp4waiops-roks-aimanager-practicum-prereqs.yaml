@@ -9,7 +9,7 @@ global_config:
   entitled_registry: cp.icr.io
   entitled_registry_user: cp
   catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-  # Create Welcome Cards in AI Manager
+  # Create Welcome Cards in CP4WAIOps
   create_cards: true
   # Create App Menu Items in OCP
   create_ocp_items: true
@@ -40,10 +40,10 @@ cp4waiops:
 
     
   # --------------------------------------------------------------------------------------------------------------------------------------
-  # CP4WAIOPS AI Manager Demo Content
+  # INSTALL CP4WAIOPS Demo Content
   # --------------------------------------------------------------------------------------------------------------------------------------
-  - name: cp4waiops-aimanager-demo-content
-    kind: AIManagerDemoContent
+  - name: cp4waiops-demo-content
+    kind: CP4WAIOpsDemoContent
     install: true
 
 
@@ -86,8 +86,8 @@ cp4waiops:
     # Install AWX and create Runbooks
     install_awx: true
     load_awx_playbooks: true
-    integrate_awx_aimanager: false
-    load_aimanager_runbooks: false
+    integrate_awx: false
+    load_runbooks: false
     create_runbook_policy: false
 
 
@@ -101,9 +101,9 @@ cp4waiops:
     demoui_admin_mode: "true"
     demoui_simulation_mode: "true"
 
-    demoui_aimanager_demo_user: demo
+    demoui_user: demo
     # Password for the Demo UI (OVERRIDES GLOBAL PASSWORD)
-    #demoui_aimanager_demo_pwd: P4ssw0rd!
+    #demoui_pwd: P4ssw0rd!
 
 
     # ---------------------------------------------------------------------

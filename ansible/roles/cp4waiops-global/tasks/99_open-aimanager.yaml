@@ -7,7 +7,7 @@
 # *************************************************************************************************************************************************
 - name: Log
   shell: |
-    export MESSAGE=" 🌏 Open AIManager"
+    export MESSAGE=" 🌏 Open CP4WAIOps"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
@@ -16,7 +16,7 @@
 
 
 
-- name: 🌏 AI MANAGER - Get AI MANAGER LOGINS
+- name: 🌏 CP4WAIOPS - Get CP4WAIOPS LOGINS
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
     export AIMANAGER_ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
@@ -41,18 +41,18 @@
   register: LOGINS
 
 
-- name: 🌏 AI MANAGER - AI MANAGER LOGINS
+- name: 🌏 CP4WAIOPS - CP4WAIOPS LOGINS
   debug: 
     var: LOGINS.stdout_lines
 
 
 - name: Log
   shell: |
-    export MESSAGE=" 🕦 Wait for AI Manager to become ready"
+    export MESSAGE=" 🕦 Wait for CP4WAIOps to become ready"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
-    echo "              📥 AI Manager Login:"  >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo "              📥 CP4WAIOps Login:"  >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "                🌏 URL:      https://$(oc get route -n {{ current_cp4waiops_cluster.project }} cpd -o jsonpath={.spec.host})"  >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo "" >> ../install_{{current_cp4waiops_feature.kind}}.log

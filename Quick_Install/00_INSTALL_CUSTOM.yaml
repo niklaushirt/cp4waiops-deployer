@@ -28,9 +28,9 @@
 # Installs:
 #
 #  - IBM Operator
-#  - AI Manager
-#  - AI Manager Demo Content
-#     - OpenLDAP & Register with AI Manager
+#  - CP4WAIOps
+#  - CP4WAIOps Demo Content
+#     - OpenLDAP & Register with CP4WAIOps
 #     - RobotShop Demo App
 #     - Demo Service Account 
 #     - AWX (Open Source Ansible Tower) with preloaded Playbooks
@@ -43,7 +43,7 @@
 #       - Create K8s Observer
 #       - Create ASM merge rules
 #       - Load ASM merge Topology
-#       - Create AI Manager Application
+#       - Create CP4WAIOps Application
 #     - Creates valid certificate for Ingress (Slack) 
 #     - External Routes (Flink, Topology, ...)
 #     - Disables ASM Service match rule 
@@ -53,7 +53,7 @@
 #    - Topology
 #      - Create ASM merge rules
 #      - Load ASM merge Topology
-#      - Create AI Manager Application
+#      - Create CP4WAIOps Application
 #  - Turbonomic
 #  - Turbonomic Demo Content
 #     - Demo User
@@ -112,7 +112,7 @@ spec:
               #set -x
 
               echo "*****************************************************************************************************************************"
-              echo " ✅ STARTING: INSTALL AI Manager with Demo Content"
+              echo " ✅ STARTING: INSTALL CP4WAIOps with Demo Content"
               echo "*****************************************************************************************************************************"
               echo ""
               echo "  ⏳ INSTALLATION START TIMESTAMP: $(date)"
@@ -152,7 +152,7 @@ spec:
                 entitled_registry: cp.icr.io
                 entitled_registry_user: cp
                 catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-                # Create Welcome Cards in AI Manager
+                # Create Welcome Cards in CP4WAIOps
                 create_cards: true
                 # Create App Menu Items in OCP
                 create_ocp_items: true
@@ -183,10 +183,10 @@ spec:
               - project: cp4waiops
                 instances:
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                # CP4WAIOPS AI Manager
+                # INSTALL CP4WAIOPS
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                - name: cp4waiops-aimanager
-                  kind: AIManager
+                - name: cp4waiops
+                  kind: CP4WAIOps
                   install: true
 
                   # current_cp4waiops_feature
@@ -222,10 +222,10 @@ spec:
 
 
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                # CP4WAIOPS AI Manager Demo Content
+                # INSTALL CP4WAIOPS Demo Content
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                - name: cp4waiops-aimanager-demo-content
-                  kind: AIManagerDemoContent
+                - name: cp4waiops-demo-content
+                  kind: CP4WAIOpsDemoContent
                   install: true
 
 
@@ -269,8 +269,8 @@ spec:
                   # Install AWX and create Runbooks
                   install_awx: true
                   load_awx_playbooks: true
-                  integrate_awx_aimanager: true
-                  load_aimanager_runbooks: true
+                  integrate_awx: true
+                  load_runbooks: true
                   create_runbook_policy: true
 
 
@@ -284,9 +284,9 @@ spec:
                   demoui_admin_mode: "true"
                   demoui_simulation_mode: "true"
 
-                  demoui_aimanager_demo_user: demo
+                  demoui_user: demo
                   # Password for the Demo UI (OVERRIDES GLOBAL PASSWORD)
-                  #demoui_aimanager_demo_pwd: P4ssw0rd!
+                  #demoui_pwd: P4ssw0rd!
 
 
                   # ---------------------------------------------------------------------

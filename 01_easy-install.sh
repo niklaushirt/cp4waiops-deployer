@@ -261,7 +261,7 @@ else
 fi
 
 
-printf "  🐥🐥🐣🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚 - Getting AI Manager Namespace                                    "
+printf "  🐥🐥🐣🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚🥚 - Getting CP4WAIOps Namespace                                    "
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 export WAIOPS_PODS=$(oc get pods -n $WAIOPS_NAMESPACE |grep -v Completed|grep -v "0/"|wc -l|tr -d ' ')
 
@@ -356,11 +356,11 @@ checkToken () {
       fi
 }
 
-checkAIManager () {
+checkCP4WAIOps () {
 
       # Check if ${Green}Already installed${NC} 
       if [[ ! $WAIOPS_NAMESPACE == "" ]]; then
-            echo "⚠️  CP4WAIOPS AI Manager seems to be installed already"
+            echo "⚠️  CP4WAIOPS CP4WAIOps seems to be installed already"
 
             read -p "   Are you sure you want to continue❓ [y,N] " DO_COMM
             if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
@@ -512,11 +512,11 @@ EOF
 menu_JOB_AI_ALL () {
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
-      echo " 🚀  Install complete Demo Environment for AI Manager with K8s Job" 
+      echo " 🚀  Install complete Demo Environment for CP4WAIOps with K8s Job" 
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
       echo ""
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       export CONFIG="./configs/cp4waiops-roks-aimanager-all-$WAIOPS_VERSION.yaml"
@@ -554,7 +554,7 @@ menu_JOB_AI_ALL () {
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
       echo "  "
-      echo "  ✅ Complete Demo Environment for AI Manager Installation done"
+      echo "  ✅ Complete Demo Environment for CP4WAIOps Installation done"
       echo "  "
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
@@ -571,7 +571,7 @@ menu_JOB_EVENT_ALL () {
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
       echo ""
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       export CONFIG="./configs/cp4waiops-roks-eventmanager-all-$WAIOPS_VERSION.yaml"
@@ -624,11 +624,11 @@ menu_JOB_EVENT_ALL () {
 menu_JOB_AI_ONLY () {
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
-      echo " 🚀  Install vanilla AI Manager with K8s Job" 
+      echo " 🚀  Install vanilla CP4WAIOps with K8s Job" 
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
       echo ""
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       export CONFIG="./configs/cp4waiops-roks-aimanager-$WAIOPS_VERSION.yaml"
@@ -668,7 +668,7 @@ menu_JOB_AI_ONLY () {
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
       echo "  "
-      echo "  ✅ Vanilla AI Manager Installation done"
+      echo "  ✅ Vanilla CP4WAIOps Installation done"
       echo "  "
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
@@ -684,7 +684,7 @@ menu_JOB_EVENT_ONLY () {
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
       echo ""
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       export CONFIG="./configs/cp4waiops-roks-eventmanager-$WAIOPS_VERSION.yaml"
@@ -743,7 +743,7 @@ menu_JOB_ALL () {
       echo "*****************************************************************************************************************************"
       echo "*****************************************************************************************************************************"
       echo ""
-      checkAIManager
+      checkCP4WAIOps
       checkToken
 
       export CONFIG="./configs/cp4waiops-roks-all-$WAIOPS_VERSION.yaml"
@@ -1116,11 +1116,11 @@ menuAIMANAGER_OPEN () {
       export ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "    🚀 AI Manager"
+      echo "    🚀 CP4WAIOps"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    -----------------------------------------------------------------------------------------------------------------------------------------------"
       echo "    "
-      echo "      📥 AI Manager"
+      echo "      📥 CP4WAIOps"
       echo ""
       echo "                🌏 URL:      $ROUTE"
       echo ""
@@ -1390,9 +1390,9 @@ echo "${NC}"
       echo "  🐥 ${UBlue}CP4WAIOPS - Complete K8s Job Install${NC}"
 
       if [[ $WAIOPS_PODS -lt $WAIOPS_PODS_MIN ]]; then
-            echo "     🚀  01  - Install AI Manager Demo${NC}   ${Green}<-- Start here${NC}                - Install AI Manager with Demo Content via Kubernetes in-cluster Job"
+            echo "     🚀  01  - Install CP4WAIOps Demo${NC}   ${Green}<-- Start here${NC}                - Install CP4WAIOps with Demo Content via Kubernetes in-cluster Job"
       else
-            echo "     ✅  01  - Install AI Manager Demo${NC}                                 - ${Green}Already installed${NC}  "
+            echo "     ✅  01  - Install CP4WAIOps Demo${NC}                                 - ${Green}Already installed${NC}  "
       fi
 
       if [[ $EVTMGR_NAMESPACE == "" ]]; then
@@ -1409,9 +1409,9 @@ echo "${NC}"
 
 
       if [[ $WAIOPS_PODS -lt $WAIOPS_PODS_MIN ]]; then
-            echo "         10  - Install AI Manager                                      - Install CP4WAIOPS AI Manager Component Only"
+            echo "         10  - Install CP4WAIOps                                      - Install CP4WAIOPS CP4WAIOps Component Only"
       else
-            echo "     ✅  10  - Install AI Manager                                      - ${Green}Already installed${NC}  "
+            echo "     ✅  10  - Install CP4WAIOps                                      - ${Green}Already installed${NC}  "
       fi
 
       if [[ $EVTMGR_NAMESPACE == "" ]]; then
@@ -1421,7 +1421,7 @@ echo "${NC}"
       fi
 
       echo "  "
-      echo "         18  - Open Documentation                                      - Open the AI Manager installation Documentation"
+      echo "         18  - Open Documentation                                      - Open the CP4WAIOps installation Documentation"
       echo "         19  - Check install                                           - Check installation"
 
 
@@ -1460,11 +1460,11 @@ echo "${NC}"
       echo "  "
 
       if [[ ! $WAIOPS_NAMESPACE == "" ]]; then
-            echo "         90  - Open AI Manager                                         - Open AI Manager"
+            echo "         90  - Open CP4WAIOps                                         - Open CP4WAIOps"
       fi
 
       if [[ ! $DEMOUI_READY == "" ]]; then
-            echo "         91  - Open AI Manager Demo                                    - Open AI Manager Incident Demo UI"
+            echo "         91  - Open CP4WAIOps Demo                                    - Open CP4WAIOps Incident Demo UI"
       fi
 
       if [[ ! $EVTMGR_NAMESPACE == "" ]]; then
