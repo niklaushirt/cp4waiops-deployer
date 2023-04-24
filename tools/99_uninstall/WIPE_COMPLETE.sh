@@ -17,7 +17,7 @@ oc delete subscription --all -n cp4waiops
 
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 🧻 Delete PODS"
+echo " 🧻 Delete Stuff"
 oc delete pods -n ibm-common-services --all
 oc delete pods -n cp4waiops --all
 oc delete csv --all -n ibm-common-services
@@ -42,8 +42,8 @@ oc delete cm -n ibm-common-services --all
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete OPERANDREQUESTS"
-oc delete operandrequests.operator.ibm.com -n cp4waiops --all
-oc delete operandrequests.operator.ibm.com -n ibm-common-services --all
+oc delete operandrequests.operator.ibm.com -n cp4waiops --all --force --grace-period=0
+oc delete operandrequests.operator.ibm.com -n ibm-common-services --all --force --grace-period=0
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete KAFKA Claims"
