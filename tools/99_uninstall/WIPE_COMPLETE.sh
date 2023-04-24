@@ -123,3 +123,46 @@ echo "--------------------------------------------------------------------------
 echo " 🧻 Delete *.ibm.com CustomResourceDefinition"
 oc delete CustomResourceDefinition $(oc get CustomResourceDefinition| grep .ibm.com|awk '{print$1}') --ignore-not-found
 
+
+
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 🧻 Delete ClusterRoleBindings"
+oc delete ClusterRoleBinding cp4waiops-installer-admin &
+oc delete ClusterRoleBinding cp4waiops-demo-ui-admin-crb &                 
+oc delete ClusterRoleBinding cp4waiops-installer-admin &
+oc delete ClusterRoleBinding awx-default &
+oc delete ClusterRoleBinding aimanager-api-platform &
+oc delete ClusterRoleBinding default-robotinfo1-admin &                        
+oc delete ClusterRoleBinding default-robotinfo2-admin &                        
+oc delete ClusterRoleBinding default-sockinfo1-admin &                         
+oc delete ClusterRoleBinding default-sockinfo2-admin &
+oc delete ClusterRoleBinding ibm-common-service-webhook-ibm-common-services &  
+oc delete ClusterRoleBinding ibm-zen-operator-serviceaccount &
+oc delete ClusterRoleBinding robot-shop &
+oc delete ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster &             
+oc delete ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster-api &
+oc delete ClusterRoleBinding turbonomic-admin1 &                               
+oc delete ClusterRoleBinding turbonomic-admin2 &
+
+
+oc patch ClusterRoleBinding cp4waiops-installer-admin -p '{"metadata":{"finalizers":null}}' --type=merge  
+oc patch ClusterRoleBinding cp4waiops-demo-ui-admin-crb -p '{"metadata":{"finalizers":null}}' --type=merge                       
+oc patch ClusterRoleBinding cp4waiops-installer-admin -p '{"metadata":{"finalizers":null}}' --type=merge 
+oc patch ClusterRoleBinding awx-default -p '{"metadata":{"finalizers":null}}' --type=merge 
+oc patch ClusterRoleBinding aimanager-api-platform -p '{"metadata":{"finalizers":null}}' --type=merge 
+oc patch ClusterRoleBinding default-robotinfo1-admin -p '{"metadata":{"finalizers":null}}' --type=merge                         
+oc patch ClusterRoleBinding default-robotinfo2-admin -p '{"metadata":{"finalizers":null}}' --type=merge                         
+oc patch ClusterRoleBinding default-sockinfo1-admin -p '{"metadata":{"finalizers":null}}' --type=merge                          
+oc patch ClusterRoleBinding default-sockinfo2-admin -p '{"metadata":{"finalizers":null}}' --type=merge 
+oc patch ClusterRoleBinding ibm-common-service-webhook-ibm-common-services -p '{"metadata":{"finalizers":null}}' --type=merge   
+oc patch ClusterRoleBinding ibm-zen-operator-serviceaccount -p '{"metadata":{"finalizers":null}}' --type=merge 
+oc patch ClusterRoleBinding robot-shop -p '{"metadata":{"finalizers":null}}' --type=merge 
+oc patch ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster -p '{"metadata":{"finalizers":null}}' --type=merge              
+oc patch ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster-api -p '{"metadata":{"finalizers":null}}' --type=merge 
+oc patch ClusterRoleBinding turbonomic-admin1 -p '{"metadata":{"finalizers":null}}' --type=merge                                
+oc patch ClusterRoleBinding turbonomic-admin2 -p '{"metadata":{"finalizers":null}}' --type=merge 
+
+
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 🧻 Delete IBM CatalogSource"
+oc delete CatalogSource -n openshift-marketplace ibm-operator-catalog
