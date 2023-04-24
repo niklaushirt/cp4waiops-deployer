@@ -38,6 +38,7 @@
 - name: 🟣  LDAP -  Demo UI Password {{current_ldap_admin_password}}
   debug:
     var: current_ldap_admin_password
+    verbosity: 1
 
 
 - name: 🚀 LDAP - Set LDAP USERS Password from instance configuration
@@ -53,6 +54,7 @@
 - name: 🟣  LDAP -  Demo UI Password {{current_ldap_user_password}}
   debug:
     var: current_ldap_user_password
+    verbosity: 1
 
 
 

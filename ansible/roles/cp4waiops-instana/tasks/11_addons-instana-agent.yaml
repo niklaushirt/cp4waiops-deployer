@@ -54,7 +54,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1

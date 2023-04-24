@@ -44,6 +44,7 @@
 - name: 🟣  LDAPREGISTER -  Demo UI Password {{current_ldap_admin_password}}
   debug:
     var: current_ldap_admin_password
+    verbosity: 1
 
 
 - name: 🚀 LDAPREGISTER - Set LDAP USERS Password from instance configuration
@@ -59,6 +60,7 @@
 - name: 🟣  LDAPREGISTER -  Demo UI Password {{current_ldap_user_password}}
   debug:
     var: current_ldap_user_password
+    verbosity: 1
 
 
 
@@ -105,7 +107,7 @@
 - name: 🟣  OUTPUT
   debug: 
     var: LDAPS.stdout_lines
-    #verbosity: 2
+    verbosity: 2
 
 - name: Log
   shell: |

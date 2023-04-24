@@ -37,6 +37,7 @@
 - name: 🟣  INSTANA -  INSTANA Password {{current_admin_pass}}
   debug:
     var: current_admin_pass
+    verbosity: 1
 
 
 
@@ -83,7 +84,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
 
@@ -131,7 +132,7 @@
     oc -n instana-datastores adm policy add-scc-to-user anyuid -z default;
   ignore_errors: true
   register: output
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -147,7 +148,7 @@
 
   ignore_errors: true
   register: output
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -218,7 +219,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -234,7 +235,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -255,7 +256,7 @@
     oc -n instana-core create secret generic instana-core --namespace instana-core --from-file=./config.yaml
   ignore_errors: true
   register: output
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -280,7 +281,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -509,7 +510,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -529,7 +530,7 @@
 #     oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}') -n instana-datastores --ignore-not-found
 #   ignore_errors: true
 #   register: output
-# - name: 🟣  DEBUG
+# - name: 🟣  OUTPUT
 #   debug:
 #     var: output.stdout_lines
 #     verbosity: 1
@@ -559,7 +560,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -577,7 +578,7 @@
 #     sleep 10
 #   ignore_errors: true
 #   register: output
-# - name: 🟣  DEBUG
+# - name: 🟣  OUTPUT
 #   debug:
 #     var: output.stdout_lines
 #     verbosity: 1
@@ -611,7 +612,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1

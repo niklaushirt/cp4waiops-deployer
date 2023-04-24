@@ -51,6 +51,7 @@
 - name: 🟣  DEMO-UI -  Demo UI Password {{current_demoui_pwd}}
   debug:
     var: current_demoui_pwd
+    verbosity: 1
 
 
 

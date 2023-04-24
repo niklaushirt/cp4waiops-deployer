@@ -183,7 +183,7 @@
     - " Agent Key:      {{ current_agent_key}}"
     - " ✅ OK...."
     - ""
-    #verbosity: 2
+    verbosity: 2
   when: current_sales_key != "NONE" or current_agent_key != "NONE"
 
 

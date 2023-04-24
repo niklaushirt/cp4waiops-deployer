@@ -73,6 +73,7 @@
 - name: 🟣 Installing {{current_cp4waiops_feature.kind}} with the following configuration
   debug:
     var: current_cp4waiops_feature
+    verbosity: 1
 
 
 

@@ -60,9 +60,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
   - name: 🚀 ROUTES - Create Topology Route - topology-rest
@@ -77,9 +78,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 
@@ -95,9 +97,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 
@@ -113,9 +116,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 
@@ -131,9 +135,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 
@@ -154,9 +159,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
   
@@ -172,9 +178,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 
@@ -194,9 +201,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 
@@ -213,9 +221,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 
@@ -232,9 +241,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 
@@ -251,9 +261,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 
@@ -270,9 +281,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
 

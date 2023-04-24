@@ -60,9 +60,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
+      verbosity: 1
 
 
   - name: 🚀 ROUTES - Create Topology Route - topology-rest
@@ -77,10 +78,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
   - name: 🚀 ROUTES - Create Topology Route - topology-file
@@ -95,10 +96,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
   - name: 🚀 ROUTES - Create Topology Route - topology-manage
@@ -113,10 +114,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
   - name: 🚀 ROUTES - Create Topology Route - topology-file-api
@@ -131,10 +132,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
   #when: OBJECT_EXISTS.stdout|length == 0
@@ -154,10 +155,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
   
   - name: 🚀 ROUTES - Create external Flink Policy Job Manager Route 
@@ -172,10 +173,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
 
@@ -194,10 +195,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
 
@@ -213,10 +214,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
 
@@ -232,10 +233,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
 
@@ -251,10 +252,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
   - name: 🚀 ROUTES - Create Spark Master UI Route 
@@ -270,10 +271,10 @@
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
-
+      verbosity: 1
 
 
 

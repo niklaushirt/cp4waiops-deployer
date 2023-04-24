@@ -38,7 +38,7 @@
 - name: 🟣  LDAP -  Demo UI Password {{current_ldap_admin_password}}
   debug:
     var: current_ldap_admin_password
-
+    verbosity: 1
 
 - name: 🚀 LDAP - Set LDAP USERS Password from instance configuration
   set_fact: current_ldap_user_password={{current_cp4waiops_feature.ldap_user_password  | default('P4ssw0rd!')}}
@@ -53,6 +53,7 @@
 - name: 🟣  LDAP -  Demo UI Password {{current_ldap_user_password}}
   debug:
     var: current_ldap_user_password
+    verbosity: 1
 
 
 

@@ -222,6 +222,7 @@
 - name: 🟣 OUTPUT - FREEZE
   debug: 
     var: output.stdout_lines
+    verbosity: 1
 
 
 - name: Log

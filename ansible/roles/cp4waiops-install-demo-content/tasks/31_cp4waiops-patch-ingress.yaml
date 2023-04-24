@@ -41,7 +41,7 @@
 - name: 🌏 NETWORK - DEBUG Ingress already patched
   debug: 
     var: output_string.stdout_lines
-    #verbosity: 2
+    verbosity: 2
 
 - name: 🌏 NETWORK - ☑️ CHECK Ingress already patched
   set_fact: INGRESS_PATCHED={{output_string.stdout_lines[0]}}
@@ -117,7 +117,7 @@
 - name: 🟢 DEBUG - Patch AutomationUIConfig Certificates
   debug: 
     var: certificate_patch
-    #verbosity: 2
+    verbosity: 2
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------

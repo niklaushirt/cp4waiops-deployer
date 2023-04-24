@@ -176,7 +176,7 @@
 
   register: output_string
   ignore_errors: true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output_string.stdout_lines
     verbosity: 1
@@ -207,7 +207,8 @@
     echo "$PROBE_WEBHOOK_URL"
   register: output_string
   ignore_errors: true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output_string.stdout_lines
+    verbosity: 1
 
