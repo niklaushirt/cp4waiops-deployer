@@ -43,5 +43,5 @@
 - name: 🟣 INIT - RESULT
   debug: 
     var: output_string.stdout_lines
-    #verbosity: 1
+    verbosity: 1
 

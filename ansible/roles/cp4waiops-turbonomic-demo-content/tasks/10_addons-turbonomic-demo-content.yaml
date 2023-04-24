@@ -85,7 +85,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    ##verbosity: 1
+    #verbosity: 1
         
 
 
@@ -110,7 +110,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
         
 
 
@@ -180,7 +180,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.create_user == true
 
 
@@ -234,7 +234,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.group_vcenter_vms == true
 
 
@@ -290,7 +290,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.group_robotshop == true
 
 
@@ -440,7 +440,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.group_licensing == true
 
 
@@ -484,7 +484,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.group_robotshop == true
 
 
@@ -535,7 +535,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.target_instana == true
 
 
@@ -626,7 +626,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 
@@ -650,7 +650,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 
@@ -689,7 +689,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 
@@ -731,7 +731,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 
@@ -761,7 +761,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.resource_hogs == true
 
 
@@ -805,7 +805,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 

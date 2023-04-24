@@ -71,7 +71,7 @@
 - name: 🟣 OUTPUT
   debug: 
     var: POLICY_RESULT.stdout_lines
-    #verbosity: 1
+    verbosity: 1
 
 
 

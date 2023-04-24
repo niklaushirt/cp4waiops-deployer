@@ -118,4 +118,4 @@
 # - name: DEBUG -              🟣 Output
 #   debug: 
 #     var: ready.stdout_lines
-#     #verbosity: 1
+#     verbosity: 1

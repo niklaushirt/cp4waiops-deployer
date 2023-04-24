@@ -57,7 +57,7 @@
 - name: 🟣  DEBUG
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
 
 
 
