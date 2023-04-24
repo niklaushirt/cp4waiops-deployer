@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: cp4waiops-turbonomic-license
-  namespace: cp4waiops-installation
+  namespace: cp4waiops-installer
 spec:
   template:
     spec:

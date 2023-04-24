@@ -2,7 +2,7 @@ cat << EOF | oc apply -f -
 apiVersion: v1                     
 kind: Namespace
 metadata:
-  name: cp4waiops-installation
+  name: cp4waiops-installer
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -15,13 +15,13 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: cp4waiops-installation
+    namespace: cp4waiops-installer
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: waiops-easy-install-aimanager-practicum
-  namespace: cp4waiops-installation
+  namespace: cp4waiops-installer
 spec:
   serviceAccountname: cp4waiops-installer-admin
   template:

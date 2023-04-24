@@ -78,8 +78,13 @@ echo "--------------------------------------------------------------------------
 echo " 🧻 Delete Namespace robot-shop"
 oc delete ns robot-shop &
 echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 🧻 Delete Namespace cp4waiops-demo-ui"
+echo " 🧻 Delete Namespace awx"
 oc delete ns awx &
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 🧻 Delete awx.ansible.com CustomResourceDefinition"
+oc delete CustomResourceDefinition $(oc get CustomResourceDefinition| grep awx.ansible.com|awk '{print$1}') --ignore-not-found
+
+
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete Namespace cp4waiops-demo-ui"
 oc delete ns cp4waiops-demo-ui &
@@ -91,12 +96,30 @@ echo " 🧻 Delete Namespace openldap"
 oc delete ns openldap &
 
 
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 🧻 Delete namespacescopes"
+oc delete namespacescopes.operator.ibm.com -n ibm-common-services --all &
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 🧻 Delete operandbindinfos"
+oc delete operandbindinfos.operator.ibm.com -n ibm-common-services --all &
+
+kubectl patch namespacescope.operator.ibm.com -n ibm-common-services common-service  -p '{"metadata":{"finalizers":null}}' --type=merge          
+kubectl patch namespacescope.operator.ibm.com -n ibm-common-services nss-managedby-odlm  -p '{"metadata":{"finalizers":null}}' --type=merge          
+kubectl patch namespacescope.operator.ibm.com -n ibm-common-services nss-odlm-scope  -p '{"metadata":{"finalizers":null}}' --type=merge          
+kubectl patch namespacescope.operator.ibm.com -n ibm-common-services odlm-scope-managedby-odlm  -p '{"metadata":{"finalizers":null}}' --type=merge          
+kubectl patch operandbindinfo.operator.ibm.com -n ibm-common-services ibm-licensing-bindinfo  -p '{"metadata":{"finalizers":null}}' --type=merge          
+
+
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete Namespace ibm-common-services "
-oc delete ns ibm-common-services 
+oc delete ns ibm-common-services &
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete Namespace cp4waiops"
-oc delete ns cp4waiops
+oc delete ns cp4waiops &
 
+
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 🧻 Delete *.ibm.com CustomResourceDefinition"
+oc delete CustomResourceDefinition $(oc get CustomResourceDefinition| grep .ibm.com|awk '{print$1}') --ignore-not-found
 
