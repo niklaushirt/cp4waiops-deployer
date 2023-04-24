@@ -367,7 +367,7 @@
 
 - name: 📥  Create Training Seasonality and XinY
   include_tasks: 59_aimanager-training-create-season-configuration.yaml
-  when: current_cp4waiops_feature.training_create_training_experimental == true | default('false') and TRAINING_EXISTS==false
+  when: current_cp4waiops_feature.training_create_training_experimental == true | default('false')
 
 
 
