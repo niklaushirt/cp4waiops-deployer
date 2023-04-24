@@ -43,7 +43,7 @@
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
     - "                                                                                                                                                   "
-    - "      🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}}                                                                                          "
+    - "      🟡🟡🟡🟡🟡  🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}}                                                                                          "
     - "                                                                                                                                                   "
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
@@ -229,7 +229,7 @@
   # Install INSTANA CP4WAIOps Connection
   - name: 📥 Install CP4WAIOps to Instana Connection
     include_tasks: 12_addons-instana-create-connections.yaml
-    when: current_cp4waiops_feature.integrate_aimanager == true
+    when: current_cp4waiops_feature.integrate_cp4waiops == true
 
 
   - name: 📥 Restart Demo UI

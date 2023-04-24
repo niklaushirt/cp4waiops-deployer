@@ -10,7 +10,7 @@
 
 
 
-- name: 🟡🟡🟡  Show Current Feature
+- name: 🟣  Show Current Feature
   debug:
     var: current_cp4waiops_feature
     verbosity: 1

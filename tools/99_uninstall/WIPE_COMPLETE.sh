@@ -43,8 +43,6 @@ oc delete cm -n ibm-common-services --all
 oc delete cm -n cp4waiops --all
 oc delete cm -n ibm-common-services --all
 
-operandrequests.operator.ibm.com
-
 
 oc delete ns ibm-common-services 
 oc delete ns cp4waiops
