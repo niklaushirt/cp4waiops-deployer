@@ -30,7 +30,7 @@
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Installing CP4WAIOPS Infrastructure Automation'    
-      EOF
+    EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  
 
@@ -215,7 +215,7 @@
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Wait for IA CONFIG to become ready'    
-      EOF
+    EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  
 
@@ -258,7 +258,7 @@
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - IA CONFIG is ready'    
-      EOF
+    EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  
 
