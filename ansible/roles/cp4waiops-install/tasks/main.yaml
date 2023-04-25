@@ -19,6 +19,24 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 
+- name: 🟡🟡🟡  OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+    appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#00B7FF'
+      color: '#fff'
+      location: BannerTop
+      text: 'Starting Installation'
+    EOF
+  ignore_errors: true
+
 
 
 # - name: Show Config
