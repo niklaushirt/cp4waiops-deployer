@@ -30,7 +30,7 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Wait for Zen to become ready'    
     EOF
   ignore_errors: true
@@ -76,7 +76,7 @@
     spec:
       backgroundColor: '#009a00'
       color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Zen is ready'    
     EOF
   ignore_errors: true

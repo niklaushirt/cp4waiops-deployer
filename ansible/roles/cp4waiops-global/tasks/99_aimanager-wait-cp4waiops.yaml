@@ -25,7 +25,7 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Wait for CP4WAIOps to become ready'    
     EOF
   ignore_errors: true
@@ -81,7 +81,7 @@
     spec:
       backgroundColor: '#009a00'
       color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - CP4WAIOps is ready'    
     EOF
   ignore_errors: true

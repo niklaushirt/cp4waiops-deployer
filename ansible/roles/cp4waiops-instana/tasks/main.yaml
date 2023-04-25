@@ -66,11 +66,11 @@
     apiVersion: console.openshift.io/v1
     kind: ConsoleNotification
     metadata:
-      name: cp4waiops-notification
+      name: cp4waiops-notification-main
     spec:
       backgroundColor: '#00B7FF'
       color: '#fff'
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      location: {{global_config.position_final_ocp_notification | default("BannerBottom")}}
       text: 'Installing  {{current_cp4waiops_feature.kind}}'    
     EOF
   ignore_errors: true
@@ -319,7 +319,7 @@
     apiVersion: console.openshift.io/v1
     kind: ConsoleNotification
     metadata:
-      name: cp4waiops-notification
+      name: cp4waiops-notification-main
     spec:
       backgroundColor: '#009a00'
       color: '#fff'
