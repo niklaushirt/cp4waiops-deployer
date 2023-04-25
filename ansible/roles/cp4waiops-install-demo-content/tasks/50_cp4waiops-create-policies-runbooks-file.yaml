@@ -21,7 +21,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Load CP4WAIOps Runbooks'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Load CP4WAIOps Runbooks'    
     EOF
 
 

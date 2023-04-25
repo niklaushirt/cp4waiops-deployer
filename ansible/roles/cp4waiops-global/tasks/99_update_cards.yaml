@@ -23,7 +23,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Update CP4WAIOps Cards'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Update CP4WAIOps Cards'    
     EOF
 
 

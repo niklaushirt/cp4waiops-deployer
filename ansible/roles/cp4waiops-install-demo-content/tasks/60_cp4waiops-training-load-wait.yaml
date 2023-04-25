@@ -21,7 +21,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Wait for Training Data to finish loading'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Wait for Training Data to finish loading'    
     EOF
 
 

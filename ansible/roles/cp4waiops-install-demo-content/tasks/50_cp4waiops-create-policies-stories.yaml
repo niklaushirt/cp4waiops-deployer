@@ -29,7 +29,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Create Policy for Story Creation'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Create Policy for Story Creation'    
     EOF
 
 

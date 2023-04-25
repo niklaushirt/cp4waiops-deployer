@@ -50,7 +50,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Initializing Installer'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Initializing Installer'    
     EOF
 
 

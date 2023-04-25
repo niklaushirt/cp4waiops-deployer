@@ -21,7 +21,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Run Metrics Training'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Run Metrics Training'    
     EOF
 
 

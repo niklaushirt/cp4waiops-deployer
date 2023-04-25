@@ -28,7 +28,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Load Templates into AWX'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Load Templates into AWX'    
     EOF
 
 

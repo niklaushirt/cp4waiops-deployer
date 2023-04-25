@@ -23,7 +23,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Wait for CP4WAIOps to become ready'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Wait for CP4WAIOps to become ready'    
     EOF
 
 
@@ -75,10 +75,10 @@
     metadata:
       name: cp4waiops-notification
     spec:
-      backgroundColor: '#ffd500'
+      backgroundColor: '#009a00'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: xxxxx'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - CP4WAIOps is ready'    
     EOF
 
 

@@ -23,7 +23,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Open doc'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Open doc'    
     EOF
 
 

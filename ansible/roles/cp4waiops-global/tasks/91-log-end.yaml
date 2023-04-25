@@ -20,10 +20,10 @@
     metadata:
       name: cp4waiops-notification
     spec:
-      backgroundColor: '#ffd500'
+      backgroundColor: '#00B7FF'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: xxxxx'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Done {{current_cp4waiops_feature.kind}} Install - {{role_name}}'    
     EOF
 
 

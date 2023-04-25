@@ -25,7 +25,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: xxxxx'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Installing IBM CatalogSource - CASE'    
     EOF
 
 

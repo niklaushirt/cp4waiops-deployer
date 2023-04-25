@@ -21,7 +21,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Create Runbooks Trigger Policy'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Create Runbooks Trigger Policy'    
     EOF
 
 

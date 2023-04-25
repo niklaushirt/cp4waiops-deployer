@@ -22,7 +22,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Create Feature Flags Definition'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Create Feature Flags Definition'    
     EOF
 
 

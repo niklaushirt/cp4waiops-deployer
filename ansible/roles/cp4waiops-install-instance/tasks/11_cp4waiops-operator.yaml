@@ -26,7 +26,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Installing CP4WAIOPS Operator'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Installing CP4WAIOPS Operator'    
     EOF
 
 
@@ -194,7 +194,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: xxxxx'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Wait for CSVs to become ready'    
     EOF
 
 
@@ -267,10 +267,10 @@
     metadata:
       name: cp4waiops-notification
     spec:
-      backgroundColor: '#ffd500'
+      backgroundColor: '#009a00'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: xxxxx'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - CSVs are ready'    
     EOF
 
 

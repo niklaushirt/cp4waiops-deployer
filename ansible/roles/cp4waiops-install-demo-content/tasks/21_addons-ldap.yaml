@@ -30,7 +30,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Installing Open LDAP'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Installing Open LDAP'    
     EOF
 
 

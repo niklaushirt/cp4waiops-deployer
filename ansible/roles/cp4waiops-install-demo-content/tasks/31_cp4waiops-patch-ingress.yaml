@@ -28,7 +28,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Create valid Ingress Certificates'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Create valid Ingress Certificates'    
     EOF
 
 
