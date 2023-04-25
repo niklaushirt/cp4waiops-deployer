@@ -63,11 +63,11 @@
     apiVersion: console.openshift.io/v1
     kind: ConsoleNotification
     metadata:
-      name: cp4waiops-notification
+      name: cp4waiops-notification-main
     spec:
       backgroundColor: '#00B7FF'
       color: '#fff'
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
       text: 'Installing Feature {{current_cp4waiops_feature.kind}}'    
     EOF
   ignore_errors: true
@@ -132,22 +132,6 @@
 - name: 🟡🟡🟡 Initialization of the Installation
   include_tasks: 03_init-initialization.yaml
   
-
-- name: 🌏 CERROR
-  shell: |
-    echo "FAILED FAIL"
-
-
-  ignore_errors: true
-  register: output_string
-  args:
-    executable: /bin/bash
-  
-- name: 🟣  OUTPUT
-  debug: 
-    var: output_string.stdout_lines
-    verbosity: 1
-
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # TEST
@@ -277,7 +261,7 @@
     apiVersion: console.openshift.io/v1
     kind: ConsoleNotification
     metadata:
-      name: cp4waiops-notification
+      name: cp4waiops-notification-main
     spec:
       backgroundColor: '#009a00'
       color: '#fff'
