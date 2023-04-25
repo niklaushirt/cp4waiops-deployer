@@ -16,18 +16,6 @@
     echo "**********************************************************************************************************************************************************" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
 
-    cat <<EOF | oc apply -f -
-    apiVersion: console.openshift.io/v1
-    kind: ConsoleNotification
-    metadata:
-      name: cp4waiops-notification
-    spec:
-      backgroundColor: '#00B7FF'
-      color: '#000'
-      location: BannerTop
-      text: 'Installing {{current_cp4waiops_feature.kind}} - Starting {{current_cp4waiops_feature.kind}} Install - {{role_name}}'    
-    EOF
-
 
 
   ignore_errors: true
