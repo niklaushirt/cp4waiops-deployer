@@ -166,3 +166,10 @@ oc patch ClusterRoleBinding turbonomic-admin2 -p '{"metadata":{"finalizers":null
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete IBM CatalogSource"
 oc delete CatalogSource -n openshift-marketplace ibm-operator-catalog
+
+
+
+exit 1
+
+oc delete CustomResourceDefinition $(oc get CustomResourceDefinition| grep .cert-manager.io|awk '{print$1}') --ignore-not-found
+oc delete CustomResourceDefinition $(oc get CustomResourceDefinition| grep certmanager.k8s.io|awk '{print$1}') --ignore-not-found

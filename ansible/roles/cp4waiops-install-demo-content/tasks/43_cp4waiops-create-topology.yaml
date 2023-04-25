@@ -71,6 +71,8 @@
     fi    
     kubectl cp $TOPOLOGY_CUSTOM_FILE -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}'):/opt/ibm/netcool/asm/data/tools/asm_config.json 
     
+    sleep 30 
+    
     echo "Import Topology Customization"
     #kubectl exec -ti -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}') -- find /opt/ibm/netcool/asm/data/tools/
     kubectl exec -ti -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}') -- /opt/ibm/graph.tools/bin/import_ui_config -file asm_config.json
