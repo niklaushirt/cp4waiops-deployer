@@ -68,7 +68,7 @@
       backgroundColor: '#00B7FF'
       color: '#fff'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing Feature {{current_cp4waiops_feature.kind}}'    
+      text: 'Installing  {{current_cp4waiops_feature.kind}}'    
     EOF
   ignore_errors: true
 
