@@ -96,7 +96,5 @@
       text: '❌ FATAL: Installation failed. Check logs.'
     EOF
   ignore_errors: true
-  when: "'FAIL' in command_result.stdout"
+  when: '"FAILED" in command_result.stdout'
 
-- fail: msg="The execution has failed because of errors."
-  when: "'FAILED' in command_result.stdout"

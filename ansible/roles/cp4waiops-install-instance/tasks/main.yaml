@@ -135,7 +135,7 @@
 
 - name: 🌏 CERROR
   shell: |
-    echo "FAIL FAIL"
+    echo "FAILED FAIL"
 
 
   ignore_errors: true
