@@ -18,7 +18,10 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+  ignore_errors: true
 
+- name: 🟡🟡🟡  OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
     cat <<EOF | oc apply -f -
     apiVersion: console.openshift.io/v1
     kind: ConsoleNotification
@@ -27,13 +30,11 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: BannerTop
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Load Templates into AWX'    
-    EOF
-
-
-
+      EOF
   ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
 
 
 - name: 🚀 AWX - Get AWX URL

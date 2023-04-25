@@ -70,7 +70,7 @@
     spec:
       backgroundColor: '#00B7FF'
       color: '#fff'
-      location: BannerTop
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing Feature {{current_cp4waiops_feature.kind}}'    
     EOF
   ignore_errors: true
@@ -326,7 +326,7 @@
       link:
         href: "https://$appURL"
         text: DemoUI
-      location: BannerTop
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'CP4WAIOPS is installed in this cluster. Access the DemoUI here:'
     EOF
   ignore_errors: true

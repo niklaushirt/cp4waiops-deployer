@@ -21,7 +21,10 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+  ignore_errors: true
 
+- name: 🟡🟡🟡  OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
     cat <<EOF | oc apply -f -
     apiVersion: console.openshift.io/v1
     kind: ConsoleNotification
@@ -30,13 +33,11 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: BannerTop
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Integrate CP4WAIOps with LDAP'    
-    EOF
-
-
-
+      EOF
   ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
 
 
 # *************************************************************************************************************************************************
@@ -129,7 +130,10 @@
     export MESSAGE="   Register OpenLDAP Server"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+  ignore_errors: true
 
+- name: 🟡🟡🟡  OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
     cat <<EOF | oc apply -f -
     apiVersion: console.openshift.io/v1
     kind: ConsoleNotification
@@ -138,13 +142,11 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: BannerTop
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Register OpenLDAP Server'    
-    EOF
-
-
-
+      EOF
   ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
 
 
 - name: 🚀 LDAPREGISTER - Create LDAP Integration
@@ -199,7 +201,10 @@
     export MESSAGE="   Create Users and Groups"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+  ignore_errors: true
 
+- name: 🟡🟡🟡  OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
     cat <<EOF | oc apply -f -
     apiVersion: console.openshift.io/v1
     kind: ConsoleNotification
@@ -208,13 +213,11 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: BannerTop
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Create Users and Groups'    
-    EOF
-
-
-
+      EOF
   ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
 
 
 
