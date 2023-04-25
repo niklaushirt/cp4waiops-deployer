@@ -21,7 +21,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Module {{task_name}}'    
+      text: 'Installing CP4WAIOPS: Module {{ansible_role_name}}'    
     EOF
 
 
