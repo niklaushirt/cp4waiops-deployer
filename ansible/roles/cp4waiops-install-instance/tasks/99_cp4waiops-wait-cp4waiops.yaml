@@ -78,7 +78,7 @@
       backgroundColor: '#009a00'
       color: '#000'
       location: BannerTop
-      text: 'Installing {{current_cp4waiops_feature.kind}} - CP4WAIOps is ready'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - CP4WAIOps is ready (this can take some time)'    
     EOF
 
 

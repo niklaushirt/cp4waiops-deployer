@@ -28,7 +28,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing {{current_cp4waiops_feature.kind}} - Wait for Zen to become ready'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Wait for Zen to become ready (this can take some time)'    
     EOF
 
 
