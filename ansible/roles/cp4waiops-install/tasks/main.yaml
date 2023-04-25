@@ -79,3 +79,24 @@
   loop_control:
     loop_var: current_cp4waiops_feature
 
+
+
+
+- name: 🟡🟡🟡  OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#FFB700'
+      color: '#fff'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: '❌ FATAL: Installation failed. Check logs.'
+    EOF
+  ignore_errors: true
+  when: "'FAILED' in command_result.stdout"
+
+- fail: msg="The execution has failed because of errors."
+  when: "'FAILED' in command_result.stdout"

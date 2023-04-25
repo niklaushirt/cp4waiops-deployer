@@ -497,7 +497,7 @@
       link:
         href: "https://$appURL"
         text: DemoUI
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
       text: 'CP4WAIOPS is installed in this cluster. Access the DemoUI here:'
     EOF
   ignore_errors: true
