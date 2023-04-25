@@ -136,6 +136,103 @@
 
 
 
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# TEST
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# - name: 🟡🟡🟡  Create Routes
+#   include_tasks: 30_cp4waiops-create-routes.yaml
+
+# # Update CP4WAIOps Cards
+# - name: 🟡🟡🟡 Update CP4WAIOps Cards
+#   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# TEST
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+
+
+- name: 🟡🟡🟡 Get Storage Classes
+  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
+
+
+- name: 🟡🟡🟡 Install CP4WAIOps Prerequisites 
+  include_tasks: 06_cp4waiops-prerequisites.yaml
+      
+
+# Install CP4WAIOPS Operator
+- name: 🟡🟡🟡 CP4WAIOps Custom Hook
+  include_tasks: 08_cp4waiops-custom-hook.yaml
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL CATALOG with YAML FILE
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+- name: 🟡🟡🟡 Install CP4WAIOps Catalog - Classic Way (skipped if CASE selected)
+  include_tasks: 10_cp4waiops-catalog.yaml
+  when: current_cp4waiops_feature.case_install==false
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL CATALOG with CASE FILE
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+- name: 🟡🟡🟡 Install CP4WAIOps Catalog - Save Case File (this can take some time - skipped if not selected)
+  include_role:
+    name: cp4waiops-case-save
+  when: current_cp4waiops_feature.case_install==true
+
+
+- name: 🟡🟡🟡 Install CP4WAIOps Catalog - Create CatalogSources from Case File (this can take some time - skipped if not selected)
+  include_role:
+    name: cp4waiops-case-catalog-source
+  when: current_cp4waiops_feature.case_install==true
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL CP4WAIOPS OPERATOR
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+- name: 🟡🟡🟡 Install the CP4WAIOps Operator
+  include_tasks: 11_cp4waiops-operator.yaml
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL FEATURE FLAGS
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Install  Feature Flags
+- name: 🟡🟡🟡  Install CP4WAIOPS Feature Flags
+  include_tasks: 12_cp4waiops-featureflags.yaml
+  when: current_cp4waiops_feature.install_feature_flags == true | default('false')
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL CP4WAIOPS
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Install CP4WAIOPS Instance
+- name: 🟡🟡🟡 Install the CP4WAIOps Instance
+  include_tasks: 19_cp4waiops-install.yaml
+      
+
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# WAIT FOR INSTALLATION READY
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Wait for Common Services being completely installed
+- name: 🟡🟡🟡 Wait for CommonServices to be ready
+  include_tasks: 99_cp4waiops-wait-common-services.yaml
+- name: 🟡🟡🟡 Wait for Zen Initialisation
+  include_tasks: 99_cp4waiops-wait-for-zen.yaml
+      
+
+# Patching Topology Deployment
+- name: 🟡🟡🟡 Patch CP4WAIOPS Topology
+  include_tasks: 20_cp4waiops-patch-topology.yaml
+
 
 # Wait for CP4WAIOPS being completely installed
 - name: 🟡🟡🟡 Wait for CP4WAIOps to be ready
@@ -151,21 +248,6 @@
 # Update CP4WAIOps Cards
 - name: 🟡🟡🟡 Update CP4WAIOps Cards
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
-
-  
-# Access and documentaiton
-- name: 🟡🟡🟡 Get all logins
-  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90_core-get-all-logins.yaml"
-
-
-
-- name: 🟡🟡🟡 Open CP4WAIOps
-  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_open-aimanager.yaml"
-
-
-- name: 🟡🟡🟡 Open Documentation
-  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_open-doc.yaml"
-
 
 
 - name: 🟡🟡🟡 End Logging

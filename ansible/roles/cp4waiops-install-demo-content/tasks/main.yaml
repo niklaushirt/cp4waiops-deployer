@@ -477,28 +477,6 @@
 
 
 
-# Access and documentaiton
-- name: 🟡🟡🟡  Get all logins
-  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90_core-get-all-logins.yaml"
-  when: current_cp4waiops_feature.print_logins == true
-
-
-
-- name: 🟡🟡🟡  Open CP4WAIOps
-  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_open-aimanager.yaml"
-  when: current_cp4waiops_feature.open_web_ui == true
-
-- name: 🟡🟡🟡  Open Demo UI
-  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_open-demoui.yaml"
-  when: current_cp4waiops_feature.open_web_ui == true
-
-
-- name: 🟡🟡🟡  Open Documentation
-  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_open-doc.yaml"
-  when: current_cp4waiops_feature.open_web_ui == true
-
-
-
 - name: 🟡🟡🟡  End Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/91-log-end.yaml"
 
