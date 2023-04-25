@@ -7,7 +7,7 @@
 # *************************************************************************************************************************************************
     
 
-- name: 🛰️  START - OCP MENU
+- name: 🛰️  START - OCP CONSOLE
   debug: 
     msg="{{ lookup('pipe','date +%d.%m.%Y---%H:%M:%S') }}"
 
@@ -18,11 +18,26 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: BannerTop
+      text: 'Installing CP4WAIOPS: Module {{ansible_play_name}}'    
+    EOF
+
+
+
   ignore_errors: true
    
 
 
-- name: 🌏 OCP MENU - Create Openshift WebConsole Menu Item
+- name: 🌏 OCP CONSOLE - Create Openshift WebConsole Menu Item
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
     appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
@@ -45,4 +60,24 @@
   ignore_errors: true
 
 
+- name: 🌏 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+    appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: example
+    spec:
+      backgroundColor: '#009a00'
+      color: '#fff'
+      link:
+        href: "https://$appURL"
+        text: DemoUI
+      location: BannerTop
+      text: 'CP4WAIOPS is installed in this cluster. Access the DemoUI here:'
+    EOF
+  ignore_errors: true
 

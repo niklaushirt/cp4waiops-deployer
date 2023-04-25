@@ -17,6 +17,21 @@
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: BannerTop
+      text: 'Installing CP4WAIOPS: Module {{ansible_play_name}}'    
+    EOF
+
+
+
   ignore_errors: true
 
 
@@ -72,7 +87,7 @@
     kubectl cp $TOPOLOGY_CUSTOM_FILE -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}'):/opt/ibm/netcool/asm/data/tools/asm_config.json 
     
     sleep 30 
-    
+
     echo "Import Topology Customization"
     #kubectl exec -ti -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}') -- find /opt/ibm/netcool/asm/data/tools/
     kubectl exec -ti -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}') -- /opt/ibm/graph.tools/bin/import_ui_config -file asm_config.json
