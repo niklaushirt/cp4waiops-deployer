@@ -23,7 +23,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Module {{ansible_role_name}}'    
+      text: 'Installing CP4WAIOPS: Wait for CP4WAIOps to become ready'    
     EOF
 
 
@@ -78,7 +78,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: BannerTop
-      text: 'Installing CP4WAIOPS: Module {{ansible_role_name}}'    
+      text: 'Installing CP4WAIOPS: xxxxx'    
     EOF
 
 
