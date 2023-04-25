@@ -194,6 +194,7 @@
 
 
         appURL=$(oc get routes -n robot-shop robotshop  -o jsonpath="{['spec']['host']}")
+        sockURL=$(oc get routes -n sock-shop front-end  -o jsonpath="{['spec']['host']}")
         ldapURL=$(oc get route -n openldap admin -o jsonpath={.spec.host})
         awxUrl=$(oc get route -n awx awx -o jsonpath={.spec.host})
         awxPwd=$(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)
@@ -205,6 +206,10 @@
         if [[ $appURL =~ "robot-shop" ]]; then
         echo "RobotShop Present"
         ROWS=$ROWS'{"drilldown_url":  "https://'$appURL'", "label": "→  RobotShop", "sub_text": " "},'
+        fi        
+        if [[ $sockURL =~ "sock-shop" ]]; then
+        echo "SockShop Present"
+        ROWS=$ROWS'{"drilldown_url":  "https://'$sockURL'", "label": "→  SockShop", "sub_text": " "},'
         fi
         if [[ $ldapURL =~ "openldap" ]]; then
         echo "LDAP Present"
