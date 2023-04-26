@@ -47,7 +47,7 @@ spec:
     link:
     href: "https://$appURL"
     text: DemoUI
-    location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
+    location: BannerTop
     text: "✅ CP4WAIOPS is installed in this cluster. 🚀 Access the DemoUI with Access Token '$DEMO_PWD' here:"
 EOF
 fi
