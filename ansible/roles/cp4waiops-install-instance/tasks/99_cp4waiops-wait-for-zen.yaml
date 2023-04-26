@@ -28,7 +28,7 @@
     metadata:
       name: cp4waiops-notification
     spec:
-      fbackgroundColor: '#ff7700'
+      backgroundColor: '#ff7700'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for Zen to become ready (this can take some time)'    
