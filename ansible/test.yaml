@@ -119,7 +119,7 @@
           href: "https://$appURL"
           text: DemoUI
         location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
-        text: "Caaaaaater. Access the DemoUI with Password here:""
+        text: "Caaaaaater. Access the DemoUI with Password here:"
       EOF
     ignore_errors: true
 
