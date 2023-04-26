@@ -18,7 +18,7 @@
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: true
 
-- name: 🟡🟡🟡  OCP CONSOLE - Create Openshift NOTIFICATION
+- name: ❇️❇️❇️ OCP CONSOLE - Create Openshift NOTIFICATION
   shell: |
     cat <<EOF | oc apply -f -
     apiVersion: console.openshift.io/v1
