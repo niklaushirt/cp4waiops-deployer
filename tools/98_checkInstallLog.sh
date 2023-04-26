@@ -6,6 +6,9 @@ echo ""
 echo "*****************************************************************************************************************************"
 echo " ❌ FATAL ERROR: Please check the Installation Logs"
 echo "*****************************************************************************************************************************"
+OPENSHIFT_ROUTE=$(oc get route -n openshift-console console -o jsonpath={.spec.host})
+INSTALL_POD=$(oc get po -n cp4waiops-installer -l app=cp4waiops-installer|awk '{print$1}')
+
 
 oc delete ConsoleNotification --all
 cat <<EOF | oc apply -f -
@@ -18,6 +21,10 @@ spec:
     color: '#fff'
     location: "BannerTop"
     text: "❌ FATAL ERROR: Please check the Installation Logs"
+    link:
+        href: "https://$OPENSHIFT_ROUTE/k8s/ns/cp4waiops-installer/pods/$INSTALL_POD/logs"
+        text: Open Logs
+
 EOF
 else
 echo ""
@@ -25,3 +32,11 @@ echo "**************************************************************************
 echo " ✅ DONE"
 echo "*****************************************************************************************************************************"
 fi
+
+
+
+
+
+
+
+
