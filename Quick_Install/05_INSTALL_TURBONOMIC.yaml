@@ -130,7 +130,7 @@ spec:
                 create_ocp_items: true
                 # Create Notifications in OCP
                 create_ocp_notifications: true
-                position_ocp_notifications: BannerBottom
+                position_ocp_notifications: BannerTop
                 position_final_ocp_notification: BannerTop
                 # Use this Password for all Instances
                 global_password: P4ssw0rd!

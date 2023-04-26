@@ -19,7 +19,7 @@ global_config:
   accept_all_licenses: False
   # Create Notifications in OCP
   create_ocp_notifications: true
-  position_ocp_notifications: BannerBottom
+  position_ocp_notifications: BannerTop
   position_final_ocp_notification: BannerTop
   # Key to decrypt Licenses
   # license_token: NONE
