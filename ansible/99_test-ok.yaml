@@ -123,6 +123,3 @@
       EOF
     ignore_errors: true
 
-  - name: ❗  Just Fail
-    fail: msg="Just Fail"
-      
