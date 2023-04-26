@@ -9,13 +9,20 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------"
-#  Installing CP4WAIOPS
+#  Installing CP4WAIOPS v3.7.0
 #
 #  CloudPak for Watson AIOps
 #
 #  ©2022 nikh@ch.ibm.com
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Get a Cluster from TechZone: https://techzone.ibm.com/collection/custom-roks-vmware-requests
+#   Geograpy: prefer Dallas or London (others might be slower)
+#   Worker node count: 5
+#   Flavour: b3c.32x128 ❗ 
+#   OpenShift Version: 4.10
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Installs:
@@ -40,6 +47,7 @@
 #     - Creates valid certificate for Ingress (Slack) 
 #     - External Routes (Flink, Topology, ...)
 #     - Disables ASM Service match rule 
+#     - Create Policy Creation for Stories and Runbooks 
 #  - Turbonomic
 #  - Turbonomic Demo Content
 #     - Demo User
@@ -73,7 +81,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: cp4waiops-install-cp-inst-turbo
+  name: cp4waiops-install-essentials
   namespace: cp4waiops-installer
 spec:
   serviceAccountname: cp4waiops-installer-admin
@@ -101,10 +109,8 @@ spec:
               #!/bin/bash
               #set -x
 
-
-
               echo "*****************************************************************************************************************************"
-              echo " ✅ STARTING: INSTALL CP4WAIOps with Demo Content - Instana - Turbonomic"
+              echo " ✅ STARTING: INSTALL CP4WAIOps with Demo Content"
               echo "*****************************************************************************************************************************"
               echo ""
               echo "  ⏳ INSTALLATION START TIMESTAMP: $(date)"
@@ -130,10 +136,9 @@ spec:
               ---
               # *************************************************************************************************************************************************
               # --------------------------------------------------------------------------------------------------------------------------------------
-              # CP4WAIOPS INSTANCES
+              # Global Configuration
               # --------------------------------------------------------------------------------------------------------------------------------------
               # *************************************************************************************************************************************************
-
 
               global_config:
                 environment_name: cp4waiops
@@ -144,10 +149,28 @@ spec:
                 entitled_registry: cp.icr.io
                 entitled_registry_user: cp
                 catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+                # Create Welcome Cards in CP4WAIOps
                 create_cards: true
+                # Create App Menu Items in OCP
                 create_ocp_items: true
+                # Create Notifications in OCP
+                create_ocp_notifications: true
+                position_ocp_notifications: BannerBottom
+                position_final_ocp_notification: BannerTop
+                # Use this Password for all Instances
+                global_password: P4ssw0rd!
+                # Set this value to True to accept all licenses
+                accept_all_licenses: False
+                # Key to decrypt Licenses
+                # license_token: NONE
 
 
+              # *************************************************************************************************************************************************
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # OpenShift Configuration
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # *************************************************************************************************************************************************
+              
               openshift:
               - name: "mycluster"
                 ocp_version: "4.10"
@@ -163,11 +186,21 @@ spec:
                   #ocp_storage_class_block: ibmc-block-gold
 
 
+
+              # *************************************************************************************************************************************************
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # Instance Conficuration
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # *************************************************************************************************************************************************
+              
+
               cp4waiops:
               - project: cp4waiops
                 instances:
                 # --------------------------------------------------------------------------------------------------------------------------------------
+                # --------------------------------------------------------------------------------------------------------------------------------------
                 # INSTALL CP4WAIOPS
+                # --------------------------------------------------------------------------------------------------------------------------------------
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 - name: cp4waiops
                   kind: CP4WAIOps
@@ -183,7 +216,9 @@ spec:
                   # Version of the catalog subscription
                   subscription_channel: v3.7
                   # Freeze the version of the Catalog image by patching CatalogSource
-                  freeze_catalog: true
+                  freeze_catalog: false
+                  # Install Feature Flags
+                  install_feature_flags: false
 
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   # Storage Classes Override for this Instance (see comment below)
@@ -201,12 +236,10 @@ spec:
                   case_inventory_setup: cpwaiopsSetup
 
 
-
-
-
-
+                # --------------------------------------------------------------------------------------------------------------------------------------
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 # INSTALL CP4WAIOPS Demo Content
+                # --------------------------------------------------------------------------------------------------------------------------------------
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 - name: cp4waiops-demo-content
                   kind: CP4WAIOpsDemoContent
@@ -231,8 +264,8 @@ spec:
                   training_create_training_metrics: true
                   training_run_training_metrics: true
 
-                  # Install Feature Flags
-                  install_feature_flags: false
+                  # Create feature flag Training (Seasonality and XinY)
+                  training_create_training_experimental: false
 
                   training_data_url: https://github.com/niklaushirt/
                   training_data_repo: cp4waiops-trainingdata
@@ -283,8 +316,10 @@ spec:
                   ldap_domain: ibm.com
                   # ldap base
                   ldap_base: dc=ibm,dc=com
-                  # ldap admin password
+                  # LDAP Admin Password (OVERRIDES GLOBAL PASSWORD)
                   #ldap_admin_password: P4ssw0rd!
+                  # LDAP Password for all Users (OVERRIDES GLOBAL PASSWORD)
+                  #ldap_user_password: P4ssw0rd!
                   # ldap namespace
                   ldap_namespace: openldap
                   # ldap namespace
@@ -307,7 +342,12 @@ spec:
                   # Create Service Account
                   create_account: true
 
+                  # Create Service Account
+                  create_account: true
 
+                  # Install Webhook Probe
+                  install_webhook_probe: false
+                  subscription_channel: v3.7
 
                   # ---------------------------------------------------------------------
                   # OUTPUT
@@ -318,31 +358,79 @@ spec:
 
 
 
+
+
               - project: cp4waiops-addons
                 instances:
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                # CP4WAIOPS ELK
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                - name: cp4waiops-elk
-                  kind: ELK
-                  install: false
+                # INSTALL TURBONOMIC
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                - name: cp4waiops-turbonomic
+                  kind: Turbonomic
+                  install: true
+                  turbo_version: 8.8.3
+
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # Storage Classes Override for this Instance (see comment below)
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  #storage_class_file: automatic
+                  #storage_class_block: automatic
+
+                - name: cp4waiops-turbonomic-demo-content
+                  kind: TurbonomicDemoContent
+                  install: true
+                  # Admin User Password (OVERRIDES GLOBAL PASSWORD)
+                  #turbo_admin_password: P4ssw0rd!
+                  # ---------------------------------------------------------------------
+                  # Create Demo User
+                  create_user: true
+                  # Demo User Name
+                  demo_user: demo
+                  # Demo User Password (OVERRIDES GLOBAL PASSWORD)
+                  #turbo_demo_password: P4ssw0rd!
+                  # ---------------------------------------------------------------------
+                  # Create Groups
+                  group_vcenter_vms: true
+                  group_robotshop: true
+                  group_licensing: true
+
+                  # ---------------------------------------------------------------------
+                  # Create Targets
+                  target_instana: true
+                  # ---------------------------------------------------------------------
+                  # Create Memory and CPU hogs
+                  resource_hogs: true
+                  # ---------------------------------------------------------------------
+                  # Create Metrics server, DIF integration and RobotShop BuisnessApp
+                  metrics_dif: true
+                  # ---------------------------------------------------------------------
+                  # Turbo License (optional)
+                  turbo_license: NONE
 
 
+
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                # CP4WAIOPS INSTANA
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # INSTALL INSTANA
+                # --------------------------------------------------------------------------------------------------------------------------------------
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 - name: cp4waiops-instana
                   kind: Instana
                   install: true
+                  version: 241-3
 
                   # ---------------------------------------------------------------------
                   # INSTANA LICENSE
-                  sales_key: $INSTANA_SALES_KEY
-                  agent_key: $INSTANA_AGENT_KEY
+                  sales_key: 'NONE'
+                  agent_key: 'NONE'
 
                   # ---------------------------------------------------------------------
                   # INSTANA ADMIN LOGIN
+                  # Admin User Name
                   instana_admin_user: "admin@instana.local"
+                  # Admin User Password (OVERRIDES GLOBAL PASSWORD)
                   #instana_admin_pass: 'P4ssw0rd!'
                   
                   # ---------------------------------------------------------------------
@@ -360,56 +448,48 @@ spec:
                   #storage_class_file: automatic
                   #storage_class_block: automatic
 
-
+            
 
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                # CP4WAIOPS TURBONOMIC
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                - name: cp4waiops-turbonomic
-                  kind: Turbonomic
-                  install: true
-                  turbo_version: 8.8.3
+                # INSTALL ELK
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                - name: cp4waiops-elk
+                  kind: ELK
+                  install: false
+      
 
+
+
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # INSTALL CP4WAIOPS Infrastructure Management
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              - project: cp4waiops-infra
+                instances:
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # CP4WAIOPS Infrastructure Management
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                - name: cp4waiops-infrastructure-management
+                  kind: InfrastructureManagement
+                  install: false
+                  # Version of the catalog subscription
+                  subscription_channel: v3.7
+                  # Freeze the version of the Catalog image by patching CatalogSource
+                  freeze_catalog: false
+                  
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   # Storage Classes Override for this Instance (see comment below)
                   # --------------------------------------------------------------------------------------------------------------------------------------
                   #storage_class_file: automatic
                   #storage_class_block: automatic
-
-
-                - name: cp4waiops-turbonomic-demo-content
-                  kind: TurbonomicDemoContent
-                  install: true
-                  # Admin User Password (OVERRIDES GLOBAL PASSWORD)
-                  #turbo_admin_password: P4ssw0rd!
-                  # ---------------------------------------------------------------------
-                  # Create Demo User
-                  create_user: true
-                  demo_user: demo
-                  #turbo_demo_password: P4ssw0rd!
-                  # ---------------------------------------------------------------------
-                  # Create Groups
-                  group_vcenter_vms: true
-                  group_robotshop: true
-                  group_licensing: true
-              
-                  # ---------------------------------------------------------------------
-                  # Create Targets
-                  target_instana: true
-                  # ---------------------------------------------------------------------
-                  # Create Memory and CPU hogs
-                  resource_hogs: true
-                  # ---------------------------------------------------------------------
-                  # Create Metrics server, DIF integration and RobotShop BuisnessApp
-                  metrics_dif: true
-                  # ---------------------------------------------------------------------
-                  # Turbo License (optional)
-                  turbo_license: $TURBO_LICENSE
+                  
 
 
 
-
-
+                    
               EOF
 
 
@@ -466,6 +546,7 @@ spec:
                 sleep 1000
               done
 
+
               while true
               do
                 sleep 1000
@@ -481,12 +562,5 @@ spec:
             # The pull token for cp.icr.com from https://myibm.ibm.com/products-services/containerlibrary
           - name: ENTITLED_REGISTRY_KEY
             value : "<REGISTRY_TOKEN>"
-          - name: INSTANA_SALES_KEY
-            value : "<YOUR_SALES_KEY>"
-          - name: INSTANA_AGENT_KEY
-            value : "<YOUR_AGENT_KEY>"
-          - name: TURBO_LICENSE
-            value : "NONE"
       restartPolicy: Never
   backoffLimit: 4
-

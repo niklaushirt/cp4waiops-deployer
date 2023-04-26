@@ -9,7 +9,7 @@
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------------------------------------------------------"
-#  Installing CP4WAIOPS
+#  Installing CP4WAIOPS v3.7.0
 #
 #  CloudPak for Watson AIOps
 #
@@ -18,51 +18,19 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Get a Cluster from TechZone: https://techzone.ibm.com/collection/custom-roks-vmware-requests
+#   Geograpy: prefer Dallas or London (others might be slower)
+#   Worker node count: 5
+#   Flavour: b3c.32x128 ❗ 
+#   OpenShift Version: 4.10
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Installs:
 #
-#  - CertManager
 #  - Instana
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: installer-cert-manager-cert-manager-admin
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-  - kind: ServiceAccount
-    name: cert-manager
-    namespace: cert-manager
----
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: installer-cert-manager-cert-manager-cainjector-admin
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-  - kind: ServiceAccount
-    name: cert-manager-cainjector
-    namespace: cert-manager
----
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: installer-cert-manager-cert-manager-webhook-admin
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-  - kind: ServiceAccount
-    name: cert-manager-webhook
-    namespace: cert-manager
----
+
 apiVersion: v1                     
 kind: Namespace
 metadata:
@@ -84,7 +52,7 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: instana-install
+  name: cp4waiops-install-instana
   namespace: cp4waiops-installer
 spec:
   serviceAccountname: cp4waiops-installer-admin
@@ -112,10 +80,8 @@ spec:
               #!/bin/bash
               #set -x
 
-
-
               echo "*****************************************************************************************************************************"
-              echo " ✅ STARTING: INSTALL Instana"
+              echo " ✅ STARTING: INSTALL CP4WAIOps with Demo Content"
               echo "*****************************************************************************************************************************"
               echo ""
               echo "  ⏳ INSTALLATION START TIMESTAMP: $(date)"
@@ -141,10 +107,9 @@ spec:
               ---
               # *************************************************************************************************************************************************
               # --------------------------------------------------------------------------------------------------------------------------------------
-              # CP4WAIOPS INSTANCES
+              # Global Configuration
               # --------------------------------------------------------------------------------------------------------------------------------------
               # *************************************************************************************************************************************************
-
 
               global_config:
                 environment_name: cp4waiops
@@ -155,10 +120,28 @@ spec:
                 entitled_registry: cp.icr.io
                 entitled_registry_user: cp
                 catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+                # Create Welcome Cards in CP4WAIOps
                 create_cards: true
+                # Create App Menu Items in OCP
                 create_ocp_items: true
+                # Create Notifications in OCP
+                create_ocp_notifications: true
+                position_ocp_notifications: BannerBottom
+                position_final_ocp_notification: BannerTop
+                # Use this Password for all Instances
+                global_password: P4ssw0rd!
+                # Set this value to True to accept all licenses
+                accept_all_licenses: False
+                # Key to decrypt Licenses
+                # license_token: NONE
 
 
+              # *************************************************************************************************************************************************
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # OpenShift Configuration
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # *************************************************************************************************************************************************
+              
               openshift:
               - name: "mycluster"
                 ocp_version: "4.10"
@@ -174,27 +157,38 @@ spec:
                   #ocp_storage_class_block: ibmc-block-gold
 
 
+
+              # *************************************************************************************************************************************************
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # Instance Conficuration
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # *************************************************************************************************************************************************
+              
+
               cp4waiops:
               - project: cp4waiops-addons
                 instances:
-             
+
                 # --------------------------------------------------------------------------------------------------------------------------------------
-                # CP4WAIOPS INSTANA
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # INSTALL INSTANA
+                # --------------------------------------------------------------------------------------------------------------------------------------
                 # --------------------------------------------------------------------------------------------------------------------------------------
                 - name: cp4waiops-instana
                   kind: Instana
-                  install: true
+                  install: false
                   version: 241-3
-                  # version: 241-3 
 
                   # ---------------------------------------------------------------------
                   # INSTANA LICENSE
-                  sales_key: $INSTANA_SALES_KEY
-                  agent_key: $INSTANA_AGENT_KEY
+                  sales_key: 'NONE'
+                  agent_key: 'NONE'
 
                   # ---------------------------------------------------------------------
                   # INSTANA ADMIN LOGIN
+                  # Admin User Name
                   instana_admin_user: "admin@instana.local"
+                  # Admin User Password (OVERRIDES GLOBAL PASSWORD)
                   #instana_admin_pass: 'P4ssw0rd!'
                   
                   # ---------------------------------------------------------------------
@@ -212,6 +206,8 @@ spec:
                   #storage_class_file: automatic
                   #storage_class_block: automatic
 
+          
+                    
               EOF
 
 
@@ -220,9 +216,6 @@ spec:
 
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 🚀 Prepare Ansible"
-              ansible-galaxy collection install community.kubernetes:1.2.1
-              ansible-galaxy collection install kubernetes.core:2.2.3
-              ansible-galaxy collection install cloud.common
               pip install openshift pyyaml kubernetes 
               echo ""
               echo ""
@@ -231,14 +224,45 @@ spec:
 
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 🚀 Starting Installation"
+              export ANSIBLE_LOG_PATH=/tmp/ansible.log
               ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=$CONFIG" -e cp_entitlement_key=$ENTITLED_REGISTRY_KEY
               echo ""
               echo ""
               echo "  ⏳ INSTALLATION END TIMESTAMP: $(date)"
+
+              num_failed=$(cat /tmp/ansible.log|grep "failed=[1-9]"|wc -l)
+              if [ $num_failed -gt 0 ];
+              then
+              echo "ERROR in Logs"
+              echo ""
+              echo "*****************************************************************************************************************************"
+              echo " ❌ FATAL ERROR: Please check the Installation Logs"
+              echo "*****************************************************************************************************************************"
+
+              oc delete ConsoleNotification --all
+              cat <<EOF | oc apply -f -
+              apiVersion: console.openshift.io/v1
+              kind: ConsoleNotification
+              metadata:
+                name: cp4waiops-notification-main
+              spec:
+                backgroundColor: '#9a0000'
+                color: '#fff'
+                location: "BannerTop"
+                text: "❌ FATAL ERROR: Please check the Installation Logs"
+              EOF
+              else
               echo ""
               echo "*****************************************************************************************************************************"
               echo " ✅ DONE"
               echo "*****************************************************************************************************************************"
+              fi
+
+
+              while true
+              do
+                sleep 1000
+              done
 
 
               while true
@@ -254,10 +278,7 @@ spec:
             #value : "./configs/cp4waiops-all-34.yaml"
             value : "./configs/cp4waiops-roks-custom.yaml"
             # The pull token for cp.icr.com from https://myibm.ibm.com/products-services/containerlibrary
-          - name: INSTANA_SALES_KEY
-            value : "<YOUR_SALES_KEY>"
-          - name: INSTANA_AGENT_KEY
-            value : "<YOUR_AGENT_KEY>"
+          - name: ENTITLED_REGISTRY_KEY
+            value : "<REGISTRY_TOKEN>"
       restartPolicy: Never
   backoffLimit: 4
-

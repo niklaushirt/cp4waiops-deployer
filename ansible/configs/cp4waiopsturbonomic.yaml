@@ -23,6 +23,12 @@ global_config:
   global_password: P4ssw0rd!
   # Set this value to True to accept all licenses
   accept_all_licenses: False
+  # Create Notifications in OCP
+  create_ocp_notifications: true
+  position_ocp_notifications: BannerBottom
+  position_final_ocp_notification: BannerTop
+  # Key to decrypt Licenses
+  # license_token: NONE
 
 
 openshift:
