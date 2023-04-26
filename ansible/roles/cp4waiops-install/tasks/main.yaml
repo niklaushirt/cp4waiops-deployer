@@ -28,7 +28,7 @@
     metadata:
       name: cp4waiops-notification-main
     spec:
-      backgroundColor: '#000a96'
+      backgroundColor: '#141a6b'
       color: '#fff'
       location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
       text: 'Starting Installation - Warming Up'

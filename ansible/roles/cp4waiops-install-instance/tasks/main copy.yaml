@@ -65,7 +65,7 @@
     metadata:
       name: cp4waiops-notification
     spec:
-      backgroundColor: '#000a96'
+      backgroundColor: '#141a6b'
       color: '#fff'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing  {{current_cp4waiops_feature.kind}}'    
