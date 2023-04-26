@@ -105,23 +105,7 @@
       var: openshift_cluster
 
 
-  - name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
-    shell: |
-      cat <<EOF | oc apply -f -
-      apiVersion: console.openshift.io/v1
-      kind: ConsoleNotification
-      metadata:
-        name: cp4waiops-notification
-      spec:
-        backgroundColor: '#009a00'
-        color: '#fff'
-        link:
-          href: "https://$appURL"
-          text: DemoUI
-        location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-        text: "Caaaaaater. Access the DemoUI with Password here:"
-      EOF
-    ignore_errors: true
+
 
   - name: ❗  Just Fail
     fail: msg="Just Fail"
