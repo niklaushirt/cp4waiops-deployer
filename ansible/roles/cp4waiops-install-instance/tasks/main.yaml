@@ -96,7 +96,9 @@
     - "     ✅ Installation Name:                        {{current_cp4waiops_feature.waiops_name}}"
     - "     🔎 CP4WAIOps Size:                           {{current_cp4waiops_feature.waiops_size}}"
     - "     🔽 Custom Sizing File:                       {{current_cp4waiops_feature.custom_size_file | default('none')}}"
-    - "     🔽 Install Feature Flags:                    {{current_cp4waiops_feature.install_feature_flags | default('not defined')}}"
+    - "     📣 Show Notifications:                       {{global_config.create_ocp_notifications | default('not defined')}}"
+    - "     📣 Primary Notifications Position:           {{global_config.position_final_ocp_notification | default('not defined')}}"
+    - "     📣 Secondary Notifications Position:         {{global_config.position_ocp_notification | default('not defined')}}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 VERSION "
     - "     🚀 Subscription Channel:                     {{current_cp4waiops_feature.subscription_channel}}"
@@ -109,7 +111,7 @@
   debug:
     var: current_cp4waiops_feature
 
-
+position_final_ocp_notification
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # INITIALIZATION
