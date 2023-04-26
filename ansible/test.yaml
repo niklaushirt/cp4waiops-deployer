@@ -45,6 +45,21 @@
       - "***************************************************************************************************************************************************"
       verbosity: 2
 
+  - name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+    shell: |
+      cat <<EOF | oc apply -f -
+      apiVersion: console.openshift.io/v1
+      kind: ConsoleNotification
+      metadata:
+        name: cp4waiops-notification-main
+      spec:
+        backgroundColor: '#00B7FF'
+        color: '#fff'
+        location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
+        text: 'Starting Installation - Warming Up'
+      EOF
+    ignore_errors: true
+
 
   - name: 🛠️  Config File Path
     debug:
@@ -71,33 +86,48 @@
       file: "{{config_file_path}}"
       name: all_config
 
-  # - name: 🟢🟢🟢  Show Config File
-  #   debug:
-  #     var: all_config
-  #     verbosity: 2
+  - name: 🟢🟢🟢  Show Config File
+    debug:
+      var: all_config
 
 
-  # - name: 🛠️  Get Global Config
-  #   set_fact: global_config={{ all_config.global_config | default([]) }}
-  # - name: 🟢🟢🟢  Show Global Config
-  #   debug:
-  #     var: global_config
-  #     verbosity: 2
+  - name: 🛠️  Get Global Config
+    set_fact: global_config={{ all_config.global_config | default([]) }}
+  - name: 🟢🟢🟢  Show Global Config
+    debug:
+      var: global_config
 
 
-  # - name: 🛠️  Get Openshift Config
-  #   set_fact: openshift_cluster={{ all_config.openshift | default([]) }}
-  # - name: 🟢🟢🟢  Show Openshift Config
-  #   debug:
-  #     var: openshift_cluster
-  #     verbosity: 2
+  - name: 🛠️  Get Openshift Config
+    set_fact: openshift_cluster={{ all_config.openshift | default([]) }}
+  - name: 🟢🟢🟢  Show Openshift Config
+    debug:
+      var: openshift_cluster
 
 
-  # Loop over all Clusters
-  - name: ♻️  Deploy Cloud Pak for Watson AIOps Assets - Loop over Clusters
-    include_role:
-      name: cp4waiops-install
-    loop: "{{ all_config.cp4waiops | default([]) }}"
-    loop_control:
-      loop_var: current_cp4waiops_cluster
+  - name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+    shell: |
+      export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+      appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+      WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+      DEMO_PWD=$(oc get cm -n $WAIOPS_NAMESPACE-demo-ui cp4waiops-demo-ui-config -o jsonpath='{.data.TOKEN}')
 
+      cat <<EOF | oc apply -f -
+      apiVersion: console.openshift.io/v1
+      kind: ConsoleNotification
+      metadata:
+        name: cp4waiops-notification
+      spec:
+        backgroundColor: '#009a00'
+        color: '#fff'
+        link:
+          href: "https://$appURL"
+          text: DemoUI
+        location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+        text: "CP4WAIOPS is installed in this cluster. Access the DemoUI with Password $DEMO_PWD here:""
+      EOF
+    ignore_errors: true
+
+  - name: ❗  Just Fail
+    fail: msg="Just Fail"
+      

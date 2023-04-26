@@ -20,7 +20,7 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 
 
-- name: 📣📣📣 OCP CONSOLE - Create Openshift NOTIFICATION
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
   shell: |
     cat <<EOF | oc apply -f -
     apiVersion: console.openshift.io/v1
