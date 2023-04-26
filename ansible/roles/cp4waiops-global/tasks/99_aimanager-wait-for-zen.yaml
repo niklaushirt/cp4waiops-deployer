@@ -28,10 +28,10 @@
     metadata:
       name: cp4waiops-notification
     spec:
-      backgroundColor: '#ffd500'
+      backgroundColor: '#dddddd'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - Wait for Zen to become ready'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for Zen to become ready'    
     EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  

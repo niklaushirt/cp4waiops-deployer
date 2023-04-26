@@ -33,7 +33,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - Installing TURBONOMIC'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Prerequisites'    
     EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  
@@ -85,6 +85,22 @@
   retries: 500
   delay: 15
 
+
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Create Instance'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
 
 
 
@@ -156,6 +172,24 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for turbonomic Namespace to be ready
 # --------------------------------------------------------------------------------------------------------------------------------------
+
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#dddddd'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for instance to be ready'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
+
 - name: 🕦 TURBONOMIC - Wait for >50 pods in namespace turbonomic
   shell: oc get po -n turbonomic |grep "1/"| wc -l
   register: kubectl_num_pods
