@@ -55,9 +55,9 @@
     metadata:
       name: cp4waiops-notification
     spec:
-      backgroundColor: '#00B7FF'
+      backgroundColor: '#000a96'
       color: '#fff'
-      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing  {{current_cp4waiops_feature.kind}}'    
     EOF
   ignore_errors: true
@@ -115,7 +115,7 @@
       link:
         href: "https://$appURL"
         text: DemoUI
-      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: "CP4WAIOPS is installed in this cluster. Access the DemoUI with Password $DEMO_PWD here:""
     EOF
   ignore_errors: true

@@ -53,7 +53,7 @@
       metadata:
         name: cp4waiops-notification-main
       spec:
-        backgroundColor: '#00B7FF'
+        backgroundColor: '#000a96'
         color: '#fff'
         location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
         text: 'Starting Installation - Warming Up'
@@ -118,7 +118,7 @@
         link:
           href: "https://$appURL"
           text: DemoUI
-        location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+        location: {{global_config.position_ocp_notifications | default("BannerTop")}}
         text: "Caaaaaater. Access the DemoUI with Password here:"
       EOF
     ignore_errors: true

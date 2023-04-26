@@ -60,7 +60,7 @@
     metadata:
       name: cp4waiops-notification-main
     spec:
-      backgroundColor: '#00B7FF'
+      backgroundColor: '#000a96'
       color: '#fff'
       location: {{global_config.position_final_ocp_notification | default("BannerBottom")}}
       text: 'Installing  {{current_cp4waiops_feature.kind}}'    
@@ -225,6 +225,8 @@
 
 - name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
   shell: |
+    oc delete ConsoleNotification cp4waiops-notification
+
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
     appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
     WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
@@ -245,6 +247,7 @@
       text: "✅ CP4WAIOPS is installed in this cluster. 🚀 Access the DemoUI with Access Token '$DEMO_PWD' here:"
     EOF
   ignore_errors: true
+
 
 
 

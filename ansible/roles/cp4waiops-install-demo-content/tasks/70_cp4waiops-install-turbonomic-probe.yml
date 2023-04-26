@@ -24,7 +24,7 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Install Turbonomic Probe'    
     EOF
   ignore_errors: true

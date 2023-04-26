@@ -80,6 +80,10 @@ spec:
               #!/bin/bash
               #set -x
 
+              oc delete ConsoleNotification --all
+              oc delete job  -n cp4waiops-installer --ignore-not-found $(oc get job -n cp4waiops-installer|grep load-|awk '{print$1}')
+              oc delete pod  -n cp4waiops-installer --ignore-not-found $(oc get po -n cp4waiops-installer|grep load-|awk '{print$1}')
+
               echo "*****************************************************************************************************************************"
               echo " ✅ STARTING: INSTALL CP4WAIOps with Demo Content"
               echo "*****************************************************************************************************************************"

@@ -33,7 +33,7 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Integrate CP4WAIOps with LDAP'    
     EOF
   ignore_errors: true
@@ -142,7 +142,7 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Register OpenLDAP Server'    
     EOF
   ignore_errors: true
@@ -213,7 +213,7 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - Create Users and Groups'    
     EOF
   ignore_errors: true

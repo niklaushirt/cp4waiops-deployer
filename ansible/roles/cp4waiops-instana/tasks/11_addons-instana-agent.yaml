@@ -32,7 +32,7 @@
     spec:
       backgroundColor: '#ffd500'
       color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - INSTANA AGENT'    
     EOF
   ignore_errors: true
