@@ -30,7 +30,7 @@
     spec:
       backgroundColor: '#00B7FF'
       color: '#fff'
-      location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
+      location: {{global_config.position_final_ocp_notification | default("BannerBottom")}}
       text: 'Starting Installation - Warming Up'
     EOF
   ignore_errors: true
