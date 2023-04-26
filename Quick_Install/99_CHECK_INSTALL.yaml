@@ -48,6 +48,10 @@ metadata:
 spec:
   serviceAccountname: cp4waiops-installer-admin
   template:
+    metadata:
+      labels:
+        app: cp4waiops-installer
+
     spec:
       containers:
         - name: install
