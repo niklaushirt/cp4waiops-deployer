@@ -21,7 +21,7 @@
     metadata:
       name: cp4waiops-notification
     spec:
-      backgroundColor: '#dddddd'
+      fbackgroundColor: '#ff7700'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerBottom")}}
       text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for Training Data to finish loading'    
