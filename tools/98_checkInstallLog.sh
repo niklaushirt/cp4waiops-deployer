@@ -13,11 +13,11 @@ apiVersion: console.openshift.io/v1
 kind: ConsoleNotification
 metadata:
     name: cp4waiops-notification-main
-    spec:
-        backgroundColor: '#9a0000'
-        color: '#fff'
-        location: "BannerTop"
-        text: "❌ FATAL ERROR: Please check the Installation Logs"
+spec:
+    backgroundColor: '#9a0000'
+    color: '#fff'
+    location: "BannerTop"
+    text: "❌ FATAL ERROR: Please check the Installation Logs"
 EOF
 else
 echo ""
