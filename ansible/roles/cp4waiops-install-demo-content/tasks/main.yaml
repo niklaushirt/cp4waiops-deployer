@@ -59,7 +59,7 @@
     - "***************************************************************************************************************************************************"
 
 
-- name: ❇️❇️❇️ OCP CONSOLE - Create Openshift NOTIFICATION
+- name: 📣📣📣 OCP CONSOLE - Create Openshift NOTIFICATION
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
     appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
@@ -481,7 +481,7 @@
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/91-log-end.yaml"
 
 
-- name: ❇️❇️❇️ OCP CONSOLE - Create Openshift NOTIFICATION
+- name: 📣📣📣 OCP CONSOLE - Create Openshift NOTIFICATION
   shell: |
     oc delete ConsoleNotification cp4waiops-notification
 
