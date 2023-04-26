@@ -31,11 +31,10 @@ echo ""
 echo "*****************************************************************************************************************************"
 echo " ✅ DONE"
 echo "*****************************************************************************************************************************"
-oc delete ConsoleNotification cp4waiops-notification
+oc delete ConsoleNotification --all
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
-WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-DEMO_PWD=$(oc get cm -n $WAIOPS_NAMESPACE-demo-ui cp4waiops-demo-ui-config -o jsonpath='{.data.TOKEN}')
+export appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+export DEMO_PWD=$(oc get cm -n $WAIOPS_NAMESPACE-demo-ui cp4waiops-demo-ui-config -o jsonpath='{.data.TOKEN}')
 cat <<EOF | oc apply -f -
 apiVersion: console.openshift.io/v1
 kind: ConsoleNotification
@@ -45,8 +44,8 @@ spec:
     backgroundColor: '#009a00'
     color: '#fff'
     link:
-    href: "https://$appURL"
-    text: DemoUI
+        href: "https://$appURL"
+        text: DemoUI
     location: BannerTop
     text: "✅ CP4WAIOPS is installed in this cluster. 🚀 Access the DemoUI with Access Token '$DEMO_PWD' here:"
 EOF
