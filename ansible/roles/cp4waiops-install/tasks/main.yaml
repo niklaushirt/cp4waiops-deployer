@@ -31,7 +31,7 @@
       backgroundColor: '#141a6b'
       color: '#fff'
       location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
-      text: 'Starting Installation - {{global_config.environment_name - Warming Up'
+      text: 'Starting Installation - {{global_config.environment_name}} - Warming Up'
     EOF
   ignore_errors: true
 
