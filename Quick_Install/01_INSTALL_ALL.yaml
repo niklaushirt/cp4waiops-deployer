@@ -279,6 +279,8 @@ spec:
                   # TOPOLOGY
                   # Install DemoApps Application
                   install_demoapps: true
+                  # RobotShop interface color (classic/white)
+                  robotshop_color: white
                   # Install DemoApps K8s Observer
                   install_demoapps_observer: true
                   # Create Topology
