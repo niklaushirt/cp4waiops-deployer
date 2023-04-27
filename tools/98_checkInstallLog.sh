@@ -54,6 +54,9 @@ EOF
 num_failed=$(cat /tmp/ansible.log|grep "error"|wc -l)
 if [ $num_failed -gt 0 ];
 then
+OPENSHIFT_ROUTE=$(oc get route -n openshift-console console -o jsonpath={.spec.host})
+INSTALL_POD=$(oc get po -n cp4waiops-installer -l app=cp4waiops-installer --no-headers|grep "Running"|awk '{print$1}')
+
 cat <<EOF | oc apply -f -
 apiVersion: console.openshift.io/v1
 kind: ConsoleNotification
