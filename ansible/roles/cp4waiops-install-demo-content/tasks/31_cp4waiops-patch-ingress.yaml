@@ -212,7 +212,7 @@
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
     oc set env -n $WAIOPS_NAMESPACE deployment/$(oc get deploy -n $WAIOPS_NAMESPACE -l app.kubernetes.io/component=chatops-slack-integrator -o jsonpath='{.items[*].metadata.name }') SLACK_WELCOME_COMMAND_NAME=/welcome
-    oc delete pod $(oc get po -n $WAIOPS_NAMESPACE|grep slack|awk '{print$1}') -n $WAIOPS_NAMESPACE --grace-period 0 --force
+    oc delete pod $(oc get po -n $WAIOPS_NAMESPACE|grep slack|awk '{print$1}'):-notfound  --ignore-not-found -n $WAIOPS_NAMESPACE --grace-period 0 --force
   ignore_errors: true
 
 

@@ -49,8 +49,27 @@ spec:
     location: BannerTop
     text: "✅ CP4WAIOPS is installed in this cluster. 🚀 Access the DemoUI with Access Token '$DEMO_PWD' here:"
 EOF
-fi
 
+
+num_failed=$(cat /tmp/ansible.log|grep "error"|wc -l)
+if [ $num_failed -gt 0 ];
+then
+cat <<EOF | oc apply -f -
+apiVersion: console.openshift.io/v1
+kind: ConsoleNotification
+metadata:
+    name: cp4waiops-notification-errors
+spec:
+    backgroundColor: '#ffd500'
+    color: '#000'
+    location: "BannerTop"
+    text: "❗ There were some non-critical errors: Please check the Installation Logs"
+    link:
+        href: "https://$OPENSHIFT_ROUTE/k8s/ns/cp4waiops-installer/pods/$INSTALL_POD/logs"
+        text: Open Logs
+EOF
+fi
+fi
 
 
 

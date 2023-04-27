@@ -376,7 +376,7 @@
         errorPods=$(oc get po -n $WAIOPS_NAMESPACE|grep ImagePull|awk '{print$1}')
         if [[ ! $errorPods == "" ]]; then
           echo "Refreshing Pods"
-          oc delete pod --ignore-not-found $(oc get po -n $WAIOPS_NAMESPACE|grep ImagePull|awk '{print$1}') -n $WAIOPS_NAMESPACE
+          oc delete pod  $(oc get po -n $WAIOPS_NAMESPACE|grep ImagePull|awk '{print$1}'):-notfound  --ignore-not-found -n $WAIOPS_NAMESPACE
         fi
 
 

@@ -35,7 +35,7 @@
   when: global_config.create_ocp_notifications | default(true) == true  
 
 
-- name: 🚀 ROUTES - Create AWX Connection (you can ignore errors in this step)
+- name: 🚀 ROUTES - Create AWX Connection (you can ignore problems in this step)
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
     oc create route passthrough -n $WAIOPS_NAMESPACE --service aimanager-aio-controller

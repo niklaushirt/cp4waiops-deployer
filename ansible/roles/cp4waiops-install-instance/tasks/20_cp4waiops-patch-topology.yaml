@@ -120,7 +120,7 @@
         errorPods=$(oc get po -n {{ current_cp4waiops_cluster.project }}|grep ImagePull|awk '{print$1}')
         if [[ ! $errorPods == "" ]]; then
           echo "Refreshing Pods"
-          oc delete pod --ignore-not-found $(oc get po -n {{ current_cp4waiops_cluster.project }}|grep ImagePull|awk '{print$1}') -n {{ current_cp4waiops_cluster.project }}>/dev/null 2>/dev/null
+          oc delete pod $(oc get po -n {{ current_cp4waiops_cluster.project }}|grep ImagePull|awk '{print$1}'):-notfound  --ignore-not-found -n {{ current_cp4waiops_cluster.project }}>/dev/null 2>/dev/null
         fi
 
 

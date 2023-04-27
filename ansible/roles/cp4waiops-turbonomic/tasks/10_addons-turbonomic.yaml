@@ -49,6 +49,8 @@
 
 - name: 🚀 TURBONOMIC - Create Turbonomic scc
   shell: |
+    oc delete clusterrolebinding turbonomic-admin1 --ignore-not-found
+    oc delete clusterrolebinding turbonomic-admin2 --ignore-not-found
     oc adm policy add-scc-to-group anyuid system:serviceaccounts:turbonomic
     oc create clusterrolebinding turbonomic-admin1 --clusterrole=cluster-admin --serviceaccount=turbonomic:t8c-operator
     oc create clusterrolebinding turbonomic-admin2 --clusterrole=cluster-admin --serviceaccount=turbonomic:turbo-user

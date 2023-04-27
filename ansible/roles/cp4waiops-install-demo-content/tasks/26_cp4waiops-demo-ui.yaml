@@ -38,7 +38,7 @@
 
 
 
-- name: 🚀 DEMO-UI - Delete old instance (ignore errors))
+- name: 🚀 DEMO-UI - Delete old instance (ignore problems in this step))
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
     oc delete deployment -n $WAIOPS_NAMESPACE-demo-ui cp4waiops-demo-ui --ignore-not-found

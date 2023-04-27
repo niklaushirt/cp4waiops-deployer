@@ -71,7 +71,7 @@
     errorPods=$(oc get po -n openshift-marketplace|grep ImagePull|awk '{print$1}')
     if [[ ! $errorPods == "" ]]; then
       echo "Refreshing Pods"
-      oc delete pod $(oc get po -n openshift-marketplace|grep ImagePull|awk '{print$1}') -n openshift-marketplace --ignore-not-found
+      oc delete pod $(oc get po -n openshift-marketplace|grep ImagePull|awk '{print$1}'):-notfound  --ignore-not-found -n openshift-marketplace
     fi
   register: kubectl_get_pods
   ignore_errors: true
@@ -115,7 +115,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name:   🚀 CP4WAIOPS CATALOG - Delete operator for pull secret (hack)
   shell: |
-    oc delete pod $(oc get po -n openshift-marketplace|grep ImagePullBackOff|awk '{print$1}') -n openshift-marketplace
+    oc delete pod $(oc get po -n openshift-marketplace|grep ImagePullBackOff|awk '{print$1}'):-notfound  --ignore-not-found -n openshift-marketplace
   register: kubectl_get_pods
   ignore_errors: true
 

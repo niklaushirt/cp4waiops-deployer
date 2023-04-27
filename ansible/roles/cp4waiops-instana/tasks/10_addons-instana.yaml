@@ -375,8 +375,8 @@
     while [ `oc -n instana-datastores get pods| grep '1/1' | grep -c ""` -lt 6 ]
     do
       oc annotate namespace instana-datastores openshift.io/node-selector-
-      oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}') -n instana-datastores --ignore-not-found
-      oc delete pod $(oc -n instana-operator get pods| grep '0/1'|awk '{print$1}') -n instana-operator --ignore-not-found
+      oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-datastores
+      oc delete pod $(oc -n instana-operator get pods| grep '0/1'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator
       sleep 30
     done
   ignore_errors: true
@@ -401,7 +401,7 @@
     do
       kubectl patch -n instana-operator serviceaccount instana-operator-webhook -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
       kubectl patch -n instana-operator serviceaccount instana-operator -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
-      oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}') -n instana-operator --ignore-not-found
+      oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator
       sleep 120
     done
   ignore_errors: true
@@ -481,8 +481,8 @@
 #       oc -n instana-core create secret tls instana-tls  --cert=./cert.crt --key=./cert.key
 
 
-#       oc delete pod $(oc -n instana-core get pods| grep acceptor|awk '{print$1}') -n instana-core --ignore-not-found
-#       oc delete pod $(oc -n instana-core get pods| grep gateway|awk '{print$1}') -n instana-core --ignore-not-found
+#       oc delete pod $(oc -n instana-core get pods| grep acceptor|awk '{print$1}'):-notfound  --ignore-not-found -n instana-core --ignore-not-found
+#       oc delete pod $(oc -n instana-core get pods| grep gateway|awk '{print$1}'):-notfound  --ignore-not-found -n instana-core --ignore-not-found
 #     else
 #         echo "✅ Seems that you're NOT on Techzone IPI"  
 #         echo "✅ No need to patch the certificates any further"  
