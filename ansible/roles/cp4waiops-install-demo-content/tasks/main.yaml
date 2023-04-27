@@ -125,6 +125,7 @@
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 TOPOLOGY"
     - "     🈸 Install Demo Applications:                {{current_cp4waiops_feature.install_demoapps}}"
+    - "     🈸 RobotShop Color (classic/white):          {{current_cp4waiops_feature.robotshop_color | default('not defined - defaults to classic') }}"
     - "     🛠️ Create Demo overlay topology:             {{current_cp4waiops_feature.install_custom_topology}}"
     - "     🛠️ Create Demo K8s Observers:                {{current_cp4waiops_feature.install_demoapps_observer}}"
     - "     🛠️ Create Demo Templates:                    {{current_cp4waiops_feature.create_topology_templates}}"

@@ -756,7 +756,7 @@ spec:
       
       containers:
       - name: web
-        image: quay.io/niklaushirt/rs-web:1.0
+        image: quay.io/niklaushirt/rs-web:{{current_cp4waiops_feature.robotshop_color | default('classic') }}
         imagePullPolicy: IfNotPresent
         env:
         - name: INSTANA_EUM_KEY
