@@ -113,13 +113,28 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Delete lingering Pods before check for reinstall
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name:   🚀 CP4WAIOPS CATALOG - Delete operator for pull secret (hack)
+- name:   🚀 CP4WAIOPS CATALOG - Delete operator for pull secret
   shell: |
     oc delete pod $(oc get po -n openshift-marketplace|grep ImagePullBackOff|awk '{print$1}'):-notfound  --ignore-not-found -n openshift-marketplace
   register: kubectl_get_pods
   ignore_errors: true
 
 
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ff7700'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for ibm-operator-catalog to become ready (about xxx-xxxx minutes) - Started at {{ ansible_date_time.time }}'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for Marketplace being ready
@@ -198,7 +213,7 @@
       backgroundColor: '#ff7700'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for CSVs to become ready (about 5-10 minutes)'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for CSVs to become ready (about 5-10 minutes) - Started at {{ ansible_date_time.time }}'    
     EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  
