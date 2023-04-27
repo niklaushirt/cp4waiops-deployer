@@ -370,6 +370,24 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for DataStores being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ff7700'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for DataStores to become ready (about 5-10 minutes) - Started at $(date +%H:%M:%S) UTC'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
+
+
 - name:   🕦 INSTANA - Wait for DataStores to become ready
   shell: |
     while [ `oc -n instana-datastores get pods| grep '1/1' | grep -c ""` -lt 6 ]
@@ -429,6 +447,22 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for Core CR being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ff7700'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for Core to become ready (about 5-10 minutes) - Started at $(date +%H:%M:%S) UTC'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
 - name:   🕦 INSTANA - Wait for Core Instance to become ready
   shell: oc -n instana-core get core instana-core -o=custom-columns=STATUS:.status.componentsStatus --no-headers
   register: kubectl_get_pods
@@ -452,6 +486,22 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for Unit CR being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ff7700'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for Unit to become ready (about 5-10 minutes) - Started at $(date +%H:%M:%S) UTC'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
 - name:   🕦 INSTANA - Wait for Unit Instance to become ready
   shell: oc -n instana-units get unit aiops-dev -o=custom-columns=STATUS:.status.componentsStatus --no-headers
   register: kubectl_get_pods
