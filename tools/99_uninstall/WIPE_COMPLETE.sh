@@ -45,10 +45,10 @@ echo " 🧻 Delete OPERANDREQUESTS"
 oc delete operandrequests.operator.ibm.com -n cp4waiops --all --force --grace-period=0 &
 oc delete operandrequests.operator.ibm.com -n ibm-common-services --all --force --grace-period=0 &
 
-kubectl patch operandrequests.operator.ibm.com -n cp4waiops iaf-core-operator  -p '{"metadata":{"finalizers":null}}' --type=merge          
-kubectl patch operandrequests.operator.ibm.com -n cp4waiops iaf-eventprocessing-operator  -p '{"metadata":{"finalizers":null}}' --type=merge
-kubectl patch operandrequests.operator.ibm.com -n cp4waiops iaf-operator  -p '{"metadata":{"finalizers":null}}' --type=merge               
-kubectl patch operandrequests.operator.ibm.com -n cp4waiops ibm-elastic-operator -p '{"metadata":{"finalizers":null}}' --type=merge       
+oc patch operandrequests.operator.ibm.com -n cp4waiops iaf-core-operator  -p '{"metadata":{"finalizers":null}}' --type=merge          
+oc patch operandrequests.operator.ibm.com -n cp4waiops iaf-eventprocessing-operator  -p '{"metadata":{"finalizers":null}}' --type=merge
+oc patch operandrequests.operator.ibm.com -n cp4waiops iaf-operator  -p '{"metadata":{"finalizers":null}}' --type=merge               
+oc patch operandrequests.operator.ibm.com -n cp4waiops ibm-elastic-operator -p '{"metadata":{"finalizers":null}}' --type=merge       
 
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
@@ -103,11 +103,11 @@ echo "--------------------------------------------------------------------------
 echo " 🧻 Delete operandbindinfos"
 oc delete operandbindinfos.operator.ibm.com -n ibm-common-services --all &
 
-kubectl patch namespacescope.operator.ibm.com -n ibm-common-services common-service  -p '{"metadata":{"finalizers":null}}' --type=merge          
-kubectl patch namespacescope.operator.ibm.com -n ibm-common-services nss-managedby-odlm  -p '{"metadata":{"finalizers":null}}' --type=merge          
-kubectl patch namespacescope.operator.ibm.com -n ibm-common-services nss-odlm-scope  -p '{"metadata":{"finalizers":null}}' --type=merge          
-kubectl patch namespacescope.operator.ibm.com -n ibm-common-services odlm-scope-managedby-odlm  -p '{"metadata":{"finalizers":null}}' --type=merge          
-kubectl patch operandbindinfo.operator.ibm.com -n ibm-common-services ibm-licensing-bindinfo  -p '{"metadata":{"finalizers":null}}' --type=merge          
+oc patch namespacescope.operator.ibm.com -n ibm-common-services common-service  -p '{"metadata":{"finalizers":null}}' --type=merge          
+oc patch namespacescope.operator.ibm.com -n ibm-common-services nss-managedby-odlm  -p '{"metadata":{"finalizers":null}}' --type=merge          
+oc patch namespacescope.operator.ibm.com -n ibm-common-services nss-odlm-scope  -p '{"metadata":{"finalizers":null}}' --type=merge          
+oc patch namespacescope.operator.ibm.com -n ibm-common-services odlm-scope-managedby-odlm  -p '{"metadata":{"finalizers":null}}' --type=merge          
+oc patch operandbindinfo.operator.ibm.com -n ibm-common-services ibm-licensing-bindinfo  -p '{"metadata":{"finalizers":null}}' --type=merge          
 
 
 
@@ -121,7 +121,9 @@ oc delete ns cp4waiops &
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete *.ibm.com CustomResourceDefinition"
-oc delete CustomResourceDefinition $(oc get CustomResourceDefinition| grep .ibm.com|awk '{print$1}') --ignore-not-found
+oc delete CustomResourceDefinition $(oc get CustomResourceDefinition| grep .ibm.com|awk '{print$1}') --ignore-not-found &
+sleep 5
+oc patch CustomResourceDefinition $(oc get CustomResourceDefinition| grep .ibm.com|awk '{print$1}')  -p '{"metadata":{"finalizers":null}}' --type=merge 
 
 
 

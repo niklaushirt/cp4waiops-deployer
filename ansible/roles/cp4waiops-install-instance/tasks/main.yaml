@@ -68,7 +68,7 @@
       backgroundColor: '#141a6b'
       color: '#fff'
       location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
-      text: 'Installing  {{current_cp4waiops_feature.kind}} - Version {{current_cp4waiops_feature.subscription_channel}}'    
+      text: 'Installing  {{current_cp4waiops_feature.kind}} - {{global_config.environment_name | default("Demo")}} - Version {{current_cp4waiops_feature.subscription_channel}}'    
     EOF
   ignore_errors: true
 
