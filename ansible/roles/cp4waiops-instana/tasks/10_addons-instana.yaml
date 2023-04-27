@@ -61,13 +61,13 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name: 🚀 INSTANA - Check cert-manager
   shell: |
-    CERT_MANAGER_CRD=$(oc get -n cert-manager pods|grep "cert-manager"|grep "1/1"|wc -l|tr -d ' ') 
+    CERT_MANAGER_CRD=$(oc get pods -A|grep "cert-manager"|grep "1/1"|wc -l|tr -d ' ') 
     echo $CERT_MANAGER_CRD
   ignore_errors: true
   register: cert_check
 
 
-- name: 🚀 INSTANA - Install cert-manager
+- name: 🚀 INSTANA - Install cert-manager {{cert_check.stdout}}
   shell: |
     oc apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml
     sleep 15
