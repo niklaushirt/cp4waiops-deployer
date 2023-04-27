@@ -61,7 +61,7 @@
       backgroundColor: '#ff7700'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for Cassandra to become ready (about 5-15 minutes) - Started at {{ ansible_date_time.time }}'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for Cassandra to become ready (about 5-15 minutes) - Started at {{ ansible_date_time.time }} UTC'    
     EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  
@@ -91,7 +91,7 @@
       backgroundColor: '#ff7700'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for Topology to become ready (about 5-10 minutes) - Started at {{ ansible_date_time.time }}'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for Topology to become ready (about 25-35 minutes) - Started at {{ ansible_date_time.time }} UTC'    
     EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  
