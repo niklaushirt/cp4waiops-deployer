@@ -24,7 +24,7 @@
       backgroundColor: '#ff7700'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for AWX to become ready (this can take some time) (about 5-10 minutes) - Started at {{ ansible_date_time.time }} UTC'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for AWX to become ready (this can take some time) (about 5-10 minutes) - Started at $(date +%H:%M:%S) UTC'    
     EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  

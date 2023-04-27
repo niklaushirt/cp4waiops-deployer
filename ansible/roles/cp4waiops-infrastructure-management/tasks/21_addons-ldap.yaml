@@ -101,7 +101,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for LDAP ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name: 🕦 CHECK -  Wait for 2 pods Running in namespace {{ current_cp4waiops_feature.ldap_namespace }} (this might take some time)
+- name: 🕦 CHECK -  Wait for 2 pods Running in namespace {{ current_cp4waiops_feature.ldap_namespace }}
   shell: |
     NUM_PODS=$(oc get po -n {{ current_cp4waiops_feature.ldap_namespace }} | grep openldap| grep Running| wc -l)
     echo $NUM_PODS
