@@ -61,7 +61,7 @@ cat <<EOF | oc apply -f -
 apiVersion: console.openshift.io/v1
 kind: ConsoleNotification
 metadata:
-    name: cp4waiops-notification-errors
+    name: cp4waiops-notification-log
 spec:
     backgroundColor: '#ffd500'
     color: '#000'
@@ -73,6 +73,8 @@ spec:
 EOF
 fi
 fi
+
+
 
 
 
