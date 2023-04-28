@@ -126,7 +126,7 @@
     kubernetes.core.k8s:
       state: present
       namespace: sock-shop
-      src: ./templates/demo_apps/sockshop/sockshop-all-in-one.yaml
+      template: ./templates/demo_apps/sockshop/sockshop-all-in-one.j2
     #when: INSTALL_DEMO_APPS == true
 
   when: OBJECT_EXISTS.stdout|length == 0
