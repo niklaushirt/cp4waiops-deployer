@@ -30,7 +30,7 @@ I installed the demo in a ROKS environment.
 
 You'll need:
 
-- ROKS 4.10
+- ROKS 4.12
 - 5x worker nodes Flavour `b3c.16x64` (so 16 CPU / 64 GB) 
 
 
@@ -59,7 +59,7 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 	1. Geograpy: whatever is closest to you
 	2. Worker node count: 5
 	3. Flavour: b3c.16x64
-	4. OpenShift Version: 4.10
+	4. OpenShift Version: 4.12
 
 	![K8s CNI](./doc/pics/roks02.png)
 

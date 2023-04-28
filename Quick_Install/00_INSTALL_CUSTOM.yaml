@@ -22,7 +22,7 @@
 #   Geograpy: prefer Dallas or London (others might be slower)
 #   Worker node count: 5
 #   Flavour: b3c.32x128 ❗ 
-#   OpenShift Version: 4.10
+#   OpenShift Version: 4.12
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Installs:
@@ -177,7 +177,7 @@ spec:
               
               openshift:
               - name: "mycluster"
-                ocp_version: "4.10"
+                ocp_version: "4.12"
                 cluster_name: "mycluster"
                 domain_name: example.com
                 openshift_storage:
