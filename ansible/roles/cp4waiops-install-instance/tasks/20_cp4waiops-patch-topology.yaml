@@ -111,9 +111,9 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Patch Topology Pods
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name: 🩹 PATCH - Patch aiops-topology-merge
-  shell: oc patch deployment aiops-topology-merge -n {{ current_cp4waiops_cluster.project }} --patch-file "{{role_path}}/templates/waiops/patches/aiops-topology-merge-patch.yaml"
-  ignore_errors: true
+# - name: 🩹 PATCH - Patch aiops-topology-merge
+#   shell: oc patch deployment aiops-topology-merge -n {{ current_cp4waiops_cluster.project }} --patch-file "{{role_path}}/templates/waiops/patches/aiops-topology-merge-patch.yaml"
+#   ignore_errors: true
 
 
 - name: 🩹 PATCH - Patch aiops-topology-search
