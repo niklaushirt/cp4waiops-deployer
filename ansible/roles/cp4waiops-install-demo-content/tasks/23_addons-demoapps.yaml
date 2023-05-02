@@ -75,7 +75,7 @@
     kubernetes.core.k8s:
       state: present
       namespace: robot-shop
-      src: ./templates/demo_apps/robotshop/robot-all-in-one.yaml
+      template: ./templates/demo_apps/robotshop/robot-all-in-one.j2
     #when: INSTALL_DEMO_APPS == true
 
   - name: 📺 DEMO APPS - Create robot-shop load generation
