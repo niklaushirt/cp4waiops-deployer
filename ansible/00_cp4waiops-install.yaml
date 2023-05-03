@@ -96,7 +96,7 @@
   # Loop over all Clusters
   - name: ♻️  Deploy Cloud Pak for Watson AIOps Assets - Loop over Clusters
     include_role:
-      name: cp4waiops-install
+      name: cp4waiops-install-main-loop
     loop: "{{ all_config.cp4waiops | default([]) }}"
     loop_control:
       loop_var: current_cp4waiops_cluster

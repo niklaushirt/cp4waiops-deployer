@@ -74,7 +74,7 @@
 # Loop over all instances
 - name: MAIN LOOP   🚀 Deploy Cloud Pak for Watson AIOps Assets - Loop over Instances for {{current_cp4waiops_cluster.project}}
   include_role:
-    name: cp4waiops-install-modules
+    name: cp4waiops-install-modules-loop
   loop: "{{ current_cp4waiops_cluster.instances}}"
   loop_control:
     loop_var: current_cp4waiops_feature
