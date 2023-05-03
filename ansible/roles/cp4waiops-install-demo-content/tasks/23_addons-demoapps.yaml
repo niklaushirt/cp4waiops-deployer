@@ -43,11 +43,11 @@
 # APPLICATION ROBOT SHOP
 # --------------------------------------------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name: 📺 DEMO APPS - Check RobotShop
-  shell: |
-    oc get namespace --ignore-not-found robot-shop
-  ignore_errors: true
-  register: OBJECT_EXISTS
+# - name: 📺 DEMO APPS - Check RobotShop
+#   shell: |
+#     oc get namespace --ignore-not-found robot-shop
+#   ignore_errors: true
+#   register: OBJECT_EXISTS
 
 
 - name: 📺 DEMO APPS - Install RobotShop
@@ -84,7 +84,7 @@
       namespace: robot-shop
       src: ./templates/demo_apps/robotshop/load-deployment.yaml
     #when: INSTALL_DEMO_APPS == true
-  when: OBJECT_EXISTS.stdout|length == 0
+  #when: OBJECT_EXISTS.stdout|length == 0
 
 
 
@@ -94,11 +94,11 @@
 # APPLICATION SOCK SHOP
 # --------------------------------------------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name: 📺 DEMO APPS - Check SockShop
-  shell: |
-    oc get namespace --ignore-not-found sock-shop
-  ignore_errors: true
-  register: OBJECT_EXISTS
+# - name: 📺 DEMO APPS - Check SockShop
+#   shell: |
+#     oc get namespace --ignore-not-found sock-shop
+#   ignore_errors: true
+#   register: OBJECT_EXISTS
 
 
 - name: 📺 DEMO APPS - Install SockShop
@@ -129,7 +129,7 @@
       template: ./templates/demo_apps/sockshop/sockshop-all-in-one.j2
     #when: INSTALL_DEMO_APPS == true
 
-  when: OBJECT_EXISTS.stdout|length == 0
+  #when: OBJECT_EXISTS.stdout|length == 0
 
 
 
