@@ -22,7 +22,7 @@ echo ""
 
 
 # echo "🚀 AWX - Create AWX Execution Environment"
-#     export RUNNER_IMAGE=niklaushirt/cp4waiops-awx:0.1.4
+#     export RUNNER_IMAGE=quay.io/niklaushirt/cp4waiops-awx:0.1.4
 #     export result=$(curl -X "POST" -s "$AWX_URL/api/v2/execution_environments/" -u "admin:$AWX_PWD" --insecure \
 #     -H 'content-type: application/json' \
 #     -d $'{

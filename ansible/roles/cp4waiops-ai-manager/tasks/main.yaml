@@ -67,7 +67,8 @@
     - "  📥 CONFIG"
     - "     ✅ Installation Name:                        {{current_cp4waiops_feature.waiops_name}}"
     - "     🔎 AIManager Size:                           {{current_cp4waiops_feature.waiops_size}}"
-    - "     🔽 Custom Siting File:                       {{current_cp4waiops_feature.custom_size_file | default('none')}}"
+    - "     🔽 Custom Sizing File:                       {{current_cp4waiops_feature.custom_size_file | default('none')}}"
+    - "     🔽 Install Feature Flags:                    {{current_cp4waiops_feature.install_feature_flags | default('not defined')}}"
     - "-----------------------------------------------------------------------------------------------"
     - "  📥 VERSION "
     - "     🚀 Subscription Channel:                     {{current_cp4waiops_feature.subscription_channel}}"
@@ -163,15 +164,28 @@
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-# INSTALL AI MANAGER
+# INSTALL AI MANAGER OPERATOR
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 - name: 📥 Install AI Manager Operator
   include_tasks: 11_aimanager-operator.yaml
 
 
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL FEATURE FLAGS
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Install  Feature Flags
+- name: 📥  Install Feature Flags
+  include_tasks: 12_aimanager-featureflags.yaml
+  when: current_cp4waiops_feature.install_feature_flags == true | default('false')
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL AI MANAGER
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install CP4WAIOPS Instance
 - name: 📥 Install AI Manager Instance
-  include_tasks: 12_aimanager-install.yaml
+  include_tasks: 19_aimanager-install.yaml
       
 
 

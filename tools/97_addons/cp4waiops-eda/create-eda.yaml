@@ -51,7 +51,7 @@ spec:
         app: eda-instance
     spec:
       containers:
-      - image: niklaushirt/eda-container:0.1
+      - image: quay.io/niklaushirt/eda-container:0.1
         imagePullPolicy: Always
         name: eda-instance
         command:

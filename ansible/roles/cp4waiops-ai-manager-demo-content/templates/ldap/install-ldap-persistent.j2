@@ -322,7 +322,7 @@ spec:
             mountPath: /config-storage
       containers:
         - name: openldap
-          image: osixia/openldap:1.5.0
+          image: quay.io/niklaushirt/openldap:1.5.0
           args: ["--loglevel", "debug"]
           volumeMounts:
             - name: config-storage
@@ -380,7 +380,7 @@ spec:
     spec:
       containers:
       - name: openldap-admin
-        image: docker.io/osixia/phpldapadmin:0.7.0
+        image: quay.io/niklaushirt/phpldapadmin:0.7.0
         ports:
           - containerPort: 80
         env:

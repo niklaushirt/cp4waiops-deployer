@@ -1,0 +1,350 @@
+---
+# Source: instana-autotrace-webhook/templates/mutating-webhook-rbac.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: instana-autotrace-webhook
+---
+# Source: instana-autotrace-webhook/templates/mutating-webhook-rbac.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: instana-autotrace-webhook
+  namespace: instana-autotrace-webhook
+  labels:
+    app.kubernetes.io/name: instana-autotrace-webhook
+    app.kubernetes.io/instance: instana-autotrace-webhook
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: instana-autotrace-webhook-1.247.0
+---
+# Source: instana-autotrace-webhook/templates/mutating-webhook-image-download-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: containers-instana-io
+  labels:
+    app.kubernetes.io/name: instana-autotrace-webhook
+    app.kubernetes.io/instance: instana-autotrace-webhook
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: instana-autotrace-webhook-1.247.0
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJjb250YWluZXJzLmluc3RhbmEuaW8iOnsidXNlcm5hbWUiOiJfIiwicGFzc3dvcmQiOiJhYWFhZG93bmxvYWRfa2V5IiwiYXV0aCI6Ilh6cGhZV0ZoWkc5M2JteHZZV1JmYTJWNSJ9fX0=
+---
+# Source: instana-autotrace-webhook/templates/mutating-webhook-rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: instana-autotrace-webhook-clusterrole
+  labels:
+    app.kubernetes.io/name: instana-autotrace-webhook
+    app.kubernetes.io/instance: instana-autotrace-webhook
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: instana-autotrace-webhook-1.247.0
+rules:
+- apiGroups: ["admissionregistration.k8s.io"]
+  resources: ["mutatingwebhookconfigurations"]
+  resourceNames: ["*"]
+  verbs: ["get", "list", "watch", "patch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets", "daemonsets", "statefulsets"]
+  resourceNames: ["*"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["pods", "configmaps"]
+  resourceNames: ["*"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps.openshift.io"]
+  resources: ["deploymentconfigs"]
+  resourceNames: ["*"]
+  verbs: ["get", "list", "watch"]
+
+- apiGroups: ["security.openshift.io"]
+  resourceNames: ["hostnetwork"]
+  resources: ["securitycontextconstraints"]
+  verbs: ["use"]
+---
+# Source: instana-autotrace-webhook/templates/mutating-webhook-rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: instana-autotrace-webhook-binding
+  labels:
+    app.kubernetes.io/name: instana-autotrace-webhook
+    app.kubernetes.io/instance: instana-autotrace-webhook
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: instana-autotrace-webhook-1.247.0
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: instana-autotrace-webhook-clusterrole
+subjects:
+- kind: ServiceAccount
+  name: instana-autotrace-webhook
+  namespace: instana-autotrace-webhook
+---
+# Source: instana-autotrace-webhook/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: instana-autotrace-webhook
+  labels:
+    app.kubernetes.io/name: instana-autotrace-webhook
+    app.kubernetes.io/instance: instana-autotrace-webhook
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: instana-autotrace-webhook-1.247.0
+  annotations:
+    service.beta.openshift.io/serving-cert-secret-name: instana-autotrace-webhook-certs
+spec:
+  selector:
+    app.kubernetes.io/instance: instana-autotrace-webhook
+  ports:
+    - name: https
+      protocol: TCP
+      port: 42650
+      targetPort: 42650
+---
+# Source: instana-autotrace-webhook/templates/deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: instana-autotrace-webhook
+  labels:
+    app.kubernetes.io/name: instana-autotrace-webhook
+    app.kubernetes.io/instance: instana-autotrace-webhook
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: instana-autotrace-webhook-1.247.0
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: instana-autotrace-webhook
+  strategy:
+    # Since we bind to the host network, a rolling update on small clusters may deadlock,
+    # with new pods not able to start because the network port is taken, and old pods remaining
+    # around until the new ones are up
+    type: Recreate
+  template:
+    metadata:
+      name: instana-autotrace-webhook
+      labels:
+        app.kubernetes.io/name: instana-autotrace-webhook
+        app.kubernetes.io/instance: instana-autotrace-webhook
+        app.kubernetes.io/managed-by: Helm
+        helm.sh/chart: instana-autotrace-webhook-1.247.0
+        instana-autotrace-ignore: "true"
+    spec:
+
+      serviceAccountName: instana-autotrace-webhook
+      securityContext:
+      imagePullSecrets:
+        - name: instana-registry
+      containers:
+      - name: instana-autotrace-webhook
+        image: "containers.instana.io/instana/release/agent/instana-autotrace-webhook@sha256:e161b5fb6dc6cc24e7855ac0e3f887af4926ba4eb25e6b36d29a974e44c09a67"
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - all
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 512Mi
+        env:
+        - name: WEBHOOK_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: WEBHOOK_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: SERVER_PORT
+          value: "42650"
+        - name: INSTANA_AUTOTRACE_WEBHOOK_VERSION
+          value: 1.247.0
+        - name: INSTANA_AUTOTRACE_IGNORED_NAMESPACES
+          value: kube-*,instana-*,openshift-*,pks-system
+        - name: INSTANA_INSTRUMENTATION_INIT_CONTAINER_SECURITY_CONTEXT
+          value: "{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"all\"]},\"privileged\":false,\"runAsNonRoot\":true}"
+        - name: INSTANA_INSTRUMENTATION_INIT_CONTAINER_IMAGE
+          value: "icr.io/instana/instrumentation@sha256:af17374d99d2b3eb9a3836580944ad038d5ed7adcf512cb69d5a303da12eb989"
+        - name: INSTANA_INSTRUMENTATION_INIT_CONTAINER_IMAGE_PULL_POLICY
+          value: "IfNotPresent"
+        - name: INSTANA_AUTOTRACE_OPT_IN
+          value: "false"
+        - name: INSTANA_AUTOTRACE_NODEJS
+          value: "true"
+        - name: INSTANA_AUTOTRACE_NETCORE
+          value: "true"
+        - name: INSTANA_AUTOTRACE_RUBY
+          value: "true"
+        - name: INSTANA_AUTOTRACE_PYTHON
+          value: "true"
+        - name: INSTANA_AUTOTRACE_ACE
+          value: "false"
+        - name: INSTANA_AUTOTRACE_IBMMQ
+          value: "false"
+        - name: INSTANA_AUTOTRACE_NODEJS_ESM
+          value: "false"
+        - name: INSTANA_AUTOTRACE_INGRESS_NGINX
+          value: "false"
+        - name: INSTANA_AUTOTRACE_INGRESS_NGINX_STATUS
+          value: "false"
+        - name: INSTANA_AUTOTRACE_INGRESS_NGINX_STATUS_ALLOW
+          value: "all"
+        - name: INSTANA_AUTOTRACE_USE_LIB_INSTANA_INIT
+          value: "true"
+        - name: INSTANA_AUTOTRACE_INIT_MEMORY_LIMIT
+          value: "64Mi"
+        - name: INSTANA_AUTOTRACE_INIT_CPU_LIMIT
+          value: "250m"
+        - name: LOGGING_LEVEL_ROOT
+          value: INFO
+        - name: JAVA_TOOL_OPTIONS
+          value: 
+        volumeMounts:
+          - name: certificates
+            mountPath: /app/certs
+        ports:
+        - containerPort: 42650
+          hostPort: 42650
+      volumes:
+        - name: certificates
+          secret:
+            secretName: instana-autotrace-webhook-certs
+---
+# Source: instana-autotrace-webhook/templates/mutating-webhook-and-cert-secret.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: instana-autotrace-webhook
+  labels:
+    app.kubernetes.io/name: instana-autotrace-webhook
+    app.kubernetes.io/instance: instana-autotrace-webhook
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: instana-autotrace-webhook-1.247.0
+    autotrace: instana-autotrace-webhook-impl
+  annotations:
+    service.beta.openshift.io/inject-cabundle: "true"
+webhooks:
+- name: autotrace-webhook.instana.com
+  failurePolicy: Ignore # We do not want to cause any trouble in scheduling
+  reinvocationPolicy: IfNeeded # If some other mutating webhook adds containers or other stuff, we wanna get another go ;-)
+  matchPolicy: Equivalent
+  rules:
+  - apiGroups: ['']
+    apiVersions: ['v1', 'v1beta1']
+    resources:
+    - pods
+    - configmaps
+    operations:
+      - 'CREATE'
+      - 'UPDATE'
+  - apiGroups: ['apps']
+    apiVersions: ['v1', 'v1beta1']
+    resources:
+    - deployments
+    - daemonsets
+    - replicaset
+    - statefulset
+    operations:
+      - 'CREATE'
+      - 'UPDATE'
+  - apiGroups: ['apps.openshift.io']
+    apiVersions: ['v1']
+    resources:
+    - deploymentconfigs
+    operations:
+      - 'CREATE'
+      - 'UPDATE'
+  clientConfig:
+    service:
+      namespace: instana-autotrace-webhook
+      name: instana-autotrace-webhook
+      port: 42650
+      path: /mutate
+  admissionReviewVersions:     
+    - v1
+    - v1beta1
+  # Only include 'sideEffects' field in Kubernetes 1.12+
+  sideEffects: NoneOnDryRun
+  timeoutSeconds: 5
+  namespaceSelector:
+    matchExpressions:
+      - key: "kubernetes.io/metadata.name"
+        operator: NotIn
+        values: 
+          - pks-system
+          - kube-system
+          - kube-public
+          - kube-node-lease
+          - openshift-apiserver
+          - openshift-apiserver-operator
+          - openshift-authentication
+          - openshift-authentication-operator
+          - openshift-cloud-controller-manager
+          - openshift-cloud-controller-manager-operator
+          - openshift-cloud-credential-operator
+          - openshift-cloud-network-config-controller
+          - openshift-cluster-csi-drivers
+          - openshift-cluster-machine-approver
+          - openshift-cluster-node-tuning-operator
+          - openshift-cluster-samples-operator
+          - openshift-cluster-storage-operator
+          - openshift-cluster-version
+          - openshift-config
+          - openshift-config-managed
+          - openshift-config-operator
+          - openshift-console
+          - openshift-console-operator
+          - openshift-console-user-settings
+          - openshift-controller-manager
+          - openshift-controller-manager-operator
+          - openshift-distributed-tracing
+          - openshift-dns
+          - openshift-dns-operator
+          - openshift-etcd
+          - openshift-etcd-operator
+          - openshift-host-network
+          - openshift-image-registry
+          - openshift-infra
+          - openshift-ingress
+          - openshift-ingress-canary
+          - openshift-ingress-operator
+          - openshift-insights
+          - openshift-kni-infra
+          - openshift-kube-apiserver
+          - openshift-kube-apiserver-operator
+          - openshift-kube-controller-manager
+          - openshift-kube-controller-manager-operator
+          - openshift-kube-scheduler
+          - openshift-kube-scheduler-operator
+          - openshift-kube-storage-version-migrator
+          - openshift-kube-storage-version-migrator-operator
+          - openshift-machine-api
+          - openshift-machine-config-operator
+          - openshift-marketplace
+          - openshift-monitoring
+          - openshift-multus
+          - openshift-network-diagnostics
+          - openshift-network-operator
+          - openshift-node
+          - openshift-nutanix-infra
+          - openshift-oauth-apiserver
+          - openshift-openstack-infra
+          - openshift-operator-lifecycle-manager
+          - openshift-operators
+          - openshift-operators-redhat
+          - openshift-ovirt-infra
+          - openshift-route-controller-manager
+          - openshift-sdn
+          - openshift-service-ca
+          - openshift-service-ca-operator
+          - openshift-user-workload-monitoring
+          - openshift-vsphere-infra
+          - instana-autotrace-webhook

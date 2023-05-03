@@ -17,7 +17,7 @@ spec:
         app: cp4waiops-demo-ui
     spec:
       containers:
-      - image: docker.io/niklaushirt/cp4waiops-demo-ui:1.20
+      - image: quay.io/niklaushirt/cp4waiops-demo-ui:1.20
         imagePullPolicy: Always
         name: cp4waiops-demo-ui
         command:
@@ -47,6 +47,8 @@ spec:
             name:  cp4waiops-demo-ui-config-events
         - configMapRef:
             name:  cp4waiops-demo-ui-config-logs
+        - configMapRef:
+            name:  cp4waiops-demo-ui-config-logs-sock
         - configMapRef:
             name:  cp4waiops-demo-ui-config-metrics
       serviceAccountName: cp4waiops-demo-ui-admin

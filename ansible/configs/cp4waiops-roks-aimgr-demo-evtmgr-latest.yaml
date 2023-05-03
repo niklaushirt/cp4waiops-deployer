@@ -72,7 +72,7 @@ cp4waiops:
     case_install: false
     case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
     case_name: ibm-cp-waiops
-    case_version: 1.5.0
+    case_version: 1.6.0
     case_inventory_setup: cpwaiopsSetup
     
 
@@ -97,12 +97,12 @@ cp4waiops:
     training_data_repo: cp4waiops-trainingdata
 
     # TOPOLOGY
-    # Install RobotShop Application
-    install_robotshop: true
+    # Install DemoApps Application
+    install_demoapps: true
     # Create Topology
     create_topology: true
-    # Create RobotShop overlay topology
-    install_robotshop_topology: true
+    # Create Custom overlay topology
+    install_custom_topology: true
 
     # RUNBOOKS
     # Install AWX and create Runbooks

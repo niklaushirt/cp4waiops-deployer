@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: load
-          image: docker.io/niklaushirt/cp4waiops-tools:2.0
+          image: quay.io/niklaushirt/cp4waiops-tools:2.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -81,7 +81,7 @@ spec:
             - name: INDEX_OVERWRITE
               value : "false"
             - name: VERSION
-              value : "v3.4.1"
+              value : "latest"
       restartPolicy: Never
 
   backoffLimit: 4

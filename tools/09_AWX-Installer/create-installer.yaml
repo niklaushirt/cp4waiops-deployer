@@ -34,7 +34,7 @@ spec:
         app: cp4waiops-installer
     spec:
       containers:
-      - image: docker.io/niklaushirt/cp4waiops-installer:2.0
+      - image: quay.io/niklaushirt/cp4waiops-installer:2.0
         imagePullPolicy: Always
         name: installer
         command:

@@ -16,7 +16,7 @@ spec:
         app: actionscript-pod
     spec:
       containers:
-      - image: docker.io/niklaushirt/bastion-ssh:1.0.0
+      - image: quay.io/niklaushirt/bastion-ssh:1.0.0
         imagePullPolicy: IfNotPresent
         name: bastion
         command:

@@ -52,7 +52,7 @@
           "output": "alert.insights.[]",
           "arguments": {
             "correlationKey": {
-              "$template": "{{alert.type.eventType}}"
+              "$template": "{{alert.resource.application}}"
             },
             "relationshipType": "aiops.ibm.com/insight-type/relationship/causal",
             "relationshipSource": "aiops.ibm.com/insight-source/relationship/causal/custom",

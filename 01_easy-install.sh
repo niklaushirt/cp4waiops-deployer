@@ -443,7 +443,7 @@ spec:
     spec:
       containers:
         - name: install
-          image: docker.io/niklaushirt/cp4waiops-tools:2.0
+          image: quay.io/niklaushirt/cp4waiops-tools:2.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
