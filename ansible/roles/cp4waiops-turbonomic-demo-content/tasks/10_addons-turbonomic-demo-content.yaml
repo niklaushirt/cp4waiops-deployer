@@ -717,7 +717,7 @@
   shell: |
     echo "------------------------------------------------------------------------------------------------------------------------------"
     echo " 📥 Create RobotShop Metrics"
-    export robotshopUUID=$(curl -XGET -s -k "https://{{TURBO_URL}}/api/v3/topologydefinitions" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq -r '.[]|select(.displayName=="RobotShop").uuid')
+    export robotshopUUID=$(curl -XGET -s -k "https://{{TURBO_URL}}/api/v3/topologydefinitions" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq -r '.[]|select(.displayName=="RobotShopSynthetic").uuid')
 
     result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/targets" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '{
         "uuid": "74709422922224",
