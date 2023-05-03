@@ -33,7 +33,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - INSTANA'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Instana Operator {{current_cp4waiops_feature.instana_version}}'    
     EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  
