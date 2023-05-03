@@ -515,46 +515,46 @@
 # --------------------------------------------------------------------------------------------------------
 
 
-- name: 🚀 TURBONOMIC - Create Instana Target
-  shell: |
-    echo "------------------------------------------------------------------------------------------------------------------------------"
-    echo " 📥 Create Instana Target"
-    INSTANA_IP=$(oc get route -n instana-core dev-aiops -o jsonpath={.spec.host})
-    result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/targets" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '{
-        "uuid": "74709474070544",
-        "displayName": "159.122.143.166",
-        "category": "Applications and Databases",
-        "inputFields": [
-          {
-            "name": "apiToken",
-            "value": "ChangeMe"
-          },
-          {
-            "name": "address",
-            "value": "'$INSTANA_IP'"
-          },
-          {
-            "name": "collectVmMetrics",
-            "value": "false"
-          }
-        ],
-        "type": "Instana",
-        "readonly": false
-      }')
+# - name: 🚀 TURBONOMIC - Create Instana Target
+#   shell: |
+#     echo "------------------------------------------------------------------------------------------------------------------------------"
+#     echo " 📥 Create Instana Target"
+#     INSTANA_IP=$(oc get route -n instana-core dev-aiops -o jsonpath={.spec.host})
+#     result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/targets" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '{
+#         "uuid": "74709474070544",
+#         "displayName": "159.122.143.166",
+#         "category": "Applications and Databases",
+#         "inputFields": [
+#           {
+#             "name": "apiToken",
+#             "value": "ChangeMe"
+#           },
+#           {
+#             "name": "address",
+#             "value": "'$INSTANA_IP'"
+#           },
+#           {
+#             "name": "collectVmMetrics",
+#             "value": "false"
+#           }
+#         ],
+#         "type": "Instana",
+#         "readonly": false
+#       }')
 
-    echo $result
-    echo ""
-    echo ""
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-  when: current_cp4waiops_feature.target_instana == true
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-  when: current_cp4waiops_feature.target_instana == true
+#     echo $result
+#     echo ""
+#     echo ""
+#   ignore_errors: true
+#   register: output
+#   args:
+#     executable: /bin/bash
+#   when: current_cp4waiops_feature.target_instana == true
+# - name: 🟣  OUTPUT
+#   debug:
+#     var: output.stdout_lines
+#     verbosity: 1
+#   when: current_cp4waiops_feature.target_instana == true
 
 
 
