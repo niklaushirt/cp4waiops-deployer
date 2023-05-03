@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: load
-          image: docker.io/niklaushirt/cp4waiops-tools:2.0
+          image: quay.io/niklaushirt/cp4waiops-tools:2.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -40,7 +40,7 @@ spec:
               echo "    🚀 Starting Data Load"
               echo "   ------------------------------------------------------------------------------------------------------------------------------"
               cd cp4waiops-trainingdata
-              ./training/robotshop-load-logs-for-training.sh
+              ./training/load-logs-for-training.sh
 
               echo "*****************************************************************************************************************************"
               echo " ✅ DONE"
@@ -51,7 +51,7 @@ spec:
             - name: INDEX_OVERWRITE
               value : "true"
             - name: VERSION
-              value : "3.3"
+              value : "latest"
       restartPolicy: Never
 
   backoffLimit: 4

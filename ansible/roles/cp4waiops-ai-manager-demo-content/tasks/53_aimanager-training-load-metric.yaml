@@ -14,6 +14,13 @@
   ignore_errors: true
 
 
+- name: 📥 TRAINING LOAD METRIC - DELETE EXISTING JOB
+  kubernetes.core.k8s:
+    state: absent
+    namespace: default
+    template: ./templates/training/load-job-metric.j2
+
+
 - name: 📥 TRAINING LOAD METRIC - CREATE CLUSTERROLE
   kubernetes.core.k8s:
     state: present

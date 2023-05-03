@@ -16,7 +16,7 @@ spec:
         app: cp4waiops-tools
     spec:
       containers:
-      - image: docker.io/niklaushirt/cp4waiops-tools:2.0
+      - image: quay.io/niklaushirt/cp4waiops-tools:2.0
         imagePullPolicy: IfNotPresent
         name: tools
         command:

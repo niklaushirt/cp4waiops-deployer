@@ -60,7 +60,7 @@ spec:
         app: turbo-gateway
     spec:
       containers:
-      - image: docker.io/niklaushirt/turbo-gateway:1.0.9
+      - image: quay.io/niklaushirt/turbo-gateway:1.0.9
         imagePullPolicy: IfNotPresent
         name: gateway
         command:

@@ -60,6 +60,7 @@
   kubernetes.core.k8s:
     state: present
     template: ./templates/waiops-demo-ui/create-cp4waiops-demo-cm.j2
+  ignore_errors: true
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for Demo UI Configuration being ready
@@ -78,7 +79,7 @@
   kubernetes.core.k8s:
     state: present
     template: ./templates/waiops-demo-ui/create-cp4waiops-demo-deploy.j2
-
+  ignore_errors: true
 
 # Wait for Demo UI being ready
 # --------------------------------------------------------------------------------------------------------------------------------------

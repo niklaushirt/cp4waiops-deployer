@@ -74,7 +74,7 @@ cp4waiops:
     case_install: false
     case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
     case_name: ibm-cp-waiops
-    case_version: 1.5.0
+    case_version: 1.6.0
     case_inventory_setup: cpwaiopsSetup
 
 
@@ -114,15 +114,15 @@ cp4waiops:
 
     # ---------------------------------------------------------------------
     # TOPOLOGY
-    # Install RobotShop Application
-    install_robotshop: false
-    # Install RobotShop K8s Observer
-    install_robotshop_observer: false
+    # Install DemoApps Application
+    install_demoapps: false
+    # Install DemoApps K8s Observer
+    install_demoapps_observer: false
     # Create Topology
     create_topology_templates: false
     create_topology_apps: false
-    # Create RobotShop overlay topology
-    install_robotshop_topology: false
+    # Create Custom overlay topology
+    install_custom_topology: false
 
 
     # ---------------------------------------------------------------------

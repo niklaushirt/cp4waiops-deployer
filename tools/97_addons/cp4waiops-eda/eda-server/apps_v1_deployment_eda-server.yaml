@@ -26,7 +26,7 @@ spec:
           value: postgresql+asyncpg://postgres:secret@postgres/eda_server
         - name: EDA_HOST
           value: 0.0.0.0
-        image: niklaushirt/eda-server:0.1
+        image: quay.io/niklaushirt/eda-server:0.1
         imagePullPolicy: IfNotPresent
         name: eda-server
         ports:

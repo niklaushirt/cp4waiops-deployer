@@ -49,7 +49,7 @@ spec:
         app:  cp4waiops-story-pusher
     spec:
       containers:
-      - image: docker.io/niklaushirt/cp4waiops-story-pusher:0.8
+      - image: quay.io/niklaushirt/cp4waiops-story-pusher:0.8
         imagePullPolicy: Always
         name: gateway
         command:

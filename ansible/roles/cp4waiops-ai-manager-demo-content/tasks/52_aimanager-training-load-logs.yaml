@@ -15,6 +15,11 @@
   ignore_errors: true
 
 
+- name: 📥 TRAINING LOAD LAD - DELETE EXISTING JOB
+  kubernetes.core.k8s:
+    state: absent
+    namespace: turbonomic
+    template: ./templates/training/load-job-logs.j2
 
 
 - name: 📥 TRAINING LOAD LAD - CREATE CLUSTERROLE

@@ -16,7 +16,7 @@ spec:
         app: stress-pod
     spec:
       containers:
-      - image: docker.io/niklaushirt/stress-pod:1.0.1
+      - image: quay.io/niklaushirt/stress-pod:1.0.1
         imagePullPolicy: IfNotPresent
         name: bastion
         command:
