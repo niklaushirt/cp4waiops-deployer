@@ -4,7 +4,7 @@
 ![K8s CNI](./doc/pics/front.png)
 
 
-<center> ©2022 Niklaus Hirt / IBM </center>
+<center> ©2023 Niklaus Hirt / IBM </center>
 
 
 <div style="page-break-after: always;"></div>
