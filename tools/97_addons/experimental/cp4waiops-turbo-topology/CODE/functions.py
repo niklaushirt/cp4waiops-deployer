@@ -10,7 +10,7 @@ import os
 # CREATE ENTITY
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 def writeEntity(topology_file, name, uniqueId,matchTokens,tags,entityType ):
-    entityString='V:{"_operation":"InsertReplace","uniqueId":"'+uniqueId+'","matchTokens":['+matchTokens+'],"tags":['+tags+'],"name":"'+name+'","entityTypes":["'+entityType+'"]}\n'
+    entityString='V:{"_operation":"InsertReplace","uniqueId":"'+uniqueId+'","mergeTokens":["'+name+'-turbonomic-topology"],"matchTokens":['+matchTokens+'],"tags":['+tags+'],"name":"'+name+'","entityTypes":["'+entityType+'"]}\n'
     topology_file.write(entityString)
 
 

@@ -46,7 +46,8 @@ loggedin='false'
 loginip='0.0.0.0'
 
 
-topology_file = open("/tmp/topology.txt", "w")
+#topology_file = open("/tmp/topology.txt", "w")
+topology_file = open("./turbonomic-topology.txt", "w")
 
 
 
