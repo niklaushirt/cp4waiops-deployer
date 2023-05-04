@@ -6,7 +6,7 @@
 
 Use Option 🐥`22` in Easy Install to install a `HUMIO ` instance
 
-## 15.2 Live Humio integration with AI Manager
+## 15.2 Live Humio integration with CP4WAIOps
 
 ### 15.2.1 Humio URL
 
@@ -23,7 +23,7 @@ Get it from Humio --> `Owl` in the top right corner / `Your Account` / `API Toke
 
 ### 15.2.3 Create Humio Log Integration
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`Data and tool integrations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`Data and tool integrations`
 * Under `Humio`, click on `Add Connection`
 * Click `Connect`
 * Name it `Humio`

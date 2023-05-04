@@ -9,11 +9,27 @@
 
 - name: Log
   shell: |
-    export MESSAGE=" 🌏 Update AI Manager Cards"
+    export MESSAGE=" 🌏 Update CP4WAIOps Cards"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: true
+
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Update CP4WAIOps Cards'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
 
 
 
@@ -55,13 +71,13 @@
         ZEN_TOKEN=$(echo "${ZEN_LOGIN_RESPONSE}" | jq -r .token)
         echo "${ZEN_TOKEN}"
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output   
   - name: 🚀 ZEN CARDS - Set ZEN_TOKEN
     set_fact: ZEN_TOKEN={{ output.stdout_lines[0] }} 
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: ZEN_TOKEN
       verbosity: 1
@@ -81,13 +97,13 @@
         curl -X "DELETE" -k "https://$ROUTE/zen-data/v1/custom_cards/appscard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json"
         curl -X "DELETE" -k "https://$ROUTE/zen-data/v1/custom_cards/systemcard" -H "Authorization: Bearer {{ZEN_TOKEN}}" -H "Content-Type: application/json"
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
       verbosity: 1
@@ -122,13 +138,13 @@
         echo "      🔎 Result: "
         echo "       "$result
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
       verbosity: 1
@@ -139,14 +155,10 @@
     shell: |
       export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
       if [ "${WAIOPS_NAMESPACE}" != "" ]; then
-        export EVTMGR_NAMESPACE=$(oc get po -A|grep noi-operator |awk '{print$1}')
         export ROUTE=$(oc get route -n $WAIOPS_NAMESPACE cpd  -o jsonpath={.spec.host})          
 
         instanaURL=$(oc get routes -n instana-core dev-aiops -o jsonpath={.spec.host})
         turboURL=$(oc get route -n turbonomic nginx -o jsonpath={.spec.host})
-        evtMgrURL=$(oc get route -n $EVTMGR_NAMESPACE  evtmanager-ibm-hdm-common-ui -o jsonpath={.spec.host})
-        evtMgrPwd=$(oc get secret -n $EVTMGR_NAMESPACE  evtmanager-was-secret -o jsonpath='{.data.WAS_PASSWORD}'| base64 --decode && echo)
-
         export ROWS=""
 
         if [[ $instanaURL =~ "dev-aiops" ]]; then
@@ -158,11 +170,6 @@
         echo "Turbonomic Present"
         ROWS=$ROWS'{"drilldown_url":  "https://'$turboURL'", "label": "→   Turbonomic", "sub_text": " "},'
         ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: administrator - Password: P4ssw0rd! "},'
-        fi
-        if [[ $evtMgrURL =~ "evt" ]]; then
-        echo "EventManager Present "
-        ROWS=$ROWS'{"drilldown_url":  "https://'$evtMgrURL'", "label": "→  EventManager", "sub_text": " "},'
-        ROWS=$ROWS'{"drilldown_url":  "", "label": "", "sub_text": "User: smadmin - Password: '$evtMgrPwd' "},'
         fi
 
         ROWS=$ROWS'{"drilldown_url":  "", "label": "Select your IBM AIOps Application above.", "sub_text": ""}'
@@ -176,13 +183,13 @@
         echo "      🔎 Result: "
         echo "       "$result
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
       verbosity: 1
@@ -203,6 +210,7 @@
 
 
         appURL=$(oc get routes -n robot-shop robotshop  -o jsonpath="{['spec']['host']}")
+        sockURL=$(oc get routes -n sock-shop front-end  -o jsonpath="{['spec']['host']}")
         ldapURL=$(oc get route -n openldap admin -o jsonpath={.spec.host})
         awxUrl=$(oc get route -n awx awx -o jsonpath={.spec.host})
         awxPwd=$(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)
@@ -214,6 +222,10 @@
         if [[ $appURL =~ "robot-shop" ]]; then
         echo "RobotShop Present"
         ROWS=$ROWS'{"drilldown_url":  "https://'$appURL'", "label": "→  RobotShop", "sub_text": " "},'
+        fi        
+        if [[ $sockURL =~ "sock-shop" ]]; then
+        echo "SockShop Present"
+        ROWS=$ROWS'{"drilldown_url":  "https://'$sockURL'", "label": "→  SockShop", "sub_text": " "},'
         fi
         if [[ $ldapURL =~ "openldap" ]]; then
         echo "LDAP Present"
@@ -240,13 +252,13 @@
         echo "      🔎 Result: "
         echo "       "$result
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
     ignore_errors: true
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
       verbosity: 1
@@ -300,14 +312,14 @@
         echo "      🔎 Result: "
         echo "       "$result
       else
-        echo "Skipping: AI Manager not installed"
+        echo "Skipping: CP4WAIOps not installed"
       fi
 
     ignore_errors: true
     register: output
     args:
       executable: /bin/bash
-  - name: 🟣  DEBUG
+  - name: 🟣  OUTPUT
     debug:
       var: output.stdout_lines
       verbosity: 1

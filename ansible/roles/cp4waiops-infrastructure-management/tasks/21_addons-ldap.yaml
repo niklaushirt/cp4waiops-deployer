@@ -22,6 +22,22 @@
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: true
 
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Open LDAP'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
 
 
 
@@ -38,7 +54,7 @@
 - name: 🟣  LDAP -  Demo UI Password {{current_ldap_admin_password}}
   debug:
     var: current_ldap_admin_password
-
+    verbosity: 1
 
 - name: 🚀 LDAP - Set LDAP USERS Password from instance configuration
   set_fact: current_ldap_user_password={{current_cp4waiops_feature.ldap_user_password  | default('P4ssw0rd!')}}
@@ -53,6 +69,7 @@
 - name: 🟣  LDAP -  Demo UI Password {{current_ldap_user_password}}
   debug:
     var: current_ldap_user_password
+    verbosity: 1
 
 
 
@@ -84,7 +101,7 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for LDAP ready
 # --------------------------------------------------------------------------------------------------------------------------------------
-- name: 🕦 CHECK -  Wait for 2 pods Running in namespace {{ current_cp4waiops_feature.ldap_namespace }} (this might take some time)
+- name: 🕦 CHECK -  Wait for 2 pods Running in namespace {{ current_cp4waiops_feature.ldap_namespace }}
   shell: |
     NUM_PODS=$(oc get po -n {{ current_cp4waiops_feature.ldap_namespace }} | grep openldap| grep Running| wc -l)
     echo $NUM_PODS

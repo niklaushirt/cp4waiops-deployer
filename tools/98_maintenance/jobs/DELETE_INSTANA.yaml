@@ -13,7 +13,7 @@
 #
 #  CloudPak for Watson AIOps
 #
-#  ©2022 nikh@ch.ibm.com
+#  ©2023 nikh@ch.ibm.com
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -23,7 +23,7 @@
 apiVersion: v1                     
 kind: Namespace
 metadata:
-  name: cp4waiops-installation
+  name: cp4waiops-installer
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -36,13 +36,13 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: cp4waiops-installation
+    namespace: cp4waiops-installer
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: waiops-delete-instana
-  namespace: cp4waiops-installation
+  namespace: cp4waiops-installer
 spec:
   serviceAccountname: cp4waiops-installer-admin
   template:
@@ -66,7 +66,7 @@ spec:
               #set -x
 
               echo "*****************************************************************************************************************************"
-              echo " ✅ STARTING: INSTALL AI Manager with Demo Content"
+              echo " ✅ STARTING: INSTALL CP4WAIOps with Demo Content"
               echo "*****************************************************************************************************************************"
               echo ""
               echo "  ⏳ INSTALLATION START TIMESTAMP: $(date)"

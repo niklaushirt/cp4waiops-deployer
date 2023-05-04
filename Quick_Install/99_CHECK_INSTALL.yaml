@@ -13,7 +13,7 @@
 #
 #  CloudPak for Watson AIOps
 #
-#  ©2022 nikh@ch.ibm.com
+#  ©2023 nikh@ch.ibm.com
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -25,7 +25,7 @@
 apiVersion: v1                     
 kind: Namespace
 metadata:
-  name: cp4waiops-installation
+  name: cp4waiops-installer
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -38,16 +38,20 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: cp4waiops-installation
+    namespace: cp4waiops-installer
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: cp4waiops-check-install
-  namespace: cp4waiops-installation
+  namespace: cp4waiops-installer
 spec:
   serviceAccountname: cp4waiops-installer-admin
   template:
+    metadata:
+      labels:
+        app: cp4waiops-installer
+
     spec:
       containers:
         - name: install
@@ -81,7 +85,7 @@ spec:
                   #  CP4WAIOPS  - Debug WAIOPS Installation
                   #
                   #
-                  #  ©2022 nikh@ch.ibm.com
+                  #  ©2023 nikh@ch.ibm.com
                   # ---------------------------------------------------------------------------------------------------------------------------------------------------"
                   # ---------------------------------------------------------------------------------------------------------------------------------------------------"
                   # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -256,7 +260,7 @@ spec:
                   # EXAMINE INSTALLATION
                   #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                   echo "*************************************************************************************************************************************"
-                  echo " 🚀  Examining CP4WAIOPS AI Manager Configuration...." 
+                  echo " 🚀  Examining CP4WAIOPS CP4WAIOps Configuration...." 
                   echo "*************************************************************************************************************************************"
                         echo ""
                         echo "  ------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -268,7 +272,6 @@ spec:
                         echo "   🛠️  Get Namespaces"
 
                         export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-                        export EVTMGR_NAMESPACE=$(oc get po -A|grep noi-operator |awk '{print$1}')
 
                         echo ""
                         echo "    ------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -326,7 +329,7 @@ spec:
                         echo ""
                         echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
                         echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
-                        echo "   🚀  CHECK CP4WAIOPS AI Manager Installation...." 
+                        echo "   🚀  CHECK CP4WAIOPS CP4WAIOps Installation...." 
                         echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
                         echo ""
                         echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -369,8 +372,6 @@ spec:
                         export CURRENT_NAMESPACE=$WAIOPS_NAMESPACE
                         checkNamespace
 
-                        export CURRENT_NAMESPACE=$EVTMGR_NAMESPACE
-                        checkNamespace
 
                         export CURRENT_NAMESPACE=awx
                         checkNamespace
@@ -840,7 +841,7 @@ spec:
                         echo ""
                         echo ""
                         echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-                        echo "    🔎 CHECK Runbooks in AI MAnager"
+                        echo "    🔎 CHECK Runbooks in CP4WAIOps"
                         echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
                         CPD_ROUTE=$(oc get route cpd -n $WAIOPS_NAMESPACE  -o jsonpath={.spec.host} || true) 
 
@@ -852,7 +853,7 @@ spec:
                   if  ([[ $AWX_TEMPLATE_COUNT -lt 3 ]]); 
                         then 
                               export CURRENT_ERROR=true
-                              export CURRENT_ERROR_STRING="AI Manager Runbooks not ready"
+                              export CURRENT_ERROR_STRING="CP4WAIOps Runbooks not ready"
                               handleError
                         else  
                               echo "      ✅ OK"; 

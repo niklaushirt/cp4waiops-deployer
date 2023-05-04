@@ -21,6 +21,22 @@
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: true
 
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Prerequisites'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
 
 
 
@@ -237,7 +253,7 @@
     executable: /bin/bash
 
 
-- name: 🟣 STORAGECLASS - Storage Class 
+- name: 🟢🟢🟢🟢🟢🟢🟢 STORAGECLASS - FINAL Storage Classes 🟢🟢🟢🟢🟢🟢🟢
   debug: 
     msg: 
     - "** Global Storage Classes for CP4WAIOPS installation *************************************************************************"

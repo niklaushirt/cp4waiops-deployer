@@ -36,7 +36,7 @@ Please jot this down.
 
 
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`Data and tool integrations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`Data and tool integrations`
 * Click `Add connection`
 * Under `Kubernetes`, click on `Add Integration`
 * Click `Connect`
@@ -62,7 +62,7 @@ Please jot this down.
 ## 20.2 AiManager Event Gateway
 
 A Simple Webhook to Kafka Gateway for CP4WAIOPS.
-This allows you to push generic JSON to AIManager Events throught a Webhook into Kafka.
+This allows you to push generic JSON to CP4WAIOps Events throught a Webhook into Kafka.
 
 > Source code is included if you want to mess around a bit.
 

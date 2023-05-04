@@ -1,0 +1,268 @@
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#         ________  __  ___     ___    ________       
+#        /  _/ __ )/  |/  /    /   |  /  _/ __ \____  _____
+#        / // __  / /|_/ /    / /| |  / // / / / __ \/ ___/
+#      _/ // /_/ / /  / /    / ___ |_/ // /_/ / /_/ (__  ) 
+#     /___/_____/_/  /_/    /_/  |_/___/\____/ .___/____/  
+#                                           /_/
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------------------------"
+#  Installing CP4WAIOPS
+#
+#  CloudPak for Watson AIOps
+#
+#  ©2023 nikh@ch.ibm.com
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Installs:
+#
+#  - WAIOPS Operator
+#  - CP4WAIOps
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+ 
+
+
+- name: ✴️ ✴️ ✴️ INSTALLATION MODULE START - {{current_cp4waiops_feature.kind}}
+  debug: 
+    msg: 
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"
+    - "                                                                                                                                                   "
+    - "      � CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}} "
+    - "                                                                                                                                                   "
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"
+
+
+- name: Log
+  shell: |
+    export MESSAGE="Installing Demo Apps"
+    export currentDate=$(date +%Y-%m-%d_%H:%M)
+    echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
+    echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
+  ignore_errors: true
+
+
+
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+    appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification-main
+    spec:
+      backgroundColor: '#141a6b'
+      color: '#fff'
+      location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
+      text: 'Installing  {{current_cp4waiops_feature.kind}} - {{global_config.environment_name | default("Demo")}} - Version {{current_cp4waiops_feature.subscription_channel}}'    
+    EOF
+  ignore_errors: true
+
+
+
+- name:  🟡🟡🟡 INITIALIZATION - Installation Parameters 🟡🟡🟡"
+  debug:
+    msg:
+    - "***********************************************************************************************"
+    - " 🚀 Installing {{current_cp4waiops_feature.kind}}"
+    - "***********************************************************************************************"
+    - "-----------------------------------------------------------------------------------------------"
+    - "  📥 STORAGE"
+    - "     💾 Installation Options for SPECIFIC MODULE {{ current_cp4waiops_feature.kind}}"
+    - "        Storage Class File Override:             {{ current_cp4waiops_feature.storage_class_file | default('no override') }}"
+    - "        Storage Class Block Override:            {{ current_cp4waiops_feature.storage_class_block | default('no override') }}"
+    - "        Storage Class InfraManagement:           {{ current_cp4waiops_feature.storage_class_file | default('no override') }}"
+    - ""
+    - "     💾 Installation Options from GLOBAL"
+    - "        Storage Class File Override:             {{ ocp_storage_class_file | default('not defined') }}"
+    - "        Storage Class Block Override:            {{ ocp_storage_class_block | default('not defined') }}"
+    - "        Storage Class InfraManagement:           {{ ocp_storage_class_file | default('not defined') }}"
+    - "-----------------------------------------------------------------------------------------------"
+    - "  📥 CONFIG"
+    - "     ✅ Installation Name:                        {{current_cp4waiops_feature.waiops_name}}"
+    - "     🔎 CP4WAIOps Size:                           {{current_cp4waiops_feature.waiops_size}}"
+    - "     🔽 Custom Sizing File:                       {{current_cp4waiops_feature.custom_size_file | default('none')}}"
+    - "     📣 Show Notifications:                       {{global_config.create_ocp_notifications | default('not defined')}}"
+    - "     📣 Primary Notifications Position:           {{global_config.position_final_ocp_notification | default('not defined')}}"
+    - "     📣 Secondary Notifications Position:         {{global_config.position_ocp_notification | default('not defined')}}"
+    - "-----------------------------------------------------------------------------------------------"
+    - "  📥 VERSION "
+    - "     🚀 Subscription Channel:                     {{current_cp4waiops_feature.subscription_channel}}"
+    - "     🔽 Freeze the Catalog Image Version:         {{current_cp4waiops_feature.freeze_catalog  | default('not defined')}}"
+    - "     ✅ Install with CASE:                        {{current_cp4waiops_feature.case_install}}"
+    - "-----------------------------------------------------------------------------------------------"
+    - "***********************************************************************************************"
+
+- name: 🟣 Installing {{current_cp4waiops_feature.kind}} with the following configuration
+  debug:
+    var: current_cp4waiops_feature
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INITIALIZATION
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Placeholder for customization
+- name: 🟡🟡🟡 Initialize Custom Hook
+  include_tasks: 00_init-custom-hook.yaml
+
+# Initialize Logging
+- name: 🟡🟡🟡 Initialize Logging
+  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/01_init-logging.yaml"
+    
+- name: 🟡🟡🟡 Initialization Checks
+  include_tasks: 02_init_checks.yaml
+# Start block
+- name: 🟡🟡🟡 Start Logging
+  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90-log-start.yaml"
+
+# Run Prerequisites
+- name: 🟡🟡🟡 Initialization of the Installation
+  include_tasks: 03_init-initialization.yaml
+  
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# TEST
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# - name: 🟡🟡🟡  Create Routes
+#   include_tasks: 30_cp4waiops-create-routes.yaml
+
+# # Update CP4WAIOps Cards
+# - name: 🟡🟡🟡 Update CP4WAIOps Cards
+#   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# TEST
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+
+
+- name: 🟡🟡🟡 Get Storage Classes
+  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
+
+
+- name: 🟡🟡🟡 Install CP4WAIOps Prerequisites 
+  include_tasks: 06_cp4waiops-prerequisites.yaml
+      
+
+# Install CP4WAIOPS Operator
+- name: 🟡🟡🟡 CP4WAIOps Custom Hook
+  include_tasks: 08_cp4waiops-custom-hook.yaml
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL CATALOG with YAML FILE
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+- name: 🟡🟡🟡 Install CP4WAIOps Catalog - Classic Way (skipped if CASE selected)
+  include_tasks: 10_cp4waiops-catalog.yaml
+  when: current_cp4waiops_feature.case_install==false
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL CATALOG with CASE FILE
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+- name: 🟡🟡🟡 Install CP4WAIOps Catalog - Save Case File (this can take some time - skipped if not selected)
+  include_role:
+    name: cp4waiops-case-save
+  when: current_cp4waiops_feature.case_install==true
+
+
+- name: 🟡🟡🟡 Install CP4WAIOps Catalog - Create CatalogSources from Case File (this can take some time - skipped if not selected)
+  include_role:
+    name: cp4waiops-case-catalog-source
+  when: current_cp4waiops_feature.case_install==true
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL CP4WAIOPS OPERATOR
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+- name: 🟡🟡🟡 Install the CP4WAIOps Operator
+  include_tasks: 11_cp4waiops-operator.yaml
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL FEATURE FLAGS
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Install  Feature Flags
+- name: 🟡🟡🟡  Install CP4WAIOPS Feature Flags
+  include_tasks: 12_cp4waiops-featureflags.yaml
+  when: current_cp4waiops_feature.install_feature_flags == true | default('false')
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# INSTALL CP4WAIOPS
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Install CP4WAIOPS Instance
+- name: 🟡🟡🟡 Install the CP4WAIOps Instance
+  include_tasks: 19_cp4waiops-install.yaml
+      
+
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# WAIT FOR INSTALLATION READY
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Wait for Common Services being completely installed
+- name: 🟡🟡🟡 Wait for CommonServices to be ready
+  include_tasks: 99_cp4waiops-wait-common-services.yaml
+- name: 🟡🟡🟡 Wait for Zen Initialisation
+  include_tasks: 99_cp4waiops-wait-for-zen.yaml
+      
+
+# Patching Topology Deployment
+- name: 🟡🟡🟡 Patch CP4WAIOPS Topology
+  include_tasks: 20_cp4waiops-patch-topology.yaml
+
+
+# Wait for CP4WAIOPS being completely installed
+- name: 🟡🟡🟡 Wait for CP4WAIOps to be ready
+  include_tasks: 99_cp4waiops-wait-cp4waiops.yaml
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Create Openshift WebConsole Menu Item
+# --------------------------------------------------------------------------------------------------------------------------------------
+- name: 🟡🟡🟡  Create CP4WAIOps Openshift WebConsole Menu Item
+  include_tasks: 91_cp4waiops-create-ocp-menu.yaml
+  when: global_config.create_ocp_items | default(true) == true  
+
+# Update CP4WAIOps Cards
+- name: 🟡🟡🟡 Update CP4WAIOps Cards
+  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
+
+
+- name: 🟡🟡🟡 End Logging
+  include_tasks: "{{role_path}}/../cp4waiops-global/tasks/91-log-end.yaml"
+
+
+
+- name: ✅ INSTALLATION MODULE DONE - {{current_cp4waiops_feature.kind}}
+  debug: 
+    msg: 
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"
+    - "                                                                                                                                                   "
+    - "       ✅ CloudPak for Watson AIOps - DONE INSTALLING {{current_cp4waiops_feature.kind}}                                                                                 "
+    - "                                                                                                                                                   "
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"
+    - "***************************************************************************************************************************************************"

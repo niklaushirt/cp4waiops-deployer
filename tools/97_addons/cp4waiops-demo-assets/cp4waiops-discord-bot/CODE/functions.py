@@ -303,10 +303,10 @@ def injectMetrics(METRIC_ROUTE,METRIC_TOKEN,METRICS_TO_SIMULATE,METRIC_TIME_SKEW
     
     #print('                          METRIC_TIME_SKEW:               '+str(METRIC_TIME_SKEW))
     #print('                          METRIC_TIME_STEP:               '+str(METRIC_TIME_STEP))
-    #print('                   ❓ Getting AIManager Namespace')
+    #print('                   ❓ Getting CP4WAIOps Namespace')
     stream = os.popen("oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}'")
     aimanagerns = stream.read().strip()
-    #print('                      ✅ AIManager Namespace:       '+aimanagerns)
+    #print('                      ✅ CP4WAIOps Namespace:       '+aimanagerns)
 
     #print('                   ❓ Getting Details Metric Endpoint')
     stream = os.popen("oc get route -n "+aimanagerns+" | grep ibm-nginx-svc | awk '{print $2}'")

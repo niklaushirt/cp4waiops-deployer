@@ -1,3 +1,4 @@
+alias python='python3.11'
 
 
 export DEBUG_ME=true

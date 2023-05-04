@@ -12,7 +12,7 @@
 #  CP4WAIOPS Installation
 #
 #
-#  ©2022 nikh@ch.ibm.com
+#  ©2023 nikh@ch.ibm.com
 # ---------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------"
@@ -67,7 +67,7 @@ runPlaybook () {
             echo "✅ Configuration found..."
             echo ""
             echo ""
-            if [[ $ANSIBLE_CONFIGURATION =~ "01_AIManager-install" ]] || [[ $ANSIBLE_CONFIGURATION =~ "04_eventmanager-install" ]] || [[ $ANSIBLE_CONFIGURATION =~ "05_InfraManagement-install" ]] || [[ $ANSIBLE_CONFIGURATION =~ "09_AIManager-only" ]];  
+            if [[ $ANSIBLE_CONFIGURATION =~ "01_CP4WAIOps-install" ]] || [[ $ANSIBLE_CONFIGURATION =~ "04_eventmanager-install" ]] || [[ $ANSIBLE_CONFIGURATION =~ "05_InfraManagement-install" ]] || [[ $ANSIBLE_CONFIGURATION =~ "09_CP4WAIOps-only" ]];  
             then
                   echo ""
                   echo ""

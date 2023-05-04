@@ -75,10 +75,10 @@ print ('------------------------------------------------------------------------
 # ('--------------------------------------------------')('--------------------------------------------------')--------------
 # GET NAMESPACES
 # ('--------------------------------------------------')('--------------------------------------------------')--------------
-print('     ❓ Getting AIManager Namespace')
+print('     ❓ Getting CP4WAIOps Namespace')
 stream = os.popen("oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}'")
 aimanagerns = stream.read().strip()
-print('        ✅ AIManager Namespace:       '+aimanagerns)
+print('        ✅ CP4WAIOps Namespace:       '+aimanagerns)
 
 
 
@@ -163,7 +163,7 @@ print ('           👩‍💻 BOT PREFIX:                   '+DISCORD_BOT_PREFI
 print ('')
 print ('')
 print ('    --------------------------------------------------------------------------------')
-print ('     🔎 AI Manager Connection Parameters')
+print ('     🔎 CP4WAIOps Connection Parameters')
 print ('    --------------------------------------------------------------------------------')
 print ('           🌏 CP4WAIOPS:                    '+DATALAYER_ROUTE)
 print ('           🌏 Demo UI:                      '+DATALAYER_ROUTE)
@@ -172,7 +172,7 @@ print ('           🌏 Turbonomic:                   '+TURBO_ROUTE)
 print ('')
 print ('')
 print ('    --------------------------------------------------------------------------------')
-print ('     🔎 AI Manager Datalayer Parameters')
+print ('     🔎 CP4WAIOps Datalayer Parameters')
 print ('    --------------------------------------------------------------------------------')
 print ('           🌏 Datalayer Route:              '+DATALAYER_ROUTE)
 print ('           👩‍💻 Datalayer User:               '+DATALAYER_USER)

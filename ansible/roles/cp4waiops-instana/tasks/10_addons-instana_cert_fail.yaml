@@ -22,6 +22,22 @@
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: true
 
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - INSTANA'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
 
 
 - name: 🚀 INSTANA - Set INSTANA Password from instance configuration
@@ -37,13 +53,14 @@
 - name: 🟣  INSTANA -  INSTANA Password {{current_admin_pass}}
   debug:
     var: current_admin_pass
+    verbosity: 1
 
 
 
 
 - name: 🚀 INSTANA - Check cert-manager
   shell: |
-    CERT_MANAGER_CRD=$(oc get customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io|grep "certificates.cert-manager.io"|wc -l|tr -d ' ') 
+    CERT_MANAGER_CRD=$(oc get pods -A|grep "cert-manager"|grep "1/1"|wc -l|tr -d ' ') 
     echo $CERT_MANAGER_CRD
   ignore_errors: true
   register: cert_check
@@ -62,15 +79,15 @@
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         echo "Installing Kubectl Instana Plugin for $OS"
         if [ "${OS}" == "darwin" ]; then
-              wget https://self-hosted.instana.io/kubectl/kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
-              tar xfvz kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
+              wget https://self-hosted.instana.io/kubectl/kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.instana_version | default("241-0") }}.tar.gz
+              tar xfvz kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.instana_version | default("241-0") }}.tar.gz
               sudo mv kubectl-instana /usr/local/bin/kubectl-instana
-              rm kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
+              rm kubectl-instana-darwin_amd64-release-{{current_cp4waiops_feature.instana_version | default("241-0") }}.tar.gz
         else
-            wget https://self-hosted.instana.io/kubectl/kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
-            tar xfvz kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
+            wget https://self-hosted.instana.io/kubectl/kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.instana_version | default("241-0") }}.tar.gz
+            tar xfvz kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.instana_version | default("241-0") }}.tar.gz
             mv kubectl-instana /usr/local/bin/kubectl-instana
-            rm kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.version | default("241-0") }}.tar.gz
+            rm kubectl-instana-linux_amd64-release-{{current_cp4waiops_feature.instana_version | default("241-0") }}.tar.gz
         fi
     fi
     if [ -x "$(command -v kubectl-instana)" ]; then
@@ -83,7 +100,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
 
@@ -131,7 +148,7 @@
     oc -n instana-datastores adm policy add-scc-to-user anyuid -z default;
   ignore_errors: true
   register: output
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -147,7 +164,7 @@
 
   ignore_errors: true
   register: output
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -218,7 +235,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -234,7 +251,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -255,7 +272,7 @@
     oc -n instana-core create secret generic instana-core --namespace instana-core --from-file=./config.yaml
   ignore_errors: true
   register: output
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -280,7 +297,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -509,7 +526,7 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -523,13 +540,13 @@
 # - name: 🚀 INSTANA - Hack for Affinity (waiting 120 seconds)
 #   shell: |
 #     oc annotate namespace instana-datastores openshift.io/node-selector-
-#     oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}') -n instana-datastores --ignore-not-found
+#     oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-datastores --ignore-not-found
 #     sleep 120
 #     oc annotate namespace instana-datastores openshift.io/node-selector-
-#     oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}') -n instana-datastores --ignore-not-found
+#     oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-datastores --ignore-not-found
 #   ignore_errors: true
 #   register: output
-# - name: 🟣  DEBUG
+# - name: 🟣  OUTPUT
 #   debug:
 #     var: output.stdout_lines
 #     verbosity: 1
@@ -552,14 +569,14 @@
     while [ `oc -n instana-datastores get pods| grep '1/1' | grep -c ""` -lt 6 ]
     do
       oc annotate namespace instana-datastores openshift.io/node-selector-
-      oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}') -n instana-datastores --ignore-not-found
+      oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-datastores
       sleep 15
     done
   ignore_errors: true
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
@@ -569,15 +586,15 @@
 
 # - name: 🚀 INSTANA - Hack for Stuck Operators (waiting 30 seconds)
 #   shell: |
-#     oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}') -n instana-operator --ignore-not-found
+#     oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator --ignore-not-found
 #     sleep 10
-#     oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}') -n instana-operator --ignore-not-found
+#     oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator --ignore-not-found
 #     sleep 10
-#     oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}') -n instana-operator --ignore-not-found
+#     oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator --ignore-not-found
 #     sleep 10
 #   ignore_errors: true
 #   register: output
-# - name: 🟣  DEBUG
+# - name: 🟣  OUTPUT
 #   debug:
 #     var: output.stdout_lines
 #     verbosity: 1
@@ -599,22 +616,30 @@
 # Wait for Operator being ready
 # --------------------------------------------------------------------------------------------------------------------------------------
 - name:   🕦 INSTANA - Wait for Operator to become ready
-  shell: |
-    while [ `oc -n instana-operator get pods| grep '1/1' | grep -c ""` -lt 2 ]
-    do
-      kubectl patch -n instana-operator serviceaccount instana-operator-webhook -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
-      kubectl patch -n instana-operator serviceaccount instana-operator -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
-      oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}') -n instana-operator --ignore-not-found
-      sleep 120
-    done
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  DEBUG
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
+  shell: oc -n instana-operator get pods| grep '1/1'|wc -l|tr -d ' '
+  register: kubectl_get_pods
+  until: kubectl_get_pods.stdout == "2"
+  retries: 500
+  delay: 15
+
+
+# - name:   🕦 INSTANA - Wait for Operator to become ready
+#   shell: |
+#     while [ `oc -n instana-operator get pods| grep '1/1' | grep -c ""` -lt 2 ]
+#     do
+#       kubectl patch -n instana-operator serviceaccount instana-operator-webhook -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
+#       kubectl patch -n instana-operator serviceaccount instana-operator -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
+#       oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator
+#       sleep 120
+#     done
+#   ignore_errors: true
+#   register: output
+#   args:
+#     executable: /bin/bash
+# - name: 🟣  OUTPUT
+#   debug:
+#     var: output.stdout_lines
+#     verbosity: 1
 
 
 

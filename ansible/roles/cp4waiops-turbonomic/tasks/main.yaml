@@ -15,7 +15,7 @@
 #
 #  CloudPak for Watson AIOps
 #
-#  ©2022 nikh@ch.ibm.com
+#  ©2023 nikh@ch.ibm.com
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -43,11 +43,30 @@
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
     - "                                                                                                                                                   "
-    - "      🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}}                                                                                          "
+    - "      🟡🟡🟡🟡🟡  🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}} 🟡🟡🟡🟡🟡                                                        "
     - "                                                                                                                                                   "
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
+
+
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+    appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification-main
+    spec:
+      backgroundColor: '#141a6b'
+      color: '#fff'
+      location: {{global_config.position_final_ocp_notification | default("BannerBottom")}}
+      text: 'Installing  {{current_cp4waiops_feature.kind}} - Version {{ current_cp4waiops_feature.turbo_version }}'    
+    EOF
+  ignore_errors: true
 
 
 
@@ -82,19 +101,19 @@
 # INITIALIZATION
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Placeholder for customization
-- name: 📥 Init Custom Hook
+- name: 🟡🟡🟡 Initialize Custom Hook
   include_tasks: 00_init-custom-hook.yaml
 
 # Initialize Logging
-- name: 📥 Init Logging
+- name: 🟡🟡🟡 Initialize Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/01_init-logging.yaml"
 
-- name: 📥 Get Storage Class
+- name: 🟡🟡🟡 Get Storage Class
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/05_init-get-storage-class.yaml"
 
   
 # Start block
-- name: 📥 Start Logging
+- name: 🟡🟡🟡 Start Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/90-log-start.yaml"
 
 
@@ -104,29 +123,26 @@
 # INSTALL TURBONOMIC
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Install TURBONOMIC
-- name: 📥 Install Turbonomic
+- name: 🟡🟡🟡 Install Turbonomic
   include_tasks: 10_addons-turbonomic.yaml
 
 
-- name: 📥 Restart Demo UI
+- name: 🟡🟡🟡 Restart Demo UI
   include_tasks: 21_addons-turbonomic-restart-demoui.yaml
 
-- name: 📥 Install OCP Menu Item
+- name: 🟡🟡🟡 Install OCP Menu Item
   include_tasks: 91_addons-turbonomic-create-ocp-tools-menu.yaml
   when: global_config.create_ocp_items | default(true) == true  
 
-# Update AI Manager Cards
-- name: 📥 Update AI Manager Cards
+# Update CP4WAIOps Cards
+- name: 🟡🟡🟡 Update CP4WAIOps Cards
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
 
 
 
-- name: 📥 End Logging
+- name: 🟡🟡🟡 End Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/91-log-end.yaml"
-
-
-
 
 
 - name: ✅ INSTALLATION MODULE DONE - {{current_cp4waiops_feature.kind}}

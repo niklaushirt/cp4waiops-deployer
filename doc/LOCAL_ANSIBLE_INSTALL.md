@@ -30,7 +30,7 @@ I installed the demo in a ROKS environment.
 
 You'll need:
 
-- ROKS 4.10
+- ROKS 4.12
 - 5x worker nodes Flavour `b3c.16x64` (so 16 CPU / 64 GB) 
 
 
@@ -38,7 +38,7 @@ You'll need:
 
 You **might** get away with less if you don't install some components (Event Manager, ELK, Turbonomic,...) but no guarantee:
 
-- Typically 4x worker nodes Flavour `b3c.16x64` _**for only AI Manager**_
+- Typically 4x worker nodes Flavour `b3c.16x64` _**for only CP4WAIOps**_
 
 <div style="page-break-after: always;"></div>
 
@@ -59,7 +59,7 @@ IBMers can get a temporary one from [Techzone](https://techzone.ibm.com/collecti
 	1. Geograpy: whatever is closest to you
 	2. Worker node count: 5
 	3. Flavour: b3c.16x64
-	4. OpenShift Version: 4.10
+	4. OpenShift Version: 4.12
 
 	![K8s CNI](./doc/pics/roks02.png)
 
@@ -114,7 +114,7 @@ This allows the CP4WAIOPS images to be pulled from the IBM Container Registry.
 
 <div style="page-break-after: always;"></div>
 
-## 3.3 AI Manager Installation
+## 3.3 CP4WAIOps Installation
 
 
 You have different options:
@@ -130,18 +130,18 @@ You have different options:
 		./01_easy-install.sh -t <REGISTRY_TOKEN>
 		```
 
-	2. Select option 🐥`10` to install the complete `AI Manager` environment with Demo Content.
+	2. Select option 🐥`10` to install the complete `CP4WAIOps` environment with Demo Content.
 
 
 
 
 > This takes about 1.5 to 2 hours.
-> After completion Easy Installer will open the documentation and the AI Manager webpage (on Mac) and you'll have to to perform the last manual steps.
+> After completion Easy Installer will open the documentation and the CP4WAIOps webpage (on Mac) and you'll have to to perform the last manual steps.
 
-> You now have a full, basic installtion of AI Manager with:
+> You now have a full, basic installtion of CP4WAIOps with:
 > 
->  - AI Manager
->  - Open LDAP & Register with AI Manager
+>  - CP4WAIOps
+>  - Open LDAP & Register with CP4WAIOps
 >  - RobotShop demo application
 >  - Trained Models based on pre-canned data (Log- and Metric Anomalies, Similar Incidents, Change Risk)
 >  - Topologies for demo scenarios
@@ -157,7 +157,7 @@ You have different options:
  <div style="page-break-after: always;"></div>
  
 
-### 3.3.1 AI Manager Configuration 
+### 3.3.1 CP4WAIOps Configuration 
 
 
 Those are the manual configurations you'll need to demo the system and that are covered by the flow above.
@@ -186,7 +186,7 @@ or
 ```bash
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 	
-echo "🌏 AI Manager:           https://$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})"
+echo "🌏 CP4WAIOps:           https://$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})"
 echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE waiops-demo-ui-python -o jsonpath={.spec.host})"
 
 ```
@@ -230,7 +230,7 @@ echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE wai
 	```bash
 	export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 		
-	echo "🌏 AI Manager:           https://$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})"
+	echo "🌏 CP4WAIOps:           https://$(oc get route -n $WAIOPS_NAMESPACE cpd -o jsonpath={.spec.host})"
 	echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE waiops-demo-ui-python -o jsonpath={.spec.host})"
 	
 	```
@@ -249,19 +249,19 @@ echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE wai
 
 Click on the red `Create Incident Memory Leak` button
 
-This will create alerts and a story in AI Manager.
+This will create alerts and a story in CP4WAIOps.
 
 ![demo](./doc/pics/demo01.png)
 
 <div style="page-break-after: always;"></div>
 
-#### 3.4.1.2 Login to AI Manager as demo User
+#### 3.4.1.2 Login to CP4WAIOps as demo User
 
-* Open the AI Manager URL from the above
+* Open the CP4WAIOps URL from the above
 * Click on `Enterprise LDAP`
 * Login as `demo` with the password `P4ssw0rd!`
 
-ℹ️  Give it a minute or two for all events and anomalies to arrive in AI Manager and Slack.
+ℹ️  Give it a minute or two for all events and anomalies to arrive in CP4WAIOps and Slack.
 
 
 ![demo](./doc/pics/demo02.png)
@@ -279,7 +279,7 @@ In the terminal type
 
 This will delete all existing Alerts/Stories and inject pre-canned event, metrics and logs to create a story.
 
-ℹ️  Give it a minute or two for all events and anomalies to arrive in AI Manager and Slack.
+ℹ️  Give it a minute or two for all events and anomalies to arrive in CP4WAIOps and Slack.
 ℹ️  You might have to run the script 3-4 times for the log anomalies to start appearing.
 
 
@@ -337,7 +337,7 @@ After successful installation, the Playbook creates a file `./LOGINS.txt` in you
 
 <div style="page-break-after: always;"></div>
 
-### 3.5.3 Integration with AI Manager
+### 3.5.3 Integration with CP4WAIOps
 
 * To get the connection parameters, run:
 
@@ -349,7 +349,7 @@ After successful installation, the Playbook creates a file `./LOGINS.txt` in you
 > 
 > This gives you all the parameters needed for creating the connection.
   
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`Data and tool integrations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`Data and tool integrations`
 * Click `Add connection`
 * Under `Netcool`, click on `Add connection`
 * Click `Connect`

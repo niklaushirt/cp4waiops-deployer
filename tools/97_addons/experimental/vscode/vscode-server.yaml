@@ -1,0 +1,197 @@
+# Source: code-server/templates/serviceaccount.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: code-server
+  labels:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+---
+# Source: code-server/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+  name: code-server
+  namespace: code-server
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: code-server-code-server-admin
+  labels:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: code-server
+    namespace: code-server
+---
+# Source: code-server/templates/pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: code-server
+  namespace: code-server
+  labels:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "10Gi"
+---
+# Source: code-server/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-server
+  namespace: code-server
+  labels:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+---
+# Source: code-server/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-server
+  namespace: code-server
+  labels:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: code-server
+      app.kubernetes.io/instance: code-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: code-server
+        app.kubernetes.io/instance: code-server
+    spec:
+      imagePullSecrets:
+        []
+      securityContext:
+        fsGroup: 1000
+      initContainers:
+      - name: init-chmod-data
+        image: busybox:latest
+        imagePullPolicy: IfNotPresent
+        command:
+          - sh
+          - -c
+          - |
+            chown -R 1000:1000 /home/coder
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+        - name: data
+          mountPath: /home/coder
+      containers:
+        - name: code-server
+          image: "quay.io/niklaushirt/code-server:0.1"
+          imagePullPolicy: Always
+          securityContext:
+            runAsUser: 1000
+          env:
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: code-server
+                key: password
+          volumeMounts:
+          - name: data
+            mountPath: /home/coder
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+      serviceAccountName: code-server
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: code-server
+---
+# Source: code-server/templates/secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: code-server
+  namespace: code-server
+  labels:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+type: Opaque
+data:
+  # P4ssw0rd!
+  password: "UDRzc3cwcmQh"
+---
+# Source: code-server/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "code-server-test-connection"
+  namespace: code-server
+  labels:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args:  ['code-server:8080']
+  restartPolicy: Never
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: code
+  namespace: code-server
+  labels:
+    app.kubernetes.io/name: code-server
+    app.kubernetes.io/instance: code-server
+spec:
+  to:
+    kind: Service
+    name: code-server
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
