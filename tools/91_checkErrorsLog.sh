@@ -47,16 +47,10 @@ spec:
 EOF
 
 echo ""
-echo " ✅ CP4WAIOPS is installed in this cluster."
+echo " 🟢🟢🟢 Logs are looking good."
 
 
-echo "------------------------------------------------------------------------------------------------------------------------------"
-echo " 🔎 Check Installation Consitency"
-./tools/92_check_install_short.sh
-echo ""
-echo ""
-echo ""
-echo ""
+
 
 
 
