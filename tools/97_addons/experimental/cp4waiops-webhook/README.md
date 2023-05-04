@@ -1,6 +1,6 @@
-# A Simple Webhook to CP4WAIOPS AIManager
+# A Simple Webhook to CP4WAIOps
 
-This allows you to push generic JSON to AIManager Events throught a Webhook into AI Manager.
+This allows you to push generic JSON to CP4WAIOps Events throught a Webhook into CP4WAIOps.
 
 > Source code is included if you want to mess around a bit.
 
@@ -62,7 +62,7 @@ If the JSON contains an array of events use this to iterate over all events:
 
 The mapping configuration has two parts (defined in the ConfigMap):
 
-* The `Template`, that contains the final output to AI Manager with the Placeholders (the Placeholders must correspond to the Output Mapping Name prefixed by `@@`):
+* The `Template`, that contains the final output to CP4WAIOps with the Placeholders (the Placeholders must correspond to the Output Mapping Name prefixed by `@@`):
 
 	```
 	  EVENT_TEMPLATE: '{"id": "1a2a6787-59ad-4acd-bd0d-46c1ddfd8e00","occurrenceTime": "@@TIMESTAMP_DATE","summary": "@@SUMMARY_TEXT","severity": @@SEVERITY_NUMBER,"type": {"eventType": "problem","classification": "@@MANAGER_NAME"},"expirySeconds": @@EXPIRY_SECONDS,"links": [{"linkType": "webpage","name": "@@MANAGER_NAME","description": "@@MANAGER_NAME","url": "@@URL_TXT"}],"sender": {"type": "host","name": "@@SENDER_NAME","sourceId": "@@SENDER_NAME"},"resource": {"type": "host","name": "@@RESOURCE_NAME","sourceId": "@@RESOURCE_NAME"},"details": {@@DETAILS_JSON}}' 
@@ -96,7 +96,7 @@ loop over all events
 
 ## Sample Webhook
 
-For the following example we will iterate over the `events` array and push them to AI Manager:
+For the following example we will iterate over the `events` array and push them to CP4WAIOps:
 
 
 ```bash

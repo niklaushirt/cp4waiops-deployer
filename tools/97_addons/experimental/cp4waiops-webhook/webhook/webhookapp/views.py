@@ -18,7 +18,7 @@ print ('                                                /_/            ')
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
 print ('')
-print ('    🛰️  Generic Webhook for CP4WAIOPS AI Manager')
+print ('    🛰️  Generic Webhook for CP4WAIOPS CP4WAIOps')
 print ('')
 print ('       Provided by:')
 print ('        🇨🇭 Niklaus Hirt (nikh@ch.ibm.com)')
@@ -34,10 +34,10 @@ loginip='0.0.0.0'
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 # GET NAMESPACES
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
-print('     ❓ Getting AIManager Namespace')
+print('     ❓ Getting CP4WAIOps Namespace')
 stream = os.popen("oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}'")
 aimanagerns = stream.read().strip()
-print('        ✅ AIManager Namespace:       '+aimanagerns)
+print('        ✅ CP4WAIOps Namespace:       '+aimanagerns)
 
 
 

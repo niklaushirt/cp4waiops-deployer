@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [37.1.1] - 2023-05-04
+
+
+### Major changes
+
+- Prepare for deprecation of EventManager
+- Prepare for deprecation of AIManager Name
+- Complete overhaul of file structure
+- Complete overhaul of naming conventions (AIManager-->CP4WAIOPS)
+- OCP Console Notifications for Installation Progress
+
+
 ## [37.0.1] - 2023-04-14
 
 
@@ -116,7 +128,7 @@ Release for 3.6.0 GA
 
 ### Major changes
 
-- Added AI Manager Cards
+- Added CP4WAIOps Cards
 - Added Turbonomic Demo Content
 
 

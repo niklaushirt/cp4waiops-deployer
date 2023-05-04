@@ -21,7 +21,7 @@ echo "   -----------------------------------------------------------------------
 echo "     🔐  Getting credentials"
 echo "   ----------------------------------------------------------------------------------------------------------------------------------------"
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-echo "       ✅ OK - AI Manager:    $WAIOPS_NAMESPACE"
+echo "       ✅ OK - CP4WAIOps:    $WAIOPS_NAMESPACE"
 
 echo "USER_PASS"
 export USER_PASS="$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.username}' | base64 --decode):$(oc get secret aiops-ir-core-ncodl-api-secret -o jsonpath='{.data.password}' | base64 --decode)"

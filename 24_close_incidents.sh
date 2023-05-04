@@ -1,1 +1,0 @@
-./tools/01_demo/close_incidents.sh

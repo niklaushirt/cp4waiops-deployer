@@ -31,7 +31,7 @@ print ('                                                /_/            ')
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
 print ('')
-print ('    🛰️  Turbo Topology for CP4WAIOPS AI Manager')
+print ('    🛰️  Turbo Topology for CP4WAIOPS CP4WAIOps')
 print ('')
 print ('       Provided by:')
 print ('        🇨🇭 Niklaus Hirt (nikh@ch.ibm.com)')
@@ -46,7 +46,8 @@ loggedin='false'
 loginip='0.0.0.0'
 
 
-topology_file = open("/tmp/topology.txt", "w")
+#topology_file = open("/tmp/topology.txt", "w")
+topology_file = open("./turbonomic-topology.txt", "w")
 
 
 
@@ -96,6 +97,7 @@ entitiesToParse = ["VirtualMachine",
 "PhysicalMachine",
 "ContainerPlatformCluster",
 "Service",
+"ApplicationComponentSpec",
 "VirtualMachineSpec"]
 
 

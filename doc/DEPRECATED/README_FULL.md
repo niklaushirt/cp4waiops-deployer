@@ -4,7 +4,7 @@
 ![K8s CNI](./doc/pics/front.png)
 
 
-<center> ©2022 Niklaus Hirt / IBM </center>
+<center> ©2023 Niklaus Hirt / IBM </center>
 
 
 <div style="page-break-after: always;"></div>
@@ -27,7 +27,7 @@ Please drop me a note on Slack or by mail nikh@ch.ibm.com if you find glitches o
 1. [Prerequisites](./doc/PREREQUISITES.md)
 1. [Troubleshooting](./doc/TROUBLESHOOTING.md)
 1. [Uninstall CP4WAIOPS](./doc/UNINSTALL.md)
-1. [AI Manager Install](./doc/INSTALL_AI_MANAGER.md)
+1. [CP4WAIOps Install](./doc/INSTALL_AI_MANAGER.md)
 1. [Event Manager Install](./doc/INSTALL_EVENT_MANAGER.md)
 1. [Event Manager Configuration](./doc/CONF_EVENT_MANAGER.md)
 1. [Runbook Configuration](./doc/CONF_RUNBOOKS.md)
@@ -112,7 +112,7 @@ You'll need:
 
 You might get away with less if you don't install some components (Event Manager, ELK, Turbonomic,...):
 
-- Typically 3x worker nodes Flavor `b3c.16x64` _**for only AI Manager**_
+- Typically 3x worker nodes Flavor `b3c.16x64` _**for only CP4WAIOps**_
 
 <div style="page-break-after: always;"></div>
 
@@ -221,7 +221,7 @@ oc delete pod $(oc get po -n openshift-marketplace|grep ImagePull|awk '{print$1}
 
 <div style="page-break-after: always;"></div>
 
-## 2.4 Install AI Manager 🟢
+## 2.4 Install CP4WAIOps 🟢
 
 ![K8s CNI](./doc/pics/install-aimanager.png)
 
@@ -244,9 +244,9 @@ For a vanilla install you will see this:
 
 <div style="page-break-after: always;"></div>
 
-### 2.4.1 Start AI Manager Installation 🟢
+### 2.4.1 Start CP4WAIOps Installation 🟢
 
-1. Select option 🐥`11` to install a base `AI Manager` instance.
+1. Select option 🐥`11` to install a base `CP4WAIOps` instance.
 2. Click through the assistant, enter the installation token (if not provided on the command line):
 
 ![K8s CNI](./doc/pics/tool1.png)
@@ -276,7 +276,7 @@ Usually it's a good idea to store this in a file for later use:
 
 <div style="page-break-after: always;"></div>
 
-## 2.5 Configure AI Manager 🟢
+## 2.5 Configure CP4WAIOps 🟢
 
 There are some minimal configurations that you have to do to use the demo system and that are covered by the 🅰️ flow:
 
@@ -305,7 +305,7 @@ Those are the minimal configurations you'll need to demo the system and that are
 
 1. [Enable Story creation Policy](#44-enable-story-creation-policy-🅰%EF%B8%8F)
 1. [Create AWX Connection](#45-create-awx-connection-🅰%EF%B8%8F)
-1. [Create AI Manager Runbook](#46-create-ai-manager-runbook-🅰%EF%B8%8F)
+1. [Create CP4WAIOps Runbook](#46-create-ai-manager-runbook-🅰%EF%B8%8F)
 1. [Create Runbook Policy](#47-create-runbook-policy-🅰%EF%B8%8F)
 
 **Configure Slack**
@@ -354,7 +354,7 @@ In this case you will see the selected options:
 ## 4.1 Add LDAP Logins to CP4WAIOPS 🟢🅰️
 
 
-* Go to `AI Manager` Dashboard
+* Go to `CP4WAIOps` Dashboard
 * Click on the top left "Hamburger" menu
 * Select `User Management`
 * Select `User Groups` Tab
@@ -381,7 +381,7 @@ In this case you will see the selected options:
 
 ### 4.2.1 Create REST Observer to Load Topologies 🟢🅰️
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`Data and tool integrations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`Data and tool integrations`
 * Click `Add connection`
 * On the left click on `Topology`
 * On the top right click on `You can also configure, schedule, and manage other observer jobs` 
@@ -424,7 +424,7 @@ ansible-playbook ./ansible/80_load-topology-all.yaml
 
 Do this for your applications (RobotShop by default)
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`Data and tool integrations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`Data and tool integrations`
 * Click `Add connection`
 * Under `Kubernetes`, click on `Add Integration`
 * Click `Connect`
@@ -444,7 +444,7 @@ Do this for your applications (RobotShop by default)
 #### 4.2.3.2 Create AIOps Application (optional)
 
 
-* In the `AI Manager` go into `Operate` / `Application Management` 
+* In the `CP4WAIOps` go into `Operate` / `Application Management` 
 * Click `Define Application`
 * Select `robot-shop` namespace
 * Click `Next`
@@ -500,7 +500,7 @@ or use the procedure in [Chapter 22](#22-manually-train-the-models) to do this m
 
 #### 4.3.2.1 Create Kafka ELK Log Inception Integration 🟢🅰️
 
-* In the `AI Manager` "Hamburger" Menu select `Define`/`Data and tool integrations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Define`/`Data and tool integrations`
 * Click `Add connection`
 * Under `Kafka`, click on `Add Integration`
 * Click `Connect`
@@ -530,7 +530,7 @@ or use the procedure in [Chapter 22](#22-manually-train-the-models) to do this m
 
 #### 4.3.2.2 Create Kafka Netcool Inception Integration 🟢🅰️
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`Data and tool integrations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`Data and tool integrations`
 * Click `Add connection`
 * Under `Kafka`, click on `Add Integration`
 * Click `Connect`
@@ -547,7 +547,7 @@ or use the procedure in [Chapter 22](#22-manually-train-the-models) to do this m
 ## 4.4 Enable Story creation Policy 🟢🅰️
 
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`Automations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`Automations`
 * Under `Policies`
 * Select `Stories` from the `Tag` dropdown menu
 * Enable `Default story creation policy for high severity alerts`
@@ -560,7 +560,7 @@ or use the procedure in [Chapter 22](#22-manually-train-the-models) to do this m
 🐥 Easy Install should aready have installed AWX (Open Source Ansible Tower) and preloaded the Job Templates.
 
 
-* In the `AI Manager` "Hamburger" Menu select `Define`/`Data and tool integrations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Define`/`Data and tool integrations`
 * Click `Add connection`
 * Under `Ansible Tower`, click on `Add Integration`
 * Click `Connect`
@@ -572,7 +572,7 @@ or use the procedure in [Chapter 22](#22-manually-train-the-models) to do this m
 
 <div style="page-break-after: always;"></div>
 
-## 4.6 Create AI Manager Runbook 🟢🅰️
+## 4.6 Create CP4WAIOps Runbook 🟢🅰️
 
 * Run the following to create the Runbooks `Live data for continuous AI training and anomaly detection`
 	```bash
@@ -584,7 +584,7 @@ or use the procedure in [Chapter 22](#22-manually-train-the-models) to do this m
 ## 4.7 Create Runbook Policy 🟢🅰️
 
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`Automations`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`Automations`
 * Under `Policies`, click `Create Policy`
 * Select `Assign a runbook to alerts`
 * Name it `Mitigate RobotShop`
@@ -803,7 +803,7 @@ This will delete all existing Alerts/Stories and inject pre-canned event and log
 
 ## 8.2 Simulate incident - Demo UI
 
-> ❗**In order to use the DEMO UI, you have to have followed through all the steps in [AI Manager Configuration](#25-configure-ai-manager). Notably Configuring Topology, Integrations and having run the Models Training.**
+> ❗**In order to use the DEMO UI, you have to have followed through all the steps in [CP4WAIOps Configuration](#25-configure-ai-manager). Notably Configuring Topology, Integrations and having run the Models Training.**
 
 ### 8.2.1 Install Demo UI
 
@@ -850,7 +850,7 @@ ansible-playbook ./ansible/18_aiops-demo-ui.yaml
 
 ### 19.1.4 Configure LDAP Users
 
-1. Log in to AI Manager as admin
+1. Log in to CP4WAIOps as admin
 2. Select `Administration/Access` control from the "Hamburger manu"
 3. Click on the `Identity provider configuration` (upper right) you should get the LDAP being registered
 4. Go back
@@ -894,7 +894,7 @@ Usually it's a good idea to store this in a file for later use:
 
 ## 19.5 Check status of installation
 
-At any moment you can run `./tools/11_check_install.sh` or for a more in-depth examination and troubleshooting `./tools/10_debug_install.sh` and select `Option 1` to check your installation.
+At any moment you can run `./tools/21_check_install.sh` or for a more in-depth examination and troubleshooting `./tools/10_debug_install.sh` and select `Option 1` to check your installation.
 
 
 <div style="page-break-after: always;"></div>

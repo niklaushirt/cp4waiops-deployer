@@ -12,7 +12,7 @@
 #  CP4WAIOPS  - Debug WAIOPS Installation
 #
 #
-#  ©2022 nikh@ch.ibm.com
+#  ©2023 nikh@ch.ibm.com
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -36,7 +36,6 @@ echo "  "
 export TEMP_PATH=~/aiops-install
 export ERROR_STRING=""
 export ERROR=false
-
 
 
 
@@ -173,7 +172,7 @@ function check_array(){
 # EXAMINE INSTALLATION
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     echo "*************************************************************************************************************************************"
-    echo " 🚀  Examining CP4WAIOPS AI Manager Configuration...." 
+    echo " 🚀  Examining CP4WAIOPS CP4WAIOps Configuration...." 
     echo "*************************************************************************************************************************************"
       echo ""
       echo "  ------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -185,7 +184,6 @@ function check_array(){
       echo "   🛠️  Get Namespaces"
 
         export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
-        export EVTMGR_NAMESPACE=$(oc get po -A|grep noi-operator |awk '{print$1}')
 
       echo ""
       echo "    ------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -243,7 +241,7 @@ function check_array(){
       echo ""
       echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
       echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "   🚀  CHECK CP4WAIOPS AI Manager Installation...." 
+      echo "   🚀  CHECK CP4WAIOPS CP4WAIOps Installation...." 
       echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
       echo ""
       echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -286,8 +284,6 @@ function check_array(){
       export CURRENT_NAMESPACE=$WAIOPS_NAMESPACE
       checkNamespace
 
-      export CURRENT_NAMESPACE=$EVTMGR_NAMESPACE
-      checkNamespace
 
       export CURRENT_NAMESPACE=awx
       checkNamespace
@@ -334,9 +330,9 @@ function check_array(){
       echo "    🔎 Check ZEN Operator"
       echo ""
 
-      export ZEN_ERRORS=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -n ibm-common-services|grep -i error)
-      export ZEN_FAILED=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -n ibm-common-services|grep -i "failed=0")
-      export ZEN_READY=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -n ibm-common-services|grep -i "ok=2")
+      export ZEN_LOGS=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -n ibm-common-services|grep "failed=1")
+      export ZEN_ERRORS=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -n ibm-common-services|grep "error")
+      export ZEN_FAILED=$(echo $ZEN_LOGS|grep "failed=1")
 
       if  ([[ $ZEN_FAILED == "" ]]); 
       then 
@@ -374,6 +370,7 @@ function check_array(){
         "aiops-topology-ui-api"
         "aiops-topology-vmvcenter-observer")
       for ELEMENT in ${CP4AIOPS_CHECK_LIST[@]}; do
+        #echo "     Check $ELEMENT.."
             ELEMENT_OK=$(oc get pod -n $WAIOPS_NAMESPACE --ignore-not-found | grep $ELEMENT || true) 
             if  ([[ ! $ELEMENT_OK =~ "1/1" ]]); 
             then 
@@ -445,99 +442,99 @@ function check_array(){
 
 
 
-      # echo ""
-      # echo ""
-      # echo "    --------------------------------------------------------------------------------------------"
-      # echo "    🔎 Check AIO"
-      # echo ""
+      echo ""
+      echo ""
+      echo "    --------------------------------------------------------------------------------------------"
+      echo "    🔎 Check AIO"
+      echo ""
 
-      # CP4AIOPS_CHECK_LIST=(
-      #   "aimanager-aio-ai-platform-api-server"
-      #   "aimanager-aio-change-risk"
-      #   "aimanager-aio-chatops-orchestrator"
-      #   "aimanager-aio-chatops-slack-integrator"
-      #   "aimanager-aio-chatops-teams-integrator"
-      #   "aimanager-aio-controller"
-      #   "aimanager-aio-cr-api"
-      #   "aimanager-aio-log-anomaly-detector"
-      #   "aimanager-aio-luigi-daemon-0"
-      #   "aimanager-aio-oob-recommended-actions"
-      #   "aimanager-aio-similar-incidents-service"
-      #   "aimanager-ibm-minio-0")
-      # for ELEMENT in ${CP4AIOPS_CHECK_LIST[@]}; do
-      #   #echo "     Check $ELEMENT.."
-      #       ELEMENT_OK=$(oc get pod -n $WAIOPS_NAMESPACE --ignore-not-found | grep $ELEMENT || true) 
-      #       if  ([[ ! $ELEMENT_OK =~ "1/1" ]]); 
-      #       then 
-      #           echo "      ⭕ Pod $ELEMENT not running successfully"; 
-      #           echo ""
-      #           export CURRENT_ERROR=true
-      #           export CURRENT_ERROR_STRING="Pod $ELEMENT not runing successfully"
-      #           handleError
-      #       else
-      #             echo "      ✅ OK: Pod $ELEMENT"; 
+      CP4AIOPS_CHECK_LIST=(
+        "aimanager-aio-ai-platform-api-server"
+        "aimanager-aio-change-risk"
+        "aimanager-aio-chatops-orchestrator"
+        "aimanager-aio-chatops-slack-integrator"
+        "aimanager-aio-chatops-teams-integrator"
+        "aimanager-aio-controller"
+        "aimanager-aio-cr-api"
+        "aimanager-aio-log-anomaly-detector"
+        "aimanager-aio-luigi-daemon-0"
+        "aimanager-aio-oob-recommended-actions"
+        "aimanager-aio-similar-incidents-service"
+        "aimanager-ibm-minio-0")
+      for ELEMENT in ${CP4AIOPS_CHECK_LIST[@]}; do
+        #echo "     Check $ELEMENT.."
+            ELEMENT_OK=$(oc get pod -n $WAIOPS_NAMESPACE --ignore-not-found | grep $ELEMENT || true) 
+            if  ([[ ! $ELEMENT_OK =~ "1/1" ]]); 
+            then 
+                echo "      ⭕ Pod $ELEMENT not running successfully"; 
+                echo ""
+                export CURRENT_ERROR=true
+                export CURRENT_ERROR_STRING="Pod $ELEMENT not runing successfully"
+                handleError
+            else
+                  echo "      ✅ OK: Pod $ELEMENT"; 
 
-      #       fi
+            fi
 
-      # done
-
-
+      done
 
 
 
 
-      # echo ""
-      # echo ""
-      # echo "    --------------------------------------------------------------------------------------------"
-      # echo "    🔎 Check IR"
-      # echo ""
 
-      # CP4AIOPS_CHECK_LIST=(
-      #   "aiops-ir-analytics-classifier"
-      #   "aiops-ir-analytics-metric-action"
-      #   "aiops-ir-analytics-metric-api"
-      #   "aiops-ir-analytics-metric-spark"
-      #   "aiops-ir-analytics-probablecause"
-      #   "aiops-ir-analytics-spark-master"
-      #   "aiops-ir-analytics-spark-pipeline-composer"
-      #   "aiops-ir-analytics-spark-worker"
-      #   "aiops-ir-analytics-spark-worker"
-      #   "aiops-ir-core-archiving"
-      #   "aiops-ir-core-cem-users"
-      #   "aiops-ir-core-datarouting"
-      #   "aiops-ir-core-esarchiving"
-      #   "aiops-ir-core"
-      #   "aiops-ir-core-ncodl-api"
-      #   "aiops-ir-core-ncodl-if"
-      #   "aiops-ir-core-ncodl-jobmgr"
-      #   "aiops-ir-core-ncodl-std"
-      #   "aiops-ir-core-ncodl-std"
-      #   "aiops-ir-core"
-      #   "aiops-ir-core-rba-as"
-      #   "aiops-ir-core-rba-rbs"
-      #   "aiops-ir-core-usercfg"
-      #   "aiops-ir-lifecycle-datarouting"
-      #   "aiops-ir-lifecycle-eventprocessor-ep"
-      #   "aiops-ir-lifecycle-eventprocessor-ep"
-      #   "aiops-ir-lifecycle-policy-grpc-svc"
-      #   "aiops-ir-lifecycle-policy-registry-svc"
-      #   "aiops-ir-ui-api-graphql")
-      # for ELEMENT in ${CP4AIOPS_CHECK_LIST[@]}; do
-      #   #echo "     Check $ELEMENT.."
-      #       ELEMENT_OK=$(oc get pod -n $WAIOPS_NAMESPACE --ignore-not-found | grep $ELEMENT || true) 
-      #       if  ([[ ! $ELEMENT_OK =~ "1/1" ]]); 
-      #       then 
-      #           echo "      ⭕ Pod $ELEMENT not running successfully"; 
-      #           echo ""
-      #           export CURRENT_ERROR=true
-      #           export CURRENT_ERROR_STRING="Pod $ELEMENT not runing successfully"
-      #           handleError
-      #       else
-      #             echo "      ✅ OK: Pod $ELEMENT"; 
 
-      #       fi
+      echo ""
+      echo ""
+      echo "    --------------------------------------------------------------------------------------------"
+      echo "    🔎 Check IR"
+      echo ""
 
-      # done
+      CP4AIOPS_CHECK_LIST=(
+        "aiops-ir-analytics-classifier"
+        "aiops-ir-analytics-metric-action"
+        "aiops-ir-analytics-metric-api"
+        "aiops-ir-analytics-metric-spark"
+        "aiops-ir-analytics-probablecause"
+        "aiops-ir-analytics-spark-master"
+        "aiops-ir-analytics-spark-pipeline-composer"
+        "aiops-ir-analytics-spark-worker"
+        "aiops-ir-analytics-spark-worker"
+        "aiops-ir-core-archiving"
+        "aiops-ir-core-cem-users"
+        "aiops-ir-core-datarouting"
+        "aiops-ir-core-esarchiving"
+        "aiops-ir-core"
+        "aiops-ir-core-ncodl-api"
+        "aiops-ir-core-ncodl-if"
+        "aiops-ir-core-ncodl-jobmgr"
+        "aiops-ir-core-ncodl-std"
+        "aiops-ir-core-ncodl-std"
+        "aiops-ir-core"
+        "aiops-ir-core-rba-as"
+        "aiops-ir-core-rba-rbs"
+        "aiops-ir-core-usercfg"
+        "aiops-ir-lifecycle-datarouting"
+        "aiops-ir-lifecycle-eventprocessor-ep"
+        "aiops-ir-lifecycle-eventprocessor-ep"
+        "aiops-ir-lifecycle-policy-grpc-svc"
+        "aiops-ir-lifecycle-policy-registry-svc"
+        "aiops-ir-ui-api-graphql")
+      for ELEMENT in ${CP4AIOPS_CHECK_LIST[@]}; do
+        #echo "     Check $ELEMENT.."
+            ELEMENT_OK=$(oc get pod -n $WAIOPS_NAMESPACE --ignore-not-found | grep $ELEMENT || true) 
+            if  ([[ ! $ELEMENT_OK =~ "1/1" ]]); 
+            then 
+                echo "      ⭕ Pod $ELEMENT not running successfully"; 
+                echo ""
+                export CURRENT_ERROR=true
+                export CURRENT_ERROR_STRING="Pod $ELEMENT not runing successfully"
+                handleError
+            else
+                  echo "      ✅ OK: Pod $ELEMENT"; 
+
+            fi
+
+      done
 
 
 
@@ -755,7 +752,7 @@ function check_array(){
       echo ""
       echo ""
       echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "    🔎 CHECK Runbooks in AI MAnager"
+      echo "    🔎 CHECK Runbooks in CP4WAIOps"
       echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
           CPD_ROUTE=$(oc get route cpd -n $WAIOPS_NAMESPACE  -o jsonpath={.spec.host} || true) 
 
@@ -767,7 +764,7 @@ function check_array(){
     if  ([[ $AWX_TEMPLATE_COUNT -lt 3 ]]); 
       then 
             export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="AI Manager Runbooks not ready"
+            export CURRENT_ERROR_STRING="CP4WAIOps Runbooks not ready"
             handleError
       else  
             echo "      ✅ OK"; 

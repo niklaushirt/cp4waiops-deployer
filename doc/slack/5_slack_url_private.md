@@ -30,9 +30,9 @@ spec:
 > The automated install does this by default.
 
 
-1. Open your AIManager Web UI
+1. Open your CP4WAIOps Web UI
 
-1. In the `AI Manager` "Hamburger" Menu select `Administration`/`Tunnel`
+1. In the `CP4WAIOps` "Hamburger" Menu select `Administration`/`Tunnel`
 
    ![secure_gw_search](images/tunnel1.png)
 

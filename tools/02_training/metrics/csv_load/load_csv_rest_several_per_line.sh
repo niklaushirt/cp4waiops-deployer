@@ -230,7 +230,7 @@ do
             if [[ $LINES_READ -ge $MAX_LINES_PER_CALL ]]; then
                   echo ""
                   echo ""
-                  echo "       🚀 Writing $MAX_LINES_PER_CALL lines to AI Manager"
+                  echo "       🚀 Writing $MAX_LINES_PER_CALL lines to CP4WAIOps"
                   echo ""
 
                   #Finalise injection file

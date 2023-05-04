@@ -23,7 +23,7 @@ This takes creates a Job in your cluster that will pull and load the training da
 
 #### 22.1.2.1 Create Training Definition for Log Anomaly
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`AI model management`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`AI model management`
 * Under `Log anomaly detection - natural language`  click on `Configure`
 * Click `Next`
 * Name it `LogAnomaly`
@@ -58,7 +58,7 @@ After successful training you should get:
 
 #### 22.2.1.1 Create Training Definition for Event Grouping
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`AI model management`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`AI model management`
 * Under `Temporal grouping` click on `Configure`
 * Click `Next`
 * Name it `EventGrouping`
@@ -110,7 +110,7 @@ This takes creates a Job in your cluster that will pull and load the training da
 
 #### 22.3.2.1 Create Training Definition
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`AI model management`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`AI model management`
 * Under `Similar incidents` click on `Configure`
 * Click `Next`
 * Name it `SimilarIncidents`
@@ -144,7 +144,7 @@ After successful training you should get:
 
 #### 22.3.3.1 Create Training Definition
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`AI model management`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`AI model management`
 * Under `Change risk` click on `Configure`
 * Click `Next`
 * Name it `ChangeRisk`
@@ -188,7 +188,7 @@ This takes creates a Job in your cluster that will pull and load the training da
 
 #### 22.4.2.1 Create Training Definition for Metric Anomaly
 
-* In the `AI Manager` "Hamburger" Menu select `Operate`/`AI model management`
+* In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`AI model management`
 * Under `Metric anomaly detection`  click on `Configure`
 * Click `Next`
 * Name it `MetricAnomaly`

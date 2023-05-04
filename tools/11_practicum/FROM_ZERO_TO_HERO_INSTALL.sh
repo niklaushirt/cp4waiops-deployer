@@ -2,7 +2,7 @@ cat << EOF | oc apply -f -
 apiVersion: v1                     
 kind: Namespace
 metadata:
-  name: cp4waiops-installation
+  name: cp4waiops-installer
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -15,13 +15,13 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: cp4waiops-installation
+    namespace: cp4waiops-installer
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: waiops-easy-install-aimanager-practicum
-  namespace: cp4waiops-installation
+  namespace: cp4waiops-installer
 spec:
   serviceAccountname: cp4waiops-installer-admin
   template:
@@ -45,7 +45,7 @@ spec:
               #set -x
 
               echo "*****************************************************************************************************************************"
-              echo " ✅ STARTING: INSTALL AI Manager with Demo Content"
+              echo " ✅ STARTING: INSTALL CP4WAIOps with Demo Content"
               echo "*****************************************************************************************************************************"
               echo ""
               echo ""
@@ -69,7 +69,7 @@ spec:
 
               echo "------------------------------------------------------------------------------------------------------------------------------"
               echo " 🚀 Starting Installation"
-              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=./configs/cp4waiops-roks-aimanager-practicum.yaml"
+              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=./configs/cp4waiops-practicum.yaml"
               echo ""
               echo ""
               echo "*****************************************************************************************************************************"

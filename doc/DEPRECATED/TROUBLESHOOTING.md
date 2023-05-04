@@ -190,7 +190,7 @@ Follow these steps to connects from Elasticvue:
 	![](./pics/es4.png)
 - Cancel the login screen and go back to the previous tab
 - Click `Connect` 
-- You should now be connected to your AI Manager ElasticSearch instance 
+- You should now be connected to your CP4WAIOps ElasticSearch instance 
 	![](./pics/es5.png)
 
 <div style="page-break-after: always;"></div>

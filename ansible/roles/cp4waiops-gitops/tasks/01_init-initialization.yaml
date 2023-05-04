@@ -15,7 +15,7 @@
 #
 #  CloudPak for Watson AIOps
 #
-#  ©2022 nikh@ch.ibm.com
+#  ©2023 nikh@ch.ibm.com
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -42,6 +42,22 @@
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: true
 
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Initializing Installer'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
 
 
 - name:   🚀 INITIALIZATION - Installing in Namespace "{{ current_cp4waiops_cluster.project }}" with size "{{ current_cp4waiops_feature.waiops_size }}"
@@ -51,8 +67,8 @@
 - name:   🚀 INITIALIZATION - Installation Parameters"
   debug:
     msg:
-    - "** CP4WAIOPS AI Manager Parameters ***********************************************************************"
-    - " AI Manager Installation Name:      {{current_cp4waiops_feature.test}}"
+    - "** CP4WAIOPS CP4WAIOps Parameters ***********************************************************************"
+    - " CP4WAIOps Installation Name:      {{current_cp4waiops_feature.test}}"
 
 
 

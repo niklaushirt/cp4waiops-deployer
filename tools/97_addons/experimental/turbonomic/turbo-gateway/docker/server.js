@@ -155,7 +155,7 @@ app.get('/getConfiguration', function (req, res) {
 function pushBA(BAnames) {
 
     //cater for multiple business apps being passed as comma separated list e.g. app1:alertgroup,app2:alertgroup,app3:alertgroup and loop through results
-    // BAnames is a sort of map where we have BANAME:ALERTGROUP so we can loop through multiple applications with separate event manager alert groups
+    // BAnames is a sort of map where we have BANAME:ALERTGROUP so we can loop through multiple applications with separate cp4waiops alert groups
     BAnames.split(',').forEach(function(BAmap) {
 
         var BAname = BAmap.split(':')[0];
@@ -395,7 +395,7 @@ function pushBA(BAnames) {
 
                                                     console.log(timestamp() + 'Found ' + oldActionsArr.length + ' old actions, ' + newActions.length + ' new actions.');
 
-                                                    //Get a list of new old actions that no longer exist in the new list to close them in event manager (since they are redundant events)
+                                                    //Get a list of new old actions that no longer exist in the new list to close them in cp4waiops (since they are redundant events)
                                                     //old actions come from reading the json file earlier
                                                     var expiredActions = [];
                                                     var indexedObj = {};
@@ -404,7 +404,7 @@ function pushBA(BAnames) {
                                                         indexedObj[o.uuid] = o;
                                                     }
 
-                                                    //loop through the previously found actions and if they exist, do nothing, since they're still technically open. Else we set the action to resolved for event manager to clear it automatically
+                                                    //loop through the previously found actions and if they exist, do nothing, since they're still technically open. Else we set the action to resolved for cp4waiops to clear it automatically
                                                     //the exception is a FAILED state action where we want to keep it open, but they will always exist in Turbonomic anyway for the given time period so they should always remain in the state file. 
                                                     //Anything FAILED outside of the time period will get cleared
                                                     for( var i=0;i<previousActions.length; i++) {

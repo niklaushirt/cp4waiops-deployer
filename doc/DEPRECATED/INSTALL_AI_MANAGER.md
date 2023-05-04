@@ -4,7 +4,7 @@
 
 
 
-## 19.1 Manually install AI Manager (Optional)
+## 19.1 Manually install CP4WAIOps (Optional)
 
 Only do this if you don't want to use 🐥 Easy Install
 
@@ -35,12 +35,12 @@ OCP_MAJOR_VERSION: automatic
 
 <div style="page-break-after: always;"></div>
 
-#### 19.1.1.2 Adapt AI Manager Config
+#### 19.1.1.2 Adapt CP4WAIOps Config
 
 ```bash
 # *************************************************************************************
 # -------------------------------------------------------------------------------------
-# CP4WAIOPS AI Manager INSTALL PARAMETERS
+# INSTALL CP4WAIOPS INSTALL PARAMETERS
 # -------------------------------------------------------------------------------------
 # *************************************************************************************
 
@@ -170,8 +170,8 @@ ansible-playbook ./ansible/01_aimanager-base-install.yaml -e cp_entitlement_key=
 This will install:
 
 - IBM Operator
-- AI Manager
-- OpenLDAP & Register with AI Manager
+- CP4WAIOps
+- OpenLDAP & Register with CP4WAIOps
 - AWX (Open Source Ansible Tower) with preloaded Playbooks
 - RobotShop Demo App
 - Demo Service Account 

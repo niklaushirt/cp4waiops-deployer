@@ -64,7 +64,7 @@ The Demo UI should open:
 
 The most important functionalities are:
 
-1. **Open AIManager (login with the provided credentials)**
+1. **Open CP4WAIOps (login with the provided credentials)**
 2. **Clear all existing Stories and Alerts**
 3. **Create an Incident/Story**
 
@@ -73,7 +73,7 @@ The most important functionalities are:
 
 
 
-> ⚠️ Before start, you should open the AIManager and check that there are no open stories and alerts pending. If there are some created few hours before (leftovers from somebody else not completing the demo) you can clean them up using AIManager Demo UI as shown below.
+> ⚠️ Before start, you should open the CP4WAIOps and check that there are no open stories and alerts pending. If there are some created few hours before (leftovers from somebody else not completing the demo) you can clean them up using CP4WAIOps Demo UI as shown below.
 
 <div style="page-break-after: always;"></div>
 
@@ -102,7 +102,7 @@ You will demonstrate the following major selling points around Cloud Pak for Wat
 1. Trigger problem situation [In the background] 
 1. Verify the status of the Robot Shop application.
 1. Understanding and resolving the incident
-   1. Login to AI Manager
+   1. Login to CP4WAIOps
    1. Open the Story
    1. Examining the Story
    1. Acknowledge the Story
@@ -185,9 +185,9 @@ Now let's start the demo.
 
 
 >**🚀 <u>Action</u>**
->Open AIManager **Demo** UI, and trigger the incident
+>Open CP4WAIOps **Demo** UI, and trigger the incident
 >
->- Point your browser to the AIManager Demo UI, 
+>- Point your browser to the CP4WAIOps Demo UI, 
 >
 >- Login with the token “P4ssw0rd!” and 
 >
@@ -247,12 +247,12 @@ I know that there are many ratings for each of the products that we sell, so whe
 
 ## 3.4 Understanding and resolving the incident
 
-### 3.4.1 Login to AI Manager
+### 3.4.1 Login to CP4WAIOps
 
 ![image](./demo/image.054.png)
 
 >**🚀 <u>Action</u>**
-In the Demo UI, click **AI MAnager `(1)`**
+In the Demo UI, click **CP4WAIOps `(1)`**
 
 
 

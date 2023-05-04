@@ -15,7 +15,7 @@
 #
 #  CloudPak for Watson AIOps
 #
-#  ©2022 nikh@ch.ibm.com
+#  ©2023 nikh@ch.ibm.com
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -43,12 +43,29 @@
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
     - "                                                                                                                                                   "
-    - "      🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}}                                                                                          "
+    - "      🟡🟡🟡🟡🟡  🚀 CloudPak for Watson AIOps - INSTALLING {{current_cp4waiops_feature.kind}} 🟡🟡🟡🟡🟡                                                        "
     - "                                                                                                                                                   "
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
     - "***************************************************************************************************************************************************"
 
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+    appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification-main
+    spec:
+      backgroundColor: '#141a6b'
+      color: '#fff'
+      location: {{global_config.position_final_ocp_notification | default("BannerBottom")}}
+      text: 'Installing  {{current_cp4waiops_feature.kind}}'    
+    EOF
+  ignore_errors: true
 
 # *************************************************************************************************************************************************
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -73,6 +90,7 @@
 - name: 🟣 Installing {{current_cp4waiops_feature.kind}} with the following configuration
   debug:
     var: current_cp4waiops_feature
+    verbosity: 1
 
 
 
@@ -193,8 +211,8 @@
   include_tasks: 10_addons-turbonomic-demo-content.yaml
 
 
-# Update AI Manager Cards
-- name: 📥 Update AI Manager Cards
+# Update CP4WAIOps Cards
+- name: 📥 Update CP4WAIOps Cards
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/99_update_cards.yaml"
 
 
@@ -203,7 +221,6 @@
 
 - name: 📥 End Logging
   include_tasks: "{{role_path}}/../cp4waiops-global/tasks/91-log-end.yaml"
-
 
 
 

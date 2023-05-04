@@ -187,7 +187,7 @@ Before you create your integration, you must assign IBM Cloud Pak for Watson AIO
 3. Click Configuration.
 4. Enter values for the following fields as shown in the next picture.
 
-    * URL for AIOps connection: The URL of your AI Manager instance in the format of protocol://hostname:port.
+    * URL for AIOps connection: The URL of your CP4WAIOps instance in the format of protocol://hostname:port.
 
       **Note:** If you use a tunnel to expose the server for the ServiceNow connection, you must replace the URL with the forwarding address of the tunnel.
 

@@ -22,6 +22,22 @@
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: true
 
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Demo Content'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
 
 - name: 🚀 TURBONOMIC - Set ADMIN Password from instance configuration
   set_fact: current_admin_pass={{current_cp4waiops_feature.turbo_admin_password  | default('P4ssw0rd!')}}
@@ -36,6 +52,7 @@
 - name: 🟣  TURBONOMIC -  ADMIN Password {{current_admin_pass}}
   debug:
     var: current_admin_pass
+    verbosity: 1
 
 
 - name: 🚀 TURBONOMIC - Set DEMO Password from instance configuration
@@ -51,6 +68,7 @@
 - name: 🟣  TURBONOMIC -  DEMO Password {{current_demo_pass}}
   debug:
     var: current_demo_pass
+    verbosity: 1
 
 
 
@@ -82,10 +100,10 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    ##verbosity: 1
+    verbosity: 1
         
 
 
@@ -107,10 +125,10 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
         
 
 
@@ -135,7 +153,7 @@
   args:
     executable: /bin/bash
   when: current_turbo_license | default("NONE") != "NONE"
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 2
@@ -177,10 +195,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.create_user == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.create_user == true
 
 
@@ -231,10 +249,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.group_vcenter_vms == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.group_vcenter_vms == true
 
 
@@ -287,10 +305,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.group_robotshop == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.group_robotshop == true
 
 
@@ -437,10 +455,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.group_licensing == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.group_licensing == true
 
 
@@ -481,10 +499,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.group_robotshop == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.group_robotshop == true
 
 
@@ -497,46 +515,46 @@
 # --------------------------------------------------------------------------------------------------------
 
 
-- name: 🚀 TURBONOMIC - Create Instana Target
-  shell: |
-    echo "------------------------------------------------------------------------------------------------------------------------------"
-    echo " 📥 Create Instana Target"
-    INSTANA_IP=$(oc get route -n instana-core dev-aiops -o jsonpath={.spec.host})
-    result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/targets" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '{
-        "uuid": "74709474070544",
-        "displayName": "159.122.143.166",
-        "category": "Applications and Databases",
-        "inputFields": [
-          {
-            "name": "apiToken",
-            "value": "ChangeMe"
-          },
-          {
-            "name": "address",
-            "value": "'$INSTANA_IP'"
-          },
-          {
-            "name": "collectVmMetrics",
-            "value": "false"
-          }
-        ],
-        "type": "Instana",
-        "readonly": false
-      }')
+# - name: 🚀 TURBONOMIC - Create Instana Target
+#   shell: |
+#     echo "------------------------------------------------------------------------------------------------------------------------------"
+#     echo " 📥 Create Instana Target"
+#     INSTANA_IP=$(oc get route -n instana-core dev-aiops -o jsonpath={.spec.host})
+#     result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/targets" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '{
+#         "uuid": "74709474070544",
+#         "displayName": "159.122.143.166",
+#         "category": "Applications and Databases",
+#         "inputFields": [
+#           {
+#             "name": "apiToken",
+#             "value": "ChangeMe"
+#           },
+#           {
+#             "name": "address",
+#             "value": "'$INSTANA_IP'"
+#           },
+#           {
+#             "name": "collectVmMetrics",
+#             "value": "false"
+#           }
+#         ],
+#         "type": "Instana",
+#         "readonly": false
+#       }')
 
-    echo $result
-    echo ""
-    echo ""
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-  when: current_cp4waiops_feature.target_instana == true
-- name: 🟣  DEBUG
-  debug:
-    var: output.stdout_lines
-    #verbosity: 1
-  when: current_cp4waiops_feature.target_instana == true
+#     echo $result
+#     echo ""
+#     echo ""
+#   ignore_errors: true
+#   register: output
+#   args:
+#     executable: /bin/bash
+#   when: current_cp4waiops_feature.target_instana == true
+# - name: 🟣  OUTPUT
+#   debug:
+#     var: output.stdout_lines
+#     verbosity: 1
+#   when: current_cp4waiops_feature.target_instana == true
 
 
 
@@ -623,10 +641,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.metrics_dif == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 
@@ -647,10 +665,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.metrics_dif == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 
@@ -686,10 +704,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.metrics_dif == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 
@@ -699,7 +717,7 @@
   shell: |
     echo "------------------------------------------------------------------------------------------------------------------------------"
     echo " 📥 Create RobotShop Metrics"
-    export robotshopUUID=$(curl -XGET -s -k "https://{{TURBO_URL}}/api/v3/topologydefinitions" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq -r '.[]|select(.displayName=="RobotShop").uuid')
+    export robotshopUUID=$(curl -XGET -s -k "https://{{TURBO_URL}}/api/v3/topologydefinitions" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json'|jq -r '.[]|select(.displayName=="RobotShopSynthetic").uuid')
 
     result=$(curl -XPOST -s -k "https://{{TURBO_URL}}/api/v3/targets" -b /tmp/cookies  -H 'Content-Type: application/json;' -H 'accept: application/json' -d '{
         "uuid": "74709422922224",
@@ -728,10 +746,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.metrics_dif == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 
@@ -758,10 +776,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.resource_hogs == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.resource_hogs == true
 
 
@@ -802,10 +820,10 @@
   args:
     executable: /bin/bash
   when: current_cp4waiops_feature.metrics_dif == true
-- name: 🟣  DEBUG
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
-    #verbosity: 1
+    verbosity: 1
   when: current_cp4waiops_feature.metrics_dif == true
 
 

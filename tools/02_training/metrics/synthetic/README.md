@@ -14,7 +14,7 @@ The metrics generation starts for 14 days back from current date.
 
 
 
-# Train the model in AI Manager
+# Train the model in CP4WAIOps
 
 # Metrics Inception
 

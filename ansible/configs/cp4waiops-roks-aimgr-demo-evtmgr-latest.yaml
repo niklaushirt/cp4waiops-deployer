@@ -15,7 +15,7 @@ global_config:
   entitled_registry: cp.icr.io
   entitled_registry_user: cp
   catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
-  # Create Welcome Cards in AI Manager
+  # Create Welcome Cards in CP4WAIOps
   create_cards: true
   # Create App Menu Items in OCP
   create_ocp_items: true
@@ -23,11 +23,17 @@ global_config:
   global_password: P4ssw0rd!
   # Set this value to True to accept all licenses
   accept_all_licenses: False
+  # Create Notifications in OCP
+  create_ocp_notifications: true
+  position_ocp_notifications: BannerTop
+  position_final_ocp_notification: BannerTop
+  # Key to decrypt Licenses
+  # license_token: NONE
 
 
 openshift:
 - name: "mycluster"
-  ocp_version: "4.10"
+  ocp_version: "4.12"
   cluster_name: "mycluster"
   domain_name: example.com
   openshift_storage:
@@ -44,10 +50,10 @@ cp4waiops:
 - project: cp4waiops
   instances:
   # --------------------------------------------------------------------------------------------------------------------------------------
-  # CP4WAIOPS AI Manager
+  # INSTALL CP4WAIOPS
   # --------------------------------------------------------------------------------------------------------------------------------------
-  - name: cp4waiops-aimanager
-    kind: AIManager
+  - name: cp4waiops
+    kind: CP4WAIOps
     install: true
     # CP4WAIOPS Size of the install (small: PoC/Demo, tall: Production)
     waiops_size: small
@@ -72,7 +78,7 @@ cp4waiops:
     case_install: false
     case_github_url: "https://github.com/IBM/cloud-pak/raw/master/repo/case"
     case_name: ibm-cp-waiops
-    case_version: 1.6.0
+    case_version: 1.5.0
     case_inventory_setup: cpwaiopsSetup
     
 
@@ -80,10 +86,10 @@ cp4waiops:
 
 
   # --------------------------------------------------------------------------------------------------------------------------------------
-  # CP4WAIOPS AI Manager Demo Content
+  # INSTALL CP4WAIOPS Demo Content
   # --------------------------------------------------------------------------------------------------------------------------------------
-  - name: cp4waiops-aimanager-demo-content
-    kind: AIManagerDemoContent
+  - name: cp4waiops-demo-content
+    kind: CP4WAIOpsDemoContent
     install: true
 
     # TRAINING
@@ -108,8 +114,8 @@ cp4waiops:
     # Install AWX and create Runbooks
     install_awx: true
     load_awx_playbooks: true
-    integrate_awx_aimanager: true
-    load_aimanager_runbooks: true
+    integrate_awx: true
+    load_runbooks: true
     create_runbook_policy: true
 
     # Demo UI
@@ -119,9 +125,9 @@ cp4waiops:
     demoui_slack_pwd: P4ssw0rd!
     demoui_admin_mode: "true"
     demoui_simulation_mode: "true"
-    demoui_aimanager_demo_user: demo
+    demoui_user: demo
     # Password for the Demo UI (OVERRIDES GLOBAL PASSWORD)
-    #demoui_aimanager_demo_pwd: P4ssw0rd!
+    #demoui_pwd: P4ssw0rd!
 
     # OUTPUT
     # Print all logins

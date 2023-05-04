@@ -244,7 +244,7 @@ metadata:
   labels:
     app: openldap
   name: openldap
-  namespace: cp4waiops-installation
+  namespace: cp4waiops-installer
 spec:
   ports:
     - port: 389
@@ -259,7 +259,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: openldap-admin
-  namespace: cp4waiops-installation
+  namespace: cp4waiops-installer
 spec:
   type: NodePort
   ports:
@@ -333,7 +333,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: openldap-admin
-  namespace: cp4waiops-installation
+  namespace: cp4waiops-installer
 spec:
   replicas: 1
   selector:
@@ -375,7 +375,7 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: openldap-admin
-  namespace: cp4waiops-installation
+  namespace: cp4waiops-installer
 spec:
   to:
     kind: Service
