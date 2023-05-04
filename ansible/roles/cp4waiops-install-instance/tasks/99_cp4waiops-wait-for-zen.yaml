@@ -41,8 +41,14 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for AutomationUIConfig ready
 # --------------------------------------------------------------------------------------------------------------------------------------
+# - name: 🕦 CHECK -  Wait for Zen AutomationUIConfig being ready (this might take some time)
+#   shell: oc get AutomationUIConfig -n {{ current_cp4waiops_cluster.project }} iaf-system  | grep True|grep -c ""
+#   register: kubectl_get_pods
+#   until: kubectl_get_pods.stdout == "1"
+#   retries: 500
+#   delay: 15
 - name: 🕦 CHECK -  Wait for Zen AutomationUIConfig being ready (this might take some time)
-  shell: oc get AutomationUIConfig -n {{ current_cp4waiops_cluster.project }} iaf-system  | grep True|grep -c ""
+  shell: oc get ZenServices -n cp4waiops iaf-zen-cpdservice -oyaml | grep 'zenStatus\: Completed' |grep -c ""
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "1"
   retries: 500
@@ -51,7 +57,7 @@
 
 - name: 🕦 CHECK -  Wait for Zen Ansible Script zen_ready.stdout in namespace ibm-common-services (this might take some time - up to 30 minutes)
   shell: |
-    ZEN_LOGS=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -n ibm-common-services|grep -i -E "ok=2|ok=3|ok=4|ok=5|ok=6|ok=7")
+    ZEN_LOGS=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -c ibm-zen-operator -n ibm-common-services|grep -i -E "ok=2|ok=3|ok=4|ok=5|ok=6|ok=7")
     echo $ZEN_LOGS
   register: zen_ready
   until: ("ok" in zen_ready.stdout)
