@@ -48,7 +48,7 @@
 #   retries: 500
 #   delay: 15
 - name: 🕦 CHECK -  Wait for Zen AutomationUIConfig being ready (this might take some time)
-  shell: oc get ZenServices -n cp4waiops iaf-zen-cpdservice -oyaml | grep 'zenStatus: Completed' |grep -c ""
+  shell: oc get ZenServices -n cp4waiops iaf-zen-cpdservice -oyaml | grep 'Completed' |grep -c ""
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "1"
   retries: 500
