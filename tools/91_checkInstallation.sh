@@ -27,7 +27,7 @@ spec:
 
 EOF
 else
-oc delete ConsoleNotification --all
+oc delete ConsoleNotification --all>/dev/null 2>/dev/null
 export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 export appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
 export DEMO_PWD=$(oc get cm -n $WAIOPS_NAMESPACE-demo-ui cp4waiops-demo-ui-config -o jsonpath='{.data.TOKEN}')
@@ -48,6 +48,17 @@ EOF
 
 echo ""
 echo " ✅ CP4WAIOPS is installed in this cluster."
+
+
+echo "------------------------------------------------------------------------------------------------------------------------------"
+echo " 🔎 Check Installation Consitency"
+./tools/91_check_install_short.sh
+echo ""
+echo ""
+echo ""
+echo ""
+
+
 
 # num_failed=$(cat /tmp/ansible.log|grep "error"|wc -l)
 # if [ $num_failed -gt 0 ];
