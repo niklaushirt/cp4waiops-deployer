@@ -215,7 +215,7 @@ On top of that you get Turbonomic and Instana instances to play around a bit (yo
 ![K8s CNI](./doc/pics/install01.png)
 
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
-1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_TURBO_INSTANA.yaml)
+1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_CP4WAIOPS_TURBO_INSTANA.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
 4. Replace `<YOUR_SALES_KEY>` and  `<YOUR_AGENT_KEY>` at the end of the file with your Instana license if you have one
 5. Replace the TURBO_LICENSE `NONE` at the end of the file with your Turbonomic license if you have one
