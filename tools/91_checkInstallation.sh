@@ -52,7 +52,7 @@ echo " ✅ CP4WAIOPS is installed in this cluster."
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🔎 Check Installation Consitency"
-./91_check_install_short.sh
+./tools/92_check_install_short.sh
 echo ""
 echo ""
 echo ""

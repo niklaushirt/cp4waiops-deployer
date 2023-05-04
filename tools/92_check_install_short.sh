@@ -399,8 +399,8 @@ function check_array(){
 
     echo "      ------------------------------------------------------------------------------------------------------------------------------------------------------"
     echo "      🔎 Check AWX Inventory"
-    export AWX_INVENTORY_COUNT=$(curl -X "GET" -s "$AWX_URL/api/v2/inventories/" -u "admin:$AWX_PWD" --insecure -H 'content-type: application/json'| jq ".count")
-    if  ([[ $AWX_INVENTORY_COUNT -lt 2 ]]); 
+    export AWX_INVENTORY_COUNT=$(curl -X "GET" -s "$AWX_URL/api/v2/inventories/" -u "admin:$AWX_PWD" --insecure -H 'content-type: application/json'|grep "CP4WAIOPS Runbooks"|wc -l|tr -d ' ')
+    if  ([[ $AWX_INVENTORY_COUNT -lt 1 ]]); 
       then 
             export CURRENT_ERROR=true
             export CURRENT_ERROR_STRING="AWX Inventory not ready"
