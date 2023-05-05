@@ -22,7 +22,7 @@ spec:
         app: cp4waiops-demo-ui
     spec:
       containers:
-      - image: quay.io/niklaushirt/cp4waiops-demo-ui:1.13
+      - image: quay.io/niklaushirt/cp4waiops-demo-ui:2.0
         imagePullPolicy: Always
         name: cp4waiops-demo-ui
         command:

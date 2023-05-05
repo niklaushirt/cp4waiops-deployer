@@ -55,7 +55,7 @@ spec:
         app:  cp4waiops-pagerduty-incident-pusher
     spec:
       containers:
-      - image: quay.io/niklaushirt/cp4waiops-pagerduty-incident-pusher:0.2
+      - image: quay.io/niklaushirt/cp4waiops-pagerduty-incident-pusher:1.0
         imagePullPolicy: Always
         name: gateway
         command:
