@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export CONT_VERSION=0.1
+export CONT_VERSION=1.0
 
 # Create the Image
 docker buildx build --platform linux/amd64 -t quay.io/niklaushirt/cp4waiops-generic-incident-pusher:$CONT_VERSION --load .

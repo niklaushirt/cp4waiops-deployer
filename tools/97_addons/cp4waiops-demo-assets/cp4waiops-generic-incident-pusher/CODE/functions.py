@@ -70,13 +70,13 @@ def updateIncident(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROU
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 def closeIncident(conn, incident_id, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     debug('         🚀 closeIncident: '+incident_id)
-    cursor = conn.execute("SELECT provider_id from STORIES where ID='"+str(incident_id)+"'")
+    cursor = conn.execute("SELECT provider_id from INCIDENTS where ID='"+str(incident_id)+"'")
     provider_id = cursor.fetchone()
     debug('PROVIDER MESSAGE ID:'+provider_id[0])
     
     send_module.resolveIncidentToProvider(incident_id, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, provider_id[0])
 
-    cursor = conn.execute("DELETE FROM STORIES where ID='"+str(incident_id)+"'")
+    cursor = conn.execute("DELETE FROM INCIDENTS where ID='"+str(incident_id)+"'")
     conn.commit()
 
 
@@ -97,7 +97,7 @@ def insertIDIntoDB(conn, incident_id, provider_id, message_hash):
     debug('         🚀 insertIDIntoDB: '+str(incident_id))
     debug('                            '+str(provider_id))
     try:
-        conn.execute("INSERT INTO STORIES (ID, MESSAGE_HASH, provider_id) \
+        conn.execute("INSERT INTO INCIDENTS (ID, MESSAGE_HASH, provider_id) \
             VALUES ('"+str(incident_id)+"', '"+str(message_hash)+"', '"+str(provider_id)+"')");
         conn.commit()
     except sqlite3.IntegrityError as e:
@@ -108,7 +108,7 @@ def insertIDIntoDB(conn, incident_id, provider_id, message_hash):
 
 def checkIDExistsDB(conn, incident_id):
     debug('         🚀 checkIDExistsDB: '+incident_id)
-    cursor = conn.execute("SELECT count(id) from STORIES where ID='"+str(incident_id)+"'")
+    cursor = conn.execute("SELECT count(id) from INCIDENTS where ID='"+str(incident_id)+"'")
     count = cursor.fetchone()
     debug ("            📥 checkIDExistsDB: "+str(count[0]))
     debug ("")
@@ -117,7 +117,7 @@ def checkIDExistsDB(conn, incident_id):
 
 def getMessageIdDB(conn, incident_id):
     debug('         🚀 getMessageIdDB: '+incident_id)
-    cursor = conn.execute("SELECT provider_id from STORIES where ID='"+str(incident_id)+"'")
+    cursor = conn.execute("SELECT provider_id from INCIDENTS where ID='"+str(incident_id)+"'")
     provider_id = cursor.fetchone()
     debug ("            📥 needsUpdate: "+str(provider_id[0]))
     return provider_id[0]
@@ -125,14 +125,14 @@ def getMessageIdDB(conn, incident_id):
 
 def needsUpdate(conn, incident_id, messageHash):
     debug('         🚀 needsUpdate: '+incident_id)
-    cursor = conn.execute("SELECT MESSAGE_HASH from STORIES where ID='"+str(incident_id)+"'")
+    cursor = conn.execute("SELECT MESSAGE_HASH from INCIDENTS where ID='"+str(incident_id)+"'")
     updateMessageHash = cursor.fetchone()
     debug ("            🛠️ NEW messageHash: "+str(messageHash))
     debug ("            🛠️ OLD messageHash: "+str(updateMessageHash[0]))
 
     if updateMessageHash[0] != messageHash:
         debug ("            ❗❗HASHES ARE DIFFERENT - UPDATE INCIDENT")
-        cursor = conn.execute("UPDATE STORIES SET MESSAGE_HASH='"+str(messageHash)+"'where ID='"+str(incident_id)+"'")
+        cursor = conn.execute("UPDATE INCIDENTS SET MESSAGE_HASH='"+str(messageHash)+"'where ID='"+str(incident_id)+"'")
         conn.commit()
         updateNeeded=1
     else:

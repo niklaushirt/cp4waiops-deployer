@@ -322,7 +322,7 @@ def setInProgressID(incident_id):
     print ('    --------------------------------------------------------------------------------')
 
     print ('         🚀 Updating Incident to "inProgress" - '+incident_id)
-    updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress",incident_id)
+    updateIncidentsID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress",incident_id)
     print ('     ✅ DONE"')
 
 
@@ -341,25 +341,25 @@ def setResolvedID(incident_id):
     print(str(RESULT))
 
     print ('         🚀 Updating Incident to "resolved" - '+incident_id)
-    updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved",incident_id)
+    updateIncidentsID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved",incident_id)
     print ('     ✅ DONE"')
 
 
 
 def setInProgress():
     print ('    --------------------------------------------------------------------------------')
-    print ('     🚀 Updating Stories')
+    print ('     🚀 Updating Incidents')
     print ('    --------------------------------------------------------------------------------')
 
-    print ('         🚀 Updating Stories to "inProgress"')
-    updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress")
+    print ('         🚀 Updating Incidents to "inProgress"')
+    updateIncidents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress")
     print ('     ✅ DONE"')
 
 
 
 def setResolved():
     print ('    --------------------------------------------------------------------------------')
-    print ('     🚀 Updating Stories')
+    print ('     🚀 Updating Incidents')
     print ('    --------------------------------------------------------------------------------')
     stream = os.popen('oc set env deployment ratings -n robot-shop PDO_URL-')
     RESULT = stream.read().strip()
@@ -373,15 +373,15 @@ def setResolved():
     print(str(RESULT))
 
 
-    print ('         🚀 Updating Stories to "resolved"')
-    updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved")
+    print ('         🚀 Updating Incidents to "resolved"')
+    updateIncidents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved")
     print ('     ✅ DONE"')
  
 
     
 def setClosed():
     print ('    --------------------------------------------------------------------------------')
-    print ('     🚀 Updating Stories')
+    print ('     🚀 Updating Incidents')
     print ('    --------------------------------------------------------------------------------')
     stream = os.popen('oc set env deployment ratings -n robot-shop PDO_URL-')
     RESULT = stream.read().strip()
@@ -390,9 +390,9 @@ def setClosed():
     RESULT = stream.read().strip()
     print(str(RESULT))
 
-    print ('     🚀 Updating Stories and Alerts to "closed"')
+    print ('     🚀 Updating Incidents and Alerts to "closed"')
     updateAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"closed")
-    updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"closed")
+    updateIncidents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"closed")
     print ('     ✅ DONE"')
 
 
@@ -448,9 +448,9 @@ class IncidentBot(commands.Bot):
 
                 await message.channel.send('--------------------------------------------------')
                 await message.channel.send('**🚀 WAIOps Incidents**')
-                view = StoriesActions()
+                view = IncidentsActions()
                 await message.channel.send(view=view)
-                view = IncidentActions()
+                view = IncidentCreateActions()
                 await message.channel.send(view=view)
 
                 
@@ -461,10 +461,10 @@ class IncidentBot(commands.Bot):
 
 
                 await message.channel.send('--------------------------------------------------')
-                await message.channel.send('**🚀 Open Stories**')
+                await message.channel.send('**🚀 Open Incidents**')
                 await message.channel.send('--------------------------------------------------')
-                actStories=getStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE)
-                for currentIncident in actStories['stories']:
+                actIncidents=getIncidents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE)
+                for currentIncident in actIncidents['stories']:
                     outputString=""
                     incident_id=currentIncident["id"]
                     incidentState=currentIncident["state"]
@@ -539,7 +539,7 @@ class IncidentBot(commands.Bot):
                     print(" 📥 Command: waiops")
                     await message.channel.send('--------------------------------------------------')
                     await message.channel.send('**🚀 WAIOps Incidents**')
-                    view = StoriesActions()
+                    view = IncidentsActions()
                     await message.channel.send(view=view)
                     view = IncidentActions()
                     await message.channel.send(view=view)
@@ -589,10 +589,10 @@ class IncidentBot(commands.Bot):
 
 
                 # --------------------------------------------------------------------------------
-                 # SET STORIES TO InProgress
+                 # SET Incidents TO InProgress
                 elif myArgument == "progress":
                     print(" 📥 Command: progress")
-                    await message.channel.send('🚀 '+INSTANCE_NAME+' Set Stories to InProgress')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Set Incidents to InProgress')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=setInProgress)
                     print('    🟠 Start THREADS')
@@ -600,20 +600,20 @@ class IncidentBot(commands.Bot):
 
 
                 # --------------------------------------------------------------------------------
-                 # SET STORIES TO Resolved
+                 # SET Incidents TO Resolved
                 elif myArgument == "resolve":
                     print(" 📥 Command: resolve")
-                    await message.channel.send('🚀 '+INSTANCE_NAME+' Set Stories to Resolved')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Set Incidents to Resolved')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=setResolved)
                     print('    🟠 Start THREADS')
                     threadRun.start()
 
                 # --------------------------------------------------------------------------------
-                 # SET STORIES TO Resolved
+                 # SET Incidents TO Resolved
                 elif myArgument == "close":
                     print(" 📥 Command: close")
-                    await message.channel.send('🚀 '+INSTANCE_NAME+' Set Stories to Resolved')
+                    await message.channel.send('🚀 '+INSTANCE_NAME+' Set Incidents to Resolved')
                     print('    🟠 Create THREADS')
                     threadRun = Thread(target=setResolved)
                     print('    🟠 Start THREADS')
@@ -621,7 +621,7 @@ class IncidentBot(commands.Bot):
 
 
                 # --------------------------------------------------------------------------------
-                 # SET STORIES TO Resolved
+                 # SET Incidents TO Resolved
                 elif myArgument == "reset":
                     print(" 📥 Command: reset")
                     await message.channel.send('🚀 '+INSTANCE_NAME+' Reset Demo Environment')
@@ -642,29 +642,29 @@ class IncidentBot(commands.Bot):
                     await message.channel.send('   🛠️ Command Buttons:')
                     await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **waiops**      :  Prints buttons to create or mitigate WAIOPS incidents')
                     await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **instana**     :  Prints buttons to create or mitigate Instana incidents')
-                    await message.channel.send('   🛠️ Stories:')
-                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **stories**     :  List all Stories')
+                    await message.channel.send('   🛠️ Incidents:')
+                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **Incidents**     :  List all Incidents')
                     await message.channel.send('   🛠️ Simulation:')
                     await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **incident**    :  Simulates a Memory leak in RobotShop')
                     await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **incidentMem** :  Simulates a Memory leak in RobotShop')
                     await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **incidentFan** :  Simulates a Fan problem in RobotShop')
-                    await message.channel.send('   🛠️ Modify Stories:')
-                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **progress**    :  Set all Stories to InProgress')
-                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **resolve **    :  Set all Stories to Resolved')
-                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **close**       :  Set all Stories to Resolved')
-                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **reset**       :  Set all Stories to Resolved')
+                    await message.channel.send('   🛠️ Modify Incidents:')
+                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **progress**    :  Set all Incidents to InProgress')
+                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **resolve **    :  Set all Incidents to Resolved')
+                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **close**       :  Set all Incidents to Resolved')
+                    await message.channel.send('      '+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' **reset**       :  Set all Incidents to Resolved')
 
 
 
 
                 # --------------------------------------------------------------------------------
-                # GET STORIES
-                elif myArgument == "stories":
-                    print(" 📥 Command: stories")
-                    await message.channel.send('**🚀 '+INSTANCE_NAME+' Open Stories**')
+                # GET Incidents
+                elif myArgument == "Incidents":
+                    print(" 📥 Command: Incidents")
+                    await message.channel.send('**🚀 '+INSTANCE_NAME+' Open Incidents**')
                     await message.channel.send('--------------------------------------------------')
-                    actStories=getStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE)
-                    for currentIncident in actStories['stories']:
+                    actIncidents=getIncidents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE)
+                    for currentIncident in actIncidents['stories']:
                         outputString=""
                         incident_id=currentIncident["id"]
                         incidentState=currentIncident["state"]
@@ -781,22 +781,22 @@ class IncidentActions(discord.ui.View):
             self.add_item(button_red)
 
 
-class StoriesActions(discord.ui.View):
+class IncidentsActions(discord.ui.View):
     def __init__(self):
         super().__init__()
 
-    @discord.ui.button(label='Acknowledge all Stories', style=discord.ButtonStyle.green, custom_id='persistent_view:ackall')
+    @discord.ui.button(label='Acknowledge all Incidents', style=discord.ButtonStyle.green, custom_id='persistent_view:ackall')
     async def green(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message('🟠 Acknowledged all Stories', ephemeral=True)
+        await interaction.response.send_message('🟠 Acknowledged all Incidents', ephemeral=True)
         setInProgress()
 
-    @discord.ui.button(label='Resolve all Stories', style=discord.ButtonStyle.green, custom_id='persistent_view:closeall')
+    @discord.ui.button(label='Resolve all Incidents', style=discord.ButtonStyle.green, custom_id='persistent_view:closeall')
     async def red(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message('🔴 Resolved all Stories', ephemeral=True)
+        await interaction.response.send_message('🔴 Resolved all Incidents', ephemeral=True)
         setResolved()
 
 
-class IncidentActions(discord.ui.View):
+class IncidentCreateActions(discord.ui.View):
     def __init__(self):
         super().__init__()
 

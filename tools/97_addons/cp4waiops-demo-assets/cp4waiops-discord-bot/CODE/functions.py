@@ -33,26 +33,26 @@ METRICS_TO_SIMULATE_NET=str(os.environ.get('METRICS_TO_SIMULATE_NET')).split(';'
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
-# GET STORIES
+# GET Incidents
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
  
-def getStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE):
+def getIncidents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE):
 
 
     url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories'
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
     response = requests.get(url, headers=headers, auth=auth)#, verify=False)
-    actStories=response.json()
+    actIncidents=response.json()
 
-    return actStories
+    return actIncidents
 
 
 
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
-# CLOSE ALERTS AND STORIES
+# CLOSE ALERTS AND Incidents
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 #open
 #clear
@@ -79,10 +79,10 @@ def updateAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE):
 #inProgress
 #resolved
 #closed
-def updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE, incident_id):
+def updateIncidentsID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE, incident_id):
     #print('              ')
     #print('               ------------------------------------------------------------------------------------------------')
-    #print('               📛 Close Stories')
+    #print('               📛 Close Incidents')
     data = '{"state": "'+STATE+'"}'
     # print(data)
     # print(type(data))
@@ -92,7 +92,7 @@ def updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE, inciden
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
     response = requests.patch(url, data=data, headers=headers, auth=auth)#, verify=False)
     #print('                   RESULT:'+str(response.content))
-    #print('               ✅ Close Stories')
+    #print('               ✅ Close Incidents')
     #print('               ------------------------------------------------------------------------------------------------')
 
     return 'OK'
@@ -103,10 +103,10 @@ def updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE, inciden
 #inProgress
 #resolved
 #closed
-def updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE):
+def updateIncidents(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE):
     #print('              ')
     #print('               ------------------------------------------------------------------------------------------------')
-    #print('               📛 Close Stories')
+    #print('               📛 Close Incidents')
     data = '{"state": "'+STATE+'"}'
     # print(data)
     # print(type(data))
@@ -116,7 +116,7 @@ def updateStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE):
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
     response = requests.patch(url, data=data, headers=headers, auth=auth)#, verify=False)
     #print('                   RESULT:'+str(response.content))
-    #print('               ✅ Close Stories')
+    #print('               ✅ Close Incidents')
     #print('               ------------------------------------------------------------------------------------------------')
 
     return 'OK'

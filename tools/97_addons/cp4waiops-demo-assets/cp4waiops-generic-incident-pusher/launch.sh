@@ -21,7 +21,7 @@ export POLL_DELAY=5
 
 
 export PROVIDER_NAME='DISCORD'
-export PROVIDER_URL='https://discord.com/api/webhooks/10602504545435xxxxxxxeNHBjj4zIFN0AedFzNJKnA'
+export PROVIDER_URL='https://discord.com/api/webhooks/1060250454543577098/Dj7faHtKPB9xxhLtOuCaZjwHaWaTgPZ9scXvxRbfJnCfhleNHBjj4zIFN0AedFzNJKnA'
 export PROVIDER_USER='NOT NEEDED'
 export PROVIDER_TOKEN='NOT NEEDED'
 

@@ -76,12 +76,12 @@ loginip='0.0.0.0'
 # ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 print('     🛠️ Initializing DB')
-conn = sqlite3.connect('./db/stories.db')
+conn = sqlite3.connect('./db/incidents.db')
 
 print('        ✅ Opened database successfully')
 
 try:
-    conn.execute('''CREATE TABLE STORIES
+    conn.execute('''CREATE TABLE INCIDENTS
             (ID TEXT PRIMARY KEY     NOT NULL, MESSAGE_HASH TEXT NOT NULL, PROVIDER_ID TEXT NOT NULL);''')
 except sqlite3.OperationalError as e:
    # handle ConnectionError the exception
