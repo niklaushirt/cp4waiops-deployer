@@ -79,7 +79,7 @@ def updateAlerts(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE):
 #inProgress
 #resolved
 #closed
-def updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE, story_id):
+def updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE, incident_id):
     #print('              ')
     #print('               ------------------------------------------------------------------------------------------------')
     #print('               📛 Close Stories')
@@ -87,7 +87,7 @@ def updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, STATE, story_i
     # print(data)
     # print(type(data))
 
-    url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories/'+story_id
+    url = 'https://'+DATALAYER_ROUTE+'/irdatalayer.aiops.io/active/v1/stories/'+incident_id
     auth=HTTPBasicAuth(DATALAYER_USER, DATALAYER_PWD)
     headers = {'Content-Type': 'application/json', 'Accept-Charset': 'UTF-8', 'x-username' : 'admin', 'x-subscription-id' : 'cfd95b7e-3bc7-4006-a4a8-a73a79c71255'}
     response = requests.patch(url, data=data, headers=headers, auth=auth)#, verify=False)

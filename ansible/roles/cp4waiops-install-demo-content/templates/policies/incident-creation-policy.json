@@ -5,7 +5,7 @@
       "ibm.com/aiops/uitemplate": "alert:createstory",
       "ibm.com/is-default": "false"
     },
-    "name": "DEMO Story creation policy for all alerts",
+    "name": "DEMO Incident creation policy for all alerts",
     "description": "Created by Nicks scripts",
     "createdBy": {
       "id": "demo",

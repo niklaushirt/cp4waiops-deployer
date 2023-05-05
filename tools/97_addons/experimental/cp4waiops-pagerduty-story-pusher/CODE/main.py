@@ -34,7 +34,7 @@ print ('                                                /_/            ')
 print ('*************************************************************************************************')
 print ('*************************************************************************************************')
 print ('')
-print ('    🛰️  PAgerduty Story Pusher for CP4WAIOPS CP4WAIOps')
+print ('    🛰️  PAgerduty Incident Pusher for CP4WAIOPS CP4WAIOps')
 print ('')
 print ('       Provided by:')
 print ('        🇨🇭 Niklaus Hirt (nikh@ch.ibm.com)')
@@ -181,12 +181,12 @@ actStories=response.json()
 #print(actStories['stories'])
 #print(actStories['stories'][0]['description'])
 
-savedStoryCount= len(actStories['stories'])
+savedIncidentCount= len(actStories['stories'])
 
 # if DEBUG_ME:
-savedStoryCount=savedStoryCount-1
+savedIncidentCount=savedIncidentCount-1
 
-print('     🔄 Initial Story Count:'+str(savedStoryCount))
+print('     🔄 Initial Incident Count:'+str(savedIncidentCount))
 print('')
 print('')
 
@@ -225,39 +225,39 @@ if ACTIVE=="True":
             actStories=response.json()
 
 
-            for currentStory in actStories['stories']:
-                story_id=currentStory["id"]
-                storyState=currentStory["state"]
-                lastChangedTime=currentStory["lastChangedTime"]
-                messageHash=hashlib.md5(str(currentStory).encode()).hexdigest()
-                #debug(currentStory)
-                debug('     ✅ Check for: '+story_id)
-                debug('     ✅ Story State: '+storyState)
+            for currentIncident in actStories['stories']:
+                incident_id=currentIncident["id"]
+                incidentState=currentIncident["state"]
+                lastChangedTime=currentIncident["lastChangedTime"]
+                messageHash=hashlib.md5(str(currentIncident).encode()).hexdigest()
+                #debug(currentIncident)
+                debug('     ✅ Check for: '+incident_id)
+                debug('     ✅ Incident State: '+incidentState)
                 debug('     ✅ Last Changed: '+lastChangedTime)
                 debug('     ✅ Hash: '+messageHash)
                 debug('      ')
 
-                if storyState != 'closed':
-                    if checkIDExistsDB(conn, story_id) == 0:
+                if incidentState != 'closed':
+                    if checkIDExistsDB(conn, incident_id) == 0:
                     #if id not in treatedStories:
-                            debug('     🛠️ Treating Story with ID: '+story_id)
-                            treatedStories.append(story_id)
-                            processStory(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, conn, story_id, messageHash)
-                            #closeStory(conn, story_id)
+                            debug('     🛠️ Treating Incident with ID: '+incident_id)
+                            treatedStories.append(incident_id)
+                            processIncident(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, conn, incident_id, messageHash)
+                            #closeIncident(conn, incident_id)
 
-                            #debug(currentStory)
+                            #debug(currentIncident)
                     else:
-                        if needsUpdate(conn, story_id, messageHash) == 1:
-                            print('       🟠 NEEDS UPDATE: '+story_id)
-                            discord_id=getMessageIdDB(conn, story_id)
-                            updateStory(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, discord_id)
+                        if needsUpdate(conn, incident_id, messageHash) == 1:
+                            print('       🟠 NEEDS UPDATE: '+incident_id)
+                            discord_id=getMessageIdDB(conn, incident_id)
+                            updateIncident(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, discord_id)
                         else:
-                            debug('       🟢 Already Treated: '+story_id)
+                            debug('       🟢 Already Treated: '+incident_id)
                         
                 else:
-                    if checkIDExistsDB(conn, story_id) > 0:
-                        print('       🔴 Closing Story: '+story_id)
-                        closeStory(conn, story_id)
+                    if checkIDExistsDB(conn, incident_id) > 0:
+                        print('       🔴 Closing Incident: '+incident_id)
+                        closeIncident(conn, incident_id)
 
             debug ('     🕦 Wait '+str(POLL_DELAY)+' seconds')
 
@@ -266,7 +266,7 @@ if ACTIVE=="True":
 else:
     while True:
         print ('-------------------------------------------------------------------------------------------------')
-        print (' ❗ Story Pusher is DISABLED')
+        print (' ❗ Incident Pusher is DISABLED')
         print ('-------------------------------------------------------------------------------------------------')
         time.sleep(15)
 

@@ -316,19 +316,19 @@ def createIncidentNet():
     print ('     ✅ DONE"')
 
 
-def setInProgressID(story_id):
+def setInProgressID(incident_id):
     print ('    --------------------------------------------------------------------------------')
-    print ('     🚀 Updating Story')
+    print ('     🚀 Updating Incident')
     print ('    --------------------------------------------------------------------------------')
 
-    print ('         🚀 Updating Story to "inProgress" - '+story_id)
-    updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress",story_id)
+    print ('         🚀 Updating Incident to "inProgress" - '+incident_id)
+    updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"inProgress",incident_id)
     print ('     ✅ DONE"')
 
 
-def setResolvedID(story_id):
+def setResolvedID(incident_id):
     print ('    --------------------------------------------------------------------------------')
-    print ('     🚀 Updating Story')
+    print ('     🚀 Updating Incident')
     print ('    --------------------------------------------------------------------------------')
     stream = os.popen('oc set env deployment ratings -n robot-shop PDO_URL-')
     RESULT = stream.read().strip()
@@ -340,8 +340,8 @@ def setResolvedID(story_id):
     RESULT = stream.read().strip()
     print(str(RESULT))
 
-    print ('         🚀 Updating Story to "resolved" - '+story_id)
-    updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved",story_id)
+    print ('         🚀 Updating Incident to "resolved" - '+incident_id)
+    updateStoriesID(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD,"resolved",incident_id)
     print ('     ✅ DONE"')
 
 
@@ -401,11 +401,11 @@ def setClosed():
 
 # --------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------
-# STORY BOT
+# IN BOT
 # --------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------
 
-class StoryBot(commands.Bot):
+class IncidentBot(commands.Bot):
     def __init__(self):
         intents = discord.Intents.default()
         intents.message_content = True
@@ -464,41 +464,41 @@ class StoryBot(commands.Bot):
                 await message.channel.send('**🚀 Open Stories**')
                 await message.channel.send('--------------------------------------------------')
                 actStories=getStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE)
-                for currentStory in actStories['stories']:
+                for currentIncident in actStories['stories']:
                     outputString=""
-                    story_id=currentStory["id"]
-                    storyState=currentStory["state"]
-                    if storyState=="assignedToIndividual":
+                    incident_id=currentIncident["id"]
+                    incidentState=currentIncident["state"]
+                    if incidentState=="assignedToIndividual":
                         stateString="🔵 Assigned To Individual"
-                    elif storyState=="inProgress":
+                    elif incidentState=="inProgress":
                         stateString="🟢 In Progress"
-                    elif storyState=="onHold":
+                    elif incidentState=="onHold":
                         stateString="🟠 On Hold"
-                    elif storyState=="resolved":
+                    elif incidentState=="resolved":
                         stateString="🔴 Resolved"
-                    elif storyState=="closed":
+                    elif incidentState=="closed":
                         stateString="❌ Closed"
                     else:
                         stateString=state
-                    title=currentStory["title"]
-                    priority=currentStory["priority"]
-                    owner=currentStory["owner"]
-                    url='https://'+CPD_ROUTE+'/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories/all/'+story_id+'/overview'
-                    #debug(currentStory)
+                    title=currentIncident["title"]
+                    priority=currentIncident["priority"]
+                    owner=currentIncident["owner"]
+                    url='https://'+CPD_ROUTE+'/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories/all/'+incident_id+'/overview'
+                    #debug(currentIncident)
                     # print('     ✅ Name: '+title)
                     # print('     ✅ priority: '+str(priority))
                     # print('     ✅ owner: '+owner)
 
                     outputString=outputString+'\n\n📥 **'+title.strip()+'**\n   > Priority: '+str(priority)+'\n   > Owner: '+owner+'\n   > State: '+stateString+'\n\n' 
-                    # print('     ✅ Story: '+outputString)
+                    # print('     ✅ Incident: '+outputString)
                     # print('      ')
                     await message.channel.send(outputString)
 
                     # We create the view and assign it to a variable so we can wait for it later.
-                    view = Story(story_id,url)
+                    view = Incident(incident_id,url)
                     await message.channel.send(view=view)
 
-                    view = StoryActions(story_id,url)
+                    view = IncidentActions(incident_id,url)
                     await message.channel.send(view=view)
                     await message.channel.send('--------------------------------------------------')
                 await message.channel.send(' \ntype "'+DISCORD_BOT_PREFIX+DISCORD_BOT_NAME+' help" to get a list of all possible commands.')
@@ -664,41 +664,41 @@ class StoryBot(commands.Bot):
                     await message.channel.send('**🚀 '+INSTANCE_NAME+' Open Stories**')
                     await message.channel.send('--------------------------------------------------')
                     actStories=getStories(DATALAYER_ROUTE,DATALAYER_USER,DATALAYER_PWD, CPD_ROUTE)
-                    for currentStory in actStories['stories']:
+                    for currentIncident in actStories['stories']:
                         outputString=""
-                        story_id=currentStory["id"]
-                        storyState=currentStory["state"]
-                        if storyState=="assignedToIndividual":
+                        incident_id=currentIncident["id"]
+                        incidentState=currentIncident["state"]
+                        if incidentState=="assignedToIndividual":
                             stateString="🔵 Assigned To Individual"
-                        elif storyState=="inProgress":
+                        elif incidentState=="inProgress":
                             stateString="🟢 In Progress"
-                        elif storyState=="onHold":
+                        elif incidentState=="onHold":
                             stateString="🟠 On Hold"
-                        elif storyState=="resolved":
+                        elif incidentState=="resolved":
                             stateString="🔴 Resolved"
-                        elif storyState=="closed":
+                        elif incidentState=="closed":
                             stateString="❌ Closed"
                         else:
                             stateString=state
-                        title=currentStory["title"]
-                        priority=currentStory["priority"]
-                        owner=currentStory["owner"]
-                        url='https://'+CPD_ROUTE+'/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories/all/'+story_id+'/overview'
-                        #debug(currentStory)
+                        title=currentIncident["title"]
+                        priority=currentIncident["priority"]
+                        owner=currentIncident["owner"]
+                        url='https://'+CPD_ROUTE+'/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories/all/'+incident_id+'/overview'
+                        #debug(currentIncident)
                         # print('     ✅ Name: '+title)
                         # print('     ✅ priority: '+str(priority))
                         # print('     ✅ owner: '+owner)
 
                         outputString=outputString+'\n\n📥 **'+title.strip()+'**\n   > Priority: '+str(priority)+'\n   > Owner: '+owner+'\n   > State: '+stateString+'\n\n' 
-                        # print('     ✅ Story: '+outputString)
+                        # print('     ✅ Incident: '+outputString)
                         # print('      ')
                         await message.channel.send(outputString)
 
                         # We create the view and assign it to a variable so we can wait for it later.
-                        view = Story(story_id,url)
+                        view = Incident(incident_id,url)
                         await message.channel.send(view=view)
 
-                        view = StoryActions(story_id,url)
+                        view = IncidentActions(incident_id,url)
                         await message.channel.send(view=view)
                         await message.channel.send('--------------------------------------------------')
 
@@ -745,35 +745,35 @@ class AIOPSLink(discord.ui.View):
         self.add_item(discord.ui.Button(label=label, style=discord.ButtonStyle.green, url='https://'+URL))
 
 
-class Story(discord.ui.View):
-    def __init__(self, storyID: str, storyURL: str):
+class Incident(discord.ui.View):
+    def __init__(self, incidentID: str, incidentURL: str):
         super().__init__()
-        # print ("storyID"+storyID)
-        # print ("storyURL"+storyURL)
+        # print ("incidentID"+incidentID)
+        # print ("incidentURL"+incidentURL)
 
-        self.add_item(discord.ui.Button(label='Open Story: ', style=discord.ButtonStyle.green, url=storyURL))
+        self.add_item(discord.ui.Button(label='Open Incident: ', style=discord.ButtonStyle.green, url=incidentURL))
 
 
-class StoryActions(discord.ui.View):
-    def __init__(self, storyID: str, storyURL: str):
+class IncidentActions(discord.ui.View):
+    def __init__(self, incidentID: str, incidentURL: str):
         super().__init__(timeout=None)
-        self.currentStoryID=storyID
-        self.add_buttons(self.currentStoryID)
+        self.currentIncidentID=incidentID
+        self.add_buttons(self.currentIncidentID)
 
-    def add_buttons(self,currentStoryID):
-            button_green = discord.ui.Button(label='Acknowledge Story', style=discord.ButtonStyle.green)
-            button_red = discord.ui.Button(label='Resolve Story', style=discord.ButtonStyle.red)
+    def add_buttons(self,currentIncidentID):
+            button_green = discord.ui.Button(label='Acknowledge Incident', style=discord.ButtonStyle.green)
+            button_red = discord.ui.Button(label='Resolve Incident', style=discord.ButtonStyle.red)
 
             async def fbutton_green(interaction: discord.Interaction):
-                await interaction.response.send_message('🟠 Acknowledge Story', ephemeral=True)
-                print('AWAIT'+currentStoryID)
-                setInProgressID(currentStoryID)
+                await interaction.response.send_message('🟠 Acknowledge Incident', ephemeral=True)
+                print('AWAIT'+currentIncidentID)
+                setInProgressID(currentIncidentID)
 
             async def fbutton_red(interaction: discord.Interaction):
-                print(self.currentStoryID)
-                await interaction.response.send_message('🔴 Resolve Story', ephemeral=True)
-                print('AWAIT'+currentStoryID)
-                setResolvedID(currentStoryID)
+                print(self.currentIncidentID)
+                await interaction.response.send_message('🔴 Resolve Incident', ephemeral=True)
+                print('AWAIT'+currentIncidentID)
+                setResolvedID(currentIncidentID)
 
             button_green.callback = fbutton_green
             self.add_item(button_green)
@@ -854,7 +854,7 @@ class IncidentInstana(discord.ui.View):
 # RUN THIS PUPPY
 # --------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------
-bot = StoryBot()
+bot = IncidentBot()
 
 
 if ACTIVE=="True": 

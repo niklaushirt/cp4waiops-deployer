@@ -303,7 +303,7 @@ Those are the minimal configurations you'll need to demo the system and that are
 
 **Advanced Configuration**
 
-1. [Enable Story creation Policy](#44-enable-story-creation-policy-🅰%EF%B8%8F)
+1. [Enable Incident creation Policy](#44-enable-incident-creation-policy-🅰%EF%B8%8F)
 1. [Create AWX Connection](#45-create-awx-connection-🅰%EF%B8%8F)
 1. [Create CP4WAIOps Runbook](#46-create-ai-manager-runbook-🅰%EF%B8%8F)
 1. [Create Runbook Policy](#47-create-runbook-policy-🅰%EF%B8%8F)
@@ -544,14 +544,14 @@ or use the procedure in [Chapter 22](#22-manually-train-the-models) to do this m
 
 <div style="page-break-after: always;"></div>
 
-## 4.4 Enable Story creation Policy 🟢🅰️
+## 4.4 Enable Incident creation Policy 🟢🅰️
 
 
 * In the `CP4WAIOps` "Hamburger" Menu select `Operate`/`Automations`
 * Under `Policies`
 * Select `Stories` from the `Tag` dropdown menu
-* Enable `Default story creation policy for high severity alerts`
-* Also enable `Default story creation policy for all alerts` if you want to get all alerts grouped into a story
+* Enable `Default incident creation policy for high severity alerts`
+* Also enable `Default incident creation policy for all alerts` if you want to get all alerts grouped into an incident
 
 ![K8s CNI](./doc/pics/policies1.png)
 
@@ -791,7 +791,7 @@ In the terminal type
 ./tools/01_demo/robotshop_incident_memory.sh
 ```
 
-This will delete all existing Alerts/Stories and inject pre-canned event and logs to create a story.
+This will delete all existing Alerts/Stories and inject pre-canned event and logs to create an incident.
 
 ℹ️  Give it a minute or two for all events and anomalies to arrive in Slack.
 

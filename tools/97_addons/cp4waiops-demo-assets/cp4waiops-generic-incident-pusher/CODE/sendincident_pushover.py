@@ -2,9 +2,9 @@
 # ------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------
 # This Module must implement:
-#   def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
-#   def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
-#   def resolveStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+#   def sendIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+#   def updateIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+#   def resolveIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
 # ------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ debug('CPD_ROUTE:'+CPD_ROUTE)
 
 
 
-def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+def sendIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Send to '+PROVIDER_NAME+'')
@@ -73,16 +73,16 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
-    # Get story information
-    id=currentStory['id']
-    title=currentStory['title']
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
+    # Get incident information
+    id=currentIncident['id']
+    title=currentIncident['title']
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
     if state=="assignedToIndividual":
         stateString="trigger"
     elif state=="inProgress":
@@ -96,12 +96,12 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
     else:
         stateString="trigger"
 
-    debug('             ❗ Story: '+title)
+    debug('             ❗ Incident: '+title)
     debug(stateString)
 
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
 
 
   
@@ -147,7 +147,7 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
 
 
 
-def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+def updateIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Updating '+PROVIDER_NAME+' NOT AVAILABLE')
@@ -160,7 +160,7 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
 
 
 
-def resolveStoryToProvider(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+def resolveIncidentToProvider(currentIncidentID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Resolve '+PROVIDER_NAME+' NOT AVAILABLE')

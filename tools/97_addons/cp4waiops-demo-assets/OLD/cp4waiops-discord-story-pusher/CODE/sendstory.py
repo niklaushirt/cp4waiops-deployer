@@ -26,7 +26,7 @@ CPD_ROUTE = stream.read().strip()
 debug('CPD_ROUTE:'+CPD_ROUTE)
 
 
-def sendDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+def sendDiscord(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Send to Discord')
@@ -41,17 +41,17 @@ def sendDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
-    # Get story information
-    id=currentStory['id']
-    title=currentStory['title']
-    debug('             ❗ Story: '+title)
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
+    # Get incident information
+    id=currentIncident['id']
+    title=currentIncident['title']
+    debug('             ❗ Incident: '+title)
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
     if state=="assignedToIndividual":
         stateString="🔵 Assigned To Individual"
     elif state=="inProgress":
@@ -66,11 +66,11 @@ def sendDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
         stateString=state
     debug(stateString)
 
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
-    insights=currentStory['insights']
-    alertIds=currentStory['alertIds']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
+    insights=currentIncident['insights']
+    alertIds=currentIncident['alertIds']
 
 
     # Get similar incidents information
@@ -152,7 +152,7 @@ def sendDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     MESSAGE_TEMPLATE={
         "username": "CP4WAIOPS Bot",
         "avatar_url": "https://i.imgur.com/4M34hi2.png",
-        "content": "CP4WAIOPS Story",
+        "content": "CP4WAIOPS Incident",
         "embeds": [{
             "author": {
             "name": INSTANCE_NAME+" ChatBot",
@@ -171,7 +171,7 @@ def sendDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Sending Story to Discord')
+    print('           🌏 Sending Incident to Discord')
     response = sendSession.post(DISCORD_WEBHOOK+"?wait=true", json=MESSAGE_TEMPLATE)
     
     try:
@@ -198,7 +198,7 @@ def sendDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     return message['id']
 
 
-def updateDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+def updateDiscord(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Updating Discord Message')
@@ -213,17 +213,17 @@ def updateDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, 
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
-    # Get story information
-    id=currentStory['id']
-    title=currentStory['title']
-    debug('             ❗ Story: '+title)
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
+    # Get incident information
+    id=currentIncident['id']
+    title=currentIncident['title']
+    debug('             ❗ Incident: '+title)
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
     if state=="assignedToIndividual":
         stateString="🔵 Assigned To Individual"
     elif state=="inProgress":
@@ -239,11 +239,11 @@ def updateDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, 
     debug(stateString)
 
 
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
-    insights=currentStory['insights']
-    alertIds=currentStory['alertIds']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
+    insights=currentIncident['insights']
+    alertIds=currentIncident['alertIds']
 
 
     # Get similar incidents information
@@ -326,10 +326,10 @@ def updateDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, 
     MESSAGE_TEMPLATE={
         "username": "CP4WAIOPS Bot",
         "avatar_url": "https://i.imgur.com/4M34hi2.png",
-        "content": "CP4WAIOPS Story",
+        "content": "CP4WAIOPS Incident",
         "embeds": [{
             "author": {
-            "name": INSTANCE_NAME+" ChatBot - Story Updated",
+            "name": INSTANCE_NAME+" ChatBot - Incident Updated",
             "url": "https://"+CPD_ROUTE+"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories/all/"+id+"/overview",
             "icon_url": "https://github.com/niklaushirt/cp4waiops-deployer/raw/main/doc/avatars/hero_stan_sm_avatar.png"
             },
@@ -345,7 +345,7 @@ def updateDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, 
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Sending Story to Discord')
+    print('           🌏 Sending Incident to Discord')
     response = sendSession.patch(DISCORD_WEBHOOK+"/messages/"+messageID, json=MESSAGE_TEMPLATE)
 
     try:
@@ -383,7 +383,7 @@ def closeDiscord(discord_id):
 
     readSession = requests.Session()
     readSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Getting Story from Discord')
+    print('           🌏 Getting Incident from Discord')
     responseGet = readSession.get(DISCORD_WEBHOOK+"/messages/"+str(discord_id))
     currentMessage=responseGet.json()
 
@@ -393,8 +393,8 @@ def closeDiscord(discord_id):
     currentMessage['embeds'][0]['author']['url']=''
     currentMessage['embeds'][0]['author']['icon_url']=''
     currentMessage['embeds'][0]['author']['proxy_icon_url']=''
-    currentMessage['embeds'][0]['author']['name']='🔴 '+INSTANCE_NAME+' ChatBot - Story Closed'
-    currentMessage['content']='🔴 CP4WAIOPS Story - CLOSED'
+    currentMessage['embeds'][0]['author']['name']='🔴 '+INSTANCE_NAME+' ChatBot - Incident Closed'
+    currentMessage['content']='🔴 CP4WAIOPS Incident - CLOSED'
 
     debug("CURRENT:"+str(currentMessage))
     debug("A:"+str(DISCORD_WEBHOOK))
@@ -402,7 +402,7 @@ def closeDiscord(discord_id):
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🔴 Closing Story on Discord')
+    print('           🔴 Closing Incident on Discord')
     response = sendSession.patch(DISCORD_WEBHOOK+"/messages/"+str(discord_id), json=currentMessage)
     if response.status_code==200:
         print('           🟢 Query OK: '+str(response.status_code))
@@ -426,23 +426,23 @@ def closeDiscord(discord_id):
 
 
 
-def sendMail(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+def sendMail(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     print('')
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️ Send Mail')
     print('')
     print('')
-    id=currentStory['id']
-    title=currentStory['title']
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
-    insights=currentStory['insights']
+    id=currentIncident['id']
+    title=currentIncident['title']
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
+    insights=currentIncident['insights']
 
 
     #print(title)
@@ -468,20 +468,20 @@ def sendMail(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
                 resolution=resolution+action['sentence']+'\r\n'
             #print(resolution)
 
-    storyString=''
-    storyString=storyString+'Story: '+title+'\r\n'
-    storyString=storyString+'createdBy'+createdBy+'\r\n'
-    storyString=storyString+'description'+description+'\r\n'
-    storyString=storyString+'priority'+str(priority)+'\r\n'
-    storyString=storyString+'state'+stateString+'\r\n'
-    storyString=storyString+'owner'+owner+' of Team '+team+'\r\n'
-    storyString=storyString+'lastChangedTime'+lastChangedTime+'\r\n'
-    storyString=storyString+'Similar Incident: '+similar_incident+'\r\n'
-    storyString=storyString+'URL: '+similar_incident_urls+'\r\n'
-    storyString=storyString+'Score '+str(similar_incident_score_max)+'\r\n'
-    storyString=storyString+'Remediation: '+resolution+'\r\n'
+    incidentString=''
+    incidentString=incidentString+'Incident: '+title+'\r\n'
+    incidentString=incidentString+'createdBy'+createdBy+'\r\n'
+    incidentString=incidentString+'description'+description+'\r\n'
+    incidentString=incidentString+'priority'+str(priority)+'\r\n'
+    incidentString=incidentString+'state'+stateString+'\r\n'
+    incidentString=incidentString+'owner'+owner+' of Team '+team+'\r\n'
+    incidentString=incidentString+'lastChangedTime'+lastChangedTime+'\r\n'
+    incidentString=incidentString+'Similar Incident: '+similar_incident+'\r\n'
+    incidentString=incidentString+'URL: '+similar_incident_urls+'\r\n'
+    incidentString=incidentString+'Score '+str(similar_incident_score_max)+'\r\n'
+    incidentString=incidentString+'Remediation: '+resolution+'\r\n'
 
-    debug (storyString)
+    debug (incidentString)
 
 
 

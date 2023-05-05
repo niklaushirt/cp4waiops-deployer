@@ -1,10 +1,10 @@
 #!/bin/bash
 
-export CONT_VERSION=0.2
+export CONT_VERSION=0.1
 
 # Create the Image
-docker buildx build --platform linux/amd64 -t niklaushirt/cp4waiops-pagerduty-incident-pusher:$CONT_VERSION --load .
-docker push niklaushirt/cp4waiops-pagerduty-incident-pusher:$CONT_VERSION
+docker buildx build --platform linux/amd64 -t quay.io/niklaushirt/cp4waiops-generic-incident-pusher:$CONT_VERSION --load .
+docker push quay.io/niklaushirt/cp4waiops-generic-incident-pusher:$CONT_VERSION
 
 # Run the Image
 

@@ -2,9 +2,9 @@
 # ------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------
 # This Module must implement:
-#   def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
-#   def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
-#   def resolveStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+#   def sendIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+#   def updateIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+#   def resolveIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
 # ------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ debug('CPD_ROUTE:'+CPD_ROUTE)
 
 
 
-def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+def sendIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Send to '+PROVIDER_NAME+'')
@@ -72,17 +72,17 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
-    # Get story information
-    id=currentStory['id']
-    title=currentStory['title']
-    debug('             ❗ Story: '+title)
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
+    # Get incident information
+    id=currentIncident['id']
+    title=currentIncident['title']
+    debug('             ❗ Incident: '+title)
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
     if state=="assignedToIndividual":
         stateString="🔵 Assigned To Individual"
     elif state=="inProgress":
@@ -97,11 +97,11 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
         stateString=state
     debug(stateString)
 
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
-    insights=currentStory['insights']
-    alertIds=currentStory['alertIds']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
+    insights=currentIncident['insights']
+    alertIds=currentIncident['alertIds']
 
 
     # Get similar incidents information
@@ -183,7 +183,7 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
     MESSAGE_TEMPLATE={
         "username": "CP4WAIOPS Bot",
         "avatar_url": "https://i.imgur.com/4M34hi2.png",
-        "content": "CP4WAIOPS Story",
+        "content": "CP4WAIOPS Incident",
         "embeds": [{
             "author": {
             "name": INSTANCE_NAME+" ChatBot",
@@ -202,7 +202,7 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Sending Story to '+PROVIDER_NAME+'')
+    print('           🌏 Sending Incident to '+PROVIDER_NAME+'')
     response = sendSession.post(PROVIDER_URL+"?wait=true", json=MESSAGE_TEMPLATE)
     
     try:
@@ -235,7 +235,7 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
 
 
 
-def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+def updateIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Updating '+PROVIDER_NAME+' Message')
@@ -250,17 +250,17 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
-    # Get story information
-    id=currentStory['id']
-    title=currentStory['title']
-    debug('             ❗ Story: '+title)
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
+    # Get incident information
+    id=currentIncident['id']
+    title=currentIncident['title']
+    debug('             ❗ Incident: '+title)
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
     if state=="assignedToIndividual":
         stateString="🔵 Assigned To Individual"
     elif state=="inProgress":
@@ -276,11 +276,11 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
     debug(stateString)
 
 
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
-    insights=currentStory['insights']
-    alertIds=currentStory['alertIds']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
+    insights=currentIncident['insights']
+    alertIds=currentIncident['alertIds']
 
 
     # Get similar incidents information
@@ -363,10 +363,10 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
     MESSAGE_TEMPLATE={
         "username": "CP4WAIOPS Bot",
         "avatar_url": "https://i.imgur.com/4M34hi2.png",
-        "content": "CP4WAIOPS Story",
+        "content": "CP4WAIOPS Incident",
         "embeds": [{
             "author": {
-            "name": INSTANCE_NAME+" ChatBot - Story Updated",
+            "name": INSTANCE_NAME+" ChatBot - Incident Updated",
             "url": "https://"+CPD_ROUTE+"/aiops/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/resolution-hub/stories/all/"+id+"/overview",
             "icon_url": "https://github.com/niklaushirt/cp4waiops-deployer/raw/main/doc/avatars/hero_stan_sm_avatar.png"
             },
@@ -382,7 +382,7 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Sending Story to '+PROVIDER_NAME+'')
+    print('           🌏 Sending Incident to '+PROVIDER_NAME+'')
     response = sendSession.patch(PROVIDER_URL+"/messages/"+messageID, json=MESSAGE_TEMPLATE)
 
     try:
@@ -412,14 +412,14 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
 
 
 
-def resolveStoryToProvider(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+def resolveIncidentToProvider(currentIncidentID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         🧻  Closing '+PROVIDER_NAME+' Message')
 
     readSession = requests.Session()
     readSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Getting Story from '+PROVIDER_NAME+'')
+    print('           🌏 Getting Incident from '+PROVIDER_NAME+'')
     responseGet = readSession.get(PROVIDER_URL+"/messages/"+str(messageID))
     currentMessage=responseGet.json()
 
@@ -431,16 +431,16 @@ def resolveStoryToProvider(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALA
     currentMessage['embeds'][0]['author']['url']=''
     currentMessage['embeds'][0]['author']['icon_url']=''
     currentMessage['embeds'][0]['author']['proxy_icon_url']=''
-    currentMessage['embeds'][0]['author']['name']='🔴 '+INSTANCE_NAME+' ChatBot - Story Closed'
-    currentMessage['content']='🔴 CP4WAIOPS Story - CLOSED'
+    currentMessage['embeds'][0]['author']['name']='🔴 '+INSTANCE_NAME+' ChatBot - Incident Closed'
+    currentMessage['content']='🔴 CP4WAIOPS Incident - CLOSED'
 
     debug("CURRENT:"+str(currentMessage))
     debug("A:"+str(PROVIDER_URL))
-    debug("B:"+str(currentStoryID))
+    debug("B:"+str(currentIncidentID))
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🔴 Closing Story on '+PROVIDER_NAME+'')
+    print('           🔴 Closing Incident on '+PROVIDER_NAME+'')
     response = sendSession.patch(PROVIDER_URL+"/messages/"+str(messageID), json=currentMessage)
     if response.status_code==200:
         print('           🟢 Query OK: '+str(response.status_code))

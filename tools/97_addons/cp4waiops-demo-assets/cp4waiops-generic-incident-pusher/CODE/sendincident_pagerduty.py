@@ -2,9 +2,9 @@
 # ------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------
 # This Module must implement:
-#   def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
-#   def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
-#   def resolveStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+#   def sendIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+#   def updateIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+#   def resolveIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
 # ------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ debug('CPD_ROUTE:'+CPD_ROUTE)
 
 
 
-def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+def sendIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Send to '+PROVIDER_NAME+'')
@@ -70,17 +70,17 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
-    # Get story information
-    id=currentStory['id']
-    title=currentStory['title']
-    debug('             ❗ Story: '+title)
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
+    # Get incident information
+    id=currentIncident['id']
+    title=currentIncident['title']
+    debug('             ❗ Incident: '+title)
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
     if state=="assignedToIndividual":
         stateString="trigger"
     elif state=="inProgress":
@@ -95,9 +95,9 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
         stateString="trigger"
     debug(stateString)
 
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
 
 
   
@@ -129,7 +129,7 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Sending Story to Pagerduty')
+    print('           🌏 Sending Incident to Pagerduty')
     response = sendSession.post(PROVIDER_URL, json=MESSAGE_TEMPLATE)
     
     debug(str(response.text))
@@ -153,7 +153,7 @@ def sendStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_R
 
 
 
-def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+def updateIncidentToProvider(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Updating '+PROVIDER_NAME+'')
@@ -168,17 +168,17 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
-    # Get story information
-    id=currentStory['id']
-    title=currentStory['title']
-    debug('             ❗ Story: '+title)
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
+    # Get incident information
+    id=currentIncident['id']
+    title=currentIncident['title']
+    debug('             ❗ Incident: '+title)
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
     if state=="assignedToIndividual":
         stateString="trigger"
     elif state=="inProgress":
@@ -193,9 +193,9 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
         stateString="trigger"
     debug(stateString)
 
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
 
 
   
@@ -226,7 +226,7 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Updating Story on '+PROVIDER_NAME+'')
+    print('           🌏 Updating Incident on '+PROVIDER_NAME+'')
     response = sendSession.post(PROVIDER_URL, json=MESSAGE_TEMPLATE)
     
     debug(response.json())
@@ -250,7 +250,7 @@ def updateStoryToProvider(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER
 
 
 
-def resolveStoryToProvider(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+def resolveIncidentToProvider(currentIncidentID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Resolve '+PROVIDER_NAME+'')
@@ -265,7 +265,7 @@ def resolveStoryToProvider(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALA
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
   
@@ -273,7 +273,7 @@ def resolveStoryToProvider(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALA
     MESSAGE_TEMPLATE={
     "routing_key": PROVIDER_TOKEN,
     "event_action": "resolve",
-    "dedup_key": currentStoryID,
+    "dedup_key": currentIncidentID,
     "payload": {
         "summary": "Resolved",
         }
@@ -285,7 +285,7 @@ def resolveStoryToProvider(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALA
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Resolving Story on '+PROVIDER_NAME+'')
+    print('           🌏 Resolving Incident on '+PROVIDER_NAME+'')
     response = sendSession.post(PROVIDER_URL, json=MESSAGE_TEMPLATE)
     
     debug(response.json())

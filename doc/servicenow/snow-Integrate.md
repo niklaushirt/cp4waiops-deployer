@@ -93,7 +93,7 @@ You can create stories in IBM Cloud Pak for Watson AIOps and issues in ServiceNo
 
 After you configure ServiceNow and IBM Cloud Pak for Watson AIOps, the updates that you make in IBM Cloud Pak for Watson AIOps will flow into the Agent Workspace of ServiceNow. 
 
-Updates to event data and the state of your story in IBM Cloud Pak for Watson AIOps appear in ServiceNow. Any updates that you make in Slack or Microsoft Teams to the description, short description, or severity after you create the story do not overwrite the existing values in ServiceNow. Also, edits that are made in ServiceNow (changing descriptions or incident names, for example) are not reflected in Slack, Microsoft Teams, or IBM Cloud Pak for Watson AIOps.
+Updates to event data and the state of your incident in IBM Cloud Pak for Watson AIOps appear in ServiceNow. Any updates that you make in Slack or Microsoft Teams to the description, short description, or severity after you create the incident do not overwrite the existing values in ServiceNow. Also, edits that are made in ServiceNow (changing descriptions or incident names, for example) are not reflected in Slack, Microsoft Teams, or IBM Cloud Pak for Watson AIOps.
 
 ### Update existing Users in ServiceNow
 
@@ -291,11 +291,11 @@ To create a ServiceNow integration, complete the following steps:
 
 ### Creating stories as incidents in ServiceNow
 
-After the integration is finished, for every chatbot story created, an incident will be created in ServiceNow. For example, the creation of the following story number 9 in Slack:
+After the integration is finished, for every chatbot incident created, an incident will be created in ServiceNow. For example, the creation of the following incident number 9 in Slack:
 
   ![slack-story](./images/slack-story.png)
 
-This story has a corresponding incident created in ServiceNow. To access these incidents, from the ServiceNow home page search for agent, and click on Agent Workspace Home, as shown below
+This incident has a corresponding incident created in ServiceNow. To access these incidents, from the ServiceNow home page search for agent, and click on Agent Workspace Home, as shown below
 
   ![agent-workspace](./images/agent-workspace.png)
 
@@ -303,7 +303,7 @@ In the Agent Workspace, if you click on the burger menu and select Watson AIOps 
 
   ![waiops-incidents-in-sn](./images/waiops-incidents-in-sn.png)
 
-This is the incident in ServiceNow that corresponds to the story number 9 that was mentioned before
+This is the incident in ServiceNow that corresponds to the incident number 9 that was mentioned before
 
   ![story9-in-sn](./images/story9-in-sn.png)
 
@@ -319,7 +319,7 @@ The process can be defined in the following steps:
 
   ![search-incidents](./images/search-incidents.png)
 
-Select an existing open incident and update the description and short description with some known log anomaly error from an existing story. For example the next picture shows the description as "Unknown Error web". Then click on the Resolution Information tab and Close the incident with resolution code Solved and fill the Resolution Notes with some resolution such as "web service was restarted". Repeat this process for at least five tickets.
+Select an existing open incident and update the description and short description with some known log anomaly error from an existing incident. For example the next picture shows the description as "Unknown Error web". Then click on the Resolution Information tab and Close the incident with resolution code Solved and fill the Resolution Notes with some resolution such as "web service was restarted". Repeat this process for at least five tickets.
 
   ![updated-incident](./images/updated-incident.png)
 
@@ -399,7 +399,7 @@ yellow open snowproblem                         xBjP5lvrRYWOlidFd0X_Xw 1 1      
 
 As you can see, there is a new model created for incidents. 
 
-4. Finally, lets use the new model by running the Search Similar Incidents functionality from an existing story in Slack. Select a story that has a reference to the updated incident you did previously and click on Search Similar Incident button 
+4. Finally, lets use the new model by running the Search Similar Incidents functionality from an existing incident in Slack. Select an incident that has a reference to the updated incident you did previously and click on Search Similar Incident button 
 
   ![similar-incidents-slack](./images/similar-incidents-slack.png)
 

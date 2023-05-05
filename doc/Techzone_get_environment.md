@@ -66,7 +66,7 @@ The most important functionalities are:
 
 1. **Open CP4WAIOps (login with the provided credentials)**
 2. **Clear all existing Stories and Alerts**
-3. **Create an Incident/Story**
+3. **Create an Incident**
 
 
 > ℹ️ If you are asked to login to the Demo UI, please use the toekn/password `P4ssw0rd!`
@@ -103,9 +103,9 @@ You will demonstrate the following major selling points around Cloud Pak for Wat
 1. Verify the status of the Robot Shop application.
 1. Understanding and resolving the incident
    1. Login to CP4WAIOps
-   1. Open the Story
-   1. Examining the Story
-   1. Acknowledge the Story
+   1. Open the Incident
+   1. Examining the Incident
+   1. Acknowledge the Incident
    1. Similar Incidents
    1. Examine the Alerts
    1. Understand the Incident
@@ -154,11 +154,11 @@ Those Events are being grouped into Alerts to massively reduce the number of sig
 
 **Slide 5**: WAIOPS also ingests Metrics from Instana (this could be Dynatrace, NewRelic or others). The Metric Anomaly detection is trained on a well running system and creates dynamic baselines. Through different algorithms it is able to detect anomalies and outliers. If an Anomaly is detected it will also be grouped with the other Events.
 
-**Slide 6**: Alerts that are relevant for the same Incident are packaged into a so called Story. The Story will be enriched and updated with information as it gets available.
+**Slide 6**: Alerts that are relevant for the same Incident are packaged into a so called Incident. The Incident will be enriched and updated with information as it gets available.
 
  **Slide 7**: One example is the Topology information. Not only will WAIOPS tell me that I have a problem and present all relevant Events but it will also tell me where in the system topology the problem is situated. 
 
-**Slide 8**: Furthermore the Story is enriched with past resolution information coming from ServiceNow tickets. I'll explain this more in detail during the demo.
+**Slide 8**: Furthermore the Incident is enriched with past resolution information coming from ServiceNow tickets. I'll explain this more in detail during the demo.
 
 **Slide 9**: The Stories can either be examined in the WAIOPS web interface or can be pushed to Slack or Teams if your teams are using a ChatOps approach.
 
@@ -267,7 +267,7 @@ Let’s take a closer look at the incident that has been created in Watson AIOps
 <div style="page-break-after: always;"></div>
 
 
-### 3.4.2 Open the Story
+### 3.4.2 Open the Incident
 
 ![image](./demo/image.056.png)  
 
@@ -281,13 +281,13 @@ Click the "hamburger menu" on the upper left. Click **Stories and alerts**
 
 **📣 <u>Narration</u>**
 
-We can see that the simulation has created a **Story**. The **Story** includes grouped information related to the incident at hand. It equates to a classic War Room that are usually put in place in case of an outage. 
-The **Story** contains related log anomalies, topology, similar incidents, recommended actions based on past trouble tickets, relevant events, runbooks, and more.
+We can see that the simulation has created a **Incident**. The **Incident** includes grouped information related to the incident at hand. It equates to a classic War Room that are usually put in place in case of an outage. 
+The **Incident** contains related log anomalies, topology, similar incidents, recommended actions based on past trouble tickets, relevant events, runbooks, and more.
 
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.3 Examining the Story
+### 3.4.3 Examining the Incident
 
 ![image](./demo/image.056.png)  
 
@@ -301,25 +301,25 @@ Click the "hamburger menu" on the upper left. Click **Stories and alerts**
 
 **📣 <u>Narration</u>**
 
-Now let's have a look at the **Story**.
+Now let's have a look at the **Incident**.
 
 
 ![image](./demo/image.059.png)
 
-As I said before, the Story regroups all relevant information concerning the incident at hand that have been identified by Watson AIOps.
+As I said before, the Incident regroups all relevant information concerning the incident at hand that have been identified by Watson AIOps.
 
 1. A list of Alerts that have been identified by Watson AIOps to be the most probable cause
 2. The localization of the problem related to the Topology
 3. The suggested Runbooks to automatically mitigate the incident
 4. Similar Incidents that resemble the incident at hand
-5. Status of the Story - here I can change the status and priority of the story
+5. Status of the Incident - here I can change the status and priority of the incident
 
 <div style="page-break-after: always;"></div>
 
-### 3.4.4 Acknowledge the Story
+### 3.4.4 Acknowledge the Incident
 
 >**🚀 <u>Action</u>**
->Click on **Change Story Settings.**
+>Click on **Change Incident Settings.**
 >
 >Select **Change Status.**
 >
@@ -332,7 +332,7 @@ As I said before, the Story regroups all relevant information concerning the inc
 
 **📣 <u>Narration</u>**
 
-First and before I continue examining the Story I want to let my colleagues know that I'm working on the incident. So let me set it to In Progress.
+First and before I continue examining the Incident I want to let my colleagues know that I'm working on the incident. So let me set it to In Progress.
 
 <div style="page-break-after: always;"></div>
 
@@ -352,7 +352,7 @@ Most large organizations use IT Service Management tools to govern processes aro
 
 The IBM Cloud Pak for Watson AIOps trains on exisitng tickets and it extracts the steps used to fix previous incidents (if documented) and recommend resolutions using natural language processing. This AI model helps you discover historical incidents to aid in the remediation of current problems. 
 
-So for the **Story**, your team is presented with the top-ranked similar incidents from the past. These relevant similar incidents help speed up incident resolution even if the I don't have access to ServiceNow. Without these features, your team must manually search for past incidents and resolutions, which is time-consuming.
+So for the **Incident**, your team is presented with the top-ranked similar incidents from the past. These relevant similar incidents help speed up incident resolution even if the I don't have access to ServiceNow. Without these features, your team must manually search for past incidents and resolutions, which is time-consuming.
 
 In this particular example I can see that the problem was related to a GIT Commit that massivly reduced the resource limits has been commited by DEV on the mysql Deployment.
 
@@ -430,7 +430,7 @@ Click on the first Alert in the list.
 
 **📣 <u>Narration</u>**
 
-In the **Alert details,** you can see different types of groupings explaining why the specific alert was added to the story.
+In the **Alert details,** you can see different types of groupings explaining why the specific alert was added to the incident.
 
 <div style="page-break-after: always;"></div>
 
@@ -444,7 +444,7 @@ Click **Scope-based grouping**.
 
 **📣 <u>Narration</u>**
 
-Some alerts were added to the story because they occurred on the same resource within a short period (default is 15 minutes)
+Some alerts were added to the incident because they occurred on the same resource within a short period (default is 15 minutes)
 
 #### Topological grouping
 
@@ -471,7 +471,7 @@ Click **Temporal correlation**.
 
 **📣 <u>Narration</u>**
 
-Finally, the temporal correlation adds to the story events that previously, in history, are known to occur close to each other in the short time window. What is most important here is the fact that all these correlations happen automatically – there is no need to define any rules or program anything. In highly dynamic and distributed cloud-native applications this is a huge advantage that saves a lot of time and effort.
+Finally, the temporal correlation adds to the incident events that previously, in history, are known to occur close to each other in the short time window. What is most important here is the fact that all these correlations happen automatically – there is no need to define any rules or program anything. In highly dynamic and distributed cloud-native applications this is a huge advantage that saves a lot of time and effort.
 
 
 >**🚀 <u>Action</u>**
@@ -506,7 +506,7 @@ Other events are confirming the hypothesis.
 
 <div style="page-break-after: always;"></div>
 
-* Cloud Pak for Watson AIOps has learned the normal, good patterns for logs coming from the applications. The Story contains a **Log Anomaly** that has been detected in the ratings service that cannot acces the mysql database.
+* Cloud Pak for Watson AIOps has learned the normal, good patterns for logs coming from the applications. The Incident contains a **Log Anomaly** that has been detected in the ratings service that cannot acces the mysql database.
 
 ![image](./demo/image.064.png)
 
@@ -737,7 +737,7 @@ So the runbook has resolved the problem. When I tell Watson AIOps that the Runbo
 ### 3.4.11 Resolve the Incident
 
 >**🚀 <u>Action</u>**
->Click on **Change Story Settings.**
+>Click on **Change Incident Settings.**
 >
 >Select **Change Status.**
 >
@@ -750,7 +750,7 @@ So the runbook has resolved the problem. When I tell Watson AIOps that the Runbo
 
 **📣 <u>Narration</u>**
 
-So now as we have resolved the problem,  I will inform the development team of the problem by reopening the ServiceNow ticket and by closing the Story. 
+So now as we have resolved the problem,  I will inform the development team of the problem by reopening the ServiceNow ticket and by closing the Incident. 
 
 
 

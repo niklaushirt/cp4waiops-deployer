@@ -765,8 +765,8 @@ The environement (Kubernetes, Applications, ...) create logs that are being fed 
 1. At the same time CP4WAIOps ingests the raw logs coming from the Log Management Tool (ELK) and looks for anomalies in the stream based on the trained model.
 2. It also ingests Metric Data and looks for anomalies
 1. If it finds an anomaly (logs and/or metrics) it forwards it to the Event Grouping as well.
-1. Out of this, CP4WAIOps creates a Story that is being enriched with Topology (Localization and Blast Radius) and with Similar Incidents that might help correct the problem.
-1. The Story is then sent to Slack.
+1. Out of this, CP4WAIOps creates an Incident that is being enriched with Topology (Localization and Blast Radius) and with Similar Incidents that might help correct the problem.
+1. The Incident is then sent to Slack.
 1. A Runbook is available to correct the problem but not launched automatically.
 
 <div style="page-break-after: always;"></div>

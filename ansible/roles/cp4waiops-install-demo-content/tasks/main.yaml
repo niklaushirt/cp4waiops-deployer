@@ -162,7 +162,7 @@
     - "  📥 MISC PARAMETERS"
     - "     🌏 Create external routes:                   {{current_cp4waiops_feature.create_external_routes}}"
     - "     🛠️ Create a valid ingress cert:              {{current_cp4waiops_feature.create_valid_ingress_certificate}}"
-    - "     🛠️ Create Policy for Story Creation:         {{current_cp4waiops_feature.create_story_policy}}"
+    - "     🛠️ Create Policy for Incident Creation:         {{current_cp4waiops_feature.create_inscident_policy}}"
     - "     🛠️ Create Kafka Log connection:              {{current_cp4waiops_feature.create_log_connection}}"
     - "     🛠️ Create Service Account:                   {{current_cp4waiops_feature.create_account}}"
     - "     🛠️ Create Webhook Probe:                     {{current_cp4waiops_feature.install_webhook_probe  | default('not defined')}}"
@@ -384,10 +384,10 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 # Create Policies
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
-# Create Story Creation and Runbook Policies
-- name: 🟡🟡🟡  Create Custom Story Creation Policy
+# Create Incident Creation and Runbook Policies
+- name: 🟡🟡🟡  Create Custom Incident Creation Policy
   include_tasks: 50_cp4waiops-create-policies-stories.yaml
-  when: current_cp4waiops_feature.create_story_policy == true
+  when: current_cp4waiops_feature.create_inscident_policy == true
 
 - name: 🟡🟡🟡  Create Custom Runbook Trigger Policy
   include_tasks: 50_cp4waiops-create-policies-runbooks.yaml

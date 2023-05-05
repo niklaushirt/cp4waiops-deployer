@@ -15,7 +15,7 @@
 
 - name: Log
   shell: |
-    export MESSAGE="Create Policy for Story Creation"
+    export MESSAGE="Create Policy for Incident Creation"
     export currentDate=$(date +%Y-%m-%d_%H:%M)
     echo "---------------------------------------------------------------------------------------------------------------------------------------------------" >> ../install_{{current_cp4waiops_feature.kind}}.log
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
@@ -32,7 +32,7 @@
       backgroundColor: '#ffd500'
       color: '#000'
       location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - Create Policy for Story Creation'    
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Create Policy for Incident Creation'    
     EOF
   ignore_errors: true
   when: global_config.create_ocp_notifications | default(true) == true  
@@ -41,11 +41,11 @@
 
 
 
-- name: 🛠️  POLICIES - Create Story Creation Policy
+- name: 🛠️  POLICIES - Create Incident Creation Policy
   shell: |
-    export POLICY_FILE="{{role_path}}/templates/policies/story-creation-policy.json"
+    export POLICY_FILE="{{role_path}}/templates/policies/incident-creation-policy.json"
     echo $POLICY_FILE
-    cp $POLICY_FILE /tmp/story_policy.json
+    cp $POLICY_FILE /tmp/incident_policy.json
 
       
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
@@ -66,14 +66,14 @@
     export result=$(curl -XGET -k -s "https://$POLICY_ROUTE/policyregistry.ibm-netcool-prod.aiops.io/v1alpha/system/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/"  \
       -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
       -H 'content-type: application/json' \
-      -u $POLICY_LOGIN|grep "DEMO Story creation policy for all alerts"|wc -l|tr -d ' ')
+      -u $POLICY_LOGIN|grep "DEMO Incident creation policy for all alerts"|wc -l|tr -d ' ')
     if [[ $result == "0" ]]; then
-      export result="Create Story Creation Policy "
+      export result="Create Incident Creation Policy "
       export result=$(curl -XPOST -k -s "https://$POLICY_ROUTE/policyregistry.ibm-netcool-prod.aiops.io/v1alpha/system/cfd95b7e-3bc7-4006-a4a8-a73a79c71255/policies"  \
         -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
         -H 'content-type: application/json' \
         -u $POLICY_LOGIN \
-        -d @/tmp/story_policy.json)
+        -d @/tmp/incident_policy.json)
 
     else 
       export result="Already exists"
