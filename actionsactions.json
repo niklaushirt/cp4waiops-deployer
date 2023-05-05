@@ -1,0 +1,571 @@
+{
+  "actions": [
+    {
+      "_actionId": "2edb2c27-743c-49eb-b636-ffe1d5139ad9",
+      "_type": "action",
+      "_createdAt": "2023-05-05T14:02:42.714Z",
+      "_modifiedAt": "2023-05-05T14:03:24.983Z",
+      "_createdBy": "admin",
+      "_modifiedBy": "demo",
+      "_version": 2,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "url",
+      "description": "Watson service credentials are required",
+      "prerequisites": "Watson service credentials are required",
+      "parameters": [
+        {
+          "name": "$url",
+          "default": "ibm.com",
+          "description": "",
+          "type": "string",
+          "minLength": 1
+        }
+      ],
+      "http": {
+        "host": "https://$url",
+        "method": "GET",
+        "headers": "{}",
+        "ignoreCertErrors": false
+      }
+    },
+    {
+      "_actionId": "af6eef3d-6940-4b32-a02b-fe04b8436aa7",
+      "_type": "action",
+      "_createdAt": "2023-05-05T13:52:22.725Z",
+      "_modifiedAt": "2023-05-05T13:54:37.522Z",
+      "_createdBy": "demo",
+      "_modifiedBy": "demo",
+      "_version": 2,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "aaaaaa",
+      "description": "Watson service credentials are required",
+      "prerequisites": "Watson service credentials are required",
+      "parameters": [
+        {
+          "name": "$url",
+          "description": "",
+          "type": "string",
+          "minLength": 1
+        }
+      ],
+      "http": {
+        "host": "https://ibm.com",
+        "method": "GET",
+        "headers": "{}",
+        "ignoreCertErrors": false
+      },
+      "outputFilter": {
+        "syntax": "regularexpression",
+        "query": ".*"
+      },
+      "_isOutputFilterActive": true
+    },
+    {
+      "_actionId": "AWX:job:CP4WAIOPS Create Robotshop Ratings Outage",
+      "_type": "action",
+      "_createdAt": "2023-05-04T19:40:25.481Z",
+      "_modifiedAt": "2023-05-04T19:40:25.481Z",
+      "_createdBy": "admin",
+      "_modifiedBy": "admin",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "CP4WAIOPS Create Robotshop Ratings Outage",
+      "description": "Create Robotshop Ratings Outage",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "extraVariables",
+          "description": "Extra variables and values required by the job template encoded as JSON.",
+          "type": "string",
+          "minLength": 0,
+          "format": "multiline",
+          "default": "PROVIDE: my_k8s_apiurl and my_k8s_apikey"
+        }
+      ],
+      "awx": {
+        "templateType": "job",
+        "templateId": 10
+      }
+    },
+    {
+      "_actionId": "AWX:job:CP4WAIOPS Mitigate Robotshop Ratings Outage",
+      "_type": "action",
+      "_createdAt": "2023-05-04T19:40:24.540Z",
+      "_modifiedAt": "2023-05-04T19:40:24.540Z",
+      "_createdBy": "admin",
+      "_modifiedBy": "admin",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "CP4WAIOPS Mitigate Robotshop Ratings Outage",
+      "description": "Mitigate Robotshop Ratings Outage",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "extraVariables",
+          "description": "Extra variables and values required by the job template encoded as JSON.",
+          "type": "string",
+          "minLength": 0,
+          "format": "multiline",
+          "default": "PROVIDE: my_k8s_apiurl and my_k8s_apikey"
+        }
+      ],
+      "awx": {
+        "templateType": "job",
+        "templateId": 9
+      }
+    },
+    {
+      "_actionId": "AWX:job:CP4WAIOPS Mitigate SockShop Switch Outage",
+      "_type": "action",
+      "_createdAt": "2023-05-04T19:40:28.471Z",
+      "_modifiedAt": "2023-05-04T19:40:28.471Z",
+      "_createdBy": "admin",
+      "_modifiedBy": "admin",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "CP4WAIOPS Mitigate SockShop Switch Outage",
+      "description": "Mitigate SockShop Switch Outage",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "extraVariables",
+          "description": "Extra variables and values required by the job template encoded as JSON.",
+          "type": "string",
+          "minLength": 0,
+          "format": "multiline",
+          "default": "PROVIDE: my_k8s_apiurl and my_k8s_apikey"
+        }
+      ],
+      "awx": {
+        "templateType": "job",
+        "templateId": 13
+      },
+      "stats": {
+        "runs": {
+          "successful": 1,
+          "failed": 0,
+          "canceled": 0,
+          "unsuccessful": 0,
+          "unknown": 0,
+          "total": 1
+        },
+        "runspercent": 100,
+        "executionTime": 67,
+        "executionMinTime": 67,
+        "executionMaxTime": 67
+      }
+    },
+    {
+      "_actionId": "AWX:job:CP4WAIOPS Start Robotshop Ratings",
+      "_type": "action",
+      "_createdAt": "2023-05-04T19:40:26.477Z",
+      "_modifiedAt": "2023-05-04T19:40:26.477Z",
+      "_createdBy": "admin",
+      "_modifiedBy": "admin",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "CP4WAIOPS Start Robotshop Ratings",
+      "description": "Start Robotshop Ratings",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "extraVariables",
+          "description": "Extra variables and values required by the job template encoded as JSON.",
+          "type": "string",
+          "minLength": 0,
+          "format": "multiline",
+          "default": "PROVIDE: my_k8s_apiurl and my_k8s_apikey"
+        }
+      ],
+      "awx": {
+        "templateType": "job",
+        "templateId": 11
+      }
+    },
+    {
+      "_actionId": "AWX:job:CP4WAIOPS Stop Robotshop Ratings",
+      "_type": "action",
+      "_createdAt": "2023-05-04T19:40:27.372Z",
+      "_modifiedAt": "2023-05-04T19:40:27.372Z",
+      "_createdBy": "admin",
+      "_modifiedBy": "admin",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "CP4WAIOPS Stop Robotshop Ratings",
+      "description": "Stop Robotshop Ratings",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "extraVariables",
+          "description": "Extra variables and values required by the job template encoded as JSON.",
+          "type": "string",
+          "minLength": 0,
+          "format": "multiline",
+          "default": "PROVIDE: my_k8s_apiurl and my_k8s_apikey"
+        }
+      ],
+      "awx": {
+        "templateType": "job",
+        "templateId": 12
+      }
+    },
+    {
+      "_actionId": "AWX:job:Demo Job Template",
+      "_type": "action",
+      "_createdAt": "2023-05-04T17:44:30.341Z",
+      "_modifiedAt": "2023-05-04T17:44:30.341Z",
+      "_createdBy": "admin",
+      "_modifiedBy": "admin",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "Demo Job Template",
+      "description": "",
+      "prerequisites": "",
+      "parameters": [],
+      "awx": {
+        "templateType": "job",
+        "templateId": 7
+      }
+    },
+    {
+      "_actionId": "cd9241f5-8d5f-4a15-b2ca-11b6fbd88339",
+      "_type": "action",
+      "_createdAt": "2023-05-05T07:45:47.753Z",
+      "_modifiedAt": "2023-05-05T07:45:47.753Z",
+      "_createdBy": "demo",
+      "_modifiedBy": "demo",
+      "_version": 0,
+      "_state": "draft",
+      "_isLatest": true,
+      "name": "test",
+      "description": "",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "$URL",
+          "default": "https://ibm.com",
+          "description": "",
+          "type": "string",
+          "minLength": 1
+        }
+      ],
+      "client": {
+        "host": "https://test.com"
+      },
+      "stats": {
+        "runs": {
+          "successful": 1,
+          "failed": 0,
+          "canceled": 0,
+          "unsuccessful": 0,
+          "unknown": 0,
+          "total": 1
+        },
+        "runspercent": 100,
+        "executionTime": 0,
+        "executionMinTime": 0,
+        "executionMaxTime": 0
+      }
+    },
+    {
+      "_actionId": "da1a8222-ccdb-4f74-a605-ebd1b9de1942",
+      "_type": "action",
+      "_createdAt": "2023-05-05T14:01:18.872Z",
+      "_modifiedAt": "2023-05-05T14:01:18.872Z",
+      "_createdBy": "admin",
+      "_modifiedBy": "admin",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "aaaaaa",
+      "description": "Watson service credentials are required",
+      "prerequisites": "Watson service credentials are required",
+      "parameters": [
+        {
+          "name": "$url",
+          "description": "",
+          "type": "string",
+          "minLength": 1
+        }
+      ],
+      "http": {
+        "host": "https://ibm.com",
+        "method": "GET",
+        "headers": "{}",
+        "ignoreCertErrors": false
+      }
+    },
+    {
+      "_actionId": "dd452e7a-a59f-48e0-864c-d310b74c5f9c",
+      "_type": "action",
+      "_createdAt": "2023-05-05T13:37:32.097Z",
+      "_modifiedAt": "2023-05-05T13:37:32.097Z",
+      "_createdBy": "demo",
+      "_modifiedBy": "demo",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "ooooo",
+      "description": "",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "$url",
+          "description": "",
+          "type": "string",
+          "minLength": 1
+        }
+      ],
+      "client": {
+        "host": "https://$url"
+      },
+      "stats": {
+        "runs": {
+          "successful": 1,
+          "failed": 0,
+          "canceled": 0,
+          "unsuccessful": 0,
+          "unknown": 0,
+          "total": 1
+        },
+        "runspercent": 100,
+        "executionTime": 0,
+        "executionMinTime": 0,
+        "executionMaxTime": 0
+      }
+    },
+    {
+      "_actionId": "fb41a237-8cf9-48fd-a87b-911a6c1c00d1",
+      "_type": "action",
+      "_createdAt": "2023-05-05T14:01:35.819Z",
+      "_modifiedAt": "2023-05-05T14:01:35.819Z",
+      "_createdBy": "admin",
+      "_modifiedBy": "admin",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "aaaaaa122",
+      "description": "Watson service credentials are required",
+      "prerequisites": "Watson service credentials are required",
+      "parameters": [
+        {
+          "name": "$url",
+          "description": "",
+          "type": "string",
+          "minLength": 1
+        }
+      ],
+      "http": {
+        "host": "https://ibm.com",
+        "method": "GET",
+        "headers": "{}",
+        "ignoreCertErrors": false
+      }
+    },
+    {
+      "_actionId": "predefined:alert-acknowledge",
+      "_type": "action",
+      "_createdAt": "2023-05-01T00:00:00.000Z",
+      "_modifiedAt": "2023-05-01T00:00:00.000Z",
+      "_createdBy": "System",
+      "_modifiedBy": "System",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "Acknowledge alert",
+      "description": "Acknowledges an alert.",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "$alert",
+          "default": "",
+          "description": "ID of the alert to be acknowledged.",
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    {
+      "_actionId": "predefined:alert-assign",
+      "_type": "action",
+      "_createdAt": "2023-05-01T00:00:00.000Z",
+      "_modifiedAt": "2023-05-01T00:00:00.000Z",
+      "_createdBy": "System",
+      "_modifiedBy": "System",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "Assign owner to alert",
+      "description": "Assign owner and user group to an alert",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "$alert",
+          "default": "",
+          "description": "ID of the alert to be assigned.",
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "name": "$team",
+          "default": "",
+          "description": "User group to be assigned to the alert. Set to - (hyphen) to unassign user group.",
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "name": "$owner",
+          "default": "",
+          "description": "Owner to be assigned to the alert. Set to - (hyphen) to unassign owner.",
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    {
+      "_actionId": "predefined:alert-clear",
+      "_type": "action",
+      "_createdAt": "2023-05-01T00:00:00.000Z",
+      "_modifiedAt": "2023-05-01T00:00:00.000Z",
+      "_createdBy": "System",
+      "_modifiedBy": "System",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "Clear alert",
+      "description": "Clears an alert.",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "$alert",
+          "default": "",
+          "description": "ID of the alert to be cleared.",
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    {
+      "_actionId": "predefined:alert-deacknowledge",
+      "_type": "action",
+      "_createdAt": "2023-05-01T00:00:00.000Z",
+      "_modifiedAt": "2023-05-01T00:00:00.000Z",
+      "_createdBy": "System",
+      "_modifiedBy": "System",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "De-acknowledge alert",
+      "description": "De-acknowledges an alert.",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "$alert",
+          "default": "",
+          "description": "ID of the alert to be de-acknowledged.",
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    {
+      "_actionId": "predefined:alert-desuppress",
+      "_type": "action",
+      "_createdAt": "2023-05-01T00:00:00.000Z",
+      "_modifiedAt": "2023-05-01T00:00:00.000Z",
+      "_createdBy": "System",
+      "_modifiedBy": "System",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "De-suppress alert",
+      "description": "De-suppresses an alert.",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "$alert",
+          "default": "",
+          "description": "ID of the alert to be de-suppressed.",
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    {
+      "_actionId": "predefined:alert-suppress",
+      "_type": "action",
+      "_createdAt": "2023-05-01T00:00:00.000Z",
+      "_modifiedAt": "2023-05-01T00:00:00.000Z",
+      "_createdBy": "System",
+      "_modifiedBy": "System",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "Suppress alert",
+      "description": "Suppresses an alert.",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "$alert",
+          "default": "",
+          "description": "ID of the alert to be suppressed.",
+          "type": "string",
+          "minLength": 1
+        }
+      ]
+    },
+    {
+      "_actionId": "predefined:alert-update-severity",
+      "_type": "action",
+      "_createdAt": "2023-05-01T00:00:00.000Z",
+      "_modifiedAt": "2023-05-01T00:00:00.000Z",
+      "_createdBy": "System",
+      "_modifiedBy": "System",
+      "_version": 1,
+      "_state": "published",
+      "_isLatest": true,
+      "name": "Update severity of alert",
+      "description": "Updates the severity of a given alert.",
+      "prerequisites": "",
+      "parameters": [
+        {
+          "name": "$alert",
+          "default": "",
+          "description": "ID of the alert to be changed",
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "name": "$severity",
+          "default": 1,
+          "description": "New severity",
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "enumLabels": [
+            "Indeterminate",
+            "Information",
+            "Warning",
+            "Minor",
+            "Major",
+            "Critical"
+          ]
+        }
+      ]
+    }
+  ]
+}
