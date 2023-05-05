@@ -62,6 +62,7 @@
 
   - name: 📺 DEMO APPS - Create robot-shop service account
     shell: |
+      oc delete clusterrolebinding robot-shop
       oc adm policy add-scc-to-user privileged -n robot-shop -z robot-shop
       oc create clusterrolebinding default-robotinfo1-admin --clusterrole=cluster-admin --serviceaccount=robot-shop:robot-shop
       oc adm policy add-scc-to-user privileged -n robot-shop -z default                                
@@ -76,6 +77,8 @@
       state: present
       namespace: robot-shop
       template: ./templates/demo_apps/robotshop/robot-all-in-one.j2
+    ignore_errors: true
+
     #when: INSTALL_DEMO_APPS == true
 
   - name: 📺 DEMO APPS - Create robot-shop load generation
@@ -83,6 +86,8 @@
       state: present
       namespace: robot-shop
       src: ./templates/demo_apps/robotshop/load-deployment.yaml
+    ignore_errors: true
+
     #when: INSTALL_DEMO_APPS == true
   #when: OBJECT_EXISTS.stdout|length == 0
 
