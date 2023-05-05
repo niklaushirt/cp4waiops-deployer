@@ -59,7 +59,13 @@ oc delete kafkaclaims.shim.bedrock.ibm.com -n ibm-common-services --all
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete OIDC Clients"
 oc delete clients.oidc.security.ibm.com -n cp4waiops --all --force --grace-period=0
+sleep 5
+oc patch clients.oidc.security.ibm.com $(oc get clients.oidc.security.ibm.com -n cp4waiops| grep .ibm.com|awk '{print$1}') -n cp4waiops -p '{"metadata":{"finalizers":null}}' --type=merge 
+
 oc delete clients.oidc.security.ibm.com -n ibm-common-services --all
+sleep 5
+oc patch clients.oidc.security.ibm.com $(oc get clients.oidc.security.ibm.com -n ibm-common-services| grep .ibm.com|awk '{print$1}') -n ibm-common-services -p '{"metadata":{"finalizers":null}}' --type=merge 
+
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete ConfigMaps"
