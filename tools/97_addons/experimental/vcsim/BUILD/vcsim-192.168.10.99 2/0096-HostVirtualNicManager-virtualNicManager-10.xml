@@ -1,0 +1,329 @@
+<ObjectContent>
+  <obj type="HostVirtualNicManager">virtualNicManager-10</obj>
+  <propSet>
+    <name>availableField</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldDef"></val>
+  </propSet>
+  <propSet>
+    <name>info</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="HostVirtualNicManagerInfo">
+      <netConfig>
+        <nicType>faultToleranceLogging</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>faultToleranceLogging.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>management</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>management.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+        <selectedVnic>management.key-vim.host.VirtualNic-vmk0</selectedVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>nvmeRdma</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>nvmeRdma.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>nvmeTcp</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>nvmeTcp.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>ptp</nicType>
+        <multiSelectAllowed>false</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>ptp.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>vSphereBackupNFC</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>vSphereBackupNFC.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>vSphereProvisioning</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>vSphereProvisioning.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>vSphereReplication</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>vSphereReplication.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>vSphereReplicationNFC</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>vSphereReplicationNFC.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>vmotion</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>vmotion.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>vsan</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>vsan.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+      <netConfig>
+        <nicType>vsanWitness</nicType>
+        <multiSelectAllowed>true</multiSelectAllowed>
+        <candidateVnic>
+          <device>vmk0</device>
+          <key>vsanWitness.key-vim.host.VirtualNic-vmk0</key>
+          <portgroup>Management Network</portgroup>
+          <spec>
+            <ip>
+              <dhcp>false</dhcp>
+              <ipAddress>192.168.10.88</ipAddress>
+              <subnetMask>255.255.255.0</subnetMask>
+            </ip>
+            <mac>00:0c:29:3c:7a:b3</mac>
+            <portgroup>Management Network</portgroup>
+            <mtu>1500</mtu>
+            <tsoEnabled>true</tsoEnabled>
+            <netStackInstanceKey>defaultTcpipStack</netStackInstanceKey>
+            <ipRouteSpec>
+              <ipRouteConfig XMLSchema-instance:type="HostIpRouteConfig">
+                <defaultGateway>192.168.10.1</defaultGateway>
+              </ipRouteConfig>
+            </ipRouteSpec>
+          </spec>
+        </candidateVnic>
+      </netConfig>
+    </val>
+  </propSet>
+  <propSet>
+    <name>value</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+</ObjectContent>

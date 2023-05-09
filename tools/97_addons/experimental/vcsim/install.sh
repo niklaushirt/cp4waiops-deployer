@@ -38,7 +38,12 @@ vcsim  -l 0.0.0.0:8989 -dc 0 -tls=false
 
 vcsim -l 0.0.0.0:8989 -dc 10 -folder 10 -ds 20 -pod 10 -nsx 20 -pool 20 -app 10 -tls=false
 
-vcsim -l 0.0.0.0:8989  -tls=false -load=vcsim-demo
+vcsim -l 0.0.0.0:8989  -tls=false -load=vcsim-192.168.10.99
+
+vcsim -l 0.0.0.0:8989 -load=vcsim-192.168.10.99
+
+
+
 govc tree -k
 
 
