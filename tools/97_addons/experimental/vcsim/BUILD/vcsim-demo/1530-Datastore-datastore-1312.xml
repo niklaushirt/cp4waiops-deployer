@@ -1,0 +1,186 @@
+<ObjectContent>
+  <obj type="Datastore">datastore-1312</obj>
+  <propSet>
+    <name>value</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>availableField</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldDef"></val>
+  </propSet>
+  <propSet>
+    <name>parent</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="Folder">group-824</val>
+  </propSet>
+  <propSet>
+    <name>customValue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>overallStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configIssue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfEvent"></val>
+  </propSet>
+  <propSet>
+    <name>effectiveRole</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfInt">
+      <int>-1</int>
+    </val>
+  </propSet>
+  <propSet>
+    <name>permission</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfPermission"></val>
+  </propSet>
+  <propSet>
+    <name>name</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="xsd:string">LocalDS_0</val>
+  </propSet>
+  <propSet>
+    <name>disabledMethod</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString"></val>
+  </propSet>
+  <propSet>
+    <name>recentTask</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference"></val>
+  </propSet>
+  <propSet>
+    <name>declaredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>triggeredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>tag</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfTag"></val>
+  </propSet>
+  <propSet>
+    <name>info</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="LocalDatastoreInfo">
+      <name>LocalDS_0</name>
+      <url>/var/folders/_2/6b55svss4g1_bvfq2gf183nh0000gn/T/govcsim-DC7-LocalDS_0-2386602344</url>
+      <freeSpace>10329396346880</freeSpace>
+      <maxFileSize>10995116277760</maxFileSize>
+      <maxMemoryFileSize>10995116277760</maxMemoryFileSize>
+      <timestamp>2023-05-09T11:40:43.253883+02:00</timestamp>
+      <path>/var/folders/_2/6b55svss4g1_bvfq2gf183nh0000gn/T/govcsim-DC7-LocalDS_0-2386602344</path>
+    </val>
+  </propSet>
+  <propSet>
+    <name>summary</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="DatastoreSummary">
+      <datastore type="Datastore">datastore-1312</datastore>
+      <name>LocalDS_0</name>
+      <url>/var/folders/_2/6b55svss4g1_bvfq2gf183nh0000gn/T/govcsim-DC7-LocalDS_0-2386602344</url>
+      <capacity>10995116277760</capacity>
+      <freeSpace>10329396346880</freeSpace>
+      <accessible>true</accessible>
+      <type>OTHER</type>
+      <maintenanceMode>normal</maintenanceMode>
+    </val>
+  </propSet>
+  <propSet>
+    <name>host</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfDatastoreHostMount">
+      <DatastoreHostMount>
+        <key type="HostSystem">host-861</key>
+        <mountInfo>
+          <accessMode>readWrite</accessMode>
+          <mounted>true</mounted>
+          <accessible>true</accessible>
+        </mountInfo>
+      </DatastoreHostMount>
+    </val>
+  </propSet>
+  <propSet>
+    <name>vm</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="VirtualMachine">vm-2855</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2858</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2861</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2864</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2867</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2870</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2873</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2876</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2879</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2882</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2885</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2888</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2891</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2894</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2897</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2900</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2903</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2906</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2909</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2912</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2915</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2918</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2921</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2924</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2927</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2930</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2933</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2936</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2939</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2942</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2945</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2948</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2951</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2954</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2957</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2960</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2963</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2966</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2969</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2972</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2975</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2978</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2981</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2984</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2987</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2990</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2993</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2996</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2999</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3002</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3005</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3008</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3011</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3014</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3017</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3020</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3023</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3026</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3029</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3032</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3035</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-3038</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>browser</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="HostDatastoreBrowser">hostdatastorebrowser-1313</val>
+  </propSet>
+  <propSet>
+    <name>capability</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="DatastoreCapability">
+      <directoryHierarchySupported>true</directoryHierarchySupported>
+      <rawDiskMappingsSupported>false</rawDiskMappingsSupported>
+      <perFileThinProvisioningSupported>true</perFileThinProvisioningSupported>
+      <storageIORMSupported>true</storageIORMSupported>
+      <nativeSnapshotSupported>false</nativeSnapshotSupported>
+      <topLevelDirectoryCreateSupported>true</topLevelDirectoryCreateSupported>
+      <seSparseSupported>true</seSparseSupported>
+    </val>
+  </propSet>
+</ObjectContent>

@@ -1,0 +1,25 @@
+<ObjectContent>
+  <obj type="HostDatastoreBrowser">hostdatastorebrowser-1297</obj>
+  <propSet>
+    <name>datastore</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="Datastore">datastore-1272</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1274</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1276</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1278</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1280</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1282</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1284</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1286</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1288</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1290</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1292</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1294</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1296</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>supportedType</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfFileQuery"></val>
+  </propSet>
+</ObjectContent>

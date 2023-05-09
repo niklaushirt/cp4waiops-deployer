@@ -1,0 +1,8 @@
+<QueryNetworkHintResponse>
+  <returnval>
+    <device>vmnic0</device>
+    <subnet>
+      <ipSubnet>0.0.0.1-255.255.255.254</ipSubnet>
+    </subnet>
+  </returnval>
+</QueryNetworkHintResponse>

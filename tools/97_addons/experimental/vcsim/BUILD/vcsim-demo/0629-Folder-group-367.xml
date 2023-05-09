@@ -1,0 +1,277 @@
+<ObjectContent>
+  <obj type="Folder">group-367</obj>
+  <propSet>
+    <name>value</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>availableField</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldDef"></val>
+  </propSet>
+  <propSet>
+    <name>parent</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="Folder">group-349</val>
+  </propSet>
+  <propSet>
+    <name>customValue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>overallStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configIssue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfEvent"></val>
+  </propSet>
+  <propSet>
+    <name>effectiveRole</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfInt">
+      <int>-1</int>
+    </val>
+  </propSet>
+  <propSet>
+    <name>permission</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfPermission"></val>
+  </propSet>
+  <propSet>
+    <name>name</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="xsd:string">F3</val>
+  </propSet>
+  <propSet>
+    <name>disabledMethod</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString"></val>
+  </propSet>
+  <propSet>
+    <name>recentTask</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference"></val>
+  </propSet>
+  <propSet>
+    <name>declaredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>triggeredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>tag</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfTag"></val>
+  </propSet>
+  <propSet>
+    <name>childType</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString">
+      <string>VirtualMachine</string>
+      <string>VirtualApp</string>
+      <string>Folder</string>
+    </val>
+  </propSet>
+  <propSet>
+    <name>childEntity</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="VirtualMachine">vm-2111</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2114</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2117</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2120</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2123</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2126</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2129</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2132</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2135</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2138</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2141</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2144</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2147</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2150</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2153</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2156</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2159</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2162</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2165</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2168</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2171</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2174</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2177</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2180</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2183</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2186</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2189</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2192</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2195</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2198</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2201</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2204</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2207</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2210</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2213</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2216</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2219</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2222</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2225</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2228</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2231</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2234</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2237</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2240</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2243</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2246</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2249</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2252</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2255</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2258</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2261</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2264</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2267</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2270</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2273</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2276</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2279</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2282</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2285</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2288</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2291</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2294</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>value</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>availableField</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldDef"></val>
+  </propSet>
+  <propSet>
+    <name>parent</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="Folder">group-349</val>
+  </propSet>
+  <propSet>
+    <name>customValue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>overallStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configIssue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfEvent"></val>
+  </propSet>
+  <propSet>
+    <name>effectiveRole</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfInt">
+      <int>-1</int>
+    </val>
+  </propSet>
+  <propSet>
+    <name>permission</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfPermission"></val>
+  </propSet>
+  <propSet>
+    <name>name</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="xsd:string">F3</val>
+  </propSet>
+  <propSet>
+    <name>disabledMethod</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString"></val>
+  </propSet>
+  <propSet>
+    <name>recentTask</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference"></val>
+  </propSet>
+  <propSet>
+    <name>declaredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>triggeredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>tag</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfTag"></val>
+  </propSet>
+  <propSet>
+    <name>childType</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString">
+      <string>VirtualMachine</string>
+      <string>VirtualApp</string>
+      <string>Folder</string>
+    </val>
+  </propSet>
+  <propSet>
+    <name>childEntity</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="VirtualMachine">vm-2111</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2114</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2117</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2120</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2123</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2126</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2129</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2132</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2135</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2138</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2141</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2144</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2147</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2150</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2153</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2156</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2159</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2162</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2165</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2168</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2171</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2174</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2177</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2180</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2183</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2186</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2189</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2192</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2195</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2198</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2201</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2204</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2207</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2210</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2213</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2216</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2219</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2222</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2225</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2228</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2231</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2234</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2237</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2240</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2243</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2246</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2249</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2252</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2255</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2258</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2261</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2264</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2267</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2270</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2273</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2276</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2279</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2282</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2285</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2288</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2291</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualMachine">vm-2294</ManagedObjectReference>
+    </val>
+  </propSet>
+</ObjectContent>

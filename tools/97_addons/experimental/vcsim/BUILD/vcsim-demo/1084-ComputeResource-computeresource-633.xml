@@ -1,0 +1,132 @@
+<ObjectContent>
+  <obj type="ComputeResource">computeresource-633</obj>
+  <propSet>
+    <name>value</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>availableField</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldDef"></val>
+  </propSet>
+  <propSet>
+    <name>parent</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="Folder">group-595</val>
+  </propSet>
+  <propSet>
+    <name>customValue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>overallStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configIssue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfEvent"></val>
+  </propSet>
+  <propSet>
+    <name>effectiveRole</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfInt">
+      <int>-1</int>
+    </val>
+  </propSet>
+  <propSet>
+    <name>permission</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfPermission"></val>
+  </propSet>
+  <propSet>
+    <name>name</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="xsd:string">DC5_H0</val>
+  </propSet>
+  <propSet>
+    <name>disabledMethod</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString"></val>
+  </propSet>
+  <propSet>
+    <name>recentTask</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference"></val>
+  </propSet>
+  <propSet>
+    <name>declaredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>triggeredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>tag</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfTag"></val>
+  </propSet>
+  <propSet>
+    <name>resourcePool</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="ResourcePool">resgroup-632</val>
+  </propSet>
+  <propSet>
+    <name>host</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="HostSystem">host-631</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>datastore</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="Datastore">datastore-1512</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1514</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1516</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1518</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1520</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1522</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1524</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1526</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1528</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1530</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1532</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1534</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1536</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1538</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1540</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1542</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1544</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1546</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1548</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1550</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>network</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="Network">network-583</ManagedObjectReference>
+      <ManagedObjectReference type="DistributedVirtualPortgroup">dvportgroup-601</ManagedObjectReference>
+      <ManagedObjectReference type="DistributedVirtualPortgroup">dvportgroup-603</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>summary</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ComputeResourceSummary">
+      <totalCpu>2294</totalCpu>
+      <totalMemory>4294430720</totalMemory>
+      <numCpuCores>2</numCpuCores>
+      <numCpuThreads>2</numCpuThreads>
+      <effectiveCpu>2294</effectiveCpu>
+      <effectiveMemory>4294430720</effectiveMemory>
+      <numHosts>1</numHosts>
+      <numEffectiveHosts>1</numEffectiveHosts>
+      <overallStatus>green</overallStatus>
+    </val>
+  </propSet>
+  <propSet>
+    <name>environmentBrowser</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="EnvironmentBrowser">envbrowser-630</val>
+  </propSet>
+  <propSet>
+    <name>configurationEx</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ComputeResourceConfigInfo">
+      <vmSwapPlacement>vmDirectory</vmSwapPlacement>
+    </val>
+  </propSet>
+</ObjectContent>

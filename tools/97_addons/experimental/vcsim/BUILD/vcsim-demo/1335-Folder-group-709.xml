@@ -1,0 +1,193 @@
+<ObjectContent>
+  <obj type="Folder">group-709</obj>
+  <propSet>
+    <name>value</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>availableField</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldDef"></val>
+  </propSet>
+  <propSet>
+    <name>parent</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="Folder">group-696</val>
+  </propSet>
+  <propSet>
+    <name>customValue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>overallStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configIssue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfEvent"></val>
+  </propSet>
+  <propSet>
+    <name>effectiveRole</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfInt">
+      <int>-1</int>
+    </val>
+  </propSet>
+  <propSet>
+    <name>permission</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfPermission"></val>
+  </propSet>
+  <propSet>
+    <name>name</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="xsd:string">F6</val>
+  </propSet>
+  <propSet>
+    <name>disabledMethod</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString"></val>
+  </propSet>
+  <propSet>
+    <name>recentTask</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference"></val>
+  </propSet>
+  <propSet>
+    <name>declaredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>triggeredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>tag</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfTag"></val>
+  </propSet>
+  <propSet>
+    <name>childType</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString">
+      <string>Datastore</string>
+      <string>StoragePod</string>
+      <string>Folder</string>
+    </val>
+  </propSet>
+  <propSet>
+    <name>childEntity</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="Datastore">datastore-1272</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1274</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1276</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1278</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1280</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1282</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1284</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1286</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1288</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1290</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1292</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1294</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1296</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1298</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1300</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1302</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1304</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1306</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1308</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1310</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>value</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>availableField</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldDef"></val>
+  </propSet>
+  <propSet>
+    <name>parent</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="Folder">group-696</val>
+  </propSet>
+  <propSet>
+    <name>customValue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>overallStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configIssue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfEvent"></val>
+  </propSet>
+  <propSet>
+    <name>effectiveRole</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfInt">
+      <int>-1</int>
+    </val>
+  </propSet>
+  <propSet>
+    <name>permission</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfPermission"></val>
+  </propSet>
+  <propSet>
+    <name>name</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="xsd:string">F6</val>
+  </propSet>
+  <propSet>
+    <name>disabledMethod</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString"></val>
+  </propSet>
+  <propSet>
+    <name>recentTask</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference"></val>
+  </propSet>
+  <propSet>
+    <name>declaredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>triggeredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>tag</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfTag"></val>
+  </propSet>
+  <propSet>
+    <name>childType</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString">
+      <string>Datastore</string>
+      <string>StoragePod</string>
+      <string>Folder</string>
+    </val>
+  </propSet>
+  <propSet>
+    <name>childEntity</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="Datastore">datastore-1272</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1274</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1276</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1278</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1280</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1282</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1284</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1286</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1288</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1290</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1292</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1294</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1296</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1298</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1300</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1302</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1304</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1306</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1308</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1310</ManagedObjectReference>
+    </val>
+  </propSet>
+</ObjectContent>

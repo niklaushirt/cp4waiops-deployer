@@ -1,0 +1,32 @@
+<ObjectContent>
+  <obj type="HostDatastoreBrowser">hostdatastorebrowser-1271</obj>
+  <propSet>
+    <name>datastore</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="Datastore">datastore-1232</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1234</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1236</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1238</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1240</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1242</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1244</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1246</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1248</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1250</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1252</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1254</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1256</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1258</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1260</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1262</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1264</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1266</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1268</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1270</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>supportedType</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfFileQuery"></val>
+  </propSet>
+</ObjectContent>

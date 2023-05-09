@@ -1,0 +1,30 @@
+<ObjectContent>
+  <obj type="HostDatastoreBrowser">hostdatastorebrowser-1387</obj>
+  <propSet>
+    <name>datastore</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="Datastore">datastore-1352</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1354</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1356</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1358</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1360</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1362</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1364</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1366</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1368</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1370</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1372</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1374</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1376</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1378</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1380</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1382</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1384</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1386</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>supportedType</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfFileQuery"></val>
+  </propSet>
+</ObjectContent>

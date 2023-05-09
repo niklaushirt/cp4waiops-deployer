@@ -1,0 +1,25 @@
+FROM ubuntu:22.10
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+  wget \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN wget https://github.com/vmware/govmomi/releases/download/v0.30.4/vcsim_Linux_x86_64.tar.gz && tar -xvzf vcsim_Linux_x86_64.tar.gz && mv vcsim /usr/local/bin
+RUN wget https://github.com/vmware/govmomi/releases/download/v0.30.4/govc_Linux_x86_64.tar.gz && tar -xvzf govc_Linux_x86_64.tar.gz && mv govc /usr/local/bin
+
+WORKDIR /vcsim
+
+
+# Expose application port
+EXPOSE 8989
+RUN mkdir vcsim-demo
+COPY vcsim-demo/* ./vcsim-demo
+COPY startup.sh ./startup.sh
+RUN chmod +x ./startup.sh
+
+# Set entrypoint to application with container defaults
+ENTRYPOINT ./startup.sh
+# ENTRYPOINT [ "vcsim" ]
+# CMD ["-l", "0.0.0.0:8989","-load=vcsim-demo","-tls=false"]

@@ -1,0 +1,36 @@
+<ObjectContent>
+  <obj type="HostDatastoreSystem">hostdatastoresystem-877</obj>
+  <propSet>
+    <name>datastore</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="Datastore">datastore-1312</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1314</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1316</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1318</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1320</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1322</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1324</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1326</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1328</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1330</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1332</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1334</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1336</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1338</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1340</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1342</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1344</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1346</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1348</ManagedObjectReference>
+      <ManagedObjectReference type="Datastore">datastore-1350</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>capabilities</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="HostDatastoreSystemCapabilities">
+      <nfsMountCreationRequired>false</nfsMountCreationRequired>
+      <nfsMountCreationSupported>false</nfsMountCreationSupported>
+      <localDatastoreSupported>false</localDatastoreSupported>
+    </val>
+  </propSet>
+</ObjectContent>

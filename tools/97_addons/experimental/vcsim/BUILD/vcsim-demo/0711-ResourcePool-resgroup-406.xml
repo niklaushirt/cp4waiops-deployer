@@ -1,0 +1,204 @@
+<ObjectContent>
+  <obj type="ResourcePool">resgroup-406</obj>
+  <propSet>
+    <name>value</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>availableField</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldDef"></val>
+  </propSet>
+  <propSet>
+    <name>parent</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="ClusterComputeResource">domain-c407</val>
+  </propSet>
+  <propSet>
+    <name>customValue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfCustomFieldValue"></val>
+  </propSet>
+  <propSet>
+    <name>overallStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configStatus</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedEntityStatus">green</val>
+  </propSet>
+  <propSet>
+    <name>configIssue</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfEvent"></val>
+  </propSet>
+  <propSet>
+    <name>effectiveRole</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfInt">
+      <int>-1</int>
+    </val>
+  </propSet>
+  <propSet>
+    <name>permission</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfPermission"></val>
+  </propSet>
+  <propSet>
+    <name>name</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="xsd:string">Resources</val>
+  </propSet>
+  <propSet>
+    <name>disabledMethod</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString"></val>
+  </propSet>
+  <propSet>
+    <name>recentTask</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference"></val>
+  </propSet>
+  <propSet>
+    <name>declaredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>triggeredAlarmState</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfAlarmState"></val>
+  </propSet>
+  <propSet>
+    <name>tag</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfTag"></val>
+  </propSet>
+  <propSet>
+    <name>summary</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ResourcePoolSummary">
+      <name>DC9_C0_APP9</name>
+      <config>
+        <entity type="ResourcePool">ha-root-pool</entity>
+        <cpuAllocation>
+          <reservation>4121</reservation>
+          <expandableReservation>false</expandableReservation>
+          <limit>4121</limit>
+          <shares>
+            <shares>9000</shares>
+            <level>custom</level>
+          </shares>
+        </cpuAllocation>
+        <memoryAllocation>
+          <reservation>961</reservation>
+          <expandableReservation>false</expandableReservation>
+          <limit>961</limit>
+          <shares>
+            <shares>9000</shares>
+            <level>custom</level>
+          </shares>
+        </memoryAllocation>
+      </config>
+      <runtime>
+        <memory>
+          <reservationUsed>0</reservationUsed>
+          <reservationUsedForVm>0</reservationUsedForVm>
+          <unreservedForPool>1007681536</unreservedForPool>
+          <unreservedForVm>1007681536</unreservedForVm>
+          <overallUsage>0</overallUsage>
+          <maxUsage>1007681536</maxUsage>
+        </memory>
+        <cpu>
+          <reservationUsed>0</reservationUsed>
+          <reservationUsedForVm>0</reservationUsedForVm>
+          <unreservedForPool>4121</unreservedForPool>
+          <unreservedForVm>4121</unreservedForVm>
+          <overallUsage>0</overallUsage>
+          <maxUsage>4121</maxUsage>
+        </cpu>
+        <overallStatus>green</overallStatus>
+      </runtime>
+    </val>
+  </propSet>
+  <propSet>
+    <name>runtime</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ResourcePoolRuntimeInfo">
+      <memory>
+        <reservationUsed>0</reservationUsed>
+        <reservationUsedForVm>0</reservationUsedForVm>
+        <unreservedForPool>1007681536</unreservedForPool>
+        <unreservedForVm>1007681536</unreservedForVm>
+        <overallUsage>0</overallUsage>
+        <maxUsage>1007681536</maxUsage>
+      </memory>
+      <cpu>
+        <reservationUsed>0</reservationUsed>
+        <reservationUsedForVm>0</reservationUsedForVm>
+        <unreservedForPool>4121</unreservedForPool>
+        <unreservedForVm>4121</unreservedForVm>
+        <overallUsage>0</overallUsage>
+        <maxUsage>4121</maxUsage>
+      </cpu>
+      <overallStatus>green</overallStatus>
+    </val>
+  </propSet>
+  <propSet>
+    <name>owner</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ManagedObjectReference" type="ClusterComputeResource">domain-c407</val>
+  </propSet>
+  <propSet>
+    <name>resourcePool</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
+      <ManagedObjectReference type="ResourcePool">resgroup-432</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-433</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-434</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-435</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-436</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-437</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-438</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-439</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-440</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-441</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-442</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-443</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-444</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-445</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-446</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-447</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-448</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-449</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-450</ManagedObjectReference>
+      <ManagedObjectReference type="ResourcePool">resgroup-451</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-452</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-453</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-454</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-455</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-456</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-457</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-458</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-459</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-460</ManagedObjectReference>
+      <ManagedObjectReference type="VirtualApp">virtualapp-461</ManagedObjectReference>
+    </val>
+  </propSet>
+  <propSet>
+    <name>vm</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference"></val>
+  </propSet>
+  <propSet>
+    <name>config</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ResourceConfigSpec">
+      <entity type="ResourcePool">ha-root-pool</entity>
+      <cpuAllocation>
+        <reservation>4121</reservation>
+        <expandableReservation>false</expandableReservation>
+        <limit>4121</limit>
+        <shares>
+          <shares>9000</shares>
+          <level>custom</level>
+        </shares>
+      </cpuAllocation>
+      <memoryAllocation>
+        <reservation>961</reservation>
+        <expandableReservation>false</expandableReservation>
+        <limit>961</limit>
+        <shares>
+          <shares>9000</shares>
+          <level>custom</level>
+        </shares>
+      </memoryAllocation>
+    </val>
+  </propSet>
+  <propSet>
+    <name>childConfiguration</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfResourceConfigSpec"></val>
+  </propSet>
+</ObjectContent>

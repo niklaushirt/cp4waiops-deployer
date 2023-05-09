@@ -1,0 +1,45 @@
+<ObjectContent>
+  <obj type="SessionManager">SessionManager</obj>
+  <propSet>
+    <name>sessionList</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfUserSession">
+      <UserSession>
+        <key>efa088ec-5a23-4cb4-b303-7f00cc69a6a0</key>
+        <userName>user</userName>
+        <fullName>user</fullName>
+        <loginTime>2023-05-09T09:41:36.06442Z</loginTime>
+        <lastActiveTime>2023-05-09T11:41:42.485657+02:00</lastActiveTime>
+        <locale>en_US</locale>
+        <messageLocale>en_US</messageLocale>
+        <extensionSession>false</extensionSession>
+        <ipAddress>192.168.4.166</ipAddress>
+        <userAgent>govc/0.30.4</userAgent>
+        <callCount>278</callCount>
+      </UserSession>
+    </val>
+  </propSet>
+  <propSet>
+    <name>currentSession</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="UserSession">
+      <key>efa088ec-5a23-4cb4-b303-7f00cc69a6a0</key>
+      <userName>user</userName>
+      <fullName>user</fullName>
+      <loginTime>2023-05-09T09:41:36.06442Z</loginTime>
+      <lastActiveTime>2023-05-09T11:41:42.485657+02:00</lastActiveTime>
+      <locale>en_US</locale>
+      <messageLocale>en_US</messageLocale>
+      <extensionSession>false</extensionSession>
+      <ipAddress>192.168.4.166</ipAddress>
+      <userAgent>govc/0.30.4</userAgent>
+      <callCount>278</callCount>
+    </val>
+  </propSet>
+  <propSet>
+    <name>messageLocaleList</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString"></val>
+  </propSet>
+  <propSet>
+    <name>supportedLocaleList</name>
+    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfString"></val>
+  </propSet>
+</ObjectContent>
