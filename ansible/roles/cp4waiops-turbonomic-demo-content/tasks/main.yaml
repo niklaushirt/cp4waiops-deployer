@@ -63,7 +63,10 @@
       backgroundColor: '#141a6b'
       color: '#fff'
       location: {{global_config.position_final_ocp_notification | default("BannerBottom")}}
-      text: 'Installing  {{current_cp4waiops_feature.kind}}'    
+      text: 'Installing  {{current_cp4waiops_feature.kind}} - '    
+      link:
+          href: "https://$OPENSHIFT_ROUTE/k8s/ns/cp4waiops-installer/pods/$INSTALL_POD/logs"
+          text: Open Logs  
     EOF
   ignore_errors: true
 
