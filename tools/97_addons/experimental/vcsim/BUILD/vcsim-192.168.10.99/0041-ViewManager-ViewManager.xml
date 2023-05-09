@@ -1,9 +1,0 @@
-<ObjectContent>
-  <obj type="ViewManager">ViewManager</obj>
-  <propSet>
-    <name>viewList</name>
-    <val xmlns:XMLSchema-instance="http://www.w3.org/2001/XMLSchema-instance" XMLSchema-instance:type="ArrayOfManagedObjectReference">
-      <ManagedObjectReference type="ContainerView">session[529050c0-2186-9f65-24e5-75d89e22fb8a]529b7da4-9b08-12a7-a646-bedf714cf568</ManagedObjectReference>
-    </val>
-  </propSet>
-</ObjectContent>
