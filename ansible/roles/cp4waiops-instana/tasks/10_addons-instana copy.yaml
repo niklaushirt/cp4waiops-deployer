@@ -358,24 +358,89 @@
   kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
-    template: ./templates/instana/ds-secrets.yaml
+    template: ./templates/instana/instana-datastores-secrets.j2
     
 
+- name: 🚀 INSTANA - Create Backend Datastore Operators
+  shell: |
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/zookeeper-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/kafka-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/elasticsearch-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/postgres-scc.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/postgres-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/cassandra-scc.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/cassandra-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/clickhouse-operator.yaml
 
-- name: 🚀 INSTANA - Create Backend Datastores Services
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  OUTPUT
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+
+
+
+- name:   🕦 INSTANA - Wait for DataStores Operators to become ready
+  shell: |
+    while [ `oc -n instana-datastores get pods| grep -v '1/1'| grep -v '2/2'| grep -v '3/3' | grep -c ""` -gt 1 ]
+    do
+      sleep 30
+    done
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  OUTPUT
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+
+
+
+- name: 🚀 INSTANA - Create Backend - kafka
   kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
-    template: ./templates/instana/ds-services.yaml
-    
+    template: ./templates/instana-datastores/kafka-instance.j2
 
 
-- name: 🚀 INSTANA - Create Backend Datastores StatefulSets
+- name: 🚀 INSTANA - Create Backend - elasticsearch
   kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
-    template: ./templates/instana/ds-statefulsets.j2
-    
+    template: ./templates/instana-datastores/elasticsearch-instance.j2
+
+
+- name: 🚀 INSTANA - Create Backend - postgres
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/postgres-instance.j2
+
+
+- name: 🚀 INSTANA - Create Backend - cassandra
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/cassandra-instance.j2
+
+
+- name: 🚀 INSTANA - Create Backend - clickhouse
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/clickhouse-instance.j2
+
+
+- name: 🚀 INSTANA - Create Backend - zookeeper
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/zookeeper-instance.j2
+
 
 
 

@@ -111,7 +111,7 @@ spec:
       resources:
         requests:
           storage: 200Gi
-      storageClassName: ocs-storagecluster-ceph-rbd
+      storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
       volumeMode: Filesystem
 --- 
 apiVersion: apps/v1
@@ -332,7 +332,7 @@ spec:
       resources:
         requests:
           storage: 200Gi
-      storageClassName: ocs-storagecluster-ceph-rbd
+      storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
       volumeMode: Filesystem
 --- 
 apiVersion: apps/v1
@@ -453,7 +453,7 @@ spec:
       resources:
         requests:
           storage: 200Gi
-      storageClassName: ocs-storagecluster-ceph-rbd
+      storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
       volumeMode: Filesystem
 --- 
 apiVersion: apps/v1
@@ -586,7 +586,7 @@ spec:
       resources:
         requests:
           storage: 200Gi
-      storageClassName: ocs-storagecluster-ceph-rbd
+      storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
       volumeMode: Filesystem
 ---
 apiVersion: apps/v1
@@ -699,7 +699,7 @@ spec:
       resources:
         requests:
           storage: 200Gi
-      storageClassName: ocs-storagecluster-ceph-rbd
+      storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
       volumeMode: Filesystem
 ---
 apiVersion: apps/v1
@@ -815,5 +815,5 @@ spec:
       resources:
         requests:
           storage: 200Gi
-      storageClassName: ocs-storagecluster-ceph-rbd
+      storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
       volumeMode: Filesystem
