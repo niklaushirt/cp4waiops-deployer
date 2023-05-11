@@ -27,7 +27,7 @@ spec:
   datastoreConfigs:
     cassandraConfigs:
       - hosts:
-          - instana-cassandra-service.instana-datastores.svc
+          - default-cassandra.instana-datastores.svc
         ports:
           - name: tcp
             port: 9042
@@ -39,7 +39,7 @@ spec:
         authEnabled: false
     clickhouseConfigs:
       - hosts:
-          - clickhouse-instana.instana-datastores.svc
+          - default-clickhouse.instana-datastores.svc
         clusterName: local
         ports:
           - name: tcp
@@ -52,7 +52,7 @@ spec:
         authEnabled: false
     elasticsearchConfig:
       hosts:
-        - instana-es-http.instana-datastores.svc
+        - default-elasticsearch.instana-datastores.svc
       clusterName: onprem_onprem
       ports:
         - name: tcp
@@ -64,7 +64,7 @@ spec:
       authEnabled: false
     kafkaConfig:
       hosts:
-        - instana-kafka-bootstrap.instana-datastores.svc
+        - default-kafka.instana-datastores.svc
       ports:
         - name: tcp
           port: 9092
@@ -72,7 +72,7 @@ spec:
       saslMechanism: PLAIN
     postgresConfigs:
     - hosts:
-        - postgres.instana-datastores.svc
+        - default-postgres.instana-datastores.svc
       ports:
         - name: tcp
           port: 5432
