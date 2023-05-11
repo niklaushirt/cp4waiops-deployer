@@ -52,13 +52,13 @@
     echo "Create Custom Topology - Create Template"
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
-    export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
-    export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
+    export TOPOLOGY_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
+    export TOPOLOGY_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
     oc create route passthrough topology-manage -n $WAIOPS_NAMESPACE --service=aiops-topology-topology --port=https-topology-api
     export TOPO_MGT_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-manage -o jsonpath={.spec.host})
 
  
-    export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
+    export LOGIN="$TOPOLOGY_REST_USR:$TOPOLOGY_REST_PWD"
 
     echo "    URL: $TOPO_MGT_ROUTE/1.0/rest-observer/rest/resources"
     echo "    LOGIN: $LOGIN"
@@ -156,13 +156,13 @@
     echo "Create Custom Topology - Create Template"
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
-    export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
-    export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
+    export TOPOLOGY_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
+    export TOPOLOGY_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
     oc create route passthrough topology-manage -n $WAIOPS_NAMESPACE --service=aiops-topology-topology --port=https-topology-api
     export TOPO_MGT_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-manage -o jsonpath={.spec.host})
 
  
-    export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
+    export LOGIN="$TOPOLOGY_REST_USR:$TOPOLOGY_REST_PWD"
 
     echo "    URL: $TOPO_MGT_ROUTE/1.0/rest-observer/rest/resources"
     echo "    LOGIN: $LOGIN"
@@ -259,13 +259,13 @@
     echo "Create Custom Topology - Create Template"
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
-    export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
-    export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
+    export TOPOLOGY_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
+    export TOPOLOGY_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
     oc create route passthrough topology-manage -n $WAIOPS_NAMESPACE --service=aiops-topology-topology --port=https-topology-api
     export TOPO_MGT_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-manage -o jsonpath={.spec.host})
 
  
-    export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
+    export LOGIN="$TOPOLOGY_REST_USR:$TOPOLOGY_REST_PWD"
 
     echo "    URL: $TOPO_MGT_ROUTE/1.0/rest-observer/rest/resources"
     echo "    LOGIN: $LOGIN"
@@ -361,13 +361,13 @@
     echo "Create Custom Topology - Create Template"
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
 
-    export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
-    export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
+    export TOPOLOGY_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
+    export TOPOLOGY_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
     oc create route passthrough topology-manage -n $WAIOPS_NAMESPACE --service=aiops-topology-topology --port=https-topology-api
     export TOPO_MGT_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-manage -o jsonpath={.spec.host})
 
  
-    export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
+    export LOGIN="$TOPOLOGY_REST_USR:$TOPOLOGY_REST_PWD"
 
     echo "    URL: $TOPO_MGT_ROUTE/1.0/rest-observer/rest/resources"
     echo "    LOGIN: $LOGIN"
