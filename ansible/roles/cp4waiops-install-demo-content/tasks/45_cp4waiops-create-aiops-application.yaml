@@ -298,19 +298,19 @@
     # # -------------------------------------------------------------------------------------------------------------------------------------------------
     # # CREATE EDGES
     # # -------------------------------------------------------------------------------------------------------------------------------------------------
-    if [[ $K8S_OBS_ID == "" ]];
-    then  
-      echo "    No K8s Observer defined"
-    else
-      echo "  Add K8s Observer Resources"
-      curl -X "POST" "$TOPO_MGT_ROUTE/1.0/topology/groups/$APP_ID/members" --insecure \
-      -u $LOGIN \
-      -H 'Content-Type: application/json' \
-      -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
-      -d "{
-        \"_id\": \"$K8S_OBS_ID\"
-      }"
-    fi
+    # if [[ $K8S_OBS_ID == "" ]];
+    # then  
+    #   echo "    No K8s Observer defined"
+    # else
+    #   echo "  Add K8s Observer Resources"
+    #   curl -X "POST" "$TOPO_MGT_ROUTE/1.0/topology/groups/$APP_ID/members" --insecure \
+    #   -u $LOGIN \
+    #   -H 'Content-Type: application/json' \
+    #   -H 'X-TenantID: cfd95b7e-3bc7-4006-a4a8-a73a79c71255' \
+    #   -d "{
+    #     \"_id\": \"$K8S_OBS_ID\"
+    #   }"
+    # fi
 
     echo "  Add Template (File Observer) Resources"
     curl -X "POST" "$TOPO_MGT_ROUTE/1.0/topology/groups/$APP_ID/members" --insecure \
