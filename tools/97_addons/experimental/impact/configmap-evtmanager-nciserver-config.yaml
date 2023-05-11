@@ -1,0 +1,64 @@
+﻿kind: ConfigMap
+apiVersion: v1
+metadata:
+  annotations:
+    hdm.ibm.com/lastknownstate: e4251ed28f32b25f3adfa6e5285b278f
+  resourceVersion: '4034695'
+  name: evtmanager-nciserver-config
+  uid: b745f5d5-3c71-4c29-b9f1-a6cd0eaac34c
+  creationTimestamp: '2023-05-10T08:07:47Z'
+  managedFields:
+    - manager: manager
+      operation: Update
+      apiVersion: v1
+      time: '2023-05-10T08:07:47Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:data':
+          .: {}
+          'f:impactcore-derby-sql-extensions': {}
+          'f:impactcore-jvm-options-replace': {}
+          'f:impactcore-log4j-props-update': {}
+          'f:impactcore-server-props-update': {}
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:hdm.ibm.com/lastknownstate': {}
+          'f:labels':
+            'f:helm.sh/chart': {}
+            'f:hdm.ibm.com/lastreconciled': {}
+            'f:app.kubernetes.io/managed-by': {}
+            'f:hdm.ibm.com/resourceowner': {}
+            'f:app.kubernetes.io/name': {}
+            .: {}
+            'f:hdm.ibm.com/chartversion': {}
+            'f:release': {}
+            'f:app.kubernetes.io/instance': {}
+          'f:ownerReferences':
+            .: {}
+            'k:{"uid":"c3e19346-f37f-46e6-8b2d-9183d11b2fae"}': {}
+  namespace: cp4waiops-evtmgr
+  ownerReferences:
+    - apiVersion: noi.ibm.com/v1beta1
+      kind: NOIFormation
+      name: evtmanager
+      uid: c3e19346-f37f-46e6-8b2d-9183d11b2fae
+      controller: true
+      blockOwnerDeletion: true
+  labels:
+    app.kubernetes.io/instance: evtmanager
+    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/name: nciserver
+    hdm.ibm.com/chartversion: 1.6.6
+    hdm.ibm.com/lastreconciled: 2023-05-10-08-19-14-615269171-0000-UTC-m-757-382204293
+    hdm.ibm.com/resourceowner: evtmanagernoi-ibm-com-v1beta1
+    helm.sh/chart: nciserver
+    release: evtmanager
+data:
+  impactcore-derby-sql-extensions: ''
+  impactcore-jvm-options-replace: |
+    -Xms512M
+    -Xmx4096M
+    -Xgc:classUnloadingKickoffThreshold=100
+  impactcore-log4j-props-update: ''
+  impactcore-server-props-update: ''

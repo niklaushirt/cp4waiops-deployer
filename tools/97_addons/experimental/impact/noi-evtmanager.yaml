@@ -1,0 +1,545 @@
+﻿apiVersion: noi.ibm.com/v1beta1
+kind: NOI
+metadata:
+  creationTimestamp: '2023-05-10T08:07:11Z'
+  generation: 1
+  managedFields:
+    - apiVersion: noi.ibm.com/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:topology':
+            'f:storageClassFileObserver': {}
+            'f:observers':
+              'f:vmvcenter': {}
+              'f:appdynamics': {}
+              'f:ciscoaci': {}
+              'f:jenkins': {}
+              'f:newrelic': {}
+              'f:rest': {}
+              'f:googlecloud': {}
+              'f:aws': {}
+              'f:dynatrace': {}
+              'f:openstack': {}
+              'f:zabbix': {}
+              'f:vmwarensx': {}
+              'f:taddm': {}
+              .: {}
+              'f:alm': {}
+              'f:file': {}
+              'f:cienablueplanet': {}
+              'f:bigfixinventory': {}
+              'f:docker': {}
+              'f:dns': {}
+              'f:ibmcloud': {}
+              'f:servicenow': {}
+              'f:contrail': {}
+              'f:kubernetes': {}
+              'f:azure': {}
+              'f:junipercso': {}
+              'f:rancher': {}
+              'f:ansibleawx': {}
+              'f:itnm': {}
+            'f:iafCartridgeRequirementsName': {}
+            'f:appDisco':
+              'f:db2archuser': {}
+              'f:dbsecret': {}
+              'f:scaleDS': {}
+              'f:certSecret': {}
+              'f:secure': {}
+              'f:db2user': {}
+              'f:enabled': {}
+              .: {}
+              'f:dbport': {}
+              'f:tlsSecret': {}
+              'f:db2database': {}
+              'f:dburl': {}
+              'f:scaleSSS': {}
+            .: {}
+            'f:netDisco': {}
+            'f:storageClassElasticTopology': {}
+            'f:storageSizeFileObserver': {}
+            'f:storageSizeElasticTopology': {}
+          'f:version': {}
+          'f:entitlementSecret': {}
+          'f:clusterDomain': {}
+          'f:persistence':
+            'f:storageClassCassandraData': {}
+            'f:storageSizeCassandraBackup': {}
+            'f:storageSizeZookeeper': {}
+            'f:storageClassImpactGUI': {}
+            'f:storageClassElastic': {}
+            'f:storageSizeCouchdb': {}
+            'f:storageClassMinio': {}
+            'f:storageSizeCassandraData': {}
+            'f:storageClassNCOBackup': {}
+            'f:enabled': {}
+            'f:storageSizeElastic': {}
+            'f:storageSizeImpactGUI': {}
+            .: {}
+            'f:storageSizeNCOPrimary': {}
+            'f:storageSizeImpactServer': {}
+            'f:storageSizeNCOBackup': {}
+            'f:storageClassKafka': {}
+            'f:storageClassNCOPrimary': {}
+            'f:storageClassCassandraBackup': {}
+            'f:storageClassImpactServer': {}
+            'f:storageClassCouchdb': {}
+            'f:storageClassZookeeper': {}
+            'f:storageSizeKafka': {}
+          'f:license':
+            .: {}
+            'f:accept': {}
+          .: {}
+          'f:deploymentType': {}
+          'f:integrations':
+            .: {}
+            'f:humio':
+              .: {}
+              'f:repository': {}
+              'f:url': {}
+          'f:advanced':
+            .: {}
+            'f:antiAffinity': {}
+            'f:imagePullPolicy': {}
+            'f:imagePullRepository': {}
+          'f:backupRestore':
+            .: {}
+            'f:enableAnalyticsBackups': {}
+          'f:ldap':
+            'f:groupFilter': {}
+            'f:suffix': {}
+            'f:storageSize': {}
+            .: {}
+            'f:baseDN': {}
+            'f:serverType': {}
+            'f:storageClass': {}
+            'f:port': {}
+            'f:mode': {}
+            'f:userFilter': {}
+            'f:sslPort': {}
+            'f:url': {}
+            'f:bindDN': {}
+      manager: OpenAPI-Generator
+      operation: Update
+      time: '2023-05-10T08:07:11Z'
+    - apiVersion: noi.ibm.com/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          .: {}
+          'f:managedResources': {}
+          'f:message': {}
+          'f:phase': {}
+          'f:versions':
+            .: {}
+            'f:available':
+              .: {}
+              'f:versions': {}
+            'f:reconciled': {}
+      manager: manager
+      operation: Update
+      subresource: status
+      time: '2023-05-10T08:19:03Z'
+  name: evtmanager
+  namespace: cp4waiops-evtmgr
+  resourceVersion: '4035975'
+  uid: 72db7f6f-8941-48b7-9336-5eb670c16f7f
+spec:
+  license:
+    accept: true
+  advanced:
+    antiAffinity: false
+    imagePullPolicy: IfNotPresent
+    imagePullRepository: cp.icr.io/cp/noi
+  ldap:
+    port: '389'
+    mode: standalone
+    userFilter: 'uid=%s,ou=users'
+    bindDN: 'cn=admin,dc=mycluster,dc=icp'
+    sslPort: '636'
+    url: 'ldap://localhost:389'
+    suffix: 'dc=mycluster,dc=icp'
+    groupFilter: 'cn=%s,ou=groups'
+    baseDN: 'dc=mycluster,dc=icp'
+    storageSize: 1Gi
+    serverType: CUSTOM
+    storageClass: ocs-storagecluster-cephfs
+  backupRestore:
+    enableAnalyticsBackups: false
+  topology:
+    appDisco:
+      enabled: false
+      scaleSSS: '1'
+      tlsSecret: ''
+      dbsecret: ''
+      db2database: taddm
+      dburl: ''
+      certSecret: ''
+      db2archuser: archuser
+      secure: false
+      scaleDS: '1'
+      db2user: db2inst1
+      dbport: '50000'
+    iafCartridgeRequirementsName: ''
+    netDisco: false
+    observers:
+      docker: false
+      taddm: false
+      servicenow: true
+      ibmcloud: false
+      alm: false
+      contrail: false
+      cienablueplanet: false
+      kubernetes: true
+      bigfixinventory: false
+      junipercso: false
+      dns: false
+      itnm: false
+      ansibleawx: false
+      ciscoaci: false
+      azure: false
+      rancher: false
+      newrelic: false
+      vmvcenter: true
+      rest: true
+      appdynamics: false
+      jenkins: false
+      zabbix: false
+      file: true
+      googlecloud: false
+      dynatrace: false
+      aws: false
+      openstack: false
+      vmwarensx: false
+    storageClassElasticTopology: ocs-storagecluster-cephfs
+    storageClassFileObserver: ocs-storagecluster-cephfs
+    storageSizeElasticTopology: 75Gi
+    storageSizeFileObserver: 5Gi
+  version: 1.6.6
+  entitlementSecret: ibm-entitlement-key
+  clusterDomain: ''
+  integrations:
+    humio:
+      repository: ''
+      url: ''
+  persistence:
+    storageSizeNCOBackup: 5Gi
+    enabled: true
+    storageSizeNCOPrimary: 5Gi
+    storageClassNCOPrimary: ocs-storagecluster-cephfs
+    storageSizeImpactServer: 5Gi
+    storageClassImpactServer: ocs-storagecluster-cephfs
+    storageClassKafka: ocs-storagecluster-cephfs
+    storageSizeKafka: 50Gi
+    storageClassCassandraBackup: ocs-storagecluster-cephfs
+    storageSizeCassandraBackup: 50Gi
+    storageClassZookeeper: ocs-storagecluster-cephfs
+    storageClassCouchdb: ocs-storagecluster-cephfs
+    storageSizeZookeeper: 5Gi
+    storageSizeCouchdb: 20Gi
+    storageClassCassandraData: ocs-storagecluster-cephfs
+    storageSizeCassandraData: 50Gi
+    storageClassElastic: ocs-storagecluster-cephfs
+    storageClassImpactGUI: ocs-storagecluster-cephfs
+    storageSizeImpactGUI: 5Gi
+    storageSizeElastic: 75Gi
+    storageClassMinio: ocs-storagecluster-cephfs
+    storageClassNCOBackup: ocs-storagecluster-cephfs
+  deploymentType: trial
+status:
+  managedResources:
+    - 'Role:cp4waiops-evtmgr/evtmanager-cassandra-role'
+    - 'Role:cp4waiops-evtmgr/evtmanager-proxy'
+    - 'Role:cp4waiops-evtmgr/evtmanager-cassandra-auth-secret-generator'
+    - 'RoleBinding:cp4waiops-evtmgr/evtmanager-cassandra-auth-secret-generator'
+    - 'RoleBinding:cp4waiops-evtmgr/evtmanager-cassandra-rolebinding'
+    - 'RoleBinding:cp4waiops-evtmgr/evtmanager-proxy'
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-noi-alert-details-service'
+    - >-
+      Route:cp4waiops-evtmgr/evtmanager-ibm-ea-mime-classification-eaasmmimecls-1
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-backend-ingress-4'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-oauth2'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-samlsps'
+    - 'Route:cp4waiops-evtmgr/evtmanager-common-dash-auth-im-repo'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-tiputil'
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-backend-ingress-2'
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-backend-ingress-3'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-iscwire'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-snoop'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-tipwebwidget'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-xyza'
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-ea-ui-api-graphql'
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-hdm-common-ui'
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-backend-ingress-1'
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-backend-ingress-5'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-ischa'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-tip-iscadmin'
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-ea-asm-mime-eaasmmime'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-impact-dashlet'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-iscadmin'
+    - >-
+      Route:cp4waiops-evtmgr/evtmanager-ibm-ea-mime-classification-eaasmmimecls-0
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-ibm'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-mybox'
+    - 'Route:cp4waiops-evtmgr/evtmanager-nci-0'
+    - 'Route:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-backend-ingress-0'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-dashravewidget'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-isc'
+    - 'Route:cp4waiops-evtmgr/evtmanager-metric-api-service-metricapiservice'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-3pi'
+    - 'Route:cp4waiops-evtmgr/evtmanager-webgui-twl-ssd'
+    - 'Route:cp4waiops-evtmgr/evtmanager-impactgui-xyz'
+    - 'Job:cp4waiops-evtmgr/evtmanager-ea-noi-layer-easetupomnibus'
+    - 'Job:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-setup'
+    - 'Job:cp4waiops-evtmgr/evtmanager-ibm-noi-alert-details-setup'
+    - 'Job:cp4waiops-evtmgr/evtmanager-ncodatalayer-agg-setup'
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-dedup-aggregationservice
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-metric-spark-service-metricsparkservice
+    - 'Deployment:cp4waiops-evtmgr/cem-operator'
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-common-dash-auth-im-repo-dashauth'
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ibm-ea-asm-mime-eaasmmime'
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-ea-asm-normalizer-normalizerstreams
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-normalizer-aggregationservice
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-metric-action-service-metricactionservice
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ncodatalayer-agg-ir'
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ibm-ea-ui-api-graphql'
+    - 'Deployment:cp4waiops-evtmgr/asm-operator'
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-inferenceservice
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-collater-aggregationservice
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-ingestionservice
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-ea-mime-classification-eaasmmimecls
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-alert-action-service-alertactionservice
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-common-ui-uiserver'
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-eventsqueryservice
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-grafana'
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-metric-api-service-metricapiservice'
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-trainer'
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ncodatalayer-agg-std'
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-metric-trigger-service-metrictriggerservice
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ea-noi-layer-eanoiactionservice'
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-alert-trigger-service-alerttriggerservice
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-common-datarouting'
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-archivingservice
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-policyregistryservice
+    - >-
+      Deployment:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-servicemonitorservice
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-proxy'
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ibm-noi-alert-details-service'
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ea-noi-layer-eanoigateway'
+    - 'Deployment:cp4waiops-evtmgr/evtmanager-ncodatalayer-agg-irf'
+    - 'ASMFormation:cp4waiops-evtmgr/evtmanager-topology'
+    - 'CronJob:cp4waiops-evtmgr/evtmanager-healthcron'
+    - 'NetworkPolicy:cp4waiops-evtmgr/evtmanager-ibm-redis'
+    - 'NetworkPolicy:cp4waiops-evtmgr/evtmanager-kafka-network-policy'
+    - 'NetworkPolicy:cp4waiops-evtmgr/evtmanager-zookeeper-network-policy'
+    - 'NetworkPolicy:cp4waiops-evtmgr/evtmanager-proxy-network-policy'
+    - 'NetworkPolicy:cp4waiops-evtmgr/evtmanager-ibm-netcool-prod-network-policy'
+    - 'NetworkPolicy:cp4waiops-evtmgr/evtmanager-cassandra-network-policy'
+    - 'NetworkPolicy:cp4waiops-evtmgr/evtmanager-couchdb-network-policy'
+    - 'ServiceAccount:cp4waiops-evtmgr/noi-service-account'
+    - 'PersistentVolumeClaim:cp4waiops-evtmgr/evtmanager-openldap-pvc'
+    - 'PersistentVolumeClaim:cp4waiops-evtmgr/evtmanager-impactgui-pvc'
+    - 'PersistentVolumeClaim:cp4waiops-evtmgr/evtmanager-ncobackup-pvc'
+    - 'PersistentVolumeClaim:cp4waiops-evtmgr/evtmanager-ncoprimary-pvc'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-ibm-redis-server'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-kafka'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-spark-master'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-ncoprimary'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-openldap'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-spark-slave'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-nciserver'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-webgui'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-zookeeper'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-ncobackup'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-impactgui'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-cassandra'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-couchdb'
+    - 'StatefulSet:cp4waiops-evtmgr/evtmanager-elasticsearch'
+    - 'CEMFormation:cp4waiops-evtmgr/evtmanager'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-ldap-proxy-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-ibm-redis-configmap'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-asm-ui-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-kafka'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-couchdb-configmap'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-impactgui-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-metric-action-service-trusted-cas'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-cassandra-bootstrap-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-objserv-agg-backup-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-istio'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-common-elastic-curator-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-webgui-user-scripts'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-nciserver-maproles'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-ibm-hdm-common-ui-trusted-cas'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-configuration-share'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-nciserver-user-scripts'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-zookeeper'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-objserv-agg-primary-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-webgui-startup-scripts'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-grafana-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-impactgui-user-scripts'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-webgui-init-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-ibm-redis-probes'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-ea-noi-layer-eanoigateway'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-impactgui-startup-scripts'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-ibm-ea-ui-api-trusted-cas'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-proxy-config'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-nciserver-startup-scripts'
+    - 'ConfigMap:cp4waiops-evtmgr/evtmanager-nciserver-config'
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-dedup-aggregationservice
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-normalizer-aggregationservice
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-redis-announce-0'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-redis-announce-1'
+    - 'Service:cp4waiops-evtmgr/evtmanager-spark-master'
+    - 'Service:cp4waiops-evtmgr/evtmanager-grafana'
+    - 'Service:cp4waiops-evtmgr/evtmanager-couchdb'
+    - 'Service:cp4waiops-evtmgr/evtmanager-objserv-agg-backup'
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-collater-aggregationservice
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-archivingservice'
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-eventsqueryservice
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-common-ui-uiserver'
+    - 'Service:cp4waiops-evtmgr/evtmanager-webgui-0'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ncodatalayer-agg-std'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-trainer'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-ea-asm-mime-eaasmmime'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-inferenceservice'
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-metric-trigger-service-metrictriggerservice
+    - 'Service:cp4waiops-evtmgr/evtmanager-common-dash-auth-im-repo-dashauth'
+    - 'Service:cp4waiops-evtmgr/evtmanager-spark-slave'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-redis-announce-2'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-redis-announce-3'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-ingestionservice'
+    - 'Service:cp4waiops-evtmgr/evtmanager-impactgui'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-noi-alert-details-service'
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-ibm-ea-mime-classification-eaasmmimecls
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-policyregistryservice
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-metric-api-service-metricapiservice-headless
+    - 'Service:cp4waiops-evtmgr/evtmanager-nci-0'
+    - 'Service:cp4waiops-evtmgr/evtmanager-metric-api-service-metricapiservice'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-redis-announce-4'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-redis-announce-5'
+    - 'Service:cp4waiops-evtmgr/evtmanager-proxy'
+    - 'Service:cp4waiops-evtmgr/evtmanager-cassandra'
+    - 'Service:cp4waiops-evtmgr/evtmanager-zkensemble'
+    - 'Service:cp4waiops-evtmgr/evtmanager-nciserver'
+    - 'Service:cp4waiops-evtmgr/evtmanager-elasticsearch'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ea-noi-layer-eanoiactionservice'
+    - 'Service:cp4waiops-evtmgr/evtmanager-webgui'
+    - 'Service:cp4waiops-evtmgr/evtmanager-zookeeper'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-redis'
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-alert-trigger-service-alerttriggerservice
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-ibm-hdm-analytics-dev-servicemonitorservice
+    - 'Service:cp4waiops-evtmgr/evtmanager-asm-ui-api'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ldapservice'
+    - 'Service:cp4waiops-evtmgr/evtmanager-nciservers'
+    - 'Service:cp4waiops-evtmgr/evtmanager-objserv-agg-primary'
+    - 'Service:cp4waiops-evtmgr/evtmanager-ibm-ea-ui-api-graphql'
+    - 'Service:cp4waiops-evtmgr/evtmanager-kafka'
+    - >-
+      Service:cp4waiops-evtmgr/evtmanager-metric-spark-service-metricsparkservice
+    - 'PodDisruptionBudget:cp4waiops-evtmgr/evtmanager-kafka-pdb'
+  message: >-
+    This deployment of Netcool Operation Insight is now complete. You can now
+
+    access the following services:
+
+    Identify the public IP of the cluster:
+      export NODE_IP=<Public IP of the ICp cluster>
+
+    WebGUI:
+      Update your hosts file( On the machine you are running your Browser) or your DNS settings with this mapping
+      $NODE_IP netcool-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com
+
+      firefox https://netcool-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com:443/ibm/console
+
+      Default credentials are: icpadmin/password you can get from the secret evtmanager-icpadmin-secret using the following
+      kubectl get secret evtmanager-icpadmin-secret -o json -n cp4waiops-evtmgr| grep ICP_ADMIN_PASSWORD  | cut -d : -f2 | cut -d '"' -f2 | base64 -d;echo
+
+    WAS Console:
+      Update your hosts file( On the machine you are running your Browser) or your DNS settings with this mapping
+      $NODE_IP was-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com
+
+      firefox https://was-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com:443/ibm/console
+
+      Default credentials are: smadmin/password you can get from the secret evtmanager-was-secret using the following
+      kubectl get secret evtmanager-was-secret -o json -n cp4waiops-evtmgr| grep WAS_PASSWORD | cut -d : -f2 | cut -d '"' -f2 | base64 -d;echo
+
+    Impact GUI:
+      Update your hosts file( On the machine you are running your Browser) or your DNS settings with this mapping
+      $NODE_IP impact-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com
+
+      firefox https://impact-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com:443/ibm/console
+
+      Credentials are: impactadmin/password you can get from the secret evtmanager-impact-secret using the following
+      kubectl get secret evtmanager-impact-secret -o json -n cp4waiops-evtmgr| grep IMPACT_ADMIN_PASSWORD | cut -d : -f2 | cut -d '"' -f2 | base64 -d;echo
+
+    Impact Servers:
+      Update your hosts file( On the machine you are running your Browser) or your DNS settings with this mapping
+      $NODE_IP nci-0-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com
+
+      firefox https://nci-0-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com:443/nameserver/services
+
+      Default credentials are: impactadmin//password you can get from the secret evtmanager-impact-secret using the following
+      kubectl get secret evtmanager-impact-secret -o json -n cp4waiops-evtmgr| grep IMPACT_ADMIN_PASSWORD | cut -d : -f2 | cut -d '"' -f2 | base64 -d;echo
+
+    AIOPS:
+      Update your hosts file( On the machine you are running your Browser) or your DNS settings with this mapping
+      $NODE_IP netcool-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com
+
+      firefox https://netcool-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com:443/
+    Default credentials are: icpadmin/password you can get from the secret
+    evtmanager-icpadmin-secret using the following
+      kubectl get secret evtmanager-icpadmin-secret -o json -n cp4waiops-evtmgr| grep ICP_ADMIN_PASSWORD  | cut -d : -f2 | cut -d '"' -f2 | base64 -d;echo
+
+    Sample Data:
+      To create a job that installs and trains the analytics system with sample data, run the following commands:
+
+      kubectl run ingesnoi3 -i --restart=Never --env=LICENSE=accept  --namespace cp4waiops-evtmgr\
+            --env=CONTAINER_IMAGE=`kubectl describe pod evtmanager-cassandra-0 -n cp4waiops-evtmgr| grep Image: | grep cassandra | head -1 | awk  '{$1=""; print $0}' |awk -F'/' '{OFS = FS}{$NF=""; print $0}' | xargs`ea-events-tooling:15.0.0-20220913140046BST \
+            -l=sidecar.istio.io/inject=false \
+            --env=ISTIO_ENABLED=false \
+            --overrides='{ "apiVersion": "v1", "spec": { "imagePullSecrets": [{"name": "ibm-entitlement-key"}] } } '  \
+            --image=`kubectl describe pod evtmanager-cassandra-0 -n cp4waiops-evtmgr| grep Image: | grep cassandra |  head -1 | awk  '{$1=""; print $0}' |awk -F'/' '{OFS = FS}{$NF=""; print $0}' | xargs`ea-events-tooling:15.0.0-20220913140046BST \
+            loadSampleData.sh -- -r evtmanager  -t cfd95b7e-3bc7-4006-a4a8-a73a79c71255 \
+            -a noi-service-account   -s ibm-entitlement-key  \
+            -j > loadSampleData.yaml
+
+      kubectl create -f loadSampleData.yaml -n cp4waiops-evtmgr
+
+      If the default service account does not have access to the image repository, uncomment the image pull secrets
+      section in the loadSampleData.yaml file and set ibm-entitlement-key  as the imagePullSecrets.name
+      value before running the kubectl create command.
+
+      To see how the sample events have been grouped, connect your browser to WebGUI, choose 'Event Viewer' from
+      the 'Incidents' menu, and change the view from 'Default' to 'Example_IBM_CloudAnalytics'.
+  phase: OK
+  versions:
+    available:
+      versions:
+        - '1.6.2,1.6.3,1.6.3.1,1.6.3.2,1.6.3.3,1.6.4,1.6.5,1.6.5.1,1.6.6,1.6.7'
+    reconciled: 1.6.6

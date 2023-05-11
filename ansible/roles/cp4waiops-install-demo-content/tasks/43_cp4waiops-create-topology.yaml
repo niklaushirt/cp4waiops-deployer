@@ -47,6 +47,13 @@
     set -x
     
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
+    export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
+    export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
+    export TOPO_MGT_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-manage -o jsonpath={.spec.host})
+    export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
+
+    echo "    URL: $TOPO_MGT_ROUTE/1.0/rest-observer/rest/resources"
+    echo "    LOGIN: $LOGIN"
 
     # kubectl exec -ti -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}') -- /opt/ibm/graph.tools/bin/backup_ui_config -out backup.json
     # kubectl cp -n $WAIOPS_NAMESPACE $(oc get po -n $WAIOPS_NAMESPACE|grep topology-topology|awk '{print$1}'):/opt/ibm/netcool/asm/data/tools/backup.json ./backup.json
@@ -81,7 +88,7 @@
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     if [ "${OS}" == "darwin" ]; then
           echo "MAC"
-          TOPOLOGY_CUSTOM_FILE=$(pwd)"/roles/cp4waiops-ai-manager-demo-content/templates/topology/asm_config.json"
+          TOPOLOGY_CUSTOM_FILE=$(pwd)"/roles/cp4waiops-install-demo-content/templates/topology/asm_config.json"
     else
           TOPOLOGY_CUSTOM_FILE="{{role_path}}/templates/topology/asm_config.json"
     fi    
@@ -132,7 +139,7 @@
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     if [ "${OS}" == "darwin" ]; then
           echo "MAC"
-          FILE_OBSERVER_CAP=$(pwd)"/roles/cp4waiops-ai-manager-demo-content/templates/topology/$LOAD_FILE_NAME"
+          FILE_OBSERVER_CAP=$(pwd)"/roles/cp4waiops-install-demo-content/templates/topology/$LOAD_FILE_NAME"
     else
           FILE_OBSERVER_CAP="{{role_path}}/templates/topology/$LOAD_FILE_NAME"
     fi    
@@ -233,7 +240,7 @@
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     if [ "${OS}" == "darwin" ]; then
           echo "MAC"
-          FILE_OBSERVER_CAP=$(pwd)"/roles/cp4waiops-ai-manager-demo-content/templates/topology/$LOAD_FILE_NAME"
+          FILE_OBSERVER_CAP=$(pwd)"/roles/cp4waiops-install-demo-content/templates/topology/$LOAD_FILE_NAME"
     else
           FILE_OBSERVER_CAP="{{role_path}}/templates/topology/$LOAD_FILE_NAME"
     fi    
@@ -332,7 +339,7 @@
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     if [ "${OS}" == "darwin" ]; then
           echo "MAC"
-          FILE_OBSERVER_CAP=$(pwd)"/roles/cp4waiops-ai-manager-demo-content/templates/topology/$LOAD_FILE_NAME"
+          FILE_OBSERVER_CAP=$(pwd)"/roles/cp4waiops-install-demo-content/templates/topology/$LOAD_FILE_NAME"
     else
           FILE_OBSERVER_CAP="{{role_path}}/templates/topology/$LOAD_FILE_NAME"
     fi    

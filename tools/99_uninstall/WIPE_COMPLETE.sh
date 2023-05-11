@@ -149,8 +149,6 @@ oc delete ClusterRoleBinding ibm-zen-operator-serviceaccount &
 oc delete ClusterRoleBinding robot-shop &
 oc delete ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster &             
 oc delete ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster-api &
-oc delete ClusterRoleBinding turbonomic-admin1 &                               
-oc delete ClusterRoleBinding turbonomic-admin2 &
 
 
 oc patch ClusterRoleBinding cp4waiops-installer-admin -p '{"metadata":{"finalizers":null}}' --type=merge  
@@ -167,8 +165,6 @@ oc patch ClusterRoleBinding ibm-zen-operator-serviceaccount -p '{"metadata":{"fi
 oc patch ClusterRoleBinding robot-shop -p '{"metadata":{"finalizers":null}}' --type=merge 
 oc patch ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster -p '{"metadata":{"finalizers":null}}' --type=merge              
 oc patch ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster-api -p '{"metadata":{"finalizers":null}}' --type=merge 
-oc patch ClusterRoleBinding turbonomic-admin1 -p '{"metadata":{"finalizers":null}}' --type=merge                                
-oc patch ClusterRoleBinding turbonomic-admin2 -p '{"metadata":{"finalizers":null}}' --type=merge 
 
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
