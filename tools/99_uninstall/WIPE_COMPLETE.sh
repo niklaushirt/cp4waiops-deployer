@@ -136,7 +136,6 @@ oc patch CustomResourceDefinition $(oc get CustomResourceDefinition| grep .ibm.c
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete ClusterRoleBindings"
 oc delete ClusterRoleBinding cp4waiops-demo-ui-admin-crb &                 
-oc delete ClusterRoleBinding cp4waiops-installer-admin &
 oc delete ClusterRoleBinding awx-default &
 oc delete ClusterRoleBinding aimanager-api-platform &
 oc delete ClusterRoleBinding default-robotinfo1-admin &                        
@@ -151,7 +150,6 @@ oc delete ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster-api &
 
 
 oc patch ClusterRoleBinding cp4waiops-demo-ui-admin-crb -p '{"metadata":{"finalizers":null}}' --type=merge                       
-oc patch ClusterRoleBinding cp4waiops-installer-admin -p '{"metadata":{"finalizers":null}}' --type=merge 
 oc patch ClusterRoleBinding awx-default -p '{"metadata":{"finalizers":null}}' --type=merge 
 oc patch ClusterRoleBinding aimanager-api-platform -p '{"metadata":{"finalizers":null}}' --type=merge 
 oc patch ClusterRoleBinding default-robotinfo1-admin -p '{"metadata":{"finalizers":null}}' --type=merge                         
