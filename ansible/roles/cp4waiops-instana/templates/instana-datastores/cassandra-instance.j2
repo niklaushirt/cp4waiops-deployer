@@ -21,7 +21,7 @@ spec:
       memory: 16Gi
   storageConfig:
     cassandraDataVolumeClaimSpec:
-      storageClass: {{ WAIOPS_STORAGE_CLASS_FILE }}
+      storageClass: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
       accessModes:
         - ReadWriteOnce
       resources:

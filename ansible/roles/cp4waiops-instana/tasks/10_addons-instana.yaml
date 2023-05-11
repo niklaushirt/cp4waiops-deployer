@@ -385,7 +385,7 @@
 
 - name:   🕦 INSTANA - Wait for DataStores Operators to become ready
   shell: |
-    while [ `oc -n instana-datastores get pods| grep '1/1' | grep -c ""` -lt 6 ]
+    while [ `oc -n instana-datastores get pods| grep -v '1/1'| grep -v '2/2'| grep -v '3/3' | grep -c ""` -gt 1 ]
     do
       sleep 30
     done
@@ -467,11 +467,11 @@
 
 - name:   🕦 INSTANA - Wait for DataStores to become ready
   shell: |
-    while [ `oc -n instana-datastores get pods| grep '1/1' | grep -c ""` -lt 6 ]
+    while [ `oc -n instana-datastores get pods| grep -v '1/1'| grep -v '2/2'| grep -v '3/3' | grep -c ""` -gt 1 ]
     do
-      oc annotate namespace instana-datastores openshift.io/node-selector-
-      oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-datastores
-      oc delete pod $(oc -n instana-operator get pods| grep '0/1'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator
+      # oc annotate namespace instana-datastores openshift.io/node-selector-
+      # oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-datastores
+      # oc delete pod $(oc -n instana-operator get pods| grep '0/1'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator
       sleep 30
     done
   ignore_errors: true

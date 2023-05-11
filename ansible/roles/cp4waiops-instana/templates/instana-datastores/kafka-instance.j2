@@ -14,7 +14,7 @@ spec:
         tls: false
     storage:
       type: jbod
-      class: {{ WAIOPS_STORAGE_CLASS_FILE }}
+      class: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
       volumes:
         - id: 0
           type: persistent-claim
@@ -29,7 +29,7 @@ spec:
     storage:
       type: persistent-claim
       size: 10Gi
-      class: {{ WAIOPS_STORAGE_CLASS_FILE }}
+      class: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
       deleteClaim: true
   entityOperator:
     template:

@@ -14,7 +14,7 @@ spec:
     autoPurgeSnapRetainCount: 20
     autoPurgePurgeInterval: 1
   persistence:
-    storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
+    storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
     reclaimPolicy: Delete
     spec:
       resources:

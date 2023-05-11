@@ -70,7 +70,7 @@ spec:
     volumeClaimTemplates:
       - name: instana-clickhouse-data-volume
         spec:
-          storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
+          storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
           accessModes:
             - ReadWriteOnce
           resources:
@@ -78,7 +78,7 @@ spec:
               storage: 100Gi
       - name: instana-clickhouse-log-volume
         spec:
-          storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
+          storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
           accessModes:
             - ReadWriteOnce
           resources:

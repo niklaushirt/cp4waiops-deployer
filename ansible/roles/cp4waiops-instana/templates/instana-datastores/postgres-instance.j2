@@ -24,7 +24,7 @@ spec:
       shared_buffers: "32MB"
   volume:
     size: 10Gi
-    storageClass: {{ WAIOPS_STORAGE_CLASS_FILE }}
+    storageClass: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
   resources:
     requests:
       cpu: 500m

@@ -22,7 +22,7 @@ spec:
         - metadata:
             name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
           spec:
-            storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
+            storageClassName: {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }}
             accessModes:
               - ReadWriteOnce
             resources:
