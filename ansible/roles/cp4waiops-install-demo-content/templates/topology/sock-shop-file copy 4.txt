@@ -1,0 +1,52 @@
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["front-end"], "namespace": "sock-shop", "name": "front-end",  "uniqueId": "front-end",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Gold","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["orders"], "namespace": "sock-shop", "name": "orders",  "uniqueId": "orders",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Platinum","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["catalog","catalogue-network","catalogue-predictive"], "namespace": "sock-shop", "name": "catalog",  "uniqueId": "catalog",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Platinum","dataCenter": "sock-shop", "entityTypes": ["database"],  "matchTokens": ["catalogue-db","catalogue-db-network","catalogue-db-predictive"], "namespace": "sock-shop", "name": "catalogue-db",  "uniqueId": "catalogue-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Gold","dataCenter": "sock-shop", "entityTypes": ["database"],  "matchTokens": ["orders-db"], "namespace": "sock-shop", "name": "orders-db",  "uniqueId": "orders-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["carts"], "namespace": "sock-shop", "name": "carts",  "uniqueId": "carts",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["database"],  "matchTokens": ["carts-db"], "namespace": "sock-shop", "name": "carts-db",  "uniqueId": "carts-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["users"], "namespace": "sock-shop", "name": "users",  "uniqueId": "users",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["database"],  "matchTokens": ["users-db"], "namespace": "sock-shop", "name": "users-db",  "uniqueId": "users-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["ship"], "namespace": "sock-shop", "name": "ship",  "uniqueId": "ship",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["database"],  "matchTokens": ["shipping-db"], "namespace": "sock-shop", "name": "shipping-db",  "uniqueId": "shipping-db",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["rabbit"], "namespace": "sock-shop", "name": "rabbit",  "uniqueId": "rabbit",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+V:{"_operation":"InsertReplace","businessCriticality": "Gold","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["queue-master"], "namespace": "sock-shop", "name": "queue-master",  "uniqueId": "queue-master",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+V:{"_operation":"InsertReplace","businessCriticality": "Gold","dataCenter": "sock-shop", "entityTypes": ["deployment"],  "matchTokens": ["pay"], "namespace": "sock-shop", "name": "pay",  "uniqueId": "pay",  "vertexType": "resource", "tags": ["app:sockshop","namespace:sock-shop"]}
+
+
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"orders","_edgeType":"calls"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"catalog","_edgeType":"calls"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"carts","_edgeType":"calls"}
+E:{"_fromUniqueId":"front-end", "_toUniqueId":"users","_edgeType":"calls"}
+
+
+E:{"_fromUniqueId":"orders", "_toUniqueId":"users","_edgeType":"calls"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"carts","_edgeType":"calls"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"pay","_edgeType":"calls"}
+E:{"_fromUniqueId":"orders", "_toUniqueId":"ship","_edgeType":"calls"}
+E:{"_fromUniqueId":"ship", "_toUniqueId":"rabbit","_edgeType":"accesses"}
+E:{"_fromUniqueId":"queue-master", "_toUniqueId":"rabbit","_edgeType":"accesses"}
+
+
+
+
+E:{"_fromUniqueId":"orders", "_toUniqueId":"orders-db","_edgeType":"accesses"}
+E:{"_fromUniqueId":"catalog", "_toUniqueId":"catalogue-db","_edgeType":"accesses"}
+E:{"_fromUniqueId":"carts", "_toUniqueId":"carts-db","_edgeType":"accesses"}
+E:{"_fromUniqueId":"users", "_toUniqueId":"users-db","_edgeType":"accesses"}
+E:{"_fromUniqueId":"ship", "_toUniqueId":"shipping-db","_edgeType":"accesses"}
+
+
+V:{"_operation":"InsertReplace","businessCriticality": "Platinum","uniqueId":"dcwest1-switch025","namespace": "sock-shop","matchTokens":["dcwest1-switch025"],"tags":["Network Topology","app:sockshop","namespace:sock-shop"],"name":"dcwest1-switch025","entityTypes":["router"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Gold","uniqueId":"dSwitch-5-vm-network","namespace": "sock-shop","matchTokens":["dSwitch-5-vm-network"],"tags":["Network Topolgy","app:sockshop","namespace:sock-shop"],"name":"DSwitch 1-VM Network","entityTypes":["switch"]}
+V:{"_operation":"InsertReplace","businessCriticality": "Silver","uniqueId":"dSwitch-5-vm-network-port-1","namespace": "sock-shop","mergeTokens":["dSwitch-5-vm-network-port-1"],"matchTokens":["dSwitch-5-vm-network-port-1"],"tags":["Network Topolgy","app:sockshop","namespace:sock-shop"],"name":"DSwitch 1-VM Network Port 1","entityTypes":["networkinterface"]}
+
+E:{"_fromUniqueId":"dSwitch-5-vm-network", "_toUniqueId":"dcwest1-switch025","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"dSwitch-5-vm-network-port-1", "_toUniqueId":"dSwitch-5-vm-network","_edgeType":"dependsOn"}
+E:{"_fromUniqueId":"catalogue-db", "_toUniqueId":"dSwitch-5-vm-network-port-1","_edgeType":"exposedBy"}
+
+
