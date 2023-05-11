@@ -363,14 +363,32 @@
 
 - name: 🚀 INSTANA - Create Backend Datastore Operators
   shell: |
-    oc apply -f ./templates/instana-datastores/zookeeper-operator.yaml
-    oc apply -f ./templates/instana-datastores/kafka-operator.yaml
-    oc apply -f ./templates/instana-datastores/elasticsearch-operator.yaml
-    oc apply -f ./templates/instana-datastores/postgres-scc.yaml
-    oc apply -f ./templates/instana-datastores/postgres-operator.yaml
-    oc apply -f ./templates/instana-datastores/cassandra-scc.yaml
-    oc apply -f ./templates/instana-datastores/cassandra-operator.yaml
-    oc apply -f ./templates/instana-datastores/clickhouse-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/zookeeper-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/kafka-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/elasticsearch-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/postgres-scc.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/postgres-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/cassandra-scc.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/cassandra-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/clickhouse-operator.yaml
+
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  OUTPUT
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+
+
+
+- name:   🕦 INSTANA - Wait for DataStores Operators to become ready
+  shell: |
+    while [ `oc -n instana-datastores get pods| grep '1/1' | grep -c ""` -lt 6 ]
+    do
+      sleep 30
+    done
   ignore_errors: true
   register: output
   args:
