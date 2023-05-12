@@ -14,7 +14,7 @@ datastoreConfigs:
       user: postgres
       password: {{ POSTGRES_PWD.stdout }} 
       adminUser: postgres
-      adminPassword: {{ POSTGRES_PWD.stdout }} 
+      adminPassword: {{ POSTGRES_PWD }} 
 imagePullSecrets:
   - name: instana-registry
 downloadKey: {{current_agent_key}}
