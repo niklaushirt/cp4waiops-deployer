@@ -15,6 +15,14 @@ datastoreConfigs:
       password: {{ POSTGRES_PWD }} 
       adminUser: postgres
       adminPassword: {{ POSTGRES_PWD }} 
+  clickhouseConfigs:
+    - databases:
+        - application
+        - logs
+      user: clickhouse-user
+      password: clickhouse-pass
+      adminUser: clickhouse-user
+      adminPassword: clickhouse-pass
 imagePullSecrets:
   - name: instana-registry
 downloadKey: {{current_agent_key}}

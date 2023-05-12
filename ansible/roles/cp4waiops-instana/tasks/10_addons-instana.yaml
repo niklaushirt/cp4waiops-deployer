@@ -152,7 +152,7 @@
     # Postgres operator installation
     helm repo add postgres https://opensource.zalando.com/postgres-operator/charts/postgres-operator
     helm repo update
-    helm install postgres-operator postgres/postgres-operator  --version=1.9.0 --set configGeneral.kubernetes_use_configmaps=true --set securityContext.runAsUser=1000860000 --namespace=instana-datastores
+    helm install postgres-operator postgres/postgres-operator  --version=1.10.0 --set configGeneral.kubernetes_use_configmaps=true --set securityContext.runAsUser=1000860000 --namespace=instana-datastores
     # Security Context Constraints, needed if you are running on RedHat OpenShift
     kubectl apply -f .roles/cp4waiops-instana/templates/instana-datastores/postgres.scc.yaml
   ignore_errors: true
@@ -277,11 +277,11 @@
     template: ./templates/instana-datastores/postgres-instance.j2
     
 
-# - name: 🚀 INSTANA - Create Backend Datastore zookeeper
-#   kubernetes.core.k8s:
-#     namespace: instana-datastores
-#     state: present
-#     template: ./templates/instana-datastores/zookeeper-instance.j2
+- name: 🚀 INSTANA - Create Backend Datastore zookeeper
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/zookeeper-instance.j2
     
 
     
