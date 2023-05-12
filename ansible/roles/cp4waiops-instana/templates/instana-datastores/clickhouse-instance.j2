@@ -66,7 +66,8 @@ spec:
                 - clickhouse-server
                 - --config-file=/etc/clickhouse-server/config.xml
           imagePullSecrets:
-            - name: clickhouse-image-secret   
+            - name: clickhouse-image-secret  
+          serviceAccountName: clickhouse-operator 
     volumeClaimTemplates:
       - name: instana-clickhouse-data-volume
         spec:
