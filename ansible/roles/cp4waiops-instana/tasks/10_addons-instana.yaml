@@ -576,6 +576,7 @@
 - name: 🚀 INSTANA - Get POSTGRES PASSWORD
   shell: |
     POSTGRES_PWD=$(oc get secret postgres.postgres.credentials.postgresql.acid.zalan.do -o json -n instana-datastores | jq -r .data.password | base64 -d)
+    echo $POSTGRES_PWD
   ignore_errors: true
   register: POSTGRES_PWD
   args:
