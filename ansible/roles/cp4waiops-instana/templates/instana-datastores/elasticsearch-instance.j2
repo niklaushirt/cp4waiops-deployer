@@ -4,20 +4,33 @@ metadata:
   name: instana
   namespace: instana-datastores
 spec:
-  version: 7.16.3
+  version: 8.7.1
   nodeSets:
     - name: default
       count: 3
       config:
-        node.master: true
-        node.data: true
-        node.ingest: true
+        node.roles:
+          - master
+          - data
+          - ingest
         node.store.allow_mmap: false
         xpack.security.authc:
           anonymous:
             username: anonymous
             roles: superuser
             authz_exception: false
+      podTemplate:
+        spec:
+          containers:
+            - name: elasticsearch
+              resources:
+                requests:
+                  memory: 4Gi
+                  cpu: 1
+                limits:
+                  memory: 4Gi
+                  cpu: 2
+          serviceAccountName: elastic-operator
       volumeClaimTemplates:
         - metadata:
             name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
@@ -32,4 +45,3 @@ spec:
     tls:
       selfSignedCertificate:
         disabled: true
-
