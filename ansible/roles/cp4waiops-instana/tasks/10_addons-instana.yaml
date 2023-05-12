@@ -363,8 +363,6 @@
     curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
     chmod 700 get_helm.sh
     ./get_helm.sh
-
-
   ignore_errors: true
   register: output
   args:
@@ -383,8 +381,6 @@
     helm repo add pravega https://charts.pravega.io
     helm repo update
     helm install instana -n instana-datastores  pravega/zookeeper-operator --version=0.2.14
-
-
   ignore_errors: true
   register: output
   args:
@@ -402,7 +398,6 @@
     helm repo add strimzi https://strimzi.io/charts/
     helm repo update
     helm install strimzi strimzi/strimzi-kafka-operator --version 0.30.0 -n instana-datastores
-
   ignore_errors: true
   register: output
   args:
@@ -420,8 +415,6 @@
     helm repo add elastic https://helm.elastic.co
     helm repo update
     helm install elastic-operator elastic/eck-operator -n instana-datastores --version=2.5.0
-
-
   ignore_errors: true
   register: output
   args:
@@ -441,7 +434,6 @@
     helm install postgres-operator postgres/postgres-operator  --version=1.9.0 --set configGeneral.kubernetes_use_configmaps=true --set securityContext.runAsUser=1000860000 --namespace=instana-datastores
     # Security Context Constraints, needed if you are running on RedHat OpenShift
     kubectl apply -f .roles/cp4waiops-instana/templates/instana-datastores/postgres.scc.yaml
-
   ignore_errors: true
   register: output
   args:
@@ -460,9 +452,6 @@
     helm install cass-operator k8ssandra/cass-operator -n instana-datastores --create-namespace --version=0.40.0 --set securityContext.runAsGroup=999 --set securityContext.runAsUser=999
     # Security Context Constraints, needed if you are running on RedHat OpenShift
     kubectl apply -f .roles/cp4waiops-instana/templates/instana-datastores/cassandra-scc.yaml
-
-
-
   ignore_errors: true
   register: output
   args:
@@ -471,6 +460,14 @@
   debug:
     var: output.stdout_lines
     verbosity: 1
+
+
+- name: 🚀 INSTANA - Create Backend Datastore Roles
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/roles.yaml
+    
 
 
 
@@ -484,7 +481,6 @@
       --docker-username=_ \
       --docker-password={{current_agent_key}} \
       --docker-server=containers.instana.io
-
   ignore_errors: true
   register: output
   args:
@@ -493,6 +489,9 @@
   debug:
     var: output.stdout_lines
     verbosity: 1
+
+
+
 
 
 - name:   🕦 INSTANA - Wait for DataStores Operators to become ready
@@ -509,6 +508,7 @@
   debug:
     var: output.stdout_lines
     verbosity: 1
+
 
 
 
