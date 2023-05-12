@@ -40,6 +40,21 @@
 
 
 
+# Create aiops-topology-service-account
+- name:   🚀 PREREQUISITES - Patch default storage class if non defined
+  shell: |
+    export default=$(oc get storageclass -oyaml|grep "is-default-class"|wc -l|tr -d " ")
+    echo $default
+    if [ $default -lt 1 ]; then
+        echo "Patching"
+        kubectl patch storageclass {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }} -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+      else
+        echo "Patching not needed"
+      fi
+  ignore_errors: true
+
+
+
 - name: 🚀 INSTANA - Set INSTANA Password from instance configuration
   set_fact: current_admin_pass={{current_cp4waiops_feature.instana_admin_pass  | default('P4ssw0rd!')}}
   when: global_config.global_password is undefined or global_config.global_password=="NONE"
