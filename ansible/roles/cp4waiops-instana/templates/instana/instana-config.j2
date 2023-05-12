@@ -5,6 +5,16 @@ dhParams: |
   +NjKm/pmquA7MV4W7SDkbc+ZMk4BA8YgBipO5Q70I2YeSPo4Y0vmI0A1yGvrOpuA
   hDDwWwGc/bqeGn8et7Ka93HlYVQ3oc1yw6mBLz7oS5alqFLfFbnTAgEC
   -----END DH PARAMETERS-----
+datastoreConfigs:
+  postgresConfigs:
+    - databases:
+        - butlerdb
+        - tenantdb
+        - sales
+      user: postgres
+      password: {{ POSTGRES_PWD.stdout }} 
+      adminUser: postgres
+      adminPassword: {{ POSTGRES_PWD.stdout }} 
 imagePullSecrets:
   - name: instana-registry
 downloadKey: {{current_agent_key}}
