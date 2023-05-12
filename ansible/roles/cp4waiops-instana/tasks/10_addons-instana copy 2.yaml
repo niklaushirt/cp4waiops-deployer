@@ -257,8 +257,7 @@
       #   runAsNonRoot: false
     EOF
 
-    #kubectl instana operator apply --namespace=instana-operator --values ./values.yaml
-    kubectl instana operator apply --namespace=instana-operator
+    kubectl instana operator apply --namespace=instana-operator --values ./values.yaml
 
 
 
@@ -355,115 +354,18 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Create DataStores
 # --------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-- name: 🚀 INSTANA - Create Backend Datastores Operators
-  shell: |
-    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-    chmod 700 get_helm.sh
-    ./get_helm.sh
-
-    # Zookeeper Operator installation
-    helm repo add pravega https://charts.pravega.io
-    helm repo update
-    helm install instana -n instana-datastores  pravega/zookeeper-operator --version=0.2.14
-
-    # Strimzi Operator installation
-    helm repo add strimzi https://strimzi.io/charts/
-    helm repo update
-    helm install strimzi strimzi/strimzi-kafka-operator --version 0.30.0 -n instana-datastores
-
-    # Elasticsearch (ECK) Operator installation
-    helm repo add elastic https://helm.elastic.co
-    helm repo update
-    helm install elastic-operator elastic/eck-operator -n instana-datastores --version=2.5.0
-
-    # Postgres operator installation
-    helm repo add postgres https://opensource.zalando.com/postgres-operator/charts/postgres-operator
-    helm repo update
-    helm install postgres-operator postgres/postgres-operator  --version=1.9.0 --set configGeneral.kubernetes_use_configmaps=true --set securityContext.runAsUser=1000860000 --namespace=instana-datastores
-    # Security Context Constraints, needed if you are running on RedHat OpenShift
-    kubectl apply -f .roles/cp4waiops-instana/templates/instana-datastores/postgres.scc.yaml
-
-    helm repo add k8ssandra https://helm.k8ssandra.io/stable
-    helm repo update
-    helm install cass-operator k8ssandra/cass-operator -n instana-datastores --create-namespace --version=0.40.0 --set securityContext.runAsGroup=999 --set securityContext.runAsUser=999
-    # Security Context Constraints, needed if you are running on RedHat OpenShift
-    kubectl apply -f .roles/cp4waiops-instana/templates/instana-datastores/cassandra-scc.yaml
-
-
-    # Clickhouse Operator installation
-    curl --silent https://raw.githubusercontent.com/Altinity/clickhouse-operator/0.19.1/deploy/operator/clickhouse-operator-install-bundle.yaml | sed 's|kube-system|instana-datastores|g' | kubectl apply --filename -
-    # Image pull secrets for Clickhouse image
-    kubectl create secret docker-registry clickhouse-image-secret \
-      --namespace=instana-datastores \
-      --docker-username=_ \
-      --docker-password=qUMhYJxjSv6uZh2SyqTEnw \
-      --docker-server=containers.instana.io
-    # Apply deployment
-    kubectl apply -f clickhouse/operator/manifests/instana-clickhouse.yaml -n instana-clickhouse
-
-
-
-
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-
-
-
-
-- name: 🚀 INSTANA - Create Backend Datastore cassandra
+- name: 🚀 INSTANA - Create Backend Datastores Secrets
   kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
-    template: ./templates/instana-datastores/cassandra-instance.j2
+    template: ./templates/instana/instana-datastores-secrets.j2
     
-
-- name: 🚀 INSTANA - Create Backend Datastore clickhouse
+- name: 🚀 INSTANA - Create Backend Datastores
   kubernetes.core.k8s:
     namespace: instana-datastores
     state: present
-    template: ./templates/instana-datastores/clickhouse-instance.j2
-    
+    template: ./templates/instana/instana-datastores.j2
 
-- name: 🚀 INSTANA - Create Backend Datastore elasticsearch
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/elasticsearch-instance.j2
-    
-
-- name: 🚀 INSTANA - Create Backend Datastore kafka
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/kafka-instance.j2
-    
-
-- name: 🚀 INSTANA - Create Backend Datastore postgres
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/postgres-instance.j2
-    
-
-# - name: 🚀 INSTANA - Create Backend Datastore zookeeper
-#   kubernetes.core.k8s:
-#     namespace: instana-datastores
-#     state: present
-#     template: ./templates/instana-datastores/zookeeper-instance.j2
-    
-
-    
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Wait for DataStores being ready

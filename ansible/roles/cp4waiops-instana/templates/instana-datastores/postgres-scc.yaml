@@ -10,10 +10,10 @@ seLinuxContext:
   type: RunAsAny
 fsGroup:
   type: RunAsAny
-allowHostDirVolumePlugin: false
+allowHostDirVolumePlugin: true
 allowHostNetwork: true
 allowHostPorts: true
-allowPrivilegedContainer: false
+allowPrivilegedContainer: true
 allowHostIPC: true
 allowHostPID: true
 readOnlyRootFilesystem: false
