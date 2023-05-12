@@ -12,7 +12,7 @@ datastoreConfigs:
         - tenantdb
         - sales
       user: postgres
-      password: {{ POSTGRES_PWD.stdout }} 
+      password: {{ POSTGRES_PWD }} 
       adminUser: postgres
       adminPassword: {{ POSTGRES_PWD }} 
 imagePullSecrets:

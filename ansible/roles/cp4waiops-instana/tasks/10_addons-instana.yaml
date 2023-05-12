@@ -602,6 +602,7 @@
     #local directory must exist
     cat ./config.yaml
     oc -n instana-core create secret generic instana-core --namespace instana-core --from-file=./config.yaml
+  ignore_errors: false
   register: output
 - name: 🟣  OUTPUT
   debug:
