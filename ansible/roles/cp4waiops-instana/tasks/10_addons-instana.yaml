@@ -601,6 +601,7 @@
     #prep core resources
     #local directory must exist
     cat ./config.yaml
+    oc -n instana-core delete secret instana-core --ignore-not-found
     oc -n instana-core create secret generic instana-core --namespace instana-core --from-file=./config.yaml
   ignore_errors: false
   register: output
