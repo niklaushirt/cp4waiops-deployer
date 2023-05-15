@@ -35,7 +35,7 @@ spec:
               memory: "64Mi"
               cpu: "150m"
             limits:
-              memory: "1256Mi"
+              memory: "2024Mi"
               cpu: "1200m"
           command:
             - /bin/sh
