@@ -150,6 +150,13 @@
     verbosity: 1
 
 
+- name: 🚀 INSTANA - Create Backend Datastore Operator Postgres SCC
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/cassandra-scc.yaml
+
+
 
 - name: 🚀 INSTANA - Create Backend Datastore Operator Postgres
   shell: |
@@ -167,11 +174,6 @@
     verbosity: 1
 
 
-- name: 🚀 INSTANA - Create Backend Datastore Operator Cassandra SCC
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/cassandra-scc.yaml
 
 
 - name: 🚀 INSTANA - Create Backend Datastore Operator Cassandra
