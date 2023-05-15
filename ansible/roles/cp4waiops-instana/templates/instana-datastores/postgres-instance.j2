@@ -21,6 +21,7 @@ spec:
   postgresql:
     version: "14"
     parameters:  # Expert section
+      max_connections: "500"
       shared_buffers: "32MB"
   volume:
     size: 10Gi
