@@ -333,7 +333,26 @@
 
 
 
-- name:   🕦 INSTANA - Wait for DataStores to become ready
+
+- name:   🕦 INSTANA - Wait for at least 27 DataStore Pods
+  shell: |
+    while [ `oc -n instana-datastores get pods| grep -c ""` -lt 26 ]
+    do
+      sleep 30
+    done
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  OUTPUT
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+
+
+
+
+- name:   🕦 INSTANA - Wait for all DataStores to become ready
   shell: |
     while [ `oc -n instana-datastores get pods| grep -v '1/1' | grep -v '2/2' | grep -v '3/3' | grep -c ""` -gt 1 ]
     do
@@ -692,7 +711,7 @@
   shell: |
     while [ `oc -n instana-operator get pods| grep '1/1' | grep -c ""` -lt 2 ]
     do
-      sleep 120
+      sleep 15
     done
   ignore_errors: true
   register: output
