@@ -77,7 +77,11 @@
 # Create DataStores
 # --------------------------------------------------------------------------------------------------------------------------------------
 
-
+# Create aiops-topology-service-account
+- name:   🚀 INSTANA - Create Backend Datastore Namespace
+  shell: |
+    oc create ns instana-datastores
+  ignore_errors: true
 
 - name: 🚀 INSTANA - Create Backend Datastore Operator Install Helm
   shell: |
