@@ -711,7 +711,8 @@
   shell: |
     while [ `oc -n instana-operator get pods| grep '1/1' | grep -c ""` -lt 2 ]
     do
-      sleep 15
+      sleep 45
+      oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator
     done
   ignore_errors: true
   register: output

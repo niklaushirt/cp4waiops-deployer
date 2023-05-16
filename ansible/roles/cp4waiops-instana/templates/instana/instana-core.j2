@@ -1,3 +1,45 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 'instana-core:openshift:scc:anyuid'
+  namespace: instana-core
+subjects:
+  - kind: ServiceAccount
+    name: instana-core
+    namespace: instana-core
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'system:openshift:scc:anyuid'
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 'instana-core:openshift:scc:privileged'
+  namespace: instana-datastores
+subjects:
+  - kind: ServiceAccount
+    name: instana-core
+    namespace: instana-core
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'system:openshift:scc:privileged'
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 'instana-core:openshift:scc:hostmount-anyuid'
+  namespace: instana-datastores
+subjects:
+  - kind: ServiceAccount
+    name: instana-core
+    namespace: instana-core
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'system:openshift:scc:hostmount-anyuid'
+---
 apiVersion: instana.io/v1beta2
 kind: Core
 metadata:
