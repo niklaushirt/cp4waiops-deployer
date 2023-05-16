@@ -7,8 +7,7 @@ echo "**************************************************************************
 echo " ❌ FATAL ERROR: Please check the Installation Logs"
 echo "*****************************************************************************************************************************"
 OPENSHIFT_ROUTE=$(oc get route -n openshift-console console -o jsonpath={.spec.host})
-INSTALL_POD=$(oc get po -n cp4waiops-installer -l app=cp4waiops-installer --no-headers|grep "Running"|awk '{print$1}')
-
+INSTALL_POD=$(oc get po -n cp4waiops-installer -l app=cp4waiops-installer --no-headers|grep "Running"|grep "1/1"|awk '{print$1}')
 
 oc delete ConsoleNotification --all
 cat <<EOF | oc apply -f -
