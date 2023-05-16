@@ -79,7 +79,7 @@
 
 - name: 🚀 INSTANA AGENT - Create Download Keys Secret
   shell: |
-    oc create secret generic instana-test -n instana-agent --from-literal=downloadKey={{current_agent_key}}  --from-literal=key={{current_agent_key}}
+    oc create secret generic instana-agent -n instana-agent --from-literal=downloadKey={{current_agent_key}}  --from-literal=key={{current_agent_key}}
   ignore_errors: true
   register: output
   args:
