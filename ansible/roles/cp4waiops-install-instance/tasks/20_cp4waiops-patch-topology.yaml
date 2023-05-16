@@ -131,6 +131,9 @@
   ignore_errors: true
 
 
+- name: 🩹 PATCH - Patch aiops-topology-inventory
+  shell: oc patch deployment aiops-topology-inventory -n {{ current_cp4waiops_cluster.project }} --patch-file "{{role_path}}/templates/waiops/patches/aiops-topology-inventory-patch.yaml"
+  ignore_errors: true
 
 
 
