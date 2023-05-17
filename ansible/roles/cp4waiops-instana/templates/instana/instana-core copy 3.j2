@@ -72,6 +72,15 @@ spec:
     - name: config.appdata.shortterm.retention.days
       value: '7'
   baseDomain: {{BASE_DOMAIN}}
+  storageConfigs:
+    rawSpans:
+      pvcConfig:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 300Gi
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
   datastoreConfigs:
     cassandraConfigs:
       - hosts:
