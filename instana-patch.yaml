@@ -1,0 +1,13 @@
+spec:
+  template:
+    spec:
+      containers:
+        - name: appdata-writer
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            privileged: true
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: true
