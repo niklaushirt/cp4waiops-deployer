@@ -680,6 +680,7 @@
     #create dev unit secret
     export LICENSE_STRING=$(cat license.json | sed -e 's/\[//g' -e 's/\"//g' -e 's/\]//g')
     echo "license: $LICENSE_STRING" > config.yaml
+    echo "licenses: [ \"$LICENSE_STRING\"]" >> config.yaml
     echo "agentKeys:" >> config.yaml
     echo "  - {{current_agent_key}}" >> config.yaml
     echo "initialAdminPassword: {{current_admin_pass}}" >> config.yaml
