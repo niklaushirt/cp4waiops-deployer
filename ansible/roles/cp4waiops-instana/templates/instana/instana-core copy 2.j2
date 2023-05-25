@@ -1,0 +1,112 @@
+apiVersion: instana.io/v1beta2
+kind: Core
+metadata:
+  namespace: instana-core
+  name: instana-core
+spec:
+  # set resource profile: small, medium, large, xlarge, xxlarge
+  resourceProfile: large
+  # Base domain for Instana
+  baseDomain: {{BASE_DOMAIN}}
+  # Host and port for the agent acceptor, usually a subdomain of the base domain
+  agentAcceptorConfig:
+    host: agent.{{BASE_DOMAIN}}
+    port: 443
+  # dockerRegistryURI: containers.instana.io
+  # URL for downloading the GeoLite2 geo-location data file
+  # geoDbUrl:
+  # Depending on your cluster setup, you may need to specify an image pull secret.
+  imagePullSecrets:
+    - name: instana-registry
+  # Datastore configs
+  featureFlags: 
+    - name: feature.synthetics.enabled
+      enabled: true
+    - name: feature.logging.enabled
+      enabled: true
+  datastoreConfigs:
+    cassandraConfigs:
+      - hosts:
+          - default-cassandra.instana-datastores.svc
+        ports:
+          - name: tcp
+            port: 9042
+        schemas:
+          - profiles
+          - spans
+          - metrics
+          - state
+        authEnabled: false
+    clickhouseConfigs:
+      - hosts:
+          - default-clickhouse.instana-datastores.svc
+        clusterName: local
+        ports:
+          - name: tcp
+            port: 9000
+          - name: http
+            port: 8123
+        schemas:
+          - application
+          - logs
+        authEnabled: false
+    elasticsearchConfig:
+      hosts:
+        - default-elasticsearch.instana-datastores.svc
+      clusterName: onprem_onprem
+      ports:
+        - name: tcp
+          port: 9300
+        - name: http
+          port: 9200
+      schemas:
+        - metadata_ng
+      authEnabled: false
+    kafkaConfig:
+      hosts:
+        - default-kafka.instana-datastores.svc
+      ports:
+        - name: tcp
+          port: 9092
+      authEnabled: false
+      saslMechanism: PLAIN
+    postgresConfigs:
+    - hosts:
+        - default-postgres.instana-datastores.svc
+      ports:
+        - name: tcp
+          port: 5432
+      databases:
+        - butlerdb
+        - tenantdb
+        - sales
+      authEnabled: false   
+  # Use one of smtpConfig or sesConfig
+  emailConfig:
+    smtpConfig:
+      from: smtp@example.com
+      host: smtp.example.com
+      port: 465
+      useSSL: true
+  # Use one of objectStorageConfig or pvcConfig
+  storageConfigs:
+    rawSpans:
+      pvcConfig:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 300Gi
+        storageClassName: {{ WAIOPS_STORAGE_CLASS_FILE }}
+  enableNetworkPolicies: false
+  properties:
+    - name: retention.metrics.rollup5
+      value: "86400"
+    - name: retention.metrics.rollup60
+      value: "2678400"
+    - name: retention.metrics.rollup300
+      value: "8035200"
+    - name: retention.metrics.rollup3600
+      value: "34214400"
+    - name: config.appdata.shortterm.retention.days
+      value: "7"

@@ -408,7 +408,7 @@ spec:
                 - name: cp4waiops-instana
                   kind: Instana
                   install: false
-                  version: 241-3
+                  instana_version: 247-0
 
                   # ---------------------------------------------------------------------
                   # INSTANA LICENSE
