@@ -854,7 +854,7 @@
 - name: 🚀 INSTANA - Scale Operator to 0 and Patch Appdata-Writer 
   shell: |
     oc scale deployment  -n instana-operator instana-operator --replicas=0
-    oc patch Deployment -n instana-core appdata-writer  -p '{"spec": {"template": {"spec": {"containers": [{"name": "appdata-writer","securityContext": {"capabilities": {"drop": ["ALL"]},"privileged": true,"runAsNonRoot": false,"readOnlyRootFilesystem": false,"allowPrivilegeEscalation": true},"image": "containers.instana.io/instana/release/product/appdata-writer:3.247.193-0"}]}}}}' --type=merge          
+    oc patch Deployment -n instana-core appdata-writer  -p '{"spec": {"template": {"spec": {"containers": [{"name": "appdata-writer","securityContext": {"capabilities": {"drop": ["ALL"]},"privileged": true,"runAsNonRoot": false,"readOnlyRootFilesystem": false,"allowPrivilegeEscalation": true},"image": "containers.instana.io/instana/release/product/appdata-writer:3.247.193-0"}]}}}}'     
   ignore_errors: true
   register: output
   args:
