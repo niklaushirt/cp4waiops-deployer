@@ -79,7 +79,7 @@
 
 - name: 🚀 INSTANA AGENT - Create Download Keys Secret
   shell: |
-    oc create secret generic instana-agent -n instana-agent --from-literal=downloadKey={{current_agent_key}}  --from-literal=key={{current_agent_key}}
+    oc create secret generic instana-test -n instana-agent --from-literal=downloadKey={{current_agent_key}}  --from-literal=key={{current_agent_key}
   ignore_errors: true
   register: output
   args:
@@ -93,10 +93,29 @@
 
 
 
+
+- name: 🚀 INSTANA AGENT - Create Subscription
+  kubernetes.core.k8s:
+    namespace: instana-agent
+    state: present
+    template: ./templates/instana-agent/instana-agent-sub.yaml
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Wait for Core CR being ready
+# --------------------------------------------------------------------------------------------------------------------------------------
+- name:   🕦 INSTANA - Wait for Instana Agent Operator to become ready
+  shell: oc get csv -n openshift-operators|grep "instana-agent-operator"|grep "Succeeded"|wc -l| tr -d ' '
+  register: kubectl_get_pods
+  until: kubectl_get_pods.stdout == "1"
+  retries: 500
+  delay: 15
+
+
+
 - name: 🚀 INSTANA AGENT - Create Agent
   kubernetes.core.k8s:
     namespace: instana-agent
     state: present
-    template: ./templates/instana-agent/instana-agent-standalone.j2
+    template: ./templates/instana-agent/instana-agent-cr.j2
 
 

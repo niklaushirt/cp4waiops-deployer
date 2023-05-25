@@ -22,21 +22,21 @@
     echo $currentDate" - "$MESSAGE  >> ../install_{{current_cp4waiops_feature.kind}}.log
   ignore_errors: true
 
-
-
-
-# Create aiops-topology-service-account
-- name:   🚀 PREREQUISITES - Patch default storage class if non defined
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
   shell: |
-    export default=$(oc get storageclass -oyaml|grep "is-default-class"|wc -l|tr -d " ")
-    echo $default
-    if [ $default -lt 1 ]; then
-        echo "Patching"
-        kubectl patch storageclass {{ WAIOPS_STORAGE_CLASS_LARGE_BLOCK }} -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-      else
-        echo "Patching not needed"
-      fi
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ffd500'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - Instana Operator {{current_cp4waiops_feature.instana_version}}'    
+    EOF
   ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
 
 
 
@@ -54,338 +54,6 @@
   debug:
     var: current_admin_pass
     verbosity: 1
-
-
-
-
-# --------------------------------------------------------------------------------------------------------------------------------------
-# Create DataStores
-# --------------------------------------------------------------------------------------------------------------------------------------
-- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
-  shell: |
-    cat <<EOF | oc apply -f -
-    apiVersion: console.openshift.io/v1
-    kind: ConsoleNotification
-    metadata:
-      name: cp4waiops-notification
-    spec:
-      backgroundColor: '#ffd500'
-      color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - Instana Datastores {{current_cp4waiops_feature.instana_version}}'    
-    EOF
-  ignore_errors: true
-  when: global_config.create_ocp_notifications | default(true) == true  
-
-
-
-# Create aiops-topology-service-account
-- name:   🚀 INSTANA - Create Backend Datastore Namespace
-  shell: |
-    oc create ns instana-datastores
-  ignore_errors: true
-
-- name: 🚀 INSTANA - Create Backend Datastore Operator Install Helm
-  shell: |
-    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-    chmod 700 get_helm.sh
-    ./get_helm.sh
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-
-
-- name: 🚀 INSTANA - Create Backend Datastore Operator Zookeeper
-  shell: |
-    # Zookeeper Operator installation
-    helm repo add pravega https://charts.pravega.io
-    helm repo update
-    helm install instana -n instana-datastores  pravega/zookeeper-operator --version=0.2.14
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-
-- name: 🚀 INSTANA - Create Backend Datastore Operator Strimzi
-  shell: |
-    # Strimzi Operator installation
-    helm repo add strimzi https://strimzi.io/charts/
-    helm repo update
-    helm install strimzi strimzi/strimzi-kafka-operator --version 0.30.0 -n instana-datastores
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-
-- name: 🚀 INSTANA - Create Backend Datastore Operator Elasticsearch
-  shell: |
-    # Elasticsearch (ECK) Operator installation
-    helm repo add elastic https://helm.elastic.co
-    helm repo update
-    helm install elastic-operator elastic/eck-operator -n instana-datastores --version=2.5.0
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-- name: 🚀 INSTANA - Create Backend Datastore Operator Postgres SCC
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/cassandra-scc.yaml
-
-
-
-- name: 🚀 INSTANA - Create Backend Datastore Operator Postgres
-  shell: |
-    # Postgres operator installation
-    helm repo add postgres https://opensource.zalando.com/postgres-operator/charts/postgres-operator
-    helm repo update
-    helm install postgres-operator postgres/postgres-operator  --version=1.10.0 --set configGeneral.kubernetes_use_configmaps=true --set securityContext.runAsUser=1000860000 --namespace=instana-datastores
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-
-
-- name: 🚀 INSTANA - Create Backend Datastore Operator Cassandra
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/cassandra-operator.yaml
-
-# - name: 🚀 INSTANA - Create Backend Datastore Operator Cassandra
-#   shell: |
-#     helm repo add k8ssandra https://helm.k8ssandra.io/stable
-#     helm repo update
-#     helm install cass-operator k8ssandra/cass-operator -n instana-datastores --create-namespace --version=0.40.0 --set securityContext.runAsGroup=999 --set securityContext.runAsUser=999
-#     # Security Context Constraints, needed if you are running on RedHat OpenShift
-#     kubectl apply -f .roles/cp4waiops-instana/templates/instana-datastores/cassandra-scc.yaml
-#   ignore_errors: true
-#   register: output
-#   args:
-#     executable: /bin/bash
-# - name: 🟣  OUTPUT
-#   debug:
-#     var: output.stdout_lines
-#     verbosity: 1
-
-
-- name: 🚀 INSTANA - Create Backend Datastore Roles
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/roles.yaml
-    
-
-
-
-- name: 🚀 INSTANA - Create Backend Datastore Operator Clickhouse 
-  shell: |
-    # Clickhouse Operator installation
-    curl --silent https://raw.githubusercontent.com/Altinity/clickhouse-operator/0.19.1/deploy/operator/clickhouse-operator-install-bundle.yaml | sed 's|kube-system|instana-datastores|g' | kubectl apply --filename -
-    # Image pull secrets for Clickhouse image
-    kubectl create secret docker-registry clickhouse-image-secret \
-      --namespace=instana-datastores \
-      --docker-username=_ \
-      --docker-password={{current_agent_key}} \
-      --docker-server=containers.instana.io
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-
-
-
-- name:   🕦 INSTANA - Wait for DataStores Operators to become ready
-  shell: |
-    while [ `oc -n instana-datastores get pods| grep -v '1/1' | grep -v '2/2' | grep -v '3/3' | grep -c ""` -gt 1 ]
-    do
-      sleep 30
-    done
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-
-- name:   🕦 INSTANA - Wait for Casstandra Operator to become ready
-  shell: |
-    while [ `oc -n instana-datastores get csv|grep DataStax|grep Succeeded| grep -c ""` -lt 1 ]
-    do
-      sleep 30
-    done
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-
-
-- name: 🚀 INSTANA - Create Backend Datastore cassandra
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/cassandra-instance.j2
-    
-
-- name: 🚀 INSTANA - Create Backend Datastore clickhouse
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/clickhouse-instance.j2
-    
-
-- name: 🚀 INSTANA - Create Backend Datastore elasticsearch
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/elasticsearch-instance.j2
-    
-
-- name: 🚀 INSTANA - Create Backend Datastore kafka
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/kafka-instance.j2
-    
-
-- name: 🚀 INSTANA - Create Backend Datastore postgres
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/postgres-instance.j2
-    
-
-- name: 🚀 INSTANA - Create Backend Datastore zookeeper
-  kubernetes.core.k8s:
-    namespace: instana-datastores
-    state: present
-    template: ./templates/instana-datastores/zookeeper-instance.j2
-    
-
-    
-
-# --------------------------------------------------------------------------------------------------------------------------------------
-# Wait for DataStores being ready
-# --------------------------------------------------------------------------------------------------------------------------------------
-- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
-  shell: |
-    cat <<EOF | oc apply -f -
-    apiVersion: console.openshift.io/v1
-    kind: ConsoleNotification
-    metadata:
-      name: cp4waiops-notification
-    spec:
-      backgroundColor: '#ff7700'
-      color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for DataStores to become ready (about 5-10 minutes) - Started at $(date +%H:%M:%S) UTC'    
-    EOF
-  ignore_errors: true
-  when: global_config.create_ocp_notifications | default(true) == true  
-
-
-
-
-# - name:   🕦 INSTANA - Wait for at least 27 DataStore Pods
-#   shell: |
-#     while [ `oc -n instana-datastores get pods| grep -c ""` -lt 26 ]
-#     do
-#       sleep 30
-#     done
-#   ignore_errors: true
-#   register: output
-#   args:
-#     executable: /bin/bash
-# - name: 🟣  OUTPUT
-#   debug:
-#     var: output.stdout_lines
-#     verbosity: 1
-
-
-
-
-- name:   🕦 INSTANA - Wait for all DataStores to become ready
-  shell: |
-    while [ `oc -n instana-datastores get pods| grep -v '1/1' | grep -v '2/2' | grep -v '3/3' | grep -c ""` -gt 1 ]
-    do
-      sleep 30
-    done
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
-
-
-
-
-- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
-  shell: |
-    cat <<EOF | oc apply -f -
-    apiVersion: console.openshift.io/v1
-    kind: ConsoleNotification
-    metadata:
-      name: cp4waiops-notification
-    spec:
-      backgroundColor: '#ffd500'
-      color: '#000'
-      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
-      text: 'Installing {{current_cp4waiops_feature.kind}} - Instana Operator {{current_cp4waiops_feature.instana_version}}'    
-    EOF
-  ignore_errors: true
-  when: global_config.create_ocp_notifications | default(true) == true  
-
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------
@@ -589,8 +257,7 @@
       #   runAsNonRoot: false
     EOF
 
-    #kubectl instana operator apply --namespace=instana-operator --values ./values.yaml
-    kubectl instana operator apply --namespace=instana-operator
+    kubectl instana operator apply --namespace=instana-operator # --values ./values.yaml
 
 
 
@@ -630,26 +297,10 @@
   register: output
   args:
     executable: /bin/bash
-- name: 🟣  OUTPUT 
+- name: 🟣  OUTPUT
   debug:
     var: output.stdout_lines
     verbosity: 1
-
-
-- name: 🚀 INSTANA - Get POSTGRES PASSWORD
-  shell: |
-    POSTGRES_PWD=$(oc get secret postgres.postgres.credentials.postgresql.acid.zalan.do -o json -n instana-datastores | jq -r .data.password | base64 -d)
-    echo $POSTGRES_PWD
-  ignore_errors: true
-  register: POSTGRES_PWD
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT 
-  debug:
-    var: POSTGRES_PWD.stdout
-- name: 🚀 INSTANA - Save POSTGRES PASSWORD {{ POSTGRES_PWD.stdout }} 
-  set_fact: POSTGRES_PWD={{ POSTGRES_PWD.stdout }} 
-
 
 
 
@@ -664,9 +315,8 @@
     #prep core resources
     #local directory must exist
     cat ./config.yaml
-    oc -n instana-core delete secret instana-core --ignore-not-found
     oc -n instana-core create secret generic instana-core --namespace instana-core --from-file=./config.yaml
-  ignore_errors: false
+  ignore_errors: true
   register: output
 - name: 🟣  OUTPUT
   debug:
@@ -680,7 +330,6 @@
     #create dev unit secret
     export LICENSE_STRING=$(cat license.json | sed -e 's/\[//g' -e 's/\"//g' -e 's/\]//g')
     echo "license: $LICENSE_STRING" > config.yaml
-    echo "licenses: [ \"$LICENSE_STRING\"]" >> config.yaml
     echo "agentKeys:" >> config.yaml
     echo "  - {{current_agent_key}}" >> config.yaml
     echo "initialAdminPassword: {{current_admin_pass}}" >> config.yaml
@@ -702,6 +351,139 @@
 
 
 
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Create DataStores
+# --------------------------------------------------------------------------------------------------------------------------------------
+- name: 🚀 INSTANA - Create Backend Datastores Secrets
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana/instana-datastores-secrets.j2
+    
+
+- name: 🚀 INSTANA - Create Backend Datastore Operators
+  shell: |
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/zookeeper-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/kafka-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/elasticsearch-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/postgres-scc.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/postgres-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/cassandra-scc.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/cassandra-operator.yaml
+    oc apply -f ./roles/cp4waiops-instana/templates/instana-datastores/clickhouse-operator.yaml
+
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  OUTPUT
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+
+
+
+- name:   🕦 INSTANA - Wait for DataStores Operators to become ready
+  shell: |
+    while [ `oc -n instana-datastores get pods| grep -v '1/1'| grep -v '2/2'| grep -v '3/3' | grep -c ""` -gt 1 ]
+    do
+      sleep 30
+    done
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  OUTPUT
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+
+
+
+- name: 🚀 INSTANA - Create Backend - kafka
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/kafka-instance.j2
+
+
+- name: 🚀 INSTANA - Create Backend - elasticsearch
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/elasticsearch-instance.j2
+
+
+- name: 🚀 INSTANA - Create Backend - postgres
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/postgres-instance.j2
+
+
+- name: 🚀 INSTANA - Create Backend - cassandra
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/cassandra-instance.j2
+
+
+- name: 🚀 INSTANA - Create Backend - clickhouse
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/clickhouse-instance.j2
+
+
+- name: 🚀 INSTANA - Create Backend - zookeeper
+  kubernetes.core.k8s:
+    namespace: instana-datastores
+    state: present
+    template: ./templates/instana-datastores/zookeeper-instance.j2
+
+
+
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+# Wait for DataStores being ready
+# --------------------------------------------------------------------------------------------------------------------------------------
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+      name: cp4waiops-notification
+    spec:
+      backgroundColor: '#ff7700'
+      color: '#000'
+      location: {{global_config.position_ocp_notifications | default("BannerTop")}}
+      text: 'Installing {{current_cp4waiops_feature.kind}} - 🕦 Wait for DataStores to become ready (about 5-10 minutes) - Started at $(date +%H:%M:%S) UTC'    
+    EOF
+  ignore_errors: true
+  when: global_config.create_ocp_notifications | default(true) == true  
+
+
+
+- name:   🕦 INSTANA - Wait for DataStores to become ready
+  shell: |
+    while [ `oc -n instana-datastores get pods| grep -v '1/1'| grep -v '2/2'| grep -v '3/3' | grep -c ""` -gt 1 ]
+    do
+      # oc annotate namespace instana-datastores openshift.io/node-selector-
+      # oc delete pod $(oc -n instana-datastores get pods| grep 'Pending'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-datastores
+      # oc delete pod $(oc -n instana-operator get pods| grep '0/1'|awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator
+      sleep 30
+    done
+  ignore_errors: true
+  register: output
+  args:
+    executable: /bin/bash
+- name: 🟣  OUTPUT
+  debug:
+    var: output.stdout_lines
+    verbosity: 1
+
+
 
 
 
@@ -712,8 +494,10 @@
   shell: |
     while [ `oc -n instana-operator get pods| grep '1/1' | grep -c ""` -lt 2 ]
     do
-      sleep 45
+      kubectl patch -n instana-operator serviceaccount instana-operator-webhook -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
+      kubectl patch -n instana-operator serviceaccount instana-operator -p '{"imagePullSecrets": [{"name": "instana-registry"}]}'
       oc delete pod $(oc -n instana-operator get pods --no-headers| grep -v 'Running' |awk '{print$1}'):-notfound  --ignore-not-found -n instana-operator
+      sleep 120
     done
   ignore_errors: true
   register: output
@@ -850,19 +634,6 @@
 
 
 
-
-- name: 🚀 INSTANA - Scale Operator to 0 and Patch Appdata-Writer 
-  shell: |
-    oc scale deployment  -n instana-operator instana-operator --replicas=0
-    oc patch Deployment -n instana-core appdata-writer  -p '{"spec": {"template": {"spec": {"containers": [{"name": "appdata-writer","securityContext": {"capabilities": {"drop": ["ALL"]},"privileged": true,"runAsNonRoot": false,"readOnlyRootFilesystem": false,"allowPrivilegeEscalation": true},"image": "containers.instana.io/instana/release/product/appdata-writer:3.247.193-0"}]}}}}' --type=merge          
-  ignore_errors: true
-  register: output
-  args:
-    executable: /bin/bash
-- name: 🟣  OUTPUT
-  debug:
-    var: output.stdout_lines
-    verbosity: 1
 
 
 

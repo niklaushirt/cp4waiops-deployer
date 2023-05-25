@@ -11,3 +11,14 @@ spec:
   name: instana-agent-operator
   source: certified-operators
   sourceNamespace: openshift-marketplace
+  startingCSV: instana-agent-operator.v2.0.11
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: instana-agent
+  namespace: instana-agent
+spec:
+  targetNamespaces:
+    - instana-agent
+  upgradeStrategy: Default

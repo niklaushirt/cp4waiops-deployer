@@ -5,6 +5,24 @@ dhParams: |
   +NjKm/pmquA7MV4W7SDkbc+ZMk4BA8YgBipO5Q70I2YeSPo4Y0vmI0A1yGvrOpuA
   hDDwWwGc/bqeGn8et7Ka93HlYVQ3oc1yw6mBLz7oS5alqFLfFbnTAgEC
   -----END DH PARAMETERS-----
+datastoreConfigs:
+  postgresConfigs:
+    - databases:
+        - butlerdb
+        - tenantdb
+        - sales
+      user: postgres
+      password: {{ POSTGRES_PWD }} 
+      adminUser: postgres
+      adminPassword: {{ POSTGRES_PWD }} 
+  clickhouseConfigs:
+    - databases:
+        - application
+        - logs
+      user: clickhouse-user
+      password: clickhouse-pass
+      adminUser: clickhouse-user
+      adminPassword: clickhouse-pass
 imagePullSecrets:
   - name: instana-registry
 downloadKey: {{current_agent_key}}

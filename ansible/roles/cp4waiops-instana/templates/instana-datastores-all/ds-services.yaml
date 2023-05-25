@@ -1,0 +1,380 @@
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-cassandra
+  namespace: instana-datastores
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 9042
+    protocol: TCP
+    targetPort: tcp
+  selector:
+    app.kubernetes.io/component: default-cassandra
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-cassandra-headless
+  namespace: instana-datastores
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 9042
+    protocol: TCP
+    targetPort: tcp
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/component: default-cassandra
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-clickhouse
+  namespace: instana-datastores
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 9000
+    protocol: TCP
+    targetPort: tcp
+  - name: http
+    port: 8123
+    protocol: TCP
+    targetPort: http
+  selector:
+    app.kubernetes.io/component: default-clickhouse
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-clickhouse-headless
+  namespace: instana-datastores
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 9000
+    protocol: TCP
+    targetPort: tcp
+  - name: http
+    port: 8123
+    protocol: TCP
+    targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/component: default-clickhouse
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-clickhouse-zookeeper
+  namespace: instana-datastores
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 2181
+    protocol: TCP
+    targetPort: tcp
+  selector:
+    app.kubernetes.io/component: default-clickhouse-zookeeper
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-clickhouse-zookeeper-headless
+  namespace: instana-datastores
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 2181
+    protocol: TCP
+    targetPort: tcp
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/component: default-clickhouse-zookeeper
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-elasticsearch
+  namespace: instana-datastores
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 9300
+    protocol: TCP
+    targetPort: tcp
+  - name: http
+    port: 9200
+    protocol: TCP
+    targetPort: http
+  selector:
+    app.kubernetes.io/component: default-elasticsearch
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-elasticsearch-headless
+  namespace: instana-datastores
+  ownerReferences:
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 9300
+    protocol: TCP
+    targetPort: tcp
+  - name: http
+    port: 9200
+    protocol: TCP
+    targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/component: default-elasticsearch
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-kafka
+  namespace: instana-datastores
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 9092
+    protocol: TCP
+    targetPort: tcp
+  selector:
+    app.kubernetes.io/component: default-kafka
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-kafka-headless
+  namespace: instana-datastores
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 9092
+    protocol: TCP
+    targetPort: tcp
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/component: default-kafka
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-kafka-zookeeper
+  namespace: instana-datastores
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 2181
+    protocol: TCP
+    targetPort: tcp
+  selector:
+    app.kubernetes.io/component: default-kafka-zookeeper
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-kafka-zookeeper-headless
+  namespace: instana-datastores
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 2181
+    protocol: TCP
+    targetPort: tcp
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/component: default-kafka-zookeeper
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-postgres
+  namespace: instana-datastores
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 5432
+    protocol: TCP
+    targetPort: tcp
+  selector:
+    app.kubernetes.io/component: default-postgres
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-postgres-headless
+  namespace: instana-datastores
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: tcp
+    port: 5432
+    protocol: TCP
+    targetPort: tcp
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/component: default-postgres
+    app.kubernetes.io/name: instana
+    app.kubernetes.io/part-of: datastores
+    instana.io/group: datastore
+  sessionAffinity: None
+  type: ClusterIP
