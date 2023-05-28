@@ -5,7 +5,7 @@ metadata:
   name: instana-core
 spec:
   # set resource profile: small, medium, large, xlarge, xxlarge
-  resourceProfile: large
+  resourceProfile: {{global_config.resourceProfile}}
   # Base domain for Instana
   baseDomain: {{BASE_DOMAIN}}
   # Host and port for the agent acceptor, usually a subdomain of the base domain

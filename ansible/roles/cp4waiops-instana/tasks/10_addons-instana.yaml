@@ -467,12 +467,13 @@
 - name: 🚀 INSTANA - Get BASE_DOMAIN
   shell: |
     CLUSTER_ROUTE=$(oc get routes console -n openshift-console | tail -n 1 2>&1 ) 
-    CLUSTER_FQDN=$( echo $CLUSTER_ROUTE | awk '{print $2}')
+    CLUSTER_FQDN=$(echo $CLUSTER_ROUTE | awk '{print $2}')
     CLUSTER_NAME=${CLUSTER_FQDN##*console.}
 
 
     #BASE_DOMAIN="dev-aiops-instana-core.$CLUSTER_NAME"
-    BASE_DOMAIN="$CLUSTER_NAME"
+    # BASE_DOMAIN="$CLUSTER_NAME"
+    BASE_DOMAIN="instana.$CLUSTER_NAME"
     echo $BASE_DOMAIN
     
   ignore_errors: true

@@ -40,6 +40,16 @@ roleRef:
   kind: ClusterRole
   name: 'system:openshift:scc:hostmount-anyuid'
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: raw-spans-access-role
+  namespace: instana-core
+rules:
+- apiGroups: [""]
+  resources: ["persistentvolumes"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+---
 apiVersion: instana.io/v1beta2
 kind: Core
 metadata:
@@ -58,7 +68,7 @@ spec:
     - enabled: true
       name: feature.logging.enabled
   agentAcceptorConfig:
-    host: {{BASE_DOMAIN}}
+    host: agent.{{BASE_DOMAIN}}
     port: 443
   properties:
     - name: retention.metrics.rollup5
@@ -133,7 +143,7 @@ spec:
             port: 5432
         authEnabled: true
   enableNetworkPolicies: false
-  resourceProfile: medium
+  resourceProfile: {{ current_cp4waiops_feature.resourceProfile }}
   imageConfig: {}
   emailConfig:
     smtpConfig:
