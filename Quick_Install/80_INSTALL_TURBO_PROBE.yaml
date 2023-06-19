@@ -72,7 +72,7 @@ spec:
 
 
               TURBONOMIC_ADMIN_USER=administrator
-              TURBONOMIC_ADMIN_PASSWORD=P4ssw0rd!
+              TURBONOMIC_ADMIN_PASSWORD=CHANGEME
 
 
 
@@ -169,7 +169,7 @@ spec:
               PROBE_OMNI_SECRET=noi-probe-secret 
               oc create secret generic -n $WAIOPS_NAMESPACE $PROBE_OMNI_SECRET --from-literal=AuthUserName=$IRC_OMNI_USERNAME --from-literal=AuthPassword=$IRC_OMNI_PASSWORD --from-file=tls.crt=tls.crt
               PROBE_AUTH_SECRET=turbonomic-probe-client-basic-auth
-              oc create secret generic -n $WAIOPS_NAMESPACE $PROBE_AUTH_SECRET --from-literal=serverBasicAuthenticationUsername=admin  --from-literal=serverBasicAuthenticationPassword=P4ssw0rd!
+              oc create secret generic -n $WAIOPS_NAMESPACE $PROBE_AUTH_SECRET --from-literal=serverBasicAuthenticationUsername=admin  --from-literal=serverBasicAuthenticationPassword=CHANGEME
 
               rm tls.crt
 
@@ -310,7 +310,7 @@ spec:
 
               TURBONOMIC_HOSTNAME=$(oc get route -n turbonomic nginx -o jsonpath={.spec.host})
               BASIC_AUTH_USERNAME=admin
-              BASIC_AUTH_PASSWORD=P4ssw0rd!
+              BASIC_AUTH_PASSWORD=CHANGEME
 
               echo "      PROBE_TURBO_WEBHOOK_URL:         $PROBE_TURBO_WEBHOOK_URL"
               echo "      TURBONOMIC_HOSTNAME:             $TURBONOMIC_HOSTNAME"

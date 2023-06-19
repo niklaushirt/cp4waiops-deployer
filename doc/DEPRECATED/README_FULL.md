@@ -866,7 +866,7 @@ ansible-playbook ./ansible/18_aiops-demo-ui.yaml
 14. Click `Next`
 15. Click `Create`
 
-Now you will be able to login with all LDAP users that are part of the demo group (for example demo/P4ssw0rd!).
+Now you will be able to login with all LDAP users that are part of the demo group (for example demo/Defined at installation).
 
 You can check/modify those in the OpenLDAPAdmin interface that you can access with the credentials described in 3.3.
 

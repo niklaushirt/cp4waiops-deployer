@@ -9,7 +9,7 @@ echo "$PROBE_GENERIC_URL"
 curl -X "POST" "$PROBE_GENERIC_URL" \
      -H 'Content-Type: text/plain; charset=utf-8' \
      -H 'Cookie: 8a3ca3e7036a020dcf1e98075251e2b8=6b0d31808967c487642156d942be194f' \
-     -u 'administrator:P4ssw0rd!' \
+     -u 'administrator:CHANGEME' \
      -d $'{
     "id": "1a2a6787-59ad-4acd-bd0d-46c1ddfd8e00",
     "occurrenceTime": "MY_TIMESTAMP",

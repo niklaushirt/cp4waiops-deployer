@@ -14,7 +14,7 @@ DEBUG_ME=os.environ.get('DEBUG_ME',"False")
 
 ACTIVE=os.environ.get('ACTIVE',"False")
 
-TURBO_PASSWORD=os.environ.get('TURBO_PASSWORD',"P4ssw0rd!")
+TURBO_PASSWORD=os.environ.get('TURBO_PASSWORD',"CHANGEME")
 
 
 

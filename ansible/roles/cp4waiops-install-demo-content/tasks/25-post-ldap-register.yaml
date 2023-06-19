@@ -48,7 +48,7 @@
 
 
 - name: 🚀 LDAPREGISTER - Set LDAP ADMIN Password from instance configuration
-  set_fact: current_ldap_admin_password={{current_cp4waiops_feature.ldap_admin_password  | default('P4ssw0rd!')}}
+  set_fact: current_ldap_admin_password={{current_cp4waiops_feature.ldap_admin_password  | default('CHANGEME')}}
   when: global_config.global_password is undefined or global_config.global_password=="NONE"
 
 
@@ -64,7 +64,7 @@
 
 
 - name: 🚀 LDAPREGISTER - Set LDAP USERS Password from instance configuration
-  set_fact: current_ldap_user_password={{current_cp4waiops_feature.ldap_user_password  | default('P4ssw0rd!')}}
+  set_fact: current_ldap_user_password={{current_cp4waiops_feature.ldap_user_password  | default('CHANGEME')}}
   when: global_config.global_password is undefined or global_config.global_password=="NONE"
 
 
@@ -418,7 +418,7 @@
     "username": "demo",
     "user_roles": ["zen_administrator_role"],
     "displayName": "demo",
-    "password": "P4ssw0rd!",
+    "password": "CHANGEME",
     "email": "demo@ibm.com",
     "approval_status": "approved",
     "permissions": ["administrator"],
@@ -442,7 +442,7 @@
     "username": "nik",
     "user_roles": ["zen_administrator_role"],
     "displayName": "nik",
-    "password": "P4ssw0rd!",
+    "password": "CHANGEME",
     "email": "nik@ibm.com",
     "approval_status": "approved",
     "permissions": ["administrator"],
@@ -467,7 +467,7 @@
     "username": "dev",
     "user_roles": ["iaf-automation-operator"],
     "displayName": "dev",
-    "password": "P4ssw0rd!",
+    "password": "CHANGEME",
     "email": "dev@ibm.com",
     "approval_status": "approved",
     "permissions": [],
@@ -493,7 +493,7 @@
     "user_roles": ["iaf-automation-operator"],
     "groups": ["demo"],
     "displayName": "test",
-    "password": "P4ssw0rd!",
+    "password": "CHANGEME",
     "email": "test@ibm.com",
     "approval_status": "approved",
     "permissions": [],
@@ -518,7 +518,7 @@
     "username": "prod",
     "user_roles": ["iaf-automation-operator"],
     "displayName": "prod",
-    "password": "P4ssw0rd!",
+    "password": "CHANGEME",
     "email": "prod@ibm.com",
     "approval_status": "approved",
     "permissions": [
@@ -551,7 +551,7 @@
     "username": "sre1",
     "user_roles": ["iaf-automation-operator"],
     "displayName": "sre1",
-    "password": "P4ssw0rd!",
+    "password": "CHANGEME",
     "email": "sre1@ibm.com",
     "approval_status": "approved",
     "permissions": [],

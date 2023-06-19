@@ -40,7 +40,7 @@ helm template falco -n falco falcosecurity/falco \
   --set falco.fileOutput.enabled=true \
   --create-namespace \
   --set falcosidekick.config.webhook.address="https://webhook.site/f5c065a9-35d0-4b8d-9442-ed6a08b688a6"
-  --set falcosidekick.config.webhook.customHeaders="token:P4ssw0rd!,"
+  --set falcosidekick.config.webhook.customHeaders="token:CHANGEME,"
   --set falcosidekick.config.webhook.checkcert="false"
 
 

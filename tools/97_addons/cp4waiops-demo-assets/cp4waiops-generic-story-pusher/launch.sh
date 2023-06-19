@@ -1,7 +1,7 @@
 alias python='python3.11'
 
 export DEBUG_ME="False"
-export TOKEN="P4ssw0rd!"
+export TOKEN="CHANGEME"
 
 export DISCORD_WEBHOOK="https://discord.com/api/webhooks/xxxxxxx"
 
@@ -39,7 +39,7 @@ exit 1
 
 export TOKEN=test
 DEBUG=os.environ.get('DEBUG',False)
-TOKEN=os.environ.get('TOKEN',"P4ssw0rd!")
+TOKEN=os.environ.get('TOKEN',"CHANGEME")
 
 DISCORD_WEBHOOK=os.environ.get('DISCORD_WEBHOOK','not provided')
 MAIL_USER=os.environ.get('MAIL_USER','not provided')

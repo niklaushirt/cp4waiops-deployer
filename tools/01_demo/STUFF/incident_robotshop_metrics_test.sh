@@ -147,7 +147,7 @@ if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
       echo ""
       echo "                🌏 URL:           $CP4WAIOPS_ROUTE"
       echo "                🧑 User:          demo"
-      echo "                🔐 Password:      P4ssw0rd!"
+      echo "                🔐 Password:      Defined at installation"
       echo ""    
       echo "                🧑 User:          $(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode && echo)"
       echo "                🔐 Password:      $(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode)"

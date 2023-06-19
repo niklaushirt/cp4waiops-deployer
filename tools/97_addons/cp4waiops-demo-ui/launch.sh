@@ -19,13 +19,13 @@ export METRIC_TIME_STEP=100
 
 export SLACK_URL="none"
 export SLACK_USER="ibmaiopsdemo@gmail.com"
-export SLACK_PWD="P4ssw0rd!"
+export SLACK_PWD="CHANGEME"
 
 export ADMIN_MODE='true'
 export SIMULATION_MODE='true'
 
 export DEMO_USER='demo1'
-export DEMO_PWD='P4ssw0rd!1'
+export DEMO_PWD='CHANGEME1'
 
 
 export METRICS_TO_SIMULATE_MEM='mysql-predictive,MemoryUsagePercent,MemoryUsage,97,3;

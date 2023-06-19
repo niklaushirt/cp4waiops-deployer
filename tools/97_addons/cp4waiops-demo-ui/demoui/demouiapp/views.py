@@ -155,7 +155,7 @@ echo "<table>"
 echo "<tr><td style=\"min-width:300px\"><h4>📥 CP4WAIOps</h4></td><td></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>demo</td></tr>"
-echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>P4ssw0rd!</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>Defined at installation</td></tr>"
 echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>$(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode && echo)</td></tr>"
 echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>$(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode)</td></tr>"
@@ -166,7 +166,7 @@ appURL=$(oc get route -n ibm-common-services cp-console -o jsonpath={.spec.host}
 echo "<tr><td colspan="2" style=\"min-width:300px\"><h4>📥 Administration hub / Common Services</h4></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>demo</td></tr>"
-echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>P4ssw0rd!</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>Defined at installation</td></tr>"
 echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>$(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode && echo)</td></tr>"
 echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>$(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode)</td></tr>"
@@ -208,7 +208,7 @@ echo "<tr><td style=\"min-width:300px\">🛠️  Server type:</td><td>Custom</td
 echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🧒 Base DN:</td><td>dc=ibm,dc=com</td></tr>"
 echo "<tr><td style=\"min-width:300px\">🧒 Bind DN:</td><td>cn=admin,dc=ibm,dc=com</td></tr>"
-echo "<tr><td style=\"min-width:300px\">🔐 Bind DN password:</td><td>P4ssw0rd! </td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Bind DN password:</td><td>Defined at installation </td></tr>"
 echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🌏 LDAP server URL:</td><td>ldap://openldap.openldap:389</td></tr>"
 echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
@@ -222,7 +222,7 @@ echo "<tr><td style=\"min-width:300px\"><h4>📥 OpenLDAP Admin Login</h4></td><
 echo "<tr><td style=\"min-width:300px\">&nbsp;</td><td></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🌏 URL:</td><td><a target="_blank" href=\"https://$appURL/\">https://$appURL/</a></td></tr>"
 echo "<tr><td style=\"min-width:300px\">🧑 User:</td><td>cn=admin,dc=ibm,dc=com</td></tr>"
-echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>P4ssw0rd!</td></tr>"
+echo "<tr><td style=\"min-width:300px\">🔐 Password:</td><td>Defined at installation</td></tr>"
 
 echo "</table>"
 echo "    <BR>"
@@ -442,7 +442,7 @@ print('     ❓ Getting Details LDAP ')
 stream = os.popen('oc get route -n openldap admin -o jsonpath={.spec.host}')
 ladp_url = stream.read().strip()
 ladp_user = 'cn=admin,dc=ibm,dc=com'
-ladp_pwd = 'P4ssw0rd!'
+ladp_pwd = 'Defined at installation'
 
 print('     ❓ Getting Details Flink Task Manager')
 stream = os.popen('oc get routes -n '+aimanagerns+' job-manager  -o jsonpath={.spec.host}')

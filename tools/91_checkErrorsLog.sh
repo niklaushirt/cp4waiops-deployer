@@ -10,7 +10,7 @@ OPENSHIFT_ROUTE=$(oc get route -n openshift-console console -o jsonpath={.spec.h
 INSTALL_POD=$(oc get po -n cp4waiops-installer -l app=cp4waiops-installer --no-headers|grep "Running"|awk '{print$1}')
 
 
-oc delete ConsoleNotification --all
+oc delete ConsoleNotification ibm-aiops-notification
 cat <<EOF | oc apply -f -
 apiVersion: console.openshift.io/v1
 kind: ConsoleNotification

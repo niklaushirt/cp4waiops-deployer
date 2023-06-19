@@ -69,7 +69,7 @@ The most important functionalities are:
 3. **Create an Incident/Story**
 
 
-> ℹ️ If you are asked to login to the Demo UI, please use the toekn/password `P4ssw0rd!`
+> ℹ️ If you are asked to login to the Demo UI, please use the toekn/password `Defined at installation`
 
 
 
@@ -189,7 +189,7 @@ Now let's start the demo.
 >
 >- Point your browser to the CP4WAIOps Demo UI, 
 >
->- Login with the token “P4ssw0rd!” and 
+>- Login with the token “Defined at installation” and 
 >
 >- Trigger the incident `(3)` you would like to use in your demo. 
 >

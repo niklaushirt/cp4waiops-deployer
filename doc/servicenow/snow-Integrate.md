@@ -133,7 +133,7 @@ Before you create your integration, you must assign IBM Cloud Pak for Watson AIO
 	    
 
 4. Save	
-5. Set the password to P4ssw0rd!
+5. Set the password to Defined at installation
 6. Click Update on the user page
 
 	![events user](./images/user-lincoln.png)
@@ -166,7 +166,7 @@ Before you create your integration, you must assign IBM Cloud Pak for Watson AIO
 
 
 4. Save	
-5. Set the password to P4ssw0rd!
+5. Set the password to Defined at installation
 6. Click Update on the user page
 
 	![events user](./images/user-abel.png)
@@ -259,7 +259,7 @@ To create a ServiceNow integration, complete the following steps:
 
       **Important:** You must Make sure that you are using the correct user (abel.tuter), the Events user, for your integration. You must also make sure that the time zone set for this user matches your system time zone in ServiceNow. For more information about ServiceNow users, see Create users.
 
-    * Password: Here this would be `P4ssw0rd!` (if you followed the steps above - the ServiceNow Events user password).
+    * Password: Here this would be `Defined at installation` (if you followed the steps above - the ServiceNow Events user password).
 
     * Encrypted password: Here this would be `g4W3L7/eFsUjV0eMncBkbg==` (if you followed the steps above - the ServiceNow Events user encrypted password).
 
