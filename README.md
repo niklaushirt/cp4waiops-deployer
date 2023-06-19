@@ -219,6 +219,7 @@ On top of that you get Turbonomic and Instana instances to play around a bit (yo
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
 4. Replace `<YOUR_SALES_KEY>` and  `<YOUR_AGENT_KEY>` at the end of the file with your Instana license if you have one
 5. Replace the TURBO_LICENSE `NONE` at the end of the file with your Turbonomic license if you have one
+5. Replace the default Password  `global_password: CHANGEME` with a Password of your choice
 3. Click `Save`
 
 > ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
@@ -281,6 +282,7 @@ Ready to go.
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Copy and paste the content from [this file](./Quick_Install/01_INSTALL_AIMGR_EVTMGR.yaml)
 3. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
+5. Replace the default Password  `global_password: CHANGEME` with a Password of your choice
 3. Click `Save`
 
 > ℹ️❗ If you get a ClusterRoleBinding already exists, just ignore it
@@ -350,6 +352,7 @@ This installation cocntains:
 	```
 	
 1. Replace `<REGISTRY_TOKEN>` at the end of the file with your pull token from step 1.1.3 (the Entitlement key from https://myibm.ibm.com)
+5. Replace the default Password  `global_password: CHANGEME` with a Password of your choice
 1. Copy the content
 1. In the the OCP Web UI click on the `+` sign in the right upper corner
 1. Paste the content
