@@ -20,6 +20,7 @@ global_config:
   # Create App Menu Items in OCP
   create_ocp_items: false
   # Use this Password for all Instances
+  # Deployment will not work if these aren't changed
   global_password: CHANGEME
   # Set this value to True to accept all licenses
   accept_all_licenses: False
