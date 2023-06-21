@@ -1,0 +1,287 @@
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#         ________  __  ___     ___    ________       
+#        /  _/ __ )/  |/  /    /   |  /  _/ __ \____  _____
+#        / // __  / /|_/ /    / /| |  / // / / / __ \/ ___/
+#      _/ // /_/ / /  / /    / ___ |_/ // /_/ / /_/ (__  ) 
+#     /___/_____/_/  /_/    /_/  |_/___/\____/ .___/____/  
+#                                           /_/
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------------------------"
+#  Installing CP4WAIOPS
+#
+#  CloudPak for Watson AIOps
+#
+#  ©2023 nikh@ch.ibm.com
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Get a Cluster from TechZone: https://techzone.ibm.com/collection/custom-roks-vmware-requests
+#   Geograpy: prefer Dallas or London (others might be slower)
+#   Worker node count: 5
+#   Flavour: b3c.32x128 ❗ 
+#   OpenShift Version: 4.12
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# Installs:
+#
+#  - Instana
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+# ---------------------------------------------------------------------------------------------------------------------------------------------------"
+
+apiVersion: v1                     
+kind: Namespace
+metadata:
+  name: cp4waiops-installer
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cp4waiops-installer-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: cp4waiops-installer
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: instana-install
+  namespace: cp4waiops-installer
+spec:
+  serviceAccountname: cp4waiops-installer-admin
+  template:
+    metadata:
+      labels:
+        app: cp4waiops-installer
+    spec:
+      containers:
+        - name: install
+          image: quay.io/niklaushirt/cp4waiops-tools:2.0
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "150m"
+            limits:
+              memory: "2024Mi"
+              cpu: "1200m"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              #!/bin/bash
+              #set -x
+              echo "***************************************************************************************************************************************************"
+              echo "***************************************************************************************************************************************************"
+              echo "                                                                                                                                                   "
+              echo " 🚀 Install CP4WAIOPS                                                                                                                                                   "
+              echo "                                                                                                                                                   "
+              echo "***************************************************************************************************************************************************"
+              echo "***************************************************************************************************************************************************"
+              echo "  "
+              echo "  "
+              echo "  ⏳ INSTALLATION START TIMESTAMP: $(date)"
+              echo ""
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              # echo " 📥 Housekeeping"
+              # oc delete ConsoleNotification --all
+              # oc delete job -n cp4waiops-installer --ignore-not-found
+              # oc delete pod -n cp4waiops-installer -l app=cp4waiops-installer --ignore-not-found
+
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo " 🚀 Getting Installation source from GitHub"
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo "   📥 Clone Repo $INSTALL_REPO"
+              git clone $INSTALL_REPO
+              cd cp4waiops-deployer
+
+              echo ""
+              echo ""
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo "   🔎 This Repo includes those latestet Commits"
+              git log|head -n 17
+              echo ""
+              echo ""
+
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo " 📝 Create Config File"
+              
+              cat <<EOF > ./ansible/configs/cp4waiops-custom.yaml
+              ---
+              # *************************************************************************************************************************************************
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # CP4WAIOPS INSTANCES
+              # --------------------------------------------------------------------------------------------------------------------------------------
+              # *************************************************************************************************************************************************
+
+
+              global_config:
+                # arya.png
+                # bear.png
+                # cersei.png
+                # cersei1.png
+                # daenerys.png
+                # groot.png
+                # hodor.png
+                # hofstadter.png
+                # howard.png
+                # jimmy.png
+                # john.png
+                # king.png
+                # lemmy.png
+                # nightking.png
+                # penny.png
+                # raj.png
+                # robot1.png
+                # robot2.png
+                # robot3.png
+                # robot4.png
+                # robot5.png
+                # sansa.png
+                # sheldon.png
+                # sherlock.png
+                # slash.png
+                # tormund.png
+                # tyrion.png
+                # walker.png
+                # watson.png
+                environment_name: Jimmy
+                cloud_platform: existing-ocp
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # CP4WAIOPS Pull Registires
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                entitled_registry: docker-na-public.artifactory.swg-devops.com
+                entitled_registry_user: nikh@ch.ibm.com
+                #catalog_image: docker-na-public.artifactory.swg-devops.com/hyc-katamari-cicd-team-docker-local/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20230504.1302-8a7bf836e
+                #catalog_image: docker-na-public.artifactory.swg-devops.com/hyc-katamari-cicd-team-docker-local/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20230505.0302-2c0f450f9
+                #catalog_image: docker-na-public.artifactory.swg-devops.com/hyc-katamari-cicd-team-docker-local/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20230509.0902-6eef3eab8
+                catalog_image: docker-na-public.artifactory.swg-devops.com/hyc-katamari-cicd-team-docker-local/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20230511.0503-fd49d3786
+                # entitled_registry: cp.icr.io
+                # entitled_registry_user: cp
+                # catalog_image: icr.io/cpopen/ibm-operator-catalog:latest
+                # Create Welcome Cards in CP4WAIOps
+                create_cards: true
+                # Create App Menu Items in OCP
+                create_ocp_items: true
+                # Create Notifications in OCP
+                create_ocp_notifications: true
+                position_ocp_notifications: BannerTop
+                position_final_ocp_notification: BannerTop
+                # Use this Password for all Instances
+                global_password: P4ssw0rd!
+                # Set this value to True to accept all licenses
+                accept_all_licenses: False
+                #license_token: _tI3RmLx4m9EH-abvdc53DYEkbYY
+
+
+              openshift:
+              - name: "fyre"
+                ocp_version: "4.13.0"
+                cluster_name: "fyre"
+                # domain_name: base.apps.chirm.cp.fyre.ibm.com
+                openshift_storage:
+                # - storage_name: auto-storage
+                #   storage_type: auto
+                  # Alternatively use
+                  #storage_name: ibm-roks-storage
+                  #storage_type: custom
+                - storage_name: rook
+                  storage_type: custom
+                  ocp_storage_class_file: rook-cephfs
+                  ocp_storage_class_block: rook-ceph-block
+
+
+
+              cp4waiops:
+
+
+              - project: cp4waiops-addons
+                instances:
+
+
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                # CP4WAIOPS INSTANA
+                # --------------------------------------------------------------------------------------------------------------------------------------
+                - name: cp4waiops-instana
+                  kind: Instana
+                  install: true
+                  #instana_version: 245-3
+                  instana_version: 247-0
+                  # instana_version: 241-3
+                  # 237-3 
+                  # ---------------------------------------------------------------------
+                  # INSTANA LICENSE
+                  sales_key: 'changeme'
+                  agent_key: 'changeme'
+
+                  # ---------------------------------------------------------------------
+                  # INSTANA ADMIN LOGIN
+                  # Admin User Name
+                  instana_admin_user: "admin@instana.local"
+                  # Admin User Password (OVERRIDES GLOBAL PASSWORD)
+                  #instana_admin_pass: 'P4ssw0rd!'
+                  
+                  # ---------------------------------------------------------------------
+                  # INSTALL INSTANA AGENT
+                  install_agent: true
+                  resourceProfile: small
+
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # INTEGRATIONS
+                  # integrate_cp4waiops: true
+                  # integrate_turbonomic: true
+                  
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  # Storage Classes Override for this Instance (see comment below)
+                  # --------------------------------------------------------------------------------------------------------------------------------------
+                  #storage_class_file: automatic
+                  #storage_class_block: automatic
+              EOF
+
+
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo " 🚀 Starting Installation"
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo ""
+
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo " 🚀 Prepare Ansible"
+              pip -q install openshift pyyaml kubernetes
+              echo ""
+              echo ""
+
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo " 🚀 Launching Ansible Playbook"
+              export ANSIBLE_LOG_PATH=/tmp/ansible.log
+              ansible-playbook ./ansible/00_cp4waiops-install.yaml -e "config_file_path=$CONFIG" -e cp_entitlement_key=$ENTITLED_REGISTRY_KEY
+              echo ""
+              echo "------------------------------------------------------------------------------------------------------------------------------"
+              echo "  ⏳ INSTALLATION END TIMESTAMP: $(date)"
+              echo ""
+              oc delete ConsoleNotification --all
+
+
+              # echo "------------------------------------------------------------------------------------------------------------------------------"
+              # echo " 🚀 Finalize Installation"
+              # ./tools/90_finalizeInstallation.sh
+              # echo ""
+
+              # while true
+              # do
+              #   sleep 1000
+              # done
+
+          env:
+          - name: INSTALL_REPO
+            value : "https://github.com/mikelo/cp4waiops-deployer.git -b inject"
+          - name: CONFIG
+            value : "./configs/cp4waiops-custom.yaml"
+      restartPolicy: Never
+  backoffLimit: 4
