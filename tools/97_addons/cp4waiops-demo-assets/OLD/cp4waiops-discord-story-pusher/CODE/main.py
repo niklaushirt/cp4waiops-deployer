@@ -10,7 +10,7 @@ import sqlite3
 import hashlib
 
 DEBUG_ME=os.environ.get('DEBUG_ME',"False")
-TOKEN=os.environ.get('TOKEN',"P4ssw0rd!")
+TOKEN=os.environ.get('TOKEN',"CHANGEME")
 
 MIN_RANK=int(os.environ.get('MIN_RANK',1))
 

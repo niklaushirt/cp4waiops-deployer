@@ -24,7 +24,7 @@ metadata:
   name:  waiops-event-gateway-config
   namespace: cp4waiops
 data:
-  TOKEN: 'P4ssw0rd!'
+  TOKEN: 'CHANGEME'
   ITERATE_ELEMENT: 'events'
   WEBHOOK_DEBUG: 'true'
   EVENT_TEMPLATE: '{"id": "1a2a6787-59ad-4acd-bd0d-46c1ddfd8e00","occurrenceTime": "@@TIMESTAMP_DATE","summary": "@@SUMMARY_TEXT","severity": @@SEVERITY_NUMBER,"type": {"eventType": "problem","classification": "@@MANAGER_NAME"},"expirySeconds": @@EXPIRY_SECONDS,"links": [{"linkType": "webpage","name": "@@MANAGER_NAME","description": "@@MANAGER_NAME","url": "@@URL_TXT"}],"sender": {"type": "host","name": "@@SENDER_NAME","sourceId": "@@SENDER_NAME"},"resource": {"type": "host","name": "@@RESOURCE_NAME","sourceId": "@@RESOURCE_NAME"},"details": {@@DETAILS_JSON}}' 

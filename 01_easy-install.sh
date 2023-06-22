@@ -1123,7 +1123,7 @@ menuCP4WAIOPS_OPEN () {
       echo "                🌏 URL:      $ROUTE"
       echo ""
       echo "                🧑 User:     demo"
-      echo "                🔐 Password: P4ssw0rd!"
+      echo "                🔐 Password: Defined at installation"
       echo "    "
       echo "                🧑 User:     $(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_username}' | base64 --decode && echo)"
       echo "                🔐 Password: $(oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 --decode)"
@@ -1246,7 +1246,7 @@ menuAWX_OPENHUMIO () {
       echo ""
       echo "                🌏 URL:      $ROUTE"
       echo "                🧑 User:     developer"
-      echo "                🔐 Password: P4ssw0rd!"
+      echo "                🔐 Password: Defined at installation"
       echo "    "
       echo "    "
       export OPEN_URL=$ROUTE
@@ -1267,7 +1267,7 @@ menuAWX_OPENLDAP () {
       echo "    " 
       echo "                🌏 URL:      $ROUTE"
       echo "                🧑 User:     cn=admin,dc=ibm,dc=com"
-      echo "                🔐 Password: P4ssw0rd!"
+      echo "                🔐 Password: Defined at installation"
       echo "    "
       echo "    "
       export OPEN_URL=$ROUTE

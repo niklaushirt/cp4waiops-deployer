@@ -379,9 +379,9 @@
   include_tasks: 58_cp4waiops-training-create-logs-configuration.yaml
   when: current_cp4waiops_feature.training_create_training_logs == true and TRAINING_EXISTS==false
 
-- name: 🟡🟡🟡  Create Training  Definition for Seasonality and XinY
-  include_tasks: 59_cp4waiops-training-create-season-configuration.yaml
-  when: current_cp4waiops_feature.training_create_training_experimental == true | default('false')
+# - name: 🟡🟡🟡  Create Training  Definition for Seasonality and XinY
+#   include_tasks: 59_cp4waiops-training-create-season-configuration.yaml
+#   when: current_cp4waiops_feature.training_create_training_experimental == true | default('false')
 
 
 

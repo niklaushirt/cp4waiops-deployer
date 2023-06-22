@@ -36,7 +36,7 @@ sleep 15
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 📥 Initialization"
 
-export TURBO_PASSWORD=P4ssw0rd!
+export TURBO_PASSWORD=CHANGEME
 export WORKFLOW_NAME="EDA_WEBHOOK"
 
 export EDA_URL=$(oc get route -n eda eda-instance -o jsonpath={.spec.host})

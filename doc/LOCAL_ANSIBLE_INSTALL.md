@@ -197,7 +197,7 @@ echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE wai
 
 * Open the URL from the above
 * Click on `Enterprise LDAP`
-* Login as `demo` with the password `P4ssw0rd!`
+* Login as `demo` with the password `Defined at installation`
 
 
 #### 3.3.3.1 Login as admin
@@ -241,7 +241,7 @@ echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE wai
 #### 3.4.1.2 Open the Web Demo UI
 
 * Open the Demo UI URL from the above
-* Login with the password `P4ssw0rd!`
+* Login with the password `Defined at installation`
 
 <div style="page-break-after: always;"></div>
 
@@ -259,7 +259,7 @@ This will create alerts and an incident in CP4WAIOps.
 
 * Open the CP4WAIOps URL from the above
 * Click on `Enterprise LDAP`
-* Login as `demo` with the password `P4ssw0rd!`
+* Login as `demo` with the password `Defined at installation`
 
 ℹ️  Give it a minute or two for all events and anomalies to arrive in CP4WAIOps and Slack.
 

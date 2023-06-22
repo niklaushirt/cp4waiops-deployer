@@ -56,7 +56,7 @@
 
 
 - name: 🚀 DEMO-UI - Set Demo UI Password from instance configuration
-  set_fact: current_demoui_pwd={{current_cp4waiops_feature.demoui_pwd | default('P4ssw0rd!')}}
+  set_fact: current_demoui_pwd={{current_cp4waiops_feature.demoui_pwd | default('CHANGEME')}}
   when: global_config.global_password is undefined or global_config.global_password=="NONE"
 
 

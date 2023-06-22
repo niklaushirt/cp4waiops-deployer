@@ -14,13 +14,13 @@ export METRIC_TIME_STEP=100
 
 export SLACK_URL="https://app.slack.com/client/T01JCN9LERM/C049ALD884W"
 export SLACK_USER="ibmaiopsdemo@gmail.com"
-export SLACK_PWD="P4ssw0rd!"
+export SLACK_PWD="CHANGEME"
 
 export ADMIN_MODE='true'
 export SIMULATION_MODE='true'
 
 export DEMO_USER='demo1'
-export DEMO_PWD='P4ssw0rd!1'
+export DEMO_PWD='CHANGEME1'
 export WAIT_BASE=61
 export WAIT_INPROGRESS=61
 export WAIT_RESOLVE=61
@@ -198,7 +198,7 @@ export TOKEN=test
 DEBUG=os.environ.get('DEBUG',False)
 SEND_DISCORD=os.environ.get('SEND_DISCORD',False)
 SEND_MAIL=os.environ.get('SEND_MAIL',False)
-TOKEN=os.environ.get('TOKEN',"P4ssw0rd!")
+TOKEN=os.environ.get('TOKEN',"CHANGEME")
 
 DISCORD_WEBHOOK=os.environ.get('DISCORD_WEBHOOK','not provided')
 MAIL_USER=os.environ.get('MAIL_USER','not provided')

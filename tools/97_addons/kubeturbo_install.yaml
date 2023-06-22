@@ -41,7 +41,7 @@ data:
             },
             "restAPIConfig": {
                 "opsManagerUserName": "administrator",
-                "opsManagerPassword": "P4ssw0rd!"
+                "opsManagerPassword": "CHANGEME"
             }
         },
         "targetConfig": {

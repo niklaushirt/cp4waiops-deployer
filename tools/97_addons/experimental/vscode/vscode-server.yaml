@@ -156,7 +156,7 @@ metadata:
     app.kubernetes.io/instance: code-server
 type: Opaque
 data:
-  # P4ssw0rd!
+  # CHANGEME
   password: "UDRzc3cwcmQh"
 ---
 # Source: code-server/templates/tests/test-connection.yaml

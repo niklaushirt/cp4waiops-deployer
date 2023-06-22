@@ -50,7 +50,7 @@ spec:
 
 
               export WAIOPS_NAMESPACE=cp4waiops-demo-ui
-              export TOKEN="P4ssw0rd!"
+              export TOKEN="CHANGEME"
               export INSTANCE_NAME="Tyrion"
 
               export LOG_ITERATIONS=20
@@ -64,13 +64,13 @@ spec:
 
               export SLACK_URL="https://aiops-fry2953.slack.com/x-p1624757694871-3716524482480-3705437209041/messages/C01JZLFJFMJ"
               export SLACK_USER="ibmaiopsdemo@gmail.com"
-              export SLACK_PWD="P4ssw0rd!"
+              export SLACK_PWD="CHANGEME"
 
               export ADMIN_MODE='true'
               export SIMULATION_MODE='true'
 
               export DEMO_USER='demo'
-              export DEMO_PWD='P4ssw0rd!'
+              export DEMO_PWD='CHANGEME'
 
               cat <<EOF | oc apply -n cp4waiops-demo-ui -f -
                 apiVersion: v1

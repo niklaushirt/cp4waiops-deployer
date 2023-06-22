@@ -20,7 +20,8 @@ global_config:
   # Create App Menu Items in OCP
   create_ocp_items: true
   # Use this Password for all Instances
-  global_password: P4ssw0rd!
+  # Deployment will not work if these aren't changed
+  global_password: CHANGEME
   # Set this value to True to accept all licenses
   accept_all_licenses: False
   # Create Notifications in OCP
@@ -55,7 +56,7 @@ cp4waiops:
   - name: cp4waiops-instana
     kind: Instana
     install: true
-    version: 241-3
+    instana_version: 247-0
 
     # ---------------------------------------------------------------------
     # INSTANA LICENSE
@@ -67,7 +68,7 @@ cp4waiops:
     # Admin User Name
     instana_admin_user: "admin@instana.local"
     # Admin User Password (OVERRIDES GLOBAL PASSWORD)
-    #instana_admin_pass: 'P4ssw0rd!'
+    #instana_admin_pass: 'CHANGEME'
     
     # ---------------------------------------------------------------------
     # INSTALL INSTANA AGENT

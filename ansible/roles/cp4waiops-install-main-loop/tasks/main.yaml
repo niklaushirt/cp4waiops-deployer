@@ -63,6 +63,35 @@
     var: _current_openshift_cluster
     verbosity: 1
 
+
+- name: 📣 OCP CONSOLE - Create Openshift NOTIFICATION
+  shell: |
+    OPENSHIFT_ROUTE=$(oc get route -n openshift-console console -o jsonpath={.spec.host})
+    INSTALL_POD=$(oc get po -n ibm-aiops-installer -l app=ibm-aiops-installer --no-headers|grep "Running"|grep "1/1"|awk '{print$1}')
+
+    oc delete ConsoleNotification --all
+    cat <<EOF | oc apply -f -
+    apiVersion: console.openshift.io/v1
+    kind: ConsoleNotification
+    metadata:
+        name: ibm-aiops-notification-password
+    spec:
+        backgroundColor: '#9a0000'
+        color: '#fff'
+        location: "BannerBottom"
+        text: "❌ FATAL ERROR: Please define your own Password for your installation at global_config.global_password (default to be changed is CHANGEME)"
+        link:
+            href: "https://$OPENSHIFT_ROUTE/k8s/ns/ibm-aiops-installer/configmaps/ibm-aiops-install-configuration/yaml"
+            text: Modify your Configuration
+
+    EOF
+  ignore_errors: true
+  args:
+    executable: /bin/bash
+  when: all_config.global_config.global_password == "CHANGEME"
+
+
+
 # Get default storage classes for current OpenShift cluster
 - name: Get OpenShift storage classes to use for {{ current_cp4waiops_cluster.project }} and storage name {{ current_cp4waiops_cluster.openshift_storage_name }}
   include_role: 
