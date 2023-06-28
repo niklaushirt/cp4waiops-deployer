@@ -1,0 +1,111 @@
+
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: evtmanager-loadsampledata
+spec:
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      imagePullSecrets:
+      - name: ibm-entitlement-key
+      serviceAccount: noi-service-account
+      serviceAccountName: noi-service-account
+      volumes:
+      - name: ca
+        secret:
+          secretName: evtmanager-omni-certificate-secret
+          items:
+          - key: ROOTCA
+            path: rootca
+      containers:
+      - name: installdemoeventsfortraining
+        volumeMounts:
+        - name: ca
+          mountPath: /ca
+          readOnly: true
+        image:  cp.icr.io/cp/noi/ea-events-tooling:15.0.0-20220913140046BST
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1000Mi
+            ephemeral-storage: 5Gi
+          limits:
+            cpu: 1000m
+            memory: 5000Mi
+            ephemeral-storage: 10Gi
+        env:
+        - name: NOIOMNIBUS_OS_TRUSTSTORE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: evtmanager-omni-certificate-secret
+              key: PASSWORD
+              optional: false
+        - name: NOIOMNIBUS_OS_TRUSTSTORE_PATH
+          value: "/tmp/omnibusTrustStore"
+        - name: NOIOMNIBUS_OS_SSL_PROTOCOL
+          value: "TLSv1.2"
+        - name: LICENSE
+          value: 'accept'
+        - name: EVTMANAGER_OBJSERV_AGG_PRIMARY_SERVICE_HOST
+          value: "evtmanager-objserv-agg-primary"
+        - name: EVTMANAGER_OBJSERV_AGG_PRIMARY_SERVICE_PORT
+          value: "4100"
+        - name: ISIO_ENABLED
+          value: "false" 
+        - name: JDBC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: evtmanager-omni-secret
+              key: OMNIBUS_ROOT_PASSWORD
+              optional: true  
+        - name: HTTP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: evtmanager-systemauth-secret
+              key: username
+              optional: false  
+        - name: HTTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: evtmanager-systemauth-secret
+              key: password
+              optional: false
+        - name: ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: evtmanager-systemauth-secret
+              key: username
+              optional: true 
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: evtmanager-systemauth-secret
+              key: password
+              optional: true  
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        args: ["loadSampleData.sh","-r","evtmanager","-e","evtmanager","-t","cfd95b7e-3bc7-4006-a4a8-a73a79c71255"]
+      restartPolicy: Never
+      initContainers:
+      - name: waitforingestionservicestatus
+        image:  cp.icr.io/cp/noi/ea-events-tooling:15.0.0-20220913140046BST
+        env:
+        command: [ "sh", "-c", "status=1;until getent hosts $EVTMANAGER_IBM_HDM_ANALYTICS_DEV_INGESTIONSERVICE_SERVICE_HOST; do echo 'waiting for ingestionservice';sleep 2;done"]          
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true

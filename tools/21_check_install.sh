@@ -1,3 +1,4 @@
+#!/bin/bash
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #         ________  __  ___     ___    ________       
@@ -19,18 +20,30 @@
 # ---------------------------------------------------------------------------------------------------------------------------------------------------"
 clear
 
+
 echo "***************************************************************************************************************************************************"
+echo "***************************************************************************************************************************************************"
+echo "***************************************************************************************************************************************************"
+echo "***************************************************************************************************************************************************"
+echo ""
+echo "       ________  __  ___     ___    ________       "
+echo "      /  _/ __ )/  |/  /    /   |  /  _/ __ \____  _____"
+echo "      / // __  / /|_/ /    / /| |  / // / / / __ \/ ___/"
+echo "    _/ // /_/ / /  / /    / ___ |_/ // /_/ / /_/ (__  ) "
+echo "   /___/_____/_/  /_/    /_/  |_/___/\____/ .___/____/  "
+echo "                                         /_/"
+echo ""
+
+echo "  "
+echo "  🚀 CloudPak for Watson AIOps - Check Installation"
+echo "  "
 echo "***************************************************************************************************************************************************"
 echo "***************************************************************************************************************************************************"
 echo "***************************************************************************************************************************************************"
 echo "  "
-echo "  🚀 CloudPak for Watson AIOps  - Check WAIOPS Installation"
 echo "  "
-echo "***************************************************************************************************************************************************"
-echo "***************************************************************************************************************************************************"
-echo "***************************************************************************************************************************************************"
-echo "  "
-echo "  "
+
+
 
 
 export TEMP_PATH=~/aiops-install
@@ -241,7 +254,7 @@ function check_array(){
       echo ""
       echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
       echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "   🚀  CHECK CP4WAIOPS CP4WAIOps Installation...." 
+      echo "   🚀  CHECK CP4WAIOPS basic Installation...." 
       echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
       echo ""
       echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -291,6 +304,206 @@ function check_array(){
       export CURRENT_NAMESPACE=turbonomic
       checkNamespace
 
+      
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# EXAMINE TRAINING
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "  🚀 CHECK Trained Models"
+      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo ""
+
+      export result=$(curl "https://$ROUTE/graphql" -k -s -H "authorization: Bearer $ZEN_TOKEN" -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://ai-platform-api-cp4waiops.itzroks-270003bu3k-qd899z-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud' --data-binary '{"query":"query {\n    getTrainingDefinitions {\n      definitionName\n      algorithmName\n      version\n      deployedVersion\n      description\n      createdBy\n      modelDeploymentDate\n   }\n   }"}' --compressed --compressed)
+      export trainedAlgorithms=$(echo $result |jq -r ".data.getTrainingDefinitions[].algorithmName")
+      
+
+      if  ([[ $trainedAlgorithms =~ "Log_Anomaly_Detection" ]]); 
+      then
+            echo "      ✅ OK: Trained - Log_Anomaly_Detection"; 
+      else
+            export CURRENT_ERROR=true
+            export CURRENT_ERROR_STRING="Log_Anomaly_Detection not trained"
+            handleError
+      fi
+
+      if  ([[ $trainedAlgorithms =~ "Similar_Incidents" ]]); 
+      then
+            echo "      ✅ OK: Trained - Similar_Incidents"; 
+      else
+            export CURRENT_ERROR=true
+            export CURRENT_ERROR_STRING="Similar_Incidents not trained"
+            handleError
+      fi
+
+      if  ([[ $trainedAlgorithms =~ "Metric_Anomaly_Detection" ]]); 
+      then
+            echo "      ✅ OK: Trained - Metric_Anomaly_Detection"; 
+      else
+            export CURRENT_ERROR=true
+            export CURRENT_ERROR_STRING="Metric_Anomaly_Detection not trained"
+            handleError
+      fi
+
+      if  ([[ $trainedAlgorithms =~ "Change_Risk" ]]); 
+      then
+            echo "      ✅ OK: Trained - Change_Risk"; 
+      else
+            export CURRENT_ERROR=true
+            export CURRENT_ERROR_STRING="Change_Risk not trained"
+            handleError
+      fi
+
+
+      if  ([[ $trainedAlgorithms =~ "Temporal_Grouping" ]]); 
+      then
+            echo "      ✅ OK: Trained - Temporal_Grouping"; 
+      else
+            export CURRENT_ERROR=true
+            export CURRENT_ERROR_STRING="Temporal_Grouping not trained"
+            handleError
+      fi
+
+      # if  ([[ $trainedAlgorithms =~ "Alert_Seasonality_Detection" ]]); 
+      # then
+      #       echo "      ✅ OK: Trained - Alert_Seasonality_Detection"; 
+      # else
+      #       export CURRENT_ERROR=true
+      #       export CURRENT_ERROR_STRING="Alert_Seasonality_Detection not trained"
+      #       handleError
+      # fi
+
+
+      # if  ([[ $trainedAlgorithms =~ "Alert_X_In_Y_Supression" ]]); 
+      # then
+      #       echo "      ✅ OK: Trained - Alert_X_In_Y_Supression"; 
+      # else
+      #       export CURRENT_ERROR=true
+      #       export CURRENT_ERROR_STRING="Alert_X_In_Y_Supression not trained"
+      #       handleError
+      # fi
+
+
+
+
+
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# EXAMINE AWX
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "  🚀 CHECK Runbooks"
+      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo ""
+
+      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "    🔎 CHECK AWX Configuration"
+      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+    export AWX_ROUTE=$(oc get route -n awx awx -o jsonpath={.spec.host})
+    export AWX_URL=$(echo "https://$AWX_ROUTE")
+    export AWX_PWD=$(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)
+
+
+    echo "      ------------------------------------------------------------------------------------------------------------------------------------------------------"
+    echo "      🔎 Check AWX Project"
+    export AWX_PROJECT_STATUS=$(curl -X "GET" -s "$AWX_URL/api/v2/projects/" -u "admin:$AWX_PWD" --insecure -H 'content-type: application/json'|jq|grep successful|grep -c "")
+    if  ([[ $AWX_PROJECT_STATUS -lt 4 ]]); 
+      then 
+            export CURRENT_ERROR=true
+            export CURRENT_ERROR_STRING="AWX Project not ready"
+            handleError
+      else  
+            echo "      ✅ OK"; 
+      fi
+
+    echo "      ------------------------------------------------------------------------------------------------------------------------------------------------------"
+    echo "      🔎 Check AWX Inventory"
+    export AWX_INVENTORY_COUNT=$(curl -X "GET" -s "$AWX_URL/api/v2/inventories/" -u "admin:$AWX_PWD" --insecure -H 'content-type: application/json'|grep "CP4WAIOPS Runbooks"|wc -l|tr -d ' ')
+    if  ([[ $AWX_INVENTORY_COUNT -lt 1 ]]); 
+      then 
+            export CURRENT_ERROR=true
+            export CURRENT_ERROR_STRING="AWX Inventory not ready"
+            handleError
+      else  
+            echo "      ✅ OK"; 
+      fi
+
+    echo "      ------------------------------------------------------------------------------------------------------------------------------------------------------"
+    echo "      🔎 Check AWX Templates"
+    export AWX_TEMPLATE_COUNT=$(curl -X "GET" -s "$AWX_URL/api/v2/job_templates/" -u "admin:$AWX_PWD" --insecure -H 'content-type: application/json'| jq ".count")
+    if  ([[ $AWX_TEMPLATE_COUNT -lt 5 ]]); 
+      then 
+            export CURRENT_ERROR=true
+            export CURRENT_ERROR_STRING="AWX Templates not ready"
+            handleError
+      else  
+            echo "      ✅ OK"; 
+      fi
+
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "    🔎 CHECK Runbooks in CP4WAIOps"
+      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
+          CPD_ROUTE=$(oc get route cpd -n $WAIOPS_NAMESPACE  -o jsonpath={.spec.host} || true) 
+
+    
+    export result=$(curl -X "GET" -s -k "https://$CPD_ROUTE/aiops/api/story-manager/rba/v1/runbooks" \
+        -H "Authorization: bearer $ZEN_TOKEN" \
+        -H 'Content-Type: application/json; charset=utf-8')
+    export RB_COUNT=$(echo $result|jq ".[].name"|grep -c "")
+    if  ([[ $AWX_TEMPLATE_COUNT -lt 3 ]]); 
+      then 
+            export CURRENT_ERROR=true
+            export CURRENT_ERROR_STRING="CP4WAIOps Runbooks not ready"
+            handleError
+      else  
+            echo "      ✅ OK"; 
+      fi
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# CHECK MORE IN DETAIL
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo ""
+      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo "   🚀  CHECK CP4WAIOPS Detailed Installation...." 
+      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
+      echo ""
+
       echo ""
       echo ""
       echo "    --------------------------------------------------------------------------------------------"
@@ -330,24 +543,17 @@ function check_array(){
       echo "    🔎 Check ZEN Operator"
       echo ""
 
-      export ZEN_LOGS=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -n ibm-common-services|grep "failed=1")
-      export ZEN_ERRORS=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -n ibm-common-services|grep "error")
-      export ZEN_FAILED=$(echo $ZEN_LOGS|grep "failed=1")
-
+      export ZEN_LOGS=$(oc logs $(oc get po -n ibm-common-services|grep ibm-zen-operator|awk '{print$1}') -c ibm-zen-operator -n ibm-common-services|grep "failed=1")
+      export ZEN_FAILED=$(echo $ZEN_LOGS|grep -i -w "failed=[1-9]")
       if  ([[ $ZEN_FAILED == "" ]]); 
       then 
-            echo "$ZEN_ERRORS"
+            echo "      ✅ OK: ZEN Operator has run successfully"; 
+        else
             echo ""
             export CURRENT_ERROR=true
             export CURRENT_ERROR_STRING="Zen has errors"
             handleError
-     
-        else
-                echo "      ✅ OK: ZEN Operator has run successfully"; 
         fi
-      
-
-
 
 
       echo ""
@@ -363,7 +569,6 @@ function check_array(){
         "aiops-topology-merge"
         "aiops-topology-observer-service"
         "aiops-topology-rest-observer"
-        "aiops-topology-search"
         "aiops-topology-servicenow-observer"
         "aiops-topology-status"
         "aiops-topology-topology"
@@ -561,214 +766,6 @@ function check_array(){
   
 
 
-
-
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# EXAMINE TRAINING
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-      echo ""
-      echo ""
-      echo ""
-      echo ""
-      echo ""
-      echo ""
-      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "  🚀 CHECK Trained Models"
-      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo ""
-
-
-      echo ""
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "     📥  LAD"
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      export result=$(curl "https://$ROUTE/graphql" -k -s -H "authorization: Bearer $ZEN_TOKEN" -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://ai-platform-api-cp4waiops.itzroks-270003bu3k-qd899z-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud' --data-binary '{"query":"query {\n    getTrainingDefinitions(algorithmName:\"Log_Anomaly_Detection\") {\n      definitionName\n      algorithmName\n      version\n      deployedVersion\n      description\n      createdBy\n      modelDeploymentDate\n      trainedModels(latest: true) {\n        modelStatus\n        trainingStartTimestamp\n        trainingEndTimestamp\n        precheckTrainingDetails {\n          dataQuality\n          dataQualityDetails {\n            report\n            languageInfo {\n              language\n            }\n          }\n        }\n        postcheckTrainingDetails {\n          aiCoverage\n          overallModelQuality\n          modelsCreatedList {\n            modelId\n          }\n        }\n      }\n    }\n  }"}' --compressed)
-      #echo $result| jq ".data.getTrainingDefinitions[].definitionName,.data.getTrainingDefinitions[].deployedVersion, .data.getTrainingDefinitions[].trainedModels.precheckTrainingDetails.dataQuality, .data.getTrainingDefinitions[].trainedModels.precheckTrainingDetails.dataQuality.dataQualityDetails.report, .data.getTrainingDefinitions[].trainedModels.postcheckTrainingDetails    , .data.getTrainingDefinitions[].postcheckTrainingDetails.aiCoverage"
-      echo "      Name:          "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".definitionName")
-      echo "      Deployed:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".deployedVersion")
-      echo "      Latest:        "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".version")
-      echo "      Data Quality:  "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainedModels[].precheckTrainingDetails.dataQuality")" - " $(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainedModels[].precheckTrainingDetails.dataQualityDetails.report[0]")
-      echo "      AI Coverage:   "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainedModels[].postcheckTrainingDetails.aiCoverage")
-      echo "      Models:        "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainedModels[].postcheckTrainingDetails.modelsCreatedList")
-      echo "      Deployed:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".modelDeploymentDate")
-      #echo $result| jq 
-      if  ([[ $(echo $result| jq ".data.getTrainingDefinitions[]") == '' ]]); 
-      then 
-            export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="LogAnomalies not trained"
-            handleError
-      fi
-
-      echo ""
-      echo ""
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "     📥  METRIC ANOMALIES"
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      export result=$(curl "https://$ROUTE/graphql" -k -s -H "authorization: Bearer $ZEN_TOKEN" -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://ai-platform-api-cp4waiops.itzroks-270003bu3k-qd899z-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud' --data-binary '{"query":"  query {\n    getTrainingDefinitions (algorithmName:\"Metric_Anomaly_Detection\"){\n      definitionName\n      algorithmName\n      description\n      version\n      deployedVersion\n      lastTraining\n      trainingSchedule {\n        frequency\n        repeat\n        noEndDate\n      }\n      trainedModels(latest: true) {\n        trainingStartTimestamp\n        trainingEndTimestamp\n        modelStatus\n        postcheckTrainingDetails {\n            aiCoverage\n          \n          }\n      }\n    }\n  }"}' --compressed)
-      echo "      Name:          "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".definitionName")
-      echo "      Deployed:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".deployedVersion")
-      echo "      Latest:        "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".version")
-      echo "      Schedule:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainingSchedule.frequency")" - " $(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainingSchedule.repeat")
-      echo "      Status:        "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainedModels[].modelStatus")
-      #echo $result| jq 
-      if  ([[ $(echo $result| jq ".data.getTrainingDefinitions[]") == '' ]]); 
-      then 
-            export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="MetricAnomalies not trained"
-            handleError
-      fi
-
-      echo ""
-      echo ""
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "     📥  TEMPORAL GROUPING"
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      export result=$(curl "https://$ROUTE/graphql" -k -s -H "authorization: Bearer $ZEN_TOKEN" -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://ai-platform-api-cp4waiops.itzroks-270003bu3k-qd899z-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud' --data-binary '{"query":"query {\n    getTrainingDefinitions(algorithmName:\"Temporal_Grouping\") {\n      definitionName\n      algorithmName\n      version\n      deployedVersion\n      description\n      createdBy\n      modelDeploymentDate\n      trainedModels(latest: true) {\n        modelStatus\n        trainingStartTimestamp\n        trainingEndTimestamp\n        postcheckTrainingDetails {\n          modelsCreatedList {\n            modelId\n          }\n        }\n      }\n    }\n  }"}' --compressed)
-      echo "      Name:          "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".definitionName")
-      echo "      Deployed:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".deployedVersion")
-      echo "      Latest:        "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".version")      
-      echo "      AI Coverage:   "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainedModels[].postcheckTrainingDetails.modelsCreatedList")
-      echo "      Deployed:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".modelDeploymentDate")
-      #echo $result| jq 
-      if  ([[ $(echo $result| jq ".data.getTrainingDefinitions[]") == '' ]]); 
-      then 
-            export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="TemporalGrouping not trained"
-            handleError
-      fi
-
-      echo ""
-      echo ""
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "     📥  SIMILAR INCIDENTS"
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      export result=$(curl "https://$ROUTE/graphql" -k -s -H "authorization: Bearer $ZEN_TOKEN" -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://ai-platform-api-cp4waiops.itzroks-270003bu3k-qd899z-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud' --data-binary '{"query":"  query {\n    getTrainingDefinitions (algorithmName:\"Similar_Incidents\"){\n      definitionName\n      algorithmName\n      description\n      version\n      deployedVersion\n      lastTraining\n      trainingSchedule {\n        frequency\n        repeat\n        noEndDate\n      }\n      trainedModels(latest: true) {\n        trainingStartTimestamp\n        trainingEndTimestamp\n        modelStatus\n        postcheckTrainingDetails {\n            aiCoverage\n          \n          }\n      }\n    }\n  }"}' --compressed)
-      echo "      Name:          "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".definitionName")
-      echo "      Deployed:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".deployedVersion")
-      echo "      Latest:        "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".version")      
-      echo "      Schedule:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainingSchedule.frequency")" - " $(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainingSchedule.repeat")
-      echo "      AI Coverage:   "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainedModels[].postcheckTrainingDetails.aiCoverage")
-      #echo $result| jq 
-      if  ([[ $(echo $result| jq ".data.getTrainingDefinitions[]") == '' ]]); 
-      then 
-            export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="SimilarIncidents not trained"
-            handleError
-      fi
-      echo ""
-      echo ""
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "     📥  CHANGE RISK"
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      export result=$(curl "https://$ROUTE/graphql" -k -s -H "authorization: Bearer $ZEN_TOKEN" -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://ai-platform-api-cp4waiops.itzroks-270003bu3k-qd899z-6ccd7f378ae819553d37d5f2ee142bd6-0000.eu-de.containers.appdomain.cloud' --data-binary '{"query":"  query {\n    getTrainingDefinitions (algorithmName:\"Change_Risk\"){\n      definitionName\n      algorithmName\n      description\n      version\n      deployedVersion\n      lastTraining\n      trainingSchedule {\n        frequency\n        repeat\n        noEndDate\n      }\n      trainedModels(latest: true) {\n        trainingStartTimestamp\n        trainingEndTimestamp\n        modelStatus\n        postcheckTrainingDetails {\n            aiCoverage\n          \n          }\n      }\n    }\n  }"}' --compressed)
-      echo "      Name:          "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".definitionName")
-      echo "      Deployed:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".deployedVersion")
-      echo "      Latest:        "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".version")
-      echo "      Schedule:      "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainingSchedule.frequency")" - " $(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainingSchedule.repeat")
-      echo "      AI Coverage:   "$(echo $result| jq ".data.getTrainingDefinitions[]" | jq -r ".trainedModels[].postcheckTrainingDetails.aiCoverage")
-      #echo $result 
-      if  ([[ $(echo $result| jq ".data.getTrainingDefinitions[]") == '' ]]); 
-      then 
-            export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="ChangeRisk not trained"
-            handleError
-      fi
-
-
-
-
-
-
-
-
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# EXAMINE AWX
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      echo ""
-      echo ""
-      echo ""
-      echo ""
-      echo ""
-      echo ""
-      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "  🚀 CHECK Runbooks"
-      echo "  ----------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo ""
-
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "    🔎 CHECK AWX Configuration"
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-
-    export AWX_ROUTE=$(oc get route -n awx awx -o jsonpath={.spec.host})
-    export AWX_URL=$(echo "https://$AWX_ROUTE")
-    export AWX_PWD=$(oc -n awx get secret awx-admin-password -o jsonpath='{.data.password}' | base64 --decode && echo)
-
-
-    echo "      ------------------------------------------------------------------------------------------------------------------------------------------------------"
-    echo "      🔎 Check AWX Project"
-    export AWX_PROJECT_STATUS=$(curl -X "GET" -s "$AWX_URL/api/v2/projects/" -u "admin:$AWX_PWD" --insecure -H 'content-type: application/json'|jq|grep successful|grep -c "")
-    if  ([[ $AWX_PROJECT_STATUS -lt 4 ]]); 
-      then 
-            export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="AWX Project not ready"
-            handleError
-      else  
-            echo "      ✅ OK"; 
-      fi
-
-    echo "      ------------------------------------------------------------------------------------------------------------------------------------------------------"
-    echo "      🔎 Check AWX Inventory"
-    export AWX_INVENTORY_COUNT=$(curl -X "GET" -s "$AWX_URL/api/v2/inventories/" -u "admin:$AWX_PWD" --insecure -H 'content-type: application/json'| jq ".count")
-    if  ([[ $AWX_INVENTORY_COUNT -lt 2 ]]); 
-      then 
-            export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="AWX Inventory not ready"
-            handleError
-      else  
-            echo "      ✅ OK"; 
-      fi
-
-    echo "      ------------------------------------------------------------------------------------------------------------------------------------------------------"
-    echo "      🔎 Check AWX Templates"
-    export AWX_TEMPLATE_COUNT=$(curl -X "GET" -s "$AWX_URL/api/v2/job_templates/" -u "admin:$AWX_PWD" --insecure -H 'content-type: application/json'| jq ".count")
-    if  ([[ $AWX_TEMPLATE_COUNT -lt 5 ]]); 
-      then 
-            export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="AWX Templates not ready"
-            handleError
-      else  
-            echo "      ✅ OK"; 
-      fi
-
-      echo ""
-      echo ""
-      echo ""
-      echo ""
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-      echo "    🔎 CHECK Runbooks in CP4WAIOps"
-      echo "    --------------------------------------------------------------------------------------------------------------------------------------------------------"
-          CPD_ROUTE=$(oc get route cpd -n $WAIOPS_NAMESPACE  -o jsonpath={.spec.host} || true) 
-
-    
-    export result=$(curl -X "GET" -s -k "https://$CPD_ROUTE/aiops/api/story-manager/rba/v1/runbooks" \
-        -H "Authorization: bearer $ZEN_TOKEN" \
-        -H 'Content-Type: application/json; charset=utf-8')
-    export RB_COUNT=$(echo $result|jq ".[].name"|grep -c "")
-    if  ([[ $AWX_TEMPLATE_COUNT -lt 3 ]]); 
-      then 
-            export CURRENT_ERROR=true
-            export CURRENT_ERROR_STRING="CP4WAIOps Runbooks not ready"
-            handleError
-      else  
-            echo "      ✅ OK"; 
-      fi
 
 
 

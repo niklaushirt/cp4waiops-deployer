@@ -1,0 +1,67 @@
+﻿kind: ConfigMap
+apiVersion: v1
+metadata:
+  annotations:
+    hdm.ibm.com/lastknownstate: 802d6ef2b8cf5c433acf25be1025876b
+  resourceVersion: '4034737'
+  name: evtmanager-impactgui-startup-scripts
+  uid: eb536765-40a7-4835-a752-4cf58020adf5
+  creationTimestamp: '2023-05-10T08:07:46Z'
+  managedFields:
+    - manager: manager
+      operation: Update
+      apiVersion: v1
+      time: '2023-05-10T08:07:46Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:data':
+          .: {}
+          'f:post-server-start': {}
+          'f:pre-server-start': {}
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:hdm.ibm.com/lastknownstate': {}
+          'f:labels':
+            'f:helm.sh/chart': {}
+            'f:hdm.ibm.com/lastreconciled': {}
+            'f:app.kubernetes.io/managed-by': {}
+            'f:hdm.ibm.com/resourceowner': {}
+            'f:managedByUser': {}
+            'f:app.kubernetes.io/name': {}
+            .: {}
+            'f:hdm.ibm.com/chartversion': {}
+            'f:release': {}
+            'f:app.kubernetes.io/instance': {}
+          'f:ownerReferences':
+            .: {}
+            'k:{"uid":"c3e19346-f37f-46e6-8b2d-9183d11b2fae"}': {}
+  namespace: cp4waiops-evtmgr
+  ownerReferences:
+    - apiVersion: noi.ibm.com/v1beta1
+      kind: NOIFormation
+      name: evtmanager
+      uid: c3e19346-f37f-46e6-8b2d-9183d11b2fae
+      controller: true
+      blockOwnerDeletion: true
+  labels:
+    hdm.ibm.com/resourceowner: evtmanagernoi-ibm-com-v1beta1
+    managedByUser: 'false'
+    app.kubernetes.io/instance: evtmanager
+    release: evtmanager
+    hdm.ibm.com/lastreconciled: 2023-05-10-08-19-14-615269171-0000-UTC-m-757-382204293
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: impactgui
+    app.kubernetes.io/name: impactgui
+    hdm.ibm.com/chartversion: 1.6.6
+data:
+  post-server-start: |
+    #
+    # Post server startup script
+    #
+    echo "Running post-server startup custom scripts"
+  pre-server-start: |
+    #
+    # Pre server startup script
+    #
+    echo "Running pre-server startup custom scripts"

@@ -18,27 +18,27 @@ oc delete subscription --all -n cp4waiops
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete Stuff"
-oc delete pods -n ibm-common-services --all
-oc delete pods -n cp4waiops --all
-oc delete csv --all -n ibm-common-services
-oc delete subscription --all -n ibm-common-services
-oc delete csv --all -n cp4waiops
-oc delete subscription --all -n cp4waiops
-oc delete deployment -n cp4waiops --all
-oc delete deployment -n ibm-common-services --all
-oc delete ss -n ibm-common-services --all
-oc delete statefulset -n ibm-common-services --all
-oc delete statefulset -n cp4waiops --all
-oc delete jobs -n cp4waiops --all
-oc delete jobs -n ibm-common-services --all
-oc delete cm -n cp4waiops --all
-oc delete cm -n ibm-common-services --all
-oc delete secret -n cp4waiops --all
-oc delete secret -n ibm-common-services --all
-oc delete pvc -n cp4waiops --all
-oc delete pvc -n ibm-common-services --all
-oc delete cm -n cp4waiops --all
-oc delete cm -n ibm-common-services --all
+oc delete pods -n ibm-common-services --all &
+oc delete pods -n cp4waiops --all &
+oc delete csv --all & -n ibm-common-services
+oc delete subscription --all & -n ibm-common-services
+oc delete csv --all & -n cp4waiops
+oc delete subscription --all & -n cp4waiops
+oc delete deployment -n cp4waiops --all &
+oc delete deployment -n ibm-common-services --all &
+oc delete ss -n ibm-common-services --all &
+oc delete statefulset -n ibm-common-services --all &
+oc delete statefulset -n cp4waiops --all &
+oc delete jobs -n cp4waiops --all &
+oc delete jobs -n ibm-common-services --all &
+oc delete cm -n cp4waiops --all &
+oc delete cm -n ibm-common-services --all &
+oc delete secret -n cp4waiops --all &
+oc delete secret -n ibm-common-services --all &
+oc delete pvc -n cp4waiops --all &
+oc delete pvc -n ibm-common-services --all &
+oc delete cm -n cp4waiops --all &
+oc delete cm -n ibm-common-services --all &
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete OPERANDREQUESTS"
@@ -58,8 +58,14 @@ oc delete kafkaclaims.shim.bedrock.ibm.com -n ibm-common-services --all
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete OIDC Clients"
-oc delete clients.oidc.security.ibm.com -n cp4waiops --all --force --grace-period=0
-oc delete clients.oidc.security.ibm.com -n ibm-common-services --all
+oc delete clients.oidc.security.ibm.com -n cp4waiops --all --force --grace-period=0 &
+sleep 5
+oc patch clients.oidc.security.ibm.com $(oc get clients.oidc.security.ibm.com -n cp4waiops| grep .ibm.com|awk '{print$1}') -n cp4waiops -p '{"metadata":{"finalizers":null}}' --type=merge 
+
+oc delete clients.oidc.security.ibm.com -n ibm-common-services --all &
+sleep 5
+oc patch clients.oidc.security.ibm.com $(oc get clients.oidc.security.ibm.com -n ibm-common-services| grep .ibm.com|awk '{print$1}') -n ibm-common-services -p '{"metadata":{"finalizers":null}}' --type=merge 
+
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete ConfigMaps"
@@ -129,9 +135,7 @@ oc patch CustomResourceDefinition $(oc get CustomResourceDefinition| grep .ibm.c
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
 echo " 🧻 Delete ClusterRoleBindings"
-oc delete ClusterRoleBinding cp4waiops-installer-admin &
 oc delete ClusterRoleBinding cp4waiops-demo-ui-admin-crb &                 
-oc delete ClusterRoleBinding cp4waiops-installer-admin &
 oc delete ClusterRoleBinding awx-default &
 oc delete ClusterRoleBinding aimanager-api-platform &
 oc delete ClusterRoleBinding default-robotinfo1-admin &                        
@@ -143,13 +147,9 @@ oc delete ClusterRoleBinding ibm-zen-operator-serviceaccount &
 oc delete ClusterRoleBinding robot-shop &
 oc delete ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster &             
 oc delete ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster-api &
-oc delete ClusterRoleBinding turbonomic-admin1 &                               
-oc delete ClusterRoleBinding turbonomic-admin2 &
 
 
-oc patch ClusterRoleBinding cp4waiops-installer-admin -p '{"metadata":{"finalizers":null}}' --type=merge  
 oc patch ClusterRoleBinding cp4waiops-demo-ui-admin-crb -p '{"metadata":{"finalizers":null}}' --type=merge                       
-oc patch ClusterRoleBinding cp4waiops-installer-admin -p '{"metadata":{"finalizers":null}}' --type=merge 
 oc patch ClusterRoleBinding awx-default -p '{"metadata":{"finalizers":null}}' --type=merge 
 oc patch ClusterRoleBinding aimanager-api-platform -p '{"metadata":{"finalizers":null}}' --type=merge 
 oc patch ClusterRoleBinding default-robotinfo1-admin -p '{"metadata":{"finalizers":null}}' --type=merge                         
@@ -161,8 +161,6 @@ oc patch ClusterRoleBinding ibm-zen-operator-serviceaccount -p '{"metadata":{"fi
 oc patch ClusterRoleBinding robot-shop -p '{"metadata":{"finalizers":null}}' --type=merge 
 oc patch ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster -p '{"metadata":{"finalizers":null}}' --type=merge              
 oc patch ClusterRoleBinding sre-tunnel-cp4waiops-tunnel-cluster-api -p '{"metadata":{"finalizers":null}}' --type=merge 
-oc patch ClusterRoleBinding turbonomic-admin1 -p '{"metadata":{"finalizers":null}}' --type=merge                                
-oc patch ClusterRoleBinding turbonomic-admin2 -p '{"metadata":{"finalizers":null}}' --type=merge 
 
 
 echo "------------------------------------------------------------------------------------------------------------------------------"
@@ -170,6 +168,8 @@ echo " 🧻 Delete IBM CatalogSource"
 oc delete CatalogSource -n openshift-marketplace ibm-operator-catalog
 
 
+oc delete ClusterRoleBinding cp4waiops-installer-admin &
+oc patch ClusterRoleBinding cp4waiops-installer-admin -p '{"metadata":{"finalizers":null}}' --type=merge  
 
 exit 1
 

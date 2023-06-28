@@ -1,0 +1,63 @@
+
+Launching defaultServer (WebSphere Application Server 22.0.0.12/wlp-1.0.71.cl221220221107-1900) on Eclipse OpenJ9 VM, version 11.0.18+10 (en_US)
+[AUDIT   ] CWWKE0001I: The server defaultServer has been launched.
+[AUDIT   ] CWWKG0093A: Processing configuration drop-ins resource: /opt/ibm/wlp/usr/servers/defaultServer/configDropins/defaults/keystore.xml
+[AUDIT   ] CWWKG0093A: Processing configuration drop-ins resource: /opt/ibm/wlp/usr/servers/defaultServer/configDropins/overrides/server.xml
+[5/10/23, 8:54:30:522 UTC] 00000001 FrameworkMana I   CWWKE0002I: The kernel started after 1.78 seconds
+[5/10/23, 8:54:30:526 UTC] 00000027 FeatureManage I   CWWKF0007I: Feature update started.
+[5/10/23, 8:54:30:634 UTC] 00000027 ConfigValidat A   CWWKG0102I: Found conflicting settings for defaultKeyStore instance of keyStore configuration.
+  Property password has conflicting values:
+    Secure value is set in file:/opt/ibm/wlp/usr/servers/defaultServer/configDropins/defaults/keystore.xml.
+    Secure value is set in file:/opt/ibm/wlp/usr/servers/defaultServer/configDropins/overrides/server.xml.
+  Property password will be set to the value defined in file:/opt/ibm/wlp/usr/servers/defaultServer/configDropins/overrides/server.xml.
+
+[5/10/23, 8:54:30:866 UTC] 0000001e DropinMonitor A   CWWKZ0058I: Monitoring dropins for applications.
+[5/10/23, 8:54:31:922 UTC] 0000002a AppMessageHel I   CWWKZ0018I: Starting application cp4waiops-grpc-impact-client.
+[5/10/23, 8:54:31:925 UTC] 0000002a WARDeployedAp I   CWWKZ0136I: The cp4waiops-grpc-impact-client application is using the archive file at the /opt/ibm/wlp/usr/servers/defaultServer/apps/cp4waiops-grpc-impact-client.war location.
+[5/10/23, 8:54:32:311 UTC] 00000021 WSKeyStore    I   Successfully loaded default keystore: /opt/cert/keystore.p12 of type: PKCS12
+[5/10/23, 8:54:32:530 UTC] 00000028 WebGroup      I   SRVE0169I: Loading Web Module: health.
+[5/10/23, 8:54:32:609 UTC] 00000028 webcontainer  I com.ibm.ws.webcontainer.osgi.DynamicVirtualHost addWebApplication SRVE0250I: Web Module health has been bound to default_host.
+[5/10/23, 8:54:32:610 UTC] 00000028 VirtualHostIm A   CWWKT0016I: Web application available (default_host): http://ibm-grpc-impact-connector-1fd007d1-a141-4e51-a1c9-5e2fd44akkgmr:9080/health/
+[5/10/23, 8:54:32:712 UTC] 00000028 WASSessionCor I SessionMgrComponentImpl initialize SESN8501I: The session manager did not find a persistent storage location; HttpSession objects will be stored in the local application server's memory.
+[5/10/23, 8:54:32:722 UTC] 00000029 WASSessionCor I SessionContextRegistryImpl getSessionContext SESN0176I: A new session context will be created for application key default_host/health
+[5/10/23, 8:54:32:728 UTC] 00000029 util          I IDGeneratorImpl IDGeneratorImpl SESN0172I: The session manager is using the Java default SecureRandom implementation for session ID generation.
+[5/10/23, 8:54:33:054 UTC] 00000029 servlet       I com.ibm.ws.webcontainer.servlet.ServletWrapper init SRVE0242I: [io.openliberty.microprofile.health.3.1.internal] [/health] [HealthCheckReadinessServlet]: Initialization successful.
+[5/10/23, 8:54:33:106 UTC] 00000029 servlet       I com.ibm.ws.webcontainer.servlet.ServletWrapper init SRVE0242I: [io.openliberty.microprofile.health.3.1.internal] [/health] [HealthCheckServlet]: Initialization successful.
+[5/10/23, 8:54:33:108 UTC] 00000029 servlet       I com.ibm.ws.webcontainer.servlet.ServletWrapper init SRVE0242I: [io.openliberty.microprofile.health.3.1.internal] [/health] [HealthCheckStartupServlet]: Initialization successful.
+[5/10/23, 8:54:33:110 UTC] 00000029 servlet       I com.ibm.ws.webcontainer.servlet.ServletWrapper init SRVE0242I: [io.openliberty.microprofile.health.3.1.internal] [/health] [HealthCheckLivenessServlet]: Initialization successful.
+[5/10/23, 8:54:33:728 UTC] 00000028 PluginGenerat I   SRVE9103I: A configuration file for a web server plugin was automatically generated for this server at /opt/ibm/wlp/output/defaultServer/logs/state/plugin-cfg.xml.
+[5/10/23, 8:54:34:313 UTC] 0000002a Version       I org.jboss.weld.bootstrap.WeldStartup <clinit> WELD-000900: 3.1.9 (Final)
+[5/10/23, 8:54:36:236 UTC] 0000002a WebGroup      I   SRVE0169I: Loading Web Module: cp4waiops-grpc-impact-client.
+[5/10/23, 8:54:36:236 UTC] 0000002a webcontainer  I com.ibm.ws.webcontainer.osgi.DynamicVirtualHost addWebApplication SRVE0250I: Web Module cp4waiops-grpc-impact-client has been bound to default_host.
+[5/10/23, 8:54:36:237 UTC] 0000002a VirtualHostIm A   CWWKT0016I: Web application available (default_host): http://ibm-grpc-impact-connector-1fd007d1-a141-4e51-a1c9-5e2fd44akkgmr:9080/
+[5/10/23, 8:54:36:239 UTC] 00000035 WASSessionCor I SessionContextRegistryImpl getSessionContext SESN0176I: A new session context will be created for application key default_host/
+[5/10/23, 8:54:36:240 UTC] 00000035 util          I IDGeneratorImpl IDGeneratorImpl SESN0172I: The session manager is using the Java default SecureRandom implementation for session ID generation.
+[5/10/23, 8:54:36:316 UTC] 00000029 PluginGenerat I   SRVE9103I: A configuration file for a web server plugin was automatically generated for this server at /opt/ibm/wlp/output/defaultServer/logs/state/plugin-cfg.xml.
+[5/10/23, 8:54:36:355 UTC] 00000035 ConnectorMana I   Init KafkaHelper
+[5/10/23, 8:54:36:355 UTC] 00000035 ConnectorMana W   KAFKA_BOOTSTRAP_SERVERS environment variable does not exist
+[5/10/23, 8:54:36:355 UTC] 00000035 ConnectorMana W   KAFKA_SCRAM_PASSWORD_PATH environment variable does not exist
+[5/10/23, 8:54:36:356 UTC] 00000035 ConnectorMana W   KAFKA_TRUSTSTORE_PASSWORD_PATH environment variable does not exist
+[5/10/23, 8:54:36:356 UTC] 00000035 ConnectorMana W   KAFKA_TRUSTSTORE_PATH environment variable does not exist
+[5/10/23, 8:54:36:356 UTC] 00000035 ConnectorMana W   KAFKA_PROD_ACKS environment variable does not exist
+[5/10/23, 8:54:36:356 UTC] 00000035 ConnectorMana W   KAFKA_PROD_BATCH_SIZE environment variable does not exist
+[5/10/23, 8:54:36:356 UTC] 00000035 ConnectorMana W   KAFKA_PROD_LINGER_MS environment variable does not exist
+[5/10/23, 8:54:36:357 UTC] 00000035 ConnectorMana W   KAFKA_PROD_COMPRESSION_TYPE environment variable does not exist
+[5/10/23, 8:54:36:357 UTC] 00000035 ConnectorMana W   KAFKA_PROD_BUFFER_MEMORY environment variable does not exist
+[5/10/23, 8:54:36:358 UTC] 00000035 ConnectorMana I   isDirectToKafkaSupported: false
+[5/10/23, 8:54:36:363 UTC] 00000035 ContextListen I   connector manager initializing
+[5/10/23, 8:54:36:610 UTC] 00000035 ConnectorMana I   custom server certificate provided
+[5/10/23, 8:54:36:625 UTC] 00000035 ConnectorMana I   client certificate and key provided
+[5/10/23, 8:54:36:718 UTC] 00000035 SystemErr     R   SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+[5/10/23, 8:54:36:718 UTC] 00000035 SystemErr     R   SLF4J: Defaulting to no-operation (NOP) logger implementation
+[5/10/23, 8:54:36:719 UTC] 00000035 SystemErr     R   SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+[5/10/23, 8:54:38:166 UTC] 00000035 CloudEventPro I   CloudEventProducer created
+[5/10/23, 8:54:38:210 UTC] 00000038 StandardConne I   starting manager
+[5/10/23, 8:54:38:210 UTC] 00000039 CloudEventPro I   no produce topics setup, queued events will not be sent until topics have been configured
+[5/10/23, 8:54:38:211 UTC] 00000038 StandardConne I   starting configuration stream
+[5/10/23, 8:54:38:212 UTC] 00000035 AppMessageHel A   CWWKZ0001I: Application cp4waiops-grpc-impact-client started in 6.290 seconds.
+[5/10/23, 8:54:38:231 UTC] 00000027 TCPPort       I   CWWKO0219I: TCP Channel defaultHttpEndpoint has been started and is now listening for requests on host *  (IPv6) port 9080.
+[5/10/23, 8:54:38:233 UTC] 00000027 TCPPort       I   CWWKO0219I: TCP Channel defaultHttpEndpoint-ssl has been started and is now listening for requests on host *  (IPv6) port 9443.
+[5/10/23, 8:54:38:239 UTC] 00000027 FeatureManage A   CWWKF0012I: The server installed the following features: [cdi-2.0, jndi-1.0, json-1.0, mpConfig-2.0, mpHealth-3.1, servlet-4.0, ssl-1.0].
+[5/10/23, 8:54:38:240 UTC] 00000027 FeatureManage I   CWWKF0008I: Feature update completed in 7.722 seconds.
+[5/10/23, 8:54:38:240 UTC] 00000027 FeatureManage A   CWWKF0011I: The defaultServer server is ready to run a smarter planet. The defaultServer server started in 9.499 seconds.
+[5/10/23, 8:54:39:146 UTC] 0000003b ConnectorCred I   client id and secret provided

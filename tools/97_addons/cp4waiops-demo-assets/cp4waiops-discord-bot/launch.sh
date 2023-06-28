@@ -29,7 +29,7 @@ export WAIT_RESTART=301
 export ACTIVE=True
 
 
-export DISCORD_BOT_TOKEN="MTA2MDI0OTE2N"
+export DISCORD_BOT_TOKEN="MTA2MDI0OTE2zzzzzzptAyKqe5yKC4RCpGtQ"
 export DISCORD_BOT_NAME="test"
 export INSTANCE_NAME="test"
 

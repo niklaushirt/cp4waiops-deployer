@@ -1,22 +1,22 @@
 import requests
 import json
-from sendstory import *
+from sendincident import *
 import datetime
 import sqlite3
 import os
 
 DEBUG_ME=os.environ.get('DEBUG_ME',"False")
 
-def processStory(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, conn, story_id, message_hash):
+def processIncident(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, conn, incident_id, message_hash):
     print('')
     print ('    ---------------------------------------------------------------------------------------------')
-    print ('     📛 Processing Story: '+currentStory['title'])
+    print ('     📛 Processing Incident: '+currentIncident['title'])
 
-    messageID=sendDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE)
+    messageID=sendDiscord(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE)
 
     timestamp = datetime.datetime.now()
-    insertIDIntoDB(conn, story_id, messageID, message_hash)
-    print ('     ✅ Processing Story, DONE...'+str(timestamp))
+    insertIDIntoDB(conn, incident_id, messageID, message_hash)
+    print ('     ✅ Processing Incident, DONE...'+str(timestamp))
     print ('    ---------------------------------------------------------------------------------------------')
     print('')
     print('')
@@ -24,28 +24,28 @@ def processStory(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, c
 
 
 
-def updateStory(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
+def updateIncident(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID):
     print('')
     print ('    ---------------------------------------------------------------------------------------------')
-    print ('     📛 Updating Story: '+currentStory['title'])
+    print ('     📛 Updating Incident: '+currentIncident['title'])
 
-    updateDiscord(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID)
+    updateDiscord(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE, messageID)
 
     timestamp = datetime.datetime.now()
-    print ('     ✅ Processing Story, DONE...'+str(timestamp))
+    print ('     ✅ Processing Incident, DONE...'+str(timestamp))
     print ('    ---------------------------------------------------------------------------------------------')
     print('')
     print('')
 
 
 
-def closeStory(conn, story_id):
-    debug('         🚀 closeStory: '+story_id)
-    cursor = conn.execute("SELECT DISCORD_ID from STORIES where ID='"+str(story_id)+"'")
+def closeIncident(conn, incident_id):
+    debug('         🚀 closeIncident: '+incident_id)
+    cursor = conn.execute("SELECT DISCORD_ID from STORIES where ID='"+str(incident_id)+"'")
     discord_id = cursor.fetchone()
     debug('DISCORD ID:'+discord_id[0])
     closeDiscord(discord_id[0])
-    cursor = conn.execute("DELETE FROM STORIES where ID='"+str(story_id)+"'")
+    cursor = conn.execute("DELETE FROM STORIES where ID='"+str(incident_id)+"'")
     conn.commit()
 
 
@@ -58,12 +58,12 @@ def printSameLine(text):
     print('test', end='text')
 
 
-def insertIDIntoDB(conn, story_id, discord_id, message_hash):
-    debug('         🚀 insertIDIntoDB: '+str(story_id))
+def insertIDIntoDB(conn, incident_id, discord_id, message_hash):
+    debug('         🚀 insertIDIntoDB: '+str(incident_id))
     debug('                            '+str(discord_id))
     try:
         conn.execute("INSERT INTO STORIES (ID, MESSAGE_HASH, DISCORD_ID) \
-            VALUES ('"+str(story_id)+"', '"+str(message_hash)+"', '"+str(discord_id)+"')");
+            VALUES ('"+str(incident_id)+"', '"+str(message_hash)+"', '"+str(discord_id)+"')");
         conn.commit()
     except sqlite3.IntegrityError as e:
         # handle ConnectionError the exception
@@ -71,33 +71,33 @@ def insertIDIntoDB(conn, story_id, discord_id, message_hash):
 
 
 
-def checkIDExistsDB(conn, story_id):
-    debug('         🚀 checkIDExistsDB: '+story_id)
-    cursor = conn.execute("SELECT count(id) from STORIES where ID='"+str(story_id)+"'")
+def checkIDExistsDB(conn, incident_id):
+    debug('         🚀 checkIDExistsDB: '+incident_id)
+    cursor = conn.execute("SELECT count(id) from STORIES where ID='"+str(incident_id)+"'")
     count = cursor.fetchone()
     debug ("            📥 checkIDExistsDB: "+str(count[0]))
     debug ("")
     return count[0]
 
 
-def getMessageIdDB(conn, story_id):
-    debug('         🚀 getMessageIdDB: '+story_id)
-    cursor = conn.execute("SELECT DISCORD_ID from STORIES where ID='"+str(story_id)+"'")
+def getMessageIdDB(conn, incident_id):
+    debug('         🚀 getMessageIdDB: '+incident_id)
+    cursor = conn.execute("SELECT DISCORD_ID from STORIES where ID='"+str(incident_id)+"'")
     discord_id = cursor.fetchone()
     debug ("            📥 needsUpdate: "+str(discord_id[0]))
     return discord_id[0]
 
 
-def needsUpdate(conn, story_id, messageHash):
-    debug('         🚀 needsUpdate: '+story_id)
-    cursor = conn.execute("SELECT MESSAGE_HASH from STORIES where ID='"+str(story_id)+"'")
+def needsUpdate(conn, incident_id, messageHash):
+    debug('         🚀 needsUpdate: '+incident_id)
+    cursor = conn.execute("SELECT MESSAGE_HASH from STORIES where ID='"+str(incident_id)+"'")
     updateMessageHash = cursor.fetchone()
     debug ("            🛠️ NEW messageHash: "+str(messageHash))
     debug ("            🛠️ OLD messageHash: "+str(updateMessageHash[0]))
 
     if updateMessageHash[0] != messageHash:
-        debug ("            ❗❗HASHES ARE DIFFERENT - UPDATE STORY")
-        cursor = conn.execute("UPDATE STORIES SET MESSAGE_HASH='"+str(messageHash)+"'where ID='"+str(story_id)+"'")
+        debug ("            ❗❗HASHES ARE DIFFERENT - UPDATE INCIDENT")
+        cursor = conn.execute("UPDATE STORIES SET MESSAGE_HASH='"+str(messageHash)+"'where ID='"+str(incident_id)+"'")
         conn.commit()
         updateNeeded=1
     else:

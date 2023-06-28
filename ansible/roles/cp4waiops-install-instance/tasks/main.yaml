@@ -58,6 +58,8 @@
   shell: |
     export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '{print$1}')
     appURL=$(oc get routes -n $WAIOPS_NAMESPACE-demo-ui $WAIOPS_NAMESPACE-demo-ui  -o jsonpath="{['spec']['host']}")|| true
+    OPENSHIFT_ROUTE=$(oc get route -n openshift-console console -o jsonpath={.spec.host})
+    INSTALL_POD=$(oc get po -n cp4waiops-installer -l app=cp4waiops-installer --no-headers|grep "Running"|grep "1/1"|awk '{print$1}')
 
     cat <<EOF | oc apply -f -
     apiVersion: console.openshift.io/v1
@@ -68,7 +70,10 @@
       backgroundColor: '#141a6b'
       color: '#fff'
       location: {{global_config.position_final_ocp_notification | default("BannerTop")}}
-      text: 'Installing  {{current_cp4waiops_feature.kind}} - {{global_config.environment_name | default("Demo")}} - Version {{current_cp4waiops_feature.subscription_channel}}'    
+      text: 'Installing  {{current_cp4waiops_feature.kind}} - {{global_config.environment_name | default("Demo")}} - Version {{current_cp4waiops_feature.subscription_channel}} - ' 
+      link:
+          href: "https://$OPENSHIFT_ROUTE/k8s/ns/cp4waiops-installer/pods/$INSTALL_POD/logs"
+          text: Open Logs   
     EOF
   ignore_errors: true
 

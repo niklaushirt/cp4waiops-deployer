@@ -1,5 +1,5 @@
 #!/bin/bash
-export CONT_VERSION=1.20
+export CONT_VERSION=2.0
 
 # Create the Image
 docker buildx build --platform linux/amd64 -t quay.io/niklaushirt/cp4waiops-demo-ui:$CONT_VERSION --load .

@@ -118,6 +118,12 @@ if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
 
      	oc exec -ti aiops-topology-cassandra-0 -- bash -c "/opt/ibm/cassandra/bin/cqlsh --ssl -u \$CASSANDRA_USER -p \$CASSANDRA_PASS -e \"copy tararam.md_metric_resource to '/tmp/tararam.md_metric_resource.csv' with header=true;\""| sed 's/^/           /'
 	oc exec -ti aiops-topology-cassandra-0 -- bash -c "/opt/ibm/cassandra/bin/cqlsh --ssl -u \$CASSANDRA_USER -p \$CASSANDRA_PASS -e \"copy tararam.dt_metric_value to '/tmp/tararam.dt_metric_value.csv' with header=true;\""| sed 's/^/           /'
+	oc exec -ti aiops-topology-cassandra-0 -- bash -c "/opt/ibm/cassandra/bin/cqlsh --ssl -u \$CASSANDRA_USER -p \$CASSANDRA_PASS -e \"copy tararam.md_group to '/tmp/tararam.md_group.csv' with header=true;\""| sed 's/^/           /'
+	oc exec -ti aiops-topology-cassandra-0 -- bash -c "/opt/ibm/cassandra/bin/cqlsh --ssl -u \$CASSANDRA_USER -p \$CASSANDRA_PASS -e \"copy tararam.md_resource to '/tmp/tararam.md_resource.csv' with header=true;\""| sed 's/^/           /'
+
+
+
+
 
       echo  ""    
       echo  ""
@@ -126,6 +132,8 @@ if [[ $DO_COMM == "y" ||  $DO_COMM == "Y" ]]; then
 
 	oc rsync aiops-topology-cassandra-0:/tmp/tararam.md_metric_resource.csv $WORKING_DIR_DUMPS| sed 's/^/           /'
 	oc rsync aiops-topology-cassandra-0:/tmp/tararam.dt_metric_value.csv $WORKING_DIR_DUMPS| sed 's/^/           /'
+	oc rsync aiops-topology-cassandra-0:/tmp/tararam.md_group.csv $WORKING_DIR_DUMPS| sed 's/^/           /'
+	oc rsync aiops-topology-cassandra-0:/tmp/tararam.md_resource.csv $WORKING_DIR_DUMPS| sed 's/^/           /'
 
 
 else

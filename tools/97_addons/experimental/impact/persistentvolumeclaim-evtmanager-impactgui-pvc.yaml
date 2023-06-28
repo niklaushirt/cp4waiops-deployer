@@ -1,0 +1,106 @@
+﻿kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  annotations:
+    hdm.ibm.com/lastknownstate: 133a75c1ca4928d018aaf216ded0a638
+    pv.kubernetes.io/bind-completed: 'yes'
+    pv.kubernetes.io/bound-by-controller: 'yes'
+    volume.beta.kubernetes.io/storage-provisioner: openshift-storage.cephfs.csi.ceph.com
+    volume.kubernetes.io/storage-provisioner: openshift-storage.cephfs.csi.ceph.com
+  resourceVersion: '4034790'
+  name: evtmanager-impactgui-pvc
+  uid: 448baf7b-f38b-47b7-a1cf-f37fec2e0311
+  creationTimestamp: '2023-05-10T08:07:48Z'
+  managedFields:
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2023-05-10T08:07:48Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            'f:pv.kubernetes.io/bind-completed': {}
+            'f:pv.kubernetes.io/bound-by-controller': {}
+            'f:volume.beta.kubernetes.io/storage-provisioner': {}
+            'f:volume.kubernetes.io/storage-provisioner': {}
+        'f:spec':
+          'f:volumeName': {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2023-05-10T08:07:48Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:accessModes': {}
+          'f:capacity':
+            .: {}
+            'f:storage': {}
+          'f:phase': {}
+      subresource: status
+    - manager: manager
+      operation: Update
+      apiVersion: v1
+      time: '2023-05-10T08:07:48Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:hdm.ibm.com/lastknownstate': {}
+          'f:labels':
+            'f:helm.sh/chart': {}
+            'f:hdm.ibm.com/lastreconciled': {}
+            'f:app.kubernetes.io/managed-by': {}
+            'f:hdm.ibm.com/resourceowner': {}
+            'f:app.kubernetes.io/name': {}
+            .: {}
+            'f:hdm.ibm.com/chartversion': {}
+            'f:release': {}
+            'f:app.kubernetes.io/instance': {}
+          'f:ownerReferences':
+            .: {}
+            'k:{"uid":"c3e19346-f37f-46e6-8b2d-9183d11b2fae"}': {}
+        'f:spec':
+          'f:accessModes': {}
+          'f:resources':
+            'f:requests':
+              .: {}
+              'f:storage': {}
+          'f:storageClassName': {}
+          'f:volumeMode': {}
+  namespace: cp4waiops-evtmgr
+  ownerReferences:
+    - apiVersion: noi.ibm.com/v1beta1
+      kind: NOIFormation
+      name: evtmanager
+      uid: c3e19346-f37f-46e6-8b2d-9183d11b2fae
+      controller: true
+      blockOwnerDeletion: true
+  finalizers:
+    - kubernetes.io/pvc-protection
+  labels:
+    app.kubernetes.io/instance: evtmanager
+    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/name: impactgui
+    hdm.ibm.com/chartversion: 1.6.6
+    hdm.ibm.com/lastreconciled: 2023-05-10-08-19-14-615269171-0000-UTC-m-757-382204293
+    hdm.ibm.com/resourceowner: evtmanagernoi-ibm-com-v1beta1
+    helm.sh/chart: impactgui
+    release: evtmanager
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: pvc-448baf7b-f38b-47b7-a1cf-f37fec2e0311
+  storageClassName: ocs-storagecluster-cephfs
+  volumeMode: Filesystem
+status:
+  phase: Bound
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi

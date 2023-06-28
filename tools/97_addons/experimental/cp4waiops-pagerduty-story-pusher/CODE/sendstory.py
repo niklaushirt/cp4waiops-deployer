@@ -41,7 +41,7 @@ debug('CPD_ROUTE:'+CPD_ROUTE)
 
 
 
-def sendPagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+def sendPagerduty(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Send to Pagerduty')
@@ -56,17 +56,17 @@ def sendPagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
-    # Get story information
-    id=currentStory['id']
-    title=currentStory['title']
-    debug('             ❗ Story: '+title)
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
+    # Get incident information
+    id=currentIncident['id']
+    title=currentIncident['title']
+    debug('             ❗ Incident: '+title)
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
     if state=="assignedToIndividual":
         stateString="trigger"
     elif state=="inProgress":
@@ -81,9 +81,9 @@ def sendPagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
         stateString="trigger"
     debug(stateString)
 
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
 
 
   
@@ -114,7 +114,7 @@ def sendPagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Sending Story to Pagerduty')
+    print('           🌏 Sending Incident to Pagerduty')
     response = sendSession.post(PAGERDUTY_URL, json=MESSAGE_TEMPLATE)
     
     debug(response.json())
@@ -138,7 +138,7 @@ def sendPagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
 
 
 
-def updatePagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+def updatePagerduty(currentIncident, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Updating Pagerduty')
@@ -153,17 +153,17 @@ def updatePagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
-    # Get story information
-    id=currentStory['id']
-    title=currentStory['title']
-    debug('             ❗ Story: '+title)
-    createdBy=currentStory['createdBy']
-    description=currentStory['description']
-    priority=currentStory['priority']
-    state=currentStory['state']
+    # Get incident information
+    id=currentIncident['id']
+    title=currentIncident['title']
+    debug('             ❗ Incident: '+title)
+    createdBy=currentIncident['createdBy']
+    description=currentIncident['description']
+    priority=currentIncident['priority']
+    state=currentIncident['state']
     if state=="assignedToIndividual":
         stateString="trigger"
     elif state=="inProgress":
@@ -178,9 +178,9 @@ def updatePagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE
         stateString="trigger"
     debug(stateString)
 
-    owner=currentStory['owner']
-    team=currentStory['team']
-    lastChangedTime=currentStory['lastChangedTime']
+    owner=currentIncident['owner']
+    team=currentIncident['team']
+    lastChangedTime=currentIncident['lastChangedTime']
 
 
   
@@ -211,7 +211,7 @@ def updatePagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Updating Story on Pagerduty')
+    print('           🌏 Updating Incident on Pagerduty')
     response = sendSession.post(PAGERDUTY_URL, json=MESSAGE_TEMPLATE)
     
     debug(response.json())
@@ -235,7 +235,7 @@ def updatePagerduty(currentStory, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE
 
 
 
-def resolvePagerduty(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
+def resolvePagerduty(currentIncidentID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_ROUTE):
     print('')
     print ('        ---------------------------------------------------------------------------------------------')
     print ('         ✉️  Resolve Pagerduty')
@@ -250,7 +250,7 @@ def resolvePagerduty(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_RO
     similar_incident=''
     resolution=''
     alertsJSONString=''
-    #debug(currentStory)
+    #debug(currentIncident)
     debug ('        ---------------------------------------------------------------------------------------------')
 
   
@@ -258,7 +258,7 @@ def resolvePagerduty(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_RO
     MESSAGE_TEMPLATE={
     "routing_key": PAGERDUTY_TOKEN,
     "event_action": "resolve",
-    "dedup_key": currentStoryID,
+    "dedup_key": currentIncidentID,
     "payload": {
         "summary": Resolved,
         }
@@ -270,7 +270,7 @@ def resolvePagerduty(currentStoryID, DATALAYER_USER, DATALAYER_PWD, DATALAYER_RO
 
     sendSession = requests.Session()
     sendSession.headers.update({'Content-Type':'application/json'})
-    print('           🌏 Resolving Story on Pagerduty')
+    print('           🌏 Resolving Incident on Pagerduty')
     response = sendSession.post(PAGERDUTY_URL, json=MESSAGE_TEMPLATE)
     
     debug(response.json())

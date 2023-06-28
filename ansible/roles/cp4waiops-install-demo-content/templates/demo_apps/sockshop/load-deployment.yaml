@@ -23,7 +23,8 @@ spec:
     spec:
       containers:
       - name: load
-        image: quay.io/niklaushirt/sock-load:0.1
+        image: quay.io/niklaushirt/sockshop-load:0.1
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 500m
@@ -31,6 +32,14 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
+        env:
+        - name: HOST
+          value: front-end.sock-shop.svc.cluster.local
+        - name: CLIENTS
+          value: "10"
+        - name: REQUESTS
+          value: "10"
+
 ---
 apiVersion: v1
 kind: Service

@@ -5,9 +5,9 @@ export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '
 
 
 
-export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
-export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
-export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
+export TOPOLOGY_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
+export TOPOLOGY_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
+export LOGIN="$TOPOLOGY_REST_USR:$TOPOLOGY_REST_PWD"
 
 oc delete route  topology-merge -n $WAIOPS_NAMESPACE
 oc create route reencrypt topology-merge -n $WAIOPS_NAMESPACE --insecure-policy="Redirect" --service=aiops-topology-merge --port=https-merge-api

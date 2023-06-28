@@ -181,8 +181,8 @@ cp4waiops:
     # Create a valid ingress certificate (needed for Slack integration)
     create_valid_ingress_certificate: true
 
-    # Create Policy for Story Creation
-    create_story_policy: true
+    # Create Policy for Incident Creation
+    create_incident_policy: true
 
     # Create Kafka connection for Log inception (needed to create log anomalies in the demo environment)
     create_log_connection: true

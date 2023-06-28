@@ -3,8 +3,8 @@ export WAIOPS_NAMESPACE=$(oc get po -A|grep aiops-orchestrator-controller |awk '
 
 
 
-export EVTMGR_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
-export EVTMGR_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
+export TOPOLOGY_REST_USR=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.username}' | base64 --decode)
+export TOPOLOGY_REST_PWD=$(oc get secret aiops-topology-asm-credentials -n $WAIOPS_NAMESPACE -o jsonpath='{.data.password}' | base64 --decode)
 
 oc delete route topology-rest -n $WAIOPS_NAMESPACE 
 oc create route passthrough topology-rest -n $WAIOPS_NAMESPACE --insecure-policy="Redirect" --service=aiops-topology-rest-observer --port=https-rest-observer-api
@@ -12,7 +12,7 @@ oc create route passthrough topology-rest -n $WAIOPS_NAMESPACE --insecure-policy
 export TOPO_ROUTE="https://"$(oc get route -n $WAIOPS_NAMESPACE topology-rest -o jsonpath={.spec.host})
 
 
-export LOGIN="$EVTMGR_REST_USR:$EVTMGR_REST_PWD"
+export LOGIN="$TOPOLOGY_REST_USR:$TOPOLOGY_REST_PWD"
 
 echo "Wait 10 seconds"
 sleep 10

@@ -40,7 +40,7 @@ spec:
               memory: "64Mi"
               cpu: "150m"
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "200m"
           command:
             - /bin/sh
@@ -121,7 +121,7 @@ spec:
               memory: "64Mi"
               cpu: "150m"
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "200m"
           command:
             - /bin/sh
@@ -194,7 +194,7 @@ spec:
               memory: "64Mi"
               cpu: "150m"
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "200m"
           command:
             - /bin/sh
@@ -262,7 +262,7 @@ spec:
               memory: "64Mi"
               cpu: "150m"
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "200m"
           command:
             - /bin/sh

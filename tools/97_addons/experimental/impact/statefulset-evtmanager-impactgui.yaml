@@ -1,0 +1,864 @@
+﻿kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  annotations:
+    hdm.ibm.com/lastknownstate: c3cc53936f69666ece8420eead49c112
+  resourceVersion: '4062442'
+  name: evtmanager-impactgui
+  uid: b97b33fe-06f8-4e02-9011-71bbf1a9d9a3
+  creationTimestamp: '2023-05-10T08:08:21Z'
+  generation: 1
+  managedFields:
+    - manager: manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2023-05-10T08:08:21Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:hdm.ibm.com/lastknownstate': {}
+          'f:labels':
+            'f:helm.sh/chart': {}
+            'f:hdm.ibm.com/lastreconciled': {}
+            'f:app.kubernetes.io/managed-by': {}
+            'f:component': {}
+            'f:hdm.ibm.com/resourceowner': {}
+            'f:app.kubernetes.io/name': {}
+            .: {}
+            'f:hdm.ibm.com/chartversion': {}
+            'f:release': {}
+            'f:app.kubernetes.io/instance': {}
+          'f:ownerReferences':
+            .: {}
+            'k:{"uid":"c3e19346-f37f-46e6-8b2d-9183d11b2fae"}': {}
+        'f:spec':
+          'f:podManagementPolicy': {}
+          'f:replicas': {}
+          'f:revisionHistoryLimit': {}
+          'f:selector': {}
+          'f:serviceName': {}
+          'f:template':
+            'f:metadata':
+              'f:annotations':
+                .: {}
+                'f:cloudpakId': {}
+                'f:cloudpakName': {}
+                'f:cloudpakVersion': {}
+                'f:productID': {}
+                'f:productMetric': {}
+                'f:productName': {}
+                'f:productVersion': {}
+              'f:labels':
+                .: {}
+                'f:app.kubernetes.io/instance': {}
+                'f:app.kubernetes.io/managed-by': {}
+                'f:app.kubernetes.io/name': {}
+                'f:helm.sh/chart': {}
+                'f:release': {}
+            'f:spec':
+              'f:volumes':
+                .: {}
+                'k:{"name":"evtmanager-impactgui-log4j-props"}':
+                  .: {}
+                  'f:configMap':
+                    .: {}
+                    'f:defaultMode': {}
+                    'f:items': {}
+                    'f:name': {}
+                  'f:name': {}
+                'k:{"name":"evtmanager-impactgui-pvc"}':
+                  .: {}
+                  'f:name': {}
+                  'f:persistentVolumeClaim':
+                    .: {}
+                    'f:claimName': {}
+                'k:{"name":"evtmanager-impactgui-server-props"}':
+                  .: {}
+                  'f:configMap':
+                    .: {}
+                    'f:defaultMode': {}
+                    'f:items': {}
+                    'f:name': {}
+                  'f:name': {}
+                'k:{"name":"evtmanager-impactgui-startup-scripts"}':
+                  .: {}
+                  'f:configMap':
+                    .: {}
+                    'f:defaultMode': {}
+                    'f:items': {}
+                    'f:name': {}
+                  'f:name': {}
+                'k:{"name":"evtmanager-impactgui-user-scripts"}':
+                  .: {}
+                  'f:configMap':
+                    .: {}
+                    'f:defaultMode': {}
+                    'f:name': {}
+                  'f:name': {}
+                'k:{"name":"evtmanager-inner-impactgui"}':
+                  .: {}
+                  'f:name': {}
+                  'f:secret':
+                    .: {}
+                    'f:defaultMode': {}
+                    'f:items': {}
+                    'f:secretName': {}
+                'k:{"name":"evtmanager-share-mount"}':
+                  .: {}
+                  'f:emptyDir': {}
+                  'f:name': {}
+              'f:containers':
+                'k:{"name":"configuration-share"}':
+                  'f:image': {}
+                  'f:volumeMounts':
+                    .: {}
+                    'k:{"mountPath":"/share"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                  'f:terminationMessagePolicy': {}
+                  .: {}
+                  'f:resources':
+                    .: {}
+                    'f:limits':
+                      .: {}
+                      'f:cpu': {}
+                      'f:memory': {}
+                    'f:requests':
+                      .: {}
+                      'f:cpu': {}
+                      'f:memory': {}
+                  'f:livenessProbe':
+                    .: {}
+                    'f:failureThreshold': {}
+                    'f:httpGet':
+                      .: {}
+                      'f:path': {}
+                      'f:port': {}
+                      'f:scheme': {}
+                    'f:initialDelaySeconds': {}
+                    'f:periodSeconds': {}
+                    'f:successThreshold': {}
+                    'f:timeoutSeconds': {}
+                  'f:env':
+                    .: {}
+                    'k:{"name":"ICP_NOI_SHARED_SYNCFROM_SERVERS"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:configMapKeyRef': {}
+                  'f:readinessProbe':
+                    .: {}
+                    'f:failureThreshold': {}
+                    'f:httpGet':
+                      .: {}
+                      'f:path': {}
+                      'f:port': {}
+                      'f:scheme': {}
+                    'f:initialDelaySeconds': {}
+                    'f:periodSeconds': {}
+                    'f:successThreshold': {}
+                    'f:timeoutSeconds': {}
+                  'f:securityContext':
+                    .: {}
+                    'f:allowPrivilegeEscalation': {}
+                    'f:capabilities':
+                      .: {}
+                      'f:drop': {}
+                    'f:privileged': {}
+                    'f:readOnlyRootFilesystem': {}
+                    'f:runAsNonRoot': {}
+                  'f:terminationMessagePath': {}
+                  'f:imagePullPolicy': {}
+                  'f:ports':
+                    .: {}
+                    'k:{"containerPort":8000,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:protocol': {}
+                  'f:name': {}
+                'k:{"name":"impactgui"}':
+                  'f:image': {}
+                  'f:volumeMounts':
+                    'k:{"mountPath":"/home/netcool/etc/user-scripts"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                    'k:{"mountPath":"/home/netcool/trust-certificates/internal"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                    'k:{"mountPath":"/home/netcool/etc/post-server-start.d/950-post-server-start.sh"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                      'f:subPath': {}
+                    'k:{"mountPath":"/share"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                    .: {}
+                    'k:{"mountPath":"/home/netcool/etc/pre-server-start.d/950-pre-server-start.sh"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                      'f:subPath': {}
+                    'k:{"mountPath":"/space"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                    'k:{"mountPath":"/space/server.props-update"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                      'f:subPath': {}
+                    'k:{"mountPath":"/space/impactgui.log4j.properties-update"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                      'f:subPath': {}
+                  'f:terminationMessagePolicy': {}
+                  .: {}
+                  'f:resources':
+                    .: {}
+                    'f:limits':
+                      .: {}
+                      'f:cpu': {}
+                      'f:memory': {}
+                    'f:requests':
+                      .: {}
+                      'f:cpu': {}
+                      'f:memory': {}
+                  'f:livenessProbe':
+                    .: {}
+                    'f:failureThreshold': {}
+                    'f:httpGet':
+                      .: {}
+                      'f:path': {}
+                      'f:port': {}
+                      'f:scheme': {}
+                    'f:initialDelaySeconds': {}
+                    'f:periodSeconds': {}
+                    'f:successThreshold': {}
+                    'f:timeoutSeconds': {}
+                  'f:env':
+                    'k:{"name":"IMPACT_SERVERS_DOMAIN_NAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"LDAP_GROUPFILTER"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"LDAP_BASE_DN"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"GEO_REDUNDANCY_DEPLOYMENT_TYPE"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"IMPACT_GUI_SERVICE_NAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"LDAP_BIND_PWD"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"USER_SCRIPTS_DIRECTORY"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"LDAP_SERVERTYPE"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"COORDINATOR_SERVICE_NAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"NCISERVERS_REPLICA_COUNT"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"USERPLUSROLES"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:configMapKeyRef': {}
+                    'k:{"name":"HELM_RELEASE"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"DASH_CI_EXTERNAL_URL"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"LDAP_USERFILTER"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    .: {}
+                    'k:{"name":"IMPACT_SERVERS_NAMESERVER_PORT"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"COORDINATOR_API_USERNAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"IMPACT_SERVER_BASE_HOSTNAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"DASH_CI_EXTERNAL_URL_TLS_CHECK"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"WAS_USERNAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"COORDINATOR_API_PASSWORD"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"LICENSE"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"LTPA_KEY_FILE"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"WAS_PASSWORD"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"LDAP_SERVICE_PORT"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"IMPACT_ADMIN_PASSWORD"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:secretKeyRef': {}
+                    'k:{"name":"LDAP_BIND_DN"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"SSO_DOMAIN"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"EXTERNAL_HOSTNAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"LDAP_VERIFY_PASSWORDS"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"LDAP_SERVICE_NAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"WEBGUI_SERVICE_NAME"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                  'f:readinessProbe':
+                    .: {}
+                    'f:failureThreshold': {}
+                    'f:httpGet':
+                      .: {}
+                      'f:path': {}
+                      'f:port': {}
+                      'f:scheme': {}
+                    'f:initialDelaySeconds': {}
+                    'f:periodSeconds': {}
+                    'f:successThreshold': {}
+                    'f:timeoutSeconds': {}
+                  'f:securityContext':
+                    .: {}
+                    'f:allowPrivilegeEscalation': {}
+                    'f:capabilities':
+                      .: {}
+                      'f:drop': {}
+                    'f:privileged': {}
+                    'f:readOnlyRootFilesystem': {}
+                    'f:runAsNonRoot': {}
+                  'f:terminationMessagePath': {}
+                  'f:imagePullPolicy': {}
+                  'f:ports':
+                    .: {}
+                    'k:{"containerPort":17310,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:protocol': {}
+                    'k:{"containerPort":17311,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:protocol': {}
+                  'f:name': {}
+              'f:dnsPolicy': {}
+              'f:serviceAccount': {}
+              'f:restartPolicy': {}
+              'f:schedulerName': {}
+              'f:terminationGracePeriodSeconds': {}
+              'f:initContainers':
+                .: {}
+                'k:{"name":"wait4webgui"}':
+                  'f:image': {}
+                  'f:volumeMounts':
+                    .: {}
+                    'k:{"mountPath":"/share"}':
+                      .: {}
+                      'f:mountPath': {}
+                      'f:name': {}
+                  'f:terminationMessagePolicy': {}
+                  .: {}
+                  'f:resources':
+                    .: {}
+                    'f:limits':
+                      .: {}
+                      'f:cpu': {}
+                      'f:memory': {}
+                    'f:requests':
+                      .: {}
+                      'f:cpu': {}
+                      'f:memory': {}
+                  'f:env':
+                    .: {}
+                    'k:{"name":"ICP_NOI_SHARED_EXIT_WHEN_FOUND"}':
+                      .: {}
+                      'f:name': {}
+                      'f:value': {}
+                    'k:{"name":"ICP_NOI_SHARED_SYNCFROM_SERVERS"}':
+                      .: {}
+                      'f:name': {}
+                      'f:valueFrom':
+                        .: {}
+                        'f:configMapKeyRef': {}
+                  'f:securityContext':
+                    .: {}
+                    'f:allowPrivilegeEscalation': {}
+                    'f:capabilities':
+                      .: {}
+                      'f:drop': {}
+                    'f:privileged': {}
+                    'f:readOnlyRootFilesystem': {}
+                    'f:runAsNonRoot': {}
+                  'f:terminationMessagePath': {}
+                  'f:imagePullPolicy': {}
+                  'f:name': {}
+              'f:imagePullSecrets':
+                .: {}
+                'k:{"name":"ibm-entitlement-key"}': {}
+              'f:serviceAccountName': {}
+              'f:securityContext':
+                .: {}
+                'f:runAsNonRoot': {}
+              'f:affinity':
+                .: {}
+                'f:nodeAffinity':
+                  .: {}
+                  'f:requiredDuringSchedulingIgnoredDuringExecution': {}
+          'f:updateStrategy':
+            'f:type': {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2023-05-10T08:26:12Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:currentReplicas': {}
+          'f:currentRevision': {}
+          'f:updatedReplicas': {}
+          'f:readyReplicas': {}
+          'f:replicas': {}
+          'f:availableReplicas': {}
+          'f:collisionCount': {}
+          'f:observedGeneration': {}
+          'f:updateRevision': {}
+      subresource: status
+  namespace: cp4waiops-evtmgr
+  ownerReferences:
+    - apiVersion: noi.ibm.com/v1beta1
+      kind: NOIFormation
+      name: evtmanager
+      uid: c3e19346-f37f-46e6-8b2d-9183d11b2fae
+      controller: true
+      blockOwnerDeletion: true
+  labels:
+    hdm.ibm.com/resourceowner: evtmanagernoi-ibm-com-v1beta1
+    app.kubernetes.io/instance: evtmanager
+    release: evtmanager
+    hdm.ibm.com/lastreconciled: 2023-05-10-08-19-14-615269171-0000-UTC-m-757-382204293
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: impactgui
+    app.kubernetes.io/name: impactgui
+    component: saas-disable
+    hdm.ibm.com/chartversion: 1.6.6
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: evtmanager
+      app.kubernetes.io/managed-by: Tiller
+      app.kubernetes.io/name: impactgui
+      helm.sh/chart: impactgui
+      release: evtmanager
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: evtmanager
+        app.kubernetes.io/managed-by: Tiller
+        app.kubernetes.io/name: impactgui
+        helm.sh/chart: impactgui
+        release: evtmanager
+      annotations:
+        cloudpakId: f94bfc8150d34cb984dd6d355b2708d8
+        cloudpakName: IBM Cloud Pak for Watson AIOps
+        cloudpakVersion: 3.5.0
+        productID: 4dba2b5a269740caae5fecdafe0568aa
+        productMetric: ''
+        productName: Event Manager - IBM Cloud Pak for Watson AIOps
+        productVersion: 1.6.6
+    spec:
+      restartPolicy: Always
+      initContainers:
+        - resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 50m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          name: wait4webgui
+          env:
+            - name: ICP_NOI_SHARED_SYNCFROM_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: evtmanager-configuration-share
+                  key: impactgui
+            - name: ICP_NOI_SHARED_EXIT_WHEN_FOUND
+              value: 'True'
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: evtmanager-share-mount
+              mountPath: /share
+          terminationMessagePolicy: File
+          image: >-
+            cp.icr.io/cp/noi/netcool-configuration-share-ee@sha256:e61f1825834949979bbf2d542b27ad200197115d83d1642aa36a9b9b66c23063
+      serviceAccountName: noi-service-account
+      imagePullSecrets:
+        - name: ibm-entitlement-key
+      schedulerName: default-scheduler
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+      containers:
+        - resources:
+            limits:
+              cpu: '1'
+              memory: 2Gi
+            requests:
+              cpu: 100m
+              memory: 1Gi
+          readinessProbe:
+            httpGet:
+              path: /ibm/console
+              port: 17311
+              scheme: HTTPS
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 250
+          terminationMessagePath: /dev/termination-log
+          name: impactgui
+          livenessProbe:
+            httpGet:
+              path: /ibm/console
+              port: 17311
+              scheme: HTTPS
+            initialDelaySeconds: 300
+            timeoutSeconds: 10
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 40
+          env:
+            - name: NCISERVERS_REPLICA_COUNT
+              value: '1'
+            - name: LICENSE
+              value: accept
+            - name: EXTERNAL_HOSTNAME
+              value: >-
+                impact-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com
+            - name: IMPACT_GUI_SERVICE_NAME
+              value: evtmanager-impactgui
+            - name: WEBGUI_SERVICE_NAME
+              value: evtmanager-webgui
+            - name: COORDINATOR_SERVICE_NAME
+              value: evtmanager-ibm-ea-dr-coordinator-service-eacoordinator
+            - name: IMPACT_SERVERS_DOMAIN_NAME
+              value: evtmanager-nciservers
+            - name: IMPACT_SERVER_BASE_HOSTNAME
+              value: evtmanager-nciserver
+            - name: IMPACT_SERVERS_NAMESERVER_PORT
+              value: '9080'
+            - name: LDAP_SERVICE_NAME
+              value: evtmanager-ldapservice
+            - name: LDAP_SERVICE_PORT
+              value: '389'
+            - name: LDAP_BIND_DN
+              value: 'cn=admin,dc=mycluster,dc=icp'
+            - name: LDAP_BASE_DN
+              value: 'dc=mycluster,dc=icp'
+            - name: LDAP_USERFILTER
+              value: 'uid=%s,ou=users'
+            - name: LDAP_GROUPFILTER
+              value: 'cn=%s,ou=groups'
+            - name: LDAP_SERVERTYPE
+              value: CUSTOM
+            - name: GEO_REDUNDANCY_DEPLOYMENT_TYPE
+              value: full
+            - name: USERPLUSROLES
+              valueFrom:
+                configMapKeyRef:
+                  name: evtmanager-nciserver-maproles
+                  key: allusersandroles
+            - name: LDAP_BIND_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: evtmanager-ldap-secret
+                  key: LDAP_BIND_PASSWORD
+                  optional: false
+            - name: IMPACT_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: evtmanager-impact-secret
+                  key: IMPACT_ADMIN_PASSWORD
+                  optional: false
+            - name: WAS_USERNAME
+              value: smadmin
+            - name: WAS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: evtmanager-was-secret
+                  key: WAS_PASSWORD
+                  optional: false
+            - name: COORDINATOR_API_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: evtmanager-coordinator-api-secret
+                  key: api_password
+                  optional: true
+            - name: COORDINATOR_API_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: evtmanager-coordinator-api-secret
+                  key: api_username
+                  optional: true
+            - name: SSO_DOMAIN
+              value: apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com
+            - name: LTPA_KEY_FILE
+              value: dash_ltpa.key
+            - name: LDAP_VERIFY_PASSWORDS
+              value: 'true'
+            - name: HELM_RELEASE
+              value: evtmanager
+            - name: DASH_CI_EXTERNAL_URL
+              value: >-
+                https://impact-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com/
+            - name: DASH_CI_EXTERNAL_URL_TLS_CHECK
+              value: >-
+                https://impact-evtmanager.apps.ocp-270003bu3k-w4q8.cloud.techzone.ibm.com/ibm/console/rest
+            - name: USER_SCRIPTS_DIRECTORY
+              value: /home/netcool/etc/user-scripts
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: true
+          ports:
+            - containerPort: 17311
+              protocol: TCP
+            - containerPort: 17310
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: evtmanager-impactgui-pvc
+              mountPath: /space
+            - name: evtmanager-inner-impactgui
+              mountPath: /home/netcool/trust-certificates/internal
+            - name: evtmanager-share-mount
+              mountPath: /share
+            - name: evtmanager-impactgui-log4j-props
+              mountPath: /space/impactgui.log4j.properties-update
+              subPath: impactgui.log4j.properties-update
+            - name: evtmanager-impactgui-server-props
+              mountPath: /space/server.props-update
+              subPath: server.props-update
+            - name: evtmanager-impactgui-startup-scripts
+              mountPath: /home/netcool/etc/pre-server-start.d/950-pre-server-start.sh
+              subPath: 950-pre-server-start.sh
+            - name: evtmanager-impactgui-startup-scripts
+              mountPath: /home/netcool/etc/post-server-start.d/950-post-server-start.sh
+              subPath: 950-post-server-start.sh
+            - name: evtmanager-impactgui-user-scripts
+              mountPath: /home/netcool/etc/user-scripts
+          terminationMessagePolicy: File
+          image: >-
+            cp.icr.io/cp/noi/netcool-impactgui-ee@sha256:17610ffce13a9fed1acde7305e33ae30283cc6614fa3e07b10744fe8cc04ac38
+        - resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 50m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 250
+          terminationMessagePath: /dev/termination-log
+          name: configuration-share
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 300
+            timeoutSeconds: 1
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 40
+          env:
+            - name: ICP_NOI_SHARED_SYNCFROM_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: evtmanager-configuration-share
+                  key: impactgui
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: evtmanager-share-mount
+              mountPath: /share
+          terminationMessagePolicy: File
+          image: >-
+            cp.icr.io/cp/noi/netcool-configuration-share-ee@sha256:e61f1825834949979bbf2d542b27ad200197115d83d1642aa36a9b9b66c23063
+      serviceAccount: noi-service-account
+      volumes:
+        - name: evtmanager-impactgui-pvc
+          persistentVolumeClaim:
+            claimName: evtmanager-impactgui-pvc
+        - name: evtmanager-share-mount
+          emptyDir: {}
+        - name: evtmanager-impactgui-log4j-props
+          configMap:
+            name: evtmanager-impactgui-config
+            items:
+              - key: impactgui-log4j-props-update
+                path: impactgui.log4j.properties-update
+            defaultMode: 420
+        - name: evtmanager-impactgui-server-props
+          configMap:
+            name: evtmanager-impactgui-config
+            items:
+              - key: server-props-update
+                path: server.props-update
+            defaultMode: 420
+        - name: evtmanager-inner-impactgui
+          secret:
+            secretName: evtmanager-inner-impactgui
+            items:
+              - key: tls.crt
+                path: trust-tls.crt
+              - key: tls.key
+                path: trust-tls.key
+            defaultMode: 420
+        - name: evtmanager-impactgui-startup-scripts
+          configMap:
+            name: evtmanager-impactgui-startup-scripts
+            items:
+              - key: pre-server-start
+                path: 950-pre-server-start.sh
+              - key: post-server-start
+                path: 950-post-server-start.sh
+            defaultMode: 420
+        - name: evtmanager-impactgui-user-scripts
+          configMap:
+            name: evtmanager-impactgui-user-scripts
+            defaultMode: 420
+      dnsPolicy: ClusterFirst
+  serviceName: evtmanager-impactgui
+  podManagementPolicy: OrderedReady
+  updateStrategy:
+    type: RollingUpdate
+  revisionHistoryLimit: 10
+status:
+  observedGeneration: 1
+  availableReplicas: 1
+  updateRevision: evtmanager-impactgui-c66ffb544
+  currentRevision: evtmanager-impactgui-c66ffb544
+  currentReplicas: 1
+  updatedReplicas: 1
+  replicas: 1
+  collisionCount: 0
+  readyReplicas: 1

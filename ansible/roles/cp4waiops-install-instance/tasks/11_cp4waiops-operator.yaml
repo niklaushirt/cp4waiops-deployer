@@ -238,7 +238,7 @@
 
 
 - name:   🕦 CP4WAIOPS OPERATOR - Wait for CSVs to become ready
-  shell: oc get csv -n {{ current_cp4waiops_cluster.project }}|grep -v "Succeeded"| grep -v ibm-watson-aiops-ui-operator | grep -c ""
+  shell: oc get csv -n {{ current_cp4waiops_cluster.project }}|grep -v "Succeeded"| grep -v ibm-watson-aiops-ui-operator | grep -v ibm-secure-tunnel| grep -c ""
   register: kubectl_get_pods
   until: kubectl_get_pods.stdout == "1"
   retries: 500

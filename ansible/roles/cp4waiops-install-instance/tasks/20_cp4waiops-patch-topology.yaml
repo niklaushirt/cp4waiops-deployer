@@ -111,14 +111,14 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 # Patch Topology Pods
 # --------------------------------------------------------------------------------------------------------------------------------------
-# - name: 🩹 PATCH - Patch aiops-topology-merge
-#   shell: oc patch deployment aiops-topology-merge -n {{ current_cp4waiops_cluster.project }} --patch-file "{{role_path}}/templates/waiops/patches/aiops-topology-merge-patch.yaml"
-#   ignore_errors: true
-
-
-- name: 🩹 PATCH - Patch aiops-topology-search
-  shell: oc patch deployment aiops-topology-search -n {{ current_cp4waiops_cluster.project }} --patch-file "{{role_path}}/templates/waiops/patches/aiops-topology-search-patch.yaml"
+- name: 🩹 PATCH - Patch aiops-topology-merge
+  shell: oc patch deployment aiops-topology-merge -n {{ current_cp4waiops_cluster.project }} --patch-file "{{role_path}}/templates/waiops/patches/aiops-topology-merge-patch.yaml"
   ignore_errors: true
+
+
+# - name: 🩹 PATCH - Patch aiops-topology-search
+#   shell: oc patch deployment aiops-topology-search -n {{ current_cp4waiops_cluster.project }} --patch-file "{{role_path}}/templates/waiops/patches/aiops-topology-search-patch.yaml"
+#   ignore_errors: true
 
 
 - name: 🩹 PATCH - Patch aiops-topology-status
@@ -131,6 +131,9 @@
   ignore_errors: true
 
 
+- name: 🩹 PATCH - Patch aiops-topology-inventory
+  shell: oc patch deployment aiops-topology-inventory -n {{ current_cp4waiops_cluster.project }} --patch-file "{{role_path}}/templates/waiops/patches/aiops-topology-inventory-patch.yaml"
+  ignore_errors: true
 
 
 

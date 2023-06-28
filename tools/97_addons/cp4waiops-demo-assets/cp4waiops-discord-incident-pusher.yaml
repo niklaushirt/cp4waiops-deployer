@@ -1,0 +1,90 @@
+---
+apiVersion: v1                     
+kind: Namespace
+metadata:
+  name: cp4waiops-experimental
+---  
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cp4waiops-experimental-admin
+  namespace: cp4waiops-experimental
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cp4waiops-experimental-admin-crb
+subjects:
+  - kind: ServiceAccount
+    name: cp4waiops-experimental-admin
+    namespace: cp4waiops-experimental
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cp4waiops-discord-incident-pusher-pvc
+  namespace: cp4waiops-experimental
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 32Mi
+  volumeMode: Filesystem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cp4waiops-discord-incident-pusher
+  namespace: cp4waiops-experimental
+  labels:
+      app:  cp4waiops-discord-incident-pusher
+spec:
+  serviceAccountName: cp4waiops-discord-incident-pusher
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  cp4waiops-discord-incident-pusher
+  template:
+    metadata:
+      labels:
+        app:  cp4waiops-discord-incident-pusher
+    spec:
+      containers:
+      - image: quay.io/niklaushirt/cp4waiops-discord-incident-pusher:1.0
+        imagePullPolicy: Always
+        name: gateway
+        command:
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+          limits:
+            cpu: "550m"
+            memory: "550Mi"
+        volumeMounts:
+          - mountPath: /home/app/db
+            name: cp4waiops-discord-incident-pusher-store
+        env:
+          - name: ACTIVE
+            value: "False"
+          - name: DEBUG_ME
+            value : "False"
+          - name: MIN_RANK
+            value : "1"
+          - name: POLL_DELAY
+            value : "5"
+        envFrom:
+        - configMapRef:
+            name:  cp4waiops-simulation-config
+      volumes:
+        - persistentVolumeClaim:
+            claimName: cp4waiops-discord-incident-pusher-pvc
+          name: cp4waiops-discord-incident-pusher-store
+      serviceAccountName: cp4waiops-experimental-admin

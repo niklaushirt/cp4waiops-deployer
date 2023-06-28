@@ -249,7 +249,7 @@ echo "🌏 Demo UI:              https://$(oc get route -n $WAIOPS_NAMESPACE wai
 
 Click on the red `Create Incident Memory Leak` button
 
-This will create alerts and a story in CP4WAIOps.
+This will create alerts and an incident in CP4WAIOps.
 
 ![demo](./doc/pics/demo01.png)
 
@@ -277,7 +277,7 @@ In the terminal type
 ./22_simulate_incident_memory.sh
 ```
 
-This will delete all existing Alerts/Stories and inject pre-canned event, metrics and logs to create a story.
+This will delete all existing Alerts/Stories and inject pre-canned event, metrics and logs to create an incident.
 
 ℹ️  Give it a minute or two for all events and anomalies to arrive in CP4WAIOps and Slack.
 ℹ️  You might have to run the script 3-4 times for the log anomalies to start appearing.
