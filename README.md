@@ -1,3 +1,9 @@
+# This Repository is deprecatedd since the GA of CP4AIOps 4.1
+## Please check [here](https://github.com/niklaushirt/ibm-aiops-deployer) 
+
+### ❗ This Repository won't be maintained going forward
+
+
 <center> <h1>CP4WatsonAIOps CP4WAIOPS v3.7.1</h1> </center>
 <center> <h2>Demo Environment Installation 🚀</h2> </center>
 
