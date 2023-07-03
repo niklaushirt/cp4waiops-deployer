@@ -1,4 +1,0 @@
-requests
-requests.auth
-datetime
-discord

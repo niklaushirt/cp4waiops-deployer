@@ -1,6 +1,0 @@
-- hosts: localhost
-  connection: local
-  tasks:
-    - name: 🟢  PLAYBOOK NAME
-      debug:
-        msg: "Ping: I'm here mate!"

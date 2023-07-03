@@ -1,7 +1,0 @@
-mutation startTrainingRun {
-  startTrainingRun(definitionName: "LogAnomalyDetection") {
-    message
-    status
-  }
-}
-

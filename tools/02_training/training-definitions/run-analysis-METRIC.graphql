@@ -1,6 +1,0 @@
-mutation startTrainingRun {
-  startTrainingRun(definitionName: "MetricAnomaly") {
-    message
-    status
-  }
-}
